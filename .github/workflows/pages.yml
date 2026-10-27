@@ -1,0 +1,45 @@
+# 網站：push 到 main 時重新產生靜態頁（tools/build-site.mjs），把 site/ 整個部署到 GitHub Pages。
+# site/data/（manifest v2、字典）和 site/web/（書籤）是其他聊天室 commit 的，跟著一起上傳。
+# repo 的 Settings → Pages → Source 要選「GitHub Actions」。
+name: Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 同時只跑一個部署；新的 push 進來不取消正在跑的，免得部署到一半
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # 不需要 npm install：build-site.mjs 只用 Node 內建模組
+      - name: Build site
+        run: node tools/build-site.mjs
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - id: deployment
+        uses: actions/deploy-pages@v4

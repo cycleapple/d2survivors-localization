@@ -59,13 +59,13 @@ pre code { background: none; border: 0; padding: 0; word-break: normal; }
 
 /* 第一層：語言分頁（底線式，接著下面的子分頁列） */
 .tabs { display: flex; margin-left: auto; flex-shrink: 0; }
-.tabs button {
-  font: inherit; font-size: 0.92rem; color: var(--muted); background: transparent; cursor: pointer;
+.tabs a {
+  font-size: 0.92rem; color: var(--muted); text-decoration: none;
   border: 1px solid transparent; border-bottom: 0; border-radius: var(--radius) var(--radius) 0 0;
   padding: 7px 16px 8px; margin-bottom: -1px; white-space: nowrap;
 }
-.tabs button:hover { color: var(--gold-hi); }
-.tabs button[aria-pressed="true"] { position: relative; color: var(--gold-hi); background: var(--bg-2); border-color: var(--line); }
+.tabs a:hover { color: var(--gold-hi); }
+.tabs a[aria-current="page"] { position: relative; color: var(--gold-hi); background: var(--bg-2); border-color: var(--line); }
 
 /* 第二層：桌面版／瀏覽器版子分頁，跟頁內導覽同一列 */
 .subbar-inner { display: flex; align-items: center; gap: 20px; height: 46px; }
@@ -155,11 +155,10 @@ h3 { font-size: 1.15rem; margin: 0 0 10px; }
 .status::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--idle); }
 .status.available { color: var(--ok); }
 .status.available::before { background: var(--ok); box-shadow: 0 0 8px var(--ok); }
-.status.in-progress { color: var(--warn); }
-.status.in-progress::before { background: var(--warn); }
+.status.beta { color: var(--warn); }
+.status.beta::before { background: var(--warn); }
+.lang.beta { border-color: var(--line); }
 .status.planned { color: var(--muted); }
-.bar { height: 4px; background: var(--line-soft); border-radius: 2px; overflow: hidden; }
-.bar > span { display: block; height: 100%; background: linear-gradient(90deg, #b88a3e, #ead39a); }
 
 /* Steps */
 .steps { list-style: none; padding: 0; margin: 0 0 40px; counter-reset: step; display: grid; gap: 12px; }
@@ -223,7 +222,7 @@ h3 { font-size: 1.15rem; margin: 0 0 10px; }
   .nav { display: none; }
   .brand span { display: none; }
   .topbar-inner { gap: 12px; }
-  .tabs button { padding: 7px 10px 8px; font-size: 0.85rem; }
+  .tabs a { padding: 7px 10px 8px; font-size: 0.85rem; }
   .subtabs { margin: 0 auto; }
   .subtabs button small { display: none; }
   .hero { padding: 56px 0 40px; }
@@ -249,4 +248,25 @@ h3 { font-size: 1.15rem; margin: 0 0 10px; }
 .web-steps { margin: 12px 0 0; padding-left: 1.4em; }
 .web-steps li { margin-bottom: 8px; }
 .web-usage { margin-top: 16px; }
+/* 首頁（語言選擇） */
+.root-page .hero { min-height: calc(100vh - 120px); border-bottom: 0; }
+.root-langs { list-style: none; padding: 0; margin: 0 auto; max-width: 960px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; text-align: left; }
+.root-langs li { position: relative; }
+.root-lang {
+  display: flex; flex-direction: column; gap: 8px; height: 100%; padding: 22px 20px;
+  background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+  color: var(--text); text-decoration: none; transition: border-color 0.15s;
+}
+.root-lang:hover, .root-langs .suggested .root-lang { border-color: var(--gold); }
+.root-lang-name { font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; color: var(--gold-hi); }
+.root-langs li[lang^="zh-Hans"] .root-lang-name { font-family: "Cinzel", "Noto Serif SC", serif; }
+.root-lang-title { font-weight: 600; }
+.root-lang-desc { color: var(--muted); font-size: 0.9rem; flex: 1; }
+.root-lang-enter { color: var(--gold-hi); font-weight: 600; }
+.root-suggested { position: absolute; top: -10px; right: 14px; font-size: 0.75rem; padding: 1px 10px; border-radius: 999px; color: #1a1206; background: var(--gold); }
+.root-planned { color: var(--muted); font-size: 0.9rem; margin: 28px auto 0; max-width: 760px; }
+@media (max-width: 760px) {
+  .root-langs { grid-template-columns: 1fr; }
+}
+
 kbd { font-family: inherit; font-size: 0.85em; padding: 0.05em 0.4em; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 4px; background: var(--bg-2); white-space: nowrap; }

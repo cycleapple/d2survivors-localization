@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://cycleapple.github.io/d2survivors-localization/sitemap.xml
