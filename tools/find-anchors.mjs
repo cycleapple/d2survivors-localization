@@ -1,6 +1,6 @@
 // 遊戲改版後，找出依賴壓縮名稱的修改規則在新版裡的寫法（用語法樹，不靠變數名稱）
 //   node tools/find-anchors.mjs <app.asar 解開的資料夾>
-// 印出「版權聲明寬度」「技能變體專用譯名」兩條規則新的 from／to，照著更新 tools/patch-rules.mjs
+// 印出「版權聲明寬度」「技能變體專用譯名」「外文字不被切掉（波蘭文）」三條規則新的 from／to，照著更新 tools/patch-rules.mjs
 import { parse } from 'acorn';
 import { simple, fullAncestor } from 'acorn-walk';
 import fs from 'node:fs';
@@ -28,8 +28,13 @@ for (const n of lang.ast.body) if (n.type === 'ExportNamedDeclaration') for (con
 const exported = { translateAs: langExports[fnByBody.translateAs], isTranslating: langExports[fnByBody.isTranslating] };
 console.log(`語言模組：translateAs = ${fnByBody.translateAs}（匯出為 ${exported.translateAs}），是否正在翻譯 = ${fnByBody.isTranslating}（匯出為 ${exported.isTranslating}）`);
 
-// 技能變體表：{fireBolt:[{id,name,describe…}…],…}
-const ks = load(file(/^keepSave-.*\.js$/));
+// 技能變體表：{fireBolt:[{id,name,describe…}…],…}。這個模組的檔名會變（2026.1027.1 是 keepSave-*，2026.1027.2 是 moved-*），
+// 所以照內容找：匯入語言模組、又有變體表的那個 .js
+const ksFile = fs.readdirSync(assets).filter(n => n.endsWith('.js')).map(n => path.join(assets, n))
+  .find(f => { const s = fs.readFileSync(f, 'utf8'); return s.includes('fireBolt:[') && s.includes('drawForeign('); });
+if (!ksFile) { console.error('找不到有技能變體表和 drawForeign 的模組'); process.exit(1); }
+console.log(`主要模組：${path.basename(ksFile)}`);
+const ks = load(ksFile);
 const local = {};
 for (const n of ks.ast.body) if (n.type === 'ImportDeclaration' && /lang-/.test(n.source.value)) for (const s of n.specifiers) local[s.imported.name] = s.local.name;
 const m = local[exported.translateAs], h = local[exported.isTranslating];
@@ -52,6 +57,16 @@ else {
   const insert = `for(let l of Object.values(${table.id.name}))for(let o of l){let n=o.name;Object.defineProperty(o,\`name\`,{get:()=>${h}()?${m}(\`modifier\`,n):n,enumerable:!0,configurable:!0})}`;
   console.log(`  from: ${JSON.stringify(anchor)}`);
   console.log(`  to:   ${JSON.stringify(anchor.slice(0, semi) + insert + anchor.slice(semi))}`);
+}
+
+// 外文字不被切掉（波蘭文）：drawForeign 裡逐字畫外文字的迴圈，用到「是不是外文字」的函式（2026.1027.1 是 gp，2026.1027.2 是 Ap）
+const loop = /for\(let (\w+) of (\w+)\)(\w+)\(\1\)&&(\w+)\.fillText\(\1,(\w+)\+(\w+),(\w+)\+this\.baseline\+(\w+)\),\5\+=this\.advanceOf\(\1\)/.exec(ks.src);
+if (!loop) console.log('\n外文字不被切掉（波蘭文）：找不到 drawForeign 的迴圈，要人工看');
+else {
+  console.log(`\n外文字不被切掉（波蘭文）（是不是外文字的函式 ${loop[3]}）`);
+  console.log(`  出現次數：${count(ks.src, loop[0])}（要是 1）`);
+  console.log(`  from: ${JSON.stringify(loop[0])}`);
+  console.log(`  規則的 from／to 裡的 ${loop[3]} 以外都照舊（變數名稱 n、t、e、s、a、r、o 不同時要一起換）`);
 }
 
 // 版權聲明：存「Unofficial fan project…」的變數，以及 e.text(那個變數,r) 那行

@@ -72,7 +72,7 @@ export const RULES = [
   // 波蘭文「前綴 物品 後綴」（%0 %1 %2），不改大小寫（D2R 的名稱本來就每個字大寫開頭）：Masywny Kaptur Umysłu
   { label: '魔法物品名稱組合（波蘭文）', groups: ['magic-pl'], file: '^lang-.*\\.js$', from: MAGIC_FROM, to: magic('[p,b,q].filter(Boolean).join(` `)') },
   // 獨特怪物名字（遊戲照韓文排成「稱號 前段 後段」）。
-  // 依賴壓縮名稱（Ma 的 e、n），遊戲改版後用 tools/find-anchors.mjs 找新的寫法（2026.1027.1）
+  // 依賴壓縮名稱（Ma 的 e、n），遊戲改版後用 tools/find-anchors.mjs 找新的寫法（2026.1027.2）
   // 德文「前段-後段 稱號」（D2R Monster2Format a0n1）：Düsternis-Hauer der Hungrige
   { label: '獨特怪物名字（德文）', groups: ['unique-de'], from: UNIQUE_FROM, to: 'let[r,i,a]=n.map(t=>e(`unique`,t));return`${r.endsWith(` -`)?`${r.slice(0,-2)}-${i}`:`${r} ${i}`} ${a}`' },
   // 法文「後段 前段 稱號」，前段照後段的詞性挑：Croc mélancolique l’Affamé
@@ -98,7 +98,7 @@ export const RULES = [
   // 外文字大小（波蘭文）：遊戲照韓文放大（有 D2R 韓文字型時標題 ×1.25～1.4、內文 ×1.3 加粗；沒有時 12／15／24 px），
   // 波蘭文只有幾個字母走外文字、夾在點陣字母中間，會比旁邊的字大一號：標題 ×1.2、內文 ×1.0，不加粗。
   // 標題字型（exocet）不管有沒有 D2R 韓文字型都用 D2R Kodia 這個家族，才會用到 font-pl 註冊的 Exocet。
-  // 依賴壓縮名稱（ne 是否有 D2R 韓文字型，g／te／re／ee 是四個字型家族），遊戲改版後用 tools/find-anchors.mjs 找新的寫法（2026.1027.1）
+  // 依賴壓縮名稱（ne 是否有 D2R 韓文字型，g／te／re／ee 是四個字型家族），遊戲改版後用 tools/find-anchors.mjs 找新的寫法（2026.1027.2）
   {
     label: '外文字大小（波蘭文）', groups: ['size-pl'],
     from: 'if(ne()){let e=a>=20?1.25:1.4;[this.foreignSize,this.foreignFamily]=o?[Math.round(a*e),g]:[Math.max(12,Math.round(a*1.3)),te],this.foreignWeight=o?``:`bold `}else[this.foreignSize,this.foreignFamily]=a<14?[12,re]:a<20?[15,ee]:[24,re];',
@@ -112,8 +112,8 @@ export const RULES = [
   // 先往下移（最多移到底部的空間用完），還超出的部分把這個字垂直壓扁到放得下
   {
     label: '外文字不被切掉（波蘭文）', groups: ['size-pl'],
-    from: 'for(let n of t)gp(n)&&e.fillText(n,s+a,r+this.baseline+o),s+=this.advanceOf(n)',
-    to: 'for(let n of t){if(gp(n)){let Z=this.foreignFamily===g?4:1,c=document.createElement(`canvas`),q=c.getContext(`2d`),F=e.font.replace(/([\\d.]+)px/,(x,v)=>v*Z+`px`);q.font=F;let M=q.measureText(n),A=M.actualBoundingBoxAscent/Z,D=M.actualBoundingBoxDescent/Z,L=M.actualBoundingBoxLeft/Z,R=M.actualBoundingBoxRight/Z,h=r+this.baseline,d=Math.max(0,Math.min(Math.ceil(A-h),Math.floor(e.canvas.height-h-D))),y=h+d,k=A>y?y/A:1;if(Z>1){c.width=Math.ceil((L+R+2)*Z);c.height=Math.ceil((A+D+2)*Z);q.font=F;q.fillStyle=e.fillStyle;q.fillText(n,(L+1)*Z,(A+1)*Z);e.imageSmoothingQuality=`high`;e.drawImage(c,s+a-L-1,y+o-(A+1)*k,c.width/Z,c.height/Z*k)}else{e.save();e.translate(s+a,y+o);e.scale(1,k);e.fillText(n,0,0);e.restore()}}s+=this.advanceOf(n)}',
+    from: 'for(let n of t)Ap(n)&&e.fillText(n,s+a,r+this.baseline+o),s+=this.advanceOf(n)',
+    to: 'for(let n of t){if(Ap(n)){let Z=this.foreignFamily===g?4:1,c=document.createElement(`canvas`),q=c.getContext(`2d`),F=e.font.replace(/([\\d.]+)px/,(x,v)=>v*Z+`px`);q.font=F;let M=q.measureText(n),A=M.actualBoundingBoxAscent/Z,D=M.actualBoundingBoxDescent/Z,L=M.actualBoundingBoxLeft/Z,R=M.actualBoundingBoxRight/Z,h=r+this.baseline,d=Math.max(0,Math.min(Math.ceil(A-h),Math.floor(e.canvas.height-h-D))),y=h+d,k=A>y?y/A:1;if(Z>1){c.width=Math.ceil((L+R+2)*Z);c.height=Math.ceil((A+D+2)*Z);q.font=F;q.fillStyle=e.fillStyle;q.fillText(n,(L+1)*Z,(A+1)*Z);e.imageSmoothingQuality=`high`;e.drawImage(c,s+a-L-1,y+o-(A+1)*k,c.width/Z,c.height/Z*k)}else{e.save();e.translate(s+a,y+o);e.scale(1,k);e.fillText(n,0,0);e.restore()}}s+=this.advanceOf(n)}',
   },
   // 點陣字型的斷行只在空白處斷，中文句子會整行超出。
   // 切完空白後，把含中文的詞再拆成一個字一個字（句末標點黏在前一個字後面、左括號黏在後一個字前面，
@@ -162,9 +162,9 @@ export const RULES = [
   // 切回英文時也照原本的 700
   {
     label: '版權聲明寬度', groups: ['cjk'],
-    // 依賴壓縮名稱（Y、ur、J），遊戲改版後用 tools/find-anchors.mjs 找新的寫法（2026.1027.1）
-    from: 'let r={...Y(e),maxWidth:ur},i=[e.text(J,r)',
-    to: 'let r={...Y(e),maxWidth:ur},i=[e.text(J,document.documentElement.lang===`{{html_lang}}`?{...r,maxWidth:360}:r)',
+    // 依賴壓縮名稱（Y、fr、J），遊戲改版後用 tools/find-anchors.mjs 找新的寫法（2026.1027.2；2026.1027.1 是 ur）
+    from: 'let r={...Y(e),maxWidth:fr},i=[e.text(J,r)',
+    to: 'let r={...Y(e),maxWidth:fr},i=[e.text(J,document.documentElement.lang===`{{html_lang}}`?{...r,maxWidth:360}:r)',
   },
   // 技能變體名稱：有些變體跟別的技能同名（荊棘之靈的 Vengeance vs 聖騎士的 Vengeance），遊戲只有一個 key，
   // 變體卡片會顯示成別的職業的技能。變體表（keepSave 的 zs={技能 id:[{id,name,describe}…]}）定義完之後，
@@ -173,9 +173,9 @@ export const RULES = [
   // 專用譯名在 dict/manual/modifiers.json，決定的原因見 docs/term-decisions.md
   {
     label: '技能變體專用譯名', groups: ['dict'],
-    // 依賴壓縮名稱（變體表 Bs、後面的 mre、Vs、Hs，匯入的 h、m），遊戲改版後用 tools/find-anchors.mjs 找新的寫法（2026.1027.1）
-    from: "]},mre={raiseSkeleton:`Evolved: Revive's skeletons take this option`},Vs={};function Hs(e,t){",
-    to: "]},mre={raiseSkeleton:`Evolved: Revive's skeletons take this option`},Vs={};for(let l of Object.values(Bs))for(let o of l){let n=o.name;Object.defineProperty(o,`name`,{get:()=>h()?m(`modifier`,n):n,enumerable:!0,configurable:!0})}function Hs(e,t){",
+    // 依賴壓縮名稱（變體表 ks、後面的 As、js、Ms，匯入的 h、m），遊戲改版後用 tools/find-anchors.mjs 找新的寫法（2026.1027.2；2026.1027.1 是 Bs、mre、Vs、Hs）
+    from: "]},As={raiseSkeleton:`Evolved: Revive's skeletons take this option`},js={};function Ms(e,t){",
+    to: "]},As={raiseSkeleton:`Evolved: Revive's skeletons take this option`},js={};for(let l of Object.values(ks))for(let o of l){let n=o.name;Object.defineProperty(o,`name`,{get:()=>h()?m(`modifier`,n):n,enumerable:!0,configurable:!0})}function Ms(e,t){",
   },
 ];
 
