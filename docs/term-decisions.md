@@ -15,6 +15,17 @@ node tools/where.mjs Vengeance --exact
 
 ---
 
+## 2026-10-27　德文、法文、俄文草稿（遊戲 2026.1027.1）
+
+自動配對（D2R deDE／frFR／ruRU）＋分批翻譯，統一用 `node work/unify-eu.mjs <de|fr|ru>`（寫進各自的 `overrides.json`）。還是 status: draft，等修改規則做好才發布。
+
+- **角色稱號 title:**：自動配對抓到詞綴（德 Schlitzer、法 Égorgeuse），改用 D2R 的 PlayerTitle：Schlächter／Tueur／Истребитель 等
+- **拾取篩選器 Hide**：Leder／Cuir／Шкура（毛皮）→ Ausblenden／Masquer／Скрыть（跟繁中、日文同一個問題）
+- **全大寫的按鈕**：D2R 對到大小寫混合的字串（RESUME → Weiterspielen）改成全大寫；有大小寫不同的同名 key（PLAY／Play）時兩個用同一個譯文（遊戲查字典不分大小寫）。法文 Play 用 Jouer（D2R 的 PARTIE 是「一局」）
+- **角色畫面欄位**：實測俄文整個超出框外，改用 D2R 式的縮寫：Скор. умений、Сопр. огню、Feuerwid.、Résist. au feu…；德文 Dexterity 保留 D2R 的「Geschick.」。Attack Damage 原本是逐字翻的（Angreifen Schaden／Атака Урон），改成 Angriffsschaden／Dégâts d’attaque／Урон атаки
+- **俄文的冷氣屬性**：規範原本寫 холод，D2R 是 лед（урон от льда），各批一半一半，統一成 лед 並照格變化（холода → льда…），規範也改了
+- **還沒統一的**：各批自創的技能變體名稱（德 Erfrierung、法 Engelure…）有沒有前後一致、法文 Stash 用 coffre 跟寶箱同字，要等用語分析和實測
+
 ## 2026-10-27　簡體中文、日文（遊戲 2026.1027.1）
 
 兩種語言都從 D2R 的 zhCN／jaJP 欄自動配對（簡中不是由繁中轉換，用中國大陸的遊戲用語），沒配對到的分批翻譯，再用 `work/unify-zh-CN.mjs`、`work/unify-ja.mjs` 統一各批的用詞。反查加 `--lang`：`node tools/where.mjs 猎法者 --lang zh-CN`。

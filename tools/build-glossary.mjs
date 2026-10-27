@@ -43,12 +43,17 @@ const byEn = new Map(), byKo = new Map();
 const add = (map, key, entry) => { if (!key) return; const k = norm(key); (map.get(k) ?? map.set(k, []).get(k)).push(entry); };
 let rows = 0;
 const genderOf = new Map(), affixForms = new Map();   // 英文（正規化）→ 物品名稱的詞性／詞綴每種詞性的形式
+const pluralGuess = new Set(), affixGender = new Map();
 for (const file of fs.readdirSync(d2rDir).filter(n => n.endsWith('.json'))) {
   for (const row of JSON.parse(fs.readFileSync(path.join(d2rDir, file), 'utf8'))) {
     rows++;
     if (lang.gendered && row.enUS && row[lang.col]) {
       const en = norm(clean(row.enUS)), g = nounGender(row[lang.col]);
       if (file === 'item-names.json' && g && !genderOf.has(en)) genderOf.set(en, g);
+      // D2R 有些物品沒標詞性（法文「Gants」、俄文「Перчатки」）：英文是 -s 結尾的複數就當複數
+      if (file === 'item-names.json' && !g && !genderForms(row[lang.col]) && /[^s]s$/.test(clean(row.enUS))) pluralGuess.add(en);
+      // 獨特怪物名字的後段（Heart、Maw）：詞性標在詞綴檔的 heartUM、maw，給前段的形容詞照著挑
+      if (file === 'item-nameaffixes.json' && g && !affixGender.has(en)) affixGender.set(en, g);
       if (file === 'item-nameaffixes.json' && genderForms(row[lang.col]) && !affixForms.has(en)) affixForms.set(en, row[lang.col].replace(/ÿc./g, '').trim());
     }
     for (const f of forms(row)) { const entry = { ...f, file, id: row.Key }; add(byEn, f.en, entry); add(byKo, f.ko, entry); }
@@ -147,11 +152,16 @@ if (lang.gendered) {
   let forms = 0, genders = 0;
   for (const key of Object.keys(out)) {
     const core = key.replace(PREFIX, '');
-    if (key.startsWith('affix:') && affixForms.has(norm(core))) { out[key] = affixForms.get(norm(core)); forms++; }
+    // affix:（魔法物品的詞綴）和 unique:（獨特怪物名字的前段，Storm → Штормовой／Штормовое…）都在執行時跟名詞組合
+    if (/^(affix|unique):/.test(key) && affixForms.has(norm(core))) { out[key] = affixForms.get(norm(core)); forms++; }
   }
   for (const key of Object.keys(ko)) {
     const core = key.replace(PREFIX, '');
-    if ((!PREFIX.test(key) || key.startsWith('item:')) && genderOf.has(norm(core)) && !out[`gender:${core}`]) { out[`gender:${core}`] = genderOf.get(norm(core)); genders++; }
+    if (out[`gender:${core}`]) continue;
+    const plural = lang.id === 'fr' ? 'mp' : 'pl';
+    const g = (!PREFIX.test(key) || key.startsWith('item:')) ? genderOf.get(norm(core)) ?? (pluralGuess.has(norm(core)) ? plural : null)
+      : key.startsWith('unique:') ? affixGender.get(norm(core)) : null;
+    if (g) { out[`gender:${core}`] = g; genders++; }
   }
   report.gendered = { affixForms: forms, itemGenders: genders };
   console.log(`詞性：詞綴 ${forms} 個保留每種詞性的形式；物品名稱 ${genders} 個附上詞性（gender:<物品>）`);

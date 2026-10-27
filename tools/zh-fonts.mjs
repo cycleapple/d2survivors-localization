@@ -16,11 +16,14 @@ const { lang, args } = takeLang(process.argv.slice(2));
 const [d2rDir, dictFile, stringsDir, outDir] = args;
 if (!outDir) { console.error('用法：node tools/zh-fonts.mjs <D2R 安裝資料夾> <字典 .json> <D2R 字串資料夾> <輸出資料夾> [--lang zh-TW|zh-CN|ja]'); process.exit(1); }
 
-const FONTS = [
+// 俄文（langs.mjs 的 fontFiles）分成兩個：title.woff2 ← Exocet（按鈕、標題，跟遊戲的拉丁字母同一套），
+// body.woff2 ← Philosopher Bold Italic（內文，D2R 俄文版代替沒有西里爾字母的 Formal436 用的字型）
+const FONTS = lang.fontFiles ?? [
   { out: 'body.woff2', src: lang.font },
 ];
-// 中文標點、假名、漢字（含擴充 A）、全形字元
-const CJK = /[　-ヿ㐀-䶿一-鿿＀-￯]/;
+if (!FONTS.every(f => f.src)) { console.error(`${lang.name} 不用另外的字型（點陣字型本來就有這些字）`); process.exit(1); }
+// 中文標點、假名、漢字（含擴充 A）、全形字元；俄文是西里爾字母
+const CJK = lang.fontChars ?? /[　-ヿ㐀-䶿一-鿿＀-￯]/;
 
 const chars = new Set();
 const collect = s => { for (const ch of s ?? '') if (CJK.test(ch)) chars.add(ch); };

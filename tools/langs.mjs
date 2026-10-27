@@ -38,6 +38,8 @@ export const TARGETS = {
   'ru': {
     col: 'ruRU', name: 'Русский', gendered: true, capitalize: true, script: /[А-яЁё]/,
     affixForm: v => /(ый|ий|ой)$/.test(v), rareJoin: (front, back) => `${front} ${back}`,
+    fontFiles: [{ out: 'title.woff2', src: 'exocetblizzardot-medium.otf' }, { out: 'body.woff2', src: 'philosopher-bolditalic.ttf' }],
+    fontChars: /[Ѐ-ӿ]/,
     status: 'draft',
   },
 };

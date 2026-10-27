@@ -75,6 +75,47 @@ node tools/where.mjs 非表示 --lang ja
 - 跨批統一用詞的一次性腳本：`work/unify-zh-CN.mjs`、`work/unify-ja.mjs`（結果寫進各自的 `overrides.json`、`modifiers.json`），決定紀錄在 [term-decisions.md](term-decisions.md)
 - 發布時三種語言都會進 manifest（見下面的「發布」）
 
+## 德文、法文、俄文（還在做，status: draft，不發布）
+
+跟中日文同一套流程（`--lang de|fr|ru`，檔案在 `dict/<語言>/`，規範是 `docs/translation-guide-{de,fr,ru}.md`），不同的地方：
+
+- **判斷有沒有翻**：德、法文跟英文同樣是拉丁字母，`langs.mjs` 標 `latin: true`，不用文字範圍判斷（`isText`）；俄文用西里爾字母判斷
+- **詞性**（`gendered: true`）：D2R 的名詞標詞性「[fs]Kappe」，形容詞列出每種詞性的形式「[fs]robuste[ms]robuster[ns]robustes[pl]robuste」（法文的複數是 mp／fp）。`build-glossary.mjs`：
+  - 一般顯示用的譯文取陽性單數（`langs.mjs` 的 `cleanD2R`）
+  - `affix:<詞綴>`、`unique:<獨特怪物名字的前段>` 保留每種詞性的形式，給執行時的組合挑
+  - `gender:<物品>` 是物品名稱和獨特怪物名字後段的詞性；D2R 沒標的、英文是 -s 結尾的當複數（Gants、Перчатки）
+- **稀有名稱**（字典裡是整個名稱，不用規則）：德文「Bestien-Schneide」（前段的「 -」改成連字號）、法文「Tranchant de la bête」（後段 前段）、俄文「Звериная кромка」（形容詞照名詞的詞性）。見 `langs.mjs` 的 `rareJoin`
+- **俄文的名稱是小寫**（「наголовник」）：英文 key 大寫開頭的，譯文第一個字母改大寫（`capitalize`）
+- **數字**：可以用當地寫法（「1,5」「1.000」「1 000」），`check-alignment.mjs` 會換回來比對
+- 統一用詞、修自動配對：`node work/unify-eu.mjs <de|fr|ru>`（角色稱號用 D2R 的 PlayerTitle、拾取篩選器的 Hide、全大寫按鈕改成全大寫）
+
+### 字型實測（遊戲 2026.1027.1）
+
+| | 結果 |
+|---|---|
+| ä ö ü ß、é è à ç ñ « » | 點陣字型（Latin-1）本來就有，不用改 |
+| œ Œ、ł ą ę（波蘭文） | 畫成「?」：點陣字型只有 Latin-1。法文規範要求寫成 oe |
+| 西里爾字母 | 畫成「?」：要像中日文一樣當「外文字」，用 canvas 字型畫 |
+
+俄文字型試了三種（`work/translation/ru-proto.mjs` 在 debug 版上加範圍和字型，截圖在 `work/translation/ru-*.png`）：Exocet（D2R 的 exocetblizzardot-medium.otf，有西里爾字母，小寫畫成小型大寫，跟遊戲的拉丁字母一致）、Philosopher Bold Italic（D2R 的 philosopher-bolditalic.ttf，應該是俄文版代替 Formal436 的內文字型，小寫好讀但是斜體）、Kodia。建議：**標題、按鈕用 Exocet，內文用 Philosopher**。`node tools/zh-fonts.mjs … --lang ru` 產生 `work/fonts/ru/title.woff2`、`body.woff2`。
+
+### 需要啟動器（patch-rules.mjs）和網頁書籤（web-rules.mjs）加的規則
+
+參考實作和測試：`node work/translation/compose-proto.mjs dict/<語言>/d2r-auto.json <de|fr|ru>`。
+
+1. **俄文：外文字範圍**。`HANGUL_RANGES` 那條再加 `||t>=1024&&t<=1279`（U+0400–04FF）
+2. **俄文：字型**。外文字的字型家族照點陣字型分兩種（keepSave 的 `foreignFont()`）：標題字型（exocet10／24／30／42）用 `D2R Kodia`，內文用 `D2R Iris`（粗體）；沒有 D2R 時是 `D2 Hangul`／`D2 Hangul 14`。註冊 unicodeRange `U+0400-04FF`：`D2R Kodia` ← title.woff2，其他三個 ← body.woff2。網頁版沒有 D2R 字型的話用系統字型也可以
+3. **魔法物品名稱**（三種語言各一個群組）。取代 `return[a(i),a(r),this.translateAs(`item`,t)].filter(Boolean).join(` `)`：
+   - 詞性 `g = this.exact.get(s(`gender:${t.trim()}`)) ?? 'ms'`；`pick(v)`：`v` 開頭是 `[` 就取 `[g]` 後面那段（沒有就取第一段），否則原樣
+   - 德文：`前綴 物品 後綴`，前綴結尾是「 -」時跟物品用連字號接（Engels-Ring），整個名稱第一個字母大寫：Robuste Kappe des Geistes
+   - 法文：`物品 前綴 後綴`：Coiffe solide de l’esprit
+   - 俄文：`前綴 物品 後綴`，有前綴時物品第一個字母改小寫，整個名稱第一個字母大寫：Прочный наголовник разума
+4. **獨特怪物名字**（keepSave 的 `return`${a} ${r} ${i}``，r 前段、i 後段、a 稱號）：
+   - 德文：`前段-後段 稱號`（Düsternis-Hauer der Hungrige）
+   - 法文：`後段 前段 稱號`，前段照後段的詞性挑（Croc mélancolique l’Affamé）
+   - 俄文：`稱號, 前段 後段`，前段照後段的詞性挑（D2R 的「%2, %0 %1」：Голод, Мрачный клык）
+5. 斷行：三種語言都用空白斷行，不用改
+
 ## 發布
 
 翻譯有變動、要讓啟動器和網頁版書籤拿到時：

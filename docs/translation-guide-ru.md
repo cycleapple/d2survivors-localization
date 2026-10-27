@@ -62,7 +62,7 @@
 | Damage Reduced by | урон уменьшен на | Crushing Blow | сокрушительный удар |
 | Deadly Strike | смертельный удар | Open Wounds | открытая рана |
 | All Resistances | сопротивление всем видам урона | Resist Fire | сопротивление огню |
-| Fire/Cold/Lightning/Poison | огонь/холод/молния/яд | Experience | опыт |
+| Fire/Cold/Lightning/Poison | огонь/лед/молния/яд (урон от льда) | Experience | опыт |
 | Level / Required Level | уровень / требуемый уровень | Requirements | требования |
 | Strength/Dexterity/Vitality/Energy | сила/ловкость/живучесть/энергия | Life/Mana | здоровье/мана |
 | Skill / Skill Tree | умение / дерево умений | Passive | пассивное |
