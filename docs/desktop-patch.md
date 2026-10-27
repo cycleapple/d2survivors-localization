@@ -17,6 +17,11 @@
   9. 暗色字（石頭按鈕上的字）：遊戲照點陣字型推算顏色時，把黑字邊緣較淡的像素誤判成「灰色填色＋黑色描邊」，中文像空心的灰字。最後的填色很暗（最亮 < 75）又比描邊淡時，改成只用描邊色畫實心字，再往右 1 像素多畫一次當粗體。升級標題那種褐金色（97）和金字、白字不受影響
   10. 技能變體專用譯名：變體表定義完之後，把每個變體的 `name` 換成 getter，翻譯時先查 `modifier:名稱`（`dict/manual/modifiers.json`），查不到照一般譯名；英文照原本。用來分開跟別的技能同名的變體（荊棘之靈的「復仇」vs 聖騎士的「復仇打擊」），原因和清單見 [term-decisions.md](term-decisions.md)
 
+  11. 德、法、俄文的魔法物品名稱（magic-de／magic-fr／magic-ru）：照 `gender:<物品>` 從 `affix:` 的「[ms]…[fs]…」挑出對應詞性的形式。德文「前綴 物品 後綴」（前綴結尾是「 -」時用連字號接：Engels-Ring）、法文「物品 前綴 後綴」、俄文「前綴 物品 後綴」（物品小寫開頭）；德、俄文句首大寫
+  12. 德、法、俄文的獨特怪物名字（keepSave 的 `Ma`，unique-de／unique-fr／unique-ru）：德文「前段-後段 稱號」、法文「後段 前段 稱號」、俄文「稱號, 前段 後段」；法、俄文的前段照 `gender:<後段>` 挑形式。參考實作是 `work/translation/compose-proto.mjs`（網頁書籤的 `web-rules.mjs` 輸出要一樣）
+  13. 俄文（cyrillic）：西里爾字母 U+0400–04FF 也當外文字畫（點陣字型沒有，原本畫成「?」）；第 9 項的暗色字修正也套用（按鈕上的黑字原本一樣是空心的灰字）
+  14. 俄文字型（font-ru）：用同樣的字型家族名稱註冊，範圍 U+0400-04FF，D2R Kodia（標題字型）用 `title.woff2`（D2R 的 Exocet），其他用 `body.woff2`（Philosopher）。檔案由 `zh-fonts.mjs … --lang ru` 產生到 `work/fonts/ru/`，跟中文一樣放進 `fonts-zh/`，只有本機打包才有；從啟動器套用時用系統字型（Chromium 的預設字型，有襯線，可以讀，2026.1027.1 實測沒有「?」）
+
   `tools/compare-shots.ps1` 可以把兩張截圖的同一塊放大並排，比較改前改後；`node tools/cdp.mjs 9229 preload "<js>"` 可以在頁面載入前掛上攔截（例如記錄 `fillText` 用的顏色）
 
 ## 測試

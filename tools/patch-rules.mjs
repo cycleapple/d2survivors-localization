@@ -2,7 +2,8 @@
 // 每條規則：在 assets 裡找到檔案（file 是檔名的 regex；沒有的話就找唯一含有 from 的 .js），
 // from 必須剛好出現一次，換成 to。from／to 裡的 {{menu_name}}、{{html_lang}} 依語言代換。
 // groups：base 每種語言都套用；dict 換掉韓文字典的語言才套用；cjk 中日文才套用；
-//   magic-zh／magic-ja 魔法物品名稱的組合順序（照 D2R 各語言的 MagicFormat）；fullwidth 冒號用全形（只有繁中）。
+//   magic-zh／magic-ja 魔法物品名稱的組合順序（照 D2R 各語言的 MagicFormat）；fullwidth 冒號用全形（只有繁中）；
+//   magic-de／magic-fr／magic-ru、unique-de／unique-fr／unique-ru 有詞性的語言組名稱；cyrillic、font-ru 俄文的字。
 
 export const ASSETS_DIR = 'desktop/dist/web/assets';
 
@@ -17,6 +18,20 @@ const OPENING = '\\u300c\\u300e\\u3010\\uff08';
 const HANGUL_RANGES = 'return t>=44032&&t<=55203||t>=12592&&t<=12687||t>=4352&&t<=4607}';
 // 漢字、擴充 A、中文標點、全形字元、平假名和片假名
 const CJK_RANGES = '||t>=19968&&t<=40959||t>=13312&&t<=19903||t>=12288&&t<=12351||t>=65280&&t<=65519||t>=12352&&t<=12543';
+
+// 有詞性的語言（德、法、俄）的名稱組合，參考實作是 work/translation/compose-proto.mjs（網頁書籤的 web-rules.mjs 輸出要一樣）。
+// 字典裡 affix:<詞綴>、unique:<前段> 是每種詞性的形式「[ms]прочный[fs]прочная…」，gender:<名詞> 是名詞的詞性（ms／fs／ns／pl，法文複數 mp／fp）
+// 挑出詞性 G 的形式：沒有標記就原樣，找不到那個詞性就用第一個
+const pick = G => `k=v=>{if(!v.startsWith(\`[\`))return v;let o=v.split(\`[\`).slice(1),w=o.find(x=>x.startsWith(${G}+\`]\`))??o[0];return w.slice(w.indexOf(\`]\`)+1).trim()}`;
+// 第一個字母大寫、小寫
+const CASE = 'U=v=>v?v[0].toUpperCase()+v.slice(1):v,W=v=>v?v[0].toLowerCase()+v.slice(1):v';
+// 魔法物品：遊戲的 translateMagic(e 全名, t 物品)，r 前綴、i 後綴、a 查 affix:。物品的詞性直接查字典（s 是遊戲正規化 key 的函式）
+const MAGIC_FROM = 'return[a(i),a(r),this.translateAs(`item`,t)].filter(Boolean).join(` `)';
+const magic = expr => `let g=this.exact.get(s(\`gender:\${t.trim()}\`))??\`ms\`,${pick('g')},${CASE},b=this.translateAs(\`item\`,t),p=k(a(r)),q=k(a(i));return ${expr}`;
+// 獨特怪物：keepSave 的 Ma(e 查詢函式, t 名稱)，n 是英文的 [前段, 後段, 稱號]，r／i／a 是各段的譯文。
+// e(`gender`,…) 查不到時會退回一般翻譯，所以要確認拿到的是詞性代碼
+const UNIQUE_FROM = 'let[r,i,a]=n.map(t=>e(`unique`,t));return`${a} ${r} ${i}`';
+const unique = expr => `let[r,i,a]=n.map(t=>e(\`unique\`,t)),G=e(\`gender\`,n[1]);G=/^(ms|fs|ns|pl|mp|fp)$/.test(G)?G:\`ms\`;let ${pick('G')},${CASE};return${expr}`;
 
 export const RULES = [
   // 啟動器用 D2S_QUERY=d2slang=<en|ko> 指定語言：每個視窗只在第一次載入時寫進 localStorage，
@@ -41,6 +56,20 @@ export const RULES = [
     from: 'return[a(i),a(r),this.translateAs(`item`,t)].filter(Boolean).join(` `)',
     to: 'return[a(r),a(i),this.translateAs(`item`,t)].filter(Boolean).join(``)',
   },
+  // 德文「前綴 物品 後綴」（D2R MagicFormat %0 %1 %2），前綴結尾是「 -」時跟物品用連字號接（Engels-Ring），句首大寫：Robuste Kappe des Geistes
+  { label: '魔法物品名稱組合（德文）', groups: ['magic-de'], file: '^lang-.*\\.js$', from: MAGIC_FROM, to: magic('U([p&&(p.endsWith(` -`)?`${p.slice(0,-2)}-${b}`:`${p} ${b}`),!p&&b,q].filter(Boolean).join(` `))') },
+  // 法文「物品 前綴 後綴」（%1 %0 %2）：Coiffe solide de l’esprit
+  { label: '魔法物品名稱組合（法文）', groups: ['magic-fr'], file: '^lang-.*\\.js$', from: MAGIC_FROM, to: magic('[b,p,q].filter(Boolean).join(` `)') },
+  // 俄文「前綴 物品 後綴」（%0 %1 %2），有前綴時物品小寫開頭，句首大寫：Прочный наголовник разума
+  { label: '魔法物品名稱組合（俄文）', groups: ['magic-ru'], file: '^lang-.*\\.js$', from: MAGIC_FROM, to: magic('U([p,p?W(b):b,q].filter(Boolean).join(` `))') },
+  // 獨特怪物名字（遊戲照韓文排成「稱號 前段 後段」）。
+  // 依賴壓縮名稱（Ma 的 e、n），遊戲改版後用 tools/find-anchors.mjs 找新的寫法（2026.1027.1）
+  // 德文「前段-後段 稱號」（D2R Monster2Format a0n1）：Düsternis-Hauer der Hungrige
+  { label: '獨特怪物名字（德文）', groups: ['unique-de'], from: UNIQUE_FROM, to: 'let[r,i,a]=n.map(t=>e(`unique`,t));return`${r.endsWith(` -`)?`${r.slice(0,-2)}-${i}`:`${r} ${i}`} ${a}`' },
+  // 法文「後段 前段 稱號」，前段照後段的詞性挑：Croc mélancolique l’Affamé
+  { label: '獨特怪物名字（法文）', groups: ['unique-fr'], from: UNIQUE_FROM, to: unique('`${i} ${k(r)} ${W(a)}`') },
+  // 俄文「稱號, 前段 後段」（D2R 的「%2, %0 %1」），前段照後段的詞性挑：Голод, Мрачный клык
+  { label: '獨特怪物名字（俄文）', groups: ['unique-ru'], from: UNIQUE_FROM, to: unique('`${U(a)}, ${U(k(r))} ${W(i)}`') },
   // 「標籤: 值」整句查不到時，翻譯器分開翻再接回去，一律接成半形「: 」；標籤是中文就改用全形「：」、不加空格。
   // 只有繁中：D2R 的簡中、日文本來就用半形冒號（「掉宝率: +%d%%」）
   {
@@ -51,6 +80,8 @@ export const RULES = [
   // D2 點陣字型只把韓文當「外文字」改用 canvas 字型畫，其他字元查不到就畫成「?」。
   // 加上中日韓漢字（含擴充 A）、中文標點、全形字元的範圍
   { label: '外文字判斷', groups: ['cjk'], from: HANGUL_RANGES, to: HANGUL_RANGES.slice(0, -1) + CJK_RANGES + '}' },
+  // 俄文：西里爾字母（U+0400–04FF）點陣字型也沒有，一樣當外文字
+  { label: '外文字判斷（西里爾字母）', groups: ['cyrillic'], from: HANGUL_RANGES, to: HANGUL_RANGES.slice(0, -1) + '||t>=1024&&t<=1279}' },
   // 點陣字型的斷行只在空白處斷，中文句子會整行超出。
   // 切完空白後，把含中文的詞再拆成一個字一個字（句末標點黏在前一個字後面、左括號黏在後一個字前面，
   // 數字和英文黏著後面那個字，「1発」「D2と」不會拆開）；拆出來的片段前面標 \u0001，接回去時不加空白
@@ -69,13 +100,20 @@ export const RULES = [
     from: 'if(typeof FontFace>`u`)return;',
     to: 'if(typeof FontFace>`u`)return;await Promise.all([[`D2R Kodia`,`body.woff2`],[`D2R Iris`,`body.woff2`],[`D2 Hangul`,`body.woff2`],[`D2 Hangul 14`,`body.woff2`]].map(async([f,n])=>{try{document.fonts.add(await new FontFace(f,`url(${new URL(`../fonts-zh/${n}`,document.baseURI).href})`,{unicodeRange:`U+3000-30FF, U+3400-4DBF, U+4E00-9FFF, U+FF00-FFEF`}).load())}catch{}}));',
   },
+  // 俄文字型：同樣的做法，標題字型（D2R Kodia）用 title.woff2（D2R 的 Exocet），其他用 body.woff2（Philosopher），範圍限定西里爾字母。
+  // 字型檔是 zh-fonts.mjs --lang ru 取出的，跟中文一樣放在 fonts-zh/；沒有時用系統字型
+  {
+    label: '俄文字型', groups: ['font-ru'], file: '^lang-.*\\.js$',
+    from: 'if(typeof FontFace>`u`)return;',
+    to: 'if(typeof FontFace>`u`)return;await Promise.all([[`D2R Kodia`,`title.woff2`],[`D2R Iris`,`body.woff2`],[`D2 Hangul`,`body.woff2`],[`D2 Hangul 14`,`body.woff2`]].map(async([f,n])=>{try{document.fonts.add(await new FontFace(f,`url(${new URL(`../fonts-zh/${n}`,document.baseURI).href})`,{unicodeRange:`U+0400-04FF`}).load())}catch{}}));',
+  },
   // 外文字的顏色是照點陣字型推算的：亮度夠的像素當填色，其餘超過三成就當描邊，畫的時候再乘上指定的顏色。
   // 石頭按鈕的黑字邊緣有一圈較淡的像素，會被當成「灰色填色（#3f3f3f）＋黑色描邊（#070707）」，中文看起來像空心的灰字。
   // 最後算出來的填色很暗、又比描邊淡時，只用描邊的顏色畫實心字（跟英文一樣），再往右 1 像素多畫一次當粗體
   // （英文按鈕字很粗，單畫一次的中文太細）；亮色字（金字、白字）的填色亮，不受影響。
   // 「很暗」的門檻 75：按鈕字的填色最亮 63，升級畫面標題那種褐金色是 97，要照原本的畫法
   {
-    label: '暗色字不加描邊', groups: ['cjk'],
+    label: '暗色字不加描邊', groups: ['cjk', 'cyrillic'],
     from: 'c=[];if(a.outline){let e=`rgb(${o(a.outline.level,a.outline.own)})`;for(let[t,n]of[[-1,0],[1,0],[0,-1],[0,1],[-1,-1],[1,-1],[-1,1],[1,1]])c.push([e,t*s,n*s])}c.push([`rgb(${o(a.level,a.own)})`,0,0]);',
     to: 'c=[],F=o(a.level,a.own),U=a.outline&&o(a.outline.level,a.outline.own),M=e=>Math.max(...e.split(`,`).map(Number)),D=U&&M(F)<75&&M(U)<M(F);if(a.outline&&!D){let e=`rgb(${U})`;for(let[t,n]of[[-1,0],[1,0],[0,-1],[0,1],[-1,-1],[1,-1],[-1,1],[1,1]])c.push([e,t*s,n*s])}c.push([`rgb(${D?U:F})`,0,0]);D&&c.push([`rgb(${U})`,1,0]);',
   },
@@ -106,6 +144,9 @@ export const LANGUAGES = [
   { id: 'zh-TW', name: '繁體中文', menu_name: '繁體中文', html_lang: 'zh-Hant', groups: ['base', 'dict', 'cjk', 'magic-zh', 'fullwidth'], dict: 'dict/zh-TW.json' },
   { id: 'zh-CN', name: '简体中文', menu_name: '简体中文', html_lang: 'zh-Hans', groups: ['base', 'dict', 'cjk', 'magic-zh'], dict: 'dict/zh-CN.json' },
   { id: 'ja', name: '日本語', menu_name: '日本語', html_lang: 'ja', groups: ['base', 'dict', 'cjk', 'magic-ja'], dict: 'dict/ja.json' },
+  { id: 'de', name: 'Deutsch', menu_name: 'Deutsch', html_lang: 'de', groups: ['base', 'dict', 'magic-de', 'unique-de'], dict: 'dict/de.json' },
+  { id: 'fr', name: 'Français', menu_name: 'Français', html_lang: 'fr', groups: ['base', 'dict', 'magic-fr', 'unique-fr'], dict: 'dict/fr.json' },
+  { id: 'ru', name: 'Русский', menu_name: 'Русский', html_lang: 'ru', groups: ['base', 'dict', 'cyrillic', 'font-ru', 'magic-ru', 'unique-ru'], dict: 'dict/ru.json' },
 ];
 
 export function fillTemplate(s, lang) {

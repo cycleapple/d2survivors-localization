@@ -1,6 +1,6 @@
 # 啟動器（launcher/，Rust）
 
-選語言（繁體中文／简体中文／日本語／English／한국어原版）後按「啟動遊戲」：自動下載新的翻譯、修改 app.asar、用選的語言開遊戲。
+選語言（manifest 裡有的翻譯：繁體中文、简体中文、日本語、Deutsch、Français、Русский；加上 English／한국어原版）後按「啟動遊戲」：自動下載新的翻譯、修改 app.asar、用選的語言開遊戲。
 
 ```
 cd launcher && cargo build --release        # → launcher/target/release/d2s-launcher.exe
@@ -17,7 +17,7 @@ cargo test --release                        # 有 backup/2026.1026.4/app.asar �
 - 讀的欄位：
   - `schema` 不是 2 就停下來，提示更新啟動器
   - `desktop`（修改規則）＝ v1 的 `patch`
-  - `languages[]` 裡有 `desktop` 欄位的語言才列進選單；`status: beta` 標成「測試中」
+  - `languages[]` 裡有 `desktop` 欄位的語言才列進選單；`status: beta` 標成「測試中」、`draft` 標成「草稿」（目前 make-manifest.mjs 不輸出 draft 的語言）
   - `launcher`：自我更新，見下面
 - 只下載選的語言的字典，以及本機已經有、但版本舊了的字典
 - manifest 規則和字典都存在本機，離線或更新失敗時用上次的
@@ -46,7 +46,7 @@ cargo test --release                        # 有 backup/2026.1026.4/app.asar �
 
 - 原版 app.asar：用遊戲附的 `resources/app.asar.sha256` 判斷。遊戲裡是原版（剛裝好或遊戲自己更新過）就先備份到 `%LOCALAPPDATA%\D2SurvivorsLauncher\originals\`，每次都從原版重新修改。所以遊戲自己更新後，下次從啟動器開會自動重新套用
 - 指定語言：遊戲本身會把環境變數 `D2S_QUERY` 加在網址後面，啟動器傳 `d2slang=en|ko`（翻譯都放在 ko 槽位）；`patch-rules.mjs` 的「啟動器指定語言」規則讓遊戲在每個視窗第一次載入時採用它。之後在遊戲裡切換語言照樣有效
-- 命令列（可以做成捷徑）：`d2s-launcher --launch [--lang zh-TW|zh-CN|ja|en|ko] [--no-update]`；另外有 `--install`（只裝不開）、`--update`、`--restore`、`--self-update`、`--status`、`--manifest <網址或路徑> --save`
+- 命令列（可以做成捷徑）：`d2s-launcher --launch [--lang zh-TW|zh-CN|ja|de|fr|ru|en|ko] [--no-update]`；另外有 `--install`（只裝不開）、`--update`、`--restore`、`--self-update`、`--status`、`--manifest <網址或路徑> --save`
 - 設定、字典、備份都在 `%LOCALAPPDATA%\D2SurvivorsLauncher\`。測試時設 `D2S_LAUNCHER_DIR` 環境變數可以換一個資料夾，不會動到平常用的設定和快取
 - 不會改 `app.asar.sha256`，所以遊戲照樣知道 asar 被改過（排行榜紀錄會標成 patched）
 
@@ -59,6 +59,8 @@ cargo test --release                        # 有 backup/2026.1026.4/app.asar �
 1. 建一個資料夾，放空的 `D2 Survivors.exe`、`resources/app.asar`（原版，例如 `backup/<版本>/app.asar`）和 `resources/app.asar.sha256`
 2. `D2S_LAUNCHER_DIR` 指到另一個資料夾，裡面的 `config.json` 把 `game_dir` 設成上面的資料夾
 3. `d2s-launcher --install --manifest site/data/manifest.json --lang ja`，再比對輸出
+
+要進遊戲看：把整個遊戲資料夾複製一份，`D2S_USER_DATA` 指到另一個資料夾（遊戲本身支援，存檔和設定就不會動到平常的），裡面 `d2` 用 junction 指到平常的 `%APPDATA%\D2 Survivors\d2`（取出的 D2 素材，1.5 GB），`desktop.json` 的 `checkForUpdates` 設成 false。再用 `D2S_QUERY=d2slang=ko` 和 `--remote-debugging-port` 開複製的那份，用 `tools/cdp.mjs` 截圖
 
 ## 待辦
 

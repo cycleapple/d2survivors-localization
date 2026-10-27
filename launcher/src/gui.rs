@@ -71,10 +71,7 @@ impl App {
         let mut list: Vec<(String, String)> = Vec::new();
         if let Some(m) = &self.manifest {
             for (l, _) in m.desktop_languages() {
-                let mut notes = Vec::new();
-                if l.status == "beta" {
-                    notes.push("測試中".to_string());
-                }
+                let mut notes: Vec<String> = l.status_note().map(String::from).into_iter().collect();
                 notes.push(if manifest::local_dict(l).is_some() { format!("{} 條", l.entries) } else { "尚未下載".into() });
                 list.push((l.id.clone(), format!("{}（{}）", l.name, notes.join("・"))));
             }

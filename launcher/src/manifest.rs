@@ -95,8 +95,20 @@ impl Manifest {
 }
 
 impl Language {
+    /// 不是正式版時的標示：beta 測試中、draft 草稿（翻完還沒進遊戲驗證）
+    pub fn status_note(&self) -> Option<&'static str> {
+        match self.status.as_str() {
+            "beta" => Some("測試中"),
+            "draft" => Some("草稿"),
+            _ => None,
+        }
+    }
+
     pub fn label(&self) -> String {
-        if self.status == "beta" { format!("{}（測試中）", self.name) } else { self.name.clone() }
+        match self.status_note() {
+            Some(n) => format!("{}（{n}）", self.name),
+            None => self.name.clone(),
+        }
     }
 }
 
