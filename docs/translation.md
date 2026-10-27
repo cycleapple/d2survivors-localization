@@ -275,3 +275,17 @@ node tools/publish.mjs
 ## 遊戲內實測（2026.1026.4，zh-TW.json 12,616 條）
 
 標題畫面（「點擊或按任意鍵」、版權聲明）、主選單（網站／新聞、進行遊戲、選項、存檔、離開）、新聞頁的改版說明（整頁中文、長句會斷行）、技能變體說明（分裂、霜燃、沉重、「對付怪物群更強」）都正常。用翻譯函式確認審核修正生效：漩渦、灼燒、保留、重新載入、跳過、回報、傭兵、粉碎打擊、首領、暗影守護、復仇打擊。實測時發現「Latest」被配成「現代」，已改成「最新」。
+
+## 正式版標準的做法（2026.1027.2，七種語言）
+
+字典層的名稱（`tools/langs.mjs` 的 `layers()` 依名稱排序合併，後面的蓋過前面的）：
+- `new-<版本>.json`：新版補翻；`new-extra-*`：韓文字典沒有的 key（舊改版說明、樣板）；`new-synergy-*`：技能協同清單（程式把技能名稱接成一段，要整段當 key，產生器 `work/agents/synergy/build.mjs`，技能改名後要重跑）；`new-runtime-*`：韓文 key 永遠對不到的執行時字串（`#` 放的是文字的、帶職業名稱的商店句子等）；`new-titles-*`：女性職業稱號 `title:<稱號>:f`（規則在 patch-rules／web-rules）；`new-death-*`
+- `review-<版本>.json`：第二輪審稿（每種語言三個新代理，`work/translation/make-review.mjs`、`apply-review.mjs`）；`review-global-*`：審稿員指出的全字典問題；`review-qa-*`：截圖檢查的修正；`review-todo-*`、`review-leftover-*`、`review-bases-*`
+- 德、法、俄、波蘭文的 `overrides.json` 由 `work/unify-eu.mjs` 產生，**不改 `review-*.json` 裡的 key**（審稿過的是最後決定）；樣板（有 `*`、`#`）不強制大寫
+- 合併：`bash work/translation/remerge.sh <語言…>`（歐洲語言會先重產 overrides）
+
+檢查：
+- 第 3 項：`bash work/translation/walk-all.sh <語言…>` 在遊戲複本（`work/translation/game`、`udata`，port 9230，不動正式安裝）走一遍，`node work/translation/walk-check.mjs <語言>` 對照現在的字典看還剩哪些（歐洲語言的 missing-report 去不掉已翻好的外文）
+- 第 4 項：截圖先用 `python -I work/qa/sheets.py <資料夾> <輸出>` 拼成 2×2 縮圖（`--crop` 裁原圖放大），代理只讀縮圖、每張一次；一次最多兩個代理，跑完確認 C 槽 10 GB 以上（2026-10-28 代理反覆讀全尺寸截圖把 C 槽塞滿過）
+- 執行時字串的實際結果：`printf '<英文>\n' | node work/agents/qa-ru/tr.mjs dict/<語言>.json`（用遊戲自己的翻譯器）
+- `build-glossary.mjs`：D2R 的 `%0 %2 %1` 照編號對應位置（日、法、俄、波蘭文的「施展技能」行曾經技能和等級對調）；`affix:` 用 D2 內部名稱，查不到英文時改用 D2R 列的 key 找詞性形式；德文稀有名稱依後段名詞的詞性選形容詞、開頭大寫
