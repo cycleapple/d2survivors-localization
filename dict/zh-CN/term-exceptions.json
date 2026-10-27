@@ -1,0 +1,52 @@
+{
+ "Lightning": [
+  "Charged Bolt, Lightning and Death Sentries shoot at monsters farther away",
+  "The Assassin's traps make room by depth: a Lightning or Death Sentry no longer gives way to a Charged Bolt Sentry or Wake of Fire, and a trap no deeper than the five standing waits for a free place",
+  "Absorb on Resist Fire, Cold and Lightning costs 20 points of resistance, as Retort does, not half the aura"
+ ],
+ "Werebear": [
+  "Werebear for #s near monsters: #% less damage taken, +#% life, splashing blows of #",
+  "A Druid in a wereform casts his gear's skills: Windhammer's Twister now flies from a Werebear's blows",
+  "The Druid's wolves sweep each bite through the monsters beside their target and his Grizzly's swipe splashes, as his Werewolf's and Werebear's blows do"
+ ],
+ "Blizzard": [
+  "Soon D2 Survivors will run only on your own Diablo II or Diablo II: Resurrected files, out of respect for Blizzard's work. Get the desktop app, or point the game at your install. Your saves come with you.",
+  "The title screen shows Blizzard's copyright notice for Diablo II, Lord of Destruction and Diablo II: Resurrected"
+ ],
+ "Thrown": [
+  "Thrown axes deal #% more damage and have +#% chance to pierce what they hit."
+ ],
+ "Critical Strike": [
+  "A werewolf with +#% life, you claw # every #s, +#% Critical Strike."
+ ],
+ "Return": [
+  "Return to Deckard Cain for your reward."
+ ],
+ "Vengeance": [
+  "Spirit of Barbs' Vengeance now returns 20% less above 40% life, not half"
+ ],
+ "Firestorm": [
+  "Immolation Arrow's Firestorm blast now deals 30% less damage, not 45% less"
+ ],
+ "Charged Bolt": [
+  "Charged Bolt, Lightning and Death Sentries shoot at monsters farther away"
+ ],
+ "Slayer": [
+  "Character select shows the title each class has earned, as D2 does: Slayer, Champion, then Patriarch or Matriarch"
+ ],
+ "Maul": [
+  "Korean: Maul, Scythe, Skull Splitter and five other item names read as the item, not a skill or a rare name"
+ ],
+ "Flight": [
+  "Flight rudders, wheel pedals and other devices that aren't game pads no longer walk the hero unless you press one of their buttons"
+ ],
+ "PLAY": [
+  "d2survivors.lol always opens on its own page now, returning players too: PLAY IN THE BROWSER takes you into the game"
+ ],
+ "Werewolf": [
+  "The Druid's wolves sweep each bite through the monsters beside their target and his Grizzly's swipe splashes, as his Werewolf's and Werebear's blows do"
+ ],
+ "Sanctuary": [
+  "A shard of pale light, warm as a living thing. It hums of something vast, and broken. There are others; you can feel them, far across Sanctuary."
+ ]
+}

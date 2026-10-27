@@ -1,0 +1,485 @@
+[
+ {
+  "key": "The portal takes you in #…",
+  "current": "传送门将在{0}后带你离开…",
+  "suggested": "传送门将在{0}秒后带你离开…",
+  "category": "meaning",
+  "reason": "游戏代码里 # 是 1～5 的纯数字秒数（Math.ceil 后的倒数），现在会显示成「传送门将在3后带你离开…」，缺少「秒」。zh-TW 也补了「秒」"
+ },
+ {
+  "key": "The monster it strikes takes 12% of its 7 bolts' damage again 0.5 seconds later.",
+  "current": "被击中的怪物会在0.5秒后再次受到7发弹体伤害的12%。",
+  "suggested": "被击中的怪物会在0.5秒后再次受到7发电荷弹伤害的12%。",
+  "category": "meaning",
+  "reason": "这是 Charged Strike（充能打击）的变体，7 bolts 指它释放的电荷弹（D2R 简中 Charged Bolt＝电荷弹）。「7发弹体」意思含糊，看不出是什么"
+ },
+ {
+  "key": "Something went wrong. SAVE AND EXIT keeps your run: please send a REPORT",
+  "current": "出现错误。“保存并退出”可保留这一局：请发送报告",
+  "suggested": "出现错误。“保存并退出”可保留这一局：请发送“反馈”",
+  "category": "consistency",
+  "reason": "REPORT 是按钮名，项目已统一为「反馈」（term-decisions；其他句子都写「请发送“反馈”」），这里写成一般名词「报告」，玩家找不到对应按钮"
+ },
+ {
+  "key": "Your level-* * starts over and keeps the golden glow for good.",
+  "current": "你的{0}级{1}将重新开始，并永久保有金色光辉。",
+  "suggested": "你的{0}级{1}将重新开始，并永久保留金色光芒。",
+  "category": "consistency",
+  "reason": "同一个 golden glow 在其他 5 条都译「金色光芒」，这里写成「金色光辉」；「保有」偏台湾书面用法，大陆用「保留」（也跟“Keeps her golden glow”→保留她的金色光芒一致）"
+ },
+ {
+  "key": "Tap again to reset",
+  "current": "再轻点一次以重置",
+  "suggested": "再轻触一次以重置",
+  "category": "consistency",
+  "reason": "Tap 的译法在 zh-CN 全字典里混用「轻触」(28 条) 和「轻点」(24 条)，同一个界面会两种并存。单独的 Tap 键和 Tap again to buy/drop/gamble/pick 等都是「轻触」，建议统一成「轻触」（全字典一起改）"
+ },
+ {
+  "key": "Tap again to start over",
+  "current": "再轻点一次以从头开始",
+  "suggested": "再轻触一次以从头开始",
+  "category": "consistency",
+  "reason": "Tap 统一为「轻触」，理由同 “Tap again to reset”"
+ },
+ {
+  "key": "Tap again to swap",
+  "current": "再轻点一次以交换",
+  "suggested": "再轻触一次以交换",
+  "category": "consistency",
+  "reason": "Tap 统一为「轻触」，理由同 “Tap again to reset”"
+ },
+ {
+  "key": "Tap again to go",
+  "current": "再轻点一次以前往",
+  "suggested": "再轻触一次以前往",
+  "category": "consistency",
+  "reason": "Tap 统一为「轻触」，理由同 “Tap again to reset”"
+ },
+ {
+  "key": "Tap the waypoint to start a run, or a hero by the fire to play as her",
+  "current": "轻点传送点开始一局，或轻点篝火旁的英雄来使用她进行游戏",
+  "suggested": "轻触传送点开始一局，或轻触篝火旁的英雄来使用她进行游戏",
+  "category": "consistency",
+  "reason": "Tap 统一为「轻触」，理由同 “Tap again to reset”"
+ },
+ {
+  "key": "Tap the + of the attribute to raise",
+  "current": "轻点要提升的属性旁的 +",
+  "suggested": "轻触要提升的属性旁的 +",
+  "category": "consistency",
+  "reason": "Tap 统一为「轻触」，理由同 “Tap again to reset”"
+ },
+ {
+  "key": "I thank you, friend, for coming to my aid.",
+  "current": "朋友，感谢你前来救我。",
+  "suggested": "感谢你，朋友，能救老夫一命。",
+  "category": "term",
+  "reason": "这句是凯恩在 D2 里的原台词，D2R 简中官方是「……感谢你，朋友，能救老夫一命。」，照官方台词（去掉开头省略号）比自译更贴近原作"
+ },
+ {
+  "key": "web",
+  "current": "电网",
+  "suggested": "蛛网",
+  "category": "consistency",
+  "reason": "web 在游戏里用于雷电网（Shock Web）的说明和蜘蛛网，字典里的 “# web”“# webs”“a hit of a web” 都译「蛛网」，单字 fallback 译成「电网」不一致，蜘蛛网的场合也说不通（ko 거미줄＝蜘蛛网）"
+ },
+ {
+  "key": "* (Esc)",
+  "current": "{0}（Esc 键）",
+  "suggested": "{0}（Esc）",
+  "category": "consistency",
+  "reason": "其他同类按键提示都是「返回（Esc）」「关闭（Esc）」「取消（Esc）」，只有这条多了「键」"
+ },
+ {
+  "key": "Her mercenary wears *: not legit",
+  "current": "她的佣兵穿戴了{0}: 不合规",
+  "suggested": "她的佣兵穿戴了{0}：不合规",
+  "category": "style",
+  "reason": "这是一句话不是「标签: 数值」，按规范用全角冒号；同组的 “Her Charms window holds *: not legit” 和 “…: not ranked” 都已用全角「：」，这条和 “She wears *: not legit” 用了半角"
+ },
+ {
+  "key": "She wears *: not legit",
+  "current": "她穿戴了{0}: 不合规",
+  "suggested": "她穿戴了{0}：不合规",
+  "category": "style",
+  "reason": "同 “Her mercenary wears *: not legit”，同组句子统一用全角冒号"
+ },
+ {
+  "key": "1 hero",
+  "current": "1 名英雄",
+  "suggested": "1位英雄",
+  "category": "consistency",
+  "reason": "跟成对的 “* heroes”→「{0}位英雄」量词和空格都不一致（名／位、「1 名」有空格）。字典里英雄一律用「位」"
+ },
+ {
+  "key": "1 run",
+  "current": "1 局",
+  "suggested": "1局",
+  "category": "consistency",
+  "reason": "成对的 “* runs”→「{0}局」数字后没有空格，这条写成「1 局」，单复数切换时会一个有空格一个没有"
+ },
+ {
+  "key": "1 run waiting to be sent",
+  "current": "1 局记录等待发送",
+  "suggested": "1局记录等待发送",
+  "category": "consistency",
+  "reason": "成对的 “* runs waiting to be sent”→「{0}局记录等待发送」没有空格，这条多了空格"
+ },
+ {
+  "key": "The tier below was never recorded",
+  "current": "下面一阶从未被记录",
+  "suggested": "较低的一阶从未被记录",
+  "category": "meaning",
+  "reason": "代码里这是攀升记录有缺口（gap）：更低的某一阶没有记录。「下面一阶」容易被理解成「下一阶」（更高的阶）"
+ },
+ {
+  "key": "Terror reopens at tier 1.",
+  "current": "恐惧将从第1阶重新开放。",
+  "suggested": "恐惧将从第1阶重新开启。",
+  "category": "consistency",
+  "reason": "同组句子（Terror * is open／stays open／A replay opens no tier）都用「开启」，这里写成「开放」"
+ },
+ {
+  "key": "It thrusts twice instead of 3 times, but each thrust deals 50% more damage.",
+  "current": "刺击次数从3次变为两次，但每次刺击伤害提高50%。",
+  "suggested": "刺击次数从3次变为2次，但每次刺击伤害提高50%。",
+  "category": "style",
+  "reason": "同一句里混用阿拉伯数字「3次」和汉字「两次」，技能说明的数字一律用阿拉伯数字（zh-TW 也是 3次→2次）"
+ },
+ {
+  "key": "Fires # of ice that # # and #, for # damage.",
+  "current": "发射{0}枚冰弹，{1}{2}只怪物并使其{3}，造成{4}点伤害。",
+  "suggested": "发射{0}冰弹，{1}{2}只怪物并使其{3}，造成{4}点伤害。",
+  "category": "placeholder",
+  "reason": "{0} 由“# bolts”填入（{0}枚），模板再写“枚”会显示成“发射3枚枚冰弹”（游戏代码：Fires ${tb(n,`bolt`)} of ice…）。去掉模板里的“枚”，与繁中一致"
+ },
+ {
+  "key": "# of # damage # for #s.",
+  "current": "{0}枚冰弹造成{1}点伤害，{2}{3}秒。",
+  "suggested": "{0}冰弹造成{1}点伤害，{2}{3}秒。",
+  "category": "placeholder",
+  "reason": "{0} 由“# bolts”填入（{0}枚），现在会显示“3枚枚冰弹”（冰球爆的说明：${tb(n,`bolt`)} of … damage …）。去掉模板里的“枚”"
+ },
+ {
+  "key": "Fires # of lightning through all in line for # damage.",
+  "current": "发射{0}道闪电，贯穿直线上的所有目标，造成{1}点伤害。",
+  "suggested": "发射{0}闪电弹，贯穿直线上的所有目标，造成{1}点伤害。",
+  "category": "placeholder",
+  "reason": "{0} 由“# bolts”填入（{0}枚），现在会显示“发射3枚道闪电”。去掉量词“道”，改成“发射3枚闪电弹”（与繁中“發射{0}閃電彈”一致）"
+ },
+ {
+  "key": "Crushes # for # damage and knocks them back.",
+  "current": "重击{0}只怪物，造成{1}点伤害并将其击退。",
+  "suggested": "重击{0}，造成{1}点伤害并将其击退。",
+  "category": "placeholder",
+  "reason": "{0} 由“# monsters”填入（{0}只怪物），现在会显示“重击3只怪物只怪物”（游戏代码：Crushes ${tb(n,`monster`)}…）。模板不再补“只怪物”"
+ },
+ {
+  "key": "Delivers # of # damage to the toughest in reach. The last releases all charges.",
+  "current": "对范围内最强的怪物发动{0}次攻击，每次造成{1}点伤害。最后一击释放所有充能。",
+  "suggested": "对范围内最强的怪物发动{0}，每次造成{1}点伤害。最后一击释放所有充能。",
+  "category": "placeholder",
+  "reason": "{0} 由“# kicks”填入（{0}次踢击），现在会显示“发动3次踢击次攻击”（游戏代码：Delivers ${tb(n,`kick`)} of …）。模板不再补“次攻击”"
+ },
+ {
+  "key": "on striking",
+  "current": "（击中时）",
+  "suggested": "击中时",
+  "category": "style",
+  "reason": "这是“*% Chance to cast level * * *”（{3}有 {0}% 几率施放{1}级{2}）的 {3} 片段，现在会显示“（击中时）有 5% 几率施放…”，句首带括号不自然，同组的“on attack”也没有括号。D2R 简中写“在击中时施放”，去掉括号"
+ },
+ {
+  "key": "when struck",
+  "current": "（被击中时）",
+  "suggested": "被击中时",
+  "category": "style",
+  "reason": "同上，“*% Chance to cast level * * *”的 {3} 片段，去掉括号，与“攻击时”一致（D2R：几率在被击中时施放）"
+ },
+ {
+  "key": "when you Kill an Enemy",
+  "current": "（消灭敌人时）",
+  "suggested": "消灭敌人时",
+  "category": "style",
+  "reason": "同上，“*% Chance to cast level * * *”的 {3} 片段，去掉括号，与“攻击时”一致（D2R：几率在消灭一名敌人时施放）"
+ },
+ {
+  "key": "An * kept aside by an older version is back now: your hero, or retired at Akara.",
+  "current": "旧版本另外保存的{0}现在回来了: 成为你的英雄，或在阿卡拉处退休。",
+  "suggested": "旧版本另外保存的{0}现在回来了：它是你当前的英雄，或已在阿卡拉处退役。",
+  "category": "meaning",
+  "reason": "原文是说英雄回来后的状态（现在是你的英雄，或已在阿卡拉处退役），“成为你的英雄，或在阿卡拉处退休”读起来像要玩家选择；“退休”与字典里的“退役”（Retired · swap her in = 已退役、A retired hero could not be read = 无法读取一位退役的英雄）不一致；句中冒号应为全角"
+ },
+ {
+  "key": "A * kept aside by an older version is back now: your hero, or retired at Akara.",
+  "current": "旧版本另外保存的{0}现在回来了: 成为你的英雄，或在阿卡拉处退休。",
+  "suggested": "旧版本另外保存的{0}现在回来了：它是你当前的英雄，或已在阿卡拉处退役。",
+  "category": "meaning",
+  "reason": "同 An * kept aside…：意思是回来后的状态而非选项；“退休”改为字典统一的“退役”；句中冒号用全角"
+ },
+ {
+  "key": "a tooth",
+  "current": "每颗利牙",
+  "suggested": "每颗骨牙",
+  "category": "consistency",
+  "reason": "这是骨牙（Teeth）伤害的“每…”标签，同一技能在说明里叫“骨牙”（Fires # teeth… = 射出{0}颗骨牙，D2R Teeth = 骨牙），“利牙”是另一种说法"
+ },
+ {
+  "key": "a second of its poison",
+  "current": "毒素每秒",
+  "suggested": "每秒毒素",
+  "category": "style",
+  "reason": "这是伤害提示框数值后面的单位标签（显示为“毒素伤害: 30 毒素每秒”），其他标签都以“每”开头（每支箭、每次刺击），“毒素每秒”词序不通；照繁中改为“每秒毒素”"
+ },
+ {
+  "key": "a second of a bite's poison",
+  "current": "撕咬毒素每秒",
+  "suggested": "每秒撕咬毒素",
+  "category": "style",
+  "reason": "同 a second of its poison：数值后的单位标签应以“每”开头，“撕咬毒素每秒”词序不通"
+ },
+ {
+  "key": "Summons your shadow, with # life and # damage a blow. Every third is a kick.",
+  "current": "召唤你的暗影，拥有{0}点生命，每击造成{1}点伤害。每第三击为踢击。",
+  "suggested": "召唤你的暗影，拥有{0}点生命，每击造成{1}点伤害。每三击中有一击为踢击。",
+  "category": "style",
+  "reason": "“每第三击为踢击”不是通顺的中文；原文意思是每三次攻击中的第三次是踢击"
+ },
+ {
+  "key": "Your arrows and javelins have a #% chance to pass through the monsters they hit.",
+  "current": "你的箭矢和标枪有{0}%几率穿透击中的怪物。",
+  "suggested": "你的箭矢和标枪有{0}%几率贯穿击中的怪物。",
+  "category": "term",
+  "reason": "这是“贯穿”（Pierce）被动的说明，核心用语 Pierce = 贯穿，同一机制的片段“pierces”也译为“贯穿”；“穿透”与技能名不一致"
+ },
+ {
+  "key": "Tap Character in a run or the camp to read it",
+  "current": "在一局中或营地里轻点“角色”来阅读",
+  "suggested": "在一局中或营地轻点“角色”即可阅读",
+  "category": "consistency",
+  "reason": "与同组的 Tap Character … to use it（在一局中或营地…即可使用）及 Open the character screen (C)…（…即可阅读）句式统一：去掉多余的“里”，“来阅读”改为“即可阅读”"
+ },
+ {
+  "key": ", needs:",
+  "current": "，需要：",
+  "suggested": "，需要:",
+  "category": "consistency",
+  "reason": "同一组标题“Evolves * into *, also needs:”译为“将{0}进化为{1}，还需要:”、“Evolves into *:”译为“进化为{0}:”，都用半角冒号；这里用了全角“：”，同一提示框里会混用"
+ },
+ {
+  "key": "Tap a skill button to spend it in the skill tree",
+  "current": "轻触技能按钮，在技能树中使用点数",
+  "suggested": "轻点技能按钮，在技能树中使用点数",
+  "category": "consistency",
+  "reason": "“Tap”在本条用“轻触”，字典里另有约一半写“轻点”（如 Tap again to choose、Tap a rank to see it、Tap to compare），同屏的提示混用两种说法；大陆移动端（如 iOS 简中）的标准说法是“轻点”，“轻触”与繁中的“輕觸”同源，建议统一为“轻点”"
+ },
+ {
+  "key": "Tap Character in a run or the camp to use it",
+  "current": "在一局中或营地轻触“角色”即可使用",
+  "suggested": "在一局中或营地轻点“角色”即可使用",
+  "category": "consistency",
+  "reason": "“Tap”在本条用“轻触”，字典里另有约一半写“轻点”（如 Tap again to choose、Tap a rank to see it、Tap to compare），同屏的提示混用两种说法；大陆移动端（如 iOS 简中）的标准说法是“轻点”，“轻触”与繁中的“輕觸”同源，建议统一为“轻点”"
+ },
+ {
+  "key": "Tap again to drop",
+  "current": "再轻触一次即可丢弃",
+  "suggested": "再轻点一次即可丢弃",
+  "category": "consistency",
+  "reason": "“Tap”在本条用“轻触”，字典里另有约一半写“轻点”（如 Tap again to choose、Tap a rank to see it、Tap to compare），同屏的提示混用两种说法；大陆移动端（如 iOS 简中）的标准说法是“轻点”，“轻触”与繁中的“輕觸”同源，建议统一为“轻点”"
+ },
+ {
+  "key": "Tap again to buy",
+  "current": "再轻触一次即可购买",
+  "suggested": "再轻点一次即可购买",
+  "category": "consistency",
+  "reason": "“Tap”在本条用“轻触”，字典里另有约一半写“轻点”（如 Tap again to choose、Tap a rank to see it、Tap to compare），同屏的提示混用两种说法；大陆移动端（如 iOS 简中）的标准说法是“轻点”，“轻触”与繁中的“輕觸”同源，建议统一为“轻点”"
+ },
+ {
+  "key": "Tap a ware to see it",
+  "current": "轻触商品即可查看",
+  "suggested": "轻点商品即可查看",
+  "category": "consistency",
+  "reason": "“Tap”在本条用“轻触”，字典里另有约一半写“轻点”（如 Tap again to choose、Tap a rank to see it、Tap to compare），同屏的提示混用两种说法；大陆移动端（如 iOS 简中）的标准说法是“轻点”，“轻触”与繁中的“輕觸”同源，建议统一为“轻点”"
+ },
+ {
+  "key": "Tap a ware, then tap it again",
+  "current": "轻触商品，再轻触一次",
+  "suggested": "轻点商品，再轻点一次",
+  "category": "consistency",
+  "reason": "“Tap”在本条用“轻触”，字典里另有约一半写“轻点”（如 Tap again to choose、Tap a rank to see it、Tap to compare），同屏的提示混用两种说法；大陆移动端（如 iOS 简中）的标准说法是“轻点”，“轻触”与繁中的“輕觸”同源，建议统一为“轻点”"
+ },
+ {
+  "key": "Tap an item to see it",
+  "current": "轻触物品即可查看",
+  "suggested": "轻点物品即可查看",
+  "category": "consistency",
+  "reason": "“Tap”在本条用“轻触”，字典里另有约一半写“轻点”（如 Tap again to choose、Tap a rank to see it、Tap to compare），同屏的提示混用两种说法；大陆移动端（如 iOS 简中）的标准说法是“轻点”，“轻触”与繁中的“輕觸”同源，建议统一为“轻点”"
+ },
+ {
+  "key": "Tap again to gamble",
+  "current": "再轻触一次即可赌博",
+  "suggested": "再轻点一次即可赌博",
+  "category": "consistency",
+  "reason": "“Tap”在本条用“轻触”，字典里另有约一半写“轻点”（如 Tap again to choose、Tap a rank to see it、Tap to compare），同屏的提示混用两种说法；大陆移动端（如 iOS 简中）的标准说法是“轻点”，“轻触”与繁中的“輕觸”同源，建议统一为“轻点”"
+ },
+ {
+  "key": "Tap an item, then tap it again",
+  "current": "轻触物品，再轻触一次",
+  "suggested": "轻点物品，再轻点一次",
+  "category": "consistency",
+  "reason": "“Tap”在本条用“轻触”，字典里另有约一半写“轻点”（如 Tap again to choose、Tap a rank to see it、Tap to compare），同屏的提示混用两种说法；大陆移动端（如 iOS 简中）的标准说法是“轻点”，“轻触”与繁中的“輕觸”同源，建议统一为“轻点”"
+ },
+ {
+  "key": "Tap again to buy it back",
+  "current": "再轻触一次即可买回",
+  "suggested": "再轻点一次即可买回",
+  "category": "consistency",
+  "reason": "“Tap”在本条用“轻触”，字典里另有约一半写“轻点”（如 Tap again to choose、Tap a rank to see it、Tap to compare），同屏的提示混用两种说法；大陆移动端（如 iOS 简中）的标准说法是“轻点”，“轻触”与繁中的“輕觸”同源，建议统一为“轻点”"
+ },
+ {
+  "key": "It takes you when the bar runs out",
+  "current": "计量条耗尽时会自动带你前往",
+  "suggested": "进度条耗尽时会自动带你前往",
+  "category": "consistency",
+  "reason": "同一个说明框的下一行「* comes when the bar runs out」用“进度条”，这里写“计量条”，同一个计量条前后两种叫法；大陆也更常说“进度条”"
+ },
+ {
+  "key": "Tap again for the skill tree",
+  "current": "再轻点一次打开技能树",
+  "suggested": "再轻触一次打开技能树",
+  "category": "consistency",
+  "reason": "Tap 在字典里统一为“轻触”（Tap => 轻触，以及多数“再轻触一次…”），这里写成“轻点／点按／点一下”，跟同组的其他 Tap 字串不一致"
+ },
+ {
+  "key": "Tap a skill to turn on one of its options",
+  "current": "轻点技能以开启它的一个变体",
+  "suggested": "轻触技能以开启它的一个变体",
+  "category": "consistency",
+  "reason": "Tap 在字典里统一为“轻触”（Tap => 轻触，以及多数“再轻触一次…”），这里写成“轻点／点按／点一下”，跟同组的其他 Tap 字串不一致"
+ },
+ {
+  "key": "Tap again to see its modifiers",
+  "current": "再轻点一次查看变体",
+  "suggested": "再轻触一次查看变体",
+  "category": "consistency",
+  "reason": "Tap 在字典里统一为“轻触”（Tap => 轻触，以及多数“再轻触一次…”），这里写成“轻点／点按／点一下”，跟同组的其他 Tap 字串不一致"
+ },
+ {
+  "key": "Tap one to turn it on",
+  "current": "轻点其中一个以启用",
+  "suggested": "轻触其中一个以启用",
+  "category": "consistency",
+  "reason": "Tap 在字典里统一为“轻触”（Tap => 轻触，以及多数“再轻触一次…”），这里写成“轻点／点按／点一下”，跟同组的其他 Tap 字串不一致"
+ },
+ {
+  "key": "She won't be ranked again. Tap again",
+  "current": "她将再也不会计入排名。请再点一下",
+  "suggested": "她将再也不会计入排名。请再轻触一次",
+  "category": "consistency",
+  "reason": "Tap 在字典里统一为“轻触”（Tap => 轻触，以及多数“再轻触一次…”），这里写成“轻点／点按／点一下”，跟同组的其他 Tap 字串不一致；同组的「This ends your saved run. Tap again」「This counts as a death. Tap again」都是“请再轻触一次”"
+ },
+ {
+  "key": "She goes back to level *. Tap again",
+  "current": "她将回到等级{0}。请再点一下",
+  "suggested": "她将回到等级{0}。请再轻触一次",
+  "category": "consistency",
+  "reason": "Tap 在字典里统一为“轻触”（Tap => 轻触，以及多数“再轻触一次…”），这里写成“轻点／点按／点一下”，跟同组的其他 Tap 字串不一致；同组其他确认提示都是“请再轻触一次”"
+ },
+ {
+  "key": "Tap again to hire",
+  "current": "再轻点一次以雇佣",
+  "suggested": "再轻触一次以雇佣",
+  "category": "consistency",
+  "reason": "Tap 在字典里统一为“轻触”（Tap => 轻触，以及多数“再轻触一次…”），这里写成“轻点／点按／点一下”，跟同组的其他 Tap 字串不一致"
+ },
+ {
+  "key": "Tap a line to change it",
+  "current": "轻点项目以更改",
+  "suggested": "轻触项目以更改",
+  "category": "consistency",
+  "reason": "Tap 在字典里统一为“轻触”（Tap => 轻触，以及多数“再轻触一次…”），这里写成“轻点／点按／点一下”，跟同组的其他 Tap 字串不一致"
+ },
+ {
+  "key": "Tap a line to choose",
+  "current": "点按一行进行选择",
+  "suggested": "轻触项目进行选择",
+  "category": "consistency",
+  "reason": "Tap 在字典里统一为“轻触”（Tap => 轻触，以及多数“再轻触一次…”），这里写成“轻点／点按／点一下”，跟同组的其他 Tap 字串不一致；“一行”也跟「Tap a line to change it」的“项目”不一致"
+ },
+ {
+  "key": "Clear a tier with No Potions in the Belt among its affixes (from tier *).",
+  "current": "完成一个带有“腰带中无药水”词缀的阶（第{0}阶起出现）。",
+  "suggested": "完成一个带有“无法使用腰带中的药水”词缀的阶（第{0}阶起出现）。",
+  "category": "consistency",
+  "reason": "词缀本身「No Potions in the Belt」译为“无法使用腰带中的药水”，「Clear a tier with No Potions in the Belt.」也用这个名称；引用词缀名称要跟名称本身一致，不能另写“腰带中无药水”"
+ },
+ {
+  "key": "Under a Terror tier's No Potions in the Belt, the belt's potions are greyed and its hover and a press say why",
+  "current": "恐惧阶带有“腰带禁用药水”时，腰带里的药水会变灰，鼠标悬停或按下时会说明原因",
+  "suggested": "恐惧阶带有“无法使用腰带中的药水”时，腰带里的药水会变灰，鼠标悬停或按下时会说明原因",
+  "category": "consistency",
+  "reason": "引用的是词缀名称「No Potions in the Belt」，字典里它是“无法使用腰带中的药水”，这里写成“腰带禁用药水”"
+ },
+ {
+  "key": "Named monsters left: *",
+  "current": "剩余具名怪物: {0}",
+  "suggested": "剩余有名号的怪物: {0}",
+  "category": "consistency",
+  "reason": "同一个成就（Slay all ten of Act I's named monsters…）的说明写“有名号的怪物”，进度行却写“具名怪物”（照搬繁中“具名”）；两处要一致，“具名”在大陆不这样用"
+ },
+ {
+  "key": "Tap: pick up or put down · Hold: equip, take off, use",
+  "current": "轻触：拿起或放下 · 长按：装备、卸下、使用",
+  "suggested": "轻触: 拿起或放下 · 长按: 装备、卸下、使用",
+  "category": "style",
+  "reason": "按键提示用「标签: 说明」的半角冒号加空格，跟同一处的桌面版「点击: 拿起 · Ctrl+点击: 移到另一侧 · 右键点击: 装备」及「← →: 选择 · Enter: 继续」一致；这里用了全角冒号"
+ },
+ {
+  "key": "Enter or arrows to change - Esc to go back",
+  "current": "Enter 或方向键更改 - Esc 返回",
+  "suggested": "Enter 或方向键: 更改 - Esc: 返回",
+  "category": "style",
+  "reason": "同类按键提示都是「键: 动作」格式（「Enter: 选择 - Esc: 返回」「方向键或拖动以调整 - Esc: 返回」），这里缺了冒号，读起来像“Esc 返回”连成一个词"
+ },
+ {
+  "key": "Poison and Bone Spells",
+  "current": "毒素与白骨\n法术",
+  "suggested": "毒素和白骨术",
+  "category": "term",
+  "reason": "这是死灵法师技能树分页名称，D2R 官方简中是“毒素和白骨术”（SkillCategoryNe2；装备属性“+%d 毒素和白骨术”）。其他分页（冰系法术、诅咒术、标枪和长矛技能…）都用官方名称且不换行，这条却自创“毒素与白骨\\n法术”"
+ },
+ {
+  "key": "A chest's stat points say they're to spend: they wait for New Stats on the character screen, or AUTO STATS spends them",
+  "current": "箱子给予的属性点会说明可供分配：它们会留在角色界面的“新属性”中等你分配，或由“自动加点”代为分配",
+  "suggested": "宝箱给予的属性点会说明可供分配：它们会留在角色界面的“新属性”中等你分配，或由“自动加点”代为分配",
+  "category": "consistency",
+  "reason": "游戏里的 chest 在字典中几乎都译“宝箱”（来自宝箱：、宝箱不再提供…、尚未开启的宝箱…），这里写“箱子”不一致"
+ },
+ {
+  "key": "Shadow Cloak",
+  "current": "暗影斗篷",
+  "suggested": "暗影披风",
+  "category": "term",
+  "reason": "稀有物品名称：Cloak 后段在所有名称里都是“披风”（Beast Cloak 野兽披风、Hailstone Cloak 冰雹披风，D2R 底材 Cloak = 披风）；“斗篷”是 Mantle 的译法。现在的“暗影斗篷”是自动配对误配到刺客技能 Cloak of Shadows（暗影斗篷），会让稀有物品显示成技能名"
+ },
+ {
+  "key": "Music and speech are optional: *.",
+  "current": "音乐和语音为可选项: {0}。",
+  "suggested": "音乐和语音为可选项：{0}。",
+  "category": "style",
+  "reason": "这是完整句子（句末有“。”），句中冒号应用全角“：”；半角冒号加空格只用于「标签: 数值」"
+ },
+ {
+  "key": "* is missing: the game plays without that music or speech.",
+  "current": "缺少{0}: 游戏将在没有该音乐或语音的情况下运行。",
+  "suggested": "缺少{0}：游戏将在没有该音乐或语音的情况下运行。",
+  "category": "style",
+  "reason": "完整句子，句中冒号应用全角“：”（同类句子如“专家模式存档只保留在游玩的地方：无法导出或导入。”都用全角）"
+ },
+ {
+  "key": "An item's box shows the charges it has left in a run, such as (12/30 Charges)",
+  "current": "物品提示框会显示这一局剩下的充能次数，例如 (12/30 次充能)",
+  "suggested": "物品提示框会显示这一局剩下的充能次数，例如（12/30 次充能）",
+  "category": "consistency",
+  "reason": "例子要跟游戏实际显示的「(#/# Charges)」=“（{0}/{1} 次充能）”一致（全角括号），句中也应用全角括号"
+ }
+]
