@@ -177,8 +177,8 @@ manifest 各部分從哪裡來：
 
 - `kind`：`translation`（修譯文）、`language`（新語言、語言改成 beta／available）、`game-fix`（遊戲改版後修好）、`launcher`（啟動器新版）
 - `announce: true` 才會發 Discord 公告。平常修譯文用 `false`；新語言、遊戲改版修好用 `true`
-- `summary` 至少要有 `zh-TW`（沒有的話 publish 會停下來），最好三種都寫。`notes` 選填
-- 沒有這個檔或是 `{}`：依統計自動寫（「繁中修正 30 條、新增 12 條；新增日文（測試中）」），`kind` 是 `translation`、`announce` 是 `false`
+- `summary` 至少要有 `zh-TW` 和 `en`（沒有的話 publish 會停下來）；網站每種介面語言（zh-TW、zh-CN、en、ja、de、fr、ru、pl）都要寫，少了的 publish 會列出來，網站顯示 en。`notes` 選填
+- 沒有這個檔或是 `{}`：依統計自動寫每種介面語言（`tools/changelog-summary.mjs`：「繁中修正 30 條、新增 12 條；新增日文（測試中）」「Russisch: 562 korrigiert」），`kind` 是 `translation`、`announce` 是 `false`
 - 先看結果再發：`node tools/publish.mjs --dry-run` 在 `work/translation/publish-dry/` 的複本上跑，不清空 changelog-next、不 commit
 
 德、法、俄文改成 beta 發布的那次：`kind: "language"`、`announce: true`，三種介面語言都寫 summary。
