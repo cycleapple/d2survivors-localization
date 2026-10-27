@@ -36,7 +36,7 @@ const esc = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 // 號碼就是 regex 的群組編號（replace 的 $1、$2…），所以要照第一次出現的順序編
 function pattern(src) {
   const seen = new Set();
-  return esc(src).replace(/<(\d)>/g, (_, n) => {
+  return esc(src).replace(/<(\d+)>/g, (_, n) => {
     if (seen.has(n)) return `\\${n}`;
     if (+n !== seen.size + 1) throw new Error(`pattern：<${n}> 要照第一次出現的順序編號：${src}`);
     seen.add(n);
@@ -45,7 +45,7 @@ function pattern(src) {
 }
 
 export const WEB_PLAY_URL = 'https://d2survivors.lol/play/';
-export const WEB_CHECKED = '2026-10-27T15:51:01.406Z';
+export const WEB_CHECKED = '2026-10-27T17:00:14.344Z';
 
 export const WEB_LANGUAGES = [
   {
@@ -157,8 +157,9 @@ export const WEB_RULES = [
   { label: '魔法物品名稱組合', groups: ['magic-zh'], optional: true, file: '^translate-.*\\.js$', find: MAGIC, replace: 'return[$1($2),$1($3),this.translateAs(`item`,$4)].filter(Boolean).join(``)' },
   // 日文是「前綴 後綴 物品」（D2R 日文的 MagicFormat「%0%2%1」），也不加空格：頑丈な魔力のキャップ
   { label: '魔法物品名稱組合（日文）', groups: ['magic-ja'], optional: true, file: '^translate-.*\\.js$', find: MAGIC, replace: 'return[$1($3),$1($2),this.translateAs(`item`,$4)].filter(Boolean).join(``)' },
-  // 德文「前綴 物品 後綴」（D2R MagicFormat %0 %1 %2），前綴結尾是「 -」時跟物品用連字號接（Engels-Ring），句首大寫：Robuste Kappe des Geistes
-  { label: '魔法物品名稱組合（德文）', groups: ['magic-de'], optional: true, file: '^translate-.*\\.js$', find: MAGIC, replace: magic('d2U([d2p&&(d2p.endsWith(` -`)?`${d2p.slice(0,-2)}-${d2b}`:`${d2p} ${d2b}`),!d2p&&d2b,d2q].filter(Boolean).join(` `))') },
+  // 德文「前綴 物品 後綴」（D2R MagicFormat %0 %1 %2），前綴結尾是「 -」時跟物品用連字號接（Engels-Ring），句首大寫：Robuste Kappe des Geistes。
+  // 有前綴、物品名稱又是兩個字以上時，物品名稱第一個字母改小寫（Robuste schwere Handschuhe）；字典裡的物品名稱是大寫開頭（白色物品單獨顯示時用）
+  { label: '魔法物品名稱組合（德文）', groups: ['magic-de'], optional: true, file: '^translate-.*\\.js$', find: MAGIC, replace: magic('d2U([d2p&&(d2p.endsWith(` -`)?`${d2p.slice(0,-2)}-${d2b}`:`${d2p} ${d2b.includes(` `)?d2W(d2b):d2b}`),!d2p&&d2b,d2q].filter(Boolean).join(` `))') },
   // 法文「物品 前綴 後綴」（%1 %0 %2）：Coiffe solide de l’esprit
   { label: '魔法物品名稱組合（法文）', groups: ['magic-fr'], optional: true, file: '^translate-.*\\.js$', find: MAGIC, replace: magic('[d2b,d2p,d2q].filter(Boolean).join(` `)') },
   // 俄文「前綴 物品 後綴」（%0 %1 %2），有前綴時物品小寫開頭，句首大寫：Прочный наголовник разума
@@ -174,6 +175,27 @@ export const WEB_RULES = [
   { label: '獨特怪物名字（俄文）', groups: ['unique-ru'], optional: true, find: UNIQUE, replace: unique('`${d2U($3)}, ${d2U(d2k($1))} ${d2W($2)}`') },
   // 波蘭文「稱號, 前段 後段」（D2R「%2, %0 %1」），前段照後段的詞性挑，不改大小寫：Żarłok, Mroczny Kieł
   { label: '獨特怪物名字（波蘭文）', groups: ['unique-pl'], optional: true, find: UNIQUE, replace: unique('`${$3}, ${d2k($1)} ${$2}`') },
+  // 英雄稱號的陰性形式：Destroyer、Conqueror 等不分職業，德、法、俄、波蘭文的女性職業（amazon、assassin、sorceress）會顯示陽性。
+  // 女性職業先查 title:<稱號>:f，查不到（翻譯函式原樣傳回）就照一般的 title:<稱號>。跟桌面版的同名規則一樣
+  {
+    label: '女性職業的稱號', groups: ['dict'], optional: true, file: '^Game-.*\\.js$',
+    find: pattern('function <1>(<2>,<3>){let <4>=<5>(<2>,<3>);if(!<4>)return null;let <6>=<7>(<2>,<3>);return <6>>0&&!<8>(<2>,<3>)?`${<9>(<4>)} · ${<10>(<6>)}`:<9>(<4>)}'),
+    replace: 'function $1($2,$3){let $4=$5($2,$3);if(!$4)return null;let d2F=[`amazon`,`assassin`,`sorceress`].includes($3)?$9(`${$4}:f`):null,d2T=d2F&&d2F!==`${$4}:f`?d2F:$9($4),$6=$7($2,$3);return $6>0&&!$8($2,$3)?`${d2T} · ${$10($6)}`:d2T}',
+  },
+  // 技能變體名稱：有些變體跟別的技能同名（荊棘之靈的 Vengeance vs 聖騎士的 Vengeance），遊戲只有一個 key，變體卡片會顯示成別的技能。
+  // 語言模組加一個全域函式，把變體表每個變體的 name 換成 getter：翻譯時先查 modifier:名稱，查不到就照一般譯名，英文時照原文。
+  // 變體表（{fireBolt:[{id,name,describe}…]…}）定義時包一層這個函式。跟桌面版「技能變體專用譯名」一樣；兩條都是 optional，
+  // 只套上第二條時函式不存在就原樣傳回
+  {
+    label: '技能變體專用譯名（翻譯函式）', groups: ['dict'], optional: true, file: '^lang-.*\\.js$',
+    find: pattern('function <1>(<2>,<3>){return <4>?<4>.translateAs(<2>,<3>):<3>}'),
+    replace: 'globalThis.__d2zhMods=d2t=>{for(let d2l of Object.values(d2t))for(let d2o of d2l){let d2n=d2o.name;Object.defineProperty(d2o,`name`,{get:()=>$4?$4.translateAs(`modifier`,d2n):d2n,enumerable:!0,configurable:!0})}return d2t};function $1($2,$3){return $4?$4.translateAs($2,$3):$3}',
+  },
+  {
+    label: '技能變體專用譯名（變體表）', groups: ['dict'], optional: true,
+    find: ',([\\w$]+)=\\{fireBolt:\\[\\{id:([\\s\\S]*?)\\]\\},([\\w$]+)=\\{raiseSkeleton:',
+    replace: ',$1=(globalThis.__d2zhMods||(d2t=>d2t))({fireBolt:[{id:$2]}),$3={raiseSkeleton:',
+  },
   // 「標籤: 值」分開翻再接回去時，標籤是中文就用全形「：」、不加空格（只有繁中：D2R 的簡中、日文本來就用半形冒號）
   {
     label: '標籤與值的冒號', groups: ['fullwidth'], optional: true, file: '^translate-.*\\.js$',
