@@ -562,7 +562,9 @@ function makeImages() {
   const png = (size, out) => magick('-size', `${size}x${size}`, 'xc:none', '-fill', '#0c0a08',
     '-draw', `roundrectangle 0,0 ${size - 1},${size - 1} ${size * 0.19},${size * 0.19}`,
     '-font', FONTS + 'georgiab.ttf', '-pointsize', String(Math.round(size * 0.47)), '-fill', '#c9a45c',
-    '-gravity', 'center', '-annotate', `+0+${Math.round(size * 0.03)}`, 'D2', out);
+    '-gravity', 'center', '-annotate', `+0+${Math.round(size * 0.03)}`, 'D2',
+    // 不寫時間戳記，圖沒變就不會產生 git 差異
+    '-define', 'png:exclude-chunks=date,time', out);
   const tmp = fs.mkdtempSync(path.join(process.getBuiltinModule('node:os').tmpdir(), 'd2s-icon-'));
   for (const s of [16, 32, 48]) png(s, path.join(tmp, `${s}.png`));
   magick(...[16, 32, 48].map(s => path.join(tmp, `${s}.png`)), path.join(ROOT, 'favicon.ico'));
