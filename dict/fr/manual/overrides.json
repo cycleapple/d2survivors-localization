@@ -2,7 +2,6 @@
  "title:Slayer": "Tueur",
  "title:Champion": "Champion",
  "Hide": "Masquer",
- "Play": "Jouer",
  "RESTART TO UPDATE": "METTRE À JOUR",
  "Attack Damage": "Dégâts d’attaque",
  "Faster Cast Rate": "Vit. des sorts",
@@ -258,10 +257,7 @@
  "RARE": "RARE",
  "LOOT FILTER": "FILTRE DE BUTIN",
  "PRESET": "PRÉRÉGLAGES",
- "MAGIC ITEMS": "OBJETS MAGIQUE",
- "RARE ITEMS": "OBJETS RARE",
  "WEAPONS": "ARMES",
  "CHARMS": "CHARMES",
- "PLAY": "Jouer",
  "TERROR #": "Terreur {0}"
 }
