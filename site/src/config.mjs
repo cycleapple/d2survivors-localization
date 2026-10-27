@@ -74,8 +74,4 @@ export const LANGUAGES = [
   { id: 'fr', native: 'Français', name: { 'zh-TW': '法文', 'zh-CN': '法语', en: 'French', ja: 'フランス語', de: 'Französisch', fr: 'français', ru: 'французский', pl: 'francuski' }, status: 'planned' },
   { id: 'ru', native: 'Русский', name: { 'zh-TW': '俄文', 'zh-CN': '俄语', en: 'Russian', ja: 'ロシア語', de: 'Russisch', fr: 'russe', ru: 'русский', pl: 'rosyjski' }, status: 'planned' },
   { id: 'pl', native: 'Polski', name: { 'zh-TW': '波蘭文', 'zh-CN': '波兰语', en: 'Polish', ja: 'ポーランド語', de: 'Polnisch', fr: 'polonais', ru: 'польский', pl: 'polski' }, status: 'planned' },
-  { id: 'es-ES', native: 'Español (España)', name: { 'zh-TW': '西班牙文（西班牙）', 'zh-CN': '西班牙语（西班牙）', en: 'Spanish (Spain)', ja: 'スペイン語（スペイン）', de: 'Spanisch (Spanien)', fr: 'espagnol (Espagne)', ru: 'испанский (Испания)', pl: 'hiszpański (Hiszpania)' }, status: 'planned' },
-  { id: 'es-419', native: 'Español (Latinoamérica)', name: { 'zh-TW': '西班牙文（拉丁美洲）', 'zh-CN': '西班牙语（拉丁美洲）', en: 'Spanish (Latin America)', ja: 'スペイン語（中南米）', de: 'Spanisch (Lateinamerika)', fr: 'espagnol (Amérique latine)', ru: 'испанский (Латинская Америка)', pl: 'hiszpański (Ameryka Łacińska)' }, status: 'planned' },
-  { id: 'it', native: 'Italiano', name: { 'zh-TW': '義大利文', 'zh-CN': '意大利语', en: 'Italian', ja: 'イタリア語', de: 'Italienisch', fr: 'italien', ru: 'итальянский', pl: 'włoski' }, status: 'planned' },
-  { id: 'pt-BR', native: 'Português (Brasil)', name: { 'zh-TW': '葡萄牙文（巴西）', 'zh-CN': '葡萄牙语（巴西）', en: 'Portuguese (Brazil)', ja: 'ポルトガル語（ブラジル）', de: 'Portugiesisch (Brasilien)', fr: 'portugais (Brésil)', ru: 'португальский (Бразилия)', pl: 'portugalski (Brazylia)' }, status: 'planned' },
 ];
