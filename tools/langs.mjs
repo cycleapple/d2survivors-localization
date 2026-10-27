@@ -18,21 +18,21 @@ import path from 'node:path';
 
 export const TARGETS = {
   'zh-TW': { col: 'zhTW', name: '繁體中文', script: /[一-鿿]/, affixForm: v => v.startsWith('之'), font: 'blizzardglobaltcunicode.ttf', status: 'available' },
-  'zh-CN': { col: 'zhCN', name: '简体中文', script: /[一-鿿]/, affixForm: v => v.startsWith('之'), font: 'blizzardglobal-v5_81.ttf', status: 'beta' },
-  'ja': { col: 'jaJP', name: '日本語', script: /[぀-ヿ一-鿿]/, affixForm: v => /の$/.test(v), skip: v => v.includes('…'), font: 'bljap_v8_3.ttf', status: 'beta' },
+  'zh-CN': { col: 'zhCN', name: '简体中文', script: /[一-鿿]/, affixForm: v => v.startsWith('之'), font: 'blizzardglobal-v5_81.ttf', status: 'available' },
+  'ja': { col: 'jaJP', name: '日本語', script: /[぀-ヿ一-鿿]/, affixForm: v => /の$/.test(v), skip: v => v.includes('…'), font: 'bljap_v8_3.ttf', status: 'available' },
   // 德文跟英文都是拉丁字母，不能用文字範圍判斷有沒有翻（latin）；點陣字型本來就有 ä ö ü ß（Latin-1），不用另外的字型。
   // 稀有名稱前段是「Bestien -」，跟後段接成「Bestien-Schneide」；詞性見下面的 gendered
   'de': {
     col: 'deDE', name: 'Deutsch', latin: true, gendered: true, script: /[A-Za-zÄÖÜäöüß]/,
     affixForm: v => / -$/.test(v), rareJoin: (front, back) => / -$/.test(front) ? `${front.slice(0, -2)}-${back}` : `${front} ${back}`,
-    status: 'beta',
+    status: 'available',
   },
   // 法文：點陣字型有 é è à ç（Latin-1），沒有 œ（會畫成「?」，要用 oe）。
   // 稀有名稱是「後段 前段」（D2R 的 RareFormat「%1 %0」：Tranchant de la bête），前段有詞性時照後段挑
   'fr': {
     col: 'frFR', name: 'Français', latin: true, gendered: true, pluralTag: 'mp', script: /[A-Za-zÀ-ÿ]/,
     affixForm: v => /^(de |du |des |d’|d'|en )/.test(v), rareJoin: (front, back) => `${back} ${front}`,
-    status: 'beta',
+    status: 'available',
   },
   // 俄文：西里爾字母不在點陣字型裡，要像中日文一樣當「外文字」用 canvas 字型畫（修改規則另外做）。
   // 稀有名稱是「形容詞前段 名詞後段」（Звериная кромка），前段照後段的詞性挑；D2R 的物品名稱是小寫，句首改大寫
@@ -41,7 +41,7 @@ export const TARGETS = {
     affixForm: v => /(ый|ий|ой)$/.test(v), rareJoin: (front, back) => `${front} ${back}`,
     fontFiles: [{ out: 'title.woff2', src: 'exocetblizzardot-medium.otf' }, { out: 'body.woff2', src: 'philosopher-bolditalic.ttf' }],
     fontChars: /[Ѐ-ӿ]/,
-    status: 'beta',
+    status: 'available',
   },
   // 波蘭文：ó 在 Latin-1 裡（點陣字型有），ą ć ę ł ń ś ź ż 是 Latin Extended-A（沒有，要當外文字用 canvas 字型畫）。
   // 字型用 D2R 拉丁字母本來就用的兩個：標題 Exocet、內文 Formal436，都有這些字，看起來跟其他字母一樣。
@@ -52,7 +52,7 @@ export const TARGETS = {
     affixForm: v => /(ski|cki|dzki|ny|wy|owy)$/.test(v), rareJoin: (front, back) => `${front} ${back}`,
     fontFiles: [{ out: 'title.woff2', src: 'exocetblizzardot-medium.otf' }, { out: 'body.woff2', src: 'formal436bt.ttf' }],
     fontChars: /[Ā-ſ]/,
-    status: 'beta',
+    status: 'available',
   },
 };
 
