@@ -1,0 +1,69 @@
+# 網頁版改版偵測：每小時抓一次線上的 d2survivors.lol/play/，用 tools/build-web.mjs 檢查書籤的規則還套得上。
+# 必要規則對不上（書籤會提示「需要更新」）時開一個 issue（標籤 game-update），已經有開著的就不重複開；
+# 有設 DISCORD_WEBHOOK_ALERTS（repo 的 Settings → Secrets）時，開 issue 的同時通知 Discord 的維護者頻道。
+# 修好規則、重新發布後，手動關掉 issue；下一次檢查失敗才會再開新的。
+name: Web check
+
+on:
+  schedule:
+    - cron: '17 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: web-check
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Check bookmarklet rules against the live game
+        id: check
+        # 失敗時整個 job 照樣算成功：每小時寄一封失敗通知信太吵，改由 issue 和 Discord 通知
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          node tools/build-web.mjs --check 2>&1 | tee check.log
+
+      - name: Open an issue and notify Discord
+        if: steps.check.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_ALERTS }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          open=$(gh issue list --label game-update --state open --json number --jq 'length')
+          if [ "$open" != "0" ]; then
+            echo "已經有開著的 game-update issue，不重複開"
+            exit 0
+          fi
+          gh label create game-update --color d93f0b --description '遊戲改版，規則要更新' 2>/dev/null || true
+          {
+            echo "網頁版遊戲改版了，書籤的必要規則對不上，玩家按書籤會看到「需要更新」，原版遊戲照常能玩。"
+            echo
+            echo "修法：改 \`tools/web-rules.mjs\`，\`node tools/build-web.mjs\` 全部 ✓ 之後重新發布（\`node tools/publish.mjs\`），再關掉這個 issue。"
+            echo
+            echo "檢查紀錄：$RUN_URL"
+            echo
+            echo '```'
+            grep -E '✗|△|主程式|語法錯誤' check.log | head -60
+            echo '```'
+          } > body.md
+          url=$(gh issue create --label game-update --title "網頁版改版：書籤規則要更新（$(date -u +%Y-%m-%d)）" --body-file body.md)
+          if [ -n "$DISCORD_WEBHOOK" ]; then
+            jq -n --arg c "⚠️ 網頁版遊戲改版，書籤規則對不上：$url" '{content: $c}' |
+              curl -fsS -H 'Content-Type: application/json' -d @- "$DISCORD_WEBHOOK" || echo "Discord 通知失敗"
+          fi

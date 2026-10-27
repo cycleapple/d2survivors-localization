@@ -106,3 +106,69 @@ site/data/dict/ja.json
 
 - v1（dist repo）只有拿 token 測試的人在用，停在最後一版，不再更新。新版啟動器改讀 v2，舊版啟動器讀到的還是 v1，不會壞
 - 主 repo 公開、v2 上線之後，dist repo 封存（archive）
+
+## 更新紀錄（changelog）
+
+玩家看得到的「這次更新了什麼」。網站、啟動器、Discord 公告讀同一份。
+
+### 檔案
+
+- `site/data/changelog.json`：`tools/publish.mjs` 產生，跟 manifest 一起 commit。不要手動改
+- `dict/changelog-next.json`：下一次發布要寫的說明，**人寫的**。`publish` 把它併進 changelog 之後清空（變成 `{}`）。沒有這個檔或是空的，就只寫自動統計
+- manifest 最上層多一欄 `changelog`：`{ "url": "changelog.json?v=<sha256 前 12 碼>", "latest": "<最新一筆的 version>" }`。啟動器和網站比對 `latest` 就知道有沒有新的更新紀錄
+
+### `dict/changelog-next.json`（人寫）
+
+```jsonc
+{
+  "kind": "translation",          // translation（修譯文）| language（新語言、語言升級成 beta／available）| game-fix（遊戲改版後修好）| launcher（啟動器新版）
+  "announce": false,              // true＝發 Discord 公告；平常修譯文用 false
+  "summary": {                    // 一句話，至少要有 zh-TW；其他沒寫的介面語言顯示 zh-TW 或 en
+    "zh-TW": "修正 30 條技能說明，新增法文、俄文（測試中）",
+    "zh-CN": "修正 30 条技能说明，新增法文、俄文（测试中）",
+    "en": "Fixed 30 skill descriptions; added French and Russian (beta)"
+  },
+  "notes": { "zh-TW": ["「漩渦」改回官方譯名", "…"] }   // 選填，條列細節
+}
+```
+
+### `site/data/changelog.json`（工具產生）
+
+```jsonc
+{
+  "schema": 1,
+  "entries": [                    // 新的在前面，最多留 50 筆
+    {
+      "version": "20261028-0300", // 跟 manifest 的 version 一樣
+      "date": "2026-10-28",
+      "kind": "translation",
+      "announce": false,
+      "summary": { "zh-TW": "…", "zh-CN": "…", "en": "…" },
+      "notes": { "zh-TW": ["…"] },
+      "game": { "desktop": "2026.1027.1" },
+      "launcher": "0.3.0",        // 這次發布時的 launcher.latest（沒有就省略）
+      "languages": [              // 自動統計：跟上一次發布比
+        { "id": "zh-TW", "status": "available", "entries": 12758, "added": 12, "changed": 30, "removed": 0 }
+      ]
+    }
+  ]
+}
+```
+
+- 只有字典、規則、語言狀態、啟動器版本有變動才會多一筆（跟 `publish` 判斷要不要發布的條件一樣）
+- 沒有寫 `changelog-next.json` 時，`summary` 由工具依統計自動產生（例如「繁中修正 30 條、新增 12 條」），`kind` 是 `translation`、`announce` 是 `false`
+
+### 誰讀
+
+| | 讀什麼 | 做什麼 |
+|---|---|---|
+| 網站 | 最近幾筆的 `summary`、`date` | 「更新紀錄」區塊；manifest 的 `game.web_checked` 太舊或 Web check 失敗時顯示「遊戲剛更新，翻譯修正中」 |
+| 啟動器 | `changelog.latest` 跟本機上次看過的比 | 有新的就在視窗上顯示最新一筆的 `summary`（介面語言對應的那個） |
+| Discord 公告 | `announce: true` 而且還沒發過的 | 發到 #更新公告（見 [release.md](release.md)） |
+
+## 遊戲改版的應對
+
+- **網頁版**：`.github/workflows/web-check.yml` 每小時用 `build-web.mjs --check` 檢查線上的遊戲。必要規則對不上就開 `game-update` issue，並通知 Discord 的維護者頻道（secret `DISCORD_WEBHOOK_ALERTS`）。書籤本身在規則對不上時不啟動、提示「需要更新」，原版遊戲照常能玩
+- **桌面版**：遊戲檔案不在網路上，沒辦法自動偵測。啟動器套用失敗（規則對不上）時，**改用英文原版開遊戲**並提示「遊戲剛更新，翻譯修正中」，不要讓玩家開不了遊戲
+- **新字串**：補翻之前顯示英文，不算壞掉。補翻寫進 `dict/manual/new-<遊戲版本>.json`
+- **修好之後**：發布時 `changelog-next.json` 的 `kind` 寫 `game-fix`、`announce` 寫 `true`
