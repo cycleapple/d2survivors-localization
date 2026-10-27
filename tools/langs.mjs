@@ -103,5 +103,5 @@ export function takeLang(argv) {
 export function layers(lang) {
   const dir = lang.manual;
   const list = re => fs.existsSync(dir) ? fs.readdirSync(dir).filter(n => re.test(n)).sort().map(n => path.join(dir, n).replace(/\\/g, '/')) : [];
-  return [lang.auto, ...list(/^audit-.*\.json$/), ...list(/^ui-.*\.json$/), ...list(/^long-.*\.json$/), ...list(/^new-.*\.json$/), ...list(/^modifiers\.json$/), ...list(/^overrides\.json$/)].filter(f => fs.existsSync(f));
+  return [lang.auto, ...list(/^audit-.*\.json$/), ...list(/^ui-.*\.json$/), ...list(/^long-.*\.json$/), ...list(/^new-.*\.json$/), ...list(/^modifiers\.json$/), ...list(/^review-.*\.json$/), ...list(/^overrides\.json$/)].filter(f => fs.existsSync(f));
 }

@@ -1,0 +1,458 @@
+[
+ {
+  "key": "app_title",
+  "zh-TW": "D2 Survivors 啟動器",
+  "zh-CN": "D2 Survivors 启动器",
+  "en": "D2 Survivors Launcher"
+ },
+ {
+  "key": "brand",
+  "zh-TW": "D2 Survivors 中文化",
+  "zh-CN": "D2 Survivors 汉化",
+  "en": "D2 Survivors Localization"
+ },
+ {
+  "key": "step_lang",
+  "zh-TW": "語言",
+  "zh-CN": "语言",
+  "en": "Language"
+ },
+ {
+  "key": "step_game",
+  "zh-TW": "遊戲",
+  "zh-CN": "游戏",
+  "en": "Game"
+ },
+ {
+  "key": "step_d2",
+  "zh-TW": "Diablo II",
+  "zh-CN": "Diablo II",
+  "en": "Diablo II"
+ },
+ {
+  "key": "step_done",
+  "zh-TW": "完成",
+  "zh-CN": "完成",
+  "en": "Done"
+ },
+ {
+  "key": "new_badge",
+  "zh-TW": "新",
+  "zh-CN": "新",
+  "en": "New"
+ },
+ {
+  "key": "site_short",
+  "zh-TW": "網站",
+  "zh-CN": "网站",
+  "en": "Website"
+ },
+ {
+  "key": "original_name",
+  "zh-TW": "原版",
+  "zh-CN": "原版",
+  "en": "original"
+ },
+ {
+  "key": "next",
+  "zh-TW": "下一步",
+  "zh-CN": "下一步",
+  "en": "Next"
+ },
+ {
+  "key": "back",
+  "zh-TW": "上一步",
+  "zh-CN": "上一步",
+  "en": "Back"
+ },
+ {
+  "key": "skip",
+  "zh-TW": "略過",
+  "zh-CN": "跳过",
+  "en": "Skip"
+ },
+ {
+  "key": "return",
+  "zh-TW": "返回",
+  "zh-CN": "返回",
+  "en": "Back"
+ },
+ {
+  "key": "lang_desc",
+  "zh-TW": "啟動器和遊戲都會用這個語言，之後可以隨時在主畫面切換。",
+  "zh-CN": "启动器和游戏都会使用这个语言，之后可以随时在主界面切换。",
+  "en": "Used for both the launcher and the game. You can change it any time on the main screen."
+ },
+ {
+  "key": "lang_loading",
+  "zh-TW": "正在讀取翻譯清單…",
+  "zh-CN": "正在读取翻译列表…",
+  "en": "Loading the list of translations…"
+ },
+ {
+  "key": "lang_offline",
+  "zh-TW": "讀不到翻譯清單，請確認網路。現在可以先選英文或韓文原版。",
+  "zh-CN": "读不到翻译列表，请确认网络。现在可以先选英文或韩文原版。",
+  "en": "Couldn't load the list of translations. Check your connection; for now you can pick the original English or Korean."
+ },
+ {
+  "key": "game_title",
+  "zh-TW": "D2 Survivors",
+  "zh-CN": "D2 Survivors",
+  "en": "D2 Survivors"
+ },
+ {
+  "key": "game_found",
+  "zh-TW": "已找到 D2 Survivors",
+  "zh-CN": "已找到 D2 Survivors",
+  "en": "D2 Survivors found"
+ },
+ {
+  "key": "game_version",
+  "zh-TW": "版本 {}",
+  "zh-CN": "版本 {}",
+  "en": "version {}"
+ },
+ {
+  "key": "game_missing",
+  "zh-TW": "還沒有找到 D2 Survivors",
+  "zh-CN": "尚未找到 D2 Survivors",
+  "en": "D2 Survivors wasn't found"
+ },
+ {
+  "key": "game_missing_desc",
+  "zh-TW": "請先到 D2 Survivors 的官方網站下載安裝，裝好後回來按「重新偵測」。如果裝在別的地方，可以手動選擇資料夾。",
+  "zh-CN": "请先到 D2 Survivors 的官方网站下载安装，装好后回来点「重新检测」。如果装在别的地方，可以手动选择文件夹。",
+  "en": "Download and install D2 Survivors from its official website, then come back and click “Detect again”. If it's installed somewhere else, choose its folder."
+ },
+ {
+  "key": "open_game_site",
+  "zh-TW": "前往 D2 Survivors 官方網站",
+  "zh-CN": "前往 D2 Survivors 官方网站",
+  "en": "Open the D2 Survivors website"
+ },
+ {
+  "key": "redetect",
+  "zh-TW": "重新偵測",
+  "zh-CN": "重新检测",
+  "en": "Detect again"
+ },
+ {
+  "key": "choose_folder",
+  "zh-TW": "選擇資料夾…",
+  "zh-CN": "选择文件夹…",
+  "en": "Choose folder…"
+ },
+ {
+  "key": "d2_title",
+  "zh-TW": "Diablo II 的遊戲檔案",
+  "zh-CN": "Diablo II 的游戏文件",
+  "en": "Diablo II game files"
+ },
+ {
+  "key": "d2_desc",
+  "zh-TW": "D2 Survivors 要用你自己的《暗黑破壞神 II：獄火重生》（或經典版 Diablo II）的遊戲檔案才能玩。",
+  "zh-CN": "D2 Survivors 需要使用你自己的《暗黑破坏神 II：狱火重生》（或经典版 Diablo II）的游戏文件才能玩。",
+  "en": "D2 Survivors runs on the game files from your own copy of Diablo II: Resurrected (or classic Diablo II)."
+ },
+ {
+  "key": "d2_found_d2r",
+  "zh-TW": "已找到 Diablo II: Resurrected",
+  "zh-CN": "已找到 Diablo II: Resurrected",
+  "en": "Diablo II: Resurrected found"
+ },
+ {
+  "key": "d2_found_classic",
+  "zh-TW": "已找到 Diablo II（經典版）",
+  "zh-CN": "已找到 Diablo II（经典版）",
+  "en": "Classic Diablo II found"
+ },
+ {
+  "key": "d2_missing",
+  "zh-TW": "沒有找到 Diablo II",
+  "zh-CN": "没有找到 Diablo II",
+  "en": "Diablo II wasn't found"
+ },
+ {
+  "key": "d2_missing_desc",
+  "zh-TW": "還沒有的話，需要購買 Diablo II: Resurrected。已經有的話，可以手動選擇資料夾，或直接略過（也可以之後在 D2 Survivors 裡設定）。",
+  "zh-CN": "还没有的话，需要购买 Diablo II: Resurrected。已经有的话，可以手动选择文件夹，或直接跳过（也可以之后在 D2 Survivors 里设置）。",
+  "en": "If you don't own it yet, you'll need to buy Diablo II: Resurrected. If you do, choose its folder or skip this step (you can also set it up later inside D2 Survivors)."
+ },
+ {
+  "key": "open_blizzard",
+  "zh-TW": "前往 Blizzard 的 Diablo II: Resurrected 頁面",
+  "zh-CN": "前往 Blizzard 的 Diablo II: Resurrected 页面",
+  "en": "Diablo II: Resurrected on Blizzard's website"
+ },
+ {
+  "key": "done_title",
+  "zh-TW": "準備好了",
+  "zh-CN": "准备好了",
+  "en": "All set"
+ },
+ {
+  "key": "done_desc",
+  "zh-TW": "按「啟動遊戲」會下載最新的翻譯並開啟遊戲。",
+  "zh-CN": "点「启动游戏」会下载最新的翻译并启动游戏。",
+  "en": "Click Play to download the latest translation and start the game."
+ },
+ {
+  "key": "site_link",
+  "zh-TW": "中文化網站",
+  "zh-CN": "汉化网站",
+  "en": "Localization website"
+ },
+ {
+  "key": "discord_link",
+  "zh-TW": "社群 Discord",
+  "zh-CN": "社区 Discord",
+  "en": "Community Discord"
+ },
+ {
+  "key": "donate",
+  "zh-TW": "☕ 請我喝杯咖啡",
+  "zh-CN": "☕ 请我喝杯咖啡",
+  "en": "☕ Buy me a coffee"
+ },
+ {
+  "key": "create_shortcut",
+  "zh-TW": "在桌面建立捷徑",
+  "zh-CN": "在桌面创建快捷方式",
+  "en": "Create a desktop shortcut"
+ },
+ {
+  "key": "shortcut_done",
+  "zh-TW": "已在桌面建立捷徑",
+  "zh-CN": "已在桌面创建快捷方式",
+  "en": "Desktop shortcut created"
+ },
+ {
+  "key": "finish",
+  "zh-TW": "完成",
+  "zh-CN": "完成",
+  "en": "Finish"
+ },
+ {
+  "key": "play",
+  "zh-TW": "啟動遊戲",
+  "zh-CN": "启动游戏",
+  "en": "Play"
+ },
+ {
+  "key": "game_language",
+  "zh-TW": "遊戲語言",
+  "zh-CN": "游戏语言",
+  "en": "Game language"
+ },
+ {
+  "key": "beta",
+  "zh-TW": "測試中",
+  "zh-CN": "测试中",
+  "en": "beta"
+ },
+ {
+  "key": "draft",
+  "zh-TW": "草稿",
+  "zh-CN": "草稿",
+  "en": "draft"
+ },
+ {
+  "key": "status_translation",
+  "zh-TW": "翻譯",
+  "zh-CN": "翻译",
+  "en": "Translation"
+ },
+ {
+  "key": "status_game",
+  "zh-TW": "遊戲",
+  "zh-CN": "游戏",
+  "en": "Game"
+ },
+ {
+  "key": "status_launcher",
+  "zh-TW": "啟動器",
+  "zh-CN": "启动器",
+  "en": "Launcher"
+ },
+ {
+  "key": "up_to_date",
+  "zh-TW": "已是最新版",
+  "zh-CN": "已是最新版",
+  "en": "up to date"
+ },
+ {
+  "key": "update_failed",
+  "zh-TW": "無法檢查更新，先用本機的翻譯",
+  "zh-CN": "无法检查更新，先用本地的翻译",
+  "en": "Couldn't check for updates; using the local copy"
+ },
+ {
+  "key": "launcher_new",
+  "zh-TW": "有新版 {}",
+  "zh-CN": "有新版 {}",
+  "en": "{} available"
+ },
+ {
+  "key": "launcher_required",
+  "zh-TW": "新的翻譯需要啟動器 {}，請先更新",
+  "zh-CN": "新的翻译需要启动器 {}，请先更新",
+  "en": "The latest translation needs launcher {}. Please update."
+ },
+ {
+  "key": "update_launcher",
+  "zh-TW": "更新啟動器",
+  "zh-CN": "更新启动器",
+  "en": "Update launcher"
+ },
+ {
+  "key": "check_updates",
+  "zh-TW": "檢查更新",
+  "zh-CN": "检查更新",
+  "en": "Check for updates"
+ },
+ {
+  "key": "settings",
+  "zh-TW": "設定",
+  "zh-CN": "设置",
+  "en": "Settings"
+ },
+ {
+  "key": "game_missing_banner",
+  "zh-TW": "找不到 D2 Survivors，請到「設定」指定遊戲資料夾",
+  "zh-CN": "找不到 D2 Survivors，请到「设置」指定游戏文件夹",
+  "en": "D2 Survivors wasn't found. Set its folder in Settings."
+ },
+ {
+  "key": "changelog",
+  "zh-TW": "更新紀錄",
+  "zh-CN": "更新记录",
+  "en": "What's new"
+ },
+ {
+  "key": "got_it",
+  "zh-TW": "知道了",
+  "zh-CN": "知道了",
+  "en": "Got it"
+ },
+ {
+  "key": "fallback_game_updated",
+  "zh-TW": "遊戲剛更新，翻譯修正中，先用原版開啟。翻譯修好後，下次從啟動器開就會自動套用。",
+  "zh-CN": "游戏刚更新，翻译修正中，先用原版启动。翻译修好后，下次从启动器启动就会自动应用。",
+  "en": "The game was just updated and the translation is being fixed, so it started as the original. The translation will be applied automatically once it's fixed."
+ },
+ {
+  "key": "fallback_no_translation",
+  "zh-TW": "翻譯還沒下載（請確認網路），先用原版開啟。",
+  "zh-CN": "翻译还没下载（请确认网络），先用原版启动。",
+  "en": "The translation hasn't been downloaded yet (check your connection), so the game started as the original."
+ },
+ {
+  "key": "original_note",
+  "zh-TW": "原版：不修改遊戲，排行榜紀錄不會被標成 patched。",
+  "zh-CN": "原版：不修改游戏，排行榜记录不会被标成 patched。",
+  "en": "Original: the game is left untouched, so leaderboard runs aren't marked as patched."
+ },
+ {
+  "key": "original_lang_hint",
+  "zh-TW": "原版照遊戲自己存的語言開啟。語言不對的話，到遊戲的 OPTIONS → GAME → LANGUAGE 切換（韓文畫面是 설정 → GAME → 언어）。",
+  "zh-CN": "原版按游戏自己保存的语言启动。语言不对的话，到游戏的 OPTIONS → GAME → LANGUAGE 切换（韩文界面是 설정 → GAME → 언어）。",
+  "en": "The original starts in the language the game has saved. If it's wrong, change it in the game under OPTIONS → GAME → LANGUAGE (on the Korean screen: 설정 → GAME → 언어)."
+ },
+ {
+  "key": "patched_note",
+  "zh-TW": "翻譯版會修改遊戲檔案，排行榜紀錄會被標成 patched。",
+  "zh-CN": "翻译版会修改游戏文件，排行榜记录会被标成 patched。",
+  "en": "Translations modify the game's files, so leaderboard runs are marked as patched."
+ },
+ {
+  "key": "working",
+  "zh-TW": "處理中…",
+  "zh-CN": "处理中…",
+  "en": "Working…"
+ },
+ {
+  "key": "error",
+  "zh-TW": "發生錯誤：{}",
+  "zh-CN": "发生错误：{}",
+  "en": "Something went wrong: {}"
+ },
+ {
+  "key": "auto_update",
+  "zh-TW": "啟動時自動更新翻譯",
+  "zh-CN": "启动时自动更新翻译",
+  "en": "Update translations on start"
+ },
+ {
+  "key": "close_after",
+  "zh-TW": "遊戲啟動後關閉啟動器",
+  "zh-CN": "游戏启动后关闭启动器",
+  "en": "Close the launcher after the game starts"
+ },
+ {
+  "key": "game_folder",
+  "zh-TW": "D2 Survivors 資料夾",
+  "zh-CN": "D2 Survivors 文件夹",
+  "en": "D2 Survivors folder"
+ },
+ {
+  "key": "d2_folder",
+  "zh-TW": "Diablo II 資料夾",
+  "zh-CN": "Diablo II 文件夹",
+  "en": "Diablo II folder"
+ },
+ {
+  "key": "detect",
+  "zh-TW": "偵測",
+  "zh-CN": "检测",
+  "en": "Detect"
+ },
+ {
+  "key": "not_found",
+  "zh-TW": "（沒有找到）",
+  "zh-CN": "（没有找到）",
+  "en": "(not found)"
+ },
+ {
+  "key": "update_source",
+  "zh-TW": "更新來源",
+  "zh-CN": "更新来源",
+  "en": "Update source"
+ },
+ {
+  "key": "restore",
+  "zh-TW": "還原原版遊戲",
+  "zh-CN": "还原原版游戏",
+  "en": "Restore the original game"
+ },
+ {
+  "key": "restore_hint",
+  "zh-TW": "把遊戲檔案換回沒有翻譯的原版",
+  "zh-CN": "把游戏文件换回没有翻译的原版",
+  "en": "Put the game's files back to the untranslated original"
+ },
+ {
+  "key": "rerun_wizard",
+  "zh-TW": "重新執行設定精靈",
+  "zh-CN": "重新运行设置向导",
+  "en": "Run the setup wizard again"
+ },
+ {
+  "key": "cli",
+  "zh-TW": "命令列",
+  "zh-CN": "命令行",
+  "en": "Command line"
+ },
+ {
+  "key": "log",
+  "zh-TW": "詳細紀錄",
+  "zh-CN": "详细记录",
+  "en": "Log"
+ },
+ {
+  "key": "links",
+  "zh-TW": "連結",
+  "zh-CN": "链接",
+  "en": "Links"
+ }
+]
