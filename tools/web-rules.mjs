@@ -32,14 +32,20 @@ const CLOSING = '\\u3001\\u3002\\uff0c\\uff1a\\uff1b\\uff01\\uff1f\\uff09\\u300d
 const OPENING = '\\u300c\\u300e\\u3010\\uff08';
 const ID = '([\\w$]+)';
 const esc = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-// 把一段原始碼變成 regex：<1>、<2>… 的位置是變數名稱，同一個號碼第二次出現要跟第一次一樣
+// 把一段原始碼變成 regex：<1>、<2>… 的位置是變數名稱，同一個號碼第二次出現要跟第一次一樣。
+// 號碼就是 regex 的群組編號（replace 的 $1、$2…），所以要照第一次出現的順序編
 function pattern(src) {
   const seen = new Set();
-  return esc(src).replace(/<(\d)>/g, (_, n) => seen.has(n) ? `\\${n}` : (seen.add(n), ID));
+  return esc(src).replace(/<(\d)>/g, (_, n) => {
+    if (seen.has(n)) return `\\${n}`;
+    if (+n !== seen.size + 1) throw new Error(`pattern：<${n}> 要照第一次出現的順序編號：${src}`);
+    seen.add(n);
+    return ID;
+  });
 }
 
 export const WEB_PLAY_URL = 'https://d2survivors.lol/play/';
-export const WEB_CHECKED = '2026-10-27T12:14:09.044Z';
+export const WEB_CHECKED = '2026-10-27T12:22:13.404Z';
 
 export const WEB_LANGUAGES = [
   {
@@ -109,6 +115,13 @@ export const WEB_RULES = [
     label: '中日文斷行', groups: ['cjk'], optional: true,
     find: pattern('for(let <1> of <2>.split(` `)){let <3>=<4>?`${<4>} ${<1>}`:<1>;'),
     replace: `for(let $1 of $2.split(\` \`).flatMap(w=>(w.match(/[${OPENING}]*[${CJK}][${CLOSING}]*|[^${CJK}]+(?:[${OPENING}]*[${CJK}][${CLOSING}]*)?/g)??[w]).map((x,j)=>j?\`\\u0001\${x}\`:x))){let g=$1[0]===\`\\u0001\`;$1=g?$1.slice(1):$1;let $3=$4?g?$4+$1:\`\${$4} \${$1}\`:$1;`,
+  },
+  // 外文字的顏色照點陣字型推算：石頭按鈕的黑字會被當成「灰色填色＋黑色描邊」，中日文看起來像空心的灰字。
+  // 填色很暗（門檻 75）又比描邊淡時，只用描邊的顏色畫實心字，再往右 1 像素多畫一次當粗體。跟桌面版的同名規則一樣
+  {
+    label: '暗色字不加描邊', groups: ['cjk'], optional: true, file: '^ui-.*\.js$',
+    find: pattern('<1>=[];if(<2>.outline){let <3>=`rgb(${<4>(<2>.outline.level,<2>.outline.own)})`;for(let[<5>,<6>]of[[-1,0],[1,0],[0,-1],[0,1],[-1,-1],[1,-1],[-1,1],[1,1]])<1>.push([<3>,<5>*<7>,<6>*<7>])}<1>.push([`rgb(${<4>(<2>.level,<2>.own)})`,0,0]);'),
+    replace: '$1=[];let d2F=$4($2.level,$2.own),d2U=$2.outline&&$4($2.outline.level,$2.outline.own),d2M=e=>Math.max(...e.split(`,`).map(Number)),d2D=d2U&&d2M(d2F)<75&&d2M(d2U)<d2M(d2F);if($2.outline&&!d2D){let $3=`rgb(${d2U})`;for(let[$5,$6]of[[-1,0],[1,0],[0,-1],[0,1],[-1,-1],[1,-1],[-1,1],[1,1]])$1.push([$3,$5*$7,$6*$7])}$1.push([`rgb(${d2D?d2U:d2F})`,0,0]);d2D&&$1.push([`rgb(${d2U})`,1,0]);',
   },
   // 標題畫面、主選單底部的版權聲明：第一段寬度上限縮成 360，在句號處折成兩行，不蓋到版本號
   {
