@@ -10,6 +10,7 @@
 //   latin：拉丁字母的語言（譯文跟英文同一套字母，script 不能拿來判斷有沒有翻）
 //   gendered：D2R 的字串有詞性標記（[ms]、[fs]、[ns]、[pl]），見 cleanD2R
 //   rareJoin：稀有名稱前段和後段怎麼接（預設直接接起來）
+//   pluralTag：D2R 沒標詞性的複數物品要用哪個標記（預設 pl；法文 mp、波蘭文 nl）
 //   capitalize：D2R 的名稱是小寫開頭（俄文「наголовник」），英文 key 是大寫開頭的就把第一個字母改大寫
 //   字典：繁中沿用最早的路徑（dict/d2r-auto.json、dict/manual/），其他語言放在 dict/<id>/
 import fs from 'node:fs';
@@ -29,7 +30,7 @@ export const TARGETS = {
   // 法文：點陣字型有 é è à ç（Latin-1），沒有 œ（會畫成「?」，要用 oe）。
   // 稀有名稱是「後段 前段」（D2R 的 RareFormat「%1 %0」：Tranchant de la bête），前段有詞性時照後段挑
   'fr': {
-    col: 'frFR', name: 'Français', latin: true, gendered: true, script: /[A-Za-zÀ-ÿ]/,
+    col: 'frFR', name: 'Français', latin: true, gendered: true, pluralTag: 'mp', script: /[A-Za-zÀ-ÿ]/,
     affixForm: v => /^(de |du |des |d’|d'|en )/.test(v), rareJoin: (front, back) => `${back} ${front}`,
     status: 'draft',
   },
@@ -40,6 +41,17 @@ export const TARGETS = {
     affixForm: v => /(ый|ий|ой)$/.test(v), rareJoin: (front, back) => `${front} ${back}`,
     fontFiles: [{ out: 'title.woff2', src: 'exocetblizzardot-medium.otf' }, { out: 'body.woff2', src: 'philosopher-bolditalic.ttf' }],
     fontChars: /[Ѐ-ӿ]/,
+    status: 'draft',
+  },
+  // 波蘭文：ó 在 Latin-1 裡（點陣字型有），ą ć ę ł ń ś ź ż 是 Latin Extended-A（沒有，要當外文字用 canvas 字型畫）。
+  // 字型用 D2R 拉丁字母本來就用的兩個：標題 Exocet、內文 Formal436，都有這些字，看起來跟其他字母一樣。
+  // 詞性標記是 ms／fs／nl（中性），中性的形式也是複數（Masywne rękawice），所以複數用 nl。
+  // 稀有名稱「形容詞 名詞」（Bestialskie Ostrze），D2R 的名稱本來就是大寫開頭
+  'pl': {
+    col: 'plPL', name: 'Polski', latin: true, gendered: true, pluralTag: 'nl', script: /[A-Za-ząćęłńóśźżĄĆĘŁŃÓŚŹŻ]/,
+    affixForm: v => /(ski|cki|dzki|ny|wy|owy)$/.test(v), rareJoin: (front, back) => `${front} ${back}`,
+    fontFiles: [{ out: 'title.woff2', src: 'exocetblizzardot-medium.otf' }, { out: 'body.woff2', src: 'formal436bt.ttf' }],
+    fontChars: /[Ā-ſ]/,
     status: 'draft',
   },
 };

@@ -116,6 +116,24 @@ node tools/where.mjs 非表示 --lang ja
    - 俄文：`稱號, 前段 後段`，前段照後段的詞性挑（D2R 的「%2, %0 %1」：Голод, Мрачный клык）
 5. 斷行：三種語言都用空白斷行，不用改
 
+### 波蘭文（pl）
+
+D2R plPL：魔法物品 `%0 %1 %2`、稀有名稱 `%0 %1`（形容詞＋名詞：Bestialskie Ostrze）、獨特怪物 `%2, %0 %1`（Żarłok, Mroczny Kieł）。詞性標記是 ms／fs／nl，nl（中性）的形式也是複數（Masywne Rękawice），`langs.mjs` 的 `pluralTag: 'nl'`。D2R 的名稱每個字大寫開頭，組合時不改大小寫。
+
+字型實測（`PROTO=pl node work/translation/ru-proto.mjs …`，截圖 `work/translation/pl-*.png`）：ó 在 Latin-1 裡；ą ć ę ł ń ś ź ż（Latin Extended-A）畫成「?」，要當外文字。D2R 的 Exocet（標題）和 Formal436（內文，D2R 拉丁字母的內文字型）都有這些字，`node tools/zh-fonts.mjs … --lang pl` 產生 `work/fonts/pl/title.woff2`、`body.woff2`。跟俄文不同的是只有幾個字母走 canvas 字型、夾在點陣字母中間：
+
+- 遊戲的外文字是照韓文放大的（標題 ×1.25～1.4、內文 ×1.3 加粗），波蘭字母會比旁邊的字大一號。實測內文 ×1.0、不加粗就跟點陣字母差不多大；標題 ×1.2
+- Exocet 的 Ś、Ć、Ż 的符號在字母上方（字形高到 773／1000，S 只到 592），按鈕上畫出來被切掉，看起來像沒有符號的 S。要讓外文字可以畫到點陣字型的格子上面（或把基線往下移）
+
+需要的規則：
+
+1. 外文字範圍：`HANGUL_RANGES` 加 `||t>=256&&t<=383`（U+0100–017F）
+2. 字型：unicodeRange `U+0100-017F`，`D2R Kodia` ← title.woff2，其他三個家族 ← body.woff2
+3. 外文字大小（只有波蘭文）：keepSave 的 `let e=a>=20?1.25:1.4;[this.foreignSize,this.foreignFamily]=o?[Math.round(a*e),g]:[Math.max(12,Math.round(a*1.3)),te],this.foreignWeight=o?``:`bold ``，標題改 ×1.2、內文改 ×1.0、不加粗；符號不要被切掉
+4. 魔法物品名稱：`前綴 物品 後綴`，照 `gender:<物品>` 挑前綴、後綴的形式，不改大小寫（Masywny Kaptur Umysłu、Karmazynowy Krótki Miecz）
+5. 獨特怪物名字：`稱號, 前段 後段`，前段照 `gender:<後段>` 挑（Żarłok, Mroczny Kieł）
+6. 參考實作：`node work/translation/compose-proto.mjs dict/pl.json pl`
+
 ## 發布
 
 翻譯有變動、要讓啟動器和網頁版書籤拿到時：

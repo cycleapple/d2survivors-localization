@@ -158,7 +158,7 @@ if (lang.gendered) {
   for (const key of Object.keys(ko)) {
     const core = key.replace(PREFIX, '');
     if (out[`gender:${core}`]) continue;
-    const plural = lang.id === 'fr' ? 'mp' : 'pl';
+    const plural = lang.pluralTag ?? 'pl';
     const g = (!PREFIX.test(key) || key.startsWith('item:')) ? genderOf.get(norm(core)) ?? (pluralGuess.has(norm(core)) ? plural : null)
       : key.startsWith('unique:') ? affixGender.get(norm(core)) : null;
     if (g) { out[`gender:${core}`] = g; genders++; }
