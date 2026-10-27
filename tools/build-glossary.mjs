@@ -135,6 +135,13 @@ for (const [key, koValue] of Object.entries(ko)) {
   report.byMethod[method] = (report.byMethod[method] ?? 0) + 1;
 }
 
+// D2R 的名稱是小寫開頭的語言（俄文）：英文 key 大寫開頭的，譯文第一個字母也改大寫（詞綴留給組合時處理）
+if (lang.capitalize) {
+  for (const [key, zh] of Object.entries(out)) {
+    if (!key.startsWith('affix:') && /^[A-Z]/.test(key.replace(PREFIX, '')) && /^\p{Ll}/u.test(zh)) out[key] = zh[0].toUpperCase() + zh.slice(1);
+  }
+}
+
 // 有詞性的語言：魔法物品名稱的詞綴保留每種詞性的形式，物品名稱附上詞性
 if (lang.gendered) {
   let forms = 0, genders = 0;

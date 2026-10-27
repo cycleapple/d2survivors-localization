@@ -10,6 +10,7 @@
 //   latin：拉丁字母的語言（譯文跟英文同一套字母，script 不能拿來判斷有沒有翻）
 //   gendered：D2R 的字串有詞性標記（[ms]、[fs]、[ns]、[pl]），見 cleanD2R
 //   rareJoin：稀有名稱前段和後段怎麼接（預設直接接起來）
+//   capitalize：D2R 的名稱是小寫開頭（俄文「наголовник」），英文 key 是大寫開頭的就把第一個字母改大寫
 //   字典：繁中沿用最早的路徑（dict/d2r-auto.json、dict/manual/），其他語言放在 dict/<id>/
 import fs from 'node:fs';
 import path from 'node:path';
@@ -23,6 +24,20 @@ export const TARGETS = {
   'de': {
     col: 'deDE', name: 'Deutsch', latin: true, gendered: true, script: /[A-Za-zÄÖÜäöüß]/,
     affixForm: v => / -$/.test(v), rareJoin: (front, back) => / -$/.test(front) ? `${front.slice(0, -2)}-${back}` : `${front} ${back}`,
+    status: 'draft',
+  },
+  // 法文：點陣字型有 é è à ç（Latin-1），沒有 œ（會畫成「?」，要用 oe）。
+  // 稀有名稱是「後段 前段」（D2R 的 RareFormat「%1 %0」：Tranchant de la bête），前段有詞性時照後段挑
+  'fr': {
+    col: 'frFR', name: 'Français', latin: true, gendered: true, script: /[A-Za-zÀ-ÿ]/,
+    affixForm: v => /^(de |du |des |d’|d'|en )/.test(v), rareJoin: (front, back) => `${back} ${front}`,
+    status: 'draft',
+  },
+  // 俄文：西里爾字母不在點陣字型裡，要像中日文一樣當「外文字」用 canvas 字型畫（修改規則另外做）。
+  // 稀有名稱是「形容詞前段 名詞後段」（Звериная кромка），前段照後段的詞性挑；D2R 的物品名稱是小寫，句首改大寫
+  'ru': {
+    col: 'ruRU', name: 'Русский', gendered: true, capitalize: true, script: /[А-яЁё]/,
+    affixForm: v => /(ый|ий|ой)$/.test(v), rareJoin: (front, back) => `${front} ${back}`,
     status: 'draft',
   },
 };

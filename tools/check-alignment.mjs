@@ -3,7 +3,10 @@
 //   node tools/check-alignment.mjs <字典 .json…>
 import fs from 'node:fs';
 
+// 譯文可以用當地的數字寫法：小數逗號（德、法、俄「1,5」）、千分位的點或空格（「1.000」「1 000」），比對前換回英文寫法
 const numbers = s => (s.match(/\d+(?:\.\d+)?/g) ?? []);
+// （英文 key 的「1,000」也一樣拿掉千分位，兩邊都寫成 1000）
+const localNumbers = s => numbers(s.replace(/(\d)[,.  ](?=\d{3}(?!\d))/g, '$1').replace(/(\d),(\d)/g, '$1.$2'));
 for (const file of process.argv.slice(2)) {
   const dict = JSON.parse(fs.readFileSync(file, 'utf8').replace(/^﻿/, ''));
   let withNumbers = 0;
@@ -13,7 +16,9 @@ for (const file of process.argv.slice(2)) {
     if (!want.length) continue;
     withNumbers++;
     const have = numbers(zh);
-    const missing = want.filter(n => !have.includes(n));
+    const local = localNumbers(zh), wantLocal = localNumbers(key);
+    const missing = want.filter(n => !have.includes(n)).length && wantLocal.filter(n => !local.includes(n)).length
+      ? wantLocal.filter(n => !local.includes(n)) : [];
     if (missing.length) bad.push({ key, zh, missing });
   }
   console.log(`${file}：有數字的 ${withNumbers} 條，數字對不上 ${bad.length} 條`);

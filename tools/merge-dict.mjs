@@ -53,6 +53,9 @@ const inconsistent = [...backs].filter(([, m]) => m.size > 1).map(([back, m]) =>
 fs.writeFileSync(outFile, JSON.stringify(merged, null, 1));
 const total = Object.keys(ko).length, n = Object.keys(merged).length;
 console.log(`${n} / ${total} 條（${(n / total * 100).toFixed(1)}%）→ ${outFile}`);
-if (added.length) console.log(`韓文字典沒有、新增的 ${added.length} 條：${added.join('｜')}`);
+// 有詞性的語言的 gender:<物品>（build-glossary 產生）只算條數
+const genders = added.filter(k => k.startsWith('gender:')), others = added.filter(k => !k.startsWith('gender:'));
+if (genders.length) console.log(`物品名稱的詞性 gender:* ${genders.length} 條`);
+if (others.length) console.log(`韓文字典沒有、新增的 ${others.length} 條：${others.join('｜')}`);
 if (rejected.length) console.log(`沒收進來 ${rejected.length} 條：\n${rejected.slice(0, 30).join('\n')}`);
 if (inconsistent.length) console.log(`稀有名稱後段譯法不一致 ${inconsistent.length} 個：\n${inconsistent.map(x => `${x.back}：${JSON.stringify(x.forms)}`).join('\n')}`);
