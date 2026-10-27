@@ -10,6 +10,7 @@
     <xhtml:link rel="alternate" hreflang="de" href="https://cycleapple.github.io/d2survivors-localization/de/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://cycleapple.github.io/d2survivors-localization/fr/"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://cycleapple.github.io/d2survivors-localization/ru/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://cycleapple.github.io/d2survivors-localization/pl/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://cycleapple.github.io/d2survivors-localization/"/>
   </url>
   <url>
@@ -22,6 +23,7 @@
     <xhtml:link rel="alternate" hreflang="de" href="https://cycleapple.github.io/d2survivors-localization/de/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://cycleapple.github.io/d2survivors-localization/fr/"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://cycleapple.github.io/d2survivors-localization/ru/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://cycleapple.github.io/d2survivors-localization/pl/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://cycleapple.github.io/d2survivors-localization/"/>
   </url>
   <url>
@@ -34,6 +36,7 @@
     <xhtml:link rel="alternate" hreflang="de" href="https://cycleapple.github.io/d2survivors-localization/de/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://cycleapple.github.io/d2survivors-localization/fr/"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://cycleapple.github.io/d2survivors-localization/ru/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://cycleapple.github.io/d2survivors-localization/pl/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://cycleapple.github.io/d2survivors-localization/"/>
   </url>
   <url>
@@ -46,6 +49,7 @@
     <xhtml:link rel="alternate" hreflang="de" href="https://cycleapple.github.io/d2survivors-localization/de/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://cycleapple.github.io/d2survivors-localization/fr/"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://cycleapple.github.io/d2survivors-localization/ru/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://cycleapple.github.io/d2survivors-localization/pl/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://cycleapple.github.io/d2survivors-localization/"/>
   </url>
   <url>
@@ -58,6 +62,7 @@
     <xhtml:link rel="alternate" hreflang="de" href="https://cycleapple.github.io/d2survivors-localization/de/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://cycleapple.github.io/d2survivors-localization/fr/"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://cycleapple.github.io/d2survivors-localization/ru/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://cycleapple.github.io/d2survivors-localization/pl/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://cycleapple.github.io/d2survivors-localization/"/>
   </url>
   <url>
@@ -70,6 +75,7 @@
     <xhtml:link rel="alternate" hreflang="de" href="https://cycleapple.github.io/d2survivors-localization/de/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://cycleapple.github.io/d2survivors-localization/fr/"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://cycleapple.github.io/d2survivors-localization/ru/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://cycleapple.github.io/d2survivors-localization/pl/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://cycleapple.github.io/d2survivors-localization/"/>
   </url>
   <url>
@@ -82,6 +88,7 @@
     <xhtml:link rel="alternate" hreflang="de" href="https://cycleapple.github.io/d2survivors-localization/de/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://cycleapple.github.io/d2survivors-localization/fr/"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://cycleapple.github.io/d2survivors-localization/ru/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://cycleapple.github.io/d2survivors-localization/pl/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://cycleapple.github.io/d2survivors-localization/"/>
   </url>
   <url>
@@ -94,6 +101,20 @@
     <xhtml:link rel="alternate" hreflang="de" href="https://cycleapple.github.io/d2survivors-localization/de/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://cycleapple.github.io/d2survivors-localization/fr/"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://cycleapple.github.io/d2survivors-localization/ru/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://cycleapple.github.io/d2survivors-localization/pl/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cycleapple.github.io/d2survivors-localization/"/>
+  </url>
+  <url>
+    <loc>https://cycleapple.github.io/d2survivors-localization/pl/</loc>
+    <lastmod>2026-10-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://cycleapple.github.io/d2survivors-localization/zh-tw/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://cycleapple.github.io/d2survivors-localization/zh-cn/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cycleapple.github.io/d2survivors-localization/en/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://cycleapple.github.io/d2survivors-localization/ja/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cycleapple.github.io/d2survivors-localization/de/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cycleapple.github.io/d2survivors-localization/fr/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cycleapple.github.io/d2survivors-localization/ru/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://cycleapple.github.io/d2survivors-localization/pl/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://cycleapple.github.io/d2survivors-localization/"/>
   </url>
 </urlset>

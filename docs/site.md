@@ -16,7 +16,7 @@ node tools/serve.mjs site 8766     # 本機預覽（或 python -m http.server 87
 | `/zh-cn/` | 简体中文（大陆用语） |
 | `/en/` | English |
 | `/ja/` | 日本語 |
-| `/de/`、`/fr/`、`/ru/` | Deutsch、Français、Русский |
+| `/de/`、`/fr/`、`/ru/`、`/pl/` | Deutsch、Français、Русский、Polski |
 
 `BASE`（網站網址）在 `site/src/config.mjs` 的 `SITE.base`，暫定 `https://cycleapple.github.io/d2survivors-localization/`。換網域就改這個值再重新產生；canonical、hreflang、Open Graph、sitemap、書籤網址都從這裡來。頁面之間的連結和 CSS、JS 用相對路徑，本機預覽和子路徑都能用。
 
