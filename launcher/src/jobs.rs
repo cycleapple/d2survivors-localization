@@ -17,9 +17,24 @@ pub enum Job {
     SelfUpdate,
 }
 
-/// 翻譯套不上、改用英文原版開遊戲時給玩家看的話
-pub const FALLBACK_GAME_UPDATED: &str = "遊戲剛更新，翻譯修正中，先用英文原版開啟。翻譯修好後，下次從啟動器開就會自動套用";
-pub const FALLBACK_NO_TRANSLATION: &str = "翻譯還沒下載（請確認網路），先用英文原版開啟";
+/// 翻譯套不上、改用英文原版開遊戲的原因
+#[derive(Clone, Copy, PartialEq)]
+pub enum Fallback {
+    /// 規則對不上：遊戲剛改版
+    GameUpdated,
+    /// 選的翻譯本機還沒有
+    NoTranslation,
+}
+
+impl Fallback {
+    /// i18n 的 key
+    pub fn key(self) -> &'static str {
+        match self {
+            Fallback::GameUpdated => "fallback_game_updated",
+            Fallback::NoTranslation => "fallback_no_translation",
+        }
+    }
+}
 
 #[derive(Default)]
 pub struct Outcome {
@@ -29,9 +44,11 @@ pub struct Outcome {
     pub launcher: Option<LauncherInfo>,
     /// 啟動器已經換成新版，要重新開啟
     pub restart: Option<PathBuf>,
-    /// 翻譯套不上，改用英文原版（FALLBACK_*）
-    pub fallback: Option<&'static str>,
-    /// 還沒看過的最新一筆更新紀錄
+    /// 翻譯套不上，改用英文原版
+    pub fallback: Option<Fallback>,
+    /// 遊戲的版本（package.json）
+    pub game_version: Option<String>,
+    /// 最新一筆更新紀錄（看過沒有用 changelog_unseen 判斷）
     pub changelog: Option<ChangelogEntry>,
 }
 
@@ -52,18 +69,19 @@ pub fn run(job: Job, config: &Config, manifest: Option<Manifest>, log: &dyn Fn(S
                 // 選的語言照舊保留，下次開啟時照常檢查更新、重新套用
                 Err(e) => {
                     let why = if e.downcast_ref::<RuleMismatch>().is_some() {
-                        FALLBACK_GAME_UPDATED
+                        Fallback::GameUpdated
                     } else if e.downcast_ref::<NoTranslation>().is_some() {
-                        FALLBACK_NO_TRANSLATION
+                        Fallback::NoTranslation
                     } else {
                         return Err(e);
                     };
                     log(format!("（{e:#}）"));
-                    log(format!("⚠ {why}"));
+                    log(format!("⚠ {}", crate::i18n::tr("zh-TW", why.key())));
                     out.fallback = Some(why);
                     english(&game, out.manifest.as_ref(), log)?
                 }
             };
+            out.game_version = game.version();
             if job == Job::Launch {
                 game.launch(slot)?;
                 log("遊戲已啟動".into());
@@ -119,13 +137,17 @@ fn update(config: &Config, out: &mut Outcome, log: &dyn Fn(String)) -> Result<()
         }
     };
     out.launcher = manifest.launcher.clone();
-    if manifest.changelog.as_ref().is_some_and(|c| c.latest != State::load().changelog_seen) {
+    if manifest.changelog.is_some() {
         match manifest::latest_changelog(&url, &manifest) {
             Ok(c) => out.changelog = c,
             Err(e) => log(format!("⚠ 讀不到更新紀錄：{e:#}")),
         }
     }
     Ok(())
+}
+
+pub fn changelog_unseen(c: &ChangelogEntry) -> bool {
+    c.version != State::load().changelog_seen
 }
 
 /// 記下看過的更新紀錄，之後不再顯示

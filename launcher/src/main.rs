@@ -1,5 +1,6 @@
 // D2 Survivors 啟動器：切換遊戲語言、自動更新翻譯
-//   d2s-launcher                     開啟視窗
+//   d2s-launcher                     開啟視窗（第一次開啟時是設定精靈）
+//   d2s-launcher --play              開啟視窗並直接啟動遊戲（桌面捷徑）
 //   d2s-launcher --launch [--lang zh-TW|zh-CN|ja|en|ko] [--no-update]   直接啟動（可以做成捷徑）
 //   d2s-launcher --install | --update | --restore | --self-update | --status   （--install 只裝上語言、不啟動）
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
@@ -7,11 +8,13 @@
 mod asar;
 mod game;
 mod gui;
+mod i18n;
 mod jobs;
 mod manifest;
 mod patcher;
 mod paths;
 mod selfupdate;
+mod system;
 
 use jobs::Job;
 use paths::Config;
@@ -19,8 +22,10 @@ use paths::Config;
 fn main() {
     selfupdate::cleanup();
     let args: Vec<String> = std::env::args().skip(1).collect();
-    if args.is_empty() {
-        if let Err(e) = gui::run() {
+    // --play：桌面捷徑用，開視窗並直接啟動遊戲（出錯時視窗留著看得到原因）
+    let play = args == ["--play"];
+    if args.is_empty() || play {
+        if let Err(e) = gui::run(play) {
             eprintln!("{e}");
         }
         return;
@@ -61,7 +66,7 @@ fn cli(args: &[String]) -> anyhow::Result<()> {
     match job {
         Some(job) => {
             let out = jobs::run(job, &config, manifest::cached(), &log)?;
-            if let Some(c) = &out.changelog {
+            if let Some(c) = out.changelog.as_ref().filter(|c| jobs::changelog_unseen(c)) {
                 println!("更新紀錄（{}）：{}", c.date, c.summary_for(config.ui_language()).unwrap_or(""));
             }
             if out.restart.is_some() {

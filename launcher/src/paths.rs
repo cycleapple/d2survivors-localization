@@ -51,16 +51,25 @@ pub struct Config {
     /// 留空就用預設安裝位置
     pub game_dir: String,
     pub close_after_launch: bool,
+    /// 第一次開啟的設定精靈做完了
+    pub wizard_done: bool,
+    /// 玩家的 Diablo II 資料夾（設定精靈偵測到的）。之後從 D2R 取字型、或在玩家電腦上配對官方譯名時用
+    pub d2_dir: String,
+    /// d2r | classic
+    pub d2_kind: String,
 }
 
 impl Default for Config {
     fn default() -> Self {
         Self {
-            language: "zh-TW".into(),
+            language: crate::system::os_language(),
             auto_update: true,
             manifest_url: String::new(),
             game_dir: String::new(),
             close_after_launch: true,
+            wizard_done: false,
+            d2_dir: String::new(),
+            d2_kind: String::new(),
         }
     }
 }
@@ -83,7 +92,7 @@ impl Config {
         write_atomic(&Self::path(), serde_json::to_string_pretty(self)?.as_bytes())
     }
 
-    /// 挑更新紀錄說明用的語言：翻譯語言；選英文、韓文原版時用英文
+    /// 介面語言：跟遊戲的翻譯語言一樣；選英文、韓文原版時用英文（介面文字沒有的語言由 i18n 退回英文）
     pub fn ui_language(&self) -> &str {
         match self.language.as_str() {
             "en" | "ko" => "en",

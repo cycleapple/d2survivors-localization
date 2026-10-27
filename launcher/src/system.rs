@@ -1,0 +1,187 @@
+// 跟 Windows 打交道的小功能：偵測 Diablo II、系統語言、開網頁、建立桌面捷徑、選資料夾
+use std::path::{Path, PathBuf};
+
+/// 中文化網站（暫定網址；換網域只改這裡）
+pub const SITE_URL: &str = "https://cycleapple.github.io/d2survivors-localization/";
+/// 中文化社群 Discord 的邀請連結（空的就不顯示）
+pub const DISCORD_URL: &str = "";
+/// D2 Survivors 官方網站（下載遊戲）
+pub const GAME_URL: &str = "https://d2survivors.lol/";
+/// Blizzard 官方的 Diablo II: Resurrected 頁面（只放官方連結，不放推廣碼）
+pub const D2R_URL: &str = "https://diablo2.blizzard.com/";
+
+#[derive(Clone, Copy, PartialEq)]
+pub enum D2Kind {
+    Resurrected,
+    Classic,
+}
+
+impl D2Kind {
+    pub fn id(self) -> &'static str {
+        match self {
+            D2Kind::Resurrected => "d2r",
+            D2Kind::Classic => "classic",
+        }
+    }
+}
+
+/// 資料夾裡是哪一種 Diablo II
+pub fn d2_kind(dir: &Path) -> Option<D2Kind> {
+    if dir.join("D2R.exe").is_file() {
+        Some(D2Kind::Resurrected)
+    } else if dir.join("d2data.mpq").is_file() && (dir.join("Game.exe").is_file() || dir.join("Diablo II.exe").is_file()) {
+        Some(D2Kind::Classic)
+    } else {
+        None
+    }
+}
+
+/// 找玩家的 Diablo II：D2 Survivors 自己記的路徑、D2R 的解除安裝登錄、經典版的登錄、預設安裝位置
+pub fn find_d2() -> Option<(PathBuf, D2Kind)> {
+    let mut candidates: Vec<PathBuf> = Vec::new();
+    // D2 Survivors 設定好之後會記在 %APPDATA%\D2 Survivors\desktop.json 的 installDir
+    if let Some(appdata) = std::env::var_os("APPDATA") {
+        let p = PathBuf::from(appdata).join("D2 Survivors").join("desktop.json");
+        if let Some(dir) = std::fs::read(p).ok().and_then(|b| serde_json::from_slice::<serde_json::Value>(&b).ok()).and_then(|v| v["installDir"].as_str().map(PathBuf::from)) {
+            candidates.push(dir);
+        }
+    }
+    for (root, key, value) in [
+        (Root::LocalMachine, r"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Diablo II Resurrected", "InstallLocation"),
+        (Root::LocalMachine, r"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Diablo II Resurrected", "InstallLocation"),
+        (Root::CurrentUser, r"SOFTWARE\Blizzard Entertainment\Diablo II", "InstallPath"),
+        (Root::LocalMachine, r"SOFTWARE\WOW6432Node\Blizzard Entertainment\Diablo II", "InstallPath"),
+    ] {
+        if let Some(v) = registry_string(root, key, value) {
+            candidates.push(PathBuf::from(v));
+        }
+    }
+    let pf86 = std::env::var_os("ProgramFiles(x86)").map(PathBuf::from).unwrap_or_else(|| r"C:\Program Files (x86)".into());
+    candidates.push(pf86.join("Diablo II Resurrected"));
+    candidates.push(pf86.join("Diablo II"));
+    candidates.into_iter().find_map(|d| d2_kind(&d).map(|k| (d, k)))
+}
+
+#[derive(Clone, Copy)]
+enum Root {
+    LocalMachine,
+    CurrentUser,
+}
+
+fn wide(s: &str) -> Vec<u16> {
+    s.encode_utf16().chain(Some(0)).collect()
+}
+
+#[cfg(windows)]
+fn registry_string(root: Root, key: &str, value: &str) -> Option<String> {
+    use windows_sys::Win32::System::Registry::{RegGetValueW, HKEY_CURRENT_USER, HKEY_LOCAL_MACHINE, RRF_RT_REG_SZ};
+    let hkey = match root {
+        Root::LocalMachine => HKEY_LOCAL_MACHINE,
+        Root::CurrentUser => HKEY_CURRENT_USER,
+    };
+    let (key, value) = (wide(key), wide(value));
+    let mut buf = vec![0u16; 1024];
+    let mut size = (buf.len() * 2) as u32;
+    let r = unsafe { RegGetValueW(hkey, key.as_ptr(), value.as_ptr(), RRF_RT_REG_SZ, std::ptr::null_mut(), buf.as_mut_ptr().cast(), &mut size) };
+    if r != 0 {
+        return None;
+    }
+    let len = (size as usize / 2).saturating_sub(1);
+    let s = String::from_utf16_lossy(&buf[..len.min(buf.len())]);
+    let s = s.trim_end_matches('\0').trim();
+    (!s.is_empty()).then(|| s.to_string())
+}
+
+#[cfg(not(windows))]
+fn registry_string(_: Root, _: &str, _: &str) -> Option<String> {
+    None
+}
+
+/// Windows 的介面語言對應到啟動器的語言 id（zh-TW、zh-CN、ja、de、fr、ru、ko、en）
+pub fn os_language() -> String {
+    let locale = os_locale().to_lowercase();
+    let lang = locale.split('-').next().unwrap_or("");
+    match lang {
+        "zh" if locale.contains("hans") || locale.ends_with("-cn") || locale.ends_with("-sg") => "zh-CN",
+        "zh" => "zh-TW",
+        "ja" | "de" | "fr" | "ru" | "ko" => lang,
+        _ => "en",
+    }
+    .to_string()
+}
+
+#[cfg(windows)]
+fn os_locale() -> String {
+    use windows_sys::Win32::Globalization::GetUserDefaultLocaleName;
+    let mut buf = [0u16; 85];
+    let n = unsafe { GetUserDefaultLocaleName(buf.as_mut_ptr(), buf.len() as i32) };
+    if n <= 1 {
+        return String::new();
+    }
+    String::from_utf16_lossy(&buf[..n as usize - 1])
+}
+
+#[cfg(not(windows))]
+fn os_locale() -> String {
+    std::env::var("LANG").unwrap_or_default().replace('_', "-")
+}
+
+/// 用預設瀏覽器開網頁
+pub fn open_url(url: &str) {
+    #[cfg(windows)]
+    unsafe {
+        use windows_sys::Win32::UI::Shell::ShellExecuteW;
+        let (op, url) = (wide("open"), wide(url));
+        ShellExecuteW(std::ptr::null_mut(), op.as_ptr(), url.as_ptr(), std::ptr::null(), std::ptr::null(), 1);
+    }
+}
+
+/// 在桌面建立啟動器的捷徑（--play：開啟後直接啟動遊戲）
+pub fn create_shortcut(name: &str) -> anyhow::Result<PathBuf> {
+    let exe = std::env::current_exe()?;
+    let dir = exe.parent().unwrap_or(Path::new("."));
+    let q = |s: &str| s.replace('\'', "''");
+    // 用 Windows 內建的 WScript.Shell 建 .lnk，不用另外帶 COM 的程式庫
+    let script = format!(
+        "$d=[Environment]::GetFolderPath('Desktop');$p=Join-Path $d '{name}.lnk';$s=(New-Object -ComObject WScript.Shell).CreateShortcut($p);\
+         $s.TargetPath='{exe}';$s.Arguments='--play';$s.WorkingDirectory='{dir}';$s.IconLocation='{exe},0';$s.Save();$p",
+        name = q(name),
+        exe = q(&exe.to_string_lossy()),
+        dir = q(&dir.to_string_lossy()),
+    );
+    let mut cmd = std::process::Command::new("powershell");
+    cmd.args(["-NoProfile", "-NonInteractive", "-Command", &script]);
+    #[cfg(windows)]
+    {
+        use std::os::windows::process::CommandExt;
+        cmd.creation_flags(0x0800_0000); // CREATE_NO_WINDOW
+    }
+    let out = cmd.output()?;
+    if !out.status.success() {
+        anyhow::bail!("{}", String::from_utf8_lossy(&out.stderr).trim());
+    }
+    Ok(PathBuf::from(String::from_utf8_lossy(&out.stdout).trim()))
+}
+
+/// 選資料夾的對話框
+pub fn pick_folder(start: &Path) -> Option<PathBuf> {
+    let mut d = rfd::FileDialog::new();
+    if start.is_dir() {
+        d = d.set_directory(start);
+    }
+    d.pick_folder()
+}
+
+/// 顯示用的路徑：把使用者資料夾換成 %LOCALAPPDATA% 之類，截圖時不會露出帳號名稱
+pub fn display_path(p: &Path) -> String {
+    let s = p.display().to_string();
+    for var in ["LOCALAPPDATA", "APPDATA", "USERPROFILE"] {
+        if let Some(v) = std::env::var_os(var) {
+            let v = v.to_string_lossy().trim_end_matches('\\').to_string();
+            if !v.is_empty() && s.to_lowercase().starts_with(&v.to_lowercase()) {
+                return format!("%{var}%{}", &s[v.len()..]);
+            }
+        }
+    }
+    s
+}

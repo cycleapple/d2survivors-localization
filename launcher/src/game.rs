@@ -84,6 +84,13 @@ impl Game {
         Ok(Original { sha256: expected, version, bytes })
     }
 
+    /// 遊戲版本（app.asar 裡 package.json 的 version；裝了翻譯的也一樣）
+    pub fn version(&self) -> Option<String> {
+        let a = Asar::parse(fs::read(self.asar()).ok()?).ok()?;
+        let v: serde_json::Value = serde_json::from_slice(&a.read("package.json").ok()?).ok()?;
+        v["version"].as_str().map(String::from)
+    }
+
     /// 把選的語言裝進遊戲。回傳遊戲要用的語言槽位（en／ko）
     pub fn install(&self, language: &str, manifest: Option<&Manifest>, log: &dyn Fn(String)) -> Result<&'static str> {
         let original = self.original()?;
