@@ -2,6 +2,84 @@
   "schema": 1,
   "entries": [
     {
+      "version": "20261027-2249",
+      "date": "2026-10-27",
+      "kind": "launcher",
+      "announce": false,
+      "summary": {
+        "zh-TW": "啟動器 1.0.0 正式推出；七種語言都是正式版",
+        "zh-CN": "启动器 1.0.0 正式推出；七种语言都是正式版",
+        "en": "Launcher 1.0.0 released; all seven languages are now final",
+        "ja": "ランチャー 1.0.0 をリリース。7 言語すべてが正式版になりました",
+        "de": "Launcher 1.0.0 veröffentlicht; alle sieben Sprachen sind jetzt final",
+        "fr": "Lanceur 1.0.0 disponible ; les sept langues sont désormais finales",
+        "ru": "Вышел лаунчер 1.0.0; все семь языков теперь в финальной версии",
+        "pl": "Wydano launcher 1.0.0; wszystkie siedem języków ma już wersję finalną"
+      },
+      "game": {
+        "desktop": "2026.1027.2"
+      },
+      "launcher": "1.0.0",
+      "languages": [
+        {
+          "id": "zh-TW",
+          "status": "available",
+          "entries": 12984,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "zh-CN",
+          "status": "available",
+          "entries": 12983,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ja",
+          "status": "available",
+          "entries": 12989,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "de",
+          "status": "available",
+          "entries": 13023,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "fr",
+          "status": "available",
+          "entries": 13032,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ru",
+          "status": "available",
+          "entries": 13073,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "pl",
+          "status": "available",
+          "entries": 13063,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        }
+      ]
+    },
+    {
       "version": "20261027-2243",
       "date": "2026-10-27",
       "kind": "language",
