@@ -1,7 +1,7 @@
 // D2 Survivors 啟動器：切換遊戲語言、自動更新翻譯
 //   d2s-launcher                     開啟視窗
-//   d2s-launcher --launch [--lang zh-TW] [--no-update]   直接啟動（可以做成捷徑）
-//   d2s-launcher --install | --update | --restore | --status   （--install 只裝上語言、不啟動）
+//   d2s-launcher --launch [--lang zh-TW|zh-CN|ja|en|ko] [--no-update]   直接啟動（可以做成捷徑）
+//   d2s-launcher --install | --update | --restore | --self-update | --status   （--install 只裝上語言、不啟動）
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 mod asar;
@@ -11,11 +11,13 @@ mod jobs;
 mod manifest;
 mod patcher;
 mod paths;
+mod selfupdate;
 
 use jobs::Job;
 use paths::Config;
 
 fn main() {
+    selfupdate::cleanup();
     let args: Vec<String> = std::env::args().skip(1).collect();
     if args.is_empty() {
         if let Err(e) = gui::run() {
@@ -43,6 +45,7 @@ fn cli(args: &[String]) -> anyhow::Result<()> {
             "--install" => job = Some(Job::Install),
             "--update" => job = Some(Job::Update),
             "--restore" => job = Some(Job::Restore),
+            "--self-update" => job = Some(Job::SelfUpdate),
             "--status" => job = None,
             "--no-update" => config.auto_update = false,
             "--lang" => config.language = it.next().cloned().ok_or_else(|| anyhow::anyhow!("--lang 後面要接語言"))?,
@@ -57,19 +60,25 @@ fn cli(args: &[String]) -> anyhow::Result<()> {
     let log = |s: String| println!("{s}");
     match job {
         Some(job) => {
-            jobs::run(job, &config, manifest::cached(), &log)?;
+            if jobs::run(job, &config, manifest::cached(), &log)?.restart.is_some() {
+                println!("下次執行就是新版");
+            }
         }
         None => {
             let m = manifest::cached();
+            println!("啟動器：{}", selfupdate::VERSION);
             println!("資料夾：{}", paths::data_dir().display());
             println!("遊戲：{}", config.game_dir().display());
             println!("語言：{}", game::language_name(&config.language, m.as_ref()));
-            println!("更新來源：{}", if config.manifest_url.is_empty() { "（未設定）" } else { &config.manifest_url });
-            println!("GitHub token：{}", if config.token().is_empty() { "未設定" } else { "已設定" });
+            println!("更新來源：{}", config.manifest_url());
             if let Some(m) = &m {
-                for l in &m.languages {
+                println!("翻譯：{}（{}）", m.version, m.updated);
+                for (l, _) in m.desktop_languages() {
                     let ready = if manifest::local_dict(l).is_some() { "已下載" } else { "未下載" };
-                    println!("  {} {}：{} 條，{}，{ready}", l.id, l.name, l.entries, l.version);
+                    println!("  {} {}：{} 條，{ready}", l.id, l.label(), l.entries);
+                }
+                if let Some(l) = selfupdate::available(m) {
+                    println!("有新版啟動器 {}（--self-update）", l.latest);
                 }
             }
             if let Ok(g) = game::Game::new(config.game_dir()) {

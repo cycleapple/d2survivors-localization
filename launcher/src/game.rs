@@ -83,14 +83,16 @@ impl Game {
             return Ok(slot);
         };
 
-        let rules_sha = sha256_hex(&serde_json::to_vec(&manifest.patch)?);
+        let spec = manifest.desktop.as_ref().context("更新來源裡沒有桌面版的修改規則")?;
+        let rules_sha = sha256_hex(&serde_json::to_vec(spec)?);
         let (key, dict, lang) = match language {
             "en" | "ko" => (format!("{}:{language}:{rules_sha}", original.sha256), None, None),
             id => {
                 let lang = manifest.languages.iter().find(|l| l.id == id)
                     .with_context(|| format!("更新來源裡沒有語言 {id}"))?;
+                let desktop = lang.desktop.as_ref().with_context(|| format!("{} 還不能在桌面版使用", lang.name))?;
                 let dict = manifest::local_dict(lang).with_context(|| format!("{} 字典還沒下載，請先檢查更新", lang.name))?;
-                (format!("{}:{id}:{}:{rules_sha}", original.sha256, lang.dict.sha256), Some(dict), Some(lang))
+                (format!("{}:{id}:{}:{rules_sha}", original.sha256, lang.dict.sha256), Some(dict), Some(desktop))
             }
         };
 
@@ -107,7 +109,7 @@ impl Game {
             _ => Target::base(),
         };
         log("修改 app.asar…".into());
-        let patched = patcher::build(original.bytes, &manifest.patch, &target)?;
+        let patched = patcher::build(original.bytes, spec, &target)?;
         self.put(&patched, key, log)?;
         Ok(slot)
     }
@@ -152,7 +154,7 @@ pub fn language_name<'a>(id: &str, manifest: Option<&'a Manifest>) -> String {
     if let Some((_, n)) = BUILTIN.iter().find(|(i, _)| *i == id) {
         return n.to_string();
     }
-    manifest.and_then(|m| m.languages.iter().find(|l| l.id == id)).map_or(id.to_string(), |l| l.name.clone())
+    manifest.and_then(|m| m.languages.iter().find(|l| l.id == id)).map_or(id.to_string(), |l| l.label())
 }
 
 pub fn exists(dir: &Path) -> bool {

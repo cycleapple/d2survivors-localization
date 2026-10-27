@@ -1,6 +1,6 @@
 // 照 manifest 的規則修改原版 app.asar（規則跟 tools/patch-rules.mjs 是同一份）
 use crate::asar::Asar;
-use crate::manifest::{Language, PatchSpec};
+use crate::manifest::{DesktopLanguage, PatchSpec};
 use anyhow::{bail, Context, Result};
 use regex::Regex;
 
@@ -17,7 +17,7 @@ impl<'a> Target<'a> {
         Self { groups: vec!["base".into()], menu_name: "", html_lang: "", dict: None }
     }
 
-    pub fn language(lang: &'a Language, dict: &'a [u8]) -> Self {
+    pub fn language(lang: &'a DesktopLanguage, dict: &'a [u8]) -> Self {
         Self { groups: lang.groups.clone(), menu_name: &lang.menu_name, html_lang: &lang.html_lang, dict: Some(dict) }
     }
 

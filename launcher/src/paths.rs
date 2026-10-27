@@ -5,13 +5,19 @@ use std::fs;
 use std::path::{Path, PathBuf};
 
 /// 編譯時可以用 D2S_MANIFEST_URL 環境變數指定預設的更新來源
-const DEFAULT_MANIFEST_URL: &str = match option_env!("D2S_MANIFEST_URL") {
+pub const DEFAULT_MANIFEST_URL: &str = match option_env!("D2S_MANIFEST_URL") {
     Some(u) => u,
-    None => "https://api.github.com/repos/cycleapple/d2survivors-zh-tw-dist/contents/manifest.json",
+    None => "https://cycleapple.github.io/d2survivors-localization/data/manifest.json",
 };
 
-/// %LOCALAPPDATA%\D2SurvivorsLauncher
+/// 舊版（manifest v1）的預設更新來源，設定檔裡存的是這個就改用新的預設值
+const V1_MANIFEST_URL: &str = "https://api.github.com/repos/cycleapple/d2survivors-zh-tw-dist/contents/manifest.json";
+
+/// %LOCALAPPDATA%\D2SurvivorsLauncher（測試時可以用 D2S_LAUNCHER_DIR 環境變數換地方）
 pub fn data_dir() -> PathBuf {
+    if let Some(d) = std::env::var_os("D2S_LAUNCHER_DIR") {
+        return PathBuf::from(d);
+    }
     let base = std::env::var_os("LOCALAPPDATA").map(PathBuf::from).unwrap_or_else(|| PathBuf::from("."));
     base.join("D2SurvivorsLauncher")
 }
@@ -40,9 +46,8 @@ pub struct Config {
     /// en、ko，或 manifest 裡的語言 id
     pub language: String,
     pub auto_update: bool,
+    /// 留空就用預設的更新來源
     pub manifest_url: String,
-    /// 更新來源是私人 GitHub repo 時用的 token（只送給 GitHub）；留空就看 D2S_GITHUB_TOKEN 環境變數
-    pub github_token: String,
     /// 留空就用預設安裝位置
     pub game_dir: String,
     pub close_after_launch: bool,
@@ -53,8 +58,7 @@ impl Default for Config {
         Self {
             language: "zh-TW".into(),
             auto_update: true,
-            manifest_url: DEFAULT_MANIFEST_URL.into(),
-            github_token: String::new(),
+            manifest_url: String::new(),
             game_dir: String::new(),
             close_after_launch: true,
         }
@@ -67,16 +71,21 @@ impl Config {
     }
 
     pub fn load() -> Self {
-        fs::read(Self::path()).ok().and_then(|b| serde_json::from_slice(&b).ok()).unwrap_or_default()
+        let mut c: Self = fs::read(Self::path()).ok().and_then(|b| serde_json::from_slice(&b).ok()).unwrap_or_default();
+        let u = c.manifest_url.trim();
+        if u == V1_MANIFEST_URL || u == DEFAULT_MANIFEST_URL {
+            c.manifest_url.clear();
+        }
+        c
     }
 
     pub fn save(&self) -> Result<()> {
         write_atomic(&Self::path(), serde_json::to_string_pretty(self)?.as_bytes())
     }
 
-    pub fn token(&self) -> String {
-        let t = self.github_token.trim();
-        if t.is_empty() { std::env::var("D2S_GITHUB_TOKEN").unwrap_or_default().trim().to_string() } else { t.to_string() }
+    pub fn manifest_url(&self) -> String {
+        let u = self.manifest_url.trim();
+        if u.is_empty() { DEFAULT_MANIFEST_URL.to_string() } else { u.to_string() }
     }
 
     pub fn game_dir(&self) -> PathBuf {

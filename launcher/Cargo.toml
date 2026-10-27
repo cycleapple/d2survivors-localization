@@ -1,8 +1,9 @@
 [package]
 name = "d2s-launcher"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
-description = "D2 Survivors 繁體中文啟動器：切換語言、自動更新翻譯"
+description = "D2 Survivors 中文化啟動器：切換語言、自動更新翻譯"
+license = "MIT"
 
 [dependencies]
 anyhow = "1"

@@ -1,4 +1,4 @@
-// 更新來源：manifest.json（tools/make-manifest.mjs 產生）和各語言字典。
+// 更新來源：manifest.json v2（docs/manifest-v2.md，tools/publish.mjs 產生）和各語言字典。
 // manifest_url 可以是 http(s) 網址，也可以是本機路徑；字典網址相對於 manifest。
 use crate::paths;
 use anyhow::{bail, Context, Result};
@@ -11,9 +11,27 @@ use std::path::Path;
 #[derive(Clone, Serialize, Deserialize)]
 pub struct Manifest {
     pub schema: u32,
+    #[serde(default)]
     pub updated: String,
-    pub patch: PatchSpec,
+    /// 這次發布的版本，顯示用
+    #[serde(default)]
+    pub version: String,
+    #[serde(default)]
+    pub launcher: Option<LauncherInfo>,
     pub languages: Vec<Language>,
+    /// 桌面版的修改規則（tools/patch-rules.mjs）
+    #[serde(default)]
+    pub desktop: Option<PatchSpec>,
+}
+
+#[derive(Clone, Serialize, Deserialize)]
+pub struct LauncherInfo {
+    pub latest: String,
+    /// 低於這個版本的啟動器不能套用這份 manifest 的規則
+    #[serde(default)]
+    pub minimum: String,
+    pub download: String,
+    pub sha256_url: String,
 }
 
 #[derive(Clone, Serialize, Deserialize)]
@@ -43,12 +61,21 @@ pub struct Rule {
 pub struct Language {
     pub id: String,
     pub name: String,
+    /// available | beta
+    #[serde(default)]
+    pub status: String,
+    pub entries: u64,
+    pub dict: DictFile,
+    /// 沒有這一欄＝桌面版不能選
+    #[serde(default)]
+    pub desktop: Option<DesktopLanguage>,
+}
+
+#[derive(Clone, Serialize, Deserialize)]
+pub struct DesktopLanguage {
     pub menu_name: String,
     pub html_lang: String,
     pub groups: Vec<String>,
-    pub version: String,
-    pub entries: u64,
-    pub dict: DictFile,
 }
 
 #[derive(Clone, Serialize, Deserialize)]
@@ -58,42 +85,34 @@ pub struct DictFile {
     pub size: u64,
 }
 
-pub const SCHEMA: u32 = 1;
+pub const SCHEMA: u32 = 2;
+
+impl Manifest {
+    /// 桌面版能選的語言
+    pub fn desktop_languages(&self) -> impl Iterator<Item = (&Language, &DesktopLanguage)> {
+        self.languages.iter().filter_map(|l| l.desktop.as_ref().map(|d| (l, d)))
+    }
+}
+
+impl Language {
+    pub fn label(&self) -> String {
+        if self.status == "beta" { format!("{}（測試中）", self.name) } else { self.name.clone() }
+    }
+}
 
 fn is_url(s: &str) -> bool {
     s.starts_with("http://") || s.starts_with("https://")
 }
 
-/// token 只送給 GitHub（私人 repo 的 raw 檔案要帶 token 才讀得到）
-fn is_github(url: &str) -> bool {
-    let host = url.split("://").nth(1).unwrap_or("").split(['/', ':']).next().unwrap_or("");
-    matches!(host, "raw.githubusercontent.com" | "api.github.com" | "github.com")
-}
-
-fn fetch(location: &str, token: &str) -> Result<Vec<u8>> {
+/// 下載網址或讀本機檔案
+pub fn fetch(location: &str) -> Result<Vec<u8>> {
     if is_url(location) {
-        let mut req = ureq::get(location).timeout(std::time::Duration::from_secs(30));
-        let with_token = !token.is_empty() && is_github(location);
-        if with_token {
-            req = req.set("Authorization", &format!("token {token}"));
-        }
-        // GitHub contents API 直接回傳檔案內容（raw 網址對私人 repo 的分支會快取舊的 commit）
-        if location.starts_with("https://api.github.com/") {
-            req = req.set("Accept", "application/vnd.github.raw");
-        }
-        let resp = match req.call() {
-            Err(ureq::Error::Status(404, _)) if is_github(location) && !with_token => {
-                bail!("找不到 {location}（私人 repo 要在設定裡填 GitHub token）")
-            }
-            // 沒有 token 的 GitHub API 每個 IP 每小時只能 60 次
-            Err(ureq::Error::Status(403 | 429, _)) if is_github(location) && !with_token => {
-                bail!("GitHub 暫時限制了下載次數，請稍後再試（或在設定裡填 GitHub token）")
-            }
-            Err(ureq::Error::Status(code @ (401 | 403 | 404), _)) if with_token => {
-                bail!("GitHub 回應 {code}：{location}（token 可能過期，或沒有這個 repo 的讀取權限）")
-            }
-            r => r.with_context(|| format!("下載失敗：{location}"))?,
-        };
+        // GitHub Pages 的 CDN 會快取，要求拿最新的（manifest 網址另外加上 ?t=）
+        let resp = ureq::get(location)
+            .timeout(std::time::Duration::from_secs(60))
+            .set("Cache-Control", "no-cache")
+            .call()
+            .context("下載失敗")?; // ureq 的錯誤訊息裡已經有網址
         let mut buf = Vec::new();
         resp.into_reader().take(64 * 1024 * 1024).read_to_end(&mut buf)?;
         Ok(buf)
@@ -102,11 +121,12 @@ fn fetch(location: &str, token: &str) -> Result<Vec<u8>> {
     }
 }
 
-fn resolve(base: &str, rel: &str) -> String {
+pub fn resolve(base: &str, rel: &str) -> String {
     if is_url(rel) {
         return rel.to_string();
     }
     if is_url(base) {
+        let base = base.split('?').next().unwrap_or(base);
         let dir = &base[..base.rfind('/').map_or(base.len(), |i| i + 1)];
         format!("{dir}{rel}")
     } else {
@@ -120,10 +140,10 @@ pub fn sha256_hex(b: &[u8]) -> String {
     hex::encode(Sha256::digest(b))
 }
 
-/// 上次成功下載的 manifest（離線時用）
+/// 上次成功下載的 manifest（離線時用）。舊格式（v1）當成沒有
 pub fn cached() -> Option<Manifest> {
     let text = fs::read(paths::data_dir().join("manifest.json")).ok()?;
-    serde_json::from_slice(&text).ok()
+    serde_json::from_slice::<Manifest>(&text).ok().filter(|m| m.schema == SCHEMA)
 }
 
 pub fn dict_path(lang: &Language) -> std::path::PathBuf {
@@ -136,32 +156,43 @@ pub fn local_dict(lang: &Language) -> Option<Vec<u8>> {
     (sha256_hex(&b) == lang.dict.sha256).then_some(b)
 }
 
-/// 下載 manifest，再把有變動的字典下載下來。回傳新的 manifest 和更新了哪些語言
-pub fn update(manifest_url: &str, token: &str, log: &dyn Fn(String)) -> Result<(Manifest, Vec<String>)> {
+pub enum Update {
+    /// 新的 manifest 已經存好；changed 是更新了字典的語言
+    Done { manifest: Manifest, changed: Vec<String> },
+    /// 啟動器版本低於 launcher.minimum：新的 manifest 沒有存下來，要先更新啟動器
+    LauncherTooOld { manifest: Manifest },
+}
+
+/// 下載 manifest，再把有變動的字典下載下來：要用的語言（want）和本機已經有的語言
+pub fn update(manifest_url: &str, want: &str, log: &dyn Fn(String)) -> Result<Update> {
     if manifest_url.trim().is_empty() {
         bail!("還沒設定更新來源（manifest_url）");
     }
     log(format!("檢查更新：{manifest_url}"));
-    // 網址加上時間，避開 CDN 快取（GitHub raw 會快取 5 分鐘），剛發布的翻譯馬上拿得到
-    let fresh = if is_url(manifest_url) && !manifest_url.contains('?') && !manifest_url.starts_with("https://api.github.com/") {
+    // 網址加上時間，避開 CDN 快取，剛發布的翻譯馬上拿得到
+    let fresh = if is_url(manifest_url) && !manifest_url.contains('?') {
         let t = std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).map_or(0, |d| d.as_secs());
         format!("{manifest_url}?t={t}")
     } else {
         manifest_url.to_string()
     };
-    let raw = fetch(&fresh, token)?;
+    let raw = fetch(&fresh)?;
+    let schema = serde_json::from_slice::<serde_json::Value>(&raw).context("manifest.json 格式不對")?["schema"].as_u64();
+    if schema != Some(SCHEMA as u64) {
+        bail!("manifest 版本 {} 不支援，請更新啟動器", schema.map_or("?".into(), |s| s.to_string()));
+    }
     let manifest: Manifest = serde_json::from_slice(&raw).context("manifest.json 格式不對")?;
-    if manifest.schema != SCHEMA {
-        bail!("manifest 版本 {} 不支援，請更新啟動器", manifest.schema);
+    if crate::selfupdate::required(&manifest).is_some() {
+        return Ok(Update::LauncherTooOld { manifest });
     }
     fs::create_dir_all(paths::data_dir().join("dicts"))?;
     let mut changed = Vec::new();
-    for lang in &manifest.languages {
-        if local_dict(lang).is_some() {
+    for (lang, _) in manifest.desktop_languages() {
+        if local_dict(lang).is_some() || (lang.id != want && !dict_path(lang).is_file()) {
             continue;
         }
-        log(format!("下載 {} 字典（{} 版，{} 條）…", lang.name, lang.version, lang.entries));
-        let b = fetch(&resolve(manifest_url, &lang.dict.url), token)?;
+        log(format!("下載 {} 字典（{} 版，{} 條）…", lang.name, manifest.version, lang.entries));
+        let b = fetch(&resolve(manifest_url, &lang.dict.url))?;
         if sha256_hex(&b) != lang.dict.sha256 {
             bail!("{} 字典的 sha256 不符，下載的檔案可能損壞", lang.name);
         }
@@ -170,5 +201,5 @@ pub fn update(manifest_url: &str, token: &str, log: &dyn Fn(String)) -> Result<(
         changed.push(lang.name.clone());
     }
     paths::write_atomic(&paths::data_dir().join("manifest.json"), &raw)?;
-    Ok((manifest, changed))
+    Ok(Update::Done { manifest, changed })
 }

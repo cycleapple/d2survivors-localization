@@ -1,0 +1,55 @@
+# 發布啟動器：推 tag launcher-v<版本>（跟 launcher/Cargo.toml 的 version 一樣）就在 Windows 上編譯，
+# 把 d2s-launcher.exe 和 d2s-launcher.exe.sha256 放到這個 tag 的 Release。
+# 之後 node tools/publish.mjs 會讀最新的 Release，更新 manifest 的 launcher.latest
+#   git tag launcher-v0.2.0 && git push origin launcher-v0.2.0
+name: release-launcher
+
+on:
+  push:
+    tags: ['launcher-v*']
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: pwsh
+        working-directory: launcher
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: tag 和 Cargo.toml 的版本要一樣
+        run: |
+          $tag = '${{ github.ref_name }}' -replace '^launcher-v', ''
+          $ver = (Select-String -Path Cargo.toml -Pattern '^version = "(.+)"').Matches[0].Groups[1].Value
+          if ($tag -ne $ver) { throw "tag 是 $tag，Cargo.toml 是 $ver" }
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: launcher
+
+      - run: cargo test --release
+
+      - run: cargo build --release
+
+      - name: 算 sha256
+        run: |
+          New-Item -ItemType Directory -Force out | Out-Null
+          Copy-Item target/release/d2s-launcher.exe out/
+          $hash = (Get-FileHash out/d2s-launcher.exe -Algorithm SHA256).Hash.ToLower()
+          # 跟 sha256sum 一樣的格式，啟動器只取第一欄
+          [IO.File]::WriteAllText("$PWD/out/d2s-launcher.exe.sha256", "$hash  d2s-launcher.exe`n")
+          Get-Content out/d2s-launcher.exe.sha256
+
+      - name: 建立 Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $ver = '${{ github.ref_name }}' -replace '^launcher-v', ''
+          gh release create '${{ github.ref_name }}' out/d2s-launcher.exe out/d2s-launcher.exe.sha256 `
+            --title "啟動器 $ver" --generate-notes --latest
