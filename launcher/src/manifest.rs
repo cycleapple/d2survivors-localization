@@ -122,13 +122,17 @@ impl Manifest {
 }
 
 impl Language {
-    /// 不是正式版時的標示：beta 測試中、draft 草稿（翻完還沒進遊戲驗證）
-    pub fn status_note(&self) -> Option<&'static str> {
+    /// i18n 的 key：available 沒有標示、beta 測試中；draft（翻完還沒進遊戲驗證）和不認得的值都當草稿，不當正式版
+    pub fn status_key(&self) -> Option<&'static str> {
         match self.status.as_str() {
-            "beta" => Some("測試中"),
-            "draft" => Some("草稿"),
-            _ => None,
+            "available" => None,
+            "beta" => Some("beta"),
+            _ => Some("draft"),
         }
+    }
+
+    pub fn status_note(&self) -> Option<&'static str> {
+        self.status_key().map(|k| crate::i18n::tr("zh-TW", k))
     }
 
     pub fn label(&self) -> String {

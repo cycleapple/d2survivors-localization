@@ -151,12 +151,7 @@ impl App {
         let mut list: Vec<(String, String)> = Vec::new();
         if let Some(m) = &self.manifest {
             for (l, _) in m.desktop_languages() {
-                let mut notes: Vec<String> = Vec::new();
-                match l.status.as_str() {
-                    "beta" => notes.push(self.t("beta").into()),
-                    "draft" => notes.push(self.t("draft").into()),
-                    _ => {}
-                }
+                let mut notes: Vec<String> = l.status_key().map(|k| self.t(k).to_string()).into_iter().collect();
                 notes.push(if manifest::local_dict(l).is_some() { self.tf("entries", &[&l.entries.to_string()]) } else { self.t("not_downloaded").into() });
                 list.push((l.id.clone(), format!("{}（{}）", l.name, notes.join("・"))));
             }

@@ -33,7 +33,7 @@ cargo test --release                        # 有 backup/2026.1026.4/app.asar �
 - 讀的欄位：
   - `schema` 不是 2 就停下來，提示更新啟動器
   - `desktop`（修改規則）＝ v1 的 `patch`
-  - `languages[]` 裡有 `desktop` 欄位的語言才列進選單；`status: beta` 標成「測試中」、`draft` 標成「草稿」（目前 make-manifest.mjs 不輸出 draft 的語言）
+  - `languages[]` 裡有 `desktop` 欄位的語言才列進選單；`status: beta` 標成「測試中」、`draft` 和不認得的值都標成「草稿」，不當正式版（目前 make-manifest.mjs 不輸出 draft 的語言）
   - `launcher`：自我更新，見下面
   - `changelog`：更新紀錄，見下面
 - 只下載選的語言的字典，以及本機已經有、但版本舊了的字典
