@@ -11,5 +11,6 @@
  "Stat Points": "屬性點數",
  "# arrows": "{0}支箭",
  "# hammer spirals out around you for # damage to all it passes.": "{0}把鎚子在你周圍盤旋擴散，對經過的所有怪物造成{1}點傷害。",
- "Fires # bolts of holy light that pierce #, for # damage (double to the undead).": "發射{0}枚聖光，穿透{1}隻怪物，造成{2}點傷害（對不死怪物加倍）。"
+ "Fires # bolts of holy light that pierce #, for # damage (double to the undead).": "發射{0}枚聖光，穿透{1}隻怪物，造成{2}點傷害（對不死怪物加倍）。",
+ "Charsi sells ranks past the maximum, and imbues rares": "恰西販售超過上限的強化階，並可把物品灌注成稀有物品"
 }
