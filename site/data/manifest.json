@@ -1,10 +1,10 @@
 {
   "schema": 2,
-  "updated": "2026-10-27T13:16:36.528Z",
-  "version": "20261027-1316",
+  "updated": "2026-10-27T13:24:29.139Z",
+  "version": "20261027-1324",
   "game": {
     "desktop": "2026.1027.1",
-    "web_checked": "2026-10-27T13:04:28.142Z"
+    "web_checked": "2026-10-27T13:21:03.641Z"
   },
   "languages": [
     {
@@ -206,8 +206,8 @@
       "status": "beta",
       "entries": 12704,
       "dict": {
-        "url": "dict/ru.json?v=eda524ab6c25",
-        "sha256": "eda524ab6c255af67944a723be0208dc172366310ca565ef4f3223a271a38f29",
+        "url": "dict/ru.json?v=478d66b6a301",
+        "sha256": "478d66b6a3018f3b5ef7ca10a463681e778068bafde8b36543c570d7e6eade36",
         "size": 1187031
       },
       "desktop": {
@@ -513,7 +513,7 @@
           "magic-de"
         ],
         "optional": true,
-        "file": "^translate-.*.js$",
+        "file": "^translate-.*\\.js$",
         "find": "return\\[([\\w$]+)\\(([\\w$]+)\\),\\1\\(([\\w$]+)\\),this\\.translateAs\\(`item`,([\\w$]+)\\)\\]\\.filter\\(Boolean\\)\\.join\\(` `\\)",
         "replace": "let d2g=this.exact.get(`gender:${$4.trim()}`.replace(/\\s+/g,` `).trim().toUpperCase())??`ms`,d2k=d2v=>{if(!d2v.startsWith(`[`))return d2v;let d2o=d2v.split(`[`).slice(1),d2w=d2o.find(d2x=>d2x.startsWith(d2g+`]`))??d2o[0];return d2w.slice(d2w.indexOf(`]`)+1).trim()},d2U=d2v=>d2v?d2v[0].toUpperCase()+d2v.slice(1):d2v,d2W=d2v=>d2v?d2v[0].toLowerCase()+d2v.slice(1):d2v,d2b=this.translateAs(`item`,$4),d2p=d2k($1($3)),d2q=d2k($1($2));return d2U([d2p&&(d2p.endsWith(` -`)?`${d2p.slice(0,-2)}-${d2b}`:`${d2p} ${d2b}`),!d2p&&d2b,d2q].filter(Boolean).join(` `))"
       },
@@ -523,7 +523,7 @@
           "magic-fr"
         ],
         "optional": true,
-        "file": "^translate-.*.js$",
+        "file": "^translate-.*\\.js$",
         "find": "return\\[([\\w$]+)\\(([\\w$]+)\\),\\1\\(([\\w$]+)\\),this\\.translateAs\\(`item`,([\\w$]+)\\)\\]\\.filter\\(Boolean\\)\\.join\\(` `\\)",
         "replace": "let d2g=this.exact.get(`gender:${$4.trim()}`.replace(/\\s+/g,` `).trim().toUpperCase())??`ms`,d2k=d2v=>{if(!d2v.startsWith(`[`))return d2v;let d2o=d2v.split(`[`).slice(1),d2w=d2o.find(d2x=>d2x.startsWith(d2g+`]`))??d2o[0];return d2w.slice(d2w.indexOf(`]`)+1).trim()},d2U=d2v=>d2v?d2v[0].toUpperCase()+d2v.slice(1):d2v,d2W=d2v=>d2v?d2v[0].toLowerCase()+d2v.slice(1):d2v,d2b=this.translateAs(`item`,$4),d2p=d2k($1($3)),d2q=d2k($1($2));return [d2b,d2p,d2q].filter(Boolean).join(` `)"
       },
@@ -533,9 +533,19 @@
           "magic-ru"
         ],
         "optional": true,
-        "file": "^translate-.*.js$",
+        "file": "^translate-.*\\.js$",
         "find": "return\\[([\\w$]+)\\(([\\w$]+)\\),\\1\\(([\\w$]+)\\),this\\.translateAs\\(`item`,([\\w$]+)\\)\\]\\.filter\\(Boolean\\)\\.join\\(` `\\)",
         "replace": "let d2g=this.exact.get(`gender:${$4.trim()}`.replace(/\\s+/g,` `).trim().toUpperCase())??`ms`,d2k=d2v=>{if(!d2v.startsWith(`[`))return d2v;let d2o=d2v.split(`[`).slice(1),d2w=d2o.find(d2x=>d2x.startsWith(d2g+`]`))??d2o[0];return d2w.slice(d2w.indexOf(`]`)+1).trim()},d2U=d2v=>d2v?d2v[0].toUpperCase()+d2v.slice(1):d2v,d2W=d2v=>d2v?d2v[0].toLowerCase()+d2v.slice(1):d2v,d2b=this.translateAs(`item`,$4),d2p=d2k($1($3)),d2q=d2k($1($2));return d2U([d2p,d2p?d2W(d2b):d2b,d2q].filter(Boolean).join(` `))"
+      },
+      {
+        "label": "魔法物品名稱組合（波蘭文）",
+        "groups": [
+          "magic-pl"
+        ],
+        "optional": true,
+        "file": "^translate-.*\\.js$",
+        "find": "return\\[([\\w$]+)\\(([\\w$]+)\\),\\1\\(([\\w$]+)\\),this\\.translateAs\\(`item`,([\\w$]+)\\)\\]\\.filter\\(Boolean\\)\\.join\\(` `\\)",
+        "replace": "let d2g=this.exact.get(`gender:${$4.trim()}`.replace(/\\s+/g,` `).trim().toUpperCase())??`ms`,d2k=d2v=>{if(!d2v.startsWith(`[`))return d2v;let d2o=d2v.split(`[`).slice(1),d2w=d2o.find(d2x=>d2x.startsWith(d2g+`]`))??d2o[0];return d2w.slice(d2w.indexOf(`]`)+1).trim()},d2U=d2v=>d2v?d2v[0].toUpperCase()+d2v.slice(1):d2v,d2W=d2v=>d2v?d2v[0].toLowerCase()+d2v.slice(1):d2v,d2b=this.translateAs(`item`,$4),d2p=d2k($1($3)),d2q=d2k($1($2));return [d2p,d2b,d2q].filter(Boolean).join(` `)"
       },
       {
         "label": "獨特怪物名字（德文）",
@@ -553,7 +563,7 @@
         ],
         "optional": true,
         "find": "let\\[([\\w$]+),([\\w$]+),([\\w$]+)\\]=([\\w$]+)\\.map\\(([\\w$]+)=>([\\w$]+)\\(`unique`,\\5\\)\\);return`\\$\\{\\3\\} \\$\\{\\1\\} \\$\\{\\2\\}`",
-        "replace": "let[$1,$2,$3]=$4.map($5=>$6(`unique`,$5)),d2G=$6(`gender`,$4[1]);d2G=/^(ms|fs|ns|pl|mp|fp)$/.test(d2G)?d2G:`ms`;let d2k=d2v=>{if(!d2v.startsWith(`[`))return d2v;let d2o=d2v.split(`[`).slice(1),d2w=d2o.find(d2x=>d2x.startsWith(d2G+`]`))??d2o[0];return d2w.slice(d2w.indexOf(`]`)+1).trim()},d2U=d2v=>d2v?d2v[0].toUpperCase()+d2v.slice(1):d2v,d2W=d2v=>d2v?d2v[0].toLowerCase()+d2v.slice(1):d2v;return`${$2} ${d2k($1)} ${d2W($3)}`"
+        "replace": "let[$1,$2,$3]=$4.map($5=>$6(`unique`,$5)),d2G=$6(`gender`,$4[1]);d2G=/^(ms|fs|ns|pl|mp|fp|nl)$/.test(d2G)?d2G:`ms`;let d2k=d2v=>{if(!d2v.startsWith(`[`))return d2v;let d2o=d2v.split(`[`).slice(1),d2w=d2o.find(d2x=>d2x.startsWith(d2G+`]`))??d2o[0];return d2w.slice(d2w.indexOf(`]`)+1).trim()},d2U=d2v=>d2v?d2v[0].toUpperCase()+d2v.slice(1):d2v,d2W=d2v=>d2v?d2v[0].toLowerCase()+d2v.slice(1):d2v;return`${$2} ${d2k($1)} ${d2W($3)}`"
       },
       {
         "label": "獨特怪物名字（俄文）",
@@ -562,7 +572,16 @@
         ],
         "optional": true,
         "find": "let\\[([\\w$]+),([\\w$]+),([\\w$]+)\\]=([\\w$]+)\\.map\\(([\\w$]+)=>([\\w$]+)\\(`unique`,\\5\\)\\);return`\\$\\{\\3\\} \\$\\{\\1\\} \\$\\{\\2\\}`",
-        "replace": "let[$1,$2,$3]=$4.map($5=>$6(`unique`,$5)),d2G=$6(`gender`,$4[1]);d2G=/^(ms|fs|ns|pl|mp|fp)$/.test(d2G)?d2G:`ms`;let d2k=d2v=>{if(!d2v.startsWith(`[`))return d2v;let d2o=d2v.split(`[`).slice(1),d2w=d2o.find(d2x=>d2x.startsWith(d2G+`]`))??d2o[0];return d2w.slice(d2w.indexOf(`]`)+1).trim()},d2U=d2v=>d2v?d2v[0].toUpperCase()+d2v.slice(1):d2v,d2W=d2v=>d2v?d2v[0].toLowerCase()+d2v.slice(1):d2v;return`${d2U($3)}, ${d2U(d2k($1))} ${d2W($2)}`"
+        "replace": "let[$1,$2,$3]=$4.map($5=>$6(`unique`,$5)),d2G=$6(`gender`,$4[1]);d2G=/^(ms|fs|ns|pl|mp|fp|nl)$/.test(d2G)?d2G:`ms`;let d2k=d2v=>{if(!d2v.startsWith(`[`))return d2v;let d2o=d2v.split(`[`).slice(1),d2w=d2o.find(d2x=>d2x.startsWith(d2G+`]`))??d2o[0];return d2w.slice(d2w.indexOf(`]`)+1).trim()},d2U=d2v=>d2v?d2v[0].toUpperCase()+d2v.slice(1):d2v,d2W=d2v=>d2v?d2v[0].toLowerCase()+d2v.slice(1):d2v;return`${d2U($3)}, ${d2U(d2k($1))} ${d2W($2)}`"
+      },
+      {
+        "label": "獨特怪物名字（波蘭文）",
+        "groups": [
+          "unique-pl"
+        ],
+        "optional": true,
+        "find": "let\\[([\\w$]+),([\\w$]+),([\\w$]+)\\]=([\\w$]+)\\.map\\(([\\w$]+)=>([\\w$]+)\\(`unique`,\\5\\)\\);return`\\$\\{\\3\\} \\$\\{\\1\\} \\$\\{\\2\\}`",
+        "replace": "let[$1,$2,$3]=$4.map($5=>$6(`unique`,$5)),d2G=$6(`gender`,$4[1]);d2G=/^(ms|fs|ns|pl|mp|fp|nl)$/.test(d2G)?d2G:`ms`;let d2k=d2v=>{if(!d2v.startsWith(`[`))return d2v;let d2o=d2v.split(`[`).slice(1),d2w=d2o.find(d2x=>d2x.startsWith(d2G+`]`))??d2o[0];return d2w.slice(d2w.indexOf(`]`)+1).trim()},d2U=d2v=>d2v?d2v[0].toUpperCase()+d2v.slice(1):d2v,d2W=d2v=>d2v?d2v[0].toLowerCase()+d2v.slice(1):d2v;return`${$3}, ${d2k($1)} ${$2}`"
       },
       {
         "label": "標籤與值的冒號",
@@ -596,9 +615,37 @@
           "font-ru"
         ],
         "optional": true,
-        "file": "^lang-.*.js$",
+        "file": "^lang-.*\\.js$",
         "find": "if\\(typeof FontFace>`u`\\)return;",
         "replace": "if(typeof FontFace>`u`)return;await Promise.all([`D2R Kodia`,`D2R Iris`,`D2 Hangul`,`D2 Hangul 14`].map(async f=>{try{document.fonts.add(await new FontFace(f,`{{fonts}}`,{unicodeRange:`U+0400-04FF`}).load())}catch{}}));"
+      },
+      {
+        "label": "外文字判斷（拉丁擴充 A）",
+        "groups": [
+          "latin-ext"
+        ],
+        "find": "return ([\\w$]+)>=44032&&\\1<=55203\\|\\|\\1>=12592&&\\1<=12687\\|\\|\\1>=4352&&\\1<=4607\\}",
+        "replace": "return $1>=44032&&$1<=55203||$1>=12592&&$1<=12687||$1>=4352&&$1<=4607||$1>=256&&$1<=383}"
+      },
+      {
+        "label": "波蘭文字型",
+        "groups": [
+          "font-pl"
+        ],
+        "optional": true,
+        "file": "^lang-.*\\.js$",
+        "find": "if\\(typeof FontFace>`u`\\)return;",
+        "replace": "if(typeof FontFace>`u`)return;await Promise.all([`D2R Kodia`,`D2R Iris`,`D2 Hangul`,`D2 Hangul 14`].map(async f=>{try{document.fonts.add(await new FontFace(f,`{{fonts}}`,{unicodeRange:`U+0100-017F`}).load())}catch{}}));"
+      },
+      {
+        "label": "外文字大小（波蘭文）",
+        "groups": [
+          "size-pl"
+        ],
+        "optional": true,
+        "file": "^ui-.*\\.js$",
+        "find": "let ([\\w$]+)=([\\w$]+)>=20\\?1\\.25:1\\.4;\\[this\\.foreignSize,this\\.foreignFamily\\]=([\\w$]+)\\?\\[Math\\.round\\(\\2\\*\\1\\),([\\w$]+)\\]:\\[Math\\.max\\(12,Math\\.round\\(\\2\\*1\\.3\\)\\),([\\w$]+)\\],this\\.foreignWeight=\\3\\?``:`bold `",
+        "replace": "let $1=1.2;[this.foreignSize,this.foreignFamily]=$3?[Math.round($2*$1),$4]:[Math.max(12,Math.round($2*1)),$5],this.foreignWeight=``"
       },
       {
         "label": "中日文斷行",
@@ -613,10 +660,11 @@
         "label": "暗色字不加描邊",
         "groups": [
           "cjk",
-          "cyrillic"
+          "cyrillic",
+          "latin-ext"
         ],
         "optional": true,
-        "file": "^ui-.*.js$",
+        "file": "^ui-.*\\.js$",
         "find": "([\\w$]+)=\\[\\];if\\(([\\w$]+)\\.outline\\)\\{let ([\\w$]+)=`rgb\\(\\$\\{([\\w$]+)\\(\\2\\.outline\\.level,\\2\\.outline\\.own\\)\\}\\)`;for\\(let\\[([\\w$]+),([\\w$]+)\\]of\\[\\[-1,0\\],\\[1,0\\],\\[0,-1\\],\\[0,1\\],\\[-1,-1\\],\\[1,-1\\],\\[-1,1\\],\\[1,1\\]\\]\\)\\1\\.push\\(\\[\\3,\\5\\*([\\w$]+),\\6\\*\\7\\]\\)\\}\\1\\.push\\(\\[`rgb\\(\\$\\{\\4\\(\\2\\.level,\\2\\.own\\)\\}\\)`,0,0\\]\\);",
         "replace": "$1=[];let d2F=$4($2.level,$2.own),d2U=$2.outline&&$4($2.outline.level,$2.outline.own),d2M=e=>Math.max(...e.split(`,`).map(Number)),d2D=d2U&&d2M(d2F)<75&&d2M(d2U)<d2M(d2F);if($2.outline&&!d2D){let $3=`rgb(${d2U})`;for(let[$5,$6]of[[-1,0],[1,0],[0,-1],[0,1],[-1,-1],[1,-1],[-1,1],[1,1]])$1.push([$3,$5*$7,$6*$7])}$1.push([`rgb(${d2D?d2U:d2F})`,0,0]);d2D&&$1.push([`rgb(${d2U})`,1,0]);"
       },
@@ -632,7 +680,7 @@
     ]
   },
   "changelog": {
-    "url": "changelog.json?v=028086699eae",
-    "latest": "20261027-1316"
+    "url": "changelog.json?v=2c9b9683a5cf",
+    "latest": "20261027-1324"
   }
 }

@@ -2,6 +2,70 @@
   "schema": 1,
   "entries": [
     {
+      "version": "20261027-1324",
+      "date": "2026-10-27",
+      "kind": "translation",
+      "announce": false,
+      "summary": {
+        "zh-TW": "俄文修正 562 條；更新修改規則",
+        "zh-CN": "俄文修正 562 条；更新修改规则",
+        "en": "Russian: 562 fixed; Updated patch rules"
+      },
+      "game": {
+        "desktop": "2026.1027.1"
+      },
+      "languages": [
+        {
+          "id": "zh-TW",
+          "status": "available",
+          "entries": 12758,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "zh-CN",
+          "status": "beta",
+          "entries": 12753,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ja",
+          "status": "beta",
+          "entries": 12755,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "de",
+          "status": "beta",
+          "entries": 12704,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "fr",
+          "status": "beta",
+          "entries": 12704,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ru",
+          "status": "beta",
+          "entries": 12704,
+          "added": 0,
+          "changed": 562,
+          "removed": 0
+        }
+      ]
+    },
+    {
       "version": "20261027-1316",
       "date": "2026-10-27",
       "kind": "language",
