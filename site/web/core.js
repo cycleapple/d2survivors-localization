@@ -25,7 +25,8 @@ export async function loadGame(playUrl, get) {
 
 const fileName = url => url.slice(url.lastIndexOf('/') + 1);
 
-// 每條規則的 find 在（file 符合的）模組裡必須剛好符合一次。直接改 modules，回傳沒套上的規則
+// 每條規則的 find 在（file 符合的）模組裡必須剛好符合一次。直接改 modules，回傳沒套上的規則。
+// replace 裡的 {{…}} 換成 vars 的值
 export function applyRules(modules, rules, vars = {}) {
   const failed = [];
   for (const rule of rules) {
@@ -45,6 +46,25 @@ export function applyRules(modules, rules, vars = {}) {
     modules.set(hits[0].url, modules.get(hits[0].url).replace(new RegExp(rule.find), to));
   }
   return failed;
+}
+
+// 這個語言要套用的規則：規則的 groups 有一個在語言的 groups 裡。不是網頁版語言（英文、韓文）時只套 base
+export function rulesFor(rules, lang) {
+  const groups = lang?.groups ?? ['base'];
+  return rules.filter(r => (r.groups ?? ['base']).some(g => groups.includes(g)));
+}
+
+// 規則 replace 裡的 {{…}}（格式見 tools/web-rules.mjs）。langs：所有網頁版語言 [{ id, menu_name, html_lang, fonts }]；
+// lang：目前的語言（英文、韓文時是 null）；dict：目前語言的字典模組網址
+export function ruleVars(langs, lang, dict) {
+  return {
+    menu: langs.map(l => `,${JSON.stringify(l.id)}:\`${l.menu_name}\``).join(''),
+    ids: JSON.stringify(langs.map(l => l.id)),
+    ...lang && {
+      id: lang.id, menu_name: lang.menu_name, html_lang: lang.html_lang, dict,
+      fonts: (lang.fonts ?? []).map(f => `local("${f}")`).join(', '),
+    },
+  };
 }
 
 // 模組換成 blob 網址後，相對路徑和 import.meta.url 會失效：一律改成原本的絕對網址，
