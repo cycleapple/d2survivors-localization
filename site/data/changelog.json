@@ -2,6 +2,98 @@
   "schema": 1,
   "entries": [
     {
+      "version": "20261027-1404",
+      "date": "2026-10-27",
+      "kind": "language",
+      "announce": false,
+      "summary": {
+        "zh-TW": "新增波蘭文（測試中）；德、法、波蘭文縮短「重新啟動以更新」按鈕",
+        "zh-CN": "新增波兰文（测试中）；德、法、波兰文缩短“重新启动以更新”按钮",
+        "en": "Added Polish (beta); shorter restart-to-update button in German, French and Polish",
+        "ja": "ポーランド語を追加（テスト中）。ドイツ語・フランス語・ポーランド語の「再起動して更新」ボタンを短く",
+        "de": "Polnisch hinzugefügt (Beta); kürzere Schaltfläche zum Neustarten für das Update auf Deutsch, Französisch und Polnisch",
+        "fr": "Ajout du polonais (bêta) ; bouton de redémarrage pour la mise à jour raccourci en allemand, français et polonais",
+        "ru": "Добавлен польский (бета); укорочена кнопка перезапуска для обновления на немецком, французском и польском",
+        "pl": "Dodano język polski (beta); krótszy przycisk ponownego uruchomienia w celu aktualizacji po niemiecku, francusku i polsku"
+      },
+      "notes": {
+        "zh-TW": [
+          "波蘭文約 67% 用語取自 D2R 官方譯文，其餘人工翻譯，進遊戲驗證過",
+          "魔法物品和稀有物品名稱照波蘭文的詞性組合（Masywne Rękawice Lisa、Bestialskie Ostrze）",
+          "ą ć ę ł ń ś ź ż 用 D2R 的 Exocet 和 Formal436 字型畫，跟遊戲的拉丁字母一樣大"
+        ],
+        "en": [
+          "About 67% of the Polish terms come from the official D2R translation; the rest was translated and checked in game",
+          "Magic and rare item names follow Polish grammatical gender (Masywne Rękawice Lisa, Bestialskie Ostrze)"
+        ],
+        "pl": [
+          "Około 67% terminów pochodzi z oficjalnego polskiego D2R; resztę przetłumaczono i sprawdzono w grze",
+          "Nazwy przedmiotów magicznych i rzadkich odmieniają się zgodnie z rodzajem (Masywne Rękawice Lisa, Bestialskie Ostrze)"
+        ]
+      },
+      "game": {
+        "desktop": "2026.1027.1"
+      },
+      "languages": [
+        {
+          "id": "zh-TW",
+          "status": "available",
+          "entries": 12758,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "zh-CN",
+          "status": "beta",
+          "entries": 12753,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ja",
+          "status": "beta",
+          "entries": 12755,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "de",
+          "status": "beta",
+          "entries": 12704,
+          "added": 0,
+          "changed": 1,
+          "removed": 0
+        },
+        {
+          "id": "fr",
+          "status": "beta",
+          "entries": 12704,
+          "added": 0,
+          "changed": 1,
+          "removed": 0
+        },
+        {
+          "id": "ru",
+          "status": "beta",
+          "entries": 12704,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "pl",
+          "status": "beta",
+          "entries": 12704,
+          "added": 12704,
+          "changed": 0,
+          "removed": 0
+        }
+      ]
+    },
+    {
       "version": "20261027-1324",
       "date": "2026-10-27",
       "kind": "translation",
