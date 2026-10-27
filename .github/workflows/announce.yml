@@ -1,0 +1,117 @@
+# 更新公告：push 到 main、site/data/changelog.json 有變動時，把這次新增、而且 announce: true 的項目發到 Discord 的 #announcements。
+# 格式見 docs/manifest-v2.md 的「更新紀錄」，哪些要公告見 docs/release.md 的「公告」。
+# repo 的 Settings → Secrets and variables → Actions：
+#   secret   DISCORD_WEBHOOK_UPDATES     #announcements 的 webhook 網址。沒設就跳過，不算失敗
+#   variable DISCORD_UPDATE_PING_ROLE    選填，「Update Ping」身分組的 ID，有設就在公告裡 @ 它
+name: Announce
+
+on:
+  push:
+    branches: [main]
+    paths: [site/data/changelog.json]
+
+permissions:
+  contents: read
+
+# 依序發，不要兩次 push 的公告交錯
+concurrency:
+  group: announce
+  cancel-in-progress: false
+
+jobs:
+  announce:
+    runs-on: ubuntu-latest
+    env:
+      DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_UPDATES }}
+    steps:
+      - name: Skip without webhook
+        if: env.DISCORD_WEBHOOK == ''
+        run: echo "沒有設定 DISCORD_WEBHOOK_UPDATES，跳過"
+
+      - uses: actions/checkout@v4
+        if: env.DISCORD_WEBHOOK != ''
+        with:
+          # 要拿 push 之前的 changelog.json 來比
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        if: env.DISCORD_WEBHOOK != ''
+        with:
+          node-version: 22
+
+      - name: Post new announcements
+        if: env.DISCORD_WEBHOOK != ''
+        env:
+          BEFORE: ${{ github.event.before }}
+          PING_ROLE: ${{ vars.DISCORD_UPDATE_PING_ROLE }}
+        run: |
+          node --input-type=module <<'EOF'
+          import { execFileSync } from 'node:child_process';
+          import { readFileSync } from 'node:fs';
+          import { pathToFileURL } from 'node:url';
+
+          const FILE = 'site/data/changelog.json';
+          const { SITE } = await import(pathToFileURL(`${process.cwd()}/site/src/config.mjs`).href);
+
+          const before = process.env.BEFORE ?? '';
+          const previous = (() => {
+            if (!before || /^0+$/.test(before)) return null;
+            try {
+              return JSON.parse(execFileSync('git', ['show', `${before}:${FILE}`], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }));
+            } catch {
+              return null;
+            }
+          })();
+          const current = JSON.parse(readFileSync(FILE, 'utf8'));
+
+          // 這次 push 新增的項目。抓不到上一版（第一次加這個檔、force push）時只看最新一筆，不把舊紀錄全部再發一次
+          let added = current.entries ?? [];
+          if (previous) {
+            const seen = new Set((previous.entries ?? []).map((e) => e.version));
+            added = added.filter((e) => !seen.has(e.version));
+          } else {
+            added = added.slice(0, 1);
+          }
+          const todo = added.filter((e) => e.announce === true).reverse(); // 舊的先發
+          if (!todo.length) {
+            console.log('沒有要公告的項目');
+            process.exit(0);
+          }
+
+          const TITLE = { translation: '翻譯更新', language: '新語言', 'game-fix': '遊戲改版修正', launcher: '啟動器新版' };
+          const role = process.env.PING_ROLE?.trim();
+
+          for (const e of todo) {
+            const summary = e.summary?.['zh-TW'] ?? e.summary?.en ?? '';
+            const notes = e.notes?.['zh-TW'] ?? [];
+            const lines = [
+              summary,
+              ...(e.summary?.en && e.summary.en !== summary ? [`*${e.summary.en}*`] : []),
+              ...(notes.length ? ['', ...notes.map((n) => `• ${n}`)] : []),
+              '',
+              `🌐 ${SITE.base}`,
+            ];
+            const body = {
+              content: role ? `<@&${role}>` : '',
+              allowed_mentions: { parse: [], roles: role ? [role] : [] },
+              embeds: [{
+                title: `${TITLE[e.kind] ?? '更新'} · ${e.version}`,
+                url: `${SITE.base}zh-tw/`,
+                description: lines.join('\n').slice(0, 4000),
+                color: 0xc7a15a,
+                footer: { text: '非官方玩家翻譯，與 D2 Survivors 開發者及 Blizzard Entertainment 無關 · Unofficial fan translation' },
+                ...(e.date ? { timestamp: `${e.date}T00:00:00Z` } : {}),
+              }],
+            };
+            const res = await fetch(process.env.DISCORD_WEBHOOK, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(body),
+            });
+            if (!res.ok) {
+              console.error(`Discord 回應 ${res.status}：${await res.text()}`);
+              process.exit(1);
+            }
+            console.log(`已公告 ${e.version}`);
+          }
+          EOF
