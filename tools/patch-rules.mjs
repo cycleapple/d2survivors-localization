@@ -64,7 +64,9 @@ export const RULES = [
     to: 'return[a(r),a(i),this.translateAs(`item`,t)].filter(Boolean).join(``)',
   },
   // 德文「前綴 物品 後綴」（D2R MagicFormat %0 %1 %2），前綴結尾是「 -」時跟物品用連字號接（Engels-Ring），句首大寫：Robuste Kappe des Geistes
-  { label: '魔法物品名稱組合（德文）', groups: ['magic-de'], file: '^lang-.*\\.js$', from: MAGIC_FROM, to: magic('U([p&&(p.endsWith(` -`)?`${p.slice(0,-2)}-${b}`:`${p} ${b}`),!p&&b,q].filter(Boolean).join(` `))') },
+  // 有前綴、物品名稱又是兩個字以上時，物品名稱第一個字母改小寫（「Robuste」+「Schwere Handschuhe」→ Robuste schwere Handschuhe）；
+  // 字典裡的物品名稱是大寫開頭（白色物品單獨顯示時用），一個字的（Kappe）和沒有前綴的照舊
+  { label: '魔法物品名稱組合（德文）', groups: ['magic-de'], file: '^lang-.*\\.js$', from: MAGIC_FROM, to: magic('U([p&&(p.endsWith(` -`)?`${p.slice(0,-2)}-${b}`:`${p} ${b.includes(` `)?W(b):b}`),!p&&b,q].filter(Boolean).join(` `))') },
   // 法文「物品 前綴 後綴」（%1 %0 %2）：Coiffe solide de l’esprit
   { label: '魔法物品名稱組合（法文）', groups: ['magic-fr'], file: '^lang-.*\\.js$', from: MAGIC_FROM, to: magic('[b,p,q].filter(Boolean).join(` `)') },
   // 俄文「前綴 物品 後綴」（%0 %1 %2），有前綴時物品小寫開頭，句首大寫：Прочный наголовник разума
@@ -81,6 +83,15 @@ export const RULES = [
   { label: '獨特怪物名字（俄文）', groups: ['unique-ru'], from: UNIQUE_FROM, to: unique('`${U(a)}, ${U(k(r))} ${W(i)}`') },
   // 波蘭文「稱號, 前段 後段」（D2R 的「%2, %0 %1」），前段照後段的詞性挑，不改大小寫：Żarłok, Mroczny Kieł
   { label: '獨特怪物名字（波蘭文）', groups: ['unique-pl'], from: UNIQUE_FROM, to: unique('`${a}, ${k(r)} ${i}`') },
+  // 英雄稱號的陰性形式：遊戲只有 Matriarch／Patriarch 依職業分，Destroyer、Conqueror、Guardian、Slayer、Champion 不分，
+  // 德、法、俄、波蘭文的女性職業（Bg：amazon、assassin、sorceress）會顯示陽性（Zerstörer）。
+  // 女性職業先查 title:<稱號>:f（Zerstörerin），查不到（翻譯函式原樣傳回）就照一般的 title:<稱號>。
+  // 依賴壓縮名稱（rO、Ug、st、R、qe、title 翻譯函式 u、女性職業 Bg），對不上時 check-rules 會報（2026.1027.2）
+  {
+    label: '女性職業的稱號', groups: ['dict'], file: '^Game-.*\\.js$',
+    from: 'function rO(e,t){let n=Ug(e,t);if(!n)return null;let r=st(e,t);return r>0&&!R(e,t)?`${u(n)} · ${qe(r)}`:u(n)}',
+    to: 'function rO(e,t){let n=Ug(e,t);if(!n)return null;let F=Bg.includes(t)?u(`${n}:f`):null,T=F&&F!==`${n}:f`?F:u(n),r=st(e,t);return r>0&&!R(e,t)?`${T} · ${qe(r)}`:T}',
+  },
   // 日期：遊戲在語言是 ko 時寫死韓文的日期格式（「10월 27일」），翻譯放在 ko 槽位，排行榜和存檔的日期會變成韓文。
   // 改成照 <html lang> 用瀏覽器的格式（繁中「10月27日」、德文「27. Okt.」、俄文「27 окт.」）
   {
