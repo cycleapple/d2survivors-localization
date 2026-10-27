@@ -140,7 +140,7 @@ manifest 各部分從哪裡來：
 | `languages[].web`、`web` | `tools/web-rules.mjs` 的 `WEB_LANGUAGES`、`WEB_RULES`、`WEB_PLAY_URL`（網頁書籤聊天室維護）；還沒匯出 `WEB_LANGUAGES` 時不輸出 |
 | `game.desktop` | `versions/` 裡最新一版 |
 | `game.web_checked` | `tools/web-rules.mjs` 有匯出 `WEB_CHECKED` 才輸出 |
-| `launcher` | 還沒有 GitHub Release，先不輸出 |
+| `launcher` | 還沒有 GitHub Release，先不輸出。之後加的時候：`sha256_url` 指到的檔案是 sha256sum 格式（`<雜湊> <檔名>`），啟動器只取第一欄 |
 
 狀態（`status`）：繁中 `available`；簡中、日文 `beta`。兩者都翻完、統一過用詞，也進遊戲走過主要畫面，查不到的字串 0 條，但還沒有玩家實際玩過的回報。有玩家回報、修過一輪之後，改 `langs.mjs` 的 `status`。
 

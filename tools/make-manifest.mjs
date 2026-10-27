@@ -30,8 +30,9 @@ const desktopVersion = fs.existsSync('versions')
   : undefined;
 
 fs.mkdirSync(path.join(outDir, 'dict'), { recursive: true });
-// status 是 draft 的語言（還在做）不發布
+// status 是 draft 的語言（還在做）不發布。啟動器只認得 available 和 beta，其他的會當成正式版顯示，所以別的值一律擋下來
 const languages = Object.entries(TARGETS).filter(([, t]) => t.status !== 'draft').map(([id, t]) => {
+  if (!['available', 'beta'].includes(t.status)) throw new Error(`${id} 的 status「${t.status}」不能發布（只能是 available、beta，還在做的用 draft）`);
   const buf = fs.readFileSync(target(id).out);
   const entries = Object.keys(JSON.parse(buf.toString('utf8'))).length;
   fs.writeFileSync(path.join(outDir, 'dict', `${id}.json`), buf);
