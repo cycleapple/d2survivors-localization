@@ -26,8 +26,9 @@
 // - 字型用系統字型（網頁版拿不到 D2R 的字型檔）
 
 const CJK = '\\u3000-\\u9fff\\uff00-\\uffef';
-// 不放在行首的字：句末標點、右括號，加上日文的長音、中點和小寫假名（禁則）。跟 patch-rules.mjs 一樣
-const CLOSING = '\\u3001\\u3002\\uff0c\\uff1a\\uff1b\\uff01\\uff1f\\uff09\\u300d\\u300f\\u3011\\u30fc\\u30fb\\u3041\\u3043\\u3045\\u3047\\u3049\\u3063\\u3083\\u3085\\u3087\\u308e\\u30a1\\u30a3\\u30a5\\u30a7\\u30a9\\u30c3\\u30e3\\u30e5\\u30e7\\u30ee\\u30f5\\u30f6';
+// 不放在行首的字：句末標點、右括號，加上日文的長音、中點和小寫假名（禁則）。跟 patch-rules.mjs 一樣，
+// 另外加半形冒號（日文的協同加成「ライトニングセントリー: +4%」不要在冒號前斷行）
+const CLOSING = '\\u3001\\u3002\\uff0c\\uff1a\\uff1b\\uff01\\uff1f\\uff09\\u300d\\u300f\\u3011\\u30fc\\u30fb\\u3041\\u3043\\u3045\\u3047\\u3049\\u3063\\u3083\\u3085\\u3087\\u308e\\u30a1\\u30a3\\u30a5\\u30a7\\u30a9\\u30c3\\u30e3\\u30e5\\u30e7\\u30ee\\u30f5\\u30f6:';
 // 不放在行尾的字：左括號
 const OPENING = '\\u300c\\u300e\\u3010\\uff08';
 const ID = '([\\w$]+)';
@@ -45,7 +46,7 @@ function pattern(src) {
 }
 
 export const WEB_PLAY_URL = 'https://d2survivors.lol/play/';
-export const WEB_CHECKED = '2026-10-27T17:00:14.344Z';
+export const WEB_CHECKED = '2026-10-27T22:26:27.496Z';
 
 export const WEB_LANGUAGES = [
   {
@@ -58,20 +59,21 @@ export const WEB_LANGUAGES = [
   },
   {
     id: 'ja', menu_name: '日本語', html_lang: 'ja', groups: ['base', 'dict', 'cjk', 'magic-ja'],
-    fonts: ['Meiryo UI Bold', 'Meiryo Bold', 'Hiragino Sans W6', 'Hiragino Kaku Gothic ProN W6', 'Noto Sans JP Bold', 'Noto Sans CJK JP Bold', 'Meiryo', 'Hiragino Sans', 'Noto Sans JP', 'Noto Sans CJK JP'],
+    // Windows 10／11 一定有遊ゴシック；メイリオ在非日文版的 Windows 常常沒裝，全部找不到時中日文會退回系統語言的字型（繁中的正黑體）
+    fonts: ['Yu Gothic UI Bold', 'Yu Gothic Bold', 'Meiryo UI Bold', 'Meiryo Bold', 'Hiragino Sans W6', 'Hiragino Kaku Gothic ProN W6', 'Noto Sans JP Bold', 'Noto Sans CJK JP Bold', 'Yu Gothic UI', 'Yu Gothic', 'Meiryo', 'Hiragino Sans', 'Noto Sans JP', 'Noto Sans CJK JP', 'MS Gothic'],
   },
   {
-    id: 'de', menu_name: 'Deutsch', html_lang: 'de', groups: ['base', 'dict', 'magic-de', 'unique-de'], fonts: [],
+    id: 'de', menu_name: 'Deutsch', html_lang: 'de', groups: ['base', 'dict', 'caps', 'magic-de', 'unique-de'], fonts: [],
   },
   {
-    id: 'fr', menu_name: 'Français', html_lang: 'fr', groups: ['base', 'dict', 'magic-fr', 'unique-fr'], fonts: [],
+    id: 'fr', menu_name: 'Français', html_lang: 'fr', groups: ['base', 'dict', 'caps', 'magic-fr', 'unique-fr'], fonts: [],
   },
   {
-    id: 'ru', menu_name: 'Русский', html_lang: 'ru', groups: ['base', 'dict', 'cyrillic', 'font-ru', 'magic-ru', 'unique-ru'],
+    id: 'ru', menu_name: 'Русский', html_lang: 'ru', groups: ['base', 'dict', 'caps', 'cyrillic', 'font-ru', 'magic-ru', 'unique-ru'],
     fonts: ['Segoe UI Bold', 'Arial Bold', 'Roboto Bold', 'Noto Sans Bold', 'Segoe UI', 'Arial', 'Roboto', 'Noto Sans'],
   },
   {
-    id: 'pl', menu_name: 'Polski', html_lang: 'pl', groups: ['base', 'dict', 'latin-ext', 'font-pl', 'size-pl', 'magic-pl', 'unique-pl'],
+    id: 'pl', menu_name: 'Polski', html_lang: 'pl', groups: ['base', 'dict', 'caps', 'latin-ext', 'font-pl', 'size-pl', 'magic-pl', 'unique-pl'],
     fonts: ['Segoe UI Bold', 'Arial Bold', 'Roboto Bold', 'Noto Sans Bold', 'Segoe UI', 'Arial', 'Roboto', 'Noto Sans'],
   },
 ];
@@ -182,6 +184,25 @@ export const WEB_RULES = [
     find: pattern('function <1>(<2>,<3>){let <4>=<5>(<2>,<3>);if(!<4>)return null;let <6>=<7>(<2>,<3>);return <6>>0&&!<8>(<2>,<3>)?`${<9>(<4>)} · ${<10>(<6>)}`:<9>(<4>)}'),
     replace: 'function $1($2,$3){let $4=$5($2,$3);if(!$4)return null;let d2F=[`amazon`,`assassin`,`sorceress`].includes($3)?$9(`${$4}:f`):null,d2T=d2F&&d2F!==`${$4}:f`?d2F:$9($4),$6=$7($2,$3);return $6>0&&!$8($2,$3)?`${d2T} · ${$10($6)}`:d2T}',
   },
+  // 角色畫面的「Survivor」（還沒有稱號時）是直接寫在角色畫面裡的，不經過上面的稱號函式。
+  // 語言模組加一個全域函式：女性職業查 title:Survivor:f，查不到（原樣傳回）就給 null；角色畫面先問它，沒有就照舊用 Survivor
+  {
+    label: '女性職業的 Survivor（查詢函式）', groups: ['dict'], optional: true, file: '^lang-.*\\.js$',
+    find: pattern('function <1>(<2>){return <3>?<3>.translateAs(`title`,<2>):<2>}'),
+    replace: 'globalThis.__d2zhSurvivor=d2c=>{if(!$3||![`amazon`,`assassin`,`sorceress`].includes(d2c))return null;let d2v=$3.translateAs(`title`,`Survivor:f`);return d2v===`Survivor:f`?null:d2v};function $1($2){return $3?$3.translateAs(`title`,$2):$2}',
+  },
+  {
+    label: '女性職業的 Survivor（角色畫面）', groups: ['dict'], optional: true, file: '^saveTransfer-.*\\.js$',
+    find: pattern('<1>.inspect?this.nameBox(<1>.inspect.name):this.fit(`Survivor`,<2>.name,`white`)'),
+    replace: '$1.inspect?this.nameBox($1.inspect.name):this.fit(globalThis.__d2zhSurvivor?.($1.cls)??`Survivor`,$2.name,`white`)',
+  },
+  // 英文原文沒有小寫字母（盾牌 SHIELDS、ROGUE ENCAMPMENT 等）時譯文也全部大寫。字典查詢不分大小寫，
+  // SHIELDS／Shields 共用一個譯文，拾取篩選器、控制器設定、死亡畫面的按鈕會變成大小寫混雜。照語言的規則轉大寫（德文 ß→SS）
+  {
+    label: '全大寫的原文', groups: ['caps'], optional: true, file: '^translate-.*\\.js$',
+    find: pattern('translate(<1>){if(!<1>||!<2>.test(<1>))return <1>;let <3>=this.cache.get(<1>);if(<3>!==void 0)return <3>;let <4>=this.find(<1>,0),<5>=<4>??<1>;'),
+    replace: 'translate($1){if(!$1||!$2.test($1))return $1;let $3=this.cache.get($1);if($3!==void 0)return $3;let $4=this.find($1,0);$4!==null&&!/\\p{Ll}/u.test($1)&&($4=$4.toLocaleUpperCase(`{{html_lang}}`));let $5=$4??$1;',
+  },
   // 技能變體名稱：有些變體跟別的技能同名（荊棘之靈的 Vengeance vs 聖騎士的 Vengeance），遊戲只有一個 key，變體卡片會顯示成別的技能。
   // 語言模組加一個全域函式，把變體表每個變體的 name 換成 getter：翻譯時先查 modifier:名稱，查不到就照一般譯名，英文時照原文。
   // 變體表（{fireBolt:[{id,name,describe}…]…}）定義時包一層這個函式。跟桌面版「技能變體專用譯名」一樣；兩條都是 optional，
@@ -247,6 +268,18 @@ export const WEB_RULES = [
     label: '中日文斷行', groups: ['cjk'], optional: true,
     find: pattern('for(let <1> of <2>.split(` `)){let <3>=<4>?`${<4>} ${<1>}`:<1>;'),
     replace: `for(let $1 of $2.split(\` \`).flatMap(w=>(w.match(/[${OPENING}]*[${CJK}][${CLOSING}]*|[^${CJK}]+(?:[${OPENING}]*[${CJK}][${CLOSING}]*)?/g)??[w]).map((x,j)=>j?\`\\u0001\${x}\`:x))){let g=$1[0]===\`\\u0001\`;$1=g?$1.slice(1):$1;let $3=$4?g?$4+$1:\`\${$4} \${$1}\`:$1;`,
+  },
+  // 升級卡片的進化條件（最大 1/8, 內在火焰, 等級 12）：程式在英文後面接半形「,」，中日文改成「、」。
+  // 卡片（canvas）是每個條件一塊，先翻好再接「、」（接在英文後面會查不到字典）；網頁的卡片把「、」放在 span 外面，條件之間不加空白
+  {
+    label: '進化條件的頓號（卡片）', groups: ['cjk'], optional: true, file: '^saveTransfer-.*\\.js$',
+    find: pattern('function <1>(<2>){let <3>=<4>(<2>.head).split(` `).map(<5>=>({text:<5>,color:`gold`})),<6>=<2>.needs.map((<7>,<8>)=>({text:<8><<2>.needs.length-1?`${<7>.text},`:<7>.text,'),
+    replace: 'function $1($2){let $3=$4($2.head).split(` `).map($5=>({text:$5,color:`gold`})),$6=$2.needs.map(($7,$8)=>({text:$8<$2.needs.length-1?`${$4($7.text)}、`:$7.text,',
+  },
+  {
+    label: '進化條件的頓號（網頁）', groups: ['cjk'], optional: true, file: '^saveTransfer-.*\\.js$',
+    find: pattern('<1>.needs.forEach((<2>,<3>)=><4>.append(` `,<5>(`span`,<2>.met?`met`:`missing`,<2>.text+(<3><<1>.needs.length-1?`,`:``))))'),
+    replace: '$1.needs.forEach(($2,$3)=>$4.append($3?``:` `,$5(`span`,$2.met?`met`:`missing`,$2.text),$3<$1.needs.length-1?`、`:``))',
   },
   // 外文字的顏色照點陣字型推算：石頭按鈕的黑字會被當成「灰色填色＋黑色描邊」，中日文看起來像空心的灰字。
   // 填色很暗（門檻 75）又比描邊淡時，只用描邊的顏色畫實心字，再往右 1 像素多畫一次當粗體。跟桌面版的同名規則一樣
