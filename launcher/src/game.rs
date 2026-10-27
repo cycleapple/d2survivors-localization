@@ -91,50 +91,36 @@ impl Game {
         v["version"].as_str().map(String::from)
     }
 
-    /// 把選的語言裝進遊戲。回傳遊戲要用的語言槽位（en／ko）
-    pub fn install(&self, language: &str, manifest: Option<&Manifest>, log: &dyn Fn(String)) -> Result<&'static str> {
+    /// 把選的語言裝進遊戲。翻譯語言回傳 Some(遊戲要用的語言槽位 ko)；
+    /// English／한국어原版是 None：換回備份的原版，不套任何規則（app.asar 跟 app.asar.sha256 對得上，排行榜不會標成 patched）
+    pub fn install(&self, language: &str, manifest: Option<&Manifest>, log: &dyn Fn(String)) -> Result<Option<&'static str>> {
+        if game_is_original(language) {
+            self.restore(log)?;
+            return Ok(None);
+        }
         let original = self.original()?;
         log(format!("遊戲版本 {}", original.version));
-        let slot = if language == "en" { "en" } else { "ko" };
-
-        let Some(manifest) = manifest else {
-            if language != "en" && language != "ko" {
-                return Err(no_translation("還沒下載過翻譯，請先連上網路檢查更新".into()));
-            }
-            log("沒有 manifest，直接用原版".into());
-            self.put(&original.bytes, format!("{}:original", original.sha256), log)?;
-            return Ok(slot);
-        };
-
+        let manifest = manifest.ok_or_else(|| no_translation("還沒下載過翻譯，請先連上網路檢查更新".into()))?;
         let spec = manifest.desktop.as_ref().context("更新來源裡沒有桌面版的修改規則")?;
         let rules_sha = sha256_hex(&serde_json::to_vec(spec)?);
-        let (key, dict, lang) = match language {
-            "en" | "ko" => (format!("{}:{language}:{rules_sha}", original.sha256), None, None),
-            id => {
-                let lang = manifest.languages.iter().find(|l| l.id == id)
-                    .ok_or_else(|| no_translation(format!("更新來源裡沒有語言 {id}")))?;
-                let desktop = lang.desktop.as_ref().ok_or_else(|| no_translation(format!("{} 還不能在桌面版使用", lang.name)))?;
-                let dict = manifest::local_dict(lang).ok_or_else(|| no_translation(format!("{} 字典還沒下載，請先檢查更新", lang.name)))?;
-                (format!("{}:{id}:{}:{rules_sha}", original.sha256, lang.dict.sha256), Some(dict), Some(desktop))
-            }
-        };
+        let lang = manifest.languages.iter().find(|l| l.id == language)
+            .ok_or_else(|| no_translation(format!("更新來源裡沒有語言 {language}")))?;
+        let desktop = lang.desktop.as_ref().ok_or_else(|| no_translation(format!("{} 還不能在桌面版使用", lang.name)))?;
+        let dict = manifest::local_dict(lang).ok_or_else(|| no_translation(format!("{} 字典還沒下載，請先檢查更新", lang.name)))?;
+        let key = format!("{}:{language}:{}:{rules_sha}", original.sha256, lang.dict.sha256);
 
         let state = State::load();
         if let Some(inst) = &state.installed {
             if inst.key == key && fs::read(self.asar()).map(|b| sha256_hex(&b) == inst.sha256).unwrap_or(false) {
                 log("遊戲裡已經是這個語言".into());
-                return Ok(slot);
+                return Ok(Some("ko"));
             }
         }
 
-        let target = match (lang, &dict) {
-            (Some(lang), Some(d)) => Target::language(lang, d),
-            _ => Target::base(),
-        };
         log("修改 app.asar…".into());
-        let patched = patcher::build(original.bytes, spec, &target)?;
+        let patched = patcher::build(original.bytes, spec, &Target::language(desktop, &dict))?;
         self.put(&patched, key, log)?;
-        Ok(slot)
+        Ok(Some("ko"))
     }
 
     fn put(&self, bytes: &[u8], key: String, log: &dyn Fn(String)) -> Result<()> {
@@ -155,22 +141,29 @@ impl Game {
         Ok(())
     }
 
-    /// 啟動遊戲。語言用 D2S_QUERY 傳給遊戲（遊戲本身支援這個環境變數，會加在網址後面）
-    pub fn launch(&self, slot: &str) -> Result<()> {
-        let mut query = format!("d2slang={slot}");
-        if let Ok(q) = std::env::var("D2S_QUERY") {
-            let q = q.trim_start_matches('?');
-            if !q.is_empty() {
-                query = format!("{q}&{query}");
+    /// 啟動遊戲。翻譯版的語言用 D2S_QUERY 傳給遊戲（遊戲本身支援這個環境變數，會加在網址後面）；
+    /// 原版沒有「啟動器指定語言」的規則，不傳，照遊戲自己存的語言
+    pub fn launch(&self, slot: Option<&str>) -> Result<()> {
+        let mut cmd = Command::new(self.dir.join(EXE));
+        cmd.current_dir(&self.dir);
+        if let Some(slot) = slot {
+            let mut query = format!("d2slang={slot}");
+            if let Ok(q) = std::env::var("D2S_QUERY") {
+                let q = q.trim_start_matches('?');
+                if !q.is_empty() {
+                    query = format!("{q}&{query}");
+                }
             }
+            cmd.env("D2S_QUERY", query);
         }
-        Command::new(self.dir.join(EXE))
-            .current_dir(&self.dir)
-            .env("D2S_QUERY", query)
-            .spawn()
-            .context("無法啟動遊戲")?;
+        cmd.spawn().context("無法啟動遊戲")?;
         Ok(())
     }
+}
+
+/// English、한국어原版：遊戲本來就有的語言，用真正的原版
+pub fn game_is_original(language: &str) -> bool {
+    BUILTIN.iter().any(|(id, _)| *id == language)
 }
 
 pub fn language_name<'a>(id: &str, manifest: Option<&'a Manifest>) -> String {

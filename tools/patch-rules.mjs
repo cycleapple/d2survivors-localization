@@ -1,7 +1,7 @@
 // app.asar 的修改規則。patch.mjs 直接用，make-manifest.mjs 寫進 manifest.json 給啟動器用。
 // 每條規則：在 assets 裡找到檔案（file 是檔名的 regex；沒有的話就找唯一含有 from 的 .js），
 // from 必須剛好出現一次，換成 to。from／to 裡的 {{menu_name}}、{{html_lang}} 依語言代換。
-// groups：base 每種語言都套用；dict 換掉韓文字典的語言才套用；cjk 中日文才套用；
+// groups：base 每種翻譯語言都套用（English／한국어原版是真正的原版，不套任何規則）；dict 換掉韓文字典的語言才套用；cjk 中日文才套用；
 //   magic-zh／magic-ja 魔法物品名稱的組合順序（照 D2R 各語言的 MagicFormat）；fullwidth 冒號用全形（只有繁中）；
 //   magic-de／magic-fr／magic-ru、unique-de／unique-fr／unique-ru 有詞性的語言組名稱；cyrillic、font-ru 俄文的字。
 
@@ -34,12 +34,19 @@ const UNIQUE_FROM = 'let[r,i,a]=n.map(t=>e(`unique`,t));return`${a} ${r} ${i}`';
 const unique = expr => `let[r,i,a]=n.map(t=>e(\`unique\`,t)),G=e(\`gender\`,n[1]);G=/^(ms|fs|ns|nl|pl|mp|fp)$/.test(G)?G:\`ms\`;let ${pick('G')},${CASE};return${expr}`;
 
 export const RULES = [
-  // 啟動器用 D2S_QUERY=d2slang=<en|ko> 指定語言：每個視窗只在第一次載入時寫進 localStorage，
-  // 之後在遊戲裡切換語言（會重新載入頁面）照樣有效
+  // 啟動器用 D2S_QUERY=d2slang=ko 指定語言（翻譯放在 ko 槽位）：只記在這個視窗的 sessionStorage，
+  // 不寫進 localStorage。否則遊戲存的語言會變成 ko，玩家之後選原版（不套任何規則、不理會 d2slang）時會開成韓文。
+  // 同一個視窗裡重新載入（遊戲更新等）照樣用 sessionStorage 的語言
   {
     label: '啟動器指定語言', groups: ['base'], file: '^lang-.*\\.js$',
     from: 'let e=null;try{e=localStorage.getItem(A)}catch{}',
-    to: 'let e=null;try{let q=new URLSearchParams(location.search).get(`d2slang`);if(q&&!sessionStorage.getItem(`d2slang`)){sessionStorage.setItem(`d2slang`,q);localStorage.setItem(A,q)}e=localStorage.getItem(A)}catch{}',
+    to: 'let e=null;try{let q=new URLSearchParams(location.search).get(`d2slang`);q&&!sessionStorage.getItem(`d2slang`)&&sessionStorage.setItem(`d2slang`,q);e=sessionStorage.getItem(`d2slang`)??localStorage.getItem(A)}catch{}',
+  },
+  // 在遊戲裡切換語言時，sessionStorage 也跟著換（遊戲本身照常存進 localStorage，那是玩家自己選的）
+  {
+    label: '遊戲裡切換語言', groups: ['base'], file: '^lang-.*\\.js$',
+    from: 'j=e;try{localStorage.setItem(A,e)}catch{return}',
+    to: 'j=e;try{sessionStorage.setItem(`d2slang`,e);localStorage.setItem(A,e)}catch{return}',
   },
   { label: '語言選單名稱', groups: ['dict'], file: '^lang-.*\\.js$', from: 'ko:`한국어`', to: 'ko:`{{menu_name}}`' },
   { label: '頁面語言標記', groups: ['dict'], file: '^lang-.*\\.js$', from: 'document.documentElement.lang=`ko`', to: 'document.documentElement.lang=`{{html_lang}}`' },

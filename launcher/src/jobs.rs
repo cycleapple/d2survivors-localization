@@ -65,7 +65,7 @@ pub fn run(job: Job, config: &Config, manifest: Option<Manifest>, log: &dyn Fn(S
             let game = Game::new(config.game_dir())?;
             let slot = match game.install(&config.language, out.manifest.as_ref(), log) {
                 Ok(slot) => slot,
-                // 遊戲改版、規則對不上，或翻譯還沒下載：不要讓玩家開不了遊戲，還原原版、用英文開。
+                // 遊戲改版、規則對不上，或翻譯還沒下載：不要讓玩家開不了遊戲，換回真正的原版開（不套任何規則）。
                 // 選的語言照舊保留，下次開啟時照常檢查更新、重新套用
                 Err(e) => {
                     let why = if e.downcast_ref::<RuleMismatch>().is_some() {
@@ -78,7 +78,9 @@ pub fn run(job: Job, config: &Config, manifest: Option<Manifest>, log: &dyn Fn(S
                     log(format!("（{e:#}）"));
                     log(format!("⚠ {}", crate::i18n::tr("zh-TW", why.key())));
                     out.fallback = Some(why);
-                    english(&game, out.manifest.as_ref(), log)?
+                    game.restore(log)?;
+                    log(format!("⚠ {}", crate::i18n::tr("zh-TW", "original_lang_hint")));
+                    None
                 }
             };
             out.game_version = game.version();
@@ -97,21 +99,6 @@ pub fn run(job: Job, config: &Config, manifest: Option<Manifest>, log: &dyn Fn(S
         }
     }
     Ok(out)
-}
-
-/// 改用英文開遊戲。純原版不會理會啟動器指定的語言，用過翻譯的玩家遊戲裡存的是 ko，會開成韓文，
-/// 所以先只套「啟動器指定語言」那條規則（base）；連它也對不上才換回純原版
-fn english(game: &Game, manifest: Option<&Manifest>, log: &dyn Fn(String)) -> Result<&'static str> {
-    match game.install("en", manifest, log) {
-        Ok(slot) => Ok(slot),
-        Err(e) if e.downcast_ref::<RuleMismatch>().is_some() || manifest.is_some_and(|m| m.desktop.is_none()) => {
-            log(format!("（{e:#}）"));
-            game.restore(log)?;
-            log("⚠ 如果遊戲顯示成韓文，請在遊戲的設定裡把語言切換成 English".into());
-            Ok("en")
-        }
-        Err(e) => Err(e),
-    }
 }
 
 /// 下載 manifest 和字典。可以用的新 manifest 放進 out.manifest（啟動器太舊時不換），也帶回啟動器版本和沒看過的更新紀錄

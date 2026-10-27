@@ -13,10 +13,6 @@ pub struct Target<'a> {
 }
 
 impl<'a> Target<'a> {
-    pub fn base() -> Self {
-        Self { groups: vec!["base".into()], menu_name: "", html_lang: "", dict: None }
-    }
-
     pub fn language(lang: &'a DesktopLanguage, dict: &'a [u8]) -> Self {
         Self { groups: lang.groups.clone(), menu_name: &lang.menu_name, html_lang: &lang.html_lang, dict: Some(dict) }
     }

@@ -14,13 +14,13 @@ cargo test --release                        # 有 backup/2026.1026.4/app.asar �
   2. D2 Survivors：沿用 `game_dir` 的偵測（預設 `%LOCALAPPDATA%\Programs\D2 Survivors`），可以手動選資料夾。沒裝時給官方網站按鈕和「重新偵測」，也可以略過
   3. Diablo II：依序找 D2 Survivors 自己記的 `%APPDATA%\D2 Survivors\desktop.json` 的 `installDir`、D2R 的解除安裝登錄（`InstallLocation`）、經典版的登錄（`InstallPath`）、`Program Files (x86)` 下的預設資料夾；資料夾裡有 `D2R.exe` 算 D2R，有 `d2data.mpq` 和 `Game.exe` 算經典版。找到的存進設定的 `d2_dir`／`d2_kind`（之後從 D2R 取字型、或改走在玩家電腦上配對官方譯名的備案時用）。都沒找到時說明需要購買 Diablo II: Resurrected，按鈕連到 Blizzard 官方頁面（只放官方連結）；偵測不到不擋流程。測試「找不到」的畫面：設環境變數 `D2S_FAKE_NO_D2=1` 再按「重新偵測」
   4. 完成：連結（中文化網站、社群 Discord、「☕ 請我喝杯咖啡」）、「在桌面建立捷徑」、「啟動遊戲」
-- **主畫面**：語言下拉選單（選項文字一樣用各自的語言）、大的「啟動遊戲」按鈕、狀態區（翻譯版本、遊戲版本、啟動器版本和有沒有新版、最新一筆更新紀錄）。上方視需要顯示：找不到遊戲、退回英文的原因、錯誤、需要更新啟動器、還沒看過的更新紀錄
+- **主畫面**：語言下拉選單（選項文字一樣用各自的語言）、大的「啟動遊戲」按鈕、狀態區（翻譯版本、遊戲版本、啟動器版本和有沒有新版、最新一筆更新紀錄）。上方視需要顯示：找不到遊戲、退回原版的原因、錯誤、需要更新啟動器、還沒看過的更新紀錄
 - **設定**：遊戲資料夾、Diablo II 資料夾、更新來源、自動更新、啟動後關閉、還原原版、建立桌面捷徑、重新執行設定精靈、連結（網站、Discord、贊助）、命令列說明、詳細紀錄
 - 背景的檢查更新失敗（離線、網址還沒上線）不跳紅色錯誤，狀態區顯示「無法檢查更新，先用本機的翻譯」；啟動、還原失敗才顯示錯誤
 - 網址集中在 `system.rs`：`SITE_URL`（中文化網站，暫定 GitHub Pages 網址，換網域只改這裡）、`DISCORD_URL`（永久邀請連結）、`DONATE_URL`（贊助，只是一個小連結：不跳出、不提醒、不影響功能）、`GAME_URL`、`D2R_URL`
 - 介面文字在 `launcher/src/i18n.rs` 的 `TABLE`：一行一個 key，依序是繁中、簡中、英文；日、德、法、俄、波蘭、韓文先用英文（要加語言：加一欄，`column()` 對應過去）。`{}` 是代入的值，各語言數量要一樣（`cargo test` 會檢查）。介面語言跟著選的遊戲語言（選英文、韓文原版時用英文）。中日文用系統字型（微軟正黑、雅黑、遊ゴシック、Malgun Gothic），簡中介面把雅黑排前面
 - 畫面上的路徑把使用者資料夾換成 `%LOCALAPPDATA%` 之類（`system::display_path`），截圖不會露出帳號
-- 桌面捷徑用 PowerShell 的 `WScript.Shell` 建立，指到啟動器本身、參數 `--play`（開視窗並直接啟動遊戲；出錯或退回英文時視窗留著）。捷徑指到啟動器現在的位置，所以啟動器要先放在固定的地方再建捷徑
+- 桌面捷徑用 PowerShell 的 `WScript.Shell` 建立，指到啟動器本身、參數 `--play`（開視窗並直接啟動遊戲；出錯或退回原版時視窗留著）。捷徑指到啟動器現在的位置，所以啟動器要先放在固定的地方再建捷徑
 - 圖示：跟網站一樣的「D2」（深色圓角方塊上的金字）。`launcher/assets/make-icon.ps1` 產生 `icon.ico`（`build.rs` 用 winresource 放進 exe）和 `icon-64.rgba`（視窗標題列）
 - 截圖在 `work/launcher/`（`wizard-*.png`、`en-wizard-1-language.png`、`main*.png`、`settings.png`），用的是正式的 `site/data/manifest.json` 和 changelog
 
@@ -40,14 +40,20 @@ cargo test --release                        # 有 backup/2026.1026.4/app.asar �
 - 只下載選的語言的字典，以及本機已經有、但版本舊了的字典
 - manifest 規則和字典都存在本機，離線或更新失敗時用上次的
 
-## 遊戲改版時退回英文
+## 原版（English／한국어）
+
+- 選 English 或 한국어原版時，換回備份的原版 app.asar，**不套任何規則**（連「啟動器指定語言」也不套），跟遊戲附的 `app.asar.sha256` 對得上，排行榜紀錄不會標成 patched。介面上寫明「原版：排行榜紀錄不會被標成 patched」；選翻譯語言時寫「翻譯版的排行榜紀錄會被標成 patched」
+- 原版不理會啟動器指定的語言，照遊戲自己存的語言（localStorage 的 `d2s:lang`）開，所以介面上提示語言不對時到遊戲的 OPTIONS → GAME → LANGUAGE 切換（韓文畫面是 설정 → GAME → 언어）
+- 為了不讓翻譯版改到遊戲存的語言：「啟動器指定語言」規則只把 `d2slang` 記在 sessionStorage，不寫進 localStorage；「遊戲裡切換語言」規則讓遊戲裡的切換同時更新 sessionStorage（遊戲本身照常存進 localStorage，那是玩家自己選的）。所以用翻譯版玩過、再選 English 原版，遊戲會照原本存的語言（通常是英文）開。舊版啟動器（0.2.0 之前）曾把 `ko` 寫進去，那些玩家要照上面的提示切一次
+- 不修改遊戲的 localStorage（leveldb）：格式是 Chromium 內部的，改壞會弄掉存檔設定，不值得冒險
+
+## 遊戲改版時退回原版
 
 遊戲自己更新後，規則可能對不上（`patcher.rs` 的 `RuleMismatch`）。這時不要讓玩家開不了遊戲：
 
-- 改用英文開遊戲，視窗上方和命令列都顯示「遊戲剛更新，翻譯修正中，先用英文原版開啟」。視窗不會自動關掉，讓玩家看到原因
-- 不是直接換回純原版：純原版不理會啟動器指定的語言，用過翻譯的玩家遊戲裡存的是 `ko`，會開成韓文。所以先只套「啟動器指定語言」那條規則（base）、用 `en` 開；連這條也對不上才換回純原版，並提示「如果遊戲顯示成韓文，請在遊戲的設定裡切換成 English」
+- 換回真正的原版開遊戲（跟上面的原版一樣，不套任何規則），視窗上方和命令列都顯示「遊戲剛更新，翻譯修正中，先用原版開啟」和語言的提示。視窗不會自動關掉，讓玩家看到原因
 - 設定裡選的語言不會改。下次開啟照常檢查更新，翻譯修好、規則對得上就自動套回去（安裝紀錄的 key 不一樣就會重做）
-- 第一次開啟又沒有網路、選的翻譯還沒下載時（`game.rs` 的 `NoTranslation`），也一樣用英文開，提示「翻譯還沒下載（請確認網路）」
+- 第一次開啟又沒有網路、選的翻譯還沒下載時（`game.rs` 的 `NoTranslation`），也一樣用原版開，提示「翻譯還沒下載（請確認網路）」
 - 遊戲開著、app.asar 寫不進去時照舊報錯（退回也要寫檔，沒辦法）
 
 ## 更新紀錄
@@ -81,10 +87,10 @@ cargo test --release                        # 有 backup/2026.1026.4/app.asar �
 ## 其他
 
 - 原版 app.asar：用遊戲附的 `resources/app.asar.sha256` 判斷。遊戲裡是原版（剛裝好或遊戲自己更新過）就先備份到 `%LOCALAPPDATA%\D2SurvivorsLauncher\originals\`，每次都從原版重新修改。所以遊戲自己更新後，下次從啟動器開會自動重新套用
-- 指定語言：遊戲本身會把環境變數 `D2S_QUERY` 加在網址後面，啟動器傳 `d2slang=en|ko`（翻譯都放在 ko 槽位）；`patch-rules.mjs` 的「啟動器指定語言」規則讓遊戲在每個視窗第一次載入時採用它。之後在遊戲裡切換語言照樣有效
+- 指定語言：遊戲本身會把環境變數 `D2S_QUERY` 加在網址後面，翻譯版啟動器傳 `d2slang=ko`（翻譯都放在 ko 槽位；原版不傳）；`patch-rules.mjs` 的「啟動器指定語言」規則讓遊戲在每個視窗第一次載入時採用它（只記在 sessionStorage）。之後在遊戲裡切換語言照樣有效
 - 命令列（可以做成捷徑）：`d2s-launcher --launch [--lang zh-TW|zh-CN|ja|de|fr|ru|en|ko] [--no-update]`；`--play` 是開視窗並直接啟動；另外有 `--install`（只裝不開）、`--update`、`--restore`、`--self-update`、`--status`、`--manifest <網址或路徑> --save`
 - 設定、字典、備份都在 `%LOCALAPPDATA%\D2SurvivorsLauncher\`。測試時設 `D2S_LAUNCHER_DIR` 環境變數可以換一個資料夾，不會動到平常用的設定和快取
-- 不會改 `app.asar.sha256`，所以遊戲照樣知道 asar 被改過（排行榜紀錄會標成 patched）
+- 不會改 `app.asar.sha256`，所以遊戲照樣知道 asar 被改過（排行榜紀錄會標成 patched）。也不做任何隱藏修改痕跡的事；不想被標成 patched 就選 English／한국어原版（真正的原版，見上面）
 
 修改了遊戲的哪些地方，見 [desktop-patch.md](desktop-patch.md)。
 

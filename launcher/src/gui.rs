@@ -272,6 +272,16 @@ impl App {
         }
     }
 
+    /// 語言選擇下面的說明：原版不會被標成 patched、語言要在遊戲裡切；翻譯版會被標成 patched
+    fn mode_note(&self, ui: &mut egui::Ui) {
+        if game::game_is_original(&self.config.language) {
+            ui.label(RichText::new(self.t("original_note")).small().color(GREEN));
+            ui.label(RichText::new(self.t("original_lang_hint")).small().weak());
+        } else {
+            ui.label(RichText::new(self.t("patched_note")).small().weak());
+        }
+    }
+
     fn path_row(ui: &mut egui::Ui, ok: bool, title: &str, detail: Option<String>) {
         ui.horizontal(|ui| {
             ui.label(RichText::new(if ok { "✔" } else { "✖" }).size(20.0).color(if ok { GREEN } else { RED }));
@@ -309,6 +319,8 @@ impl App {
                     ui.add_space(6.0);
                 }
                 self.language_picker(ui, false);
+                ui.add_space(6.0);
+                self.mode_note(ui);
             }
             1 => {
                 ui.heading(self.t("game_title"));
@@ -478,7 +490,9 @@ impl App {
 
         ui.label(RichText::new(self.t("game_language")).strong());
         ui.add_enabled_ui(!self.busy, |ui| self.language_picker(ui, true));
-        ui.add_space(14.0);
+        ui.add_space(2.0);
+        self.mode_note(ui);
+        ui.add_space(12.0);
 
         let game_ok = game::exists(&self.config.game_dir());
         if Self::big_button(ui, self.t("play"), !self.busy && game_ok) {
@@ -511,6 +525,7 @@ impl App {
         if let Some(f) = self.fallback {
             Self::banner(ui, Color32::from_rgb(90, 60, 20), Color32::from_rgb(255, 220, 150), |ui| {
                 ui.label(self.t(f.key()));
+                ui.label(RichText::new(self.t("original_lang_hint")).small());
             });
         }
         if let Some(e) = self.error.clone() {
