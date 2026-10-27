@@ -27,6 +27,8 @@ enum Page {
     Wizard(u8),
     Main,
     Settings,
+    /// 關於 D2 Survivors：介紹、官方連結、跟翻譯的關係
+    About,
 }
 
 pub struct App {
@@ -71,6 +73,7 @@ impl App {
             Ok("language") => Page::Language,
             Ok("main") => Page::Main,
             Ok("settings") => Page::Settings,
+            Ok("about") => Page::About,
             _ if config.wizard_done => Page::Main,
             _ => Page::Language,
         };
@@ -100,6 +103,10 @@ impl App {
             rx,
         };
         app.refresh_game();
+        // 精靈裡略過了 Diablo II 那步、或舊版設定沒有記：開啟時偵測一次，主畫面的提醒才不會誤報
+        if app.d2().is_none() {
+            app.detect_d2();
+        }
         cc.egui_ctx.send_viewport_cmd(egui::ViewportCommand::Title(system::APP_NAME.into()));
         if play && app.config.wizard_done {
             // 捷徑的 --play：開啟後直接啟動遊戲（裡面會先檢查更新）
@@ -336,7 +343,8 @@ impl App {
             if link(ui, "🌐", self.t("site_short"), GOLD).clicked() {
                 system::open_url(system::SITE_URL);
             }
-            if !system::DISCORD_URL.is_empty() && link(ui, "💬", "Discord", GOLD).clicked() {
+            // 翻譯社群的 Discord（遊戲官方的 Discord 在「關於」裡，兩個分開）
+            if !system::DISCORD_URL.is_empty() && link(ui, "💬", self.t("link_translation_discord"), GOLD).clicked() {
                 system::open_url(system::DISCORD_URL);
             }
             if !system::DONATE_URL.is_empty() && link(ui, "", self.t("donate"), MUTED).clicked() {
@@ -527,7 +535,10 @@ impl App {
         ui.add_space(16.0);
 
         let game_ok = game::exists(&self.config.game_dir());
-        if theme::gold_button(ui, self.t("play"), 24.0, 58.0, !self.busy && game_ok).clicked() {
+        if !game_ok {
+            // 還沒裝遊戲：「啟動遊戲」的位置換成下載卡片，不讓玩家按了才報錯
+            self.game_missing_card(ui);
+        } else if theme::gold_button(ui, self.t("play"), 24.0, 58.0, !self.busy).clicked() {
             if let Some(c) = &self.changelog {
                 // 更新紀錄顯示著時按了啟動，就當成看過了
                 let _ = jobs::mark_changelog_seen(&c.version);
@@ -548,8 +559,84 @@ impl App {
                 }
             });
         });
+        // 找不到 Diablo II：一行提醒，不擋啟動（玩家可能裝在別的地方，或在遊戲裡設定）
+        if game_ok && self.d2().is_none() {
+            ui.horizontal_wrapped(|ui| {
+                ui.label(RichText::new(format!("⚠ {}", self.t("d2_missing_hint"))).small().color(WARN));
+                if ui.add(egui::Label::new(RichText::new(format!("↗ {}", self.t("d2r_page"))).small().color(GOLD)).sense(egui::Sense::click())).on_hover_cursor(egui::CursorIcon::PointingHand).clicked() {
+                    system::open_url(system::D2R_URL);
+                }
+            });
+        }
         ui.add_space(10.0);
         self.changelog_card(ui);
+    }
+
+    fn game_missing_card(&mut self, ui: &mut egui::Ui) {
+        theme::panel(ui, |ui| {
+            ui.label(RichText::new(self.t("game_not_installed")).font(theme::display_font(17.0)).color(GOLD));
+            ui.add_space(2.0);
+            ui.label(RichText::new(self.t("game_not_installed_desc")).color(MUTED));
+            ui.add_space(8.0);
+            if theme::gold_button(ui, &format!("↗  {}", self.t("download_game")), 18.0, 40.0, true).clicked() {
+                system::open_url(system::GAME_URL);
+            }
+            ui.add_space(6.0);
+            ui.horizontal(|ui| {
+                if ui.button(format!("↻  {}", self.t("redetect"))).clicked() {
+                    self.config.game_dir.clear();
+                    self.refresh_game();
+                    let _ = self.config.save();
+                }
+                if ui.button(self.t("choose_folder")).clicked() {
+                    if let Some(d) = system::pick_folder(&self.config.game_dir()) {
+                        self.config.game_dir = d.display().to_string();
+                        self.refresh_game();
+                        let _ = self.config.save();
+                    }
+                }
+            });
+        });
+    }
+
+    // ── 關於 D2 Survivors ──
+
+    fn about_page(&mut self, ui: &mut egui::Ui) {
+        let link = |ui: &mut egui::Ui, text: &str, url: &str| {
+            if ui.add(egui::Label::new(RichText::new(format!("↗  {text}")).color(GOLD)).sense(egui::Sense::click())).on_hover_cursor(egui::CursorIcon::PointingHand).on_hover_text(url).clicked() {
+                system::open_url(url);
+            }
+        };
+        ui.label(RichText::new(self.t("about_title")).font(theme::display_font(19.0)).color(GOLD));
+        ui.add_space(4.0);
+        ui.label(RichText::new(self.t("about_desc")).color(TEXT));
+        ui.add_space(4.0);
+        ui.label(RichText::new(self.t("about_needs")).color(MUTED));
+        ui.add_space(4.0);
+        let installed = self.game_version.clone().unwrap_or_else(|| self.t("game_not_installed").to_string());
+        ui.label(RichText::new(self.tf("about_installed", &[&installed])).small().color(MUTED));
+        ui.add_space(10.0);
+        theme::panel(ui, |ui| {
+            Self::section_label(ui, self.t("about_game_links"));
+            link(ui, self.t("link_game_site"), system::GAME_URL);
+            link(ui, self.t("link_game_play"), system::GAME_PLAY_URL);
+            link(ui, self.t("link_game_discord"), system::GAME_DISCORD_URL);
+            link(ui, self.t("d2r_page"), system::D2R_URL);
+        });
+        ui.add_space(8.0);
+        theme::panel(ui, |ui| {
+            Self::section_label(ui, self.t("about_launcher_links"));
+            ui.label(RichText::new(self.t("about_unofficial")).small().color(MUTED));
+            ui.add_space(4.0);
+            link(ui, self.t("link_translation_site"), system::SITE_URL);
+            if !system::DISCORD_URL.is_empty() {
+                link(ui, self.t("link_translation_discord"), system::DISCORD_URL);
+            }
+            if !system::DONATE_URL.is_empty() {
+                link(ui, self.t("donate"), system::DONATE_URL);
+            }
+            ui.label(RichText::new(format!("{} v{}", system::APP_NAME, selfupdate::VERSION)).small().color(IDLE));
+        });
     }
 
     fn changelog_card(&mut self, ui: &mut egui::Ui) {
@@ -579,11 +666,6 @@ impl App {
     }
 
     fn banners(&mut self, ui: &mut egui::Ui, ctx: &egui::Context) {
-        if !game::exists(&self.config.game_dir()) {
-            theme::banner(ui, Tone::Err, |ui| {
-                ui.label(RichText::new(self.t("game_missing_banner")).color(TEXT));
-            });
-        }
         if let Some(f) = self.fallback {
             theme::banner(ui, Tone::Warn, |ui| {
                 ui.label(RichText::new(self.t(f.key())).color(TEXT));
@@ -755,8 +837,11 @@ impl App {
                     if ui.button(format!("⚙  {}", self.t("settings"))).clicked() {
                         self.page = Page::Settings;
                     }
+                    if ui.button(format!("ⓘ  {}", self.t("about"))).clicked() {
+                        self.page = Page::About;
+                    }
                 }
-                Page::Settings => {
+                Page::Settings | Page::About => {
                     if ui.button(format!("‹  {}", self.t("return"))).clicked() {
                         let _ = self.config.save();
                         self.page = Page::Main;
@@ -803,7 +888,7 @@ impl eframe::App for App {
             Page::Language => {
                 egui::TopBottomPanel::bottom("nav").frame(bar_frame()).show_separator_line(false).show(ctx, |ui| self.language_nav(ui));
             }
-            Page::Settings => {}
+            Page::Settings | Page::About => {}
         }
 
         egui::CentralPanel::default().frame(egui::Frame::new().inner_margin(egui::Margin::symmetric(20, 14))).show(ctx, |ui| {
@@ -812,6 +897,7 @@ impl eframe::App for App {
                 Page::Wizard(step) => self.wizard(ui, ctx, step),
                 Page::Main => self.main_page(ui, ctx),
                 Page::Settings => self.settings_page(ui, ctx),
+                Page::About => self.about_page(ui),
             });
         });
     }

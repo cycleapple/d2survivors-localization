@@ -9,8 +9,12 @@ pub const SITE_URL: &str = "https://cycleapple.github.io/d2survivors-localizatio
 pub const DISCORD_URL: &str = "https://discord.gg/QMBbTHSsaK";
 /// 贊助連結（只放在完成頁和設定的連結區，不跳出、不提醒；贊助與否不影響任何功能）
 pub const DONATE_URL: &str = "https://paypal.me/DonateCYtw";
-/// D2 Survivors 官方網站（下載遊戲）
+/// D2 Survivors 官方網站（下載遊戲）。跟網站 site/src/config.mjs 的 LINKS 一樣
 pub const GAME_URL: &str = "https://d2survivors.lol/";
+/// D2 Survivors 的瀏覽器版
+pub const GAME_PLAY_URL: &str = "https://d2survivors.lol/play/";
+/// D2 Survivors 遊戲官方的 Discord（英文；跟翻譯社群的 DISCORD_URL 是不同的伺服器）
+pub const GAME_DISCORD_URL: &str = "https://discord.gg/mYMGgZPuQb";
 /// Blizzard 官方的 Diablo II: Resurrected 頁面（只放官方連結，不放推廣碼）
 pub const D2R_URL: &str = "https://diablo2.blizzard.com/";
 
