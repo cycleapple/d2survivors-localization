@@ -30,7 +30,7 @@ node tools/serve.mjs site 8766     # 本機預覽（或 python -m http.server 87
 | `tools/build-site.mjs` | 頁面樣板，產生靜態頁 |
 | `site/app.js` | 語言頁的互動：版本切換、書籤按鈕、讀較新的 manifest 重畫 |
 | `site/root.js` | 首頁：標出建議語言 |
-| `site/style.css`、`site/assets/` | 樣式、截圖、`og.jpg`（1200×630 分享圖） |
+| `site/style.css`、`site/assets/` | 樣式、截圖、分享圖（`og.jpg`、`og-<語言>.jpg`，1200×630） |
 
 產生的檔案（commit 進 repo，部署時也會重新產生）：`site/index.html`、`site/<語言>/index.html`、`site/sitemap.xml`、`site/robots.txt`。**不要手動改**，改 `site/src/` 再重跑。
 
@@ -45,6 +45,32 @@ node tools/serve.mjs site 8766     # 本機預覽（或 python -m http.server 87
 - 首段要寫清楚是**把遊戲本身翻成該語言**，不是攻略（搜尋結果前面多半是攻略站的語言版）
 - 長度：title 約 60 字元（中日文約 30 字），description 約 160 字元（中日文約 100 字）；重要的詞放前面。不要堆關鍵字，也不要提其他翻譯作者
 - `sitemap.xml` 每個網址都附 hreflang 對照
+- 結構化資料（JSON-LD，在 <head>）：語言頁是 SoftwareApplication（桌面版啟動器，operatingSystem Windows）、WebApplication（瀏覽器版書籤）、FAQPage（只放兩個版本都看得到的題目，文字跟頁面一樣）；首頁是 WebSite。alternateName 用 i18n 的 。不寫 author／publisher。部署後用 Google 的「複合式搜尋結果測試」檢查
+- 站長平台驗證： 的 google、bing、baidu 有值才輸出 google-site-verification、msvalidate.01、baidu-site-verification
+- favicon：、（16／32／48）、（180），每頁都有 link（Google 搜尋結果的小圖示要真的網址）
+- 分享圖：，標題用該語言（i18n 的 、），og:image:alt 用 ；首頁用 。改了文字要在本機跑 沒變 sitezh-twindex.html
+沒變 sitezh-cnindex.html
+沒變 siteenindex.html
+沒變 sitejaindex.html
+沒變 sitedeindex.html
+沒變 siterindex.html
+沒變 siteuindex.html
+沒變 siteindex.html
+沒變 sitesitemap.xml
+沒變 siteobots.txt
+manifest：20261027-1324（需要 ImageMagick 和 Windows 字型），產生的圖 commit 進 repo
+- sitemap 的 lastmod：頁面內容跟上次產生的一樣就沿用舊日期，有變才寫當天
+- 檢查：沒變 sitezh-twindex.html
+沒變 sitezh-cnindex.html
+沒變 siteenindex.html
+沒變 sitejaindex.html
+沒變 sitedeindex.html
+沒變 siterindex.html
+沒變 siteuindex.html
+沒變 siteindex.html
+沒變 sitesitemap.xml
+沒變 siteobots.txt
+manifest：20261027-1324 把每頁的 title、description、canonical、hreflang、分享圖、JSON-LD 摘要寫到 ，也檢查重複、缺漏、FAQPage 題目是否在頁面上
 - `robots.txt` 只有放在網域根目錄才有效。現在在 `github.io/<repo>/` 底下，搜尋引擎不會讀；換成自己的網域之後才生效。在那之前，sitemap 請到 Google Search Console、Bing、百度站長平台手動提交
 - Google Fonts 只載入該語言需要的字型（繁中 Noto Serif TC、簡中 Noto Serif SC、英文只有 Cinzel）
 
@@ -117,3 +143,11 @@ node tools/serve.mjs site 8766     # 本機預覽（或 python -m http.server 87
 ## 部署
 
 `.github/workflows/pages.yml`：push 到 `main` 時跑 `node tools/build-site.mjs`，把 `site/` 整個上傳到 GitHub Pages（含 `site/data/`、`site/web/`）。repo 的 Settings → Pages → Source 要選「GitHub Actions」。流程見 [release.md](release.md)。
+
+## 部署後要使用者自己做的
+
+1. GitHub repo 公開、Settings → Pages → Source 選 GitHub Actions，push 一次讓網站上線
+2. 建立站長平台帳號、加入網站：Google Search Console、Bing Webmaster Tools、百度搜索资源平台（百度需要中國手機號碼）。選「HTML 標記」驗證，把 content 的值填進 ，重新產生、push，再回平台按驗證
+3. 在三個平台提交 sitemap：（Bing 也可以從 Google Search Console 匯入）
+4. 用 Google 的「複合式搜尋結果測試」貼各語言頁的網址，確認結構化資料沒有錯誤
+5. 換成自己的網域之後：改 、重新產生，robots.txt 才會生效；站長平台要重新加網站
