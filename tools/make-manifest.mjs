@@ -4,7 +4,7 @@
 //   共用欄位（最上層、languages[] 的 id／name／status／entries／dict、game）：這裡產生，語言清單和狀態來自 tools/langs.mjs（draft 的不放）
 //   桌面版（languages[].desktop、desktop）：tools/patch-rules.mjs 的 LANGUAGES／RULES／ASSETS_DIR／DICT_TARGET
 //   網頁版（languages[].web、web）：tools/web-rules.mjs 的 WEB_LANGUAGES／WEB_RULES（還沒匯出 WEB_LANGUAGES 時不輸出）
-//   launcher：還沒有 GitHub Release，先不輸出
+//   launcher：tools/launcher-release.json（發 Release 時改 latest；規則格式改了、舊版不能用時才調高 minimum）
 // 字典和規則都沒變時不改寫 manifest.json（updated／version 才不會每次都變）
 import fs from 'node:fs';
 import path from 'node:path';
@@ -60,6 +60,13 @@ const manifest = {
   desktop: { assets_dir: ASSETS_DIR, dict_target: DICT_TARGET, rules: RULES },
   ...(webLangs && { web: { play_url: web.WEB_PLAY_URL ?? 'https://d2survivors.lol/play/', rules: web.WEB_RULES } }),
 };
+
+// 啟動器的最新版本：下載網址固定指到 GitHub 最新的 Release（網站的下載按鈕也用同一個）
+if (fs.existsSync('tools/launcher-release.json')) {
+  const { latest, minimum } = JSON.parse(fs.readFileSync('tools/launcher-release.json', 'utf8'));
+  const base = 'https://github.com/cycleapple/d2survivors-localization/releases/latest/download/d2s-launcher.exe';
+  manifest.launcher = { latest, minimum: minimum ?? latest, download: base, sha256_url: `${base}.sha256` };
+}
 
 const file = path.join(outDir, 'manifest.json');
 // changelog 欄位是 publish.mjs 寫進去的（更新紀錄的網址和最新一筆），這裡照舊保留、比較時不算
