@@ -2,6 +2,83 @@
   "schema": 1,
   "entries": [
     {
+      "version": "20261027-1658",
+      "date": "2026-10-27",
+      "kind": "translation",
+      "announce": false,
+      "summary": {
+        "zh-TW": "繁中新增 122 條；簡中修正 1 條、新增 122 條；日文修正 639 條、新增 131 條；德文修正 1735 條、新增 218 條；法文修正 423 條、新增 226 條；俄文修正 581 條、新增 248 條；波蘭文修正 458 條、新增 199 條；更新修改規則",
+        "zh-CN": "繁中新增 122 条；简中修正 1 条、新增 122 条；日文修正 639 条、新增 131 条；德文修正 1735 条、新增 218 条；法文修正 423 条、新增 226 条；俄文修正 581 条、新增 248 条；波兰文修正 458 条、新增 199 条；更新修改规则",
+        "en": "Traditional Chinese: 122 added; Simplified Chinese: 1 fixed, 122 added; Japanese: 639 fixed, 131 added; German: 1735 fixed, 218 added; French: 423 fixed, 226 added; Russian: 581 fixed, 248 added; Polish: 458 fixed, 199 added; Updated patch rules",
+        "ja": "繁体字中国語：122 件を追加／簡体字中国語：1 件を修正、122 件を追加／日本語：639 件を修正、131 件を追加／ドイツ語：1735 件を修正、218 件を追加／フランス語：423 件を修正、226 件を追加／ロシア語：581 件を修正、248 件を追加／ポーランド語：458 件を修正、199 件を追加／パッチルールを更新",
+        "de": "Traditionelles Chinesisch: 122 hinzugefügt; Vereinfachtes Chinesisch: 1 korrigiert, 122 hinzugefügt; Japanisch: 639 korrigiert, 131 hinzugefügt; Deutsch: 1735 korrigiert, 218 hinzugefügt; Französisch: 423 korrigiert, 226 hinzugefügt; Russisch: 581 korrigiert, 248 hinzugefügt; Polnisch: 458 korrigiert, 199 hinzugefügt; Patch-Regeln aktualisiert",
+        "fr": "Chinois traditionnel : 122 ajouts ; Chinois simplifié : 1 corrections, 122 ajouts ; Japonais : 639 corrections, 131 ajouts ; Allemand : 1735 corrections, 218 ajouts ; Français : 423 corrections, 226 ajouts ; Russe : 581 corrections, 248 ajouts ; Polonais : 458 corrections, 199 ajouts ; Règles de patch mises à jour",
+        "ru": "Традиционный китайский: добавлено 122; Упрощенный китайский: исправлено 1, добавлено 122; Японский: исправлено 639, добавлено 131; Немецкий: исправлено 1735, добавлено 218; Французский: исправлено 423, добавлено 226; Русский: исправлено 581, добавлено 248; Польский: исправлено 458, добавлено 199; Обновлены правила патча",
+        "pl": "Chiński tradycyjny: dodano 122; Chiński uproszczony: poprawiono 1, dodano 122; Japoński: poprawiono 639, dodano 131; Niemiecki: poprawiono 1735, dodano 218; Francuski: poprawiono 423, dodano 226; Rosyjski: poprawiono 581, dodano 248; Polski: poprawiono 458, dodano 199; Zaktualizowano reguły łatki"
+      },
+      "game": {
+        "desktop": "2026.1027.2"
+      },
+      "languages": [
+        {
+          "id": "zh-TW",
+          "status": "available",
+          "entries": 12975,
+          "added": 122,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "zh-CN",
+          "status": "beta",
+          "entries": 12974,
+          "added": 122,
+          "changed": 1,
+          "removed": 0
+        },
+        {
+          "id": "ja",
+          "status": "beta",
+          "entries": 12985,
+          "added": 131,
+          "changed": 639,
+          "removed": 0
+        },
+        {
+          "id": "de",
+          "status": "beta",
+          "entries": 13021,
+          "added": 218,
+          "changed": 1735,
+          "removed": 0
+        },
+        {
+          "id": "fr",
+          "status": "beta",
+          "entries": 13029,
+          "added": 226,
+          "changed": 423,
+          "removed": 0
+        },
+        {
+          "id": "ru",
+          "status": "beta",
+          "entries": 13051,
+          "added": 248,
+          "changed": 581,
+          "removed": 0
+        },
+        {
+          "id": "pl",
+          "status": "beta",
+          "entries": 13002,
+          "added": 199,
+          "changed": 458,
+          "removed": 0
+        }
+      ]
+    },
+    {
       "version": "20261027-1539",
       "date": "2026-10-27",
       "kind": "translation",

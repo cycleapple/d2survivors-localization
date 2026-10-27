@@ -1,21 +1,21 @@
 {
   "schema": 2,
-  "updated": "2026-10-27T15:39:58.944Z",
-  "version": "20261027-1539",
+  "updated": "2026-10-27T16:58:27.251Z",
+  "version": "20261027-1658",
   "game": {
     "desktop": "2026.1027.2",
-    "web_checked": "2026-10-27T15:20:04.655Z"
+    "web_checked": "2026-10-27T15:51:01.406Z"
   },
   "languages": [
     {
       "id": "zh-TW",
       "name": "繁體中文",
       "status": "available",
-      "entries": 12853,
+      "entries": 12975,
       "dict": {
-        "url": "dict/zh-TW.json?v=95515ba253a0",
-        "sha256": "95515ba253a0413e9b2b76acfcab9dcbab7111eac3304f538a0f2ce7121399ca",
-        "size": 803514
+        "url": "dict/zh-TW.json?v=f5cd811b388f",
+        "sha256": "f5cd811b388fff45e610153f065de18467c0a8c747a66a8b98d52f64e71596d6",
+        "size": 815226
       },
       "desktop": {
         "menu_name": "繁體中文",
@@ -55,11 +55,11 @@
       "id": "zh-CN",
       "name": "简体中文",
       "status": "beta",
-      "entries": 12852,
+      "entries": 12974,
       "dict": {
-        "url": "dict/zh-CN.json?v=9c24dad852b9",
-        "sha256": "9c24dad852b9eb1c9bf7ff5c2f2b00ff232ef7f9f391be1d90d8997326b94662",
-        "size": 803428
+        "url": "dict/zh-CN.json?v=de3293e1828f",
+        "sha256": "de3293e1828f54199ee408a1fe78596b2ec5dd804c21fec7d62f6a70695cd029",
+        "size": 815071
       },
       "desktop": {
         "menu_name": "简体中文",
@@ -97,11 +97,11 @@
       "id": "ja",
       "name": "日本語",
       "status": "beta",
-      "entries": 12854,
+      "entries": 12985,
       "dict": {
-        "url": "dict/ja.json?v=236fe4322143",
-        "sha256": "236fe4322143bc1a23e2c4a0684bcac4d69e74134482541b43b736a29e780a61",
-        "size": 964089
+        "url": "dict/ja.json?v=2958a456ce50",
+        "sha256": "2958a456ce50447b5255a1fbd5826cc3c5759d036f627e40a33636a38dd050e4",
+        "size": 980873
       },
       "desktop": {
         "menu_name": "日本語",
@@ -140,11 +140,11 @@
       "id": "de",
       "name": "Deutsch",
       "status": "beta",
-      "entries": 12803,
+      "entries": 13021,
       "dict": {
-        "url": "dict/de.json?v=086f4308afc0",
-        "sha256": "086f4308afc053b089dc247cbeff1c3f19092e8e07fb544f865e9e10ec3a1f80",
-        "size": 882996
+        "url": "dict/de.json?v=36dcc652e163",
+        "sha256": "36dcc652e16344cf61dcb5b9e1c7dbffdfabf1b7c59cf935ef344ca38581914f",
+        "size": 904758
       },
       "desktop": {
         "menu_name": "Deutsch",
@@ -172,11 +172,11 @@
       "id": "fr",
       "name": "Français",
       "status": "beta",
-      "entries": 12803,
+      "entries": 13029,
       "dict": {
-        "url": "dict/fr.json?v=e45ba3288417",
-        "sha256": "e45ba3288417fd7b576c7b372fb6ce7bdfb90e36e8302b6c8dfb44aa23311a85",
-        "size": 924632
+        "url": "dict/fr.json?v=e3d795417596",
+        "sha256": "e3d79541759656b78a053cc8b2eb768cc7617406e2c736db6f8439a2232fef71",
+        "size": 948917
       },
       "desktop": {
         "menu_name": "Français",
@@ -204,11 +204,11 @@
       "id": "ru",
       "name": "Русский",
       "status": "beta",
-      "entries": 12803,
+      "entries": 13051,
       "dict": {
-        "url": "dict/ru.json?v=e4feba9d40a9",
-        "sha256": "e4feba9d40a95d53d0dbabb73c7fa1d051e72122143301fb620eebf3ff53a655",
-        "size": 1203393
+        "url": "dict/ru.json?v=374101f20c4e",
+        "sha256": "374101f20c4e8643ff90556e9e58eb80fdb5cb3422df2a67fa8f46dea83ffcdf",
+        "size": 1236253
       },
       "desktop": {
         "menu_name": "Русский",
@@ -249,11 +249,11 @@
       "id": "pl",
       "name": "Polski",
       "status": "beta",
-      "entries": 12803,
+      "entries": 13002,
       "dict": {
-        "url": "dict/pl.json?v=95c9d328f69d",
-        "sha256": "95c9d328f69de2504f3c0e86d3ce3b38af3db50f0acf7d7f32c9596730945f87",
-        "size": 890990
+        "url": "dict/pl.json?v=b21f2f7390d8",
+        "sha256": "b21f2f7390d8af8efe1f13ed76d5b8509ac85d92794e9ac5cde32fa43ff066c8",
+        "size": 911685
       },
       "desktop": {
         "menu_name": "Polski",
@@ -361,7 +361,7 @@
         ],
         "file": "^lang-.*\\.js$",
         "from": "return[a(i),a(r),this.translateAs(`item`,t)].filter(Boolean).join(` `)",
-        "to": "let g=this.exact.get(s(`gender:${t.trim()}`))??`ms`,k=v=>{if(!v.startsWith(`[`))return v;let o=v.split(`[`).slice(1),w=o.find(x=>x.startsWith(g+`]`))??o[0];return w.slice(w.indexOf(`]`)+1).trim()},U=v=>v?v[0].toUpperCase()+v.slice(1):v,W=v=>v?v[0].toLowerCase()+v.slice(1):v,b=this.translateAs(`item`,t),p=k(a(r)),q=k(a(i));return U([p&&(p.endsWith(` -`)?`${p.slice(0,-2)}-${b}`:`${p} ${b}`),!p&&b,q].filter(Boolean).join(` `))"
+        "to": "let g=this.exact.get(s(`gender:${t.trim()}`))??`ms`,k=v=>{if(!v.startsWith(`[`))return v;let o=v.split(`[`).slice(1),w=o.find(x=>x.startsWith(g+`]`))??o[0];return w.slice(w.indexOf(`]`)+1).trim()},U=v=>v?v[0].toUpperCase()+v.slice(1):v,W=v=>v?v[0].toLowerCase()+v.slice(1):v,b=this.translateAs(`item`,t),p=k(a(r)),q=k(a(i));return U([p&&(p.endsWith(` -`)?`${p.slice(0,-2)}-${b}`:`${p} ${b.includes(` `)?W(b):b}`),!p&&b,q].filter(Boolean).join(` `))"
       },
       {
         "label": "魔法物品名稱組合（法文）",
@@ -421,6 +421,33 @@
         ],
         "from": "let[r,i,a]=n.map(t=>e(`unique`,t));return`${a} ${r} ${i}`",
         "to": "let[r,i,a]=n.map(t=>e(`unique`,t)),G=e(`gender`,n[1]);G=/^(ms|fs|ns|nl|pl|mp|fp)$/.test(G)?G:`ms`;let k=v=>{if(!v.startsWith(`[`))return v;let o=v.split(`[`).slice(1),w=o.find(x=>x.startsWith(G+`]`))??o[0];return w.slice(w.indexOf(`]`)+1).trim()},U=v=>v?v[0].toUpperCase()+v.slice(1):v,W=v=>v?v[0].toLowerCase()+v.slice(1):v;return`${a}, ${k(r)} ${i}`"
+      },
+      {
+        "label": "女性職業的稱號",
+        "groups": [
+          "dict"
+        ],
+        "file": "^Game-.*\\.js$",
+        "from": "function rO(e,t){let n=Ug(e,t);if(!n)return null;let r=st(e,t);return r>0&&!R(e,t)?`${u(n)} · ${qe(r)}`:u(n)}",
+        "to": "function rO(e,t){let n=Ug(e,t);if(!n)return null;let F=Bg.includes(t)?u(`${n}:f`):null,T=F&&F!==`${n}:f`?F:u(n),r=st(e,t);return r>0&&!R(e,t)?`${T} · ${qe(r)}`:T}"
+      },
+      {
+        "label": "日期格式（排行榜）",
+        "groups": [
+          "dict"
+        ],
+        "file": "^Game-.*\\.js$",
+        "from": "t===`ko`?`${n.getMonth()+1}월 ${n.getDate()}일`:",
+        "to": "t===`ko`?n.toLocaleDateString(document.documentElement.lang,{month:`short`,day:`numeric`}):"
+      },
+      {
+        "label": "日期格式（完整）",
+        "groups": [
+          "dict"
+        ],
+        "file": "^Game-.*\\.js$",
+        "from": "return t===`ko`?`${n.getFullYear()}년 ${n.getMonth()+1}월 ${n.getDate()}일`:",
+        "to": "return t===`ko`?n.toLocaleDateString(document.documentElement.lang,{year:`numeric`,month:`long`,day:`numeric`}):"
       },
       {
         "label": "標籤與值的冒號",
@@ -574,6 +601,51 @@
         "file": "^lang-.*\\.js$",
         "find": "function ([\\w$]+)\\(([\\w$]+)\\)\\{if\\(\\2!==([\\w$]+)\\(\\)\\)\\{",
         "replace": "window.__d2zhLang={get:()=>$3(),set:e=>$1(e)};function $1($2){if($2!==$3()){"
+      },
+      {
+        "label": "排行榜：不送出成績",
+        "groups": [
+          "base"
+        ],
+        "file": "^saveTransfer-.*\\.js$",
+        "find": "async function ([\\w$]+)\\(([\\w$]+),([\\w$]+),([\\w$]+),([\\w$]+)=!1\\)\\{let ([\\w$]+)=([\\w$]+)\\(\\);try\\{",
+        "replace": "async function $1($2,$3,$4,$5=!1){if($2!==`GET`)return{status:null,body:null};let $6=$7();try{"
+      },
+      {
+        "label": "排行榜：不排進佇列",
+        "groups": [
+          "base"
+        ],
+        "file": "^saveTransfer-.*\\.js$",
+        "find": "function ([\\w$]+)\\(([\\w$]+),([\\w$]+)=Date\\.now\\(\\)\\)\\{return ([\\w$]+)\\(\\[\\.\\.\\.([\\w$]+)\\(\\)\\.filter\\(\\3=>\\3\\.id!==\\2\\.runId\\)",
+        "replace": "function $1($2,$3=Date.now()){return!1;return $4([...$5().filter($3=>$3.id!==$2.runId)"
+      },
+      {
+        "label": "排行榜：不送出佇列",
+        "groups": [
+          "base"
+        ],
+        "file": "^saveTransfer-.*\\.js$",
+        "find": "function ([\\w$]+)\\(([\\w$]+)=Date\\.now\\(\\)\\)\\{return ([\\w$]+)\\|\\|\\(\\3=\\(async\\(\\)=>\\{",
+        "replace": "function $1($2=Date.now()){return Promise.resolve();return $3||($3=(async()=>{"
+      },
+      {
+        "label": "回報：不送出",
+        "groups": [
+          "base"
+        ],
+        "file": "^saveTransfer-.*\\.js$",
+        "find": "async function ([\\w$]+)\\(([\\w$]+)\\)\\{let ([\\w$]+)=await ([\\w$]+)\\(JSON\\.stringify\\(\\2\\)\\);return \\3!==null&&\\3>=200&&\\3<300\\?`sent`:",
+        "replace": "async function $1($2){return`refused`;let $3=await $4(JSON.stringify($2));return $3!==null&&$3>=200&&$3<300?`sent`:"
+      },
+      {
+        "label": "回報：不送出佇列",
+        "groups": [
+          "base"
+        ],
+        "file": "^saveTransfer-.*\\.js$",
+        "find": "async function ([\\w$]+)\\(([\\w$]+)=Date\\.now\\(\\)\\)\\{if\\(!([\\w$]+)\\)\\{\\3=!0;try\\{let ([\\w$]+)=([\\w$]+)\\(\\)\\.filter\\(",
+        "replace": "async function $1($2=Date.now()){return;if(!$3){$3=!0;try{let $4=$5().filter("
       },
       {
         "label": "載入字典",
@@ -787,7 +859,7 @@
     ]
   },
   "changelog": {
-    "url": "changelog.json?v=e43bf0131cf5",
-    "latest": "20261027-1539"
+    "url": "changelog.json?v=c4fca4988390",
+    "latest": "20261027-1658"
   }
 }
