@@ -137,7 +137,7 @@ node tools/serve.mjs site 8766     # 本機預覽（或 python -m http.server 87
 
 ### 語言清單
 
-- `LANGUAGES` 的順序就是網站上的順序；還在做的語言先放進去，manifest 沒有的顯示「計畫中」
+- `LANGUAGES` 的順序就是網站上的順序；還在做的語言先放進去，manifest 沒有的顯示「計畫中」。目前沒有計畫中的語言（使用者 2026-10-28 拿掉了西、義、葡），這時語言區塊不加 `languages.planned` 那句，首頁也不列計畫中的語言
 - 文字裡要列出「有哪些語言」的地方用 `{langs}`（A、B 或 C）或 `{langsAnd}`（A、B 和 C），建置時用 manifest 裡可用和測試中的語言、以那一頁的語言產生（`Intl.ListFormat`）。新語言發布後重新產生就好，不用改文字
 - Discord 置頂文字裡的語言列表歸 Discord 聊天室，語言有變動時傳訊息給它
 

@@ -223,6 +223,12 @@ function fillLangs(texts, lang) {
   return fill(texts);
 }
 
+// 語言區塊的說明：有「計畫中」的語言才加 languages.planned（全形句號結尾的不加空格）
+const withPlanned = t => {
+  if (!state.languages.some(l => l.status === 'planned')) return t['languages.lead'];
+  return t['languages.lead'] + (/[。！？]$/.test(t['languages.lead']) ? '' : ' ') + t['languages.planned'];
+};
+
 const langLink = (o, sl, prefix = '../') => `<a href="${prefix}${o.path}/" hreflang="${o.hreflang}" lang="${o.html}" data-lang="${o.id}"${o === sl ? ' aria-current="page"' : ''}>${esc(o.label)}</a>`;
 
 // 窄螢幕放不下語言分頁時，在頁面最上面把所有語言一次列出（各用自己的語言寫，可以折行）。寬螢幕藏起來
@@ -373,7 +379,7 @@ function langPage(sl) {
     <section class="section" id="languages">
       <div class="wrap">
         <h2>${esc(t['languages.title'])}</h2>
-        <p class="section-lead">${esc(t['languages.lead'])}</p>
+        <p class="section-lead">${esc(withPlanned(t))}</p>
         <ul class="lang-grid" id="lang-grid">
           ${langGridHtml(state, t, sl.id)}
         </ul>
@@ -533,7 +539,7 @@ function rootPage() {
           </li>`;
           }).join('\n          ')}
         </ul>
-        <p class="root-planned">${esc(en['languages.title'])}: ${planned.map(l => `<span lang="${esc(l.id)}">${esc(l.native)}</span>`).join(' · ')}</p>
+        ${planned.length ? `<p class="root-planned">${esc(en['languages.title'])}: ${planned.map(l => `<span lang="${esc(l.id)}">${esc(l.native)}</span>`).join(' · ')}</p>` : ''}
       </div>
     </section>
   </main>
