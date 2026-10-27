@@ -43,7 +43,7 @@ site/data/dict/ja.json
     {
       "id": "zh-TW",                       // 語言代碼，三邊通用
       "name": "繁體中文",                   // 顯示名稱（用該語言自己寫）
-      "status": "available",               // available | beta（beta：可以選，但標示測試中）
+      "status": "available",               // available | beta（可以選，標示測試中）| draft（見下面）
       "entries": 12616,                    // 字典條數
       "dict": {
         "url": "dict/zh-TW.json?v=1a2b3c4d5e6f",   // 相對於 manifest.json
@@ -76,6 +76,13 @@ site/data/dict/ja.json
   }
 }
 ```
+
+`status` 的三種值：
+
+- `available`：正式版
+- `beta`：可以選，標示「測試中」
+- `draft`：翻譯還在做（`tools/langs.mjs` 標的）。`publish` 不會把 draft 的語言寫進 manifest，所以正常發布的 manifest 裡不會出現。萬一出現（例如手動產生的測試用 manifest），啟動器和書籤標成「草稿」，網站顯示成「計畫中」
+- 讀到不認得的值：當成 `draft` 處理，不要當成正式版
 
 ## 各欄位歸誰
 
