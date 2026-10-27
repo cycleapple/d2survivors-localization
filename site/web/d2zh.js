@@ -51,6 +51,17 @@ const MESSAGES = {
   },
 };
 
+// manifest 的 status：beta＝測試中、draft＝草稿（用那個語言自己寫）
+const STATUS = {
+  'zh-TW': { beta: '（測試中）', draft: '（草稿）' },
+  'zh-CN': { beta: '（测试中）', draft: '（草稿）' },
+  ja: { beta: '（テスト中）', draft: '（下書き）' },
+  de: { beta: '(Beta)', draft: '(Entwurf)' },
+  fr: { beta: '(bêta)', draft: '(brouillon)' },
+  ru: { beta: '(бета)', draft: '(черновик)' },
+  en: { beta: '(beta)', draft: '(draft)' },
+};
+
 const store = {
   get(key) { try { return localStorage.getItem(key); } catch { return null; } },
   set(key, value) { try { localStorage.setItem(key, value); } catch { /* 存不了就只有這次 */ } },
@@ -95,7 +106,12 @@ async function start() {
   ]);
   if (manifest.schema !== 2 || !manifest.web?.rules) throw new Error(msg.old);
   // 有 web 欄位的語言才能選
-  const langs = manifest.languages.filter(l => l.web).map(l => ({ ...l, ...l.web, dict: new URL(l.dict.url, MANIFEST).href }));
+  // beta、draft 在遊戲的語言選單名稱後面標示（不認得的 status 當成 draft）
+  const langs = manifest.languages.filter(l => l.web).map(l => {
+    const status = ['available', 'beta', 'draft'].includes(l.status) ? l.status : 'draft';
+    const label = status === 'available' ? '' : (STATUS[l.id] ?? STATUS.en)[status];
+    return { ...l, ...l.web, status, menu_name: label ? `${l.web.menu_name}${label.startsWith('（') ? '' : ' '}${label}` : l.web.menu_name, dict: new URL(l.dict.url, MANIFEST).href };
+  });
   const ids = langs.map(l => l.id);
   if (!ids.length) throw new Error(msg.old);
   const first = wanted(ids);

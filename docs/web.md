@@ -27,6 +27,7 @@ node tools/serve.mjs site 8766      # 本機預覽（允許跨網域讀取）；
 - iframe 先載入 `/robots.txt` 再把修改版寫進去：這樣才歸遊戲的 Service Worker（scope `/`）管，「USE MY OWN FILES」模式靠它從 OPFS 讀 D2 檔案
 - 還沒選檔案模式時，遊戲會把 iframe 換到 `setup.html`（原版英文）；選完回到 `/play/` 時書籤再換成修改版
 - 網頁版多幾個語言（localStorage `d2s:lang` = `zh-TW`／`zh-CN`／`ja`），不佔韓文的位置；原版遊戲讀到不認得的值會照瀏覽器語言回到英文，所以重新整理後不會卡在看不懂的語言。舊版書籤存的 `zh` 當成 `zh-TW`
+- manifest 的 `status`（見 [manifest-v2.md](manifest-v2.md)）：`beta` 在遊戲語言選單的名稱後面標「（測試中）」，`draft` 標「（草稿）」，用那個語言自己寫（「简体中文（测试中）」「Français (brouillon)」）；不認得的值當成 `draft`。`available` 不標
 - 第一次按書籤開哪個語言：遊戲設定裡的語言 → 上次用的（`d2zh:last`）→ 瀏覽器語言 → 繁中
 - 再按一次書籤＝目前的語言和英文切換。遊戲裡「選項 → 遊戲設定 → 語言」列出 English、한국어 和 manifest 裡有 `web` 欄位的語言；換語言時修改版會請外層用新語言的規則重新開一次（不然 `location.reload()` 會載入原版）
 - 網頁版改版比桌面版頻繁、壓縮後的變數名稱會變，所以 `web-rules.mjs` 用 regex（變數名稱抓下來再放回去；`pattern()` 的 `<1>`、`<2>`… 要照第一次出現的順序編號，跟 `$1`、`$2`… 對得上），跟桌面版的 `patch-rules.mjs` 分開。必要的規則（語言選單、接受語言設定、載入字典、外文字判斷）沒套上就不啟動，提示「需要更新」；其他的標 `optional`，沒套上照樣啟動、在 console 警告
@@ -49,6 +50,8 @@ node tools/serve.mjs site 8766      # 本機預覽（允許跨網域讀取）；
 正式的 manifest（22949d4，version 20261027-1223）：繁中、簡中、日文切換、書籤切換都正常。
 
 德、法、俄文（manifest 裡還是 draft，用暫存資料夾自己加上去的 manifest 測）：俄文標題、主選單（西里爾字母用系統字型畫、按鈕是實心黑字）、德文、法文主選單、書籤切換（法文 ↔ 英文）都正常。
+
+status 標示：简中 beta 顯示「语言：简体中文（测试中）」、法文 status 改成不認得的值時顯示「LANGUE: Français (brouillon)」。
 
 還沒測：USE MY OWN FILES 實際讀檔、Safari／Firefox、手機、遊戲中的升級卡片和物品名稱（日文的魔法物品順序、禁則斷行只用 `build-web.mjs` 確認規則套得上；德法俄的名稱組合用 `compose-check.mjs` 對照過，沒有在遊戲畫面上看過）。
 
