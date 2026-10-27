@@ -32,8 +32,8 @@
 
 - **更新紀錄**：每次發布自動寫進 `site/data/changelog.json`，網站和啟動器會顯示（格式見 [manifest-v2.md](manifest-v2.md) 的「更新紀錄」）
 - **Discord**：
-  - #更新公告：`.github/workflows/announce.yml` 在 push 到 main、`changelog.json` 有新的 `announce: true` 項目時發文。webhook 網址存在 repo 的 secret `DISCORD_WEBHOOK_UPDATES`
-  - 維護者頻道：Web check 失敗時通知，secret `DISCORD_WEBHOOK_ALERTS`
+  - #announcements（更新公告）：`.github/workflows/announce.yml` 在 push 到 main、`changelog.json` 有新的 `announce: true` 項目時發文。webhook 網址存在 repo 的 secret `DISCORD_WEBHOOK_UPDATES`
+  - #alerts（STAFF，只有 Moderator 看得到）：Web check 失敗時通知，secret `DISCORD_WEBHOOK_ALERTS`
   - webhook 網址等於發文權限，不進 repo、不貼在對話裡
 - **哪些要公告**：平常修譯文只進更新紀錄。新語言、語言升級成 beta／available、遊戲改版修好、啟動器新版才發 Discord
 - **論壇**（PTT、巴哈姆特、Bilibili、Reddit）：只發里程碑（正式上線、新增語言），手動貼。標明非官方、一句話講重點、附網站連結

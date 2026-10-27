@@ -171,7 +171,7 @@ site/data/dict/ja.json
 |---|---|---|
 | 網站 | 最近幾筆的 `summary`、`date` | 「更新紀錄」區塊；manifest 的 `game.web_checked` 太舊或 Web check 失敗時顯示「遊戲剛更新，翻譯修正中」 |
 | 啟動器 | `changelog.latest` 跟本機上次看過的比 | 有新的就在視窗上顯示最新一筆的 `summary`（介面語言對應的那個） |
-| Discord 公告 | `announce: true` 而且還沒發過的 | 發到 #更新公告（見 [release.md](release.md)） |
+| Discord 公告 | `announce: true` 而且還沒發過的 | 發到 #announcements（見 [release.md](release.md)） |
 
 ## 遊戲改版的應對
 
