@@ -130,7 +130,7 @@ site/data/dict/ja.json
 {
   "kind": "translation",          // translation（修譯文）| language（新語言、語言升級成 beta／available）| game-fix（遊戲改版後修好）| launcher（啟動器新版）
   "announce": false,              // true＝發 Discord 公告；平常修譯文用 false
-  "summary": {                    // 一句話，至少要有 zh-TW；其他沒寫的介面語言顯示 zh-TW 或 en
+  "summary": {                    // 一句話，至少要有 zh-TW 和 en；網站每種介面語言（zh-TW、zh-CN、en、ja、de、fr、ru…）都要寫，沒寫的顯示 en
     "zh-TW": "修正 30 條技能說明，新增法文、俄文（測試中）",
     "zh-CN": "修正 30 条技能说明，新增法文、俄文（测试中）",
     "en": "Fixed 30 skill descriptions; added French and Russian (beta)"
