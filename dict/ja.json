@@ -12842,6 +12842,7 @@
  "In Hardcore's camp the leaderboard's book shows Hardcore's own boards and its ladder by experience, the dead in red": "ハードコアの野営地では、ランキングの本にハードコア専用のランキングと経験値順のラダーが表示され、死亡した英雄は赤で示されるようになりました",
  "The Hardcore ladder marks a hero whose level is higher than her play could reach as possibly odd, and she stays on it": "ハードコアのラダーでは、プレイで到達できる以上のレベルの英雄に「異常の可能性あり」の印が付き、その英雄はラダーに残ります",
  "Diablo warns you as the Dark Wanderer takes you into Hardcore, and again when a Hardcore hero dies": "黒衣の放浪者がハードコアへ連れていくときと、ハードコアの英雄が死亡したときに、ディアブロが警告するようになりました",
+ "* level #": "{0} レベル{1}",
  "modifier:Vengeance": "復讐",
  "modifier:Sacrifice": "生贄",
  "modifier:Inferno": "業火",

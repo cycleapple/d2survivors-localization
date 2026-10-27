@@ -88,5 +88,6 @@
  "The website's leaderboards switch between Softcore and Hardcore, with Hardcore's ladder, its statistics and a player's heroes of both": "Les classements du site web basculent entre mode Normal et mode Extrême, avec le tournoi Extrême, ses statistiques et les héros d’un joueur dans les deux modes",
  "In Hardcore's camp the leaderboard's book shows Hardcore's own boards and its ladder by experience, the dead in red": "Dans le camp Extrême, le livre du classement affiche les classements propres au mode Extrême et son tournoi par expérience, les morts en rouge",
  "The Hardcore ladder marks a hero whose level is higher than her play could reach as possibly odd, and she stays on it": "Le tournoi Extrême marque comme \"anomalie possible\" un héros dont le niveau dépasse ce que son jeu pouvait atteindre, et il y reste",
- "Diablo warns you as the Dark Wanderer takes you into Hardcore, and again when a Hardcore hero dies": "Diablo vous avertit quand le Rôdeur noir vous emmène en mode Extrême, et à nouveau quand un héros Extrême meurt"
+ "Diablo warns you as the Dark Wanderer takes you into Hardcore, and again when a Hardcore hero dies": "Diablo vous avertit quand le Rôdeur noir vous emmène en mode Extrême, et à nouveau quand un héros Extrême meurt",
+ "* level #": "{0} niveau {1}"
 }
