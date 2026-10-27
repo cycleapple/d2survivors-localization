@@ -1,7 +1,7 @@
 // 啟動器視窗
 use crate::game::{self, BUILTIN};
 use crate::jobs::{self, Job, Outcome};
-use crate::manifest::{self, LauncherInfo, Manifest};
+use crate::manifest::{self, ChangelogEntry, LauncherInfo, Manifest};
 use crate::paths::{Config, DEFAULT_MANIFEST_URL};
 use crate::selfupdate;
 use eframe::egui;
@@ -17,6 +17,10 @@ pub struct App {
     manifest: Option<Manifest>,
     /// 最新一次讀到的啟動器版本資訊
     launcher: Option<LauncherInfo>,
+    /// 上次啟動時翻譯套不上、改用英文原版
+    fallback: Option<&'static str>,
+    /// 還沒看過的最新一筆更新紀錄
+    changelog: Option<ChangelogEntry>,
     logs: Vec<String>,
     busy: bool,
     show_settings: bool,
@@ -32,6 +36,8 @@ impl App {
         let mut app = Self {
             config: Config::load(),
             launcher: manifest.as_ref().and_then(|m| m.launcher.clone()),
+            fallback: None,
+            changelog: None,
             manifest,
             logs: Vec::new(),
             busy: false,
@@ -109,6 +115,12 @@ impl eframe::App for App {
                         }
                         // 更新失敗時 jobs 會帶回原本的；manifest 拿掉 launcher 區塊時就是沒有新版
                         self.launcher = o.launcher;
+                        if o.changelog.is_some() {
+                            self.changelog = o.changelog;
+                        }
+                        if job == Job::Launch || job == Job::Install {
+                            self.fallback = o.fallback;
+                        }
                         // 換成新版了：開新的啟動器，關掉自己
                         if let Some(exe) = o.restart {
                             let _ = self.config.save();
@@ -120,7 +132,8 @@ impl eframe::App for App {
                     }
                     match error {
                         Some(e) => self.logs.push(format!("✖ {e}")),
-                        None if job == Job::Launch && self.config.close_after_launch => {
+                        // 改用英文原版開的話，留著視窗讓玩家看到原因
+                        None if job == Job::Launch && self.config.close_after_launch && self.fallback.is_none() => {
                             ctx.send_viewport_cmd(egui::ViewportCommand::Close);
                         }
                         None => {}
@@ -147,6 +160,25 @@ impl eframe::App for App {
                 ui.colored_label(egui::Color32::from_rgb(220, 90, 70), format!("找不到遊戲：{}", dir.display()));
             }
             self.launcher_banner(ui, ctx);
+            if let Some(why) = self.fallback {
+                ui.add_space(4.0);
+                egui::Frame::group(ui.style()).fill(egui::Color32::from_rgb(90, 60, 20)).show(ui, |ui| {
+                    ui.colored_label(egui::Color32::from_rgb(255, 220, 150), why);
+                });
+            }
+            if let Some(c) = self.changelog.clone() {
+                ui.add_space(4.0);
+                egui::Frame::group(ui.style()).show(ui, |ui| {
+                    ui.horizontal_wrapped(|ui| {
+                        ui.label(egui::RichText::new(format!("更新紀錄 {}", c.date)).strong());
+                        ui.label(c.summary_for(self.config.ui_language()).unwrap_or(""));
+                        if ui.small_button("知道了").clicked() {
+                            let _ = jobs::mark_changelog_seen(&c.version);
+                            self.changelog = None;
+                        }
+                    });
+                });
+            }
             ui.add_space(8.0);
 
             let languages = self.languages();
@@ -171,6 +203,10 @@ impl eframe::App for App {
                 ui.horizontal(|ui| {
                     let play = egui::Button::new(egui::RichText::new("  啟動遊戲  ").size(18.0));
                     if ui.add(play).clicked() {
+                        // 更新紀錄顯示著時按了啟動，就當成看過了
+                        if let Some(c) = self.changelog.take() {
+                            let _ = jobs::mark_changelog_seen(&c.version);
+                        }
                         self.start(Job::Launch, ctx);
                     }
                     if ui.button("檢查更新").clicked() {

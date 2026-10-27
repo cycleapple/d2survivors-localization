@@ -83,6 +83,14 @@ impl Config {
         write_atomic(&Self::path(), serde_json::to_string_pretty(self)?.as_bytes())
     }
 
+    /// 挑更新紀錄說明用的語言：翻譯語言；選英文、韓文原版時用英文
+    pub fn ui_language(&self) -> &str {
+        match self.language.as_str() {
+            "en" | "ko" => "en",
+            l => l,
+        }
+    }
+
     pub fn manifest_url(&self) -> String {
         let u = self.manifest_url.trim();
         if u.is_empty() { DEFAULT_MANIFEST_URL.to_string() } else { u.to_string() }
@@ -95,8 +103,11 @@ impl Config {
 
 /// 上次裝進遊戲的 app.asar
 #[derive(Clone, Default, Serialize, Deserialize)]
+#[serde(default)]
 pub struct State {
     pub installed: Option<Installed>,
+    /// 看過的最新一筆更新紀錄（manifest 的 changelog.latest）
+    pub changelog_seen: String,
 }
 
 #[derive(Clone, Serialize, Deserialize)]

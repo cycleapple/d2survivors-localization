@@ -17,6 +17,22 @@ pub struct Game {
     pub dir: PathBuf,
 }
 
+/// 選的翻譯本機還沒有（第一次開啟又沒有網路、更新來源拿掉了這個語言）：jobs 會改用英文原版開遊戲
+#[derive(Debug)]
+pub struct NoTranslation(pub String);
+
+impl std::fmt::Display for NoTranslation {
+    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+        f.write_str(&self.0)
+    }
+}
+
+impl std::error::Error for NoTranslation {}
+
+fn no_translation(msg: String) -> anyhow::Error {
+    NoTranslation(msg).into()
+}
+
 pub struct Original {
     pub sha256: String,
     pub version: String,
@@ -76,7 +92,7 @@ impl Game {
 
         let Some(manifest) = manifest else {
             if language != "en" && language != "ko" {
-                bail!("還沒下載過翻譯，請先連上網路檢查更新");
+                return Err(no_translation("還沒下載過翻譯，請先連上網路檢查更新".into()));
             }
             log("沒有 manifest，直接用原版".into());
             self.put(&original.bytes, format!("{}:original", original.sha256), log)?;
@@ -89,9 +105,9 @@ impl Game {
             "en" | "ko" => (format!("{}:{language}:{rules_sha}", original.sha256), None, None),
             id => {
                 let lang = manifest.languages.iter().find(|l| l.id == id)
-                    .with_context(|| format!("更新來源裡沒有語言 {id}"))?;
-                let desktop = lang.desktop.as_ref().with_context(|| format!("{} 還不能在桌面版使用", lang.name))?;
-                let dict = manifest::local_dict(lang).with_context(|| format!("{} 字典還沒下載，請先檢查更新", lang.name))?;
+                    .ok_or_else(|| no_translation(format!("更新來源裡沒有語言 {id}")))?;
+                let desktop = lang.desktop.as_ref().ok_or_else(|| no_translation(format!("{} 還不能在桌面版使用", lang.name)))?;
+                let dict = manifest::local_dict(lang).ok_or_else(|| no_translation(format!("{} 字典還沒下載，請先檢查更新", lang.name)))?;
                 (format!("{}:{id}:{}:{rules_sha}", original.sha256, lang.dict.sha256), Some(dict), Some(desktop))
             }
         };
@@ -121,7 +137,7 @@ impl Game {
             paths::write_atomic(&self.asar(), bytes).context("無法寫入 app.asar，請先關掉遊戲")?;
             log(format!("已裝進遊戲：{}", self.asar().display()));
         }
-        State { installed: Some(Installed { key, sha256: sha }) }.save()
+        State { installed: Some(Installed { key, sha256: sha }), ..State::load() }.save()
     }
 
     /// 還原成原版 app.asar

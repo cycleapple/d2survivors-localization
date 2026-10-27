@@ -18,6 +18,9 @@ pub struct Manifest {
     pub version: String,
     #[serde(default)]
     pub launcher: Option<LauncherInfo>,
+    /// 更新紀錄（changelog.json）的位置和最新一筆的版本
+    #[serde(default)]
+    pub changelog: Option<ChangelogRef>,
     pub languages: Vec<Language>,
     /// 桌面版的修改規則（tools/patch-rules.mjs）
     #[serde(default)]
@@ -32,6 +35,30 @@ pub struct LauncherInfo {
     pub minimum: String,
     pub download: String,
     pub sha256_url: String,
+}
+
+#[derive(Clone, Serialize, Deserialize)]
+pub struct ChangelogRef {
+    pub url: String,
+    pub latest: String,
+}
+
+/// changelog.json 的一筆（只讀啟動器要顯示的欄位）
+#[derive(Clone, Deserialize)]
+pub struct ChangelogEntry {
+    pub version: String,
+    #[serde(default)]
+    pub date: String,
+    /// 語言 → 一句話說明
+    #[serde(default)]
+    pub summary: std::collections::BTreeMap<String, String>,
+}
+
+impl ChangelogEntry {
+    /// 照介面語言挑說明：沒有就用 zh-TW，再沒有就用 en
+    pub fn summary_for(&self, lang: &str) -> Option<&str> {
+        [lang, "zh-TW", "en"].iter().find_map(|l| self.summary.get(*l)).or_else(|| self.summary.values().next()).map(|s| s.as_str())
+    }
 }
 
 #[derive(Clone, Serialize, Deserialize)]
@@ -166,6 +193,17 @@ pub fn dict_path(lang: &Language) -> std::path::PathBuf {
 pub fn local_dict(lang: &Language) -> Option<Vec<u8>> {
     let b = fs::read(dict_path(lang)).ok()?;
     (sha256_hex(&b) == lang.dict.sha256).then_some(b)
+}
+
+/// 下載 changelog.json，回傳 manifest 說的最新那一筆
+pub fn latest_changelog(manifest_url: &str, m: &Manifest) -> Result<Option<ChangelogEntry>> {
+    let Some(c) = &m.changelog else { return Ok(None) };
+    #[derive(Deserialize)]
+    struct File {
+        entries: Vec<ChangelogEntry>,
+    }
+    let f: File = serde_json::from_slice(&fetch(&resolve(manifest_url, &c.url))?).context("changelog.json 格式不對")?;
+    Ok(f.entries.into_iter().find(|e| e.version == c.latest))
 }
 
 pub enum Update {

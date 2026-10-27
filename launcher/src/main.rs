@@ -60,7 +60,11 @@ fn cli(args: &[String]) -> anyhow::Result<()> {
     let log = |s: String| println!("{s}");
     match job {
         Some(job) => {
-            if jobs::run(job, &config, manifest::cached(), &log)?.restart.is_some() {
+            let out = jobs::run(job, &config, manifest::cached(), &log)?;
+            if let Some(c) = &out.changelog {
+                println!("更新紀錄（{}）：{}", c.date, c.summary_for(config.ui_language()).unwrap_or(""));
+            }
+            if out.restart.is_some() {
                 println!("下次執行就是新版");
             }
         }
