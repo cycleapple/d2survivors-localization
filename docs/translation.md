@@ -73,7 +73,37 @@ node tools/where.mjs 非表示 --lang ja
 
 - 各語言的修改規則群組在 `tools/patch-rules.mjs` 的 `LANGUAGES`：簡中跟繁中一樣是「後綴前綴物品」、不加空格，但不換全形冒號（D2R 簡中本來就用半形）；日文的魔法物品名稱是「前綴後綴物品」（D2R 日文的 MagicFormat `%0%2%1`），斷行加上日文禁則（長音、小寫假名不放行首，左括號不放行尾）
 - 跨批統一用詞的一次性腳本：`work/unify-zh-CN.mjs`、`work/unify-ja.mjs`（結果寫進各自的 `overrides.json`、`modifiers.json`），決定紀錄在 [term-decisions.md](term-decisions.md)
-- 啟動器的 manifest（`make-manifest`）也會讀 `dict/zh-CN.json`、`dict/ja.json`；啟動器本身要能選這兩種語言，才會用到
+- 發布時三種語言都會進 manifest（見下面的「發布」）
+
+## 發布
+
+翻譯有變動、要讓啟動器和網頁版書籤拿到時：
+
+```
+node tools/publish.mjs
+```
+
+1. 合併每種語言的字典（`tools/langs.mjs` 的 `TARGETS`，用 `versions/` 裡最新一版的 key，字典層次是 `layers()`）→ `dict/<id>.json`
+2. `tools/make-manifest.mjs site/data` 產生 manifest v2（格式見 [manifest-v2.md](manifest-v2.md)）：
+   - `site/data/manifest.json`
+   - `site/data/dict/zh-TW.json`、`zh-CN.json`、`ja.json`（字典網址帶 sha256 前 12 碼，內容換了網址就換了）
+3. 只 `git add site/data/`、commit（不 push；push 之後 GitHub Actions 部署 Pages）。字典和規則都沒變時，manifest 不改寫，也不會 commit
+
+manifest 各部分從哪裡來：
+
+| 欄位 | 來源 |
+|---|---|
+| `languages[]` 的 `id`、`name`、`status` | `tools/langs.mjs` 的 `TARGETS` |
+| `languages[]` 的 `entries`、`dict` | 合併後的 `dict/<id>.json` |
+| `languages[].desktop`、`desktop` | `tools/patch-rules.mjs` 的 `LANGUAGES`、`RULES`、`ASSETS_DIR`、`DICT_TARGET`（啟動器聊天室維護） |
+| `languages[].web`、`web` | `tools/web-rules.mjs` 的 `WEB_LANGUAGES`、`WEB_RULES`、`WEB_PLAY_URL`（網頁書籤聊天室維護）；還沒匯出 `WEB_LANGUAGES` 時不輸出 |
+| `game.desktop` | `versions/` 裡最新一版 |
+| `game.web_checked` | `tools/web-rules.mjs` 有匯出 `WEB_CHECKED` 才輸出 |
+| `launcher` | 還沒有 GitHub Release，先不輸出 |
+
+狀態（`status`）：繁中 `available`；簡中、日文 `beta`。兩者都翻完、統一過用詞，也進遊戲走過主要畫面，查不到的字串 0 條，但還沒有玩家實際玩過的回報。有玩家回報、修過一輪之後，改 `langs.mjs` 的 `status`。
+
+v1 的更新來源（`dist/`，`cycleapple/d2survivors-zh-tw-dist`）停在最後一版，不再更新。
 
 ## 遊戲更新後的流程
 
@@ -100,6 +130,8 @@ node tools/patch.mjs backup/<新版本>/app.asar dict/zh-TW.json work/app.asar &
 # 7. 用途索引、用語分析（新譯文裡的名稱要跟介面一致）、進遊戲量測漏翻（make-debug.mjs，見上面）
 node tools/usage-index.mjs work/app/desktop/dist/web "%APPDATA%/D2 Survivors/d2" versions/<新版本>/ko.json work/usage.json
 node tools/term-analysis.mjs work/usage.json dict/zh-TW.json work/term-report.json
+# 8. 發布（見上面的「發布」）
+node tools/publish.mjs
 ```
 
 測技能變體譯名的 `work/test-mods.js` 裡的檔名和匯出名稱（變體表匯出成什麼）每版都會變，用 `node work/find-export.mjs <keepSave 檔> <變體表名稱>` 查。

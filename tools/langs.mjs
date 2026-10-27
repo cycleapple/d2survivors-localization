@@ -5,14 +5,15 @@
 //              沒有前綴的單一英文字是一般名詞（遊戲整句查不到時會逐字翻），不能用這種形式
 //   skip：D2R 裡不能用的譯文（日文的技能名稱有截斷過的「チェインライトニ…」）
 //   font：D2R 裡給這個語言用的字型（data\hd\ui\fonts\）
+//   status：發布到 manifest 的狀態。available（可用）或 beta（測試中：翻完、進遊戲驗證過，但還沒有玩家實際玩過的回報）
 //   字典：繁中沿用最早的路徑（dict/d2r-auto.json、dict/manual/），其他語言放在 dict/<id>/
 import fs from 'node:fs';
 import path from 'node:path';
 
 export const TARGETS = {
-  'zh-TW': { col: 'zhTW', name: '繁體中文', script: /[一-鿿]/, affixForm: v => v.startsWith('之'), font: 'blizzardglobaltcunicode.ttf' },
-  'zh-CN': { col: 'zhCN', name: '简体中文', script: /[一-鿿]/, affixForm: v => v.startsWith('之'), font: 'blizzardglobal-v5_81.ttf' },
-  'ja': { col: 'jaJP', name: '日本語', script: /[぀-ヿ一-鿿]/, affixForm: v => /の$/.test(v), skip: v => v.includes('…'), font: 'bljap_v8_3.ttf' },
+  'zh-TW': { col: 'zhTW', name: '繁體中文', script: /[一-鿿]/, affixForm: v => v.startsWith('之'), font: 'blizzardglobaltcunicode.ttf', status: 'available' },
+  'zh-CN': { col: 'zhCN', name: '简体中文', script: /[一-鿿]/, affixForm: v => v.startsWith('之'), font: 'blizzardglobal-v5_81.ttf', status: 'beta' },
+  'ja': { col: 'jaJP', name: '日本語', script: /[぀-ヿ一-鿿]/, affixForm: v => /の$/.test(v), skip: v => v.includes('…'), font: 'bljap_v8_3.ttf', status: 'beta' },
 };
 
 export function target(id = 'zh-TW') {
