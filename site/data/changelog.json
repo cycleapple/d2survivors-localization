@@ -2,6 +2,93 @@
   "schema": 1,
   "entries": [
     {
+      "version": "20261027-1503",
+      "date": "2026-10-27",
+      "kind": "game-fix",
+      "announce": false,
+      "summary": {
+        "zh-TW": "支援遊戲 2026.1027.2：七種語言補上 98 條新字串（專家級、天梯等）；繁中、簡中完成第二輪審稿",
+        "zh-CN": "支持游戏 2026.1027.2：七种语言补上 98 条新字符串（专家模式、天梯等）；繁中、简中完成第二轮审校",
+        "en": "Supports game 2026.1027.2: 98 new strings (Hardcore, ladder and more) in all seven languages; second review of Traditional and Simplified Chinese",
+        "ja": "ゲーム 2026.1027.2 に対応：7言語に新しい文字列 98 件（ハードコア、ラダーなど）を追加。繁体字・簡体字中国語の2回目のレビューを完了",
+        "de": "Unterstützt Spielversion 2026.1027.2: 98 neue Texte (Hardcore, Rangliste u. a.) in allen sieben Sprachen; zweite Durchsicht von traditionellem und vereinfachtem Chinesisch",
+        "fr": "Compatible avec le jeu 2026.1027.2 : 98 nouveaux textes (Extrême, classement, etc.) dans les sept langues ; deuxième relecture du chinois traditionnel et simplifié",
+        "ru": "Поддержка версии игры 2026.1027.2: 98 новых строк (героический режим, рейтинг и др.) на всех семи языках; вторая вычитка традиционного и упрощенного китайского",
+        "pl": "Obsługa wersji gry 2026.1027.2: 98 nowych tekstów (tryb Hardkor, ranking itp.) we wszystkich siedmiu językach; druga korekta chińskiego tradycyjnego i uproszczonego"
+      },
+      "notes": {
+        "zh-TW": [
+          "繁中：第二輪審稿修正 75 條，例如傭兵靈氣的主詞、重複的量詞（「3枚枚冰彈」）、恰西強化一律稱「階」、觸控一律「輕觸」",
+          "簡中：第二輪審稿修正 89 條，觸控一律「轻点」，Faster Cast Rate 改用 D2R 官方「更快速施法」"
+        ],
+        "en": [
+          "Traditional Chinese: 75 fixes from the second review (e.g. doubled measure words, mercenary aura wording)",
+          "Simplified Chinese: 89 changes from the second review (touch wording, official Faster Cast Rate term)"
+        ]
+      },
+      "game": {
+        "desktop": "2026.1027.2"
+      },
+      "languages": [
+        {
+          "id": "zh-TW",
+          "status": "available",
+          "entries": 12851,
+          "added": 93,
+          "changed": 74,
+          "removed": 0
+        },
+        {
+          "id": "zh-CN",
+          "status": "beta",
+          "entries": 12851,
+          "added": 98,
+          "changed": 88,
+          "removed": 0
+        },
+        {
+          "id": "ja",
+          "status": "beta",
+          "entries": 12853,
+          "added": 98,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "de",
+          "status": "beta",
+          "entries": 12802,
+          "added": 98,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "fr",
+          "status": "beta",
+          "entries": 12802,
+          "added": 98,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ru",
+          "status": "beta",
+          "entries": 12802,
+          "added": 98,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "pl",
+          "status": "beta",
+          "entries": 12802,
+          "added": 98,
+          "changed": 0,
+          "removed": 0
+        }
+      ]
+    },
+    {
       "version": "20261027-1404",
       "date": "2026-10-27",
       "kind": "language",

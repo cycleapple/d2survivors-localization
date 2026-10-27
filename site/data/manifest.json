@@ -1,9 +1,9 @@
 {
   "schema": 2,
-  "updated": "2026-10-27T14:04:35.554Z",
-  "version": "20261027-1404",
+  "updated": "2026-10-27T15:03:57.216Z",
+  "version": "20261027-1503",
   "game": {
-    "desktop": "2026.1027.1",
+    "desktop": "2026.1027.2",
     "web_checked": "2026-10-27T13:21:03.641Z"
   },
   "languages": [
@@ -11,11 +11,11 @@
       "id": "zh-TW",
       "name": "繁體中文",
       "status": "available",
-      "entries": 12758,
+      "entries": 12851,
       "dict": {
-        "url": "dict/zh-TW.json?v=5f21d9d7829e",
-        "sha256": "5f21d9d7829e35dc1a499a0f993cba051d37949245f6a0ddf671edf7371cf85b",
-        "size": 792774
+        "url": "dict/zh-TW.json?v=1d52919bb4a9",
+        "sha256": "1d52919bb4a932b2f6a16cdc22ccb79ca77240fd0dc7f2b33156c06fb88634bc",
+        "size": 803267
       },
       "desktop": {
         "menu_name": "繁體中文",
@@ -55,11 +55,11 @@
       "id": "zh-CN",
       "name": "简体中文",
       "status": "beta",
-      "entries": 12753,
+      "entries": 12851,
       "dict": {
-        "url": "dict/zh-CN.json?v=5c4845aaa084",
-        "sha256": "5c4845aaa0844efa50d8eac1f28efb389dcdba68dce300f8a253468aca7e8e9a",
-        "size": 792294
+        "url": "dict/zh-CN.json?v=f9422776f5b7",
+        "sha256": "f9422776f5b7d63d6714156b1d165aea3c2f1931bac6ccfbbed71ce5d691bc74",
+        "size": 803379
       },
       "desktop": {
         "menu_name": "简体中文",
@@ -97,11 +97,11 @@
       "id": "ja",
       "name": "日本語",
       "status": "beta",
-      "entries": 12755,
+      "entries": 12853,
       "dict": {
-        "url": "dict/ja.json?v=455142d09c72",
-        "sha256": "455142d09c720e402a38e373a6b4c737e176b1bb0bd02e7e2b80957615c53f74",
-        "size": 950317
+        "url": "dict/ja.json?v=0dba9cc3130f",
+        "sha256": "0dba9cc3130f8573ea0245a7ac7890952c774cd20ebe4e006a14a3a586fea442",
+        "size": 964055
       },
       "desktop": {
         "menu_name": "日本語",
@@ -140,11 +140,11 @@
       "id": "de",
       "name": "Deutsch",
       "status": "beta",
-      "entries": 12704,
+      "entries": 12802,
       "dict": {
-        "url": "dict/de.json?v=c6ec904e31c9",
-        "sha256": "c6ec904e31c9ecf99a412123d57acfa991a4274e6fe7e90c7d46f41d9279f42c",
-        "size": 871243
+        "url": "dict/de.json?v=f0828c2cc92c",
+        "sha256": "f0828c2cc92c31acf12f1e8f9c8022da755debd99c77c90fc896f23b3f63794e",
+        "size": 882965
       },
       "desktop": {
         "menu_name": "Deutsch",
@@ -172,11 +172,11 @@
       "id": "fr",
       "name": "Français",
       "status": "beta",
-      "entries": 12704,
+      "entries": 12802,
       "dict": {
-        "url": "dict/fr.json?v=99529f0ac121",
-        "sha256": "99529f0ac121191e929834975fd3ba917f2fe07000040fe128c08d384d0c12cd",
-        "size": 912741
+        "url": "dict/fr.json?v=6a7bd2ee8a4c",
+        "sha256": "6a7bd2ee8a4cabc209642f16142ecd98f5a5114a6f7d5259409624fcd1021672",
+        "size": 924600
       },
       "desktop": {
         "menu_name": "Français",
@@ -204,11 +204,11 @@
       "id": "ru",
       "name": "Русский",
       "status": "beta",
-      "entries": 12704,
+      "entries": 12802,
       "dict": {
-        "url": "dict/ru.json?v=478d66b6a301",
-        "sha256": "478d66b6a3018f3b5ef7ca10a463681e778068bafde8b36543c570d7e6eade36",
-        "size": 1187031
+        "url": "dict/ru.json?v=d5afe91cfe81",
+        "sha256": "d5afe91cfe81838071b5d6e8b1d53e0238dafd0277ce73de5e3086b29b5a10e1",
+        "size": 1203352
       },
       "desktop": {
         "menu_name": "Русский",
@@ -249,11 +249,11 @@
       "id": "pl",
       "name": "Polski",
       "status": "beta",
-      "entries": 12704,
+      "entries": 12802,
       "dict": {
-        "url": "dict/pl.json?v=2561e7badf96",
-        "sha256": "2561e7badf9639f803b64c3462b76f202358c39d00425965f023638a9cc68c47",
-        "size": 879209
+        "url": "dict/pl.json?v=61c3d1bdf952",
+        "sha256": "61c3d1bdf952296d59726cd83a6af6c8bc23ce8dfa4f25c88b7b7ff023df29e3",
+        "size": 890958
       },
       "desktop": {
         "menu_name": "Polski",
@@ -307,7 +307,16 @@
         ],
         "file": "^lang-.*\\.js$",
         "from": "let e=null;try{e=localStorage.getItem(A)}catch{}",
-        "to": "let e=null;try{let q=new URLSearchParams(location.search).get(`d2slang`);if(q&&!sessionStorage.getItem(`d2slang`)){sessionStorage.setItem(`d2slang`,q);localStorage.setItem(A,q)}e=localStorage.getItem(A)}catch{}"
+        "to": "let e=null;try{let q=new URLSearchParams(location.search).get(`d2slang`);q&&!sessionStorage.getItem(`d2slang`)&&sessionStorage.setItem(`d2slang`,q);e=sessionStorage.getItem(`d2slang`)??localStorage.getItem(A)}catch{}"
+      },
+      {
+        "label": "遊戲裡切換語言",
+        "groups": [
+          "base"
+        ],
+        "file": "^lang-.*\\.js$",
+        "from": "j=e;try{localStorage.setItem(A,e)}catch{return}",
+        "to": "j=e;try{sessionStorage.setItem(`d2slang`,e);localStorage.setItem(A,e)}catch{return}"
       },
       {
         "label": "語言選單名稱",
@@ -459,8 +468,8 @@
         "groups": [
           "size-pl"
         ],
-        "from": "for(let n of t)gp(n)&&e.fillText(n,s+a,r+this.baseline+o),s+=this.advanceOf(n)",
-        "to": "for(let n of t){if(gp(n)){let Z=this.foreignFamily===g?4:1,c=document.createElement(`canvas`),q=c.getContext(`2d`),F=e.font.replace(/([\\d.]+)px/,(x,v)=>v*Z+`px`);q.font=F;let M=q.measureText(n),A=M.actualBoundingBoxAscent/Z,D=M.actualBoundingBoxDescent/Z,L=M.actualBoundingBoxLeft/Z,R=M.actualBoundingBoxRight/Z,h=r+this.baseline,d=Math.max(0,Math.min(Math.ceil(A-h),Math.floor(e.canvas.height-h-D))),y=h+d,k=A>y?y/A:1;if(Z>1){c.width=Math.ceil((L+R+2)*Z);c.height=Math.ceil((A+D+2)*Z);q.font=F;q.fillStyle=e.fillStyle;q.fillText(n,(L+1)*Z,(A+1)*Z);e.imageSmoothingQuality=`high`;e.drawImage(c,s+a-L-1,y+o-(A+1)*k,c.width/Z,c.height/Z*k)}else{e.save();e.translate(s+a,y+o);e.scale(1,k);e.fillText(n,0,0);e.restore()}}s+=this.advanceOf(n)}"
+        "from": "for(let n of t)Ap(n)&&e.fillText(n,s+a,r+this.baseline+o),s+=this.advanceOf(n)",
+        "to": "for(let n of t){if(Ap(n)){let Z=this.foreignFamily===g?4:1,c=document.createElement(`canvas`),q=c.getContext(`2d`),F=e.font.replace(/([\\d.]+)px/,(x,v)=>v*Z+`px`);q.font=F;let M=q.measureText(n),A=M.actualBoundingBoxAscent/Z,D=M.actualBoundingBoxDescent/Z,L=M.actualBoundingBoxLeft/Z,R=M.actualBoundingBoxRight/Z,h=r+this.baseline,d=Math.max(0,Math.min(Math.ceil(A-h),Math.floor(e.canvas.height-h-D))),y=h+d,k=A>y?y/A:1;if(Z>1){c.width=Math.ceil((L+R+2)*Z);c.height=Math.ceil((A+D+2)*Z);q.font=F;q.fillStyle=e.fillStyle;q.fillText(n,(L+1)*Z,(A+1)*Z);e.imageSmoothingQuality=`high`;e.drawImage(c,s+a-L-1,y+o-(A+1)*k,c.width/Z,c.height/Z*k)}else{e.save();e.translate(s+a,y+o);e.scale(1,k);e.fillText(n,0,0);e.restore()}}s+=this.advanceOf(n)}"
       },
       {
         "label": "中文斷行",
@@ -512,16 +521,16 @@
         "groups": [
           "cjk"
         ],
-        "from": "let r={...Y(e),maxWidth:ur},i=[e.text(J,r)",
-        "to": "let r={...Y(e),maxWidth:ur},i=[e.text(J,document.documentElement.lang===`{{html_lang}}`?{...r,maxWidth:360}:r)"
+        "from": "let r={...Y(e),maxWidth:fr},i=[e.text(J,r)",
+        "to": "let r={...Y(e),maxWidth:fr},i=[e.text(J,document.documentElement.lang===`{{html_lang}}`?{...r,maxWidth:360}:r)"
       },
       {
         "label": "技能變體專用譯名",
         "groups": [
           "dict"
         ],
-        "from": "]},mre={raiseSkeleton:`Evolved: Revive's skeletons take this option`},Vs={};function Hs(e,t){",
-        "to": "]},mre={raiseSkeleton:`Evolved: Revive's skeletons take this option`},Vs={};for(let l of Object.values(Bs))for(let o of l){let n=o.name;Object.defineProperty(o,`name`,{get:()=>h()?m(`modifier`,n):n,enumerable:!0,configurable:!0})}function Hs(e,t){"
+        "from": "]},As={raiseSkeleton:`Evolved: Revive's skeletons take this option`},js={};function Ms(e,t){",
+        "to": "]},As={raiseSkeleton:`Evolved: Revive's skeletons take this option`},js={};for(let l of Object.values(ks))for(let o of l){let n=o.name;Object.defineProperty(o,`name`,{get:()=>h()?m(`modifier`,n):n,enumerable:!0,configurable:!0})}function Ms(e,t){"
       }
     ]
   },
@@ -778,7 +787,7 @@
     ]
   },
   "changelog": {
-    "url": "changelog.json?v=370ba4fd6386",
-    "latest": "20261027-1404"
+    "url": "changelog.json?v=24be4a432c93",
+    "latest": "20261027-1503"
   }
 }
