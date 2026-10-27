@@ -11,7 +11,7 @@ use eframe::egui::{self, Color32, RichText, Stroke};
 use std::path::PathBuf;
 use std::sync::mpsc::{channel, Receiver, Sender};
 
-const WIZARD_STEPS: u8 = 4;
+const WIZARD_STEPS: u8 = 3;
 
 enum Msg {
     Log(String),
@@ -21,7 +21,9 @@ enum Msg {
 
 #[derive(Clone, Copy, PartialEq)]
 enum Page {
-    /// 設定精靈的第幾步（0 語言、1 D2 Survivors、2 Diablo II、3 完成）
+    /// 第一次開啟時最先出現的語言畫面（不算在精靈的步驟裡：還沒選語言，不放任何要看得懂某種語言的字）
+    Language,
+    /// 設定精靈的第幾步（0 D2 Survivors、1 Diablo II、2 完成），用選的語言顯示
     Wizard(u8),
     Main,
     Settings,
@@ -63,13 +65,14 @@ impl App {
         theme::apply(&cc.egui_ctx);
         let (tx, rx) = channel();
         let manifest = manifest::cached();
-        // 測試、截圖用：D2S_UI_PAGE=wizard1～wizard4｜main｜settings 直接開那一頁
+        // 測試、截圖用：D2S_UI_PAGE=language｜wizard1～wizard3｜main｜settings 直接開那一頁
         let page = match std::env::var("D2S_UI_PAGE").as_deref() {
             Ok(p) if p.starts_with("wizard") => Page::Wizard(p[6..].parse::<u8>().unwrap_or(1).clamp(1, WIZARD_STEPS) - 1),
+            Ok("language") => Page::Language,
             Ok("main") => Page::Main,
             Ok("settings") => Page::Settings,
             _ if config.wizard_done => Page::Main,
-            _ => Page::Wizard(0),
+            _ => Page::Language,
         };
         let icon = cc.egui_ctx.load_texture(
             "icon",
@@ -345,28 +348,11 @@ impl App {
     // ── 設定精靈 ──
 
     fn wizard(&mut self, ui: &mut egui::Ui, ctx: &egui::Context, step: u8) {
-        let labels = [self.t("step_lang"), self.t("step_game"), self.t("step_d2"), self.t("step_done")];
+        let labels = [self.t("step_game"), self.t("step_d2"), self.t("step_done")];
         theme::steps(ui, &labels, step as usize);
         ui.add_space(10.0);
         match step {
             0 => {
-                // 還沒選語言：不放標題和說明，只有 🌐 和語言按鈕（每個都用自己的語言寫）。選了之後下一步才用那個語言
-                ui.vertical_centered(|ui| ui.label(RichText::new("🌐").size(26.0).color(GOLD)));
-                ui.add_space(8.0);
-                if self.manifest.is_none() {
-                    if self.busy {
-                        ui.horizontal(|ui| {
-                            ui.spinner();
-                            ui.label(self.t("lang_loading"));
-                        });
-                    } else if self.update_failed {
-                        ui.colored_label(WARN, self.t("lang_offline"));
-                    }
-                    ui.add_space(6.0);
-                }
-                self.language_picker(ui, false);
-            }
-            1 => {
                 ui.heading(RichText::new(self.t("game_title")).color(GOLD));
                 ui.add_space(8.0);
                 let dir = self.config.game_dir();
@@ -396,7 +382,7 @@ impl App {
                     }
                 });
             }
-            2 => {
+            1 => {
                 ui.heading(RichText::new(self.t("d2_title")).color(GOLD));
                 ui.label(RichText::new(self.t("d2_desc")).color(MUTED));
                 ui.add_space(8.0);
@@ -452,8 +438,9 @@ impl App {
     fn wizard_nav(&mut self, ui: &mut egui::Ui, ctx: &egui::Context, step: u8) {
         let mut next: Option<Page> = None;
         ui.horizontal(|ui| {
-            if step > 0 && ui.button(format!("‹  {}", self.t("back"))).clicked() {
-                next = Some(Page::Wizard(step - 1));
+            // 第一步的「上一步」回到語言畫面
+            if ui.button(format!("‹  {}", self.t("back"))).clicked() {
+                next = Some(if step == 0 { Page::Language } else { Page::Wizard(step - 1) });
             }
             ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
                 if step == WIZARD_STEPS - 1 {
@@ -463,9 +450,8 @@ impl App {
                     return;
                 }
                 let ok = match step {
-                    1 => game::exists(&self.config.game_dir()),
-                    2 => self.d2().is_some(),
-                    _ => true,
+                    0 => game::exists(&self.config.game_dir()),
+                    _ => self.d2().is_some(),
                 };
                 let (label, color) = if ok { (self.t("next"), GOLD_HI) } else { (self.t("skip"), MUTED) };
                 if ui.button(RichText::new(format!("{label}  ›")).color(color)).clicked() {
@@ -475,15 +461,41 @@ impl App {
         });
         if let Some(p) = next {
             // 進到 Diablo II 那一步時，還沒偵測過就先偵測
-            if p == Page::Wizard(2) && self.d2().is_none() {
-                self.detect_d2();
-            }
-            if p == Page::Wizard(1) {
-                self.refresh_game();
-            }
+            self.enter(p);
             let _ = self.config.save();
             self.page = p;
         }
+    }
+
+    /// 換到精靈的某一步之前要做的事：D2 Survivors 那步重新偵測遊戲，Diablo II 那步還沒偵測過就先偵測
+    fn enter(&mut self, p: Page) {
+        match p {
+            Page::Wizard(0) => self.refresh_game(),
+            Page::Wizard(1) if self.d2().is_none() => self.detect_d2(),
+            _ => {}
+        }
+    }
+
+    /// 語言畫面：只有語言卡片（各語言用自己的名稱和狀態），沒有步驟指示和說明文字
+    fn language_page(&mut self, ui: &mut egui::Ui) {
+        ui.add_space(6.0);
+        // 還在讀語言清單：只轉圈，不寫字
+        if self.manifest.is_none() && self.busy {
+            ui.vertical_centered(|ui| ui.spinner());
+            ui.add_space(8.0);
+        }
+        self.language_picker(ui, false);
+    }
+
+    /// 語言畫面底下只有一個「→」，不寫字
+    fn language_nav(&mut self, ui: &mut egui::Ui) {
+        ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
+            if ui.button(RichText::new("   →   ").size(18.0).color(GOLD_HI)).clicked() {
+                let _ = self.config.save();
+                self.enter(Page::Wizard(0));
+                self.page = Page::Wizard(0);
+            }
+        });
     }
 
     fn finish_wizard(&mut self, ctx: &egui::Context) {
@@ -702,7 +714,7 @@ impl App {
                 self.create_shortcut(ctx);
             }
             if ui.button(self.t("rerun_wizard")).clicked() {
-                self.page = Page::Wizard(0);
+                self.page = Page::Language;
             }
         });
         ui.add_space(10.0);
@@ -749,7 +761,7 @@ impl App {
                         self.page = Page::Main;
                     }
                 }
-                Page::Wizard(_) => {}
+                Page::Wizard(_) | Page::Language => {}
             });
         });
     }
@@ -787,11 +799,15 @@ impl eframe::App for App {
             Page::Main => {
                 egui::TopBottomPanel::bottom("footer").frame(bar_frame()).show_separator_line(false).show(ctx, |ui| self.footer(ui, ctx));
             }
+            Page::Language => {
+                egui::TopBottomPanel::bottom("nav").frame(bar_frame()).show_separator_line(false).show(ctx, |ui| self.language_nav(ui));
+            }
             Page::Settings => {}
         }
 
         egui::CentralPanel::default().frame(egui::Frame::new().inner_margin(egui::Margin::symmetric(20, 14))).show(ctx, |ui| {
             egui::ScrollArea::vertical().auto_shrink([false, false]).show(ui, |ui| match self.page {
+                Page::Language => self.language_page(ui),
                 Page::Wizard(step) => self.wizard(ui, ctx, step),
                 Page::Main => self.main_page(ui, ctx),
                 Page::Settings => self.settings_page(ui, ctx),

@@ -5,7 +5,6 @@
 
 /// (key, [繁中, 簡中, 英文, 日, 德, 法, 俄, 波蘭])
 const TABLE: &[(&str, [&str; 8])] = &[
-    ("step_lang", ["語言", "语言", "Language", "言語", "Sprache", "Langue", "Язык", "Język"]),
     ("step_game", ["遊戲", "游戏", "Game", "ゲーム", "Spiel", "Jeu", "Игра", "Gra"]),
     ("step_d2", ["Diablo II", "Diablo II", "Diablo II", "ディアブロ II", "Diablo II", "Diablo II", "Diablo II", "Diablo II"]),
     ("step_done", ["完成", "完成", "Done", "完了", "Fertig", "Terminé", "Готово", "Gotowe"]),
@@ -16,8 +15,6 @@ const TABLE: &[(&str, [&str; 8])] = &[
     ("back", ["上一步", "上一步", "Back", "戻る", "Zurück", "Précédent", "Назад", "Wstecz"]),
     ("skip", ["略過", "跳过", "Skip", "スキップ", "Überspringen", "Passer", "Пропустить", "Pomiń"]),
     ("return", ["返回", "返回", "Back", "戻る", "Zurück", "Retour", "Назад", "Wróć"]),
-    ("lang_loading", ["正在讀取翻譯清單…", "正在读取翻译列表…", "Loading the list of translations…", "翻訳の一覧を読み込んでいます…", "Liste der Übersetzungen wird geladen…", "Chargement de la liste des traductions…", "Загрузка списка переводов…", "Wczytywanie listy tłumaczeń…"]),
-    ("lang_offline", ["讀不到翻譯清單，請確認網路。現在可以先選英文或韓文原版。", "读不到翻译列表，请确认网络。现在可以先选英文或韩文原版。", "Couldn't load the list of translations. Check your connection; for now you can pick the original English or Korean.", "翻訳の一覧を読み込めませんでした。インターネット接続を確認してください。今は英語または韓国語のオリジナルを選べます。", "Die Liste der Übersetzungen konnte nicht geladen werden. Prüfen Sie Ihre Internetverbindung. Vorerst können Sie das englische oder koreanische Original wählen.", "Impossible de charger la liste des traductions. Vérifiez votre connexion ; en attendant, vous pouvez choisir l’original anglais ou coréen.", "Не удалось загрузить список переводов. Проверьте подключение к интернету. Пока можно выбрать оригинал на английском или корейском.", "Nie udało się wczytać listy tłumaczeń. Sprawdź połączenie z internetem. Na razie można wybrać oryginał po angielsku lub po koreańsku."]),
     ("game_title", ["D2 Survivors", "D2 Survivors", "D2 Survivors", "D2 Survivors", "D2 Survivors", "D2 Survivors", "D2 Survivors", "D2 Survivors"]),
     ("game_found", ["已找到 D2 Survivors", "已找到 D2 Survivors", "D2 Survivors found", "D2 Survivors が見つかりました", "D2 Survivors gefunden", "D2 Survivors trouvé", "Найдена игра D2 Survivors", "Znaleziono D2 Survivors"]),
     ("game_version", ["版本 {}", "版本 {}", "version {}", "バージョン {}", "Version {}", "version {}", "версия {}", "wersja {}"]),

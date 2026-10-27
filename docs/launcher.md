@@ -9,12 +9,11 @@ cargo test --release                        # 有 backup/2026.1026.4/app.asar �
 
 ## 視窗
 
-- **設定精靈**（第一次開啟時；之後可以從「設定」→「重新執行設定精靈」再跑一次）：
-  1. 選語言：同時決定啟動器的介面語言和遊戲的翻譯語言。預設照 Windows 的地區格式（`GetUserDefaultLocaleName`，zh-TW／zh-HK → 繁中、zh-CN → 簡中、ja／de／fr／ru／pl／ko，其他用英文）。兩欄的卡片一次列出 manifest 裡有 `desktop` 的語言，加上 English、한국어；卡片上是語言名稱（大字）和狀態（小字），都用那個語言自己寫（简体中文／测试中、Русский／бета，`i18n::native_status`），不用國旗。這一步沒有標題和說明，只有 🌐 圖示和語言卡片（玩家這時還沒選語言）；「下一步」和之後的畫面照選的語言，點了立刻換。還沒讀到 manifest 時顯示「讀取中」，讀不到就說明可以先選原版
-  2. D2 Survivors：沿用 `game_dir` 的偵測（預設 `%LOCALAPPDATA%\Programs\D2 Survivors`），可以手動選資料夾。沒裝時給官方網站按鈕和「重新偵測」，也可以略過
-  3. Diablo II：依序找 D2 Survivors 自己記的 `%APPDATA%\D2 Survivors\desktop.json` 的 `installDir`、D2R 的解除安裝登錄（`InstallLocation`）、經典版的登錄（`InstallPath`）、`Program Files (x86)` 下的預設資料夾；資料夾裡有 `D2R.exe` 算 D2R，有 `d2data.mpq` 和 `Game.exe` 算經典版。找到的存進設定的 `d2_dir`／`d2_kind`（之後從 D2R 取字型、或改走在玩家電腦上配對官方譯名的備案時用）。都沒找到時說明需要購買 Diablo II: Resurrected，按鈕連到 Blizzard 官方頁面（只放官方連結）；偵測不到不擋流程。測試「找不到」的畫面：設環境變數 `D2S_FAKE_NO_D2=1` 再按「重新偵測」
-  4. 完成：連結（網站、社群 Discord、「☕ 請我喝杯咖啡」）、「在桌面建立捷徑」、「啟動遊戲」
-- 精靈上方是步驟指示（① 語言 — ② 遊戲 — ③ Diablo II — ④ 完成，目前的用金色），底下是「上一步／下一步（找不到時是略過）／完成」
+- **語言畫面**（第一次開啟時最先出現；「設定」→「重新執行設定精靈」也從這裡開始）：只有標題列的 D2 圖示和程式名稱，加上兩欄的語言卡片（manifest 裡有 `desktop` 的語言，加上 English、한국어）。卡片上是語言名稱（大字）和狀態（小字），都用那個語言自己寫（简体中文／测试中、Русский／бета，`i18n::native_status`），不用國旗。沒有步驟指示、沒有說明文字（玩家這時還沒選語言），底下只有一個「→」。預設選 Windows 的地區格式對應的語言（`GetUserDefaultLocaleName`，zh-TW／zh-HK → 繁中、zh-CN → 簡中、ja／de／fr／ru／pl／ko，其他用英文）。選的語言同時決定啟動器的介面語言和遊戲的翻譯語言
+- **設定精靈**（選完語言之後，全部用選的語言）：上方是步驟指示（① 遊戲 — ② Diablo II — ③ 完成，目前的用金色），底下是「上一步／下一步（找不到時是略過）／完成」；第一步的「上一步」回到語言畫面
+  1. D2 Survivors：沿用 `game_dir` 的偵測（預設 `%LOCALAPPDATA%\Programs\D2 Survivors`），可以手動選資料夾。沒裝時給官方網站按鈕和「重新偵測」，也可以略過
+  2. Diablo II：依序找 D2 Survivors 自己記的 `%APPDATA%\D2 Survivors\desktop.json` 的 `installDir`、D2R 的解除安裝登錄（`InstallLocation`）、經典版的登錄（`InstallPath`）、`Program Files (x86)` 下的預設資料夾；資料夾裡有 `D2R.exe` 算 D2R，有 `d2data.mpq` 和 `Game.exe` 算經典版。找到的存進設定的 `d2_dir`／`d2_kind`（之後從 D2R 取字型、或改走在玩家電腦上配對官方譯名的備案時用）。都沒找到時說明需要購買 Diablo II: Resurrected，按鈕連到 Blizzard 官方頁面（只放官方連結）；偵測不到不擋流程。測試「找不到」的畫面：設環境變數 `D2S_FAKE_NO_D2=1` 再按「重新偵測」
+  3. 完成：連結（網站、社群 Discord、「☕ 請我喝杯咖啡」）、「在桌面建立捷徑」、「啟動遊戲」
 - **主畫面**：語言下拉選單（選項文字一樣用各自的語言）、說明（原版不會被標成 patched／翻譯版會）、金色的大「啟動遊戲」按鈕、最新一筆更新紀錄的小卡片（沒看過的有「新」和「知道了」）。底部是狀態列（翻譯、遊戲、啟動器的版本，綠點正常、黃點要注意：檢查更新失敗、有新版啟動器）和連結（網站、Discord、贊助）。上方視需要顯示：找不到遊戲、退回原版的原因、錯誤、需要更新啟動器
 - **設定**：遊戲資料夾、Diablo II 資料夾、更新來源、自動更新、啟動後關閉、還原原版、建立桌面捷徑、重新執行設定精靈、連結、命令列說明、授權（Cinzel 的 OFL 全文）、詳細紀錄
 - 背景的檢查更新失敗（離線、網址還沒上線）不跳紅色錯誤，狀態列的翻譯變成黃點、旁邊的 ⚠ 說明「無法檢查更新，先用本機的翻譯」；啟動、還原失敗才顯示錯誤
@@ -23,7 +22,7 @@ cargo test --release                        # 有 backup/2026.1026.4/app.asar �
   - 內文 Segoe UI，加上微軟正黑（簡中是微軟雅黑、日文是遊ゴシック）、Malgun Gothic，emoji 圖示用 egui 內建的 Noto Emoji
   - 「啟動遊戲」是金底深色字（#1a1206），hover 變亮金、按下變暗並往下 1 px
   - 視窗 580×620（邏輯像素，Windows 縮放時跟著放大）。100%、125% 實際截圖檢查過；150% 時是 870×930 實體像素，1080p 螢幕的工作區放得下
-- 測試、截圖用的環境變數：`D2S_UI_PAGE=wizard1`～`wizard4`／`main`／`settings` 直接開那一頁；`D2S_UI_ZOOM=1.25` 連視窗一起放大，模擬 Windows 的縮放
+- 測試、截圖用的環境變數：`D2S_UI_PAGE=language`／`wizard1`～`wizard3`／`main`／`settings` 直接開那一頁；`D2S_UI_ZOOM=1.25` 連視窗一起放大，模擬 Windows 的縮放
 - 程式名稱是 `system.rs` 的 `APP_NAME`「D2 Survivors Localization」：每種介面語言都一樣、不翻譯（啟動器支援很多語言，不叫「中文化」）。視窗標題、標題列、exe 的 FileDescription／ProductName（`build.rs`）、桌面捷徑名稱都用它；exe 檔名照舊是 `d2s-launcher.exe`
 - 網址集中在 `system.rs`：`SITE_URL`（網站，暫定 GitHub Pages 網址，換網域只改這裡）、`DISCORD_URL`（永久邀請連結）、`DONATE_URL`（贊助，只是一個小連結：不跳出、不提醒、不影響功能）、`GAME_URL`、`D2R_URL`
 - 介面文字在 `launcher/src/i18n.rs` 的 `TABLE`：一行一個 key，8 欄依序是繁中、簡中、英文、日、德、法、俄、波蘭文（韓文和其他語言用英文）。日、德、法、俄、波蘭文是翻譯聊天室翻的（`dict/launcher-i18n.json`），`node launcher/merge-i18n.mjs --write` 併進 TABLE（不加 `--write` 只列出差異）；新增或修改 key 時要通知翻譯聊天室補翻（來源清單 `dict/launcher-i18n-src.json`）。`{}` 是代入的值，各語言數量要一樣（`cargo test` 會檢查）。介面語言跟著選的遊戲語言（選英文、韓文原版時用英文）。處理中的紀錄是繁中寫的，其他介面語言只顯示「處理中」
