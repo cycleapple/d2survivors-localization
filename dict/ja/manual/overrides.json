@@ -7,7 +7,7 @@
  "Armageddon's Hailstorm now deals 8% more damage": "天変地異の「雹の嵐」のダメージが8%上昇しました",
  "Exile's Retribution now says its blast comes each time you block, at most every 0.8 seconds instead of every 4": "追放の「天罰」の説明に、爆発が4秒ごとではなく、ブロックするたびに最短0.8秒間隔で発生すると表示されるようになりました",
  "Absorb on Resist Fire, Cold and Lightning costs 20 points of resistance, as Retort does, not half the aura": "火炎耐性、冷気耐性、電撃耐性の「吸収」の代償が、オーラ効果の半分ではなく、「切り返し」と同じく耐性20ポイントになりました",
- "Shock Web's Creeping webs now stay on the pack instead of drifting past it, so they deal more in all, though their bonus is 20%, not 50%": "ショックウェブの「這い寄る」のウェブが、通り過ぎずに敵の群れの上にとどまるようになり、合計ダメージが増えました。ただしボーナスは50%ではなく20%です",
+ "Shock Web's Creeping webs now stay on the pack instead of drifting past it, so they deal more in all, though their bonus is 20%, not 50%": "ショックウェブの「這い寄り」のウェブが、通り過ぎずに敵の群れの上にとどまるようになり、合計ダメージが増えました。ただしボーナスは50%ではなく20%です",
  "War Banner now marks its reach with a ring on the floor, so you can see where Battle Orders keeps working": "「軍旗」が地面に輪を表示して範囲を示すようになり、鼓舞がどこまで有効か分かるようになりました",
  "Decrepify's Withering Ground now curses three quarters of Decrepify's area, not a third": "衰弱の「枯死の地」が、衰弱の範囲の3分の1ではなく4分の3に呪いをかけるようになりました",
  "Iron Maiden's Spite now sends back a missile's full damage, not what your resistances left of it": "アイアンメイデンの「悪意」が、耐性で軽減された後の値ではなく、発射物のダメージ全体を跳ね返すようになりました",
