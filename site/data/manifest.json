@@ -1,21 +1,21 @@
 {
   "schema": 2,
-  "updated": "2026-10-27T17:27:47.387Z",
-  "version": "20261027-1727",
+  "updated": "2026-10-27T22:43:19.405Z",
+  "version": "20261027-2243",
   "game": {
     "desktop": "2026.1027.2",
-    "web_checked": "2026-10-27T17:00:14.344Z"
+    "web_checked": "2026-10-27T22:26:27.496Z"
   },
   "languages": [
     {
       "id": "zh-TW",
       "name": "繁體中文",
       "status": "available",
-      "entries": 12975,
+      "entries": 12984,
       "dict": {
-        "url": "dict/zh-TW.json?v=f5cd811b388f",
-        "sha256": "f5cd811b388fff45e610153f065de18467c0a8c747a66a8b98d52f64e71596d6",
-        "size": 815226
+        "url": "dict/zh-TW.json?v=d670285265f1",
+        "sha256": "d670285265f147e7ae8e7c9c8295beeb85f90dd5b8685e3a3ca09562eb30771c",
+        "size": 815716
       },
       "desktop": {
         "menu_name": "繁體中文",
@@ -54,12 +54,12 @@
     {
       "id": "zh-CN",
       "name": "简体中文",
-      "status": "beta",
-      "entries": 12982,
+      "status": "available",
+      "entries": 12983,
       "dict": {
-        "url": "dict/zh-CN.json?v=fc35b86f4d3d",
-        "sha256": "fc35b86f4d3dbca1c093f099141936dc7ed36ea12ce7b3af850842e8359614b9",
-        "size": 815535
+        "url": "dict/zh-CN.json?v=b254e256df0a",
+        "sha256": "b254e256df0a3ff1342c1d9dfa1c5cd5f7b79c755bc7cde7b17a367c8f3aa293",
+        "size": 815571
       },
       "desktop": {
         "menu_name": "简体中文",
@@ -96,12 +96,12 @@
     {
       "id": "ja",
       "name": "日本語",
-      "status": "beta",
-      "entries": 12985,
+      "status": "available",
+      "entries": 12989,
       "dict": {
-        "url": "dict/ja.json?v=2958a456ce50",
-        "sha256": "2958a456ce50447b5255a1fbd5826cc3c5759d036f627e40a33636a38dd050e4",
-        "size": 980873
+        "url": "dict/ja.json?v=f99995054ed1",
+        "sha256": "f99995054ed1e0890bcb6b23ba8cb8afc04c6aebf5451daa1324508a5063a990",
+        "size": 981109
       },
       "desktop": {
         "menu_name": "日本語",
@@ -123,28 +123,33 @@
           "magic-ja"
         ],
         "fonts": [
+          "Yu Gothic UI Bold",
+          "Yu Gothic Bold",
           "Meiryo UI Bold",
           "Meiryo Bold",
           "Hiragino Sans W6",
           "Hiragino Kaku Gothic ProN W6",
           "Noto Sans JP Bold",
           "Noto Sans CJK JP Bold",
+          "Yu Gothic UI",
+          "Yu Gothic",
           "Meiryo",
           "Hiragino Sans",
           "Noto Sans JP",
-          "Noto Sans CJK JP"
+          "Noto Sans CJK JP",
+          "MS Gothic"
         ]
       }
     },
     {
       "id": "de",
       "name": "Deutsch",
-      "status": "beta",
-      "entries": 13021,
+      "status": "available",
+      "entries": 13023,
       "dict": {
-        "url": "dict/de.json?v=36dcc652e163",
-        "sha256": "36dcc652e16344cf61dcb5b9e1c7dbffdfabf1b7c59cf935ef344ca38581914f",
-        "size": 904758
+        "url": "dict/de.json?v=6e0a29baad6a",
+        "sha256": "6e0a29baad6a8ffb3d13810c70f254b89e539db321dd2ccc3f85b13c2cf7500e",
+        "size": 904515
       },
       "desktop": {
         "menu_name": "Deutsch",
@@ -152,6 +157,8 @@
         "groups": [
           "base",
           "dict",
+          "gender",
+          "caps",
           "magic-de",
           "unique-de"
         ]
@@ -162,6 +169,7 @@
         "groups": [
           "base",
           "dict",
+          "caps",
           "magic-de",
           "unique-de"
         ],
@@ -171,12 +179,12 @@
     {
       "id": "fr",
       "name": "Français",
-      "status": "beta",
-      "entries": 13029,
+      "status": "available",
+      "entries": 13032,
       "dict": {
-        "url": "dict/fr.json?v=e3d795417596",
-        "sha256": "e3d79541759656b78a053cc8b2eb768cc7617406e2c736db6f8439a2232fef71",
-        "size": 948917
+        "url": "dict/fr.json?v=3cd8a85b591e",
+        "sha256": "3cd8a85b591e080616b22a7eafe7b61c3f6cebe039462126467a93bdf212d3e0",
+        "size": 948753
       },
       "desktop": {
         "menu_name": "Français",
@@ -184,6 +192,8 @@
         "groups": [
           "base",
           "dict",
+          "gender",
+          "caps",
           "magic-fr",
           "unique-fr"
         ]
@@ -194,6 +204,7 @@
         "groups": [
           "base",
           "dict",
+          "caps",
           "magic-fr",
           "unique-fr"
         ],
@@ -203,12 +214,12 @@
     {
       "id": "ru",
       "name": "Русский",
-      "status": "beta",
-      "entries": 13051,
+      "status": "available",
+      "entries": 13073,
       "dict": {
-        "url": "dict/ru.json?v=374101f20c4e",
-        "sha256": "374101f20c4e8643ff90556e9e58eb80fdb5cb3422df2a67fa8f46dea83ffcdf",
-        "size": 1236253
+        "url": "dict/ru.json?v=34bc3b05ca21",
+        "sha256": "34bc3b05ca216017495f051415c1066abff36551623a928711cdcca2bd56f56b",
+        "size": 1237775
       },
       "desktop": {
         "menu_name": "Русский",
@@ -216,6 +227,8 @@
         "groups": [
           "base",
           "dict",
+          "gender",
+          "caps",
           "cyrillic",
           "font-ru",
           "magic-ru",
@@ -228,6 +241,7 @@
         "groups": [
           "base",
           "dict",
+          "caps",
           "cyrillic",
           "font-ru",
           "magic-ru",
@@ -248,12 +262,12 @@
     {
       "id": "pl",
       "name": "Polski",
-      "status": "beta",
-      "entries": 13002,
+      "status": "available",
+      "entries": 13063,
       "dict": {
-        "url": "dict/pl.json?v=b21f2f7390d8",
-        "sha256": "b21f2f7390d8af8efe1f13ed76d5b8509ac85d92794e9ac5cde32fa43ff066c8",
-        "size": 911685
+        "url": "dict/pl.json?v=336906ea88ba",
+        "sha256": "336906ea88ba4c1288e8b8b887eec46fe12fc05ba8516410b4856084f82acbb8",
+        "size": 915452
       },
       "desktop": {
         "menu_name": "Polski",
@@ -261,6 +275,8 @@
         "groups": [
           "base",
           "dict",
+          "gender",
+          "caps",
           "latin-ext",
           "font-pl",
           "size-pl",
@@ -274,6 +290,7 @@
         "groups": [
           "base",
           "dict",
+          "caps",
           "latin-ext",
           "font-pl",
           "size-pl",
@@ -425,11 +442,56 @@
       {
         "label": "女性職業的稱號",
         "groups": [
-          "dict"
+          "gender"
         ],
         "file": "^Game-.*\\.js$",
         "from": "function rO(e,t){let n=Ug(e,t);if(!n)return null;let r=st(e,t);return r>0&&!R(e,t)?`${u(n)} · ${qe(r)}`:u(n)}",
         "to": "function rO(e,t){let n=Ug(e,t);if(!n)return null;let F=Bg.includes(t)?u(`${n}:f`):null,T=F&&F!==`${n}:f`?F:u(n),r=st(e,t);return r>0&&!R(e,t)?`${T} · ${qe(r)}`:T}"
+      },
+      {
+        "label": "女性職業的 Survivor",
+        "groups": [
+          "gender"
+        ],
+        "file": "^saveTransfer-.*\\.js$",
+        "from": "r.push(e.inspect?this.nameBox(e.inspect.name):this.fit(`Survivor`,Ql.name,`white`),a)",
+        "to": "let $f=[`amazon`,`assassin`,`sorceress`].includes(e.cls)?v(`title:Survivor:f`):null;r.push(e.inspect?this.nameBox(e.inspect.name):this.fit($f&&$f!==`title:Survivor:f`?$f:`Survivor`,Ql.name,`white`),a)"
+      },
+      {
+        "label": "全大寫的原文",
+        "groups": [
+          "caps"
+        ],
+        "file": "^lang-.*\\.js$",
+        "from": "let n=this.find(e,0),r=n??e;",
+        "to": "let n=this.find(e,0),r=n??e;n!==null&&/[A-Z].*[A-Z]/s.test(e)&&!/[a-z]/.test(e)&&(r=n.toLocaleUpperCase(`{{html_lang}}`));"
+      },
+      {
+        "label": "全大寫的原文（分類查詢）",
+        "groups": [
+          "caps"
+        ],
+        "file": "^lang-.*\\.js$",
+        "from": "translateAs(e,t){return this.exact.get(s(`${e}:${t.trim()}`))??this.translate(t)}",
+        "to": "translateAs(e,t){let n=this.exact.get(s(`${e}:${t.trim()}`));return n===void 0?this.translate(t):/[A-Z].*[A-Z]/s.test(t)&&!/[a-z]/.test(t)?n.toLocaleUpperCase(`{{html_lang}}`):n}"
+      },
+      {
+        "label": "進化條件的頓號（升級卡片）",
+        "groups": [
+          "cjk"
+        ],
+        "file": "^saveTransfer-.*\\.js$",
+        "from": "{text:n<e.needs.length-1?`${t.text},`:t.text,color:t.met?`white`:`red`}",
+        "to": "{text:n<e.needs.length-1?`${v(t.text)}、`:t.text,color:t.met?`white`:`red`}"
+      },
+      {
+        "label": "進化條件的頓號（HUD）",
+        "groups": [
+          "cjk"
+        ],
+        "file": "^saveTransfer-.*\\.js$",
+        "from": "n.text+(r<e.needs.length-1?`,`:``)",
+        "to": "(r<e.needs.length-1?`${v(n.text)}、`:n.text)"
       },
       {
         "label": "日期格式（排行榜）",
@@ -504,7 +566,7 @@
           "cjk"
         ],
         "from": "for(let i of r.split(` `)){let r=e?`${e} ${i}`:i;",
-        "to": "for(let i of r.split(` `).flatMap(w=>(w.match(/[\\u300c\\u300e\\u3010\\uff08]*[\\u3000-\\u9fff\\uff00-\\uffef][\\u3001\\u3002\\uff0c\\uff1a\\uff1b\\uff01\\uff1f\\uff09\\u300d\\u300f\\u3011\\u30fc\\u30fb\\u3041\\u3043\\u3045\\u3047\\u3049\\u3063\\u3083\\u3085\\u3087\\u308e\\u30a1\\u30a3\\u30a5\\u30a7\\u30a9\\u30c3\\u30e3\\u30e5\\u30e7\\u30ee\\u30f5\\u30f6]*|[^\\u3000-\\u9fff\\uff00-\\uffef]+(?:[\\u300c\\u300e\\u3010\\uff08]*[\\u3000-\\u9fff\\uff00-\\uffef][\\u3001\\u3002\\uff0c\\uff1a\\uff1b\\uff01\\uff1f\\uff09\\u300d\\u300f\\u3011\\u30fc\\u30fb\\u3041\\u3043\\u3045\\u3047\\u3049\\u3063\\u3083\\u3085\\u3087\\u308e\\u30a1\\u30a3\\u30a5\\u30a7\\u30a9\\u30c3\\u30e3\\u30e5\\u30e7\\u30ee\\u30f5\\u30f6]*)?/g)??[w]).map((x,j)=>j?`\\u0001${x}`:x))){let g=i[0]===`\\u0001`;i=g?i.slice(1):i;let r=e?g?e+i:`${e} ${i}`:i;"
+        "to": "for(let i of r.split(` `).flatMap(w=>(w.match(/[\\u300c\\u300e\\u3010\\uff08]*[\\u3000-\\u9fff\\uff00-\\uffef][:;,.!?)\\u3001\\u3002\\uff0c\\uff1a\\uff1b\\uff01\\uff1f\\uff09\\u300d\\u300f\\u3011\\u30fc\\u30fb\\u3041\\u3043\\u3045\\u3047\\u3049\\u3063\\u3083\\u3085\\u3087\\u308e\\u30a1\\u30a3\\u30a5\\u30a7\\u30a9\\u30c3\\u30e3\\u30e5\\u30e7\\u30ee\\u30f5\\u30f6]*|[^\\u3000-\\u9fff\\uff00-\\uffef]+(?:[\\u300c\\u300e\\u3010\\uff08]*[\\u3000-\\u9fff\\uff00-\\uffef][:;,.!?)\\u3001\\u3002\\uff0c\\uff1a\\uff1b\\uff01\\uff1f\\uff09\\u300d\\u300f\\u3011\\u30fc\\u30fb\\u3041\\u3043\\u3045\\u3047\\u3049\\u3063\\u3083\\u3085\\u3087\\u308e\\u30a1\\u30a3\\u30a5\\u30a7\\u30a9\\u30c3\\u30e3\\u30e5\\u30e7\\u30ee\\u30f5\\u30f6]*)?/g)??[w]).map((x,j)=>j?`\\u0001${x}`:x))){let g=i[0]===`\\u0001`;i=g?i.slice(1):i;let r=e?g?e+i:`${e} ${i}`:i;"
       },
       {
         "label": "中文字型",
@@ -513,7 +575,7 @@
         ],
         "file": "^lang-.*\\.js$",
         "from": "if(typeof FontFace>`u`)return;",
-        "to": "if(typeof FontFace>`u`)return;await Promise.all([[`D2R Kodia`,`body.woff2`],[`D2R Iris`,`body.woff2`],[`D2 Hangul`,`body.woff2`],[`D2 Hangul 14`,`body.woff2`]].map(async([f,n])=>{try{document.fonts.add(await new FontFace(f,`url(${new URL(`../fonts-zh/${n}`,document.baseURI).href})`,{unicodeRange:`U+3000-30FF, U+3400-4DBF, U+4E00-9FFF, U+FF00-FFEF`}).load())}catch{}}));"
+        "to": "if(typeof FontFace>`u`)return;{let $r=`U+3000-30FF, U+3400-4DBF, U+4E00-9FFF, U+FF00-FFEF`,$a=async(f,s)=>{try{document.fonts.add(await new FontFace(f,s,{unicodeRange:$r}).load())}catch{}},$n=[`D2R Kodia`,`D2R Iris`,`D2 Hangul`,`D2 Hangul 14`],$s=({[`zh-Hans`]:[`Microsoft YaHei`,`MicrosoftYaHei`,`Microsoft YaHei UI`,`DengXian`,`SimSun`],ja:[`Yu Gothic Medium`,`YuGothic-Medium`,`Yu Gothic Regular`,`YuGothic-Regular`,`Meiryo`,`MS Gothic`]})[`{{html_lang}}`]??[`Microsoft JhengHei`,`MicrosoftJhengHeiRegular`,`Microsoft JhengHei UI`,`PMingLiU`];await Promise.all($n.map(f=>$a(f,$s.map(n=>`local(\"${n}\")`).join(`,`))));await Promise.all($n.map(f=>$a(f,`url(${new URL(`../fonts-zh/body.woff2`,document.baseURI).href})`)))}"
       },
       {
         "label": "俄文字型",
@@ -773,6 +835,36 @@
         "replace": "function $1($2,$3){let $4=$5($2,$3);if(!$4)return null;let d2F=[`amazon`,`assassin`,`sorceress`].includes($3)?$9(`${$4}:f`):null,d2T=d2F&&d2F!==`${$4}:f`?d2F:$9($4),$6=$7($2,$3);return $6>0&&!$8($2,$3)?`${d2T} · ${$10($6)}`:d2T}"
       },
       {
+        "label": "女性職業的 Survivor（查詢函式）",
+        "groups": [
+          "dict"
+        ],
+        "optional": true,
+        "file": "^lang-.*\\.js$",
+        "find": "function ([\\w$]+)\\(([\\w$]+)\\)\\{return ([\\w$]+)\\?\\3\\.translateAs\\(`title`,\\2\\):\\2\\}",
+        "replace": "globalThis.__d2zhSurvivor=d2c=>{if(!$3||![`amazon`,`assassin`,`sorceress`].includes(d2c))return null;let d2v=$3.translateAs(`title`,`Survivor:f`);return d2v===`Survivor:f`?null:d2v};function $1($2){return $3?$3.translateAs(`title`,$2):$2}"
+      },
+      {
+        "label": "女性職業的 Survivor（角色畫面）",
+        "groups": [
+          "dict"
+        ],
+        "optional": true,
+        "file": "^saveTransfer-.*\\.js$",
+        "find": "([\\w$]+)\\.inspect\\?this\\.nameBox\\(\\1\\.inspect\\.name\\):this\\.fit\\(`Survivor`,([\\w$]+)\\.name,`white`\\)",
+        "replace": "$1.inspect?this.nameBox($1.inspect.name):this.fit(globalThis.__d2zhSurvivor?.($1.cls)??`Survivor`,$2.name,`white`)"
+      },
+      {
+        "label": "全大寫的原文",
+        "groups": [
+          "caps"
+        ],
+        "optional": true,
+        "file": "^translate-.*\\.js$",
+        "find": "translate\\(([\\w$]+)\\)\\{if\\(!\\1\\|\\|!([\\w$]+)\\.test\\(\\1\\)\\)return \\1;let ([\\w$]+)=this\\.cache\\.get\\(\\1\\);if\\(\\3!==void 0\\)return \\3;let ([\\w$]+)=this\\.find\\(\\1,0\\),([\\w$]+)=\\4\\?\\?\\1;",
+        "replace": "translate($1){if(!$1||!$2.test($1))return $1;let $3=this.cache.get($1);if($3!==void 0)return $3;let $4=this.find($1,0);$4!==null&&!/\\p{Ll}/u.test($1)&&($4=$4.toLocaleUpperCase(`{{html_lang}}`));let $5=$4??$1;"
+      },
+      {
         "label": "技能變體專用譯名（翻譯函式）",
         "groups": [
           "dict"
@@ -862,7 +954,27 @@
         ],
         "optional": true,
         "find": "for\\(let ([\\w$]+) of ([\\w$]+)\\.split\\(` `\\)\\)\\{let ([\\w$]+)=([\\w$]+)\\?`\\$\\{\\4\\} \\$\\{\\1\\}`:\\1;",
-        "replace": "for(let $1 of $2.split(` `).flatMap(w=>(w.match(/[\\u300c\\u300e\\u3010\\uff08]*[\\u3000-\\u9fff\\uff00-\\uffef][\\u3001\\u3002\\uff0c\\uff1a\\uff1b\\uff01\\uff1f\\uff09\\u300d\\u300f\\u3011\\u30fc\\u30fb\\u3041\\u3043\\u3045\\u3047\\u3049\\u3063\\u3083\\u3085\\u3087\\u308e\\u30a1\\u30a3\\u30a5\\u30a7\\u30a9\\u30c3\\u30e3\\u30e5\\u30e7\\u30ee\\u30f5\\u30f6]*|[^\\u3000-\\u9fff\\uff00-\\uffef]+(?:[\\u300c\\u300e\\u3010\\uff08]*[\\u3000-\\u9fff\\uff00-\\uffef][\\u3001\\u3002\\uff0c\\uff1a\\uff1b\\uff01\\uff1f\\uff09\\u300d\\u300f\\u3011\\u30fc\\u30fb\\u3041\\u3043\\u3045\\u3047\\u3049\\u3063\\u3083\\u3085\\u3087\\u308e\\u30a1\\u30a3\\u30a5\\u30a7\\u30a9\\u30c3\\u30e3\\u30e5\\u30e7\\u30ee\\u30f5\\u30f6]*)?/g)??[w]).map((x,j)=>j?`\\u0001${x}`:x))){let g=$1[0]===`\\u0001`;$1=g?$1.slice(1):$1;let $3=$4?g?$4+$1:`${$4} ${$1}`:$1;"
+        "replace": "for(let $1 of $2.split(` `).flatMap(w=>(w.match(/[\\u300c\\u300e\\u3010\\uff08]*[\\u3000-\\u9fff\\uff00-\\uffef][\\u3001\\u3002\\uff0c\\uff1a\\uff1b\\uff01\\uff1f\\uff09\\u300d\\u300f\\u3011\\u30fc\\u30fb\\u3041\\u3043\\u3045\\u3047\\u3049\\u3063\\u3083\\u3085\\u3087\\u308e\\u30a1\\u30a3\\u30a5\\u30a7\\u30a9\\u30c3\\u30e3\\u30e5\\u30e7\\u30ee\\u30f5\\u30f6:]*|[^\\u3000-\\u9fff\\uff00-\\uffef]+(?:[\\u300c\\u300e\\u3010\\uff08]*[\\u3000-\\u9fff\\uff00-\\uffef][\\u3001\\u3002\\uff0c\\uff1a\\uff1b\\uff01\\uff1f\\uff09\\u300d\\u300f\\u3011\\u30fc\\u30fb\\u3041\\u3043\\u3045\\u3047\\u3049\\u3063\\u3083\\u3085\\u3087\\u308e\\u30a1\\u30a3\\u30a5\\u30a7\\u30a9\\u30c3\\u30e3\\u30e5\\u30e7\\u30ee\\u30f5\\u30f6:]*)?/g)??[w]).map((x,j)=>j?`\\u0001${x}`:x))){let g=$1[0]===`\\u0001`;$1=g?$1.slice(1):$1;let $3=$4?g?$4+$1:`${$4} ${$1}`:$1;"
+      },
+      {
+        "label": "進化條件的頓號（卡片）",
+        "groups": [
+          "cjk"
+        ],
+        "optional": true,
+        "file": "^saveTransfer-.*\\.js$",
+        "find": "function ([\\w$]+)\\(([\\w$]+)\\)\\{let ([\\w$]+)=([\\w$]+)\\(\\2\\.head\\)\\.split\\(` `\\)\\.map\\(([\\w$]+)=>\\(\\{text:\\5,color:`gold`\\}\\)\\),([\\w$]+)=\\2\\.needs\\.map\\(\\(([\\w$]+),([\\w$]+)\\)=>\\(\\{text:\\8<\\2\\.needs\\.length-1\\?`\\$\\{\\7\\.text\\},`:\\7\\.text,",
+        "replace": "function $1($2){let $3=$4($2.head).split(` `).map($5=>({text:$5,color:`gold`})),$6=$2.needs.map(($7,$8)=>({text:$8<$2.needs.length-1?`${$4($7.text)}、`:$7.text,"
+      },
+      {
+        "label": "進化條件的頓號（網頁）",
+        "groups": [
+          "cjk"
+        ],
+        "optional": true,
+        "file": "^saveTransfer-.*\\.js$",
+        "find": "([\\w$]+)\\.needs\\.forEach\\(\\(([\\w$]+),([\\w$]+)\\)=>([\\w$]+)\\.append\\(` `,([\\w$]+)\\(`span`,\\2\\.met\\?`met`:`missing`,\\2\\.text\\+\\(\\3<\\1\\.needs\\.length-1\\?`,`:``\\)\\)\\)\\)",
+        "replace": "$1.needs.forEach(($2,$3)=>$4.append($3?``:` `,$5(`span`,$2.met?`met`:`missing`,$2.text),$3<$1.needs.length-1?`、`:``))"
       },
       {
         "label": "暗色字不加描邊",
@@ -888,7 +1000,7 @@
     ]
   },
   "changelog": {
-    "url": "changelog.json?v=af75f368f0bc",
-    "latest": "20261027-1727"
+    "url": "changelog.json?v=46c7a8fe1b78",
+    "latest": "20261027-2243"
   }
 }

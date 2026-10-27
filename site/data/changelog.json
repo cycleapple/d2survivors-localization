@@ -2,6 +2,83 @@
   "schema": 1,
   "entries": [
     {
+      "version": "20261027-2243",
+      "date": "2026-10-27",
+      "kind": "language",
+      "announce": false,
+      "summary": {
+        "zh-TW": "七種語言全部升為正式版：繁中、簡中、日、德、法、俄、波蘭文都通過第二輪審稿、遊戲內漏翻檢查與桌面版／網頁版截圖檢查；死亡畫面的物理傷害、各語言的截圖修正一併更新",
+        "zh-CN": "七种语言全部升为正式版：繁中、简中、日、德、法、俄、波兰文都通过第二轮审校、游戏内漏翻检查与桌面版／网页版截图检查；死亡画面的物理伤害、各语言的截图修正一并更新",
+        "en": "All seven languages are now final: Traditional and Simplified Chinese, Japanese, German, French, Russian and Polish passed a second review, an in-game check for untranslated text and desktop/web screenshot checks; also fixes the death screen's physical damage and each language's screenshot findings",
+        "ja": "7言語すべてが正式版になりました。繁体字・簡体字中国語、日本語、ドイツ語、フランス語、ロシア語、ポーランド語が、2回目のレビュー、ゲーム内の未翻訳チェック、デスクトップ版・ブラウザー版のスクリーンショット確認を通過。死亡画面の物理ダメージと各言語のスクリーンショット確認による修正も反映",
+        "de": "Alle sieben Sprachen sind jetzt final: traditionelles und vereinfachtes Chinesisch, Japanisch, Deutsch, Französisch, Russisch und Polnisch haben eine zweite Durchsicht, eine Prüfung auf unübersetzte Texte im Spiel und Screenshot-Prüfungen für Desktop und Browser bestanden; dazu der physische Schaden im Todesbildschirm und die Korrekturen aus den Screenshots",
+        "fr": "Les sept langues passent en version finale : le chinois traditionnel et simplifié, le japonais, l'allemand, le français, le russe et le polonais ont passé une deuxième relecture, une vérification des textes non traduits en jeu et une vérification des captures sur ordinateur et navigateur ; avec les dégâts physiques de l'écran de mort et les corrections issues des captures",
+        "ru": "Все семь языков теперь в финальной версии: традиционный и упрощенный китайский, японский, немецкий, французский, русский и польский прошли вторую вычитку, проверку непереведенного текста в игре и проверку скриншотов на компьютере и в браузере; также исправлен физический урон на экране смерти и учтены замечания по скриншотам",
+        "pl": "Wszystkie siedem języków jest teraz w wersji ostatecznej: chiński tradycyjny i uproszczony, japoński, niemiecki, francuski, rosyjski i polski przeszły drugą korektę, sprawdzenie nieprzetłumaczonych tekstów w grze i sprawdzenie zrzutów ekranu na komputerze i w przeglądarce; poprawiono też obrażenia fizyczne na ekranie śmierci i uwagi ze zrzutów ekranu"
+      },
+      "game": {
+        "desktop": "2026.1027.2"
+      },
+      "languages": [
+        {
+          "id": "zh-TW",
+          "status": "available",
+          "entries": 12984,
+          "added": 9,
+          "changed": 14,
+          "removed": 0
+        },
+        {
+          "id": "zh-CN",
+          "status": "available",
+          "entries": 12983,
+          "added": 1,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ja",
+          "status": "available",
+          "entries": 12989,
+          "added": 4,
+          "changed": 27,
+          "removed": 0
+        },
+        {
+          "id": "de",
+          "status": "available",
+          "entries": 13023,
+          "added": 2,
+          "changed": 24,
+          "removed": 0
+        },
+        {
+          "id": "fr",
+          "status": "available",
+          "entries": 13032,
+          "added": 3,
+          "changed": 22,
+          "removed": 0
+        },
+        {
+          "id": "ru",
+          "status": "available",
+          "entries": 13073,
+          "added": 22,
+          "changed": 46,
+          "removed": 0
+        },
+        {
+          "id": "pl",
+          "status": "available",
+          "entries": 13063,
+          "added": 61,
+          "changed": 46,
+          "removed": 0
+        }
+      ]
+    },
+    {
       "version": "20261027-1727",
       "date": "2026-10-27",
       "kind": "translation",
