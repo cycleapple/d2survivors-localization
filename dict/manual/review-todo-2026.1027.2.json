@@ -1,0 +1,15 @@
+{
+ "Akara's re-draft gives back a legit hero's": "在阿卡拉處重新抽選，即可取回合規英雄應有的點數",
+ "Akara's re-draft gives back a legit hero's, free": "在阿卡拉處免費重新抽選，即可取回合規英雄應有的點數",
+ "From gear, half its Increased Attack Speed, its mana and the card, and Meditation": "來自裝備、裝備攻擊速度的一半、裝備的法力、卡片，以及冥想",
+ "Trump": "愚者",
+ "It bursts half as wide, for 60% more poison, and needs a corpse twice as close to a monster.": "爆炸範圍減半，毒素提高60%，且屍體與怪物的距離必須在原本的一半以內。",
+ "Strikes the toughest monster in reach with a heavy blow for # damage, sweeping #% through the monsters beside it. Each blow costs #% of your life, none below #%.": "重擊範圍內最強的怪物，造成{0}點傷害，並對其旁的怪物橫掃{1}%的傷害。每次打擊消耗{2}%的生命，生命低於{3}%時不會發動。",
+ "Strikes the toughest monster in reach for # damage, costing #% of your life (none below #%).": "打擊範圍內最強的怪物，造成{0}點傷害，消耗{1}%的生命（生命低於{2}%時不會發動）。",
+ "A Terror offer taken while a tier run is saved plays the offer you clicked, and Wirt's Leg is only used up for the Secret Cow Level": "已有儲存的恐懼階一局時選擇恐懼階選項，會進行你點擊的那一項，維特的腿也只會在進入秘密乳牛關時消耗",
+ "Frostburn": "霜灼",
+ "Stat Points": "屬性點數",
+ "# arrows": "{0}支箭",
+ "# hammer spirals out around you for # damage to all it passes.": "{0}把鎚子在你周圍盤旋擴散，對經過的所有怪物造成{1}點傷害。",
+ "Fires # bolts of holy light that pierce #, for # damage (double to the undead).": "發射{0}枚聖光，穿透{1}隻怪物，造成{2}點傷害（對不死怪物加倍）。"
+}

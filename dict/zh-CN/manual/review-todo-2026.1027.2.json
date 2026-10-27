@@ -1,0 +1,16 @@
+{
+ "Akara's re-draft gives back a legit hero's": "在阿卡拉处重新抽选，即可拿回合规英雄应有的点数",
+ "Akara's re-draft gives back a legit hero's, free": "在阿卡拉处免费重新抽选，即可拿回合规英雄应有的点数",
+ "From gear, half its Increased Attack Speed, its mana and the card, and Meditation": "来自装备、装备提高攻击速度的一半、装备的法力、卡片，以及冥思",
+ "It bursts half as wide, for 60% more poison, and needs a corpse twice as close to a monster.": "爆炸范围减半，毒素提高60%，且尸体与怪物的距离必须在原来的一半以内。",
+ "Strikes the toughest monster in reach with a heavy blow for # damage, sweeping #% through the monsters beside it. Each blow costs #% of your life, none below #%.": "以沉重的一击打击范围内最强的怪物，造成{0}点伤害，并对其旁的怪物横扫{1}%的伤害。每次打击消耗{2}%的生命，生命低于{3}%时不会发动。",
+ "Strikes the toughest monster in reach for # damage, costing #% of your life (none below #%).": "打击范围内最强的怪物，造成{0}点伤害，消耗{1}%的生命（生命低于{2}%时不会发动）。",
+ "A Terror offer taken while a tier run is saved plays the offer you clicked, and Wirt's Leg is only used up for the Secret Cow Level": "已有保存的恐惧阶一局时选择恐惧阶选项，会进行你点击的那一项，怀特的腿也只会在进入神秘的奶牛关时消耗",
+ "Lightning and Cold Enchanted uniques' bolts and novas deal D2's damage at the monster's level: Coldworm the Burrower no longer one-shots on a continued Hell": "闪电强化与冰霜强化暗金怪的电荷弹和新星会按怪物等级造成D2的伤害：在接续进行的地狱难度中，钻地的冰虫不再一击秒杀",
+ "title:Slayer": "屠魔者",
+ "title:Champion": "勇士",
+ "title:Guardian": "守护者",
+ "Huntress": "女猎手",
+ "Snare": "罗网",
+ "Frostburn": "霜燃"
+}
