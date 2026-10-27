@@ -20,37 +20,37 @@ const fetch0 = window.fetch.bind(window);
 
 const MESSAGES = {
   'zh-TW': {
-    loading: '正在載入繁體中文…', on: '繁體中文已開啟。再按一次書籤可以切換中英文。', to: '切換成繁體中文',
+    loading: '正在載入繁體中文…', on: '繁體中文已開啟。再按一次書籤可以切換中英文。翻譯模式下成績不會上傳到排行榜，要上榜請重新整理頁面用原版。', to: '切換成繁體中文',
     failed: '中文化載入失敗：', outdated: '遊戲改版了，中文化需要更新', page: '請先打開 D2 Survivors 的遊戲頁面（https://d2survivors.lol/play/），再按這個書籤。',
     old: '書籤需要更新：請到中文化網站重新安裝書籤。', loop: '中文化一直重新載入，已停止。請重新整理頁面。', frame: '中文化載入失敗：框架打不開。請重新整理頁面。',
   },
   'zh-CN': {
-    loading: '正在加载简体中文…', on: '简体中文已开启。再按一次书签可以切换中英文。', to: '切换成简体中文',
+    loading: '正在加载简体中文…', on: '简体中文已开启。再按一次书签可以切换中英文。汉化模式下成绩不会上传到排行榜，要上榜请刷新页面用原版。', to: '切换成简体中文',
     failed: '汉化加载失败：', outdated: '游戏更新了，汉化需要更新', page: '请先打开 D2 Survivors 的游戏页面（https://d2survivors.lol/play/），再按这个书签。',
     old: '书签需要更新：请到汉化网站重新安装书签。', loop: '汉化一直重新加载，已停止。请刷新页面。', frame: '汉化加载失败：框架打不开。请刷新页面。',
   },
   ja: {
-    loading: '日本語を読み込んでいます…', on: '日本語になりました。もう一度ブックマークを押すと英語に切り替わります。', to: '日本語に切り替えます',
+    loading: '日本語を読み込んでいます…', on: '日本語になりました。もう一度ブックマークを押すと英語に切り替わります。翻訳中の記録はリーダーボードに送信されません。ランキングに載せるにはページを再読み込みして元の版で遊んでください。', to: '日本語に切り替えます',
     failed: '日本語化の読み込みに失敗しました：', outdated: 'ゲームが更新されたため、日本語化の更新が必要です', page: 'D2 Survivors のゲームページ（https://d2survivors.lol/play/）を開いてから、このブックマークを押してください。',
     old: 'ブックマークの更新が必要です。日本語化サイトでブックマークを入れ直してください。', loop: '読み込みが繰り返されたため停止しました。ページを再読み込みしてください。', frame: '日本語化の読み込みに失敗しました：フレームを開けません。ページを再読み込みしてください。',
   },
   de: {
-    loading: 'Deutsch wird geladen…', on: 'Deutsch ist aktiv. Lesezeichen erneut anklicken, um zwischen Deutsch und Englisch zu wechseln.', to: 'Wechsel zu Deutsch',
+    loading: 'Deutsch wird geladen…', on: 'Deutsch ist aktiv. Lesezeichen erneut anklicken, um zwischen Deutsch und Englisch zu wechseln. Mit der Übersetzung werden keine Läufe an die Bestenliste gesendet; für die Bestenliste die Seite neu laden und das Original spielen.', to: 'Wechsel zu Deutsch',
     failed: 'Übersetzung konnte nicht geladen werden: ', outdated: 'Das Spiel wurde aktualisiert, die Übersetzung muss angepasst werden', page: 'Bitte zuerst die Spielseite von D2 Survivors öffnen (https://d2survivors.lol/play/) und dann das Lesezeichen anklicken.',
     old: 'Das Lesezeichen ist veraltet. Bitte auf der Übersetzungsseite neu installieren.', loop: 'Die Übersetzung lädt immer wieder neu und wurde gestoppt. Bitte die Seite neu laden.', frame: 'Übersetzung konnte nicht geladen werden: Rahmen lässt sich nicht öffnen. Bitte die Seite neu laden.',
   },
   fr: {
-    loading: 'Chargement du français…', on: 'Le français est activé. Cliquez à nouveau sur le favori pour basculer entre français et anglais.', to: 'Passage au français',
+    loading: 'Chargement du français…', on: 'Le français est activé. Cliquez à nouveau sur le favori pour basculer entre français et anglais. Avec la traduction, les parties ne sont pas envoyées au classement ; pour y figurer, rechargez la page et jouez à la version originale.', to: 'Passage au français',
     failed: 'Échec du chargement de la traduction : ', outdated: 'Le jeu a été mis à jour, la traduction doit l’être aussi', page: 'Ouvrez d’abord la page de jeu de D2 Survivors (https://d2survivors.lol/play/), puis cliquez sur ce favori.',
     old: 'Le favori est obsolète. Réinstallez-le depuis le site de la traduction.', loop: 'La traduction se recharge en boucle et a été arrêtée. Rechargez la page.', frame: 'Échec du chargement de la traduction : impossible d’ouvrir le cadre. Rechargez la page.',
   },
   ru: {
-    loading: 'Загрузка русского перевода…', on: 'Русский перевод включен. Нажмите закладку еще раз, чтобы переключиться между русским и английским.', to: 'Переключение на русский',
+    loading: 'Загрузка русского перевода…', on: 'Русский перевод включен. Нажмите закладку еще раз, чтобы переключиться между русским и английским. С переводом забеги не отправляются в таблицу лидеров; чтобы попасть в нее, обновите страницу и играйте в оригинал.', to: 'Переключение на русский',
     failed: 'Не удалось загрузить перевод: ', outdated: 'Игра обновилась, перевод нужно обновить', page: 'Сначала откройте страницу игры D2 Survivors (https://d2survivors.lol/play/), затем нажмите эту закладку.',
     old: 'Закладка устарела. Установите ее заново на сайте перевода.', loop: 'Перевод постоянно перезагружается и был остановлен. Обновите страницу.', frame: 'Не удалось загрузить перевод: не открывается фрейм. Обновите страницу.',
   },
   pl: {
-    loading: 'Wczytywanie polskiego tłumaczenia…', on: 'Polski jest włączony. Kliknij zakładkę ponownie, aby przełączać między polskim a angielskim.', to: 'Przełączanie na polski',
+    loading: 'Wczytywanie polskiego tłumaczenia…', on: 'Polski jest włączony. Kliknij zakładkę ponownie, aby przełączać między polskim a angielskim. Z tłumaczeniem wyniki nie są wysyłane do rankingu; aby się w nim znaleźć, odśwież stronę i graj w oryginał.', to: 'Przełączanie na polski',
     failed: 'Nie udało się wczytać tłumaczenia: ', outdated: 'Gra została zaktualizowana, tłumaczenie wymaga aktualizacji', page: 'Najpierw otwórz stronę gry D2 Survivors (https://d2survivors.lol/play/), a potem kliknij tę zakładkę.',
     old: 'Zakładka jest nieaktualna. Zainstaluj ją ponownie ze strony tłumaczenia.', loop: 'Tłumaczenie ciągle się przeładowuje i zostało zatrzymane. Odśwież stronę.', frame: 'Nie udało się wczytać tłumaczenia: nie można otworzyć ramki. Odśwież stronę.',
   },
@@ -262,7 +262,7 @@ background:rgba(12,10,8,.92);color:#e8dfcc;font:14px/1.4 "Microsoft JhengHei","M
       try { now = normalize(api ? api.get() : current()); } catch { /* 讀不到當成英文 */ }
       const last = store.get(LAST_KEY);
       const next = ids.includes(now) ? 'en' : ids.includes(last) ? last : first;
-      toast(next === 'en' ? 'Switching to English' : (MESSAGES[next] ?? msg).to);
+      toast(next === 'en' ? 'Switching to English. Runs still are not sent to the leaderboard until you reload the page.' : (MESSAGES[next] ?? msg).to, next === 'en' ? 6000 : 3500);
       // 遊戲自己存設定、再請書籤重新開（語言切換介面）；沒有的話自己寫 localStorage
       if (api) return api.set(next);
       store.set(LANG_KEY, next);
@@ -270,7 +270,7 @@ background:rgba(12,10,8,.92);color:#e8dfcc;font:14px/1.4 "Microsoft JhengHei","M
     },
   };
   show(firstPage);
-  toast(msg.on);
+  toast(msg.on, 8000);
 }
 
 let statusEl = null;
