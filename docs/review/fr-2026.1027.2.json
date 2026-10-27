@@ -1,0 +1,611 @@
+[
+ {
+  "key": "ACT *",
+  "current": "ACTE {0}",
+  "suggested": "Acte {0}",
+  "category": "other",
+  "reason": "Lookup ignores case, so this wildcard also catches mixed-case 'Act 3' / 'Act IV' fillers inside other strings (This ends your saved run in Act 3., Fell in Hell, Act IV, Ends your saved run (Act 3, ...)) and prints 'ACTE 3' mid-sentence; title case works for the act banner too"
+ },
+ {
+  "key": "This ends your saved run in *.",
+  "current": "Cela met fin à votre partie sauvegardée dans {0}.",
+  "suggested": "Cela met fin à votre partie sauvegardée dans l’{0}.",
+  "category": "grammar",
+  "reason": "Filler is 'Act N' (code: act:`Act ${u.act}`); 'dans Acte 3' lacks the article"
+ },
+ {
+  "key": "Fell in *, *",
+  "current": "Mort dans {0}, {1}",
+  "suggested": "Mort en {0}, {1}",
+  "category": "grammar",
+  "reason": "{0} is a difficulty or 'Terror N'; elsewhere the dictionary uses 'en Cauchemar', 'en Terreur' ('dans Enfer' is wrong)"
+ },
+ {
+  "key": "Level * · * · swap her in",
+  "current": "Niveau {0} · {1} · la reprendre",
+  "suggested": "Niveau {0} · {1} · la faire revenir",
+  "category": "consistency",
+  "reason": "Same action is 'faire revenir' elsewhere (Retired · swap her in, Akara menu notes); 'la reprendre' reads as 'take her back/resume'"
+ },
+ {
+  "key": "Swap her back in and re-draft her at Akara",
+  "current": "Reprenez-la et faites-lui un nouveau choix chez Akara",
+  "suggested": "Faites-la revenir et faites-lui un nouveau choix chez Akara",
+  "category": "consistency",
+  "reason": "Swap in = 'faire revenir' elsewhere in the dictionary"
+ },
+ {
+  "key": "Your level-* * starts over and keeps the golden glow for good.",
+  "current": "Votre {1} de niveau {0} recommence et garde l’éclat doré pour toujours.",
+  "suggested": "Votre {1} de niveau {0} recommence et garde la lueur dorée pour toujours.",
+  "category": "consistency",
+  "reason": "golden glow is 'lueur dorée' in the neighbouring strings (Earns/Keeps the golden glow, Reach level 99...)"
+ },
+ {
+  "key": "January",
+  "current": "Janvier",
+  "suggested": "janvier",
+  "category": "grammar",
+  "reason": "Only used in the news date '27 January · Build …'; French month names are lowercase, as février/avril/août/décembre already are"
+ },
+ {
+  "key": "March",
+  "current": "Mars",
+  "suggested": "mars",
+  "category": "grammar",
+  "reason": "French month names are lowercase in dates; match février/avril/août/décembre"
+ },
+ {
+  "key": "May",
+  "current": "Mai",
+  "suggested": "mai",
+  "category": "grammar",
+  "reason": "French month names are lowercase in dates; match février/avril/août/décembre"
+ },
+ {
+  "key": "June",
+  "current": "Juin",
+  "suggested": "juin",
+  "category": "grammar",
+  "reason": "French month names are lowercase in dates; match février/avril/août/décembre"
+ },
+ {
+  "key": "July",
+  "current": "Juillet",
+  "suggested": "juillet",
+  "category": "grammar",
+  "reason": "French month names are lowercase in dates; match février/avril/août/décembre"
+ },
+ {
+  "key": "September",
+  "current": "Septembre",
+  "suggested": "septembre",
+  "category": "grammar",
+  "reason": "French month names are lowercase in dates; match février/avril/août/décembre"
+ },
+ {
+  "key": "October",
+  "current": "Octobre",
+  "suggested": "octobre",
+  "category": "grammar",
+  "reason": "French month names are lowercase in dates; match février/avril/août/décembre"
+ },
+ {
+  "key": "November",
+  "current": "Novembre",
+  "suggested": "novembre",
+  "category": "grammar",
+  "reason": "French month names are lowercase in dates; match février/avril/août/décembre"
+ },
+ {
+  "key": "Act I is not saved: your next run starts anew. Your items and gold are kept.",
+  "current": "L’acte I n’est pas sauvegardé : votre prochaine partie recommence à zéro. Vos objets et votre or sont conservés.",
+  "suggested": "L’Acte I n’est pas sauvegardé : votre prochaine partie recommence à zéro. Vos objets et votre or sont conservés.",
+  "category": "consistency",
+  "reason": "Act names are capitalised everywhere else (Acte I, l’Acte {0})"
+ },
+ {
+  "key": "Too many stat points",
+  "current": "Trop de points de caractéristiques",
+  "suggested": "Trop de points de stat.",
+  "category": "consistency",
+  "reason": "Stat points are 'points de stat.' in every sibling string (* stat points: D2 gives…, # stat points to place…)"
+ },
+ {
+  "key": "Build # is ready to install from the main menu",
+  "current": "Le build {0} peut être installé depuis le menu principal",
+  "suggested": "La version {0} peut être installée depuis le menu principal",
+  "category": "consistency",
+  "reason": "Build here is a game version; 'le build' is this game's word for a character build, and the update banners already say 'Nouvelle version prête'"
+ },
+ {
+  "key": "- ready to evolve",
+  "current": "- prêt à évoluer",
+  "suggested": "- peut évoluer",
+  "category": "grammar",
+  "reason": "Appended to any skill name ('Boule de feu 5 - prêt à évoluer'); 'prêt' fails for feminine skills, a verb has no gender"
+ },
+ {
+  "key": "* is active",
+  "current": "{0} actif",
+  "suggested": "{0} prend effet",
+  "category": "grammar",
+  "reason": "{0} is an item name of any gender/number (Coiffe…, Gants…); 'actif' only agrees with masculine singular"
+ },
+ {
+  "key": "*T: Charsi's wares - Esc: end the run",
+  "current": "{0}T : marchandises de Charsi - Esc : finir la partie",
+  "suggested": "{0}T : marchandises de Charsi - Échap : terminer la partie",
+  "category": "consistency",
+  "reason": "Same hint is 'Échap : terminer la partie' in 'Enter: next tier - …' and 'Retour (Échap)'; key name and verb should not change between variants"
+ },
+ {
+  "key": "Enter: * - T: Charsi's wares - Esc: end the run",
+  "current": "Entrée : {0} - T : marchandises de Charsi - Esc : finir la partie",
+  "suggested": "Entrée : {0} - T : marchandises de Charsi - Échap : terminer la partie",
+  "category": "consistency",
+  "reason": "Matches 'Enter: next tier - … - Échap : terminer la partie' (Entrée is translated, so Esc → Échap)"
+ },
+ {
+  "key": "Enter: * - T: Charsi's wares - Esc: main menu",
+  "current": "Entrée : {0} - T : marchandises de Charsi - Esc : menu principal",
+  "suggested": "Entrée : {0} - T : marchandises de Charsi - Échap : menu principal",
+  "category": "consistency",
+  "reason": "'Enter: play again - … - Échap : menu principal' and 'Retour (Échap)' use Échap"
+ },
+ {
+  "key": "* (Esc)",
+  "current": "{0} (Esc)",
+  "suggested": "{0} (Échap)",
+  "category": "consistency",
+  "reason": "Back (Esc) is 'Retour (Échap)'; Entrée is translated, so Esc should be too"
+ },
+ {
+  "key": "Only the * can use that. *",
+  "current": "Utilisable uniquement par {0}. {1}",
+  "suggested": "{0} uniquement. {1}",
+  "category": "grammar",
+  "reason": "{0} is a bare class name ('par Sorcière' lacks the article, and it varies by gender); mirrors D2R '(Amazone uniquement)'"
+ },
+ {
+  "key": "Slain by *'s *: * * damage",
+  "current": "Tué(e) par {1} de {0} : {2} pts de dégâts de {3}",
+  "suggested": "Tué(e) par {1} de {0} : {2} pts de dégâts ({3})",
+  "category": "grammar",
+  "reason": "{3} is the element word: physical gives 'dégâts de physique' (and magic 'de Magie'); a parenthesis works for every filler"
+ },
+ {
+  "key": "Slain by *: * * damage",
+  "current": "Tué(e) par {0} : {1} pts de dégâts de {2}",
+  "suggested": "Tué(e) par {0} : {1} pts de dégâts ({2})",
+  "category": "grammar",
+  "reason": "{2} is the element word: physical gives 'dégâts de physique'; a parenthesis works for every filler"
+ },
+ {
+  "key": "It throws 2 more webs, spread wider, but each deals 80% of the damage.",
+  "current": "Lance 2 champs de plus, plus écartés, mais chacun inflige 80% des dégâts.",
+  "suggested": "Lance 2 toiles de plus, plus écartées, mais chacune inflige 80% des dégâts.",
+  "category": "consistency",
+  "reason": "Webs of the same skill are 'toile' in the sibling modifier text (Creeping: 'Chaque toile rampe…'); 'champs' makes no sense here"
+ },
+ {
+  "key": "RUMBLE",
+  "current": "Grondement",
+  "suggested": "Vibration",
+  "category": "meaning",
+  "reason": "RUMBLE (pad vibration option) and Rumble (Leap modifier) are one key; 'Grondement' is wrong for the controller option, 'Vibration' fits both (cf. zh/ja decision 震動/振動)"
+ },
+ {
+  "key": "Rumble",
+  "current": "Grondement",
+  "suggested": "Vibration",
+  "category": "meaning",
+  "reason": "Same key as the RUMBLE pad option (case-insensitive lookup); 'Vibration' fits both uses"
+ },
+ {
+  "key": "Warder's",
+  "current": "défensif",
+  "suggested": "de la Sentinelle",
+  "category": "consistency",
+  "reason": "affix:Warder's is 'de la Sentinelle'; the plain key gives a different word (défensif) for the same prefix"
+ },
+ {
+  "key": "Terra's",
+  "current": "terrenien",
+  "suggested": "terrien",
+  "category": "other",
+  "reason": "'terrenien' is not a French word (and lacks the accent); affix:Terra's has the same problem"
+ },
+ {
+  "key": "It reaches 80% farther, but lowers resistances 40% less.",
+  "current": "Porte 80% plus loin, mais réduit les résistances 40% de moins.",
+  "suggested": "Porte 80% plus loin, mais sa réduction des résistances est 40% plus faible.",
+  "category": "grammar",
+  "reason": "\"réduit les résistances 40% de moins\" is not idiomatic French; say the reduction is 40% weaker."
+ },
+ {
+  "key": "it hits",
+  "current": "touche",
+  "suggested": "elle touche",
+  "category": "placeholder",
+  "reason": "Fills {3} of \"# # for # damage around what #.\" (Exploding Arrow, subject = flèche); \"autour de touche\" is broken. Paired with the template fix."
+ },
+ {
+  "key": "they hit",
+  "current": "touchent",
+  "suggested": "elles touchent",
+  "category": "placeholder",
+  "reason": "Same as \"it hits\": plural filler for the Exploding Arrow template (\"autour de ce qu’elles touchent\")."
+ },
+ {
+  "key": "# # for # damage around what #.",
+  "current": "{0} {1} : {2} pts de dégâts autour de {3}.",
+  "suggested": "{0} {1} : {2} pts de dégâts autour de ce qu’{3}.",
+  "category": "placeholder",
+  "reason": "With {3} = touche/touchent the output is \"autour de touche\". Needs \"ce qu’\" + subject pronoun in the filler (fallback; the exact sentence templates already say \"autour de ce qu’elle touche\")."
+ },
+ {
+  "key": "Fires # of # damage that # target.",
+  "current": "Tire {0} infligeant {1} pts de dégâts qui {2} la cible.",
+  "suggested": "Tire {0} infligeant {1} pts de dégâts qui {2} cible.",
+  "category": "placeholder",
+  "reason": "Fillers are \"traque sa\" / \"traquent leur\", so \"qui {2} la cible\" gives \"traque sa la cible\" (double determiner)."
+ },
+ {
+  "key": "toughest monster",
+  "current": "monstre le plus coriace",
+  "suggested": "le monstre le plus coriace",
+  "category": "grammar",
+  "reason": "Only filler of \"Bone walls cage the * near you…\" (singular case); without the article it reads \"emprisonnent monstre le plus coriace\". The plural filler \"les {0} monstres les plus coriaces\" already has it."
+ },
+ {
+  "key": "Fires # of lightning for # damage each.",
+  "current": "Lance {0} de foudre qui infligent {1} points de dégâts chacun.",
+  "suggested": "Lance {0} de foudre qui infligent {1} points de dégâts chacune.",
+  "category": "grammar",
+  "reason": "Only filler is \"# sparks\" → \"étincelles\" (feminine, always 3+), so \"chacun\" must be \"chacune\"."
+ },
+ {
+  "key": "Fires # of lightning through all in line for # damage.",
+  "current": "Lance {0} de foudre qui traversent tout sur leur ligne et infligent {1} points de dégâts.",
+  "suggested": "Lance {0} de foudre traversant tout ce qui est aligné, pour {1} points de dégâts.",
+  "category": "grammar",
+  "reason": "Lightning (Charged Bolt line) starts at 1 bolt → \"1 projectile de foudre qui traversent … et infligent\" (plural verbs with singular subject). A participle works for any count."
+ },
+ {
+  "key": "* * fire, cold, lightning or poison bolts for * damage each.",
+  "current": "{0} {1} des projectiles de Feu, de Froid, de Foudre ou de Poison de {2} pts de dégâts chacun.",
+  "suggested": "{0} {1} des traits de feu, de froid, de foudre ou de poison pour {2} pts de dégâts chacun.",
+  "category": "consistency",
+  "reason": "The plural sentence \"Up to # skeletal mages cast…\" says \"des traits de feu, de froid, de foudre ou de poison pour…\"; this one uses \"projectiles de Feu, de Froid…\" with capitals. (Sibling \"# skeletal mage casts…\" has the same wording to align.)"
+ },
+ {
+  "key": "# # after monsters, each bite poisoning # over #s.",
+  "current": "{0} {1} vers les monstres, chaque morsure empoisonnant de {2} en {3} s.",
+  "suggested": "{0} {1} vers les monstres, chaque morsure infligeant {2} de poison en {3} s.",
+  "category": "grammar",
+  "reason": "\"empoisonnant de {2}\" is not French. Same wording is in the exact templates \"# creeper crawls…\" / \"Up to # creepers crawl…\"."
+ },
+ {
+  "key": "Lowers enemy fire resistance #%, a fifth of that if immune.",
+  "current": "Réduit la résistance au feu des ennemis de {0}%, d’un cinquième de cette valeur s’ils sont immunisés.",
+  "suggested": "Réduit la résistance au feu des ennemis de {0}%, d’un cinquième de cette valeur s’ils sont insensibles.",
+  "category": "term",
+  "reason": "D2R calls immunity \"insensible\" (Insensible au feu); the rest of the dictionary and \"Only a fifth of it works on an immune monster\" use insensible."
+ },
+ {
+  "key": "Lowers enemy cold resistance #%, a fifth of that if immune.",
+  "current": "Réduit la résistance au froid des ennemis de {0}%, d’un cinquième de cette valeur s’ils sont immunisés.",
+  "suggested": "Réduit la résistance au froid des ennemis de {0}%, d’un cinquième de cette valeur s’ils sont insensibles.",
+  "category": "term",
+  "reason": "D2R immunity term is \"insensible\", used elsewhere in the dictionary."
+ },
+ {
+  "key": "Lowers enemy lightning resistance #%, a fifth of that if immune.",
+  "current": "Réduit la résistance à la foudre des ennemis de {0}%, d’un cinquième de cette valeur s’ils sont immunisés.",
+  "suggested": "Réduit la résistance à la foudre des ennemis de {0}%, d’un cinquième de cette valeur s’ils sont insensibles.",
+  "category": "term",
+  "reason": "D2R immunity term is \"insensible\", used elsewhere in the dictionary."
+ },
+ {
+  "key": "Skeletons, mages and revives get +#% life and damage",
+  "current": "Squelettes, mages et ranimés obtiennent +{0}% de vie et de dégâts",
+  "suggested": "Squelettes, mages et réanimés obtiennent +{0}% de vie et de dégâts",
+  "category": "consistency",
+  "reason": "Revive is Réanimation in D2R and other strings say \"monstres réanimés\"; \"ranimés\" is inconsistent."
+ },
+ {
+  "key": "All your * go up one level, even past their maximum",
+  "current": "Tous vos {0} gagnent un niveau, même au-delà de leur maximum",
+  "suggested": "{0} : tout l’arbre gagne un niveau, même au-delà du maximum",
+  "category": "grammar",
+  "reason": "{0} is a skill tree name (Compétences de combat, Malédictions, Auras défensives… mostly feminine); \"Tous vos {0}\" gives \"Tous vos Compétences…\". Gender-neutral wording."
+ },
+ {
+  "key": "Next * at character level *",
+  "current": "{0} : prochain au niveau de personnage {1}",
+  "suggested": "{0} : prochain déblocage au niveau de personnage {1}",
+  "category": "grammar",
+  "reason": "{0} is \"skill\"→Compétence (f.) or \"passive\"→Passif (m.); \"Compétence : prochain…\" disagrees. Neutral noun avoids it."
+ },
+ {
+  "key": "+*% damage per level of *",
+  "current": "+{0}% de dégâts par niveau de {1}",
+  "suggested": "+{0}% de dégâts par niveau ({1})",
+  "category": "grammar",
+  "reason": "{1} is a skill name; many start with a vowel (Éclair, Orbe gelé, Armageddon…), giving \"de Éclair\" without elision."
+ },
+ {
+  "key": "+*% per level of *",
+  "current": "+{0}% par niveau de {1}",
+  "suggested": "+{0}% par niveau ({1})",
+  "category": "grammar",
+  "reason": "Same elision problem: \"de Éclair\" for vowel-initial skill names."
+ },
+ {
+  "key": "+*% per level of * and * more",
+  "current": "+{0}% par niveau de {1} et {2} autres",
+  "suggested": "+{0}% par niveau ({1} et {2} autres)",
+  "category": "grammar",
+  "reason": "Same elision problem: \"de Éclair\" for vowel-initial skill names."
+ },
+ {
+  "key": "An * kept aside by an older version is back now: your hero, or retired at Akara.",
+  "current": "Mis de côté par une ancienne version, {0} est de retour : votre héros, ou à la retraite chez Akara.",
+  "suggested": "{0} : un héros mis de côté par une ancienne version est de retour, comme votre héros ou à la retraite chez Akara.",
+  "category": "grammar",
+  "reason": "{0} is a class name (Amazone, Sorcière…): \"Mis de côté…, Amazone est de retour\" lacks an article and agreement."
+ },
+ {
+  "key": "A * kept aside by an older version is back now: your hero, or retired at Akara.",
+  "current": "Mis de côté par une ancienne version, {0} est de retour : votre héros, ou à la retraite chez Akara.",
+  "suggested": "{0} : un héros mis de côté par une ancienne version est de retour, comme votre héros ou à la retraite chez Akara.",
+  "category": "grammar",
+  "reason": "Same as the \"An *\" variant: class-name filler, no article, \"Mis\" doesn't agree with Amazone/Sorcière."
+ },
+ {
+  "key": "when struck",
+  "current": "(quand touché)",
+  "suggested": "quand touché",
+  "category": "consistency",
+  "reason": "Fills {3} of \"*% Chance to cast level * * *\"; D2R has no parentheses (\"… - niv. %1 quand touché\") and \"on striking\"/\"on attack\" have none either."
+ },
+ {
+  "key": "when you Kill an Enemy",
+  "current": "(quand vous tuez un ennemi)",
+  "suggested": "quand vous tuez un ennemi",
+  "category": "consistency",
+  "reason": "Same template filler; drop the parentheses like \"en touchant\" / \"en attaquant\"."
+ },
+ {
+  "key": "Tap a ware to see it",
+  "current": "Touchez un article pour le voir",
+  "suggested": "Touchez une marchandise pour la voir",
+  "category": "consistency",
+  "reason": "\"ware\" is \"marchandise\" everywhere else (Marchandises de Charsi, \"Cliquez sur une marchandise pour l’acheter\")."
+ },
+ {
+  "key": "Tap a ware, then tap it again",
+  "current": "Touchez un article, puis touchez-le à nouveau",
+  "suggested": "Touchez une marchandise, puis touchez-la à nouveau",
+  "category": "consistency",
+  "reason": "\"ware\" is \"marchandise\" elsewhere (desktop variant \"Cliquez sur une marchandise…\")."
+ },
+ {
+  "key": "Envenomed",
+  "current": "Infect",
+  "suggested": "Envenimé",
+  "category": "meaning",
+  "reason": "Magic prefix (poison line Septic/Envenomed/Corosive/Toxic, KO 맹독의). \"infect\" means foul/vile, not poisoned. affix:Envenomed needs the 4 gender forms too."
+ },
+ {
+  "key": "Trump",
+  "current": "fou",
+  "suggested": "d’atout",
+  "category": "meaning",
+  "reason": "KO 으뜸 (trump/top); \"fou\" (fool) follows the zh ref, not the source. \"d’atout\" is invariable, so it also works in composed names (affix:Trump)."
+ },
+ {
+  "key": "Paleocene",
+  "current": "fidèle",
+  "suggested": "paléocène",
+  "category": "meaning",
+  "reason": "Paleocene is the geological epoch (KO 팔레오세); \"fidèle\" (faithful) has nothing to do with it. affix:Paleocene needs plural forms (paléocènes)."
+ },
+ {
+  "key": "Bronze",
+  "current": "Bronze",
+  "suggested": "en bronze",
+  "category": "consistency",
+  "reason": "D2R prefix is \"en bronze\"; the rest of the series here is \"en fer\", \"en acier\", \"en argent\", \"en platine\" (affix:Bronze already en bronze)."
+ },
+ {
+  "key": "Fallen: resurrect at Kashya",
+  "current": "Tombée : à ressusciter auprès de Kashya",
+  "suggested": "Hors de combat : à ressusciter auprès de Kashya",
+  "category": "grammar",
+  "reason": "This line is for the mercenary, and most mercenaries are male (Desert, Iron Wolf, Barbarian), so feminine 'Tombée' is wrong. Use a gender-neutral wording."
+ },
+ {
+  "key": "* free of *",
+  "current": "{0} libres sur {1}",
+  "suggested": "Libres : {0} sur {1}",
+  "category": "grammar",
+  "reason": "{0} is m.free and can be 0 or 1, which gives '1 libres'. Word it like 'Points libres : {0} sur {1}'."
+ },
+ {
+  "key": "* (on)",
+  "current": "{0} (actif)",
+  "suggested": "{0} (active)",
+  "category": "grammar",
+  "reason": "{0} is a modifier option (variante, feminine), so 'actif' should be 'active'."
+ },
+ {
+  "key": "Evolved from **",
+  "current": "Évolution de {0}{1}",
+  "suggested": "Évoluée à partir de {0}{1}",
+  "category": "meaning",
+  "reason": "'Évolution de X' reads as 'the evolution of X' (what X turns into), the opposite direction. The line sits on an evolved skill's box and names the skill it came from."
+ },
+ {
+  "key": "Not learned",
+  "current": "Non apprise",
+  "suggested": "À apprendre",
+  "category": "grammar",
+  "reason": "Also shown for passives (passif, masculine), so feminine 'Non apprise' is wrong there. The suggestion works for both."
+ },
+ {
+  "key": "One hit a cast",
+  "current": "Un coup par incantation",
+  "suggested": "Un coup par lancer",
+  "category": "consistency",
+  "reason": "The sibling line '* hits a cast' says 'par lancer', and the two alternate in the same box."
+ },
+ {
+  "key": "Each skill's hit, and its damage a second:",
+  "current": "Coup de chaque compétence, et ses dégâts par seconde :",
+  "suggested": "Dégâts par coup et par seconde de chaque compétence :",
+  "category": "meaning",
+  "reason": "Header of a list 'Skill: hit damage, N/s'. 'Coup de chaque compétence' doesn't say it's damage per hit."
+ },
+ {
+  "key": "She goes back to level *. Tap again",
+  "current": "Elle revient au niveau {0}. Touchez de nouveau",
+  "suggested": "Il revient au niveau {0}. Touchez de nouveau",
+  "category": "consistency",
+  "reason": "The hero is masculine 'il/héros' in the sibling prompt in the same menu ('Il ne figurera plus jamais au classement') and almost everywhere else."
+ },
+ {
+  "key": "She goes back to level *. Click again",
+  "current": "Elle revient au niveau {0}. Cliquez de nouveau",
+  "suggested": "Il revient au niveau {0}. Cliquez de nouveau",
+  "category": "consistency",
+  "reason": "Same as the Tap version: the hero is 'il' in the sibling prompts."
+ },
+ {
+  "key": "Click to pick up · Ctrl-click to move across · Right-click to equip",
+  "current": "Clic : prendre · Ctrl+clic : déplacer de l’autre côté · Clic droit : équiper",
+  "suggested": "Clic : ramasser · Ctrl+clic : déplacer de l’autre côté · Clic droit : équiper",
+  "category": "consistency",
+  "reason": "Pick up is 'ramasser' in the glossary and in the touch version of this hint."
+ },
+ {
+  "key": "Tap",
+  "current": "Toucher",
+  "suggested": "Touchez",
+  "category": "consistency",
+  "reason": "Fills '* to reload*' next to 'Click' = 'Cliquez', so the result reads 'Toucher pour recharger…' vs 'Cliquez pour recharger…'. Use the same imperative."
+ },
+ {
+  "key": "Clear a tier with No Potions in the Belt among its affixes (from tier *).",
+  "current": "Terminez un palier ayant l’affixe \"Pas de potions dans la ceinture\" (à partir du palier {0}).",
+  "suggested": "Terminez un palier ayant l’affixe \"Pas de potions de ceinture\" (à partir du palier {0}).",
+  "category": "consistency",
+  "reason": "The affix itself ('No Potions in the Belt') is 'Pas de potions de ceinture' in the dictionary and in the short version of this quest. This string says 'dans la ceinture'."
+ },
+ {
+  "key": "Cain's No Potions quest says it needs a Terror tier with No Potions in the Belt among its affixes, which rolls from tier 7",
+  "current": "La quête \"Sans potions\" de Cain précise qu’il faut un palier de Terreur ayant l’affixe \"Pas de potions dans la ceinture\", qui apparaît à partir du palier 7",
+  "suggested": "La quête \"Sans potions\" de Cain précise qu’il faut un palier de Terreur ayant l’affixe \"Pas de potions de ceinture\", qui apparaît à partir du palier 7",
+  "category": "consistency",
+  "reason": "The affix name doesn't match the affix string 'No Potions in the Belt' = 'Pas de potions de ceinture'."
+ },
+ {
+  "key": "Enter or arrows to change - Esc to go back",
+  "current": "Entrée ou flèches pour modifier - Échap pour revenir",
+  "suggested": "Entrée ou flèches : modifier - Échap : retour",
+  "category": "consistency",
+  "reason": "The other option-screen hints use 'X : action - Échap : retour' ('Entrée : choisir - Échap : retour', 'Flèches ou glisser pour régler - Échap : retour')."
+ },
+ {
+  "key": "*: OFF",
+  "current": "{0} : NON",
+  "suggested": "{0} : DÉSACTIVÉ",
+  "category": "consistency",
+  "reason": "The options screen uses this template to show toggles with no own key (STAT RANGES, MUTE) and to measure label width. OFF = 'DÉSACTIVÉ' and the ON form shows 'ACTIVÉ', so 'NON' gives a mismatched pair and too narrow a width."
+ },
+ {
+  "key": "AUTO UPDATE: *",
+  "current": "MÀJ AUTO : {0}",
+  "suggested": "MAJ AUTO : {0}",
+  "category": "consistency",
+  "reason": "The label AUTO UPDATE is 'MAJ AUTO'. The toggle line spells it 'MÀJ AUTO'."
+ },
+ {
+  "key": "Rusthandle's Attuned deals 5% less damage, not 15% less",
+  "current": "L’Harmonisation de Manche ferronier réduit les dégâts de 5%, et non plus de 15%",
+  "suggested": "L’Harmonie de Manche ferronier réduit les dégâts de 5%, et non plus de 15%",
+  "category": "consistency",
+  "reason": "The modifier Attuned is named 'Harmonie' in the dictionary (the modifier card). This line calls it 'Harmonisation'."
+ },
+ {
+  "key": "Concentration's Steadfast costs 10% of the aura, not half",
+  "current": "La Fermeté de Concentration coûte 10% de l’aura, et non plus la moitié",
+  "suggested": "La variante Inébranlable de Concentration coûte 10% de l’aura, et non plus la moitié",
+  "category": "consistency",
+  "reason": "The modifier Steadfast is named 'Inébranlable' in the dictionary. This line calls it 'Fermeté'."
+ },
+ {
+  "key": "Claws of Thunder's Static no longer makes the release 10% weaker",
+  "current": "La variante Statique de Griffes du Tonnerre n’affaiblit plus la libération de 10%",
+  "suggested": "La variante Décharge de Griffes du Tonnerre n’affaiblit plus la libération de 10%",
+  "category": "consistency",
+  "reason": "The modifier card uses modifier:Static = 'Décharge', not 'Statique'."
+ },
+ {
+  "key": "Chain Lightning's Tether now holds the toughest monster in range and moves on when it dies, where it held the nearest and stopped",
+  "current": "L’Entrave de Chaîne d’éclairs retient désormais le monstre le plus coriace à portée et passe au suivant quand il meurt, alors qu’elle retenait le plus proche et s’arrêtait",
+  "suggested": "Le Lien de Chaîne d’éclairs retient désormais le monstre le plus coriace à portée et passe au suivant quand il meurt, alors qu’il retenait le plus proche et s’arrêtait",
+  "category": "consistency",
+  "reason": "The modifier Tether is named 'Lien' in the dictionary. This line calls it 'Entrave'."
+ },
+ {
+  "key": "Under your kills you see the wave you're on and the monsters left in it",
+  "current": "Sous vos victimes s’affichent la vague en cours et le nombre de monstres restants",
+  "suggested": "Sous le compteur de victimes s’affichent la vague en cours et le nombre de monstres restants",
+  "category": "meaning",
+  "reason": "'kills' here is the kill counter on the HUD. 'Sous vos victimes' literally says 'under your victims'."
+ },
+ {
+  "key": "He is a natural party leader, holy man, and blessed warrior.",
+  "current": "C’est un chef-né, un saint homme et un combattant aguerri.",
+  "suggested": "C’est un chef de groupe né, un saint homme et un guerrier béni.",
+  "category": "meaning",
+  "reason": "'blessed warrior' became 'combattant aguerri' (seasoned fighter), which loses 'blessed'. Not an official D2R string, so translate it faithfully."
+ },
+ {
+  "key": "Magic Ring",
+  "current": "Anneau Magique",
+  "suggested": "Anneau magique",
+  "category": "grammar",
+  "reason": "Item name in the quest reward box. The adjective should be lowercase, as in D2R names ('Anneau magique', 'Flèche magique')."
+ },
+ {
+  "key": "Raven Gorget",
+  "current": "Hausse-col Corbeau",
+  "suggested": "Hausse-col du Corbeau",
+  "category": "term",
+  "reason": "The D2R rare prefix Raven is 'du Corbeau' (item-names id 2284). Bare 'Corbeau' is the Druid skill name."
+ },
+ {
+  "key": "Raven Shard",
+  "current": "L’éclat Corbeau",
+  "suggested": "L’éclat du Corbeau",
+  "category": "term",
+  "reason": "The D2R rare prefix Raven is 'du Corbeau' (item-names id 2284), not the bare skill name 'Corbeau'."
+ },
+ {
+  "key": "Vengeance Turn",
+  "current": "Tour Vengeance",
+  "suggested": "Tour de la vengeance",
+  "category": "consistency",
+  "reason": "The rare front part Vengeance has no D2R form, and the dictionary splits 74 'de la vengeance' / 44 'Vengeance'. 'Vengeance Dart' in this batch uses 'de la vengeance', so match the majority."
+ },
+ {
+  "key": "Vengeance Weaver",
+  "current": "Tisserand Vengeance",
+  "suggested": "Tisserand de la vengeance",
+  "category": "consistency",
+  "reason": "Same front part as 'Vengeance Dart' = 'Fléchette de la vengeance'. The dictionary majority is 'de la vengeance'."
+ }
+]

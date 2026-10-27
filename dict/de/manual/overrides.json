@@ -14,7 +14,6 @@
  "Cold Resist": "Kältewid.",
  "Lightning Resist": "Blitzwid.",
  "Poison Resist": "Giftwid.",
- "Clear a tier with No Potions in the Belt among its affixes (from tier *).": "Schließe eine Stufe mit dem Affix \"Keine Tränke im Gürtel\" ab (ab Stufe {0}).",
  "The Uniques tab's search box says a set's name finds every piece of that set": "Das Suchfeld im Tab \"Einzigartig\" weist darauf hin, dass der Name eines Sets alle Teile dieses Sets findet",
  "Raises each armour's own Damage Reduction: counted in Damage Reduced": "Erhöht die eigene Schadensreduzierung jeder Rüstung: zählt zu \"Schaden reduziert um\"",
  "In OneDrive, iCloud or Dropbox? Set it to always keep on this device.": "In OneDrive, iCloud oder Dropbox? Stelle es auf \"Immer auf diesem Gerät behalten\".",
@@ -28,7 +27,6 @@
  "Concentration's Steadfast costs 10% of the aura, not half": "Konzentration: \"Standhaftigkeit\" kostet 10% der Aura statt der Hälfte",
  "Defiance's Rebuke costs 25% of the aura, not half": "Trotz: \"Rüge\" kostet 25% der Aura statt der Hälfte",
  "Conviction's Lingering lowers resistances 10% less than the aura, not 25% less": "Verurteilung: \"Verweilen\" senkt Widerstände um 10% weniger als die Aura statt um 25% weniger",
- "Blessed Aim's Stunning lowers its chance by 10%, not 25%": "Gesegnete Führung: \"Betäubung\" senkt ihre Chance um 10% statt um 25%",
  "Berserk's Blood Rage now costs 5% damage above 40% life, not 15%": "Amok: \"Blutzorn\" kostet über 40% Leben jetzt 5% Schaden statt 15%",
  "Volcano's Lava Flow rocks now deal 25% less, not 40% less": "Vulkan: Die Felsen von \"Lavastrom\" verursachen jetzt 25% weniger statt 40% weniger",
  "Armageddon's Hailstorm now deals 8% more damage": "Armageddon: \"Hagelsturm\" verursacht jetzt 8% mehr Schaden",
@@ -114,6 +112,5 @@
  "WEAPONS": "WAFFEN",
  "KEEP": "EINZAHLEN",
  "CHARMS": "ZAUBER",
- "TERROR #": "Schrecken {0}",
- "RUMBLE": "Grollen"
+ "TERROR #": "Schrecken {0}"
 }

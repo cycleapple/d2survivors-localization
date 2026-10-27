@@ -11,13 +11,11 @@
  "Cold Resist": "Résist. au froid",
  "Lightning Resist": "Résist. à la foudre",
  "Poison Resist": "Résist. au poison",
- "Clear a tier with No Potions in the Belt among its affixes (from tier *).": "Terminez un palier ayant l’affixe \"Pas de potions dans la ceinture\" (à partir du palier {0}).",
  "In OneDrive, iCloud or Dropbox? Set it to always keep on this device.": "Dans OneDrive, iCloud ou Dropbox ? Réglez-le sur \"Toujours conserver sur cet appareil\".",
  "Tomb Reaver lists D2's 10% Reanimate as: Returned, in grey: it does nothing yet": "Profanatrice affiche en gris le \"10% ranimé(s) sous forme de : Ranimé\" de D2 : sans effet pour l’instant",
  "A mercenary's gear +to All Skills now raises his skills and aura, so +2 takes a Desert Mercenary's Might from level 5 to 7": "Le bonus \"+ à toutes les compétences\" de l’équipement d’un mercenaire augmente désormais ses compétences et son aura : avec +2, la Puissance d’un mercenaire du désert passe du niveau 5 au niveau 7",
  "Under a Terror tier's No Potions in the Belt, the belt's potions are greyed and its hover and a press say why": "Avec l’affixe \"Pas de potions dans la ceinture\" d’un palier de Terreur, les potions de la ceinture sont grisées, et son infobulle ou un appui en indiquent la raison",
  "Cain's Six Evolutions quest says the evolved skills may come from any of your trees": "La quête \"Six évolutions\" de Cain précise que les compétences évoluées peuvent provenir de n’importe lequel de vos arbres",
- "Cain's No Potions quest says it needs a Terror tier with No Potions in the Belt among its affixes, which rolls from tier 7": "La quête \"Sans potions\" de Cain précise qu’il faut un palier de Terreur ayant l’affixe \"Pas de potions dans la ceinture\", qui apparaît à partir du palier 7",
  "The Amazon's Dodge and Avoid work while she attacks, on the run too, as D2's \"when attacking or standing still\"; Evade takes the hits between her attacks": "Esquive et Éviter de l’Amazone fonctionnent pendant qu’elle attaque, même en courant, comme le \"en attaquant ou à l’arrêt\" de D2 ; Feinte gère les coups reçus entre ses attaques",
  "Cain's One Tree quests ask one tree's skills to deal at least 75% of Mephisto's damage, or Baal's in Hell, so a hero continued into Nightmare or Hell can do them; the Quest Log shows the share in the fight": "Les quêtes \"Un seul arbre\" de Cain demandent que les compétences d’un arbre infligent au moins 75% des dégâts subis par Méphisto, ou par Baal en Enfer, afin qu’un héros poursuivi en Cauchemar ou en Enfer puisse les accomplir ; le journal de quêtes affiche cette part pendant le combat",
  "A Druid shifts only while the spells he has put more levels in than his Werewolf or Werebear recharge, and turns back as soon as one is ready, so a wereform picked late no longer stops his spells; the wereforms' cards say No spells in red": "Un Druide ne se métamorphose que pendant la recharge des sorts dans lesquels il a investi plus de niveaux que dans Hurleur nocturne ou Kodiak, et reprend forme humaine dès que l’un d’eux est prêt : une métamorphose choisie tard ne bloque plus ses sorts ; les cartes des métamorphoses indiquent \"Pas de sorts\" en rouge",
@@ -272,6 +270,5 @@
  "KEEP": "DÉPÔT",
  "CHARMS": "CHARMES",
  "PLAY": "Jouer",
- "TERROR #": "Terreur {0}",
- "RUMBLE": "Grondement"
+ "TERROR #": "Terreur {0}"
 }

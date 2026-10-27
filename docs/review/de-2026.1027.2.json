@@ -1,0 +1,681 @@
+[
+ {
+  "key": "A Terror tier's boss must fall within 10 minutes",
+  "current": "Der Boss einer Schrecken-Stufe muss innerhalb von 10 Minuten fallen",
+  "suggested": "Der Boss einer Schreckensstufe muss innerhalb von 10 Minuten fallen",
+  "category": "consistency",
+  "reason": "'Terror tier' is 'Schreckensstufe' in 43 strings (incl. 'Your levels in this tier are lost'); 'Schrecken-Stufe' is the minority spelling"
+ },
+ {
+  "key": "Gold Find",
+  "current": "Goldfundbonus",
+  "suggested": "Goldfund",
+  "category": "consistency",
+  "reason": "Sits in the same character-screen list / Charsi ranks as Magic Find, which overrides.json deliberately shortened to 'Magiefund'; the pair should match"
+ },
+ {
+  "key": "Increased Attack Speed",
+  "current": "Erhöhte Angriffsgeschwindigkeit",
+  "suggested": "Angriffsgeschw.",
+  "category": "length",
+  "reason": "Character-screen label next to 'Zauberrate' and 'Laufgeschw.' (both shortened for width); 31 characters is far longer than its neighbours"
+ },
+ {
+  "key": "Something went wrong. SAVE AND EXIT keeps your run: please send a REPORT",
+  "current": "Ein Fehler ist aufgetreten. SPEICHERN UND VERLASSEN behält deinen Durchgang: Bitte sende eine MELDUNG",
+  "suggested": "Ein Fehler ist aufgetreten. SPEICHERN UND VERLASSEN behält deinen Durchgang: Bitte über MELDEN einen Bericht senden",
+  "category": "consistency",
+  "reason": "The button is translated 'Melden' (Report/REPORT); 'MELDUNG' names a button that doesn't exist"
+ },
+ {
+  "key": "replay",
+  "current": "erneut spielen",
+  "suggested": "Wiederholung",
+  "category": "consistency",
+  "reason": "Shown as a noun in labels/banners ('Terror tier # · replay', 'TERROR TIER # · REPLAY', same key case-insensitively); other strings call a replay 'Wiederholung'"
+ },
+ {
+  "key": "CONTINUE TO #",
+  "current": "WEITER NACH {0}",
+  "suggested": "WEITER: {0}",
+  "category": "consistency",
+  "reason": "Filler is NIGHTMARE/HELL; the specific keys are 'WEITER: ALPTRAUM' / 'WEITER: HÖLLE', so the generic template should read the same"
+ },
+ {
+  "key": "Charsi's Wares",
+  "current": "Charsis Waren",
+  "suggested": "CHARSIS WAREN",
+  "category": "other",
+  "reason": "Case-insensitive collision with the button label `CHARSI'S WARES` (3 ways.label uses next to DURCHGANG BEENDEN, HAUPTMENÜ); the shared value must be ALL CAPS"
+ },
+ {
+  "key": "Only the * can use that. *",
+  "current": "Nur {0} kann das benutzen. {1}",
+  "suggested": "Nur für {0} benutzbar. {1}",
+  "category": "grammar",
+  "reason": "{0} is a bare class name (Amazone, Paladin…): 'Nur Amazone kann das benutzen' lacks the article; D2R style '(Nur Amazone)' works for every class"
+ },
+ {
+  "key": "The Sightless Eye",
+  "current": "Das blinde Auge",
+  "suggested": "Das Verborgene Auge",
+  "category": "term",
+  "reason": "D2R German calls the order 'Schwestern vom Verborgenen Auge' (Akara/Gheed dialogue); also fix the chapter title 'The Sightless Eye. *' (currently 'Das blinde Auge. {0}')"
+ },
+ {
+  "key": "Slain by *'s *: * * damage",
+  "current": "Getötet durch {0}s {1}: {2} {3}-Schaden",
+  "suggested": "Getötet durch {1} von {0}: {2} Schaden ({3})",
+  "category": "grammar",
+  "reason": "'{0}s' breaks for monster names that don't take plain -s (Blutrabe, Gefallener…); {3} is physical/fire/cold/… → 'physisch-Schaden' is ungrammatical. Parenthesised element works for every filler"
+ },
+ {
+  "key": "Slain by *: * * damage",
+  "current": "Getötet durch {0}: {1} {2}-Schaden",
+  "suggested": "Getötet durch {0}: {1} Schaden ({2})",
+  "category": "grammar",
+  "reason": "{2} is the element word (physisch, Feuer, Magie…): 'physisch-Schaden' is ungrammatical; parenthesised element works for every filler"
+ },
+ {
+  "key": "Levels gear adds to every # #",
+  "current": "Stufen durch Ausrüstung gelten für alle {0} {1}",
+  "suggested": "Stufen durch Ausrüstung gelten für alles in {0} ({1})",
+  "category": "grammar",
+  "reason": "Fillers are the tree name without ' Skills' and 'skill'/'passive'/'skill and passive' (code: hint of skill-tree rows): 'für alle Feuer Fertigkeit' is ungrammatical (alle + singular)"
+ },
+ {
+  "key": "A level past a #'s maximum still adds to it, as in D2",
+  "current": "Stufen über dem Maximum von {0} zählen weiter, wie in D2",
+  "suggested": "Stufen über dem Maximum zählen weiter ({0}), wie in D2",
+  "category": "grammar",
+  "reason": "Filler is 'skill' or 'skill or passive': 'über dem Maximum von Fertigkeit oder Passiv' doesn't read; keep the filler out of the genitive"
+ },
+ {
+  "key": "Hail",
+  "current": "Pfeilhagel",
+  "suggested": "Hagel",
+  "category": "meaning",
+  "reason": "Modifier of both Strafe and Blade Fury (bladeFury.name); 'Pfeilhagel' is wrong for the blade-throwing skill"
+ },
+ {
+  "key": "Onslaught",
+  "current": "Ansturm",
+  "suggested": "Sturmangriff",
+  "category": "term",
+  "reason": "Modifier of Fend; 'Ansturm' is the D2R name of the Paladin skill Charge (which is also a skill in this game), so the card shows another skill's name"
+ },
+ {
+  "key": "Rampage",
+  "current": "Raserei",
+  "suggested": "Wüten",
+  "category": "term",
+  "reason": "Modifier of Fury; 'Raserei' is the D2R name of the Barbarian skill Frenzy"
+ },
+ {
+  "key": "Lacerate",
+  "current": "Zerfleischen",
+  "suggested": "Zerreißen",
+  "category": "term",
+  "reason": "Modifier of Fury; 'Zerfleischen' is the D2R name of the Druid skill Maul, which is a skill in this game too (Quake Paw/Grudge are its modifiers)"
+ },
+ {
+  "key": "It raises up to 6 dire wolves instead of 3, each biting for half the damage.",
+  "current": "Erschafft bis zu 6 Todeswölfe statt 3, jeder beißt mit halbem Schaden.",
+  "suggested": "Erschafft bis zu 6 Schreckenswölfe statt 3, jeder beißt mit halbem Schaden.",
+  "category": "term",
+  "reason": "D2R: Summon Dire Wolf = 'Schreckenswolf' (dict too); 'Todeswolf' is not the official name"
+ },
+ {
+  "key": "The dire wolves bite 30% faster, each bite dealing 25% less damage.",
+  "current": "Die Todeswölfe beißen 30 % schneller, jeder Biss verursacht 25 % weniger Schaden.",
+  "suggested": "Die Schreckenswölfe beißen 30 % schneller, jeder Biss verursacht 25 % weniger Schaden.",
+  "category": "term",
+  "reason": "D2R: Dire Wolf = 'Schreckenswolf'"
+ },
+ {
+  "key": "RUMBLE",
+  "current": "Grollen",
+  "suggested": "Vibration",
+  "category": "meaning",
+  "reason": "Same key as 'Rumble' (case-insensitive); it is the controller vibration option in screens.js, where 'Grollen' (thunder rumble) is wrong. 'Vibration' also fits Leap's landing modifier (zh chose 震動 for the same reason)"
+ },
+ {
+  "key": "Rumble",
+  "current": "Grollen",
+  "suggested": "Vibration",
+  "category": "meaning",
+  "reason": "Shares the value with the controller option RUMBLE; 'Grollen' is wrong there and is also close to Maul's modifier 'Groll'"
+ },
+ {
+  "key": "Embers",
+  "current": "Glut",
+  "suggested": "Glutfunken",
+  "category": "consistency",
+  "reason": "'Ember' (Royal Strike modifier) is also 'Glut'; two Assassin martial-arts modifiers would show the same name (zh distinguishes 餘燼/熾烈)"
+ },
+ {
+  "key": "Murder",
+  "current": "Krähenschwarm",
+  "suggested": "Rabenschwarm",
+  "category": "consistency",
+  "reason": "Modifier of Raven; the skill and its description (639) speak of Raben, not Krähen"
+ },
+ {
+  "key": "Each paid re-draft costs * more, up to * gold",
+  "current": "Jedes bezahlte Neuwählen kostet {0} mehr, bis zu {1} Gold",
+  "suggested": "Jede bezahlte Neuwahl kostet {0} mehr, bis zu {1} Gold",
+  "category": "consistency",
+  "reason": "Other re-draft strings use the noun 'Neuwahl' (Akaras Neuwahl, Eine Neuwahl bei Akara); 'Neuwählen' only here"
+ },
+ {
+  "key": "Half its blow is lightning damage, but it deals 10% less damage.",
+  "current": "Die Hälfte des Schlags ist Blitzschaden, verursacht aber 10 % weniger Schaden.",
+  "suggested": "Die Hälfte des Schlags ist Blitzschaden, dafür verursacht der Golem 10 % weniger Schaden.",
+  "category": "grammar",
+  "reason": "'verursacht aber' has no subject of its own and reads as if 'half of the blow' deals less damage; name the golem (Charged Iron is an Iron Golem option)."
+ },
+ {
+  "key": "Your level-* * can now enter the Terror tiers.",
+  "current": "{1} (Stufe {0}) kann jetzt die Schrecken-Stufen betreten.",
+  "suggested": "Dein Held ({1}, Stufe {0}) kann jetzt die Schreckensstufen betreten.",
+  "category": "grammar",
+  "reason": "{1} is a bare class name (Amazone, Barbar), so the sentence starts 'Amazone (Stufe 30) kann…' with no article. Also 'Schrecken-Stufen' vs 'Schreckensstufen' in 'the Terror tiers' and most of the dictionary."
+ },
+ {
+  "key": "The Terror tiers are open",
+  "current": "Die Schrecken-Stufen sind offen",
+  "suggested": "Die Schreckensstufen sind offen",
+  "category": "consistency",
+  "reason": "'Schrecken-Stufen' vs 'Schreckensstufen' ('the Terror tiers' in this part, and 43 of 60 uses in dict/de.json)."
+ },
+ {
+  "key": "Sword Mastery",
+  "current": "Schwertbeherrschung",
+  "suggested": "Klingenbeherrschung",
+  "category": "term",
+  "reason": "The Barbarian's sword mastery is 'Blade Mastery' in D2R (skillname127), German 'Klingenbeherrschung'. The zh ref 利刃專精 is that official name too."
+ },
+ {
+  "key": "Splits one arrow into a fan of #, each dealing # damage.",
+  "current": "Teilt einen Pfeil in einen Fächer aus {0} auf, die je {1} Schaden verursachen.",
+  "suggested": "Teilt einen Pfeil in einen Fächer aus {0} Pfeilen auf, die je {1} Schaden verursachen.",
+  "category": "grammar",
+  "reason": "{0} is a bare number here (constant), so 'einen Fächer aus 3 auf, die…' is missing its noun, and 'die' has nothing plural to refer to."
+ },
+ {
+  "key": "Throws # of # damage trailing poison clouds that deal # over #s.",
+  "current": "Wirft {0} mit {1} Schaden, die Giftwolken hinterlassen, welche {2} Schaden über {3} Sek. verursachen.",
+  "suggested": "Wirft {0} mit {1} Schaden und hinterlässt Giftwolken, die {2} Schaden über {3} Sek. verursachen.",
+  "category": "grammar",
+  "reason": "{0} can be '1 Wurfspieß' (count starts at 1), which gives 'ein Wurfspieß …, die Giftwolken hinterlassen'. This wording works for 1 or more."
+ },
+ {
+  "key": "Splits one arrow into # at the monsters around you, each dealing # damage.",
+  "current": "Teilt einen Pfeil in {0} auf die Monster um dich herum auf, die je {1} Schaden verursachen.",
+  "suggested": "Teilt einen Pfeil in {0} Pfeile auf, die auf die Monster um dich herum fliegen und je {1} Schaden verursachen.",
+  "category": "grammar",
+  "reason": "{0} is a bare number; 'in 6 auf die Monster um dich herum auf' doesn't parse."
+ },
+ {
+  "key": "Fires # at the nearest monsters for # damage.",
+  "current": "Feuert {0} Feuergeschosse auf die nächsten Monster ab und verursacht {1} Schaden.",
+  "suggested": "Feuert {0} auf die nächsten Monster ab und verursacht {1} Schaden.",
+  "category": "placeholder",
+  "reason": "{0} already holds the count and noun ('3 bolts' -> '3 Bolzen'/'1 Geschoss'), so the game shows 'Feuert 3 Bolzen Feuergeschosse ab'. Checked with the game's translator."
+ },
+ {
+  "key": "Fires # of ice that # # and #, for # damage.",
+  "current": "Feuert {0} Eisgeschosse ab, die {2} Monster {1} und {3}, und verursacht {4} Schaden.",
+  "suggested": "Feuert {0} aus Eis ab, die {2} Monster {1} und {3}, und verursacht {4} Schaden.",
+  "category": "placeholder",
+  "reason": "{0} is the translated '# bolt(s)', so 'Eisgeschosse' adds a second noun ('3 Geschosse Eisgeschosse'). Only matters when this generic fallback is reached (the concrete keys cover the usual case)."
+ },
+ {
+  "key": "Fires # of lightning for # damage each.",
+  "current": "Feuert {0} Blitze ab, die je {1} Schaden verursachen.",
+  "suggested": "Feuert {0} aus Blitzenergie ab, je {1} Schaden.",
+  "category": "placeholder",
+  "reason": "{0} is already '3 Funken', so the game shows 'Feuert 3 Funken Blitze ab'. 'die je … verursachen' also breaks with '1 Funke'."
+ },
+ {
+  "key": "Fires # of lightning through all in line for # damage.",
+  "current": "Feuert {0} Blitze durch alles in einer Linie und verursacht {1} Schaden.",
+  "suggested": "Feuert {0} aus Blitzenergie durch alles in einer Linie und verursacht {1} Schaden.",
+  "category": "placeholder",
+  "reason": "{0} is already '2 Bolzen'/'1 Geschoss', so the game shows 'Feuert 2 Bolzen Blitze durch…'. Checked with the game's translator."
+ },
+ {
+  "key": "# of # damage # for #s.",
+  "current": "{0} Eisgeschosse mit {1} Schaden {2}, {3} Sek. lang.",
+  "suggested": "{0} aus Eis mit {1} Schaden {2}, {3} Sek. lang.",
+  "category": "placeholder",
+  "reason": "{0} is the translated '# bolt(s)'; 'Eisgeschosse' doubles the noun. Generic fallback (the concrete keys cover the usual case)."
+ },
+ {
+  "key": "Monsters within # lose #% of their life, and elites and bosses a third of that.",
+  "current": "Monster im Umkreis von {0} verlieren {1}% ihres Lebens, Elite-Monster und Bosse ein Drittel davon.",
+  "suggested": "Monster im Umkreis von {0} verlieren {1}% ihres Lebens, Elitemonster und Bosse ein Drittel davon.",
+  "category": "consistency",
+  "reason": "'Elite-Monster' vs 'Elitemonster' in every other string of this part (#102, #127, #141, #143, #163)."
+ },
+ {
+  "key": "+#% to all resistances, #% Damage Reduced. Poison and chill wear off #% faster.",
+  "current": "+{0}% zu allen Widerständen, Schaden um {1}% reduziert. Gift und Kälte klingen {2}% schneller ab.",
+  "suggested": "+{0}% zu allen Widerständen, Schaden um {1}% reduziert. Gift und Verlangsamung klingen {2}% schneller ab.",
+  "category": "consistency",
+  "reason": "'chill' is 'Verlangsamung/verlangsamen' everywhere else (#137, #294, #404, #405). 'Kälte' reads as the cold element."
+ },
+ {
+  "key": "+#% to all resistances. Poison and chill wear off #% faster.",
+  "current": "+{0}% zu allen Widerständen. Gift und Kälte klingen {1}% schneller ab.",
+  "suggested": "+{0}% zu allen Widerständen. Gift und Verlangsamung klingen {1}% schneller ab.",
+  "category": "consistency",
+  "reason": "'chill' is 'Verlangsamung/verlangsamen' everywhere else (#404, #405 say 'Gift und Verlangsamung')."
+ },
+ {
+  "key": "Fires * of holy light that * *, for * damage (double to the undead).",
+  "current": "Feuert {0} aus heiligem Licht ab, die {2} Monster {1}, und verursacht {3} Schaden (doppelt gegen Untote).",
+  "suggested": "Feuert {0} aus heiligem Licht ab, das {2} Monster {1}, und verursacht {3} Schaden (doppelt gegen Untote).",
+  "category": "grammar",
+  "reason": "There is a concrete key for the plural only, so this generic one runs for '1 bolt' and gives 'Feuert 1 Geschoss …, die 2 Monster durchbohrt'. 'das' fits 'Geschoss'."
+ },
+ {
+  "key": "Adds +#% damage to your attacks and Blessed Hammer.",
+  "current": "Gewährt deinen Angriffen und Gesegneter Hammer +{0}% Schaden.",
+  "suggested": "Deine Angriffe und Gesegneter Hammer erhalten +{0}% Schaden.",
+  "category": "grammar",
+  "reason": "'deinen Angriffen und Gesegneter Hammer' puts the uninflected skill name in a dative list. Nominative keeps the name as it is."
+ },
+ {
+  "key": "Your ravens, wolves, grizzly and creepers get +#% life and damage.",
+  "current": "Deine Raben, Wölfe, Grizzly und Ranken erhalten +{0}% Leben und Schaden.",
+  "suggested": "Deine Raben, Wölfe, Grizzly und Kriecher erhalten +{0}% Leben und Schaden.",
+  "category": "term",
+  "reason": "Creepers are 'Kriecher' in D2R (Giftkriecher, Sonnenkriecher). 'Ranke' is a vine (Aasranke), and #445 already says 'die Gaben der Ranken und das Gift der Kriecher'."
+ },
+ {
+  "key": "+* to * Skill Levels",
+  "current": "+{0} zu {1}-Fertigkeitsstufen",
+  "suggested": "+{0} zu Fertigkeiten der Klasse {1}",
+  "category": "grammar",
+  "reason": "{1} is a class name (Amazone, Assassine, Zauberin), so the compound comes out as 'Amazone-Fertigkeitsstufen' with no linking -n. D2R says '+1 zu Amazonenfertigkeiten'. This wording works for every class."
+ },
+ {
+  "key": "* won't come back as a new skill",
+  "current": "{0} kommt nicht mehr als neue Fertigkeit",
+  "suggested": "{0} wird nicht mehr als neue Fertigkeit angeboten",
+  "category": "grammar",
+  "reason": "'kommt nicht mehr als neue Fertigkeit' is incomplete German ('won't come back' = 'is no longer offered')."
+ },
+ {
+  "key": "Next * at character level *",
+  "current": "Nächste {0}: Charakterstufe {1}",
+  "suggested": "{0} als Nächstes: Charakterstufe {1}",
+  "category": "grammar",
+  "reason": "{0} is 'skill' or 'passive' -> 'Fertigkeit' or 'Passiv' (neuter), so 'Nächste Passiv' is wrong. Avoid the inflected adjective."
+ },
+ {
+  "key": "The leaderboard can't be reached. Played now, your * won't be ranked again.",
+  "current": "Die Bestenliste ist nicht erreichbar. Spielst du jetzt, wird {0} nie wieder gewertet.",
+  "suggested": "Die Bestenliste ist nicht erreichbar. Spielst du jetzt, wird dein Held ({0}) nie wieder gewertet.",
+  "category": "grammar",
+  "reason": "{0} is a bare class name, so you get 'wird Amazone nie wieder gewertet' with no article. The class names have different genders, so dein/deine can't be put in front."
+ },
+ {
+  "key": "Send my runs is off. Played now, your * won't be ranked again.",
+  "current": "\"Meine Durchgänge senden\" ist aus. Spielst du jetzt, wird {0} nie wieder gewertet.",
+  "suggested": "\"Meine Durchgänge senden\" ist aus. Spielst du jetzt, wird dein Held ({0}) nie wieder gewertet.",
+  "category": "grammar",
+  "reason": "{0} is a bare class name ('wird Zauberin nie wieder gewertet')."
+ },
+ {
+  "key": "An * kept aside by an older version is back now: your hero, or retired at Akara.",
+  "current": "{0}, von einer älteren Version beiseitegelegt, ist jetzt zurück: als dein Held oder im Ruhestand bei Akara.",
+  "suggested": "Ein von einer älteren Version beiseitegelegter Held ({0}) ist jetzt zurück: als dein Held oder im Ruhestand bei Akara.",
+  "category": "grammar",
+  "reason": "{0} is a bare class name ('An Amazon kept aside…'), so the German starts 'Amazone, von einer…' with no article."
+ },
+ {
+  "key": "A * kept aside by an older version is back now: your hero, or retired at Akara.",
+  "current": "{0}, von einer älteren Version beiseitegelegt, ist jetzt zurück: als dein Held oder im Ruhestand bei Akara.",
+  "suggested": "Ein von einer älteren Version beiseitegelegter Held ({0}) ist jetzt zurück: als dein Held oder im Ruhestand bei Akara.",
+  "category": "grammar",
+  "reason": "{0} is a bare class name ('A Barbarian kept aside…'), so the German starts 'Barbar, von einer…' with no article."
+ },
+ {
+  "key": "+1% critical strike chance +3% damage with a bow or claws",
+  "current": "+1% Kritische Trefferchance +3% Schaden mit Bogen oder Klauen",
+  "suggested": "+1% kritische Trefferchance +3% Schaden mit Bogen oder Klauen",
+  "category": "consistency",
+  "reason": "The sibling '+1% critical strike chance +3% weapon damage' and the other running-text strings write it in lowercase ('kritische Trefferchance')."
+ },
+ {
+  "key": "Your * is now one hero, level *. Your other copies are kept at Akara.",
+  "current": "{0} ist jetzt ein einziger Held, Stufe {1}. Deine anderen Kopien werden bei Akara aufbewahrt.",
+  "suggested": "{0}: jetzt ein einziger Held, Stufe {1}. Deine anderen Kopien werden bei Akara aufbewahrt.",
+  "category": "grammar",
+  "reason": "'Your *' is a bare class name, so it comes out as 'Amazone ist jetzt…' without 'Deine/Dein'. The gender varies, so drop the possessive."
+ },
+ {
+  "key": "Walk into the portal to *",
+  "current": "Betritt das Portal nach {0}",
+  "suggested": "Betritt das Portal (Ziel: {0})",
+  "category": "grammar",
+  "reason": "{0} is a town or act (\"Lager der Jägerinnen\", \"Festung des Wahnsinns\", \"Docks von Kurast\", \"Akt 2\"); \"nach\" only works for bare place names, giving \"nach Lager der Jägerinnen\""
+ },
+ {
+  "key": "* hits a cast",
+  "current": "{0} Treffer pro Wirken",
+  "suggested": "{0} Treffer pro Einsatz",
+  "category": "consistency",
+  "reason": "Sibling line \"One hit a cast\" uses \"pro Einsatz\"; the same tooltip line should use one word (\"pro Wirken\" is also unidiomatic)"
+ },
+ {
+  "key": "Slay Duriel within * seconds of his coming.",
+  "current": "Töte Duriel innerhalb von {0} Sekunden nach seinem Erscheinen.",
+  "suggested": "Duriel innerhalb von {0} Sekunden nach seinem Erscheinen töten.",
+  "category": "consistency",
+  "reason": "Cain challenge list mixes du-imperative and infinitive; most entries (Andariel, Duriel, Mephisto...) use the impersonal infinitive the guide prefers"
+ },
+ {
+  "key": "Hold * evolved skills, from any of your trees, as an act boss falls.",
+  "current": "Besitze {0} entwickelte Fertigkeiten aus beliebigen Bäumen, wenn ein Aktboss fällt.",
+  "suggested": "{0} entwickelte Fertigkeiten aus beliebigen Bäumen besitzen, wenn ein Aktboss fällt.",
+  "category": "consistency",
+  "reason": "Same challenge list: infinitive like the other entries"
+ },
+ {
+  "key": "Slay Talic, Madawc and Korlic within * seconds of their awakening.",
+  "current": "Töte Talic, Madawc und Korlic innerhalb von {0} Sekunden nach ihrem Erwachen.",
+  "suggested": "Talic, Madawc und Korlic innerhalb von {0} Sekunden nach ihrem Erwachen töten.",
+  "category": "consistency",
+  "reason": "Same challenge list: infinitive like the other entries"
+ },
+ {
+  "key": "Slay Baal with skills of one tree dealing at least *% of the damage he takes.",
+  "current": "Töte Baal, wobei Fertigkeiten eines einzigen Baums mindestens {0}% seines erlittenen Schadens verursachen.",
+  "suggested": "Baal töten, wobei Fertigkeiten eines einzigen Baums mindestens {0}% seines erlittenen Schadens verursachen.",
+  "category": "consistency",
+  "reason": "Same challenge list: infinitive like the other entries"
+ },
+ {
+  "key": "Slay Baal within * seconds of his coming.",
+  "current": "Töte Baal innerhalb von {0} Sekunden nach seinem Erscheinen.",
+  "suggested": "Baal innerhalb von {0} Sekunden nach seinem Erscheinen töten.",
+  "category": "consistency",
+  "reason": "Same challenge list: infinitive like the other entries"
+ },
+ {
+  "key": "Clear tier * or higher.",
+  "current": "Schließe Stufe {0} oder höher ab.",
+  "suggested": "Stufe {0} oder höher abschließen.",
+  "category": "consistency",
+  "reason": "Same challenge list: \"Die Kuhstufe abschließen.\" etc. use the infinitive"
+ },
+ {
+  "key": "Clear * tiers in a row without losing one.",
+  "current": "Schließe {0} Stufen in Folge ab, ohne eine zu verlieren.",
+  "suggested": "{0} Stufen in Folge abschließen, ohne eine zu verlieren.",
+  "category": "consistency",
+  "reason": "Same challenge list: infinitive like the other entries"
+ },
+ {
+  "key": "Clear a tier with No Potions in the Belt among its affixes (from tier *).",
+  "current": "Schließe eine Stufe mit dem Affix \"Keine Tränke im Gürtel\" ab (ab Stufe {0}).",
+  "suggested": "Eine Stufe mit dem Affix \"Keine Tränke im Gürtel\" abschließen (ab Stufe {0}).",
+  "category": "consistency",
+  "reason": "Same challenge list: infinitive like the other entries"
+ },
+ {
+  "key": "and continue the run",
+  "current": "und den Durchgang fortsetzen",
+  "suggested": "und den Durchgang fortzusetzen",
+  "category": "grammar",
+  "reason": "Fills {1} of \"* to reload*\"; the result \"Tippen zum Neuladen und den Durchgang fortsetzen\" mixes a nominal and a verbal phrase. Change together with \"* to reload*\""
+ },
+ {
+  "key": "* to reload*",
+  "current": "{0} zum Neuladen{1}",
+  "suggested": "{0}, um neu zu laden{1}",
+  "category": "grammar",
+  "reason": "{0}=Tippen/Klicken, {1}=\" and continue the run\" or empty: gives \"Tippen, um neu zu laden und den Durchgang fortzusetzen\""
+ },
+ {
+  "key": "A contact is @name (X) or u/name (Reddit).",
+  "current": "Ein Kontakt ist @name (X) oder u/name (Reddit).",
+  "suggested": "Kontakt im Format @name (X) oder u/name (Reddit).",
+  "category": "meaning",
+  "reason": "Validation hint about the contact format (ko: 형식입니다); \"Ein Kontakt ist @name\" reads as a statement about one contact"
+ },
+ {
+  "key": "The automap no longer marks set and unique items the loot filter hides",
+  "current": "Die Autom. Karte markiert keine Set- und einzigartigen Gegenstände mehr, die der Beutefilter ausblendet",
+  "suggested": "Die automatische Karte markiert keine Set- und einzigartigen Gegenstände mehr, die der Beutefilter ausblendet",
+  "category": "consistency",
+  "reason": "In running text the D2R UI abbreviation \"Autom. Karte\" (capital A mid-sentence) is odd; other changelog lines write \"automatische Karte\""
+ },
+ {
+  "key": "An item's charges spent in a run stay spent after Save and Exit and CONTINUE",
+  "current": "In einem Durchgang verbrauchte Ladungen eines Gegenstands bleiben nach Speichern und verlassen und WEITER verbraucht",
+  "suggested": "In einem Durchgang verbrauchte Ladungen eines Gegenstands bleiben nach SPEICHERN UND VERLASSEN und WEITER verbraucht",
+  "category": "grammar",
+  "reason": "Button name in lowercase (\"Speichern und verlassen\") reads as plain verbs; write it as the button shows (SPEICHERN UND VERLASSEN), like the Esc-menu changelog line"
+ },
+ {
+  "key": "On a phone, monsters raised by Revive no longer hold back a Terror tier's boss",
+  "current": "Auf dem Handy halten durch Reanimation erweckte Monster den Boss einer Schrecken-Stufe nicht mehr auf",
+  "suggested": "Auf dem Handy halten durch Reanimation erweckte Monster den Boss einer Schreckensstufe nicht mehr auf",
+  "category": "consistency",
+  "reason": "\"Schreckensstufe\" is the dominant spelling (43 strings) vs \"Schrecken-Stufe\" (17)"
+ },
+ {
+  "key": "Blessed Aim's Stunning lowers its chance by 10%, not 25%",
+  "current": "Gesegnete Führung: \"Betäubung\" senkt ihre Chance um 10% statt um 25%",
+  "suggested": "Gesegnete Führung: \"Betäubend\" senkt ihre Chance um 10% statt um 25%",
+  "category": "consistency",
+  "reason": "The Blessed Aim modifier card shows modifier:Stunning = \"Betäubend\"; the changelog must quote the same name"
+ },
+ {
+  "key": "Claws of Thunder's Static no longer makes the release 10% weaker",
+  "current": "Die statische Ladung von Donnerklauen schwächt die Entladung nicht mehr um 10%",
+  "suggested": "Donnerklauen: \"Funkenschlag\" schwächt die Entladung nicht mehr um 10%",
+  "category": "consistency",
+  "reason": "Static here is the Claws of Thunder modifier, shown as modifier:Static = \"Funkenschlag\"; \"statische Ladung\" does not match the card"
+ },
+ {
+  "key": "A Terror tier's boss waits until every champion and unique you can hurt is dead",
+  "current": "Der Boss einer Schrecken-Stufe wartet, bis jeder Champion und jedes einzigartige Monster, das du verletzen kannst, tot ist",
+  "suggested": "Der Boss einer Schreckensstufe wartet, bis jeder Champion und jedes einzigartige Monster, das du verletzen kannst, tot ist",
+  "category": "consistency",
+  "reason": "\"Schreckensstufe\" is the dominant spelling"
+ },
+ {
+  "key": "The Cow tier comes as nine waves of Hell Bovines, with the Cow King as the last",
+  "current": "Die Kuh-Stufe besteht aus neun Wellen Höllenbullen, mit dem Kuhkönig als letztem",
+  "suggested": "Die Kuhstufe besteht aus neun Wellen Höllenbullen, mit dem Kuhkönig als letztem",
+  "category": "consistency",
+  "reason": "The challenge \"Die Kuhstufe abschließen.\" and others write \"Kuhstufe\""
+ },
+ {
+  "key": "A cleared Terror tier shows your clear time against the times that skip tiers",
+  "current": "Eine abgeschlossene Schrecken-Stufe zeigt deine Zeit im Vergleich zu den Zeiten, mit denen man Stufen überspringt",
+  "suggested": "Eine abgeschlossene Schreckensstufe zeigt deine Zeit im Vergleich zu den Zeiten, mit denen man Stufen überspringt",
+  "category": "consistency",
+  "reason": "\"Schreckensstufe\" is the dominant spelling"
+ },
+ {
+  "key": "A hero already re-drafted has her free reset at Akara back, once",
+  "current": "Ein bereits neu gewählter Held erhält seine kostenlose Zurücksetzung bei Akara einmalig zurück",
+  "suggested": "Ein Held, dessen Build bereits neu gewählt wurde, erhält seine kostenlose Zurücksetzung bei Akara einmalig zurück",
+  "category": "meaning",
+  "reason": "\"re-drafted\" means its build was re-drafted at Akara; \"neu gewählter Held\" reads as \"newly selected hero\""
+ },
+ {
+  "key": "On phones, the map's tiles, the heroes, the monsters and the automap draw again",
+  "current": "Auf Handys werden Kartenkacheln, Helden, Monster und die autom. Karte wieder angezeigt",
+  "suggested": "Auf Handys werden Kartenkacheln, Helden, Monster und die automatische Karte wieder angezeigt",
+  "category": "consistency",
+  "reason": "Lowercase \"autom. Karte\" in running text; spell it out like other changelog lines"
+ },
+ {
+  "key": "Damage +N on The Redeemer and Astreon's Iron Ward now works",
+  "current": "Schaden +N auf Der Erlöser und Astreons Eisenschutz wirkt jetzt",
+  "suggested": "Schaden +N auf \"Der Erlöser\" und \"Astreons Eisenschutz\" wirkt jetzt",
+  "category": "grammar",
+  "reason": "\"auf Der Erlöser\" is ungrammatical unless the item name is marked; quote the names"
+ },
+ {
+  "key": "Open Wounds and Crushing Blow follow D2 on champions, uniques and past level 60",
+  "current": "Offene Wunden und Niederstrecken folgen D2 bei Champions, einzigartigen Monstern und über Stufe 60",
+  "suggested": "Offene Wunden und Vernichtender Schlag folgen D2 bei Champions, einzigartigen Monstern und über Stufe 60",
+  "category": "term",
+  "reason": "D2R German Crushing Blow is \"vernichtender Schlag\" (ModStr5c); \"Niederstrecken\" is the Paladin skill Smite, also used in this dictionary (Zeal/Smite passive)"
+ },
+ {
+  "key": "The mana globe counts Increase Maximum Mana on your own mana only, as D2 does",
+  "current": "Die Manakugel rechnet Erhöht max. Mana wie in D2 nur auf dein eigenes Mana an",
+  "suggested": "Die Manakugel rechnet \"Erhöht maximales Mana\" wie in D2 nur auf dein eigenes Mana an",
+  "category": "grammar",
+  "reason": "Stat name dropped unmarked into the sentence is hard to parse; quote it and use the dictionary form of \"Increase Maximum Mana\""
+ },
+ {
+  "key": "Increased Chance of Blocking",
+  "current": "Erhöhte Blockchance",
+  "suggested": "erhöhte Blockchance",
+  "category": "grammar",
+  "reason": "The game builds \"20% Increased Chance of Blocking\" and translates the part after the number, so it shows \"20% Erhöhte Blockchance\"; D2R: \"%d%% erhöhte Blockchance\""
+ },
+ {
+  "key": "Faster Block Rate",
+  "current": "Schnellere Blockrate",
+  "suggested": "schnellere Blockrate",
+  "category": "grammar",
+  "reason": "Shown after the number (\"+20% Schnellere Blockrate\"); D2R and the guide use lowercase \"schnellere Blockrate\""
+ },
+ {
+  "key": "Faster Hit Recovery",
+  "current": "Schnellere Erholung nach Treffer",
+  "suggested": "schnellere Erholung nach Treffer",
+  "category": "grammar",
+  "reason": "Follows a number in item lines; D2R and the guide use lowercase, matching the \"+#% Faster Hit Recovery\" template"
+ },
+ {
+  "key": "Slower Stamina Drain",
+  "current": "Langsamerer Ausdauerverbrauch",
+  "suggested": "langsamerer Ausdauerverbrauch",
+  "category": "grammar",
+  "reason": "Follows a number (\"25% ...\"); D2R: \"%d%% langsamerer Ausdauerverbrauch\""
+ },
+ {
+  "key": "Piercing Attack",
+  "current": "Durchbohrender Angriff",
+  "suggested": "durchbohrender Angriff",
+  "category": "grammar",
+  "reason": "Follows a number; D2R: \"%+d%% durchbohrender Angriff\""
+ },
+ {
+  "key": "Damage Taken Goes To Mana",
+  "current": "Erlittener Schaden geht auf Mana",
+  "suggested": "erlittenen Schadens geht auf Mana",
+  "category": "grammar",
+  "reason": "Follows a percentage (\"+10% ...\"); D2R: \"%+d%% erlittenen Schadens geht auf Mana\" (genitive after the %)"
+ },
+ {
+  "key": "Chance of Crushing Blow",
+  "current": "Chance auf Niederstrecken",
+  "suggested": "Chance auf vernichtenden Schlag",
+  "category": "term",
+  "reason": "D2R item stat: \"%+d%% Chance auf vernichtenden Schlag\"; \"Niederstrecken\" is the skill Smite"
+ },
+ {
+  "key": "Bitter Brogues",
+  "current": "verbitterter Schnürschuhe",
+  "suggested": "Verbitterte Schnürschuhe",
+  "category": "grammar",
+  "reason": "Rare name: the adjective must agree with plural Schnürschuhe (D2R [pl]verbitterte) and the name starts uppercase"
+ },
+ {
+  "key": "Bitter Knot",
+  "current": "verbitterter Knoten",
+  "suggested": "Verbitterter Knoten",
+  "category": "grammar",
+  "reason": "Rare name shown on its own: first letter must be uppercase (D2R composed names: \"Entropisches Medaillon\")"
+ },
+ {
+  "key": "Bitter Torc",
+  "current": "verbitterter Armreif",
+  "suggested": "Verbitterter Armreif",
+  "category": "grammar",
+  "reason": "Rare name shown on its own: first letter must be uppercase"
+ },
+ {
+  "key": "At the campfire, NEW RUN on Nightmare or Hell says it starts as your kept hero from Act I, so it isn't taken for your saved run",
+  "current": "Am Lagerfeuer sagt NEUER DURCHGANG in Alptraum oder Hölle, dass er mit deinem aufbewahrten Helden ab Akt I beginnt, damit er nicht für deinen gespeicherten Durchgang gehalten wird",
+  "suggested": "Am Lagerfeuer sagt NEUES SPIEL in Alptraum oder Hölle, dass es mit deinem aufbewahrten Helden ab Akt 1 beginnt, damit es nicht für deinen gespeicherten Durchgang gehalten wird",
+  "category": "consistency",
+  "reason": "The NEW RUN button is \"NEUES SPIEL\" in the dictionary, not \"NEUER DURCHGANG\"; acts are written \"Akt 1\", not \"Akt I\""
+ },
+ {
+  "key": "Your mercenary's portrait says the level he joins at while he waits for it, where a phone sees it, no longer only in its hover box",
+  "current": "Das Porträt deines Söldners zeigt, ab welcher Stufe er sich anschließt, während er darauf wartet, und zwar dort, wo ein Handy es sieht, nicht mehr nur im Tooltip",
+  "suggested": "Solange dein Söldner auf seine Beitrittsstufe wartet, zeigt sein Porträt diese Stufe jetzt direkt an, sodass sie auch auf dem Handy sichtbar ist, nicht mehr nur im Tooltip",
+  "category": "meaning",
+  "reason": "\"dort, wo ein Handy es sieht\" is a literal calque and barely understandable; the meaning is: visible on phones (no hover), not only in the hover box"
+ },
+ {
+  "key": "Bitter Gyre",
+  "current": "verbitterter Windung",
+  "suggested": "Verbitterte Windung",
+  "category": "grammar",
+  "reason": "Rare name: Windung is feminine (D2R form [fs]verbitterte); uppercase start"
+ },
+ {
+  "key": "Cruel Suit",
+  "current": "grausamer Anzug",
+  "suggested": "Grausamer Anzug",
+  "category": "grammar",
+  "reason": "Rare name shown on its own: first letter must be uppercase"
+ },
+ {
+  "key": "The Battlebranch",
+  "current": "der Kampfast",
+  "suggested": "Der Kampfast",
+  "category": "grammar",
+  "reason": "Unique item name shown on its own; the lowercase article from D2R data looks like a typo (cf. \"Der Erlöser\", \"Der Kuhkönig\")"
+ },
+ {
+  "key": "Demon Bane",
+  "current": "Dämonen-Gift -",
+  "suggested": "Dämonen-Gift",
+  "category": "other",
+  "reason": "Leftover \" -\" from the D2R prefix form of Bane; as a rare suffix the hyphen marker must not be shown"
+ },
+ {
+  "key": "Bitter Mar",
+  "current": "verbitterter Schänder",
+  "suggested": "Verbitterter Schänder",
+  "category": "grammar",
+  "reason": "Rare name shown on its own: first letter must be uppercase"
+ },
+ {
+  "key": "Entropy Beads",
+  "current": "entropischer Perlen",
+  "suggested": "Entropische Perlen",
+  "category": "grammar",
+  "reason": "Rare name: Perlen is plural (gender:Beads = pl, D2R [pl]entropische); uppercase start"
+ },
+ {
+  "key": "Bitter Heart",
+  "current": "verbitterter Herz",
+  "suggested": "Verbittertes Herz",
+  "category": "grammar",
+  "reason": "Rare name: Herz is neuter (gender:Heart = ns, D2R [ns]verbittertes); uppercase start"
+ },
+ {
+  "key": "Lightning Damage",
+  "current": "Blitzschlag Schaden",
+  "suggested": "Blitzschaden",
+  "category": "grammar",
+  "reason": "Damage-type label (beside Feuerschaden, Giftschaden); \"Blitzschlag Schaden\" is a word-by-word match; D2R: \"Blitzschaden\""
+ }
+]
