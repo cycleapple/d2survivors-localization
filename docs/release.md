@@ -75,4 +75,5 @@
 - [ ] 主 repo 改公開：`gh repo edit cycleapple/<repo> --visibility public --accept-visibility-change-consequences`
 - [ ] commit 作者信箱：公開後看得到。要隱藏的話，公開前改成 GitHub 的 noreply 信箱
 - [ ] 通知 D2 Survivors 作者（書籤會修改他的網頁版遊戲）
-- [ ] 公告：PTT、巴哈姆特、Bilibili、Discord
+- [ ] Discord 改成「已推出」：discord/content.py 的 SITE_SOON、LAUNCHER_SOON 改成 False，重跑 `python discord/setup_server.py`；置頂訊息換上宣傳截圖（Discord 聊天室）
+- [ ] 公告：Discord #announcements（changelog 寫一筆 kind: launcher、announce: true）、PTT、巴哈姆特、Bilibili
