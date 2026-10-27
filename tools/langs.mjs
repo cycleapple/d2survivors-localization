@@ -52,7 +52,7 @@ export const TARGETS = {
     affixForm: v => /(ski|cki|dzki|ny|wy|owy)$/.test(v), rareJoin: (front, back) => `${front} ${back}`,
     fontFiles: [{ out: 'title.woff2', src: 'exocetblizzardot-medium.otf' }, { out: 'body.woff2', src: 'formal436bt.ttf' }],
     fontChars: /[Ā-ſ]/,
-    status: 'draft',
+    status: 'beta',
   },
 };
 
