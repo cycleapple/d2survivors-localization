@@ -8,7 +8,7 @@ const numbers = s => (s.match(/\d+(?:\.\d+)?/g) ?? []);
 // （英文 key 的「1,000」也一樣拿掉千分位，兩邊都寫成 1000）
 // 中文的「第四層」「第二章」（D2R 官方譯名）用國字，也換成數字
 const CN = { 一: '1', 二: '2', 三: '3', 四: '4', 五: '5', 六: '6', 七: '7', 八: '8', 九: '9' };
-const localNumbers = s => numbers(s.replace(/(\d)[,.  ](?=\d{3}(?!\d))/g, '$1').replace(/(\d),(\d)/g, '$1.$2').replace(/(?<=第)[一二三四五六七八九](?=[層章幕階])/g, c => ` ${CN[c]} `));
+const localNumbers = s => numbers(s.replace(/(\d)[,.  ](?=\d{3}(?!\d))/g, '$1').replace(/(\d),(\d)/g, '$1.$2').replace(/(?<=第)[一二三四五六七八九](?=[層层章幕階阶])/g, c => ` ${CN[c]} `));
 for (const file of process.argv.slice(2)) {
   const dict = JSON.parse(fs.readFileSync(file, 'utf8').replace(/^﻿/, ''));
   let withNumbers = 0;
