@@ -60,5 +60,8 @@
  "Poison Resist +#%": "+{0}% к сопротивлению яду",
  "Fires # bolt of ice that pierces # and chills, for # damage.": "Ледяные снаряды ({0}) пронзают монстров (до {1}) и охлаждают, урон: {2}.",
  "Fires # bolts of ice that pierce # and chill, for # damage.": "Ледяные снаряды ({0}) пронзают монстров (до {1}) и охлаждают, урон: {2}.",
- "Skill Tree": "Умения"
+ "Skill Tree": "Умения",
+ "Share": "Доля",
+ "Attacker Takes Damage of #": "Атакующий получает урон: {0}",
+ "Lost: this climb. Your * starts again at level 1.": "Потеряно: прогресс этого восхождения. {0} снова начинает с 1-го уровня."
 }

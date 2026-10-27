@@ -100,5 +100,8 @@
  "VIDEO OPTIONS has a SKILL EFFECTS slider: fade your own skills when a build fills the screen, while monsters' attacks stay solid": "W menu GRAFIKA jest suwak EFEKTY UMIEJ., który przyciemnia własne umiejętności, gdy build wypełnia ekran, a ataki potworów pozostają wyraźne",
  "Click to pick up · Right-click to equip · Shift-click to sell · Esc to close": "Kliknij: podnieś · PPM: wyposaż · Shift+klik: sprzedaj · Esc: zamknij",
  "Click to pick up · Ctrl-click to move across · Right-click to equip": "Kliknij: podnieś · Ctrl+klik: przenieś · PPM: wyposaż",
- "Select": "Wybierz"
+ "Select": "Wybierz",
+ "Sound": "DŹWIĘK",
+ "Music": "MUZYKA",
+ "No points are free. Turn off another skill's option to free one.": "Brak wolnych punktów. Wyłącz modyfikator innej umiejętności, aby zwolnić punkt."
 }

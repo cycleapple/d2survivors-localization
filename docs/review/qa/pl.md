@@ -64,3 +64,30 @@ All dictionary fixes are in `work/qa/pl/fixes.json` (101 keys). Placeholders wer
   - Camp top tabs too narrow ("UMIEJĘTNOŚCI").
   - Copyright line over the HUD at 800×600.
 - The **web screenshot folder** is `pl/web-20261028a/`, not `pl/web/` (that one is empty).
+
+## Web (new set)
+
+Checked the 29 shots in `work/qa/pl/web/` (publish 06b4ab5, site/data 20261027-1727) through the 8 contact sheets in `sheets-web/`, plus 3 crops. "Status now" = current `dict/pl.json` (03:24, which already contains `review-qa-2026.1027.2.json`). No "?" boxes or tofu. New fixes are in `work/qa/pl/fixes-web.json` (3 keys, checked with `work/agents/qa-ru/tr.mjs` on top of `dict/pl.json`).
+
+| File | Problem | Status now | Fix |
+|---|---|---|---|
+| 02a | Slider labels "Dźwięk", "Muzyka" in mixed case, every other row is caps (WYCISZ, POPRZEDNIE MENU). ru got the same fix | **open** | `Sound` → `DŹWIĘK`, `Music` → `MUZYKA` (each is only the slider label) |
+| 02a, 02c | "Wycisz: WYŁ.", "Auto-atrybuty: WYŁ." | known, **fixed** (WYCISZ: / AUTO-ATRYBUTY:) | — |
+| 02a–02c, 10c, 11 | "Zgłoś" in mixed case | known, **fixed** (ZGŁOŚ) | — |
+| 02b | "EFEKTY UMIEJĘTNOŚCI" cut on the left | known, **fixed** (EFEKTY UMIEJ.) | — |
+| 02d | Controller rows in mixed case | known (caps rule = launcher/bookmarklet) | — |
+| 05b | "Normalnym" vs "Koszmar" | known, **fixed** | — |
+| 06-sorceress-character | "Ocalały" for Sorceress; "następny poziom" lowercase | known (female Survivor rule); Next Level **fixed** | — |
+| 06-sorceress-skills, 09a | Tree tabs, "Przywoływanie / Zaklęcia" | known (tab width); Summoning Spells **fixed** (Przyzwania) | — |
+| 06-sorceress-skill-tooltip | "Kliknij, by zobaczyć modyfikatory" | fits (crop), OK | — |
+| 07a–08b | Top tab "Umiejętności" too wide; gamble hint cut, "Losuj ponownie"; stash "Wspólna"/"Unikatowe"; note behind search; "+16% Zwiększa obronę", "Odporność na Ogień +9%" | known; dict parts **fixed** (Kliknij, by zagrać w hazard, Unikaty, Hazard, item templates) | — |
+| 09a, 12a | "W umiejętność Zniedołężnienie:" (12a already shows "Rozwija się w umiejętność …") | known, **fixed** (Rozwój: {0}, wymaga:) | — |
+| 09b, 09c | Modifier tooltip ends "Wyłącz **opcję** innej umiejętności, aby zwolnić punkt": the same tooltip and the skill tooltip call them "modyfikatory" (guide: Modifier = modyfikator; ru says модификатор) | **open** | `No points are free. Turn off another skill's option to free one.` → "Brak wolnych punktów. Wyłącz modyfikator innej umiejętności, aby zwolnić punkt." |
+| 10c | Copyright over HUD at 800×600 | known, layout | **Bookmarklet** |
+| 10d | Values "Podnieś" mixed case; hint lines | known; KEEP hint **fixed** | — |
+| 11 | "17 physical damage", column "Udost." | known, **fixed** (pkt. obrażeń fizycznych, Udział) | — |
+| 12a, 12b | "Select", "Pause" | known, **fixed** (Wybierz, Pauza) | — |
+| 12b | Phone button "Automapa" fills the button edge to edge (not cut, crop) | OK, watch | none (shared with the controller row AUTOMAPA) |
+| 12a | Phone button "Umiejętności": the canvas "ś" sits loose between the bitmap letters | OK (fits) | — |
+| 01 | Main-menu backup hint overlaps the bottom of the SURVIVORS logo (ru the same) | layout, minor | **Bookmarklet / site** |
+| 00, 03, 04a, 04b, 05a, 08b names, 09b/09c variant names, 10a | Title, saves, news (Hardkor = D2R term), camp, HUD, "Karmazynowa Ćwiekowana Zbroja", Rozszczepienie / Mroźny Ogień / Ciężar, Obłok Jadu / Wypatroszenie / Daleki Rzut | OK | — |

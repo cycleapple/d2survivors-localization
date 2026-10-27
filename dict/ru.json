@@ -5,7 +5,7 @@
  "SHOW ITEMS": "ПОКАЗ ПРЕДМЕТОВ",
  "Shrine": "Святилище",
  "Other": "Другое",
- "Share": "Общ.",
+ "Share": "Доля",
  "Lut Gholein": "Лут-Голейн",
  "Kurast Docks": "Доки Кураста",
  "Harrogath": "Харрогат",
@@ -9493,7 +9493,7 @@
  "Re-draft your *": "Новый выбор: {0}",
  "Reset your *": "Сбросить: {0}",
  "Lost: what she gained since Baal last fell. Your * is level * again.": "Потеряно: все, что получено с последней победы над Баалом. {0} снова на уровне {1}.",
- "Lost: this climb. Your * starts again at level 1.": "Потеряно: это восхождение. {0} снова начинает с 1-го уровня.",
+ "Lost: this climb. Your * starts again at level 1.": "Потеряно: прогресс этого восхождения. {0} снова начинает с 1-го уровня.",
  "Lost: Terror * and 10% of a level's experience. Terror * is open.": "Потеряно: Ужас {0} и 10% опыта уровня. Открыт Ужас {1}.",
  "Lost: 10% of a level's experience. Terror * stays open.": "Потеряно: 10% опыта уровня. Ужас {0} остается открытым.",
  "Restart your *": "Начать заново: {0}",
@@ -13781,5 +13781,6 @@
  "Fire Resist +#%": "+{0}% к сопротивлению огню",
  "Cold Resist +#%": "+{0}% к сопротивлению льду",
  "Lightning Resist +#%": "+{0}% к сопротивлению молнии",
- "Poison Resist +#%": "+{0}% к сопротивлению яду"
+ "Poison Resist +#%": "+{0}% к сопротивлению яду",
+ "Attacker Takes Damage of #": "Атакующий получает урон: {0}"
 }

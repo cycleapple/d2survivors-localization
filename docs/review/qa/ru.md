@@ -55,3 +55,29 @@ No "?" boxes or tofu from missing Cyrillic glyphs. The only "?" came from the ar
 ## Not covered
 
 No boss banner, Terror or skill-modifier card (same as the other languages). No magic/rare item in the run inventory (I checked the Charsi tooltips instead).
+
+## Web (new set)
+
+Checked the 27 shots in `work/qa/ru/web/` (publish 06b4ab5, site/data 20261027-1727) through the 7 contact sheets in `sheets-web/`, plus 2 crops. "Status now" = current `dict/ru.json` (03:24, which already contains `review-qa-2026.1027.2.json`). No "?" boxes or tofu. New fixes are in `work/qa/ru/fixes-web.json` (3 keys, checked with `tr.mjs` on top of `dict/ru.json`).
+
+| File | Problem | Status now | Fix |
+|---|---|---|---|
+| 01, 10c | "Настройки" not in caps | known, **fixed** (НАСТРОЙКИ) | — |
+| 02a | Звук / Музыка / "Выключить звук: ВЫКЛ." | known, **fixed** (ЗВУК, МУЗЫКА, БЕЗ ЗВУКА) | — |
+| 02c, 10c, 10d | Автохарактеристики, СОРТИРОВКА ДОБЫЧИ, preset ОТКЛ., values "Взять" | known, **fixed** | — |
+| 02d | Controller rows in mixed case; "Карта: Показать" | known (caps rule = launcher/bookmarklet); View **fixed** (Просмотр) | — |
+| 06-amazon/sorceress-character | "Выживший" for female classes | known (female Survivor rule) | — |
+| 06-amazon/sorceress-character | "Уровень" cut | known, **fixed** (Ур.) | — |
+| 06-amazon/sorceress-character | "Урон уменьшен" | fits (crop), OK | — |
+| 06-*-skills, 09a | Tree tab names; "Призыв / Заклинания" | known (skill-tree tab width); Summoning Spells **fixed** | — |
+| 07a–08a | Shop hint cut, inventory hint 5 lines, top tab "Дерево умений", stash "Уникальные", rank box on one line | known, **fixed** in dict (Щелчок по…, ЛКМ/ПКМ, Умения, Уник., \n) | — |
+| 07a, 07b, 08a | Button "НОВЫЙ ЗАБЕГ" | fits (crop), OK | — |
+| 08a | "Атакующий получает урон 1" (number glued to the label; D2R: "Атакующий получает урон: %d") | **open** (no `Attacker Takes Damage of #` key; pl already has it) | `Attacker Takes Damage of #` → `Атакующий получает урон: {0}` |
+| 08a | "Сопр. льду" in the item box | known, **fixed** (+{0}% к сопротивлению …) | — |
+| 09a, 12a | Ice Bolt card too tall | known (desktop) | as in fixes.json |
+| 10c, 12b | Copyright over HUD at 800×600; phone life/mana drawn over the top buttons (pl 12b draws them above the orbs) | known, layout | **Bookmarklet** |
+| 11 | Death-screen column "Общ." (= "total") for Share; the column is the damage share (100%) | **open** | `Share` → `Доля` (only use: death-screen table) |
+| 11 | "Потеряно: это восхождение." reads as "Lost: this ascension" (the climb itself, not its progress) | **open**, minor | `Lost: this climb. Your * starts again at level 1.` → "Потеряно: прогресс этого восхождения. {0} снова начинает с 1-го уровня." (pl says "postęp tej wspinaczki") |
+| 11 | "6 урона (физический)"; buttons Товары Чарси / Лагерь разбойниц | known, **fixed** ("физический урон: 6", ТОВАРЫ ЧАРСИ); ROGUE ENCAMPMENT needs the caps rule | — |
+| 01 | Main menu: the backup hint "Сохраните копию: …" sits on the bottom of the SURVIVORS logo (pl the same) | layout, minor | **Bookmarklet / site**: move the hint a few px down |
+| 00, 03, 04b, 05a, 05b, 09b, 10a, 12a | Title, saves, news, camp, waypoint, skill modifiers (Расщепление / Морозное пламя / Тяжесть), HUD, phone buttons (Выбрать, Пауза) | OK | — |
