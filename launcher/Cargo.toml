@@ -1,6 +1,6 @@
 [package]
 name = "d2s-launcher"
-version = "0.2.0"
+version = "1.0.0"
 edition = "2021"
 description = "D2 Survivors Localization: switch the game's language and keep translations up to date"
 license = "MIT"
