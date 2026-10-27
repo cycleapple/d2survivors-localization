@@ -21,8 +21,8 @@ for (const { key, ko } of batch) {
   const zh = out[key];
   if (typeof zh !== 'string' || !zh.trim()) { problems.push(`缺少：${key}`); continue; }
   if (placeholders(zh) !== expected(key, ko)) problems.push(`佔位符不同：${key} → ${zh}（應該是 ${expected(key, ko) || '無'}，譯文 ${placeholders(zh) || '無'}）`);
-  if (!lang.script.test(zh) && !LATIN_OK.test(zh)) problems.push(`沒有${lang.name}：${key} → ${zh}`);
-  if (!lang.script.test(zh) && LATIN_OK.test(zh) && zh !== key) problems.push(`沒有${lang.name}（確認是否本來就不用譯）：${key} → ${zh}`);
+  if (!lang.latin && !lang.script.test(zh) && !LATIN_OK.test(zh)) problems.push(`沒有${lang.name}：${key} → ${zh}`);
+  if (!lang.latin && !lang.script.test(zh) && LATIN_OK.test(zh) && zh !== key) problems.push(`沒有${lang.name}（確認是否本來就不用譯）：${key} → ${zh}`);
   if (FULLWIDTH && (/[一-鿿][:,][^\s\d]/.test(zh) || /[一-鿿][,;]/.test(zh))) problems.push(`用了半形標點：${key} → ${zh}`);
   if (lang.id === 'zh-CN' && /[個與為們這說時點會於從還對實際應開關選擇]/.test(zh)) problems.push(`有繁體字：${key} → ${zh}`);
 }

@@ -9,7 +9,7 @@
 //   2. 句子裡的單字在已配對的稀有名稱中怎麼組合（Beast → 野獸之禦）
 import fs from 'node:fs';
 import path from 'node:path';
-import { takeLang } from './langs.mjs';
+import { takeLang, cleanD2R } from './langs.mjs';
 
 const { lang, args: rest } = takeLang(process.argv.slice(2));
 const option = name => { const i = rest.indexOf(name); if (i < 0) return null; const v = rest[i + 1]; rest.splice(i, 2); return v; };
@@ -19,11 +19,11 @@ if (!kinds) { console.error('用法：node tools/make-todo.mjs <ko.json> <D2R �
 const perBatch = Number(perBatchArg) || 12000;
 
 const norm = s => s.replace(/\s+/g, ' ').trim().toUpperCase();
-const clean = s => s.replace(/ÿc./g, '').replace(/\[[a-z]{2}\]/g, '').trim();
+const clean = cleanD2R;   // 多種詞性的形式取陽性單數，見 langs.mjs
 const PREFIX = /^(item|affix|monster|unique|title):/;
 
 const terms = new Map();   // 英文（正規化）→ 目標語言
-const addTerm = (en, zh) => { en = en.trim(); zh = zh.trim(); if (en && zh && lang.script.test(zh) && !lang.skip?.(zh) && !terms.has(norm(en))) terms.set(norm(en), { en, zh }); };
+const addTerm = (en, zh) => { en = en.trim(); zh = zh.trim(); if (en && zh && lang.isText(zh) && !lang.skip?.(zh) && !terms.has(norm(en))) terms.set(norm(en), { en, zh }); };
 const auto = JSON.parse(fs.readFileSync(autoFile, 'utf8'));
 for (const [key, zh] of Object.entries(auto)) if (!/[*#{]/.test(key)) addTerm(key.replace(PREFIX, ''), zh);
 for (const file of fs.readdirSync(d2rDir).filter(n => n.endsWith('.json'))) {

@@ -1,6 +1,8 @@
 // 用 D2R 官方字串（enUS／koKR／目標語言）自動配對遊戲字典的英文 key，產生目標語言的譯文
 //   node tools/build-glossary.mjs <ko.json> <D2R 字串資料夾> <輸出 .json> [報告 .json] [--lang zh-TW|zh-CN|ja]
 // 語言設定在 tools/langs.mjs，預設繁中。下面的變數名稱 zh 指的是目標語言的譯文
+// 有詞性的語言（德文）另外輸出：affix:<詞綴> 保留 D2R 每種詞性的形式「[fs]robuste[ms]robuster…」、
+// gender:<物品> 是物品名稱的詞性（fs／ms／ns／pl），給魔法物品名稱組合時挑形容詞的形式用
 // 配對順序：
 //   1. 英文相同（去掉 item:／affix: 這類前綴，比較方式跟遊戲一樣：空白合併、不分大小寫）
 //   2. 韓文相同（遊戲的韓文多半直接取自 D2R 的 koKR）
@@ -8,7 +10,7 @@
 // 多個候選時，用韓文譯文挑；挑不出來就取出現最多次的
 import fs from 'node:fs';
 import path from 'node:path';
-import { takeLang } from './langs.mjs';
+import { takeLang, cleanD2R, genderForms, nounGender } from './langs.mjs';
 
 const { lang, args } = takeLang(process.argv.slice(2));
 const [koFile, d2rDir, outFile, reportFile] = args;
@@ -17,14 +19,15 @@ if (!koFile || !d2rDir || !outFile) { console.error('用法：node tools/build-g
 const PREFIX = /^(item|affix|monster|unique|title):/;
 const norm = s => s.replace(/\s+/g, ' ').trim().toUpperCase();
 // D2R 字串裡的顏色碼（ÿc4）、性別／單複數標記（[ms]、[fs]、[pl]…）
-const clean = s => s.replace(/ÿc./g, '').replace(/\[[a-z]{2}\]/g, '').trim();
+const clean = cleanD2R;   // 多種詞性的形式取陽性單數，見 langs.mjs
 const TOKEN = /%(\+?)(?:d|i|s|\d)/g;
 
 // D2R 的一條字串 → 可比對的英文／韓文形式，以及目標語言的譯文；樣板會轉成遊戲的格式
 function forms(row) {
   const en = clean(row.enUS ?? ''), ko = clean(row.koKR ?? ''), zh = clean(row[lang.col] ?? '');
-  if (!en || !zh || !lang.script.test(zh) || lang.skip?.(zh)) return [];
-  if (!TOKEN.test(en)) return [{ en, ko, zh }];
+  if (!en || !zh || !lang.isText(zh) || lang.skip?.(zh)) return [];
+  const raw = (row[lang.col] ?? '').replace(/ÿc./g, '').trim();
+  if (!TOKEN.test(en)) return [{ en, ko, zh, raw }];
   TOKEN.lastIndex = 0;
   const count = (en.match(TOKEN) ?? []).length;
   if ((zh.match(TOKEN) ?? []).length !== count) return [];
@@ -39,9 +42,15 @@ function forms(row) {
 const byEn = new Map(), byKo = new Map();
 const add = (map, key, entry) => { if (!key) return; const k = norm(key); (map.get(k) ?? map.set(k, []).get(k)).push(entry); };
 let rows = 0;
+const genderOf = new Map(), affixForms = new Map();   // 英文（正規化）→ 物品名稱的詞性／詞綴每種詞性的形式
 for (const file of fs.readdirSync(d2rDir).filter(n => n.endsWith('.json'))) {
   for (const row of JSON.parse(fs.readFileSync(path.join(d2rDir, file), 'utf8'))) {
     rows++;
+    if (lang.gendered && row.enUS && row[lang.col]) {
+      const en = norm(clean(row.enUS)), g = nounGender(row[lang.col]);
+      if (file === 'item-names.json' && g && !genderOf.has(en)) genderOf.set(en, g);
+      if (file === 'item-nameaffixes.json' && genderForms(row[lang.col]) && !affixForms.has(en)) affixForms.set(en, row[lang.col].replace(/ÿc./g, '').trim());
+    }
     for (const f of forms(row)) { const entry = { ...f, file, id: row.Key }; add(byEn, f.en, entry); add(byKo, f.ko, entry); }
   }
 }
@@ -66,6 +75,9 @@ function pick(cands, ko, prefix) {
 // 兩段的 koKR 接起來跟遊戲的韓文一樣 → checked；
 // 韓文不同（遊戲自己翻的）但前段有大寫 key、後段有同名小寫 key 的 D2R 字串 → structural（之後要抽查）
 const removeSpaces = s => s.replace(/\s+/g, '');
+// 前段有每種詞性的形式時（德文、法文），照後段的詞性挑；兩段怎麼接看 langs.mjs 的 rareJoin
+const frontFor = (a, b, front) => { const f = genderForms(a.raw ?? ''), g = nounGender(b.raw ?? ''); return (f && g && f[g]) || front; };
+const joinRare = (a, b, front = a.zh) => lang.rareJoin(lang.gendered ? frontFor(a, b, front) : front, b.zh);
 function rareName(key, koValue) {
   const words = key.split(' ');
   if (words.length !== 2) return null;
@@ -78,14 +90,15 @@ function rareName(key, koValue) {
   // 韓文比對用所有同名字串（詞綴的 koKR 常多一個「의」，符文之語的才對得上），中文前段還是用詞綴的
   const preferred = new Set(exactFront.map(c => c.zh)).size === 1 ? exactFront[0].zh : null;
   for (const a of exactFront.length ? first : front.length ? front : first) for (const b of back.length ? back : second) {
-    if (a.ko && b.ko && removeSpaces(a.ko + b.ko) === removeSpaces(koValue)) return { zh: (preferred ?? a.zh) + b.zh, method: 'rareName' };
+    if (a.ko && b.ko && removeSpaces(a.ko + b.ko) === removeSpaces(koValue)) return { zh: joinRare(a, b, preferred ?? a.zh), method: 'rareName' };
   }
   // 前段常跟符文之語同名（Death → 死亡／死神），稀有名稱不會用符文之語的；再有多個就優先用詞綴檔的
   const notRuneword = front.filter(c => c.file !== 'item-runes.json');
   const affixes = notRuneword.filter(c => c.file === 'item-nameaffixes.json');
-  const frontZh = new Set((new Set(notRuneword.map(c => c.zh)).size > 1 && affixes.length ? affixes : notRuneword).map(c => c.zh));
+  const fronts = new Set(notRuneword.map(c => c.zh)).size > 1 && affixes.length ? affixes : notRuneword;
+  const frontZh = new Set(fronts.map(c => c.zh));
   const backZh = new Set(back.map(c => c.zh));
-  if (frontZh.size === 1 && backZh.size === 1) return { zh: [...frontZh][0] + [...backZh][0], method: 'rareNameStructural' };
+  if (frontZh.size === 1 && backZh.size === 1) return { zh: joinRare(fronts[0], back[0]), method: 'rareNameStructural' };
   return null;
 }
 
@@ -122,10 +135,25 @@ for (const [key, koValue] of Object.entries(ko)) {
   report.byMethod[method] = (report.byMethod[method] ?? 0) + 1;
 }
 
+// 有詞性的語言：魔法物品名稱的詞綴保留每種詞性的形式，物品名稱附上詞性
+if (lang.gendered) {
+  let forms = 0, genders = 0;
+  for (const key of Object.keys(out)) {
+    const core = key.replace(PREFIX, '');
+    if (key.startsWith('affix:') && affixForms.has(norm(core))) { out[key] = affixForms.get(norm(core)); forms++; }
+  }
+  for (const key of Object.keys(ko)) {
+    const core = key.replace(PREFIX, '');
+    if ((!PREFIX.test(key) || key.startsWith('item:')) && genderOf.has(norm(core)) && !out[`gender:${core}`]) { out[`gender:${core}`] = genderOf.get(norm(core)); genders++; }
+  }
+  report.gendered = { affixForms: forms, itemGenders: genders };
+  console.log(`詞性：詞綴 ${forms} 個保留每種詞性的形式；物品名稱 ${genders} 個附上詞性（gender:<物品>）`);
+}
+
 fs.mkdirSync(path.dirname(outFile), { recursive: true });
 fs.writeFileSync(outFile, JSON.stringify(out, null, 1));
 if (reportFile) fs.writeFileSync(reportFile, JSON.stringify(report, null, 1));
-const total = Object.keys(ko).length, matched = Object.keys(out).length;
+const total = Object.keys(ko).length, matched = Object.keys(out).filter(k => !k.startsWith('gender:')).length;
 console.log(`D2R 字串 ${rows} 條；遊戲 key ${total} 條，配對到 ${matched} 條（${(matched / total * 100).toFixed(1)}%）`);
 console.log('配對方式：', report.byMethod);
 console.log(`有多個候選、取最常見的：${report.ambiguous.length} 條；佔位符對不上而放棄：${report.placeholderMismatch.length} 條`);

@@ -1,7 +1,7 @@
 // 產生更新來源 manifest v2（格式見 docs/manifest-v2.md）：<輸出資料夾>/manifest.json 和 <輸出資料夾>/dict/<id>.json
 //   node tools/make-manifest.mjs [輸出資料夾，預設 site/data]
 // 啟動器、網頁版書籤、網站讀同一份。字典網址相對於 manifest.json，帶內容雜湊（Pages 的 CDN 會快取）。
-//   共用欄位（最上層、languages[] 的 id／name／status／entries／dict、game）：這裡產生，語言清單和狀態來自 tools/langs.mjs
+//   共用欄位（最上層、languages[] 的 id／name／status／entries／dict、game）：這裡產生，語言清單和狀態來自 tools/langs.mjs（draft 的不放）
 //   桌面版（languages[].desktop、desktop）：tools/patch-rules.mjs 的 LANGUAGES／RULES／ASSETS_DIR／DICT_TARGET
 //   網頁版（languages[].web、web）：tools/web-rules.mjs 的 WEB_LANGUAGES／WEB_RULES（還沒匯出 WEB_LANGUAGES 時不輸出）
 //   launcher：還沒有 GitHub Release，先不輸出
@@ -30,7 +30,8 @@ const desktopVersion = fs.existsSync('versions')
   : undefined;
 
 fs.mkdirSync(path.join(outDir, 'dict'), { recursive: true });
-const languages = Object.entries(TARGETS).map(([id, t]) => {
+// status 是 draft 的語言（還在做）不發布
+const languages = Object.entries(TARGETS).filter(([, t]) => t.status !== 'draft').map(([id, t]) => {
   const buf = fs.readFileSync(target(id).out);
   const entries = Object.keys(JSON.parse(buf.toString('utf8'))).length;
   fs.writeFileSync(path.join(outDir, 'dict', `${id}.json`), buf);
