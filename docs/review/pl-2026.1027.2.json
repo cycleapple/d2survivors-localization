@@ -1,0 +1,667 @@
+[
+ {
+  "key": "Your level-* * starts over and keeps the golden glow for good.",
+  "current": "{1} (poziom {0}) zaczyna od nowa i na zawsze zachowuje złoty blask.",
+  "suggested": "{1} (poziom {0}) zaczyna od nowa i na zawsze zachowuje złotą poświatę.",
+  "category": "consistency",
+  "reason": "'golden glow' is 'złota poświata' in the neighbouring strings (Earns/Keeps the golden glow); here 'złoty blask'"
+ },
+ {
+  "key": "January",
+  "current": "Styczeń",
+  "suggested": "stycznia",
+  "category": "grammar",
+  "reason": "Months are only used in the news date '<day> <month> · Build #' (code: `${day} ${km[m]} · Build`), so they need the lowercase genitive like lutego/kwietnia: '27 października'"
+ },
+ {
+  "key": "March",
+  "current": "Marzec",
+  "suggested": "marca",
+  "category": "grammar",
+  "reason": "Date-only month (day + month): genitive lowercase, as lutego/kwietnia already are"
+ },
+ {
+  "key": "May",
+  "current": "Maj",
+  "suggested": "maja",
+  "category": "grammar",
+  "reason": "Date-only month (day + month): genitive lowercase, as lutego/kwietnia already are"
+ },
+ {
+  "key": "June",
+  "current": "Czerwiec",
+  "suggested": "czerwca",
+  "category": "grammar",
+  "reason": "Date-only month (day + month): genitive lowercase, as lutego/kwietnia already are"
+ },
+ {
+  "key": "July",
+  "current": "Lipiec",
+  "suggested": "lipca",
+  "category": "grammar",
+  "reason": "Date-only month (day + month): genitive lowercase, as lutego/kwietnia already are"
+ },
+ {
+  "key": "September",
+  "current": "Wrzesień",
+  "suggested": "września",
+  "category": "grammar",
+  "reason": "Date-only month (day + month): genitive lowercase, as lutego/kwietnia already are"
+ },
+ {
+  "key": "October",
+  "current": "Październik",
+  "suggested": "października",
+  "category": "grammar",
+  "reason": "Date-only month (day + month): genitive lowercase, as lutego/kwietnia already are"
+ },
+ {
+  "key": "November",
+  "current": "Listopad",
+  "suggested": "listopada",
+  "category": "grammar",
+  "reason": "Date-only month (day + month): genitive lowercase, as lutego/kwietnia already are"
+ },
+ {
+  "key": "Level * · * · swap her in",
+  "current": "Poziom {0} · {1} · przywróć ją",
+  "suggested": "Poziom {0} · {1} · zamień na nią",
+  "category": "consistency",
+  "reason": "This swaps a kept hero in (ko 다시 데려오기); 'przywróć' is the glossary verb for un-resting a skill, and the other swap strings use 'zamienić'"
+ },
+ {
+  "key": "Levels gear adds to every # #",
+  "current": "Poziomy z wyposażenia działają na wszystkie: {0} {1}",
+  "suggested": "Poziomy z wyposażenia działają na wszystkie: {1} ({0})",
+  "category": "grammar",
+  "reason": "Fillers are the tree name minus ' Skills' and 'skill'/'passive': current reads 'wszystkie: Łuk i Kusza Umiejętności'; putting the kind first reads 'wszystkie: Umiejętności (Łuk i Kusza)'"
+ },
+ {
+  "key": "Two-weapon skills swing or throw with both in turn",
+  "current": "Umiejętności dwiema broniami uderzają lub rzucają na zmianę każdą z nich",
+  "suggested": "Umiejętności z dwiema broniami uderzają lub rzucają na zmianę każdą z nich",
+  "category": "grammar",
+  "reason": "'Umiejętności dwiema broniami' lacks the preposition (z dwiema broniami)"
+ },
+ {
+  "key": "Adds #-# fire damage to the hero's attacks, not her spells",
+  "current": "Dodaje {0}-{1} pkt. obrażeń od ognia do ataków bohatera, ale nie do czarów",
+  "suggested": "Dodaje {0}-{1} pkt. obrażeń od ognia do ataków bohatera, nie do zaklęć",
+  "category": "consistency",
+  "reason": "Same tooltip as 'Adds fire damage to the hero's attacks, not her spells' (= 'nie do zaklęć'); spells should not switch to 'czarów' between the two"
+ },
+ {
+  "key": "Her Charms window holds *: not legit",
+  "current": "W oknie talizmanów bohaterki: {0} – nieuczciwy",
+  "suggested": "W oknie talizmanów bohatera: {0} – to nieuczciwe",
+  "category": "consistency",
+  "reason": "Sibling lines use 'bohater' and '– to nieuczciwe'; 'bohaterki'/'nieuczciwy' (masculine, not agreeing with the item) breaks the pattern"
+ },
+ {
+  "key": "Send my runs: On",
+  "current": "Wysyłanie moich podejść: włączone",
+  "suggested": "Wysyłaj moje podejścia: włączone",
+  "category": "consistency",
+  "reason": "Every reference to this option (Turn Send my runs on…, Send my runs is off…, SEND MY RUNS in patch notes) calls it 'Wysyłaj moje podejścia'; the toggle itself must carry the same name"
+ },
+ {
+  "key": "Send my runs: Off",
+  "current": "Wysyłanie moich podejść: wyłączone",
+  "suggested": "Wysyłaj moje podejścia: wyłączone",
+  "category": "consistency",
+  "reason": "Same option name as referenced elsewhere ('opcja Wysyłaj moje podejścia')"
+ },
+ {
+  "key": "- ready to evolve",
+  "current": "- gotowe do rozwoju",
+  "suggested": "- można rozwinąć",
+  "category": "grammar",
+  "reason": "Appended to a skill name in the run summary ('<skill> 5 - ready to evolve'); neuter 'gotowe' doesn't agree with masculine/feminine skill names (Pocisk Ognia, Kula Ognia). Impersonal form works for all"
+ },
+ {
+  "key": "Charsi's Wares",
+  "current": "Toware Charsi",
+  "suggested": "Towary Charsi",
+  "category": "grammar",
+  "reason": "Typo: 'Toware' -> 'Towary' (lowercase variant 'Charsi's wares' already uses 'towary')"
+ },
+ {
+  "key": "It thrusts twice instead of 3 times, but each thrust deals 50% more damage.",
+  "current": "Pcha dwa razy zamiast 3, ale każde pchnięcie zadaje o 50% więcej obrażeń.",
+  "suggested": "Wykonuje 2 pchnięcia zamiast 3, ale każde zadaje o 50% więcej obrażeń.",
+  "category": "meaning",
+  "reason": "'Pcha' means pushes/shoves; a spear thrust is 'pchnięcie', so phrase it with the noun"
+ },
+ {
+  "key": "Blight",
+  "current": "Morowy",
+  "suggested": "Zaraza",
+  "category": "other",
+  "reason": "Skill-variant name; a bare adjective 'Morowy' (pestilent ...?) is not a name. ko 마름병 is a noun; de Fäulnis, ru Тлен are nouns"
+ },
+ {
+  "key": "It blows up 2 corpses each shot, each for 60% of the damage.",
+  "current": "Każdym strzałem wysadza 2 zwłoki, a każde zadają 60% obrażeń.",
+  "suggested": "Każdym strzałem wysadza 2 zwłoki, każde z nich zadaje 60% obrażeń.",
+  "category": "grammar",
+  "reason": "'każde zadają' mixes singular subject with plural verb"
+ },
+ {
+  "key": "Gale",
+  "current": "Monsunowy",
+  "suggested": "Wichura",
+  "category": "term",
+  "reason": "Twister's variant 'Gale' got the auto-matched D2R rare-name adjective 'Monsunowy' (monsoon-ish, bare adjective). Variant names are nouns (de Sturmwind, fr Bourrasque, ru Шквал); 'Gale Force' already uses 'Siła Wichury'"
+ },
+ {
+  "key": "Lava Bombs",
+  "current": "Bombe Lawy",
+  "suggested": "Bomby Lawy",
+  "category": "grammar",
+  "reason": "Typo: plural of 'bomba' is 'bomby'"
+ },
+ {
+  "key": "Its damage bonus is 1.8 times on your blows, and none on your summons.",
+  "current": "Premia do obrażeń działa 1,8 razy mocniej na twoje ciosy i wcale na przywołane istoty.",
+  "suggested": "Premia do obrażeń jest 1,8 razy większa dla twoich ciosów, a na przywołane istoty nie działa wcale.",
+  "category": "grammar",
+  "reason": "'… i wcale na przywołane istoty' is missing the negated verb (nie działa)"
+ },
+ {
+  "key": "RUMBLE",
+  "current": "Dudnienie",
+  "suggested": "Wibracje",
+  "category": "meaning",
+  "reason": "RUMBLE is the gamepad vibration ON/OFF option (screens.js kind 'rumble'); 'Dudnienie' means a rumbling noise. Case-insensitive lookup shares it with Leap's variant 'Rumble' (landing shakes the ground), which 'Wibracje' also fits (de/fr Vibration, zh 震動)"
+ },
+ {
+  "key": "Rumble",
+  "current": "Dudnienie",
+  "suggested": "Wibracje",
+  "category": "meaning",
+  "reason": "Same key as RUMBLE (case-insensitive lookup): must match; 'Wibracje' fits both the gamepad option and the ground-shaking variant"
+ },
+ {
+  "key": "Gore",
+  "current": "Brutalny",
+  "suggested": "Posoka",
+  "category": "meaning",
+  "reason": "Variant name got the auto-matched rare-name prefix adjective \"Brutalny\" (no noun). The variant is about gore/a bursting body (ko 선혈); use a noun, like D2R \"of Gore\" = Posoki."
+ },
+ {
+  "key": "Gut",
+  "current": "Rzeźnicki",
+  "suggested": "Wypatroszenie",
+  "category": "meaning",
+  "reason": "Auto-matched rare-name prefix adjective \"Rzeźnicki\" used as a standalone variant name; ko 내장 / zh 開膛 = disembowel. Use a noun."
+ },
+ {
+  "key": "Twin Strike",
+  "current": "Bliźniaczy Cios",
+  "suggested": "Bliźniaczy Piorun",
+  "category": "meaning",
+  "reason": "Fist of the Heavens variant: each lightning strikes twice (ko 쌍발 낙뢰). \"Cios\" is a melee blow."
+ },
+ {
+  "key": "Possessed Champions",
+  "current": "Opętanie Czempioni",
+  "suggested": "Opętani czempioni",
+  "category": "grammar",
+  "reason": "\"Opętanie Czempioni\" is noun + noun (auto-match of \"Possessed\"); needs an agreeing adjective. Lowercase like \"Więcej elitarnych grup\"."
+ },
+ {
+  "key": "Evolved: Revive's skeletons take this option",
+  "current": "Rozwinięte: szkielety Ożywienia przejmują tę opcję",
+  "suggested": "Rozwinięte: szkielety Ożywienia otrzymują ten modyfikator",
+  "category": "term",
+  "reason": "\"option\" here is the skill modifier (ko 변형); glossary term is \"modyfikator\"."
+ },
+ {
+  "key": "Untouched by Duriel",
+  "current": "Duriel bez draśnięcia",
+  "suggested": "Nietknięty przez Duriela",
+  "category": "meaning",
+  "reason": "Challenge = kill Duriel without being hit. \"Duriel bez draśnięcia\" reads as Duriel left unscratched."
+ },
+ {
+  "key": "Untouched by Mephisto",
+  "current": "Mefisto bez draśnięcia",
+  "suggested": "Nietknięty przez Mefista",
+  "category": "meaning",
+  "reason": "Same as Untouched by Duriel: it is the hero who must stay unhit (D2R genitive: Zabij Mefista)."
+ },
+ {
+  "key": "Untouched by Diablo",
+  "current": "Diablo bez draśnięcia",
+  "suggested": "Nietknięty przez Diablo",
+  "category": "meaning",
+  "reason": "Same as Untouched by Duriel: it is the hero who must stay unhit."
+ },
+ {
+  "key": "Tap a skill button to spend it in the skill tree",
+  "current": "Dotknij przycisku umiejętności, aby wydać punkt w drzewie umiejętności",
+  "suggested": "Dotknij przycisku umiejętności, aby wydać punkt w oknie umiejętności",
+  "category": "consistency",
+  "reason": "Sibling string \"Spend it in the skill tree (T)\" uses \"w oknie umiejętności\"; glossary Skill Tree = umiejętności (the window)."
+ },
+ {
+  "key": "they hit",
+  "current": "trafionych wrogów",
+  "suggested": "trafiają",
+  "category": "grammar",
+  "reason": "Filler for \"# # for # damage around what #.\" -> \"wokół tego, w co {3}\"; \"trafionych wrogów\" breaks it (\"w co trafionych wrogów\"). Must be a verb like \"it hits\" = \"trafia\"."
+ },
+ {
+  "key": "it passes",
+  "current": "przelatuje",
+  "suggested": "na swojej drodze",
+  "category": "grammar",
+  "reason": "Filler for \"* out around you for * damage to all *.\" -> \"wszystkim {2}\"; \"wszystkim przelatuje\" is broken. A phrase that fits after \"wszystkim\" works for singular and plural."
+ },
+ {
+  "key": "they pass",
+  "current": "mijanych wrogów",
+  "suggested": "na swojej drodze",
+  "category": "grammar",
+  "reason": "Same slot: \"wszystkim mijanych wrogów\" has the wrong case. Same value as \"it passes\" so both counts read right."
+ },
+ {
+  "key": "Fires # at the nearest monsters for # damage.",
+  "current": "Wystrzeliwuje w najbliższe potwory ogniste pociski ({0}), zadając {1} pkt. obrażeń.",
+  "suggested": "Wystrzeliwuje w najbliższe potwory: {0}, zadając {1} pkt. obrażeń.",
+  "category": "placeholder",
+  "reason": "{0} is the already translated \"N bolts\" piece (tb(n,\"bolt\")), so \"ogniste pociski ({0})\" doubles the noun. No full-number variant exists, so this template is what Fire Bolt shows."
+ },
+ {
+  "key": "Fires # of lightning for # damage each.",
+  "current": "Wystrzeliwuje błyskawice ({0}), każda zadaje {1} pkt. obrażeń.",
+  "suggested": "Wystrzeliwuje: {0} (błyskawice), każda zadaje {1} pkt. obrażeń.",
+  "category": "placeholder",
+  "reason": "{0} is the translated \"N sparks\" piece (\"iskry ×3\"); \"błyskawice ({0})\" doubles the noun. Used by Charged Bolt (no full-number variant)."
+ },
+ {
+  "key": "Fires # of lightning through all in line for # damage.",
+  "current": "Wystrzeliwuje błyskawice ({0}) przez wszystko na linii, zadając {1} pkt. obrażeń.",
+  "suggested": "Wystrzeliwuje: {0} (błyskawice) przez wszystko na linii, zadając {1} pkt. obrażeń.",
+  "category": "placeholder",
+  "reason": "{0} is the translated \"N bolts\" piece; \"błyskawice ({0})\" doubles the noun. Used by Lightning (no full-number variant)."
+ },
+ {
+  "key": "Fires # of ice that # # and #, for # damage.",
+  "current": "Wystrzeliwuje lodowe pociski ({0}), które {1} potwory (maks. {2}) i {3}, zadając {4} pkt. obrażeń.",
+  "suggested": "Wystrzeliwuje: {0} (lód), które {1} potwory (maks. {2}) i {3}, zadając {4} pkt. obrażeń.",
+  "category": "placeholder",
+  "reason": "{0} is the translated \"N bolts\" piece; \"lodowe pociski ({0})\" doubles the noun (fallback template; full-number variants exist)."
+ },
+ {
+  "key": "# of # damage # for #s.",
+  "current": "Pociski ({0}) zadające {1} pkt. obrażeń {2} na {3} s.",
+  "suggested": "{0} – {1} pkt. obrażeń, {2} na {3} s.",
+  "category": "placeholder",
+  "reason": "{0} is the translated \"N bolts\" piece; \"Pociski ({0})\" doubles the noun (fallback template; full-number variants exist)."
+ },
+ {
+  "key": "a thrust",
+  "current": "na dźgnięcie",
+  "suggested": "na pchnięcie",
+  "category": "consistency",
+  "reason": "Thrust is \"pchnięcie\" in the skill descriptions it labels (Jab, Charged Strike...); \"dźgnięcie\" is used for Stabs."
+ },
+ {
+  "key": "a spear thrust",
+  "current": "na dźgnięcie włócznią",
+  "suggested": "na pchnięcie włócznią",
+  "category": "consistency",
+  "reason": "Valkyrie description says \"pchnięcia włócznią\"; per-hit label should match."
+ },
+ {
+  "key": "the thrust or a bolt",
+  "current": "na dźgnięcie lub pocisk",
+  "suggested": "na pchnięcie lub pocisk",
+  "category": "consistency",
+  "reason": "Same thrust term as the description it labels."
+ },
+ {
+  "key": "the landing or the strike",
+  "current": "za każde lądowanie lub uderzenie",
+  "suggested": "na lądowanie lub uderzenie",
+  "category": "consistency",
+  "reason": "Per-hit labels go after \"Ogień: 10-20 …\" and all others use \"na …\"; \"za każde\" breaks the pattern."
+ },
+ {
+  "key": "an undead monster in it",
+  "current": "za każdego nieumarłego w obszarze",
+  "suggested": "na nieumarłego w obszarze",
+  "category": "consistency",
+  "reason": "Same per-hit label slot; others use \"na …\", not \"za każdego …\"."
+ },
+ {
+  "key": "a hit of a web",
+  "current": "na trafienie sieci",
+  "suggested": "na trafienie pajęczyny",
+  "category": "consistency",
+  "reason": "Shock Web = Porażająca Pajęczyna and \"# webs\" = \"pajęczyny ×{0}\"; \"sieci\" differs."
+ },
+ {
+  "key": "Adds +#% fire, cold and lightning resistance, and chill wears off #% faster.",
+  "current": "Dodaje +{0}% do odporności na ogień, zimno i błyskawice, a spowolnienie mija o {1}% szybciej.",
+  "suggested": "Dodaje +{0}% do odporności na ogień, zimno i błyskawice, a schłodzenie mija o {1}% szybciej.",
+  "category": "consistency",
+  "reason": "The chill status is \"schłodzenie\" in the sibling passives (\"Zatrucie i schłodzenie mijają…\"); \"spowolnienie\" is the separate slow effect."
+ },
+ {
+  "key": "Poison and chill wear off #% faster on you.",
+  "current": "Zatrucie i spowolnienie mijają u ciebie o {0}% szybciej.",
+  "suggested": "Zatrucie i schłodzenie mijają u ciebie o {0}% szybciej.",
+  "category": "consistency",
+  "reason": "Same as above: chill = schłodzenie, as in \"+#% to all resistances. Poison and chill wear off #% faster.\""
+ },
+ {
+  "key": "+1% chance of a critical strike, +3% damage with a bow or claws",
+  "current": "+1% szansy na uderzenie krytyczne, +3% obrażeń z łukiem lub szponami",
+  "suggested": "+1% szansy na trafienie krytyczne, +3% obrażeń z łukiem lub pazurami",
+  "category": "consistency",
+  "reason": "Elsewhere in these strings critical strike = \"trafienie krytyczne\" (19 vs 5 in the dict) and Claws = \"pazury\" (D2R hint)."
+ },
+ {
+  "key": "+1% critical strike chance +3% damage with a bow or claws",
+  "current": "+1% szansy na uderzenie krytyczne\n+3% obrażeń z łukiem lub szponami",
+  "suggested": "+1% szansy na trafienie krytyczne\n+3% obrażeń z łukiem lub pazurami",
+  "category": "consistency",
+  "reason": "Same as the comma version: \"trafienie krytyczne\", claws = \"pazury\"."
+ },
+ {
+  "key": "when struck",
+  "current": "(przy otrzymaniu trafienia)",
+  "suggested": "przy otrzymaniu trafienia",
+  "category": "consistency",
+  "reason": "Filler at the end of \"{0}% szansy rzucenia … {3}\"; \"on striking\"/\"on attack\" have no parentheses, so the line reads inconsistently."
+ },
+ {
+  "key": "when you Kill an Enemy",
+  "current": "(kiedy zabijasz wroga)",
+  "suggested": "przy zabiciu wroga",
+  "category": "consistency",
+  "reason": "Same slot as \"on striking\" (przy trafieniu) / \"on attack\" (przy ataku): no parentheses, same \"przy …\" form."
+ },
+ {
+  "key": "+*% *of *",
+  "current": "+{0}% {1}na poziom: {2}",
+  "suggested": "+{0}% {1}na poziom umiejętności {2}",
+  "category": "consistency",
+  "reason": "Sibling templates use \"na poziom umiejętności {1}\" (\"+*% per level of *\"). Also {1} is the untranslated piece \"damage per level \" (no key exists)."
+ },
+ {
+  "key": "An * kept aside by an older version is back now: your hero, or retired at Akara.",
+  "current": "Przywrócono: {0}, odłożone przez starszą wersję – jako twój bohater lub na emeryturze u Akary.",
+  "suggested": "Postać ({0}) odłożona przez starszą wersję wróciła – jako twój bohater lub na emeryturze u Akary.",
+  "category": "grammar",
+  "reason": "{0} is a class name (Amazonka, Paladyn…); neuter \"odłożone\" agrees with neither. \"Postać\" carries the agreement."
+ },
+ {
+  "key": "A * kept aside by an older version is back now: your hero, or retired at Akara.",
+  "current": "Przywrócono: {0}, odłożone przez starszą wersję – jako twój bohater lub na emeryturze u Akary.",
+  "suggested": "Postać ({0}) odłożona przez starszą wersję wróciła – jako twój bohater lub na emeryturze u Akary.",
+  "category": "grammar",
+  "reason": "Same as the \"An *\" variant: class-name filler, \"odłożone\" does not agree."
+ },
+ {
+  "key": "Tap Character in a run or the camp to read it",
+  "current": "Dotknij Postać w trakcie podejścia lub w obozie, aby ją przeczytać",
+  "suggested": "Dotknij przycisku Postać w podejściu lub w obozie, aby to przeczytać",
+  "category": "grammar",
+  "reason": "\"dotknąć\" takes the genitive (\"Dotknij Postać\" is wrong); match the sibling \"Tap Character … to use it\" wording."
+ },
+ {
+  "key": "Safari may delete this save after a week away: save it as a file in SAVES",
+  "current": "Safari może usunąć ten zapis po tygodniu nieobecności: zapisz go jako plik w oknie ZAPISY",
+  "suggested": "Safari może usunąć ten zapis po tygodniu nieobecności: zapisz go jako plik w menu ZAPISY",
+  "category": "consistency",
+  "reason": "Sibling \"Keep a copy of your save…\" says \"w menu ZAPISY\"."
+ },
+ {
+  "key": "Come back at half life once more per run, per rank",
+  "current": "Jeszcze jeden powrót z połową zdrowia na podejście za każdą rangę",
+  "suggested": "Każda ranga: o jeden powrót z połową zdrowia więcej na podejście",
+  "category": "consistency",
+  "reason": "The three sibling rank lines (reroll/skip/banish) all use \"Każda ranga: o jedno … więcej na podejście\"."
+ },
+ {
+  "key": "Corosive",
+  "current": "Korozyjny",
+  "suggested": "Skorodowany",
+  "category": "term",
+  "reason": "D2R Corrosive = Skorodowany, and affix:Corosive already uses it; plain key \"Korozyjny\" differs."
+ },
+ {
+  "key": "Gritty",
+  "current": "Szorstki",
+  "suggested": "Miażdżący",
+  "category": "consistency",
+  "reason": "affix:Gritty (what item names show) is \"Miażdżący\"; plain key \"Szorstki\" differs."
+ },
+ {
+  "key": "Paleocene",
+  "current": "Paleocen",
+  "suggested": "Paleoceński",
+  "category": "grammar",
+  "reason": "Magic prefix must be an adjective; \"Paleocen\" is the noun (and affix:Paleocene \"Wierny\" is wrong, see cross-cutting)."
+ },
+ {
+  "key": "Fiend",
+  "current": "Biesowy",
+  "suggested": "Bies",
+  "category": "term",
+  "reason": "Also the monster name (monster-catalog batdemon2/7 name); D2R monster Fiend = Bies. The adjective \"Biesowy\" only fits rare names, which the dict holds whole."
+ },
+ {
+  "key": "and continue the run",
+  "current": "i kontynuuj podejście",
+  "suggested": "i kontynuować podejście",
+  "category": "grammar",
+  "reason": "Filler for \"* to reload*\" ({0}, aby wczytać ponownie{1}); after \"aby\" the verb must be infinitive: \"Kliknij, aby wczytać ponownie i kontynuować podejście\"."
+ },
+ {
+  "key": "AUTO UPDATE: *",
+  "current": "AUTOAKTUALIZACJA: {0}",
+  "suggested": "AUTO-AKTUALIZACJA: {0}",
+  "category": "consistency",
+  "reason": "The option itself (AUTO UPDATE) is \"AUTO-AKTUALIZACJA\" with a hyphen."
+ },
+ {
+  "key": "Options say what AUTO STATS does",
+  "current": "Opcje wyjaśniają, co robi AUTO-ATRYBUTY",
+  "suggested": "Opcje wyjaśniają, co robi opcja AUTO-ATRYBUTY",
+  "category": "grammar",
+  "reason": "\"AUTO-ATRYBUTY\" is plural, \"co robi AUTO-ATRYBUTY\" does not agree; name it as an option."
+ },
+ {
+  "key": "Clear a tier with No Potions in the Belt among its affixes (from tier *).",
+  "current": "Ukończ stopień z cechą \"Brak mikstur w pasie\" (od stopnia {0}).",
+  "suggested": "Ukończ stopień z cechą \"Bez mikstur z pasa\" (od stopnia {0}).",
+  "category": "consistency",
+  "reason": "The affix is named \"Bez mikstur z pasa\" in the dictionary (and in the sibling quest string), not \"Brak mikstur w pasie\"."
+ },
+ {
+  "key": "* hits a cast",
+  "current": "Trafienia na rzucenie: {0}",
+  "suggested": "Trafienia na użycie: {0}",
+  "category": "consistency",
+  "reason": "Sibling \"One hit a cast\" uses \"na użycie\"; \"na rzucenie\" is awkward and inconsistent."
+ },
+ {
+  "key": "Fire Wall's Crossfire walls now deal 55% of the damage each, up from half",
+  "current": "Ogień Krzyżowy Ściany Ognia: każda ściana zadaje teraz 55% obrażeń zamiast połowy",
+  "suggested": "Krzyżowy Ogień Ściany Ognia: każda ściana zadaje teraz 55% obrażeń zamiast połowy",
+  "category": "consistency",
+  "reason": "The variant is named \"Krzyżowy Ogień\" (key Crossfire), not \"Ogień Krzyżowy\"."
+ },
+ {
+  "key": "Herald of Zakarum's Trail burns twice as hard",
+  "current": "Szlak Herolda Zakarum pali dwa razy mocniej",
+  "suggested": "Ślad Herolda Zakarum pali dwa razy mocniej",
+  "category": "consistency",
+  "reason": "The variant Trail is \"Ślad\" in the dictionary, not \"Szlak\"."
+ },
+ {
+  "key": "Alma Negra's Fault Line deals 50% of the bash along its line, not 35%",
+  "current": "Linia uskoku Almy Negry zadaje wzdłuż linii 50% obrażeń Odrzucenia, a nie 35%",
+  "suggested": "Uskok Almy Negry zadaje wzdłuż linii 50% obrażeń uderzenia tarczą, a nie 35%",
+  "category": "consistency",
+  "reason": "The variant is named \"Uskok\" (key Fault Line). \"the bash\" is Alma Negra's own shield bash (\"Bashes the toughest monster...\"), not the Barbarian skill Bash (Odrzucenie)."
+ },
+ {
+  "key": "Might's Rally costs you 10% of the aura, not 30%",
+  "current": "Zryw Mocy kosztuje 10% siły aury, a nie 30%",
+  "suggested": "Zbiórka Mocy kosztuje 10% siły aury, a nie 30%",
+  "category": "consistency",
+  "reason": "The variant Rally is \"Zbiórka\" in the dictionary, not \"Zryw\"."
+ },
+ {
+  "key": "Defiance's Rebuke costs 25% of the aura, not half",
+  "current": "Nagana Śmiałości kosztuje 25% siły aury, a nie połowę",
+  "suggested": "Skarcenie Śmiałości kosztuje 25% siły aury, a nie połowę",
+  "category": "consistency",
+  "reason": "The variant Rebuke is \"Skarcenie\" in the dictionary, not \"Nagana\"."
+ },
+ {
+  "key": "Conviction's Lingering lowers resistances 10% less than the aura, not 25% less",
+  "current": "Uporczywość Przekonania obniża odporności o 10% słabiej niż aura, a nie o 25%",
+  "suggested": "Długotrwałość Przekonania obniża odporności o 10% słabiej niż aura, a nie o 25%",
+  "category": "consistency",
+  "reason": "The variant Lingering is \"Długotrwałość\" in the dictionary, not \"Uporczywość\" (term-decisions: names in sentences must match the name itself)."
+ },
+ {
+  "key": "Blessed Aim's Stunning lowers its chance by 10%, not 25%",
+  "current": "Ogłuszenie Błogosławionej Celności obniża jej szansę o 10%, a nie o 25%",
+  "suggested": "Oszołomienie Błogosławionej Celności obniża jej szansę o 10%, a nie o 25%",
+  "category": "consistency",
+  "reason": "Variant names are shown via modifier: keys; modifier:Stunning is \"Oszołomienie\", so the card says Oszołomienie, not Ogłuszenie."
+ },
+ {
+  "key": "Claws of Thunder's Static no longer makes the release 10% weaker",
+  "current": "Statyka Szponów Gromu nie osłabia już uwolnienia o 10%",
+  "suggested": "Ładunek Statyczny Szponów Gromu nie osłabia już uwolnienia o 10%",
+  "category": "consistency",
+  "reason": "modifier:Static is \"Ładunek Statyczny\" (the name the variant card shows), not \"Statyka\"."
+ },
+ {
+  "key": "The Cow tier comes as nine waves of Hell Bovines, with the Cow King as the last",
+  "current": "Stopień krów to dziewięć fal piekielnych krów, a na końcu Krowi Król",
+  "suggested": "Krowi stopień to dziewięć fal piekielnych krów, a na końcu Krowi Król",
+  "category": "consistency",
+  "reason": "The tier is named \"Krowi stopień\" (The Cow Tier) and \"Clear the Cow tier.\" uses it too; \"Stopień krów\" is a third form."
+ },
+ {
+  "key": "Cain's Six Evolutions quest says the evolved skills may come from any of your trees",
+  "current": "Zadanie Caina \"Sześć Rozwinięć\" informuje, że rozwinięte umiejętności mogą pochodzić z dowolnego drzewa",
+  "suggested": "Zadanie Caina \"Sześć rozwojów\" informuje, że rozwinięte umiejętności mogą pochodzić z dowolnego drzewa",
+  "category": "consistency",
+  "reason": "The quest name (key Six Evolutions) is \"Sześć rozwojów\"; quote it as shown (or rename the quest itself to \"Sześć Rozwinięć\" and keep this)."
+ },
+ {
+  "key": "Tiers cleared offline or with Send my runs off still count, carried to the leaderboard by your next run",
+  "current": "Stopnie ukończone offline lub z wyłączoną opcją Wysyłaj moje podejścia nadal się liczą i trafiają do rankingu z następnym podejściem",
+  "suggested": "Stopnie ukończone offline lub przy wyłączonym wysyłaniu podejść nadal się liczą i trafiają do rankingu z następnym podejściem",
+  "category": "consistency",
+  "reason": "The option is displayed as \"Wysyłanie moich podejść: wyłączone\"; \"z wyłączoną opcją Wysyłaj moje podejścia\" quotes a label that does not exist."
+ },
+ {
+  "key": "Focused",
+  "current": "Koncentracja",
+  "suggested": "Skupienie",
+  "category": "consistency",
+  "reason": "modifier:Focused is \"Skupienie\"; the plain key \"Koncentracja\" is also the Paladin aura Concentration, the clash the modifier key exists to avoid."
+ },
+ {
+  "key": "Contemplation",
+  "current": "Medytacja",
+  "suggested": "Kontemplacja",
+  "category": "consistency",
+  "reason": "modifier:Contemplation is \"Kontemplacja\"; \"Medytacja\" is the official name of the Paladin aura Meditation."
+ },
+ {
+  "key": "Pulse",
+  "current": "Drgający",
+  "suggested": "Puls",
+  "category": "meaning",
+  "reason": "Used as the Nova / Frost Nova variant name (\"casts 1.7 times as often\"); \"Drgający\" is the auto-matched unique-monster adjective (\"twitching\"), not a name. Unique monsters use unique:Pulse, so this key is free."
+ },
+ {
+  "key": "View",
+  "current": "Pokaż",
+  "suggested": "View",
+  "category": "meaning",
+  "reason": "Name of the Xbox controller button (list A, B, X, Y, LB, ..., View, Menu); button names stay unchanged like Menu, LB, RT."
+ },
+ {
+  "key": "Poison and Bone Spells",
+  "current": "Zaklęcia Trucizn i Kości",
+  "suggested": "Trucizny i Kości",
+  "category": "consistency",
+  "reason": "Necromancer skill-tree tab label; sibling tabs are D2R short labels (Cold Spells \"Zimno\", Fire Spells \"Ogień\", Lightning Spells \"Błyskawice\"); D2R: Poison and Bone = \"Trucizny i Kości\". Also shorter for the tab."
+ },
+ {
+  "key": "Raven Wrap",
+  "current": "Kruk Kapota",
+  "suggested": "Krucza Kapota",
+  "category": "grammar",
+  "reason": "Rare name: prefix must be the D2R adjective Raven = [fs]Krucza[ms]Kruczy[nl]Krucze agreeing with Kapota (f), not the noun \"Kruk\"."
+ },
+ {
+  "key": "Raven Harness",
+  "current": "Kruk Uprząż",
+  "suggested": "Krucza Uprząż",
+  "category": "grammar",
+  "reason": "Rare name: Raven = Krucza/Kruczy/Krucze (D2R); Uprząż is feminine."
+ },
+ {
+  "key": "Raven Fang",
+  "current": "Kruk Kieł",
+  "suggested": "Kruczy Kieł",
+  "category": "grammar",
+  "reason": "Rare name: Raven = Kruczy/Krucza/Krucze (D2R), not the noun \"Kruk\"."
+ },
+ {
+  "key": "Raven Spire",
+  "current": "Kruk Iglica",
+  "suggested": "Krucza Iglica",
+  "category": "grammar",
+  "reason": "Rare name: Raven = Krucza/Kruczy/Krucze (D2R); Iglica is feminine."
+ },
+ {
+  "key": "Raven Needle",
+  "current": "Kruk Igła",
+  "suggested": "Krucza Igła",
+  "category": "grammar",
+  "reason": "Rare name: Raven = Krucza/Kruczy/Krucze (D2R); Igła is feminine."
+ },
+ {
+  "key": "Vengeance Heart",
+  "current": "Zemsta Serce",
+  "suggested": "Mściwe Serce",
+  "category": "grammar",
+  "reason": "Rare name needs an adjective; \"Zemsta Serce\" is two nouns. Half the Vengeance names already use Mściwy/Mściwa/Mściwe (Mściwa Kapuza, Mściwe Futro)."
+ },
+ {
+  "key": "Vengeance Lock",
+  "current": "Zemsta Zamek",
+  "suggested": "Mściwy Zamek",
+  "category": "grammar",
+  "reason": "Rare name needs an adjective agreeing with Zamek (m); matches Mściwa Kapuza / Mściwe Futro."
+ },
+ {
+  "key": "Beast Song",
+  "current": "Bestialski Pieśń",
+  "suggested": "Bestialska Pieśń",
+  "category": "grammar",
+  "reason": "Pieśń is feminine (cf. Upiorna Pieśń)."
+ },
+ {
+  "key": "unique:Spawn",
+  "current": "pomiot",
+  "suggested": "Pomiot",
+  "category": "other",
+  "reason": "Unique monster name part; every other unique: noun is capitalized (Kieł, Rozpruwacz...) and D2R also has \"[ms]Pomiot\"; lowercase gives \"Żarłok, Krwawy pomiot\"."
+ }
+]

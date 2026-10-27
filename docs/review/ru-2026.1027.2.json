@@ -1,0 +1,625 @@
+[
+ {
+  "key": "Static",
+  "current": "Неподвижный",
+  "suggested": "Статика",
+  "category": "meaning",
+  "reason": "Skill modifier of Claws of Thunder (lightning zap). 'Неподвижный' (motionless) is D2R's magic-prefix form and wrong here; item names use affix:Static, so the plain key is free. Changelog already says 'Статика Грозовых когтей'; noun like other modifier names."
+ },
+ {
+  "key": "January",
+  "current": "Январь",
+  "suggested": "января",
+  "category": "grammar",
+  "reason": "Months are only used in '* * · Build *' as '<day> <month>': needs genitive lowercase ('27 октября'), like April/August/December already are."
+ },
+ {
+  "key": "February",
+  "current": "Февраль",
+  "suggested": "февраля",
+  "category": "grammar",
+  "reason": "Genitive lowercase for the date line (day month)."
+ },
+ {
+  "key": "March",
+  "current": "Март",
+  "suggested": "марта",
+  "category": "grammar",
+  "reason": "Genitive lowercase for the date line (day month)."
+ },
+ {
+  "key": "May",
+  "current": "Май",
+  "suggested": "мая",
+  "category": "grammar",
+  "reason": "Genitive lowercase for the date line (day month)."
+ },
+ {
+  "key": "June",
+  "current": "Июнь",
+  "suggested": "июня",
+  "category": "grammar",
+  "reason": "Genitive lowercase for the date line (day month)."
+ },
+ {
+  "key": "July",
+  "current": "Июль",
+  "suggested": "июля",
+  "category": "grammar",
+  "reason": "Genitive lowercase for the date line (day month)."
+ },
+ {
+  "key": "September",
+  "current": "Сентябрь",
+  "suggested": "сентября",
+  "category": "grammar",
+  "reason": "Genitive lowercase for the date line (day month)."
+ },
+ {
+  "key": "October",
+  "current": "Октябрь",
+  "suggested": "октября",
+  "category": "grammar",
+  "reason": "Genitive lowercase for the date line (day month)."
+ },
+ {
+  "key": "November",
+  "current": "Ноябрь",
+  "suggested": "ноября",
+  "category": "grammar",
+  "reason": "Genitive lowercase for the date line (day month)."
+ },
+ {
+  "key": "Leaderboard",
+  "current": "Таблица лидеров",
+  "suggested": "Таблица рекордов",
+  "category": "consistency",
+  "reason": "Leaderboard is 'таблица рекордов' in 33 dictionary strings and 'таблица лидеров' in 14; unify on the majority."
+ },
+ {
+  "key": "Can't reach the leaderboard",
+  "current": "Нет связи с таблицей лидеров",
+  "suggested": "Нет связи с таблицей рекордов",
+  "category": "consistency",
+  "reason": "Same message elsewhere uses 'таблицей рекордов'."
+ },
+ {
+  "key": "Your *'s clears go to the leaderboard",
+  "current": "Прохождения героя ({0}) попадают в таблицу лидеров",
+  "suggested": "Прохождения героя ({0}) попадают в таблицу рекордов",
+  "category": "consistency",
+  "reason": "Leaderboard = таблица рекордов (majority form)."
+ },
+ {
+  "key": "Each clear of a difficulty or a tier goes to the leaderboard",
+  "current": "Каждое прохождение сложности или ступени попадает в таблицу лидеров",
+  "suggested": "Каждое прохождение сложности или ступени попадает в таблицу рекордов",
+  "category": "consistency",
+  "reason": "Neighbouring line 'Each run of yours goes to the leaderboard…' uses 'таблицу рекордов'."
+ },
+ {
+  "key": "The leaderboard refuses them",
+  "current": "Таблица лидеров их не принимает",
+  "suggested": "Таблица рекордов их не принимает",
+  "category": "consistency",
+  "reason": "Leaderboard = таблица рекордов (majority form)."
+ },
+ {
+  "key": "Her mercenary wears *: not legit",
+  "current": "На наемнике надето {0}: нечестно",
+  "suggested": "На наемнике: {0} — нечестно",
+  "category": "grammar",
+  "reason": "{0} is any item name (any gender); neuter 'надето' does not agree with e.g. 'Прочный шлем'."
+ },
+ {
+  "key": "She wears *: not legit",
+  "current": "На герое надето {0}: нечестно",
+  "suggested": "На герое: {0} — нечестно",
+  "category": "grammar",
+  "reason": "{0} is any item name; 'надето' only agrees with neuter nouns."
+ },
+ {
+  "key": "Her Charms window holds *: not legit",
+  "current": "В окне оберегов героини: {0} — нечестный",
+  "suggested": "В окне оберегов героя: {0} — нечестно",
+  "category": "grammar",
+  "reason": "'героини' breaks the masculine 'герой' used everywhere; masculine 'нечестный' does not agree with item names of other genders. Match the two sibling lines."
+ },
+ {
+  "key": "* · yours · free",
+  "current": "{0} · ваш · бесплатно",
+  "suggested": "{0} · ваш наемник · бесплатно",
+  "category": "grammar",
+  "reason": "{0} is the mercenary type; 'ваш' disagrees with 'Разбойница-разведчица'. KO also says 'your mercenary'."
+ },
+ {
+  "key": "Half its damage is fire damage, which hurts monsters immune to cold.",
+  "current": "Половина урона — урон от огня, который поражает монстров, невосприимчивых к льду.",
+  "suggested": "Половина урона — урон от огня, который поражает монстров, невосприимчивых ко льду.",
+  "category": "grammar",
+  "reason": "'ко льду' (D2R: Невосприимчивость ко льду), not 'к льду'. Same error in 3 other 'immune to cold' strings."
+ },
+ {
+  "key": "Bow and Crossbow Skills",
+  "current": "Умения луков и арбалетов",
+  "suggested": "Луки и арбалеты",
+  "category": "term",
+  "reason": "Official D2R skill tab name; sibling tabs use the D2R form ('Дротики и копья', 'Яды и кости', 'Смена облика')."
+ },
+ {
+  "key": "Thunderbolt",
+  "current": "Удар молнии",
+  "suggested": "Небесная молния",
+  "category": "term",
+  "reason": "'Удар молнии' is the official D2R name of the Amazon skill Lightning Strike; a modifier must not show another skill's name (the bolts strike from the sky)."
+ },
+ {
+  "key": "Volley",
+  "current": "Залп",
+  "suggested": "Залповый огонь",
+  "category": "term",
+  "reason": "'Залп' is the official D2R name of Multiple Shot, another Amazon bow skill; this is Magic Arrow's modifier. Update 'Magic Arrow's Volley arrows…' too."
+ },
+ {
+  "key": "Twin",
+  "current": "Двойник",
+  "suggested": "Близнецы",
+  "category": "meaning",
+  "reason": "Blade Sentinel modifier that sends 2 blades; 'Двойник' means a double/decoy and is the official D2R name of Decoy."
+ },
+ {
+  "key": "Squall",
+  "current": "Шквал",
+  "suggested": "Буран",
+  "category": "consistency",
+  "reason": "Twister's 'Gale' is also 'Шквал', and Hurricane (a cold skill) has both 'Gale Force' (Сила шквала) and 'Squall': two modifiers read the same."
+ },
+ {
+  "key": "Ember",
+  "current": "Огнистый",
+  "suggested": "Уголек",
+  "category": "consistency",
+  "reason": "Royal Strike modifier name; the bare D2R prefix adjective 'Огнистый' reads like an unfinished item name. Other modifier names are nouns (Тяжесть, Хрупкость). KO 불씨 (ember)."
+ },
+ {
+  "key": "Speeds up casting: Faster Cast Rate, as what fighting pours in",
+  "current": "Ускоряет применение умений: скорость применения умений по мере того, что приносит бой",
+  "suggested": "Ускоряет применение умений: скорость применения умений растет от того, что приносит бой",
+  "category": "grammar",
+  "reason": "'по мере того, что приносит бой' is ungrammatical ('по мере того, как…')."
+ },
+ {
+  "key": "Adds +#% Faster Cast Rate: half as much, in the same total",
+  "current": "Добавляет +{0}% к скорости применения умений: вполовину, в той же общей сумме",
+  "suggested": "Добавляет +{0}% к скорости применения умений: вдвое меньше, в ту же общую сумму",
+  "category": "grammar",
+  "reason": "'вполовину' cannot stand alone here; 'в той же общей сумме' is unclear about adding into the same total."
+ },
+ {
+  "key": "From the campfire, * now starts as your level-* *.",
+  "current": "Теперь у костра {0} начинается героем: {2}, уровень {1}.",
+  "suggested": "Теперь у костра {0} начинается с героя: {2}, уровень {1}.",
+  "category": "grammar",
+  "reason": "{0} is a difficulty (Кошмар/Ад); 'начинается героем' is not idiomatic, 'начинается с героя' is."
+ },
+ {
+  "key": "Click again to start over",
+  "current": "Нажмите еще раз, чтобы начать заново",
+  "suggested": "Щелкните еще раз, чтобы начать заново",
+  "category": "consistency",
+  "reason": "Its siblings 'Click again to reset' and 'Click again to go' use 'Щелкните'."
+ },
+ {
+  "key": "Click again to swap",
+  "current": "Нажмите еще раз, чтобы заменить",
+  "suggested": "Щелкните еще раз, чтобы заменить",
+  "category": "consistency",
+  "reason": "Its siblings 'Click again to reset' and 'Click again to go' use 'Щелкните'."
+ },
+ {
+  "key": "RUMBLE",
+  "current": "Грохот",
+  "suggested": "ВИБРАЦИЯ",
+  "category": "meaning",
+  "reason": "Controller option: 'Грохот' means a loud noise; D2R uses 'Вибрация контроллера'. Collides case-insensitively with Rumble (Leap variant), so one shared value; ALL CAPS like PLAY/Play."
+ },
+ {
+  "key": "Rumble",
+  "current": "Грохот",
+  "suggested": "ВИБРАЦИЯ",
+  "category": "consistency",
+  "reason": "Same lookup key as RUMBLE (case-insensitive), only one value can win; keep identical to RUMBLE."
+ },
+ {
+  "key": "War Howl",
+  "current": "Боевой вой",
+  "suggested": "Боевой рев",
+  "category": "term",
+  "reason": "Variant of Howl, whose official D2R name is 'Рев'; 'вой' breaks the link to the base skill."
+ },
+ {
+  "key": "Each tooth pierces 2 monsters, but deals 38% less damage.",
+  "current": "Каждый зуб пробивает 2 монстров, но наносит на 38% меньше урона.",
+  "suggested": "Каждый клык пробивает 2 монстров, но наносит на 38% меньше урона.",
+  "category": "consistency",
+  "reason": "Teeth is 'Клыки' (D2R, and 'Выпускает клыки' in the skill text); use клык, not зуб."
+ },
+ {
+  "key": "The teeth fly close together at one monster and deal 12% more damage.",
+  "current": "Зубы летят кучно в одного монстра и наносят на 12% больше урона.",
+  "suggested": "Клыки летят кучно в одного монстра и наносят на 12% больше урона.",
+  "category": "consistency",
+  "reason": "Teeth = 'Клыки' (D2R skill name), not 'Зубы'."
+ },
+ {
+  "key": "a tooth",
+  "current": "за зуб",
+  "suggested": "за клык",
+  "category": "consistency",
+  "reason": "Per-hit label of Teeth; skill and its description use клыки."
+ },
+ {
+  "key": "It reaches 80% farther, but lowers resistances 40% less.",
+  "current": "Достает на 80% дальше, но снижает сопротивления на 40% слабее.",
+  "suggested": "Достает на 80% дальше, но снижает сопротивления на 40% меньше.",
+  "category": "grammar",
+  "reason": "'снижает ... на 40% слабее' is ungrammatical; a verb takes 'меньше'."
+ },
+ {
+  "key": "Untouched by Duriel",
+  "current": "Без единого удара Дюриэля",
+  "suggested": "Без урона от Дюриэля",
+  "category": "consistency",
+  "reason": "Sibling challenges are 'Без урона от Мефисто/Диабло'; 'Без единого удара' breaks the series."
+ },
+ {
+  "key": "Fires # of lightning for # damage each.",
+  "current": "Выпускает {0} молнии, урон каждого: {1}.",
+  "suggested": "Выпускает {0} молнии, урон каждой: {1}.",
+  "category": "grammar",
+  "reason": "Filler is always sparks ('искры ×4', feminine); 'урон каждого' doesn't agree."
+ },
+ {
+  "key": "* hit the monsters in reach for * damage each.",
+  "current": "{0} по монстрам в досягаемости, {1} урона каждый.",
+  "suggested": "Наносит {0} по монстрам в досягаемости, по {1} урона каждый.",
+  "category": "grammar",
+  "reason": "Filler is '# swift blows' -> 'быстрые удары ×3', so output starts lowercase with no verb ('быстрые удары ×3 по монстрам…')."
+ },
+ {
+  "key": "# seek monsters, dealing # damage to each they pass and stunning it.",
+  "current": "{0} преследуют монстров, нанося {1} урона каждому на пути и оглушая его.",
+  "suggested": "Выпускает {0}: они преследуют монстров, нанося {1} урона каждому на пути и оглушая его.",
+  "category": "grammar",
+  "reason": "Filler is 'смерчи ×3' / 'смерч ×1': output starts lowercase and the plural verb clashes with singular filler."
+ },
+ {
+  "key": "it hits",
+  "current": "во что попадает",
+  "suggested": "попадает",
+  "category": "placeholder",
+  "reason": "Fills 'вокруг того, во что {3}' in '# # for # damage around what #.' -> doubled 'во что во что попадает'."
+ },
+ {
+  "key": "they hit",
+  "current": "поражают",
+  "suggested": "попадают",
+  "category": "consistency",
+  "reason": "Same slot as 'it hits' ('во что {3}'); 'поражают' gives 'во что поражают'. Pair must be попадает/попадают."
+ },
+ {
+  "key": "they pass",
+  "current": "проходят",
+  "suggested": "на своем пути",
+  "category": "consistency",
+  "reason": "Pair of 'it passes' (= 'на своем пути') in the same slot 'to all #'; a bare verb 'проходят' doesn't fit."
+ },
+ {
+  "key": "chills",
+  "current": "замедляет холодом",
+  "suggested": "охлаждает",
+  "category": "consistency",
+  "reason": "Chill is 'охлаждение/охлаждает' in most of the dictionary (36 strings); 'замедляет холодом' also uses холод, which the term decision replaced with лед."
+ },
+ {
+  "key": "chill",
+  "current": "замедляют холодом",
+  "suggested": "охлаждают",
+  "category": "consistency",
+  "reason": "Plural pair of 'chills'; unify chill wording on охлаждение/охлаждает."
+ },
+ {
+  "key": "A ring of ice within # deals # damage and chills all it reaches for # seconds.",
+  "current": "Кольцо льда в радиусе {0} наносит {1} урона и замедляет холодом всех задетых на {2} сек.",
+  "suggested": "Кольцо льда в радиусе {0} наносит {1} урона и охлаждает всех задетых на {2} сек.",
+  "category": "consistency",
+  "reason": "Chill = охлаждает (dictionary majority); avoid холод."
+ },
+ {
+  "key": "Adds +#% fire, cold and lightning resistance, and chill wears off #% faster.",
+  "current": "+{0}% к сопротивлению огню, льду и молнии; замедление льдом проходит на {1}% быстрее.",
+  "suggested": "+{0}% к сопротивлению огню, льду и молнии; охлаждение проходит на {1}% быстрее.",
+  "category": "consistency",
+  "reason": "Same game term is 'охлаждение' in Fade/Natural Resistance texts ('Яд и охлаждение проходят…')."
+ },
+ {
+  "key": "Poison and chill wear off #% faster on you.",
+  "current": "Отравление и замедление холодом проходят у вас на {0}% быстрее.",
+  "suggested": "Отравление и охлаждение проходят у вас на {0}% быстрее.",
+  "category": "consistency",
+  "reason": "Chill = 'охлаждение' elsewhere; 'замедление холодом' uses холод and differs from sibling passives."
+ },
+ {
+  "key": "For #s a storm within # yards deals # cold damage # times a second, chilling.",
+  "current": "В течение {0} сек. буря в радиусе {1} м наносит {2} урона от льда (ударов в секунду: {3}) и замедляет льдом.",
+  "suggested": "В течение {0} сек. буря в радиусе {1} м наносит {2} урона от льда (ударов в секунду: {3}) и охлаждает.",
+  "category": "consistency",
+  "reason": "Chill = охлаждает; 'замедляет льдом' is a third variant."
+ },
+ {
+  "key": "+#% maximum life",
+  "current": "+{0}% к максимальному здоровью",
+  "suggested": "+{0}% к максимальному запасу здоровья",
+  "category": "term",
+  "reason": "D2R: 'Increase Maximum Life' = '+%d%% к максимальному запасу здоровья'; the same term is already used in +20 maximum life, Oak Sage etc."
+ },
+ {
+  "key": "+#% maximum life (+#%)",
+  "current": "+{0}% к максимальному здоровью (+{1}%)",
+  "suggested": "+{0}% к максимальному запасу здоровья (+{1}%)",
+  "category": "term",
+  "reason": "D2R wording 'максимальный запас здоровья'; keep identical to '+#% maximum life'."
+ },
+ {
+  "key": "+# maximum life",
+  "current": "+{0} к максимальному здоровью",
+  "suggested": "+{0} к максимальному запасу здоровья",
+  "category": "consistency",
+  "reason": "Neighbouring '+20 maximum life' says 'к максимальному запасу здоровья' (D2R wording)."
+ },
+ {
+  "key": "*: * at character level *",
+  "current": "{0}: {1} на уровне персонажа {2}",
+  "suggested": "{0}: {1} (уровень персонажа {2})",
+  "category": "grammar",
+  "reason": "{1} is 'next level' -> 'Следующий уровень', giving 'Следующий уровень на уровне персонажа 6'; parenthesis avoids the tautology and works for any filler."
+ },
+ {
+  "key": "*: * at level *",
+  "current": "{0}: {1} на уровне {2}",
+  "suggested": "{0}: {1} (уровень {2})",
+  "category": "grammar",
+  "reason": "Same as above: 'Следующий уровень на уровне 6'."
+ },
+ {
+  "key": "Scorching",
+  "current": "Сгущающий",
+  "suggested": "Опаляющий",
+  "category": "meaning",
+  "reason": "Fire-damage prefix above Flaming; 'Сгущающий' means 'thickening'. affix:Scorching has the same error and only one form."
+ },
+ {
+  "key": "Paleocene",
+  "current": "Верный",
+  "suggested": "Палеоценовый",
+  "category": "meaning",
+  "reason": "Literal epoch name (ko 팔레오세, zh 古新世); 'Верный' means 'faithful'. affix:Paleocene same, one form only."
+ },
+ {
+  "key": "of Anima",
+  "current": "дружбы",
+  "suggested": "души",
+  "category": "meaning",
+  "reason": "Anima = soul (ko 영혼, zh 靈魂之), the life suffix above 'of Life'; 'дружбы' means 'of friendship'. affix:of Anima has the same value."
+ },
+ {
+  "key": "#% chance of a critical strike, which deals double damage",
+  "current": "{0}% к вероятности критического удара, наносящего двойной урон",
+  "suggested": "Вероятность критического удара (двойной урон): {0}%",
+  "category": "meaning",
+  "reason": "Skill box line states the skill's total crit chance, not a bonus; \"к вероятности\" reads as \"+X% to chance\"."
+ },
+ {
+  "key": "* to reload*",
+  "current": "{0}, чтобы перезагрузить{1}",
+  "suggested": "{0}: перезагрузить{1}",
+  "category": "grammar",
+  "reason": "{0} is Tap/Click (\"Касание\"/\"Щелчок\") and {1} is \" and continue the run\"; \"Щелчок, чтобы перезагрузить\" is a noun + purpose clause. Use the \"Щелчок: взять\" pattern used elsewhere."
+ },
+ {
+  "key": "Clear a tier with No Potions in the Belt among its affixes (from tier *).",
+  "current": "Пройдите ступень со свойством \"Без зелий в поясе\" (со ступени {0}).",
+  "suggested": "Пройдите ступень со свойством \"Без зелий из пояса\" (со ступени {0}).",
+  "category": "consistency",
+  "reason": "The tier affix itself is translated \"Без зелий из пояса\" (key No Potions in the Belt); quote it the same way."
+ },
+ {
+  "key": "The Valkyrie's Frost Maiden now deals 45% more damage",
+  "current": "Ледяная дева Валькирии теперь наносит на 45% больше урона",
+  "suggested": "Морозная дева Валькирии теперь наносит на 45% больше урона",
+  "category": "consistency",
+  "reason": "The modifier Frost Maiden is \"Морозная дева\" in the dictionary."
+ },
+ {
+  "key": "Claws of Thunder's Static no longer makes the release 10% weaker",
+  "current": "Статика Грозовых когтей больше не ослабляет высвобождение на 10%",
+  "suggested": "Статический разряд Грозовых когтей больше не ослабляет высвобождение на 10%",
+  "category": "consistency",
+  "reason": "The modifier name shown on the card is modifier:Static = \"Статический разряд\", not \"Статика\"."
+ },
+ {
+  "key": "The Shadow Master's Martyr no longer has 30% less life",
+  "current": "Мученик Тени мастера больше не получает −30% к здоровью",
+  "suggested": "Мученик Тени мастера больше не имеет на 30% меньше здоровья",
+  "category": "other",
+  "reason": "Only value in the whole ru dictionary using U+2212 minus (not in Latin-1 or the Cyrillic range); rephrase without it, which also reads more naturally."
+ },
+ {
+  "key": "Options say what AUTO STATS does",
+  "current": "В настройках объясняется, что делает АВТОХАРАКТЕРИСТИКИ",
+  "suggested": "В настройках объясняется, что делает параметр АВТОХАРАКТЕРИСТИКИ",
+  "category": "grammar",
+  "reason": "Singular verb with the plural-looking АВТОХАРАКТЕРИСТИКИ; naming it as a setting fixes the agreement."
+ },
+ {
+  "key": "The Esc menu reads RESUME, OPTIONS, REPORT, SAVE AND EXIT, and Esc resumes",
+  "current": "Меню Esc: ПРОДОЛЖИТЬ, НАСТРОЙКИ, СООБЩИТЬ, СОХРАНИТЬ И ВЫЙТИ, а Esc возвращает в игру",
+  "suggested": "Меню Esc: ВОЗОБНОВИТЬ, НАСТРОЙКИ, СООБЩИТЬ, СОХРАНИТЬ И ВЫЙТИ, а Esc возвращает в игру",
+  "category": "consistency",
+  "reason": "The RESUME button is \"ВОЗОБНОВИТЬ\" in the dictionary; \"ПРОДОЛЖИТЬ\" is the main-menu CONTINUE. (REPORT itself is currently \"Пожаловаться\" in the dict, see cross-cutting note.)"
+ },
+ {
+  "key": "+Life and Life per Level on gear give twice as much, D2's share of your life",
+  "current": "+здоровье и здоровье за уровень на снаряжении дают вдвое больше — столько, сколько их доля здоровья в D2",
+  "suggested": "+здоровье и здоровье за уровень на снаряжении дают вдвое больше, в той же доле от здоровья, что и в D2",
+  "category": "grammar",
+  "reason": "\"столько, сколько их доля здоровья в D2\" is ungrammatical."
+ },
+ {
+  "key": "A quest item whose gift you already have can be dropped, sold or let go of, so spent Books of Skill no longer fill the inventory",
+  "current": "Предмет задания, награда за который уже получена, можно выбросить, продать или оставить, поэтому использованные книги умений больше не заполняют инвентарь",
+  "suggested": "Предмет задания, награда за который уже получена, можно выбросить, продать или иначе от него избавиться, поэтому использованные книги умений больше не заполняют инвентарь",
+  "category": "meaning",
+  "reason": "\"оставить\" reads as \"keep\"; \"let go of\" means getting rid of it (ko/zh: discard)."
+ },
+ {
+  "key": "SHOW ITEMS",
+  "current": "ПОКАЗАТЬ ПРЕДМЕТЫ",
+  "suggested": "ПОКАЗ ПРЕДМЕТОВ",
+  "category": "consistency",
+  "reason": "\"SHOW ITEMS: #\" is \"ПОКАЗ ПРЕДМЕТОВ: {0}\" and SHOW DAMAGE / SHOW DAMAGE: # are both \"ПОКАЗ УРОНА\"; the label should match its own value line (also shorter). Changelog lines quoting ПОКАЗАТЬ ПРЕДМЕТЫ / ПОКАЗАТЬ УРОН should follow."
+ },
+ {
+  "key": "Storm Golem",
+  "current": "Штормовой Голем",
+  "suggested": "Штормовой голем",
+  "category": "consistency",
+  "reason": "Golem is lowercase in every D2R golem name (Кровяной голем, Железный голем, Огненный голем)."
+ },
+ {
+  "key": "Beast Song",
+  "current": "Звериный песнь",
+  "suggested": "Звериная песнь",
+  "category": "grammar",
+  "reason": "песнь is feminine. Same error in ~15 other '* Song' rare names (see cross-cutting)."
+ },
+ {
+  "key": "Raven Flight",
+  "current": "Ворон полет",
+  "suggested": "Вороний полет",
+  "category": "grammar",
+  "reason": "Rare prefix Raven is the D2R adjective вороний/воронья/воронье/вороньи (as in Raven Talisman, Raven Edge); \"Ворон полет\" is two nouns."
+ },
+ {
+  "key": "Raven Turn",
+  "current": "Ворон оборот",
+  "suggested": "Вороний оборот",
+  "category": "grammar",
+  "reason": "Same: Raven prefix must be the adjective."
+ },
+ {
+  "key": "Raven Fist",
+  "current": "Ворон кулаки",
+  "suggested": "Вороньи кулаки",
+  "category": "grammar",
+  "reason": "Same: adjective in plural to agree with кулаки (cf. Skull Fist = Черепные кулаки)."
+ },
+ {
+  "key": "Armageddon Thirst",
+  "current": "Армагеддон жажда",
+  "suggested": "Апокалиптическая жажда",
+  "category": "term",
+  "reason": "D2R's rare prefix Armageddon (key Holocaust) is the adjective [ms]апокалиптический[fs]апокалиптическая…; \"Армагеддон\" is the skill name and leaves two bare nouns."
+ },
+ {
+  "key": "Armageddon Scythe",
+  "current": "Армагеддон коса",
+  "suggested": "Апокалиптическая коса",
+  "category": "term",
+  "reason": "Same: D2R rare prefix Armageddon = апокалиптический, agreeing with коса (f)."
+ },
+ {
+  "key": "Vengeance Impaler",
+  "current": "Отмщение пронзатель",
+  "suggested": "Мстительный пронзатель",
+  "category": "grammar",
+  "reason": "D2R has no rare-prefix form for Vengeance; the runeword noun \"Отмщение\" + noun is ungrammatical. Needs an adjective (one choice for all Vengeance * names)."
+ },
+ {
+  "key": "Vengeance Splitter",
+  "current": "Отмщение расщепитель",
+  "suggested": "Мстительный расщепитель",
+  "category": "grammar",
+  "reason": "Same as Vengeance Impaler."
+ },
+ {
+  "key": "Vengeance Gnarl",
+  "current": "Отмщение сук",
+  "suggested": "Мстительный сук",
+  "category": "grammar",
+  "reason": "Same as Vengeance Impaler."
+ },
+ {
+  "key": "Better Chance of Getting Magic Items",
+  "current": "Вероятность найти магический предмет",
+  "suggested": "к вероятности найти магический предмет",
+  "category": "meaning",
+  "reason": "Item-box stat built as \"<value>% <text>\" (descval 1): \"25% Вероятность найти магический предмет\" reads as a flat 25% chance. D2R: \"+%d%% к вероятности найти магический предмет\"."
+ },
+ {
+  "key": "Slower Stamina Drain",
+  "current": "Медленный расход выносливости",
+  "suggested": "к замедлению расхода выносливости",
+  "category": "grammar",
+  "reason": "Shown as \"10% <text>\": \"10% Медленный расход выносливости\" doesn't parse."
+ },
+ {
+  "key": "Life after each Kill",
+  "current": "Здоровье при убийстве",
+  "suggested": "здоровья при убийстве",
+  "category": "grammar",
+  "reason": "Shown as \"+5 <text>\"; needs genitive as in D2R \"%+d здоровья при убийстве\"."
+ },
+ {
+  "key": "Life after each Demon Kill",
+  "current": "Здоровье при убийстве демона",
+  "suggested": "здоровья при убийстве демона",
+  "category": "grammar",
+  "reason": "Shown as \"+5 <text>\"; genitive like D2R."
+ },
+ {
+  "key": "Increase Maximum Mana",
+  "current": "Увеличивает максимальный запас маны",
+  "suggested": "Увеличивает максимальный запас маны на",
+  "category": "grammar",
+  "reason": "descval 2: shown as \"<text> 10%\"; without \"на\" it reads \"Увеличивает максимальный запас маны 10%\"."
+ },
+ {
+  "key": "Defense vs. Missile",
+  "current": "Защита от снарядов",
+  "suggested": "к защите от снарядов",
+  "category": "consistency",
+  "reason": "Shown as \"+5 <text>\" like Defense vs. Melee (\"к защите от ударов в ближнем бою\"); D2R: \"%+d к защите от снарядов\"."
+ },
+ {
+  "key": "Click a rank to buy it",
+  "current": "Нажмите на ранг, чтобы купить его",
+  "suggested": "Щелкните ранг, чтобы купить его",
+  "category": "consistency",
+  "reason": "\"Click\" is \"Щелкните\" in 14 strings (incl. Click a ware to buy it); \"Нажмите\" in 6."
+ },
+ {
+  "key": "Click to see its modifiers",
+  "current": "Нажмите, чтобы увидеть модификаторы",
+  "suggested": "Щелкните, чтобы увидеть модификаторы",
+  "category": "consistency",
+  "reason": "Same Click = Щелкните; its pair \"Tap again to see…\" and the neighbouring \"Click to take this tree\" use Щелкните/Коснитесь."
+ },
+ {
+  "key": "Click one to turn it on",
+  "current": "Нажмите на один, чтобы включить его",
+  "suggested": "Щелкните по одному, чтобы включить его",
+  "category": "consistency",
+  "reason": "Click = Щелкните; \"Нажмите на один\" also reads oddly."
+ }
+]
