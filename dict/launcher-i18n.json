@@ -78,13 +78,6 @@
   "update_launcher": { "ja": "ランチャーを更新", "de": "Launcher aktualisieren", "fr": "Mettre à jour le lanceur", "ru": "Обновить лаунчер", "pl": "Zaktualizuj launcher" },
   "check_updates": { "ja": "更新を確認", "de": "Nach Updates suchen", "fr": "Rechercher des mises à jour", "ru": "Проверить обновления", "pl": "Sprawdź aktualizacje" },
   "settings": { "ja": "設定", "de": "Einstellungen", "fr": "Paramètres", "ru": "Настройки", "pl": "Ustawienia" },
-  "game_missing_banner": {
-    "ja": "D2 Survivors が見つかりません。「設定」でフォルダーを指定してください。",
-    "de": "D2 Survivors nicht gefunden. Legen Sie den Ordner in den Einstellungen fest.",
-    "fr": "D2 Survivors introuvable. Indiquez son dossier dans les Paramètres.",
-    "ru": "Игра D2 Survivors не найдена. Укажите ее папку в настройках.",
-    "pl": "Nie znaleziono D2 Survivors. Wskaż folder gry w Ustawieniach."
-  },
   "changelog": { "ja": "更新履歴", "de": "Neuigkeiten", "fr": "Nouveautés", "ru": "Что нового", "pl": "Co nowego" },
   "got_it": { "ja": "OK", "de": "Verstanden", "fr": "Compris", "ru": "Понятно", "pl": "Rozumiem" },
   "fallback_game_updated": {
@@ -143,5 +136,53 @@
   "cli": { "ja": "コマンドライン", "de": "Befehlszeile", "fr": "Ligne de commande", "ru": "Командная строка", "pl": "Wiersz poleceń" },
   "log": { "ja": "ログ", "de": "Protokoll", "fr": "Journal", "ru": "Журнал", "pl": "Dziennik" },
   "links": { "ja": "リンク", "de": "Links", "fr": "Liens", "ru": "Ссылки", "pl": "Linki" },
-  "licenses": { "ja": "ライセンス", "de": "Lizenzen", "fr": "Licences", "ru": "Лицензии", "pl": "Licencje" }
+  "licenses": { "ja": "ライセンス", "de": "Lizenzen", "fr": "Licences", "ru": "Лицензии", "pl": "Licencje" },
+  "game_not_installed": { "ja": "D2 Survivors がインストールされていません", "de": "D2 Survivors ist nicht installiert", "fr": "D2 Survivors n'est pas installé", "ru": "D2 Survivors не установлена", "pl": "D2 Survivors nie jest zainstalowane" },
+  "game_not_installed_desc": {
+    "ja": "D2 Survivors は無料のゲームです。公式サイトからダウンロードしてインストールし、終わったら「再検出」を押してください。別の場所にインストールしている場合は、フォルダーを選んでください。",
+    "de": "D2 Survivors ist kostenlos. Lade es von der offiziellen Website herunter, installiere es und klicke dann auf „Erneut suchen“. Ist es an einem anderen Ort installiert, wähle seinen Ordner aus.",
+    "fr": "D2 Survivors est gratuit. Téléchargez-le et installez-le depuis son site officiel, puis cliquez sur « Détecter à nouveau ». S'il est installé ailleurs, choisissez son dossier.",
+    "ru": "D2 Survivors — бесплатная игра. Скачайте и установите ее с официального сайта, затем нажмите «Повторить поиск». Если игра установлена в другом месте, выберите ее папку.",
+    "pl": "D2 Survivors jest darmowe. Pobierz je i zainstaluj z oficjalnej strony, a potem kliknij „Wykryj ponownie”. Jeśli gra jest zainstalowana w innym miejscu, wskaż jej folder."
+  },
+  "download_game": { "ja": "D2 Survivors をダウンロード", "de": "D2 Survivors herunterladen", "fr": "Télécharger D2 Survivors", "ru": "Скачать D2 Survivors", "pl": "Pobierz D2 Survivors" },
+  "d2_missing_hint": {
+    "ja": "『ディアブロ II』のゲームファイルが見つかりません。D2 Survivors はご自分の『ディアブロ II』または『ディアブロ II リザレクテッド』で動きます。別の場所にある場合も、そのままプレイしてゲーム内で設定できます。",
+    "de": "Die Spieldateien von Diablo II wurden nicht gefunden. D2 Survivors läuft mit deinem eigenen Diablo II oder Diablo II: Resurrected; liegt es an einem anderen Ort, kannst du trotzdem spielen und es im Spiel einrichten.",
+    "fr": "Les fichiers de jeu de Diablo II sont introuvables. D2 Survivors fonctionne avec votre propre Diablo II ou Diablo II: Resurrected ; s'il se trouve ailleurs, vous pouvez quand même jouer et le configurer dans le jeu.",
+    "ru": "Файлы игры Diablo II не найдены. D2 Survivors работает на вашей собственной копии Diablo II или Diablo II: Resurrected; если она установлена в другом месте, можно все равно играть и указать ее в игре.",
+    "pl": "Nie znaleziono plików gry Diablo II. D2 Survivors działa na twoim własnym Diablo II lub Diablo II: Resurrected; jeśli jest w innym miejscu, możesz mimo to grać i ustawić to w grze."
+  },
+  "d2r_page": { "ja": "『ディアブロ II リザレクテッド』公式ページ", "de": "Offizielle Seite von Diablo II: Resurrected", "fr": "Page officielle de Diablo II: Resurrected", "ru": "Официальная страница Diablo II: Resurrected", "pl": "Oficjalna strona Diablo II: Resurrected" },
+  "about": { "ja": "情報", "de": "Über", "fr": "À propos", "ru": "О программе", "pl": "O programie" },
+  "about_title": { "ja": "D2 Survivors について", "de": "Über D2 Survivors", "fr": "À propos de D2 Survivors", "ru": "О D2 Survivors", "pl": "O D2 Survivors" },
+  "about_desc": {
+    "ja": "D2 Survivors は framara が制作した無料のファンゲームです。『ディアブロ II』の世界を舞台にしたサバイバーズ系アクションゲームで、デスクトップ版とブラウザー版があります。",
+    "de": "D2 Survivors ist ein kostenloses Fanspiel von framara: ein Survivors-ähnliches Actionspiel in der Welt von Diablo II, für den Desktop und im Browser.",
+    "fr": "D2 Survivors est un jeu de fan gratuit créé par framara : un jeu d'action de type survivors dans l'univers de Diablo II, sur ordinateur et dans le navigateur.",
+    "ru": "D2 Survivors — бесплатная фанатская игра от framara: экшен в духе survivors в мире Diablo II, для компьютера и в браузере.",
+    "pl": "D2 Survivors to darmowa gra fanowska autorstwa framary: gra akcji w stylu survivors osadzona w świecie Diablo II, na komputer i w przeglądarce."
+  },
+  "about_needs": {
+    "ja": "ゲームにはご自分の『ディアブロ II』または『ディアブロ II リザレクテッド』のゲームファイルが必要です。",
+    "de": "Das Spiel benötigt die Spieldateien deines eigenen Diablo II oder Diablo II: Resurrected.",
+    "fr": "Le jeu a besoin des fichiers de votre propre Diablo II ou Diablo II: Resurrected.",
+    "ru": "Для игры нужны файлы вашей собственной копии Diablo II или Diablo II: Resurrected.",
+    "pl": "Gra potrzebuje plików z twojego własnego Diablo II lub Diablo II: Resurrected."
+  },
+  "about_unofficial": {
+    "ja": "このランチャーは非公式の翻訳ツールで、D2 Survivors の作者とも Blizzard Entertainment とも関係ありません。",
+    "de": "Dieser Launcher ist ein inoffizielles Übersetzungswerkzeug und steht in keiner Verbindung zum Autor von D2 Survivors oder zu Blizzard Entertainment.",
+    "fr": "Ce lanceur est un outil de traduction non officiel, sans lien avec l'auteur de D2 Survivors ni avec Blizzard Entertainment.",
+    "ru": "Этот лаунчер — неофициальный инструмент перевода, не связанный ни с автором D2 Survivors, ни с Blizzard Entertainment.",
+    "pl": "Ten launcher to nieoficjalne narzędzie do tłumaczenia, niezwiązane z autorem D2 Survivors ani z Blizzard Entertainment."
+  },
+  "about_installed": { "ja": "インストール済みのバージョン：{}", "de": "Installierte Version: {}", "fr": "Version installée : {}", "ru": "Установленная версия: {}", "pl": "Zainstalowana wersja: {}" },
+  "about_game_links": { "ja": "ゲーム", "de": "Das Spiel", "fr": "Le jeu", "ru": "Игра", "pl": "Gra" },
+  "about_launcher_links": { "ja": "翻訳", "de": "Die Übersetzung", "fr": "La traduction", "ru": "Перевод", "pl": "Tłumaczenie" },
+  "link_game_site": { "ja": "D2 Survivors 公式サイト", "de": "Offizielle Website von D2 Survivors", "fr": "Site officiel de D2 Survivors", "ru": "Официальный сайт D2 Survivors", "pl": "Oficjalna strona D2 Survivors" },
+  "link_game_play": { "ja": "ブラウザーでプレイ（ブラウザー版）", "de": "Im Browser spielen", "fr": "Jouer dans le navigateur", "ru": "Играть в браузере", "pl": "Graj w przeglądarce" },
+  "link_game_discord": { "ja": "ゲーム公式 Discord（英語）", "de": "Offizieller Discord des Spiels (Englisch)", "fr": "Discord officiel du jeu (en anglais)", "ru": "Официальный Discord игры (на английском)", "pl": "Oficjalny Discord gry (po angielsku)" },
+  "link_translation_site": { "ja": "翻訳サイト", "de": "Website der Übersetzung", "fr": "Site de la traduction", "ru": "Сайт перевода", "pl": "Strona tłumaczenia" },
+  "link_translation_discord": { "ja": "翻訳コミュニティの Discord", "de": "Discord der Übersetzungs-Community", "fr": "Discord de la communauté de traduction", "ru": "Discord сообщества переводчиков", "pl": "Discord społeczności tłumaczy" }
 }

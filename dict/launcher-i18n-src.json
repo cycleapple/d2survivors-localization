@@ -258,12 +258,6 @@
   "en": "Settings"
  },
  {
-  "key": "game_missing_banner",
-  "zh-TW": "找不到 D2 Survivors，請到「設定」指定遊戲資料夾",
-  "zh-CN": "找不到 D2 Survivors，请到「设置」指定游戏文件夹",
-  "en": "D2 Survivors wasn't found. Set its folder in Settings."
- },
- {
   "key": "changelog",
   "zh-TW": "更新紀錄",
   "zh-CN": "更新记录",
@@ -400,5 +394,101 @@
   "zh-TW": "授權",
   "zh-CN": "许可",
   "en": "Licenses"
+ },
+ {
+  "key": "game_not_installed",
+  "zh-TW": "尚未安裝 D2 Survivors",
+  "zh-CN": "尚未安装 D2 Survivors",
+  "en": "D2 Survivors isn't installed"
+ },
+ {
+  "key": "game_not_installed_desc",
+  "zh-TW": "D2 Survivors 是免費遊戲。請先到官方網站下載安裝，裝好後按「重新偵測」；裝在別的地方的話，可以手動選擇資料夾。",
+  "zh-CN": "D2 Survivors 是免费游戏。请先到官方网站下载安装，装好后点「重新检测」；装在别的地方的话，可以手动选择文件夹。",
+  "en": "D2 Survivors is free. Download and install it from its official website, then click “Detect again”. If it's installed somewhere else, choose its folder."
+ },
+ {
+  "key": "download_game",
+  "zh-TW": "下載 D2 Survivors",
+  "zh-CN": "下载 D2 Survivors",
+  "en": "Download D2 Survivors"
+ },
+ {
+  "key": "about",
+  "zh-TW": "關於",
+  "zh-CN": "关于",
+  "en": "About"
+ },
+ {
+  "key": "about_title",
+  "zh-TW": "關於 D2 Survivors",
+  "zh-CN": "关于 D2 Survivors",
+  "en": "About D2 Survivors"
+ },
+ {
+  "key": "about_desc",
+  "zh-TW": "D2 Survivors 是 framara 製作的免費粉絲遊戲：以《暗黑破壞神 II》為題材的 survivors-like 動作遊戲，有桌面版和瀏覽器版。",
+  "zh-CN": "D2 Survivors 是 framara 制作的免费粉丝游戏：以《暗黑破坏神 II》为题材的 survivors-like 动作游戏，有桌面版和浏览器版。",
+  "en": "D2 Survivors is a free fan-made game by framara: a survivors-like action game set in the world of Diablo II, on desktop and in the browser."
+ },
+ {
+  "key": "about_needs",
+  "zh-TW": "遊戲需要你自己的 Diablo II 或 Diablo II: Resurrected 的遊戲檔案。",
+  "zh-CN": "游戏需要使用你自己的 Diablo II 或 Diablo II: Resurrected 的游戏文件。",
+  "en": "The game needs the game files from your own Diablo II or Diablo II: Resurrected."
+ },
+ {
+  "key": "about_unofficial",
+  "zh-TW": "這個啟動器是非官方的翻譯工具，跟 D2 Survivors 的作者和 Blizzard Entertainment 都沒有關係。",
+  "zh-CN": "这个启动器是非官方的翻译工具，与 D2 Survivors 的作者和 Blizzard Entertainment 均无关。",
+  "en": "This launcher is an unofficial translation tool, not affiliated with the author of D2 Survivors or with Blizzard Entertainment."
+ },
+ {
+  "key": "about_installed",
+  "zh-TW": "已安裝的版本：{}",
+  "zh-CN": "已安装的版本：{}",
+  "en": "Installed version: {}"
+ },
+ {
+  "key": "about_game_links",
+  "zh-TW": "遊戲",
+  "zh-CN": "游戏",
+  "en": "The game"
+ },
+ {
+  "key": "about_launcher_links",
+  "zh-TW": "翻譯",
+  "zh-CN": "翻译",
+  "en": "The translation"
+ },
+ {
+  "key": "link_game_site",
+  "zh-TW": "D2 Survivors 官方網站",
+  "zh-CN": "D2 Survivors 官方网站",
+  "en": "D2 Survivors official website"
+ },
+ {
+  "key": "link_game_play",
+  "zh-TW": "在瀏覽器玩（網頁版）",
+  "zh-CN": "在浏览器里玩（网页版）",
+  "en": "Play in the browser"
+ },
+ {
+  "key": "link_game_discord",
+  "zh-TW": "遊戲官方 Discord（英文）",
+  "zh-CN": "游戏官方 Discord（英文）",
+  "en": "Official game Discord (English)"
+ },
+ {
+  "key": "link_translation_site",
+  "zh-TW": "翻譯網站",
+  "zh-CN": "翻译网站",
+  "en": "Translation website"
+ },
+ {
+  "key": "link_translation_discord",
+  "zh-TW": "翻譯社群 Discord",
+  "zh-CN": "翻译社区 Discord",
+  "en": "Translation community Discord"
  }
 ]
