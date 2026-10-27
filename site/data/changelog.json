@@ -2,6 +2,93 @@
   "schema": 1,
   "entries": [
     {
+      "version": "20261027-1539",
+      "date": "2026-10-27",
+      "kind": "translation",
+      "announce": false,
+      "summary": {
+        "zh-TW": "繁中、簡中：對照遊戲程式碼修正技能說明與名稱（犧牲類技能的生命門檻、聖光彈、霜灼／霜燃撞名等），補上屬性等級的標籤",
+        "zh-CN": "繁中、简中：对照游戏代码修正技能说明与名称（牺牲类技能的生命门槛、圣光弹、霜灼／霜燃撞名等），补上属性等级的标签",
+        "en": "Traditional and Simplified Chinese: skill descriptions and names checked against the game code (life threshold of Sacrifice-type skills, Holy Bolt, Frostburn/Frostfire clash) and stat level labels added",
+        "ja": "繁体字・簡体字中国語：ゲームのコードと照合してスキルの説明と名前を修正（献身などのライフ条件、聖なる一撃、名前の重複など）。能力値レベルの表示を追加",
+        "de": "Traditionelles und vereinfachtes Chinesisch: Fertigkeitsbeschreibungen und -namen mit dem Spielcode abgeglichen (Lebensschwelle opfernder Fertigkeiten, Heiliger Blitz, doppelte Namen) und Stufenanzeigen für Attribute ergänzt",
+        "fr": "Chinois traditionnel et simplifié : descriptions et noms de compétences vérifiés dans le code du jeu (seuil de vie des compétences de sacrifice, Trait sacré, noms en double) et libellés de niveau des attributs ajoutés",
+        "ru": "Традиционный и упрощенный китайский: описания и названия умений сверены с кодом игры (порог здоровья у умений с жертвой, Заряд Света, совпадающие названия), добавлены подписи уровней характеристик",
+        "pl": "Chiński tradycyjny i uproszczony: opisy i nazwy umiejętności sprawdzone z kodem gry (próg życia umiejętności z poświęceniem, Święty Pocisk, powtarzające się nazwy), dodano etykiety poziomów atrybutów"
+      },
+      "notes": {
+        "zh-TW": [
+          "繁中：待確認清單逐條對照遊戲程式碼，修正 13 條，例如血升、犧牲打擊「生命低於 40% 時不會發動」、霜灼（原本跟霜燃同名）、角色畫面的「屬性點數」、聖光彈兩枚以上時的「穿透」",
+          "簡中：修正 14 條，稱號改用 D2R 的屠魔者、勇士、守护者，修饰词女猎手、罗网"
+        ],
+        "en": [
+          "Traditional Chinese: 13 fixes from checking the open items against the game code (e.g. life threshold wording, Frostburn name clash, Stat Points label, Holy Bolt plural)",
+          "Simplified Chinese: 14 fixes, including the D2R titles Slayer/Champion/Guardian"
+        ]
+      },
+      "game": {
+        "desktop": "2026.1027.2"
+      },
+      "languages": [
+        {
+          "id": "zh-TW",
+          "status": "available",
+          "entries": 12853,
+          "added": 2,
+          "changed": 12,
+          "removed": 0
+        },
+        {
+          "id": "zh-CN",
+          "status": "beta",
+          "entries": 12852,
+          "added": 1,
+          "changed": 14,
+          "removed": 0
+        },
+        {
+          "id": "ja",
+          "status": "beta",
+          "entries": 12854,
+          "added": 1,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "de",
+          "status": "beta",
+          "entries": 12803,
+          "added": 1,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "fr",
+          "status": "beta",
+          "entries": 12803,
+          "added": 1,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ru",
+          "status": "beta",
+          "entries": 12803,
+          "added": 1,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "pl",
+          "status": "beta",
+          "entries": 12803,
+          "added": 1,
+          "changed": 0,
+          "removed": 0
+        }
+      ]
+    },
+    {
       "version": "20261027-1503",
       "date": "2026-10-27",
       "kind": "game-fix",

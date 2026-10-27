@@ -13511,5 +13511,6 @@
  "The website's leaderboards switch between Softcore and Hardcore, with Hardcore's ladder, its statistics and a player's heroes of both": "В таблицах рекордов на сайте можно переключаться между обычным и героическим режимом: рейтинг героического режима, его статистика и герои игрока в обоих режимах",
  "In Hardcore's camp the leaderboard's book shows Hardcore's own boards and its ladder by experience, the dead in red": "В лагере героического режима книга таблицы рекордов показывает отдельные таблицы героического режима и его рейтинг по опыту, погибшие — красным",
  "The Hardcore ladder marks a hero whose level is higher than her play could reach as possibly odd, and she stays on it": "Рейтинг героического режима помечает героя, чей уровень выше достижимого его игрой, как \"Возможна аномалия\", и герой остается в рейтинге",
- "Diablo warns you as the Dark Wanderer takes you into Hardcore, and again when a Hardcore hero dies": "Диабло предупреждает вас, когда Темный Странник ведет вас в героический режим, и еще раз — когда погибает герой героического режима"
+ "Diablo warns you as the Dark Wanderer takes you into Hardcore, and again when a Hardcore hero dies": "Диабло предупреждает вас, когда Темный Странник ведет вас в героический режим, и еще раз — когда погибает герой героического режима",
+ "* level #": "{0}, уровень {1}"
 }

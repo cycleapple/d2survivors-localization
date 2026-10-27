@@ -13512,6 +13512,7 @@
  "In Hardcore's camp the leaderboard's book shows Hardcore's own boards and its ladder by experience, the dead in red": "W obozie trybu Hardkor księga rankingu pokazuje własne rankingi trybu Hardkor i ranking według doświadczenia, a martwych na czerwono",
  "The Hardcore ladder marks a hero whose level is higher than her play could reach as possibly odd, and she stays on it": "Ranking postaci hardkorowych oznacza bohatera, którego poziom jest wyższy, niż pozwala jego gra, jako możliwą anomalię, a bohater w nim pozostaje",
  "Diablo warns you as the Dark Wanderer takes you into Hardcore, and again when a Hardcore hero dies": "Diablo ostrzega cię, gdy Mroczny Wędrowiec zabiera cię do trybu Hardkor, i ponownie, gdy ginie bohater trybu Hardkor",
+ "* level #": "{0} poziom {1}",
  "gender:Amazon": "fs",
  "gender:Armor": "ms",
  "gender:Assassin": "nl",

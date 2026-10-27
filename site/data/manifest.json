@@ -1,21 +1,21 @@
 {
   "schema": 2,
-  "updated": "2026-10-27T15:03:57.216Z",
-  "version": "20261027-1503",
+  "updated": "2026-10-27T15:39:58.944Z",
+  "version": "20261027-1539",
   "game": {
     "desktop": "2026.1027.2",
-    "web_checked": "2026-10-27T13:21:03.641Z"
+    "web_checked": "2026-10-27T15:20:04.655Z"
   },
   "languages": [
     {
       "id": "zh-TW",
       "name": "繁體中文",
       "status": "available",
-      "entries": 12851,
+      "entries": 12853,
       "dict": {
-        "url": "dict/zh-TW.json?v=1d52919bb4a9",
-        "sha256": "1d52919bb4a932b2f6a16cdc22ccb79ca77240fd0dc7f2b33156c06fb88634bc",
-        "size": 803267
+        "url": "dict/zh-TW.json?v=95515ba253a0",
+        "sha256": "95515ba253a0413e9b2b76acfcab9dcbab7111eac3304f538a0f2ce7121399ca",
+        "size": 803514
       },
       "desktop": {
         "menu_name": "繁體中文",
@@ -55,11 +55,11 @@
       "id": "zh-CN",
       "name": "简体中文",
       "status": "beta",
-      "entries": 12851,
+      "entries": 12852,
       "dict": {
-        "url": "dict/zh-CN.json?v=f9422776f5b7",
-        "sha256": "f9422776f5b7d63d6714156b1d165aea3c2f1931bac6ccfbbed71ce5d691bc74",
-        "size": 803379
+        "url": "dict/zh-CN.json?v=9c24dad852b9",
+        "sha256": "9c24dad852b9eb1c9bf7ff5c2f2b00ff232ef7f9f391be1d90d8997326b94662",
+        "size": 803428
       },
       "desktop": {
         "menu_name": "简体中文",
@@ -97,11 +97,11 @@
       "id": "ja",
       "name": "日本語",
       "status": "beta",
-      "entries": 12853,
+      "entries": 12854,
       "dict": {
-        "url": "dict/ja.json?v=0dba9cc3130f",
-        "sha256": "0dba9cc3130f8573ea0245a7ac7890952c774cd20ebe4e006a14a3a586fea442",
-        "size": 964055
+        "url": "dict/ja.json?v=236fe4322143",
+        "sha256": "236fe4322143bc1a23e2c4a0684bcac4d69e74134482541b43b736a29e780a61",
+        "size": 964089
       },
       "desktop": {
         "menu_name": "日本語",
@@ -140,11 +140,11 @@
       "id": "de",
       "name": "Deutsch",
       "status": "beta",
-      "entries": 12802,
+      "entries": 12803,
       "dict": {
-        "url": "dict/de.json?v=f0828c2cc92c",
-        "sha256": "f0828c2cc92c31acf12f1e8f9c8022da755debd99c77c90fc896f23b3f63794e",
-        "size": 882965
+        "url": "dict/de.json?v=086f4308afc0",
+        "sha256": "086f4308afc053b089dc247cbeff1c3f19092e8e07fb544f865e9e10ec3a1f80",
+        "size": 882996
       },
       "desktop": {
         "menu_name": "Deutsch",
@@ -172,11 +172,11 @@
       "id": "fr",
       "name": "Français",
       "status": "beta",
-      "entries": 12802,
+      "entries": 12803,
       "dict": {
-        "url": "dict/fr.json?v=6a7bd2ee8a4c",
-        "sha256": "6a7bd2ee8a4cabc209642f16142ecd98f5a5114a6f7d5259409624fcd1021672",
-        "size": 924600
+        "url": "dict/fr.json?v=e45ba3288417",
+        "sha256": "e45ba3288417fd7b576c7b372fb6ce7bdfb90e36e8302b6c8dfb44aa23311a85",
+        "size": 924632
       },
       "desktop": {
         "menu_name": "Français",
@@ -204,11 +204,11 @@
       "id": "ru",
       "name": "Русский",
       "status": "beta",
-      "entries": 12802,
+      "entries": 12803,
       "dict": {
-        "url": "dict/ru.json?v=d5afe91cfe81",
-        "sha256": "d5afe91cfe81838071b5d6e8b1d53e0238dafd0277ce73de5e3086b29b5a10e1",
-        "size": 1203352
+        "url": "dict/ru.json?v=e4feba9d40a9",
+        "sha256": "e4feba9d40a95d53d0dbabb73c7fa1d051e72122143301fb620eebf3ff53a655",
+        "size": 1203393
       },
       "desktop": {
         "menu_name": "Русский",
@@ -249,11 +249,11 @@
       "id": "pl",
       "name": "Polski",
       "status": "beta",
-      "entries": 12802,
+      "entries": 12803,
       "dict": {
-        "url": "dict/pl.json?v=61c3d1bdf952",
-        "sha256": "61c3d1bdf952296d59726cd83a6af6c8bc23ce8dfa4f25c88b7b7ff023df29e3",
-        "size": 890958
+        "url": "dict/pl.json?v=95c9d328f69d",
+        "sha256": "95c9d328f69de2504f3c0e86d3ce3b38af3db50f0acf7d7f32c9596730945f87",
+        "size": 890990
       },
       "desktop": {
         "menu_name": "Polski",
@@ -751,8 +751,8 @@
         ],
         "optional": true,
         "file": "^ui-.*\\.js$",
-        "find": "let ([\\w$]+)=([\\w$]+)>=20\\?1\\.25:1\\.4;\\[this\\.foreignSize,this\\.foreignFamily\\]=([\\w$]+)\\?\\[Math\\.round\\(\\2\\*\\1\\),([\\w$]+)\\]:\\[Math\\.max\\(12,Math\\.round\\(\\2\\*1\\.3\\)\\),([\\w$]+)\\],this\\.foreignWeight=\\3\\?``:`bold `",
-        "replace": "let $1=1.2;[this.foreignSize,this.foreignFamily]=$3?[Math.round($2*$1),$4]:[Math.max(12,Math.round($2*1)),$5],this.foreignWeight=``"
+        "find": "if\\(([\\w$]+)\\(\\)\\)\\{let ([\\w$]+)=([\\w$]+)>=20\\?1\\.25:1\\.4;\\[this\\.foreignSize,this\\.foreignFamily\\]=([\\w$]+)\\?\\[Math\\.round\\(\\3\\*\\2\\),([\\w$]+)\\]:\\[Math\\.max\\(12,Math\\.round\\(\\3\\*1\\.3\\)\\),([\\w$]+)\\],this\\.foreignWeight=\\4\\?``:`bold `\\}else\\[this\\.foreignSize,this\\.foreignFamily\\]=\\3<14\\?\\[12,([\\w$]+)\\]:\\3<20\\?\\[15,([\\w$]+)\\]:\\[24,\\7\\];",
+        "replace": "[this.foreignSize,this.foreignFamily]=$4?[Math.round($3*1.2),$5]:[Math.max(12,Math.round($3)),$1()?$6:$3<14?$7:$3<20?$8:$7],this.foreignWeight=``;"
       },
       {
         "label": "中日文斷行",
@@ -787,7 +787,7 @@
     ]
   },
   "changelog": {
-    "url": "changelog.json?v=24be4a432c93",
-    "latest": "20261027-1503"
+    "url": "changelog.json?v=e43bf0131cf5",
+    "latest": "20261027-1539"
   }
 }
