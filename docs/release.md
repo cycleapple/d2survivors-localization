@@ -22,6 +22,11 @@
 2. **遊戲改版**：桌面版照 [translation.md](translation.md) 的「遊戲更新後的流程」改 `patch-rules.mjs`；網頁版跑 `node tools/build-web.mjs --check`，對不上就改 `web-rules.mjs`。都改完再 `publish`
 3. **啟動器有新版**：推 tag `launcher-v<版本>` → GitHub Actions 編譯、建立 Release → 下次 `publish` 時 manifest 的 `launcher.latest` 跟著更新
 4. **網站內容改了**：push 就會部署
+5. **新語言上線**（draft → beta → available）：
+   1. 翻譯：翻完、列出需要的規則
+   2. 啟動器、網頁書籤：各自加規則（`patch-rules.mjs`、`web-rules.mjs`）
+   3. 翻譯：改成 beta，`changelog-next.json` 寫 `kind: language`、`announce: true`，發布，再通知宣傳網站
+   4. 宣傳網站：加該語言的網站頁面（`/<語言>/`），更新語言清單；再請 Discord 聊天室更新置頂的語言列表
 
 ## 公告
 
