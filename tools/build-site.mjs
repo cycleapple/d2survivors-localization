@@ -90,8 +90,22 @@ function perPlatform(t, key, render) {
 // 版本分頁用：在 JS 執行前先決定顯示哪個版本，避免先閃一下桌面版
 const PLATFORM_BOOT = `<script>(function(){var P=['desktop','web'],q=new URLSearchParams(location.search).get('platform'),h={'#install':'desktop','#web':'web'}[location.hash],s;try{s=localStorage.getItem('d2s-site-platform')}catch(e){}document.body.dataset.platform=P.indexOf(q)>=0?q:h||(P.indexOf(s)>=0?s:/Windows/i.test(navigator.userAgent)?'desktop':'web')})()</script>`;
 
+// 文字裡的 {langs}（A、B 或 C）、{langsAnd}（A、B 和 C）：manifest 裡可用和測試中的語言，用這一頁的語言寫。
+// 加了新語言重新產生就好，不用改文字
+function fillLangs(texts, lang) {
+  const names = state.languages.filter(l => l.status === 'available' || l.status === 'beta').map(l => l.name[lang] || l.name.en || l.native);
+  const list = type => new Intl.ListFormat(lang, { type }).format(names);
+  const fill = v => typeof v === 'string' ? v.replaceAll('{langs}', list('disjunction')).replaceAll('{langsAnd}', list('conjunction'))
+    : Array.isArray(v) ? v.map(fill)
+    : v && typeof v === 'object' ? Object.fromEntries(Object.entries(v).map(([k, x]) => [k, fill(x)]))
+    : v;
+  return fill(texts);
+}
+
 function langPage(sl) {
-  const t = I18N[sl.id];
+  const t = fillLangs(I18N[sl.id], sl.id);
+  // 桌面捷徑的範例用這一頁的語言（不是遊戲翻譯語言的就用繁中）
+  const exampleLang = state.languages.some(l => l.id === sl.id && l.entries) ? sl.id : 'zh-TW';
   const only = p => (p ? ` data-only="${p}"` : '');
   const runtime = {
     lang: sl.id,
@@ -233,7 +247,7 @@ function langPage(sl) {
           <article class="card">
             <h3>${esc(t['cli.title'])}</h3>
             <p>${esc(t['cli.lead'])}</p>
-            <pre><code>d2s-launcher.exe --launch --lang zh-TW</code></pre>
+            <pre><code>d2s-launcher.exe --launch --lang ${exampleLang}</code></pre>
             <dl class="cli-list">
               ${t['cli.items'].map(([flag, desc]) => `<dt><code>${esc(flag)}</code></dt><dd>${esc(desc)}</dd>`).join('\n              ')}
             </dl>
@@ -304,7 +318,7 @@ function langPage(sl) {
 function rootPage() {
   const en = I18N.en;
   const planned = state.languages.filter(l => !SITE_LANGS.some(s => s.id === l.id));
-  const title = 'D2 Survivors Localization | 繁體中文・简体中文・English';
+  const title = `D2 Survivors Localization | ${SITE_LANGS.map(s => s.label).join('・')}`;
   const description = `${en['meta.description']} ${I18N['zh-TW']['meta.description']}`;
   return `<!doctype html>
 <html lang="en">

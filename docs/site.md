@@ -15,6 +15,7 @@ node tools/serve.mjs site 8766     # 本機預覽（或 python -m http.server 87
 | `/zh-tw/` | 繁體中文（台灣用語） |
 | `/zh-cn/` | 简体中文（大陆用语） |
 | `/en/` | English |
+| `/ja/` | 日本語 |
 
 `BASE`（網站網址）在 `site/src/config.mjs` 的 `SITE.base`，暫定 `https://cycleapple.github.io/d2survivors-localization/`。換網域就改這個值再重新產生；canonical、hreflang、Open Graph、sitemap、書籤網址都從這裡來。頁面之間的連結和 CSS、JS 用相對路徑，本機預覽和子路徑都能用。
 
@@ -79,12 +80,27 @@ node tools/serve.mjs site 8766     # 本機預覽（或 python -m http.server 87
 
 書籤網址是 `BASE + web/d2zh.js`，建置時寫進 HTML。本機預覽時書籤也是指到正式網址。
 
-## 加一種介面語言（例如 /ja/）
+## 加一種介面語言（例如 /de/）
 
-1. `site/src/config.mjs` 的 `SITE_LANGS` 加一筆：`{ id: 'ja', path: 'ja', label: '日本語', html: 'ja', hreflang: 'ja', og: 'ja_JP', fonts: ['Noto+Serif+JP:wght@600;700'] }`
-2. `site/src/i18n.mjs` 加一份 `ja`（照 `en` 的 key 翻）；`LANGUAGES` 每一筆的 `name` 加 `ja`（沒加就顯示英文名稱）
-3. `style.css` 視需要加 `:root:lang(ja)` 的字型
-4. `node tools/build-site.mjs`。hreflang、sitemap、語言分頁、首頁卡片都會自動多一個
+規則：翻譯聊天室把某種語言改成 beta 或 available 並發布後，會通知網站加上那個語言的頁面（/ja/ 就是這樣加的）。
+
+1. `site/src/config.mjs` 的 `SITE_LANGS` 加一筆，例如 `{ id: 'de', path: 'de', label: 'Deutsch', html: 'de', hreflang: 'de', og: 'de_DE', fonts: [] }`。`fonts` 是 Google Fonts 要多載的標題字型（拉丁字母用 Cinzel 就夠，空陣列）
+2. `site/src/i18n.mjs` 加一份（照 `en` 的 key 翻，關鍵字參考翻譯聊天室給的）。這些要依語言調整：
+   - 啟動器只有繁中介面：按鈕名稱照原文寫，後面加譯文，例如「啟動遊戲」（ゲームを起動）
+   - SmartScreen 那題用該語言版 Windows 的按鈕文字
+   - 截圖是繁中版，說明要註明
+   - 書籤名稱 `web.bookmark.name`
+3. `LANGUAGES` 每一筆的 `name` 加這個語言（沒加就顯示英文名稱）
+4. `style.css` 視需要加 `:root:lang(xx)` 的字型
+5. `node tools/build-site.mjs`。hreflang、sitemap、語言分頁、首頁卡片、首頁標題都會自動多一個
+
+檢查 key 有沒有漏：每種語言的 key 要跟 `en` 一樣（`faq.items` 題數可以不同）。
+
+### 語言清單
+
+- `LANGUAGES` 的順序就是網站上的順序；還在做的語言先放進去，manifest 沒有的顯示「計畫中」
+- 文字裡要列出「有哪些語言」的地方用 `{langs}`（A、B 或 C）或 `{langsAnd}`（A、B 和 C），建置時用 manifest 裡可用和測試中的語言、以那一頁的語言產生（`Intl.ListFormat`）。新語言發布後重新產生就好，不用改文字
+- Discord 置頂文字裡的語言列表歸 Discord 聊天室，語言有變動時傳訊息給它
 
 ## 部署
 

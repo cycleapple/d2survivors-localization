@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>D2 Survivors 日本語化｜ランチャーとブラウザ版ブックマーク</title>
+  <meta name="description" content="D2 Survivors の非公式日本語化。用語は『ディアブロ II リザレクテッド』の公式日本語訳に準拠。Windows はランチャーでワンクリック導入・自動更新、ブラウザ版はブックマークで PC でもスマホでも使えます。">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://cycleapple.github.io/d2survivors-localization/ja/">
+  <link rel="alternate" hreflang="zh-TW" href="https://cycleapple.github.io/d2survivors-localization/zh-tw/">
+  <link rel="alternate" hreflang="zh-CN" href="https://cycleapple.github.io/d2survivors-localization/zh-cn/">
+  <link rel="alternate" hreflang="en" href="https://cycleapple.github.io/d2survivors-localization/en/">
+  <link rel="alternate" hreflang="ja" href="https://cycleapple.github.io/d2survivors-localization/ja/">
+  <link rel="alternate" hreflang="x-default" href="https://cycleapple.github.io/d2survivors-localization/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="D2 Survivors Localization">
+  <meta property="og:title" content="D2 Survivors 日本語化｜ランチャーとブラウザ版ブックマーク">
+  <meta property="og:description" content="D2 Survivors の非公式日本語化。用語は『ディアブロ II リザレクテッド』の公式日本語訳に準拠。Windows はランチャーでワンクリック導入・自動更新、ブラウザ版はブックマークで PC でもスマホでも使えます。">
+  <meta property="og:url" content="https://cycleapple.github.io/d2survivors-localization/ja/">
+  <meta property="og:image" content="https://cycleapple.github.io/d2survivors-localization/assets/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:locale:alternate" content="zh_TW">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="D2 Survivors 日本語化｜ランチャーとブラウザ版ブックマーク">
+  <meta name="twitter:description" content="D2 Survivors の非公式日本語化。用語は『ディアブロ II リザレクテッド』の公式日本語訳に準拠。Windows はランチャーでワンクリック導入・自動更新、ブラウザ版はブックマークで PC でもスマホでも使えます。">
+  <meta name="twitter:image" content="https://cycleapple.github.io/d2survivors-localization/assets/og.jpg">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230c0a08'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='15' font-weight='700' text-anchor='middle' fill='%23c9a45c'%3ED2%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Noto+Serif+JP:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body data-platform="desktop">
+  <script>(function(){var P=['desktop','web'],q=new URLSearchParams(location.search).get('platform'),h={'#install':'desktop','#web':'web'}[location.hash],s;try{s=localStorage.getItem('d2s-site-platform')}catch(e){}document.body.dataset.platform=P.indexOf(q)>=0?q:h||(P.indexOf(s)>=0?s:/Windows/i.test(navigator.userAgent)?'desktop':'web')})()</script>
+  <header class="topbar">
+    <!-- 第一層選網站語言（各自一頁），第二層選桌面版／瀏覽器版（同一頁裡切換） -->
+    <div class="wrap topbar-inner">
+      <a class="brand" href="https://cycleapple.github.io/d2survivors-localization/">D2S <span>Localization</span></a>
+      <nav class="tabs lang-switch" aria-label="サイトの言語">
+        <a href="../zh-tw/" hreflang="zh-TW" lang="zh-Hant-TW" data-lang="zh-TW">繁體中文</a>
+        <a href="../zh-cn/" hreflang="zh-CN" lang="zh-Hans-CN" data-lang="zh-CN">简体中文</a>
+        <a href="../en/" hreflang="en" lang="en" data-lang="en">English</a>
+        <a href="../ja/" hreflang="ja" lang="ja" data-lang="ja" aria-current="page">日本語</a>
+      </nav>
+    </div>
+    <div class="wrap subbar-inner">
+      <nav class="nav">
+        <a href="#download">ダウンロード</a>
+        <a href="#sources">入手先</a>
+        <a href="#languages">対応言語</a>
+        <a href="#install" data-only="desktop">インストール</a>
+        <a href="#web" data-only="web">インストール</a>
+        <a href="#faq">よくある質問</a>
+      </nav>
+      <div class="subtabs" id="platform-switch" role="group" aria-label="バージョン">
+        <button type="button" data-platform="desktop">デスクトップ版<small>Windows</small></button>
+        <button type="button" data-platform="web">ブラウザ版<small>PC・スマホ</small></button>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- game.web_checked 太舊時由 app.js 顯示（看當下時間，所以不在建置時決定） -->
+    <div class="notice" id="stale-notice" role="status" hidden>
+      <div class="wrap"><strong>ゲームがアップデートされたため、翻訳を修正中です。</strong>その間はブックマークやランチャーで翻訳を適用できないことがありますが、ゲームはいつもどおり英語版で遊べます。修正が終わったら更新履歴でお知らせします。</div>
+    </div>
+
+    <section class="hero" id="download">
+      <div class="wrap">
+        <p class="eyebrow">非公式ファン翻訳</p>
+        <h1>D2 Survivors 日本語化</h1>
+        <p class="lead" data-only="desktop">D2 Survivors をあなたの言語で。用語は『ディアブロ II リザレクテッド』の公式訳に準拠しています。ランチャーでワンクリック導入・自動更新、いつでも元に戻せます。</p>
+        <p class="lead" data-only="web">D2 Survivors をあなたの言語で。ブラウザ版で遊ぶときは、ブックマークをクリックするだけで中国語（繁体字）、中国語（簡体字）、または日本語に切り替わります。用語は『ディアブロ II リザレクテッド』の公式訳に準拠。インストール不要で、PC でもスマホでも使えます。</p>
+        <div class="cta" data-only="desktop">
+          <a class="btn btn-primary" id="download-btn" aria-disabled="true">近日公開</a>
+          <a class="btn btn-ghost" href="#install">インストール方法</a>
+        </div>
+        <div class="cta" data-only="web">
+          <a class="btn btn-primary" href="#web">ブックマークを追加</a>
+          <a class="btn btn-ghost" href="https://d2survivors.lol/play/" target="_blank" rel="noopener">ゲームページを開く</a>
+        </div>
+        <div id="hero-meta">
+        <ul class="meta" data-only="desktop"><li>対応ゲームバージョン <strong>2026.1027.1</strong></li><li>ランチャー <strong>近日公開 · Windows</strong></li><li>翻訳の更新 <strong>2026-10-27</strong></li></ul>
+        <ul class="meta" data-only="web"><li>ブラウザ <strong>Chrome · Edge · Firefox · Safari</strong></li><li>デバイス <strong>PC・スマホ</strong></li><li>翻訳の更新 <strong>2026-10-27</strong></li></ul>
+        </div>
+        
+      </div>
+    </section>
+
+    <section class="screens">
+      <div class="wrap screens-grid">
+        <figure>
+          <img src="../assets/screen-levelup.webp" width="1239" height="929" loading="lazy" alt="レベルアップカード（繁体字中国語版）：スキル名・説明・進化条件まで翻訳済み">
+          <figcaption>レベルアップカード（繁体字中国語版）：スキル名・説明・進化条件まで翻訳済み</figcaption>
+        </figure>
+        <figure>
+          <img src="../assets/screen-hud.webp" width="1239" height="929" loading="lazy" alt="ゲーム画面（繁体字中国語版）：エリア名・ライフ・マナ・ゴールド">
+          <figcaption>ゲーム画面（繁体字中国語版）：エリア名・ライフ・マナ・ゴールド</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section" id="sources">
+      <div class="wrap">
+        <h2>入手先とゲーム本体</h2>
+        <p class="section-lead">このプロジェクトが提供するのは翻訳だけで、ゲームのファイルは含まれていません。始める前に、下の公式の入手先から D2 Survivors と『ディアブロ II』を用意してください。</p>
+        <div class="cards">
+          <article class="card">
+            <h3>D2 Survivors</h3>
+            <p class="card-sub">作者：framara</p>
+            <p>『ディアブロ II』の世界を舞台にした、無料の非公式ファンメイドのサバイバー系ゲームです。この翻訳プロジェクトは作者とは無関係です。ゲーム自体の不具合は公式の窓口に報告してください。</p>
+            <ul class="links">
+              <li><a href="https://d2survivors.lol/" target="_blank" rel="noopener">公式サイト<span class="host">d2survivors.lol</span></a></li>
+              <li data-only="desktop"><a href="https://d2survivors.lol/download/" target="_blank" rel="noopener">デスクトップ版をダウンロード（Windows / Mac / Linux）<span class="host">d2survivors.lol</span></a></li>
+              <li data-only="web"><a href="https://d2survivors.lol/play/" target="_blank" rel="noopener">ブラウザで遊ぶ<span class="host">d2survivors.lol</span></a></li>
+              <li><a href="https://discord.gg/mYMGgZPuQb" target="_blank" rel="noopener">ゲーム公式 Discord（英語）<span class="host">discord.gg</span></a></li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>『ディアブロ II』</h3>
+            <p class="card-sub">Blizzard Entertainment</p>
+            <p>D2 Survivors はお使いの PC にある『ディアブロ II』のグラフィックとサウンドを読み込むため、『ディアブロ II リザレクテッド』、または『ディアブロ II』＋『ロード・オブ・デストラクション』（パッチ 1.14）を各自で用意する必要があります。</p>
+            <ul class="links">
+              <li><a href="https://us.shop.battle.net/en-us/family/diablo-ii" target="_blank" rel="noopener">Battle.net ショップ（購入）<span class="host">us.shop.battle.net</span></a></li>
+              <li><a href="https://download.battle.net/" target="_blank" rel="noopener">Battle.net アプリをダウンロード<span class="host">download.battle.net</span></a></li>
+              <li><a href="https://store.steampowered.com/app/2536520/" target="_blank" rel="noopener">Steam：ディアブロ II リザレクテッド<span class="host">store.steampowered.com</span></a></li>
+            </ul>
+          </article>
+        </div>
+        <p class="source-note">用語：スキル・アイテム・モンスター・エリアなどの名前は『ディアブロ II リザレクテッド』の公式訳に準拠し、それ以外はこのプロジェクトで翻訳しています。</p>
+      </div>
+    </section>
+
+    <section class="section" id="languages">
+      <div class="wrap">
+        <h2>対応言語</h2>
+        <p class="section-lead">繁体字中国語は正式版です。「ベータ」の言語は選べますが、翻訳はまだ校正中です。ほかの言語も順次制作しています。</p>
+        <ul class="lang-grid" id="lang-grid">
+          <li class="lang available">
+      <div class="lang-head"><span class="lang-name" lang="zh-TW">繁體中文</span><span class="lang-code">zh-TW</span></div>
+      <span class="lang-sub">中国語（繁体字）</span>
+      <span class="status available">正式版</span>
+      <span class="lang-sub">12,758 件</span>
+    </li>
+<li class="lang beta">
+      <div class="lang-head"><span class="lang-name" lang="zh-CN">简体中文</span><span class="lang-code">zh-CN</span></div>
+      <span class="lang-sub">中国語（簡体字）</span>
+      <span class="status beta">ベータ</span>
+      <span class="lang-sub">12,753 件</span>
+    </li>
+<li class="lang beta">
+      <div class="lang-head"><span class="lang-name" lang="ja">日本語</span><span class="lang-code">ja</span></div>
+      <span class="lang-sub">日本語</span>
+      <span class="status beta">ベータ</span>
+      <span class="lang-sub">12,755 件</span>
+    </li>
+<li class="lang planned">
+      <div class="lang-head"><span class="lang-name" lang="de">Deutsch</span><span class="lang-code">de</span></div>
+      <span class="lang-sub">ドイツ語</span>
+      <span class="status planned">予定</span>
+      
+    </li>
+<li class="lang planned">
+      <div class="lang-head"><span class="lang-name" lang="fr">Français</span><span class="lang-code">fr</span></div>
+      <span class="lang-sub">フランス語</span>
+      <span class="status planned">予定</span>
+      
+    </li>
+<li class="lang planned">
+      <div class="lang-head"><span class="lang-name" lang="ru">Русский</span><span class="lang-code">ru</span></div>
+      <span class="lang-sub">ロシア語</span>
+      <span class="status planned">予定</span>
+      
+    </li>
+<li class="lang planned">
+      <div class="lang-head"><span class="lang-name" lang="pl">Polski</span><span class="lang-code">pl</span></div>
+      <span class="lang-sub">ポーランド語</span>
+      <span class="status planned">予定</span>
+      
+    </li>
+<li class="lang planned">
+      <div class="lang-head"><span class="lang-name" lang="es-ES">Español (España)</span><span class="lang-code">es-ES</span></div>
+      <span class="lang-sub">スペイン語（スペイン）</span>
+      <span class="status planned">予定</span>
+      
+    </li>
+<li class="lang planned">
+      <div class="lang-head"><span class="lang-name" lang="es-419">Español (Latinoamérica)</span><span class="lang-code">es-419</span></div>
+      <span class="lang-sub">スペイン語（中南米）</span>
+      <span class="status planned">予定</span>
+      
+    </li>
+<li class="lang planned">
+      <div class="lang-head"><span class="lang-name" lang="it">Italiano</span><span class="lang-code">it</span></div>
+      <span class="lang-sub">イタリア語</span>
+      <span class="status planned">予定</span>
+      
+    </li>
+<li class="lang planned">
+      <div class="lang-head"><span class="lang-name" lang="pt-BR">Português (Brasil)</span><span class="lang-code">pt-BR</span></div>
+      <span class="lang-sub">ポルトガル語（ブラジル）</span>
+      <span class="status planned">予定</span>
+      
+    </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="changelog" hidden>
+      <div class="wrap narrow">
+        <h2>更新履歴</h2>
+        <p class="section-lead">翻訳・対応言語・ランチャーの更新です。ランチャーとブックマークは毎回最新の翻訳を取得するので、ダウンロードし直す必要はありません。</p>
+        <ol class="changelog" id="changelog-list">
+          
+        </ol>
+      </div>
+    </section>
+
+    <section class="section" id="install" data-only="desktop">
+      <div class="wrap">
+        <h2>インストール</h2>
+        <p class="section-lead">ゲームのファイルを手で書き換える必要はなく、すべてランチャーが行います。先にゲームを終了してください。ランチャーの画面は今のところ繁体字中国語のみなので、下のボタン名はランチャーの表記のまま書いています。</p>
+        <p class="switch-hint">Mac・Linux・スマホを使っている、またはブラウザで遊んでいる場合は <button type="button" class="link-btn" data-platform="web">ブラウザ版へ</button></p>
+        <ol class="steps">
+          <li><strong>まず D2 Survivors をインストール</strong><p><a href="https://d2survivors.lol/download/" target="_blank" rel="noopener">D2 Survivors 公式サイト</a>からデスクトップ版をダウンロードし、ゲームの設定画面で『ディアブロ II』のインストール先を指定して、ゲームが起動することを確認します。</p></li>
+          <li><strong>ランチャーをダウンロード</strong><p><code>d2s-launcher.exe</code> をダウンロードして、好きなフォルダに置きます。インストールは不要です。</p></li>
+          <li><strong>ランチャーを開く</strong><p>ランチャーは既定の場所 <code>%LOCALAPPDATA%\Programs\D2 Survivors</code> でゲームを探します。見つからない場合は「設定」（設定）を押してゲームのフォルダを指定します。</p></li>
+          <li><strong>言語を選んで起動</strong><p>「遊戲語言」（ゲームの言語）で言語を選び、「啟動遊戲」（ゲームを起動）を押します。初回は翻訳をダウンロードし、元の <code>app.asar</code> を自動でバックアップします。</p></li>
+          <li><strong>以後はランチャーから起動</strong><p>「啟動時自動更新翻譯」（起動時に翻訳を自動更新）にチェックを入れると、毎回最新の翻訳を取得し、ゲームのアップデート後も自動で適用し直します。</p></li>
+        </ol>
+        <div class="cards">
+          <article class="card">
+            <h3>元に戻す</h3>
+            <div><ul><li>ランチャーで「還原原版」（元に戻す）を押すと、ゲームの <code>app.asar</code> が元のファイルに戻ります。</li><li>一時的に英語版や韓国語版で遊びたいときは、「遊戲語言」で English または「한국어（原版）」を選んで起動します。</li><li>完全に削除するには、元に戻したあと、ランチャーと <code>%LOCALAPPDATA%\D2SurvivorsLauncher</code> フォルダを削除します。</li></ul></div>
+          </article>
+          <article class="card">
+            <h3>デスクトップのショートカット</h3>
+            <p>ショートカットのリンク先を下のようにすると、ランチャーの画面を出さずに指定した言語でゲームを起動できます。</p>
+            <pre><code>d2s-launcher.exe --launch --lang ja</code></pre>
+            <dl class="cli-list">
+              <dt><code>--launch</code></dt><dd>言語を適用してゲームを起動</dd>
+              <dt><code>--lang &lt;id&gt;</code></dt><dd>言語を指定（例：ja、en、ko）</dd>
+              <dt><code>--no-update</code></dt><dd>今回は翻訳の更新を確認しない</dd>
+              <dt><code>--update</code></dt><dd>翻訳の更新だけ行う</dd>
+              <dt><code>--restore</code></dt><dd>元に戻す</dd>
+              <dt><code>--status</code></dt><dd>現在の言語、ゲームのバージョン、翻訳の状態を表示</dd>
+            </dl>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="web" data-only="web">
+      <div class="wrap">
+        <h2>ブックマークを追加</h2>
+        <p class="section-lead"><a href="https://d2survivors.lol/play/" target="_blank" rel="noopener">d2survivors.lol</a> のブラウザ版で遊んでいますか？ ブックマークをひとつ追加するだけで中国語（繁体字）、中国語（簡体字）、または日本語に切り替えられます。ランチャーと同じ翻訳を使い、インストールは不要、PC でもスマホでも使えます。</p>
+        <p class="switch-hint">Windows でデスクトップ版を遊んでいる場合は <button type="button" class="link-btn" data-platform="desktop">デスクトップ版へ</button></p>
+        <div class="cards">
+          <article class="card">
+            <h3>PC（Chrome、Edge、Firefox）</h3>
+            <p class="bookmarklet-row">
+              <a class="btn btn-primary bookmarklet" id="bookmarklet" href="javascript:import('https://cycleapple.github.io/d2survivors-localization/web/d2zh.js').then(m=&gt;m.default()).catch(e=&gt;alert('D2 Survivors Localization: '+e))" draggable="true">D2 日本語化</a>
+              <span class="bookmarklet-hint" id="bookmarklet-hint">← ブックマークバーへドラッグ</span>
+            </p>
+            <ol class="web-steps">
+              <li><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>B</kbd>（Mac：<kbd>⌘</kbd>+<kbd>Shift</kbd>+<kbd>B</kbd>）でブックマークバーを表示します。</li>
+              <li>上の「D2 日本語化」ボタンをブックマークバーまでドラッグします。</li>
+              <li><a href="https://d2survivors.lol/play/" target="_blank" rel="noopener">ゲームページ</a>を開き（「USE MY OWN FILES」か「HOSTED FILES」でゲームに入ります）、ブックマークバーの「D2 日本語化」をクリックします。</li>
+            </ol>
+          </article>
+          <article class="card">
+            <h3>スマホ（Android Chrome、iPhone Safari）</h3>
+            <p class="bookmarklet-row">
+              <button type="button" class="btn btn-ghost" id="copy-bookmarklet">ブックマークのコードをコピー</button>
+              <span class="bookmarklet-hint" id="copy-status" role="status"></span>
+            </p>
+            <pre class="bookmarklet-code"><code id="bookmarklet-code">javascript:import('https://cycleapple.github.io/d2survivors-localization/web/d2zh.js').then(m=&gt;m.default()).catch(e=&gt;alert('D2 Survivors Localization: '+e))</code></pre>
+            <ol class="web-steps">
+              <li>上のボタンでブックマークのコードをコピーします。</li>
+              <li>このページをブックマークに追加し、そのブックマークを編集します。名前を「D2 日本語化」にして、URL をコピーしたコードにまるごと置き換えます。</li>
+              <li>Android：ゲームページを開いてから、アドレスバーに「D2 日本語化」と入力し、下に出てくるブックマークをタップします（ブックマーク一覧からタップしても実行されません）。</li>
+              <li>iPhone：ゲームページを開いてから、Safari のブックマーク一覧で「D2 日本語化」をタップします。</li>
+            </ol>
+          </article>
+        </div>
+        <div class="card web-usage">
+          <h3>使い方</h3>
+          <ul>
+            <li>ブックマークを押すと、ゲームが翻訳された状態で開き直します（1〜2 秒）。プレイ中でも先にセーブするので大丈夫です。初回はブラウザの言語設定で言語を選び、以後は最後に使った言語を覚えています。</li>
+            <li>もう一度ブックマークを押すと、今の言語と英語を切り替えます。ゲームの OPTIONS → GAME OPTIONS の言語にも中国語（繁体字）、中国語（簡体字）、日本語が追加され、そこから切り替えることもできます。</li>
+            <li>ページを再読み込みすると元のゲームに戻ります。もう一度ブックマークを押してください。</li>
+            <li>セーブデータはいつもどおりブラウザに保存され、影響はありません。ブックマークは毎回このサイトから最新の翻訳を読み込むので、ネット接続が必要です。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="wrap narrow">
+        <h2>よくある質問</h2>
+        <div class="faq">
+          <details><summary>これは公式の翻訳ですか？</summary><div class="answer"><p>いいえ。プレイヤーが作った非公式の翻訳で、D2 Survivors の開発者とも Blizzard Entertainment とも関係ありません。</p></div></details>
+          <details><summary>日本語版の完成度は？</summary><div class="answer"><p>今はベータ版です。ほとんどの文字は翻訳済みですが、まだ校正中のため、不自然な訳や英語のままの部分があります。見つけたらぜひ教えてください。</p></div></details>
+          <details><summary>Mac、Linux、スマホでも遊べますか？</summary><div class="answer"><p>はい。ランチャーは今のところ Windows 版のみです。Mac・Linux・スマホでは<a href="https://d2survivors.lol/play/" target="_blank" rel="noopener">ブラウザ版</a>で遊び、「ブラウザ版」タブのブックマークで日本語に切り替えてください。</p></div></details>
+          <details data-only="desktop"><summary>セーブデータに影響はありますか？</summary><div class="answer"><p>ありません。ランチャーが置き換えるのはゲームフォルダ内の <code>resources\app.asar</code> だけで、置き換える前に元のファイルをバックアップします。セーブデータは別の場所にあり、読み込みも変更もしません。</p></div></details>
+          <details data-only="web"><summary>セーブデータに影響はありますか？</summary><div class="answer"><p>ありません。セーブデータはいつもどおりブラウザに保存されます。ブックマークは開いているページの中でゲームの文字を差し替えるだけで、何も残しません。再読み込みすると元に戻ります。</p></div></details>
+          <details data-only="desktop"><summary>ゲームがアップデートされたら？</summary><div class="answer"><p>ゲームのアップデートで <code>app.asar</code> が置き換わるため、翻訳は一時的に消えます。いつもどおりランチャーから起動すれば、また適用されます。</p><p>新しいバージョンの変更が大きく、書き換えルールが合わない場合、ランチャーは無理に書き換えずにエラーを表示します。その間は「還原原版」で元に戻していつもどおり遊び、翻訳の更新を待ってください。</p></div></details>
+          <details data-only="web"><summary>ブラウザ版のゲームがアップデートされたら？</summary><div class="answer"><p>ブックマークは毎回、書き換えルールが新しいバージョンに合うかを先に確認します。合わない場合は「更新が必要」と表示して起動せず、元のゲームにも影響しません。翻訳が更新されるまで英語版で遊んでください。</p></div></details>
+          <details data-only="desktop"><summary>ゲーム内の言語メニューで、韓国語が「日本語」になっているのはなぜ？</summary><div class="answer"><p>翻訳はゲームに組み込まれている韓国語の枠を借りているため、適用すると言語メニューの韓国語が選んだ言語の名前になります。韓国語で遊びたいときは、ランチャーで「한국어（原版）」を選んで起動してください。</p></div></details>
+          <details data-only="web"><summary>スマホでブックマークを押しても何も起きない</summary><div class="answer"><p>Android の Chrome では、ブックマーク一覧からタップしても実行されません。アドレスバーにブックマークの名前「D2 日本語化」を入力し、下に出てくるブックマークをタップしてください。iPhone は、ゲームページを開いた状態で Safari のブックマーク一覧からタップします。</p><p>ブックマークの URL がコードにまるごと置き換わっていて、<code>javascript:</code> で始まっているかも確認してください。</p></div></details>
+          <details data-only="desktop"><summary>まだ英語のところがあるのはなぜ？</summary><div class="answer"><p>UI・スキル・アイテム・モンスターはほとんど翻訳済みですが、パッチノートや長めのスキル説明の一部は翻訳中で、それまでは英語で表示されます。ランチャーが自動で更新するので、翻訳が終わりしだい反映されます。</p></div></details>
+          <details data-only="web"><summary>まだ英語のところがあるのはなぜ？</summary><div class="answer"><p>UI・スキル・アイテム・モンスターはほとんど翻訳済みですが、パッチノートや長めのスキル説明の一部は翻訳中で、それまでは英語で表示されます。ブックマークは毎回最新の翻訳を読み込むので、翻訳が終わりしだい反映されます。</p></div></details>
+          <details data-only="desktop"><summary>「Windows によって PC が保護されました」と表示されたら？</summary><div class="answer"><p>ランチャーにはコード署名がありません（署名の証明書は毎年費用がかかります）。そのため、ダウンロードした人が十分に増えるまでは Windows SmartScreen がこの警告を出します。</p><p>「<strong>詳細情報</strong>」を押してから「<strong>実行</strong>」を押してください。次からは表示されません。ダウンロードはこのサイトか <a href="https://github.com/cycleapple/d2survivors-localization/releases" target="_blank" rel="noopener">GitHub Releases</a> からだけにしてください。各リリースには <code>d2s-launcher.exe.sha256</code> が付いていて、<code>certutil -hashfile d2s-launcher.exe SHA256</code> で照合できます。</p><p>ブラウザが「このファイルは一般的にダウンロードされていません」と表示した場合は、ダウンロードのメニューから「保存」を選んでください。</p></div></details>
+          <details><summary>キャラクター名に日本語は使えますか？</summary><div class="answer"><p>今のところ使えません。ゲーム自体がキャラクター名に英字と韓国語しか使えない仕様です。</p></div></details>
+          <details><summary>翻訳を手伝ったり、誤字を報告したりできますか？</summary><div class="answer"><p>大歓迎です！ 繁体字中国語以外の言語はまだ制作中かベータ版で、特にネイティブの方の校正が助かります。連絡先は準備ができしだいここでお知らせします。</p></div></details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      
+      <p>プレイヤーによる非公式の翻訳です。<a href="https://d2survivors.lol/" target="_blank" rel="noopener">D2 Survivors</a>（framara）および Blizzard Entertainment とは関係ありません。Diablo® は Blizzard Entertainment, Inc. の商標です。</p>
+      <p class="footer-small"><span data-only="desktop">Game 2026.1027.1 · Launcher —</span><span data-only="web">Web · Translations 2026-10-27</span></p>
+    </div>
+  </footer>
+
+  <script id="page-data" type="application/json">{"lang":"ja","t":{"changelog.kind.translation":"翻訳","changelog.kind.language":"言語","changelog.kind.game-fix":"ゲーム更新","changelog.kind.launcher":"ランチャー","lang.coverage":"{0} 件","status.available":"正式版","status.beta":"ベータ","status.planned":"予定","meta.updated":"翻訳の更新","meta.game":"対応ゲームバージョン","meta.launcher":"ランチャー","meta.platform":"Windows","meta.browsers":"ブラウザ","meta.devices":"デバイス","meta.devices.value":"PC・スマホ","hero.download":"ランチャーをダウンロード","hero.soon":"近日公開","web.copied":"コピーしました","web.copyfail":"自動でコピーできませんでした。下のコードを手動で選択してください。","web.pc.drag":"ボタンをブックマークバーへドラッグしてください。ここでクリックしても追加されません。"},"webChecked":"2026-10-27T12:22:13.404Z"}</script>
+  <script type="module" src="../app.js"></script>
+</body>
+</html>
