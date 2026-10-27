@@ -34,7 +34,8 @@ fs.mkdirSync(path.join(outDir, 'dict'), { recursive: true });
 const languages = Object.entries(TARGETS).filter(([, t]) => t.status !== 'draft').map(([id, t]) => {
   if (!['available', 'beta'].includes(t.status)) throw new Error(`${id} 的 status「${t.status}」不能發布（只能是 available、beta，還在做的用 draft）`);
   const buf = fs.readFileSync(target(id).out);
-  const entries = Object.keys(JSON.parse(buf.toString('utf8'))).length;
+  // 條數不算 gender:<物品>（有詞性的語言組名稱用的資料，不是譯文）
+  const entries = Object.keys(JSON.parse(buf.toString('utf8'))).filter(k => !k.startsWith('gender:')).length;
   fs.writeFileSync(path.join(outDir, 'dict', `${id}.json`), buf);
   const hash = sha256(buf);
   const lang = { id, name: t.name, status: t.status, entries, dict: { url: `dict/${id}.json?v=${hash.slice(0, 12)}`, sha256: hash, size: buf.length } };

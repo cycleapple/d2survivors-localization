@@ -26,7 +26,7 @@ Public visé : joueurs francophones qui connaissent *Diablo II: Resurrected* en 
 
 - **« Libellé : valeur »** avec espace avant les deux-points, comme D2R : `Niveau requis : {0}`, `Découverte d’objets magiques : +{0}%`
 - Apostrophe typographique `’` comme D2R (d’or, l’esprit)
-- **Pas de `œ`/`Œ`** : la police bitmap du jeu ne les a pas (ils s’affichent « ? »). Écrire `oe` : coeur, oeil, manoeuvre. Les autres accents (é è ê à â ç ù û ô î ï ë) et « » fonctionnent
+- **Pas de `œ`/`Œ`** : la police bitmap du jeu ne les a pas (ils s’affichent « ? »). Écrire `oe` : coeur, oeil, manoeuvre. Les autres accents (é è ê à â ç ù û ô î ï ë) fonctionnent. Guillemets : « » s’affichent mal dans la police du jeu, utiliser des guillemets droits "…"
 - Clés en MAJUSCULES (`NEW RUN`, `MAIN MENU`) : boutons ou titres, en MAJUSCULES et **courts** (`OPTIONS`, `QUITTER`). Le français est plus long que l’anglais et les boutons sont étroits : préférer un mot plus court à une traduction littérale. Les majuscules accentuées sont possibles (`É`, `À`)
 - Séparateurs ` · `, ` / `, ` - ` comme dans l’original (le jeu coupe là et traduit chaque partie)
 - Compétences, objets, monstres : noms officiels D2R. Vérifier avec `hints` ou `node tools/lookup.mjs data/d2r-strings "Nom" --lang fr`
