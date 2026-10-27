@@ -1,9 +1,10 @@
 {
   "schema": 2,
-  "updated": "2026-10-27T12:11:57.088Z",
-  "version": "20261027-1211",
+  "updated": "2026-10-27T12:23:28.056Z",
+  "version": "20261027-1223",
   "game": {
-    "desktop": "2026.1027.1"
+    "desktop": "2026.1027.1",
+    "web_checked": "2026-10-27T12:22:13.404Z"
   },
   "languages": [
     {
@@ -26,6 +27,28 @@
           "magic-zh",
           "fullwidth"
         ]
+      },
+      "web": {
+        "menu_name": "繁體中文",
+        "html_lang": "zh-Hant",
+        "groups": [
+          "base",
+          "dict",
+          "cjk",
+          "magic-zh",
+          "fullwidth"
+        ],
+        "fonts": [
+          "Microsoft JhengHei UI Bold",
+          "Microsoft JhengHei Bold",
+          "PingFang TC Semibold",
+          "Noto Sans TC Bold",
+          "Noto Sans CJK TC Bold",
+          "Microsoft JhengHei",
+          "PingFang TC",
+          "Noto Sans TC",
+          "Noto Sans CJK TC"
+        ]
       }
     },
     {
@@ -47,6 +70,27 @@
           "cjk",
           "magic-zh"
         ]
+      },
+      "web": {
+        "menu_name": "简体中文",
+        "html_lang": "zh-Hans",
+        "groups": [
+          "base",
+          "dict",
+          "cjk",
+          "magic-zh"
+        ],
+        "fonts": [
+          "Microsoft YaHei UI Bold",
+          "Microsoft YaHei Bold",
+          "PingFang SC Semibold",
+          "Noto Sans SC Bold",
+          "Noto Sans CJK SC Bold",
+          "Microsoft YaHei",
+          "PingFang SC",
+          "Noto Sans SC",
+          "Noto Sans CJK SC"
+        ]
       }
     },
     {
@@ -67,6 +111,28 @@
           "dict",
           "cjk",
           "magic-ja"
+        ]
+      },
+      "web": {
+        "menu_name": "日本語",
+        "html_lang": "ja",
+        "groups": [
+          "base",
+          "dict",
+          "cjk",
+          "magic-ja"
+        ],
+        "fonts": [
+          "Meiryo UI Bold",
+          "Meiryo Bold",
+          "Hiragino Sans W6",
+          "Hiragino Kaku Gothic ProN W6",
+          "Noto Sans JP Bold",
+          "Noto Sans CJK JP Bold",
+          "Meiryo",
+          "Hiragino Sans",
+          "Noto Sans JP",
+          "Noto Sans CJK JP"
         ]
       }
     }
@@ -180,6 +246,134 @@
         ],
         "from": "]},mre={raiseSkeleton:`Evolved: Revive's skeletons take this option`},Vs={};function Hs(e,t){",
         "to": "]},mre={raiseSkeleton:`Evolved: Revive's skeletons take this option`},Vs={};for(let l of Object.values(Bs))for(let o of l){let n=o.name;Object.defineProperty(o,`name`,{get:()=>h()?m(`modifier`,n):n,enumerable:!0,configurable:!0})}function Hs(e,t){"
+      }
+    ]
+  },
+  "web": {
+    "play_url": "https://d2survivors.lol/play/",
+    "rules": [
+      {
+        "label": "語言選單",
+        "groups": [
+          "base"
+        ],
+        "file": "^lang-.*\\.js$",
+        "find": "\\{en:`ENGLISH`,ko:`한국어`\\}",
+        "replace": "{en:`ENGLISH`,ko:`한국어`{{menu}}}"
+      },
+      {
+        "label": "接受語言設定",
+        "groups": [
+          "base"
+        ],
+        "file": "^lang-.*\\.js$",
+        "find": "([\\w$]+)=([\\w$]+)===`en`\\|\\|\\2===`ko`\\?\\2:",
+        "replace": "$1=$2===`en`||$2===`ko`||{{ids}}.includes($2)?$2:"
+      },
+      {
+        "label": "換語言時重新開修改版",
+        "groups": [
+          "base"
+        ],
+        "optional": true,
+        "file": "^lang-.*\\.js$",
+        "find": "([\\w$]+)\\(\\(\\)=>location\\.reload\\(\\)\\)",
+        "replace": "$1(()=>parent!==window&&parent.__d2zh?parent.__d2zh.reboot():location.reload())"
+      },
+      {
+        "label": "語言切換介面",
+        "groups": [
+          "base"
+        ],
+        "optional": true,
+        "file": "^lang-.*\\.js$",
+        "find": "function ([\\w$]+)\\(([\\w$]+)\\)\\{if\\(\\2!==([\\w$]+)\\(\\)\\)\\{",
+        "replace": "window.__d2zhLang={get:()=>$3(),set:e=>$1(e)};function $1($2){if($2!==$3()){"
+      },
+      {
+        "label": "載入字典",
+        "groups": [
+          "dict"
+        ],
+        "file": "^lang-.*\\.js$",
+        "find": "if\\(([\\w$]+)\\(\\)!==`ko`\\)return;document\\.documentElement\\.lang=`ko`;let\\[([\\w$]+)\\]=await Promise\\.all\\(\\[([\\w$]+)\\(\\(\\)=>import\\(",
+        "replace": "if($1()!==`ko`&&$1()!==`{{id}}`)return;document.documentElement.lang=$1()===`{{id}}`?`{{html_lang}}`:`ko`;let[$2]=await Promise.all([$3(()=>$1()===`{{id}}`?import(`{{dict}}`).then(e=>e.default):import("
+      },
+      {
+        "label": "中日文字型",
+        "groups": [
+          "cjk"
+        ],
+        "optional": true,
+        "file": "^lang-.*\\.js$",
+        "find": "if\\(typeof FontFace>`u`\\)return;",
+        "replace": "if(typeof FontFace>`u`)return;await Promise.all([`D2R Kodia`,`D2R Iris`,`D2 Hangul`,`D2 Hangul 14`].map(async f=>{try{document.fonts.add(await new FontFace(f,`{{fonts}}`,{unicodeRange:`U+3000-30FF, U+3400-4DBF, U+4E00-9FFF, U+FF00-FFEF`}).load())}catch{}}));"
+      },
+      {
+        "label": "魔法物品名稱組合",
+        "groups": [
+          "magic-zh"
+        ],
+        "optional": true,
+        "file": "^translate-.*\\.js$",
+        "find": "return\\[([\\w$]+)\\(([\\w$]+)\\),\\1\\(([\\w$]+)\\),this\\.translateAs\\(`item`,([\\w$]+)\\)\\]\\.filter\\(Boolean\\)\\.join\\(` `\\)",
+        "replace": "return[$1($2),$1($3),this.translateAs(`item`,$4)].filter(Boolean).join(``)"
+      },
+      {
+        "label": "魔法物品名稱組合（日文）",
+        "groups": [
+          "magic-ja"
+        ],
+        "optional": true,
+        "file": "^translate-.*\\.js$",
+        "find": "return\\[([\\w$]+)\\(([\\w$]+)\\),\\1\\(([\\w$]+)\\),this\\.translateAs\\(`item`,([\\w$]+)\\)\\]\\.filter\\(Boolean\\)\\.join\\(` `\\)",
+        "replace": "return[$1($3),$1($2),this.translateAs(`item`,$4)].filter(Boolean).join(``)"
+      },
+      {
+        "label": "標籤與值的冒號",
+        "groups": [
+          "fullwidth"
+        ],
+        "optional": true,
+        "file": "^translate-.*\\.js$",
+        "find": "return`\\$\\{([\\w$]+)\\.replace\\(/:\\?\\\\s\\*\\$/,`:`\\)\\} \\$\\{([\\w$]+)\\}`",
+        "replace": "return/[\\u4e00-\\u9fff]/.test($1)?`${$1.replace(/[:：]?\\s*$/,`：`)}${$2}`:`${$1.replace(/:?\\s*$/,`:`)} ${$2}`"
+      },
+      {
+        "label": "外文字判斷",
+        "groups": [
+          "cjk"
+        ],
+        "find": "return ([\\w$]+)>=44032&&\\1<=55203\\|\\|\\1>=12592&&\\1<=12687\\|\\|\\1>=4352&&\\1<=4607\\}",
+        "replace": "return $1>=44032&&$1<=55203||$1>=12592&&$1<=12687||$1>=4352&&$1<=4607||$1>=19968&&$1<=40959||$1>=13312&&$1<=19903||$1>=12288&&$1<=12351||$1>=65280&&$1<=65519||$1>=12352&&$1<=12543}"
+      },
+      {
+        "label": "中日文斷行",
+        "groups": [
+          "cjk"
+        ],
+        "optional": true,
+        "find": "for\\(let ([\\w$]+) of ([\\w$]+)\\.split\\(` `\\)\\)\\{let ([\\w$]+)=([\\w$]+)\\?`\\$\\{\\4\\} \\$\\{\\1\\}`:\\1;",
+        "replace": "for(let $1 of $2.split(` `).flatMap(w=>(w.match(/[\\u300c\\u300e\\u3010\\uff08]*[\\u3000-\\u9fff\\uff00-\\uffef][\\u3001\\u3002\\uff0c\\uff1a\\uff1b\\uff01\\uff1f\\uff09\\u300d\\u300f\\u3011\\u30fc\\u30fb\\u3041\\u3043\\u3045\\u3047\\u3049\\u3063\\u3083\\u3085\\u3087\\u308e\\u30a1\\u30a3\\u30a5\\u30a7\\u30a9\\u30c3\\u30e3\\u30e5\\u30e7\\u30ee\\u30f5\\u30f6]*|[^\\u3000-\\u9fff\\uff00-\\uffef]+(?:[\\u300c\\u300e\\u3010\\uff08]*[\\u3000-\\u9fff\\uff00-\\uffef][\\u3001\\u3002\\uff0c\\uff1a\\uff1b\\uff01\\uff1f\\uff09\\u300d\\u300f\\u3011\\u30fc\\u30fb\\u3041\\u3043\\u3045\\u3047\\u3049\\u3063\\u3083\\u3085\\u3087\\u308e\\u30a1\\u30a3\\u30a5\\u30a7\\u30a9\\u30c3\\u30e3\\u30e5\\u30e7\\u30ee\\u30f5\\u30f6]*)?/g)??[w]).map((x,j)=>j?`\\u0001${x}`:x))){let g=$1[0]===`\\u0001`;$1=g?$1.slice(1):$1;let $3=$4?g?$4+$1:`${$4} ${$1}`:$1;"
+      },
+      {
+        "label": "暗色字不加描邊",
+        "groups": [
+          "cjk"
+        ],
+        "optional": true,
+        "file": "^ui-.*.js$",
+        "find": "([\\w$]+)=\\[\\];if\\(([\\w$]+)\\.outline\\)\\{let ([\\w$]+)=`rgb\\(\\$\\{([\\w$]+)\\(\\2\\.outline\\.level,\\2\\.outline\\.own\\)\\}\\)`;for\\(let\\[([\\w$]+),([\\w$]+)\\]of\\[\\[-1,0\\],\\[1,0\\],\\[0,-1\\],\\[0,1\\],\\[-1,-1\\],\\[1,-1\\],\\[-1,1\\],\\[1,1\\]\\]\\)\\1\\.push\\(\\[\\3,\\5\\*([\\w$]+),\\6\\*\\7\\]\\)\\}\\1\\.push\\(\\[`rgb\\(\\$\\{\\4\\(\\2\\.level,\\2\\.own\\)\\}\\)`,0,0\\]\\);",
+        "replace": "$1=[];let d2F=$4($2.level,$2.own),d2U=$2.outline&&$4($2.outline.level,$2.outline.own),d2M=e=>Math.max(...e.split(`,`).map(Number)),d2D=d2U&&d2M(d2F)<75&&d2M(d2U)<d2M(d2F);if($2.outline&&!d2D){let $3=`rgb(${d2U})`;for(let[$5,$6]of[[-1,0],[1,0],[0,-1],[0,1],[-1,-1],[1,-1],[-1,1],[1,1]])$1.push([$3,$5*$7,$6*$7])}$1.push([`rgb(${d2D?d2U:d2F})`,0,0]);d2D&&$1.push([`rgb(${d2U})`,1,0]);"
+      },
+      {
+        "label": "版權聲明寬度",
+        "groups": [
+          "cjk"
+        ],
+        "optional": true,
+        "find": "let ([\\w$]+)=\\{\\.\\.\\.([\\w$]+)\\(([\\w$]+)\\),maxWidth:([\\w$]+)\\},([\\w$]+)=\\[\\3\\.text\\(([\\w$]+),\\1\\),",
+        "replace": "let $1={...$2($3),maxWidth:$4},$5=[$3.text($6,{...$1,maxWidth:360}),"
       }
     ]
   }
