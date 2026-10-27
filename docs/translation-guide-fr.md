@@ -68,7 +68,8 @@ Le jeu compose les objets magiques à l’exécution : **objet + préfixe + suff
 | Skill / Skill Tree | compétence / arbre des compétences | Passive | passif |
 | Knockback | renversement | Pierce | percer |
 | Gold | or | Gamble | parier |
-| Imbue | imprégner | Stash | coffre (D2R : Cache) |
+| Imbue | imprégner | Stash | réserve (D2R : "Votre réserve est pleine") |
+| Chest (coffre au trésor) | coffre (D2R : Coffre) | Chill / chilled | ralentir / ralenti, ralentissement (D2R : le froid ralentit) |
 | Inventory | inventaire | Mercenary | mercenaire |
 | Waypoint | relais | Shrine | sanctuaire |
 | Potion | potion | Belt | ceinture |
@@ -93,11 +94,12 @@ Noms D2R : Akara, Charsi, Gheed, Kashya, Deckard Cain, Andariel, Duriel, Méphis
 | legit / not legit | réglementaire / non réglementaire | ranked | classé |
 | rank (améliorations de Charsi) | rang | Terror tier # | Terreur, palier {0} |
 | run (une partie) | partie | camp | camp |
-| kept hero / keep | héros conservé / conserver | hero | héros |
+| kept hero / keep | héros conservé / conserver | hero | héros (masculin : il, le faire revenir) |
 | Evolve / Evolves into | évolution / évolue en | act boss | boss d’acte |
 | Tome / Book | tome / livre de compétences | Charms window | fenêtre des charmes |
 | hover box | infobulle | loot filter | filtre de butin |
 | IN MY COLLECTION | DANS MA COLLECTION | KEEP / HIDE / SELL / PICK UP | Conserver / Masquer / Vendre / Ramasser |
+| Uniques tab: Kept / Missing | Collectés / Manquants | SHOW DAMAGE / SHOW ITEMS | AFFICHER LES DÉGÂTS / AFFICHER LES OBJETS |
 | desktop app | application de bureau | website | site web |
 | Level Up | niveau supérieur | Kills | victimes |
 | SAVES | SAUVEGARDES | REPORT | SIGNALER |

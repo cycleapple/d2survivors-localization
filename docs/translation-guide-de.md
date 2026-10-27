@@ -57,7 +57,7 @@ Magische Gegenstände setzt das Spiel zur Laufzeit zusammen: **Präfix + Gegenst
 | Faster Cast Rate | schnellere Zauberrate | Faster Run/Walk | Bewegungsgeschwindigkeit |
 | Faster Hit Recovery | schnellere Erholung nach Treffer | Faster Block Rate | schnellere Blockrate |
 | Increased Attack Speed | erhöhte Angriffsgeschwindigkeit | Enhanced Damage | erhöhter Schaden |
-| Damage Reduced by | Schaden reduziert um | Crushing Blow | Niederstrecken |
+| Damage Reduced by | Schaden reduziert um | Crushing Blow | vernichtender Schlag (Smite = Niederstrecken) |
 | Deadly Strike | Todesschlag | Open Wounds | offene Wunden |
 | Life/Mana stolen per hit | abgesaugtes Leben/Mana pro Treffer | All Resistances | alle Widerstände |
 | Fire/Cold/Lightning/Poison | Feuer/Kälte/Blitz/Gift | Resist Fire | Widerstand gegen Feuer |

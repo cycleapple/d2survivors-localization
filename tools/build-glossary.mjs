@@ -47,6 +47,11 @@ const add = (map, key, entry) => { if (!key) return; const k = norm(key); (map.g
 let rows = 0;
 const genderOf = new Map(), affixForms = new Map();   // 英文（正規化）→ 物品名稱的詞性／詞綴每種詞性的形式
 const pluralGuess = new Set(), affixGender = new Map();
+// 詞綴檔的 key（D2 內部名稱）→ 每種詞性的形式。遊戲的 affix: 用 D2 的內部名稱（Corosive、Scorching、Gritty），
+// D2R 的英文顯示名稱不一樣（Corrosive、Condensing、Grinding），用英文對不到時改用 key 對
+const affixFormsByKey = new Map();
+// 德文：D2R 名詞的詞性（「[ns]Herz」），用德文字對（稀有名稱的後段 heart「Herz」沒標，同一個字在 hrt、heartUM 有標）
+const genderByWord = new Map();
 for (const file of fs.readdirSync(d2rDir).filter(n => n.endsWith('.json'))) {
   for (const row of JSON.parse(fs.readFileSync(path.join(d2rDir, file), 'utf8'))) {
     rows++;
@@ -58,6 +63,8 @@ for (const file of fs.readdirSync(d2rDir).filter(n => n.endsWith('.json'))) {
       // 獨特怪物名字的後段（Heart、Maw）：詞性標在詞綴檔的 heartUM、maw，給前段的形容詞照著挑
       if (file === 'item-nameaffixes.json' && g && !affixGender.has(en)) affixGender.set(en, g);
       if (file === 'item-nameaffixes.json' && genderForms(row[lang.col]) && !affixForms.has(en)) affixForms.set(en, row[lang.col].replace(/ÿc./g, '').trim());
+      if (file === 'item-nameaffixes.json' && row.Key && genderForms(row[lang.col]) && !affixFormsByKey.has(norm(row.Key))) affixFormsByKey.set(norm(row.Key), row[lang.col].replace(/ÿc./g, '').trim());
+      if (/^item-name(s|affixes)\.json$/.test(file) && g) { const w = clean(row[lang.col]).toLowerCase(); (genderByWord.get(w) ?? genderByWord.set(w, new Set()).get(w)).add(g); }
     }
     for (const f of forms(row)) { const entry = { ...f, file, id: row.Key }; add(byEn, f.en, entry); add(byKo, f.ko, entry); }
   }
@@ -84,8 +91,38 @@ function pick(cands, ko, prefix) {
 // 韓文不同（遊戲自己翻的）但前段有大寫 key、後段有同名小寫 key 的 D2R 字串 → structural（之後要抽查）
 const removeSpaces = s => s.replace(/\s+/g, '');
 // 前段有每種詞性的形式時（德文、法文），照後段的詞性挑；兩段怎麼接看 langs.mjs 的 rareJoin
-const frontFor = (a, b, front) => { const f = genderForms(a.raw ?? ''), g = nounGender(b.raw ?? ''); return (f && g && f[g]) || front; };
-const joinRare = (a, b, front = a.zh) => lang.rareJoin(lang.gendered ? frontFor(a, b, front) : front, b.zh);
+// 德文：稀有名稱的後段（D2 的 RareSuffix，item-names 的 hood、gyre…）D2R 都沒標詞性，前段的形容詞（Bitter、Cruel、Entropy）
+// 原本都取陽性（verbitterter Kapuze）。詞性的來源依序：後段自己的標記 → D2R 其他字串裡同一個德文字的標記（Herz ← hrt「[ns]Herz」）
+// → 下面的表（D2R 任何地方都沒標的字）。名稱第一個字母大寫（Verbitterte Kapuze，像 D2R 的「Entropisches Medaillon」）；
+// 後段 Bane 在 D2R 是前段的形式「Gift -」，接在後面時拿掉「 -」（Dämonen-Gift）
+const DE_GENDER = {
+  ms: 'Abhacker Anzug Armreif Ast Aufspießer Bolzen Dreh Felsen Finger Flug Griff Halt Hammer Hass Heiligenschein Hinterhalt Kamm Knacker Knirscher Knöchel Knorren Knoten Kragen Kratzer Kreis Lichtbrand Malmer Mantel Meister Pfad Pfahl Pfeil Pfosten Prügel Rand Räuber Reißer Riemen Schänder Schleicher Schleier Schlupf Schlüssel Schneider Schrecken Schrei Schritt Schuh Spießer Stecher Stern Streiter Talisman Todesstab Turm Überwurf Umhang Versenker Wächter Weg Zahn Zerbrecher Zerfetzer Zerschmetterer Zügel Sänger',
+  fs: 'Stange Angel Bindung Brut Fackel Fährte Halsberge Halskette Hand Harfe Hülle Kapuze Kette Kiste Kneifzange Kopfbedeckung Kugel Latte Parade Pferdedecke Regel Robe Rolle Säge Schale Schleife Schlinge Schnalle Schneide Sehne Sichel Spange Spindel Spirale Spitze Umschlingung Windung Nadel',
+  ns: 'Abzeichen Band Bild Cape Emblem Fell Fleisch Gesicht Gift Halsband Holz Koller Leder Lied Maß Schloss Siegel Skalpell Visier Zeichen',
+  pl: 'Ärmelaufschläge Fäustlinge Fransen Hörner Nägel Pelze Perlen Schnürschuhe Schuhnägel Sporen',
+};
+const deGender = new Map(Object.entries(DE_GENDER).flatMap(([g, ws]) => ws.split(' ').map(w => [w.toLowerCase(), g])));
+const backGender = b => {
+  const g = nounGender(b.raw ?? '');
+  // 法文：D2R 沒標詞性的複數後段（Brogues「Brodequins」）跟 gender: 一樣當複數
+  if (!g && lang.id === 'fr' && pluralGuess.has(norm(b.en ?? ''))) return lang.pluralTag;
+  if (g || lang.id !== 'de') return g;
+  const w = (b.zh ?? '').replace(/ -$/, '').toLowerCase(), tagged = genderByWord.get(w);
+  return tagged?.size === 1 ? [...tagged][0] : deGender.get(w) ?? null;
+};
+const frontFor = (a, b, front) => { const f = genderForms(a.raw ?? ''), g = backGender(b); return (f && g && f[g]) || front; };
+const upperFirst = s => s.replace(/^\p{Ll}/u, c => c.toUpperCase());
+// 德文前段是名詞、D2R 沒寫成「 -」的（Raven「Rabe」、Corpse「Kadaver」），照其他前段接成複合字（Raben-Ägis、Kadaver-Ägis）；
+// Armageddon 用 D2R 稀有名稱前段的「von Armageddon」（item-names 的 Holocaust）。
+// 前段是屬格「der Kobolde」（Imp）、「von …」時放在後面：Horn der Kobolde、Horn von Armageddon
+const DE_FRONT = { Rabe: 'Raben -', Ghul: 'Ghul -', Gespenst: 'Gespenster -', Kadaver: 'Kadaver -', Teufel: 'Teufels -', Rache: 'Rache -', Regel: 'Regel -', Armageddon: 'von Armageddon' };
+const joinRare = (a, b, front = a.zh) => {
+  if (lang.id !== 'de') return lang.rareJoin(lang.gendered ? frontFor(a, b, front) : front, b.zh);
+  const f0 = frontFor(a, b, front), f = DE_FRONT[f0] ?? f0, back = b.zh.replace(/ -$/, '');
+  return /^(der|des|von) /.test(f) ? `${back} ${f}` : lang.rareJoin(f, back);
+};
+// 德文：英文 key 是大寫開頭的稀有名稱，譯文第一個字母也大寫
+const rareCase = (key, zh) => lang.id === 'de' && /^[A-Z]/.test(key) ? upperFirst(zh) : zh;
 function rareName(key, koValue) {
   const words = key.split(' ');
   if (words.length !== 2) return null;
@@ -100,9 +137,13 @@ function rareName(key, koValue) {
   const backAll = second.filter(c => c.id === words[1].toLowerCase());
   const back = backAll.some(c => c.file === 'item-nameaffixes.json') ? backAll.filter(c => c.file === 'item-nameaffixes.json') : backAll;
   // 韓文比對用所有同名字串（詞綴的 koKR 常多一個「의」，符文之語的才對得上），中文前段還是用詞綴的
-  const preferred = new Set(exactFront.map(c => c.zh)).size === 1 ? exactFront[0].zh : null;
+  // 法文：前段不在詞綴檔的（Raven）用 item-names 裡稀有名稱前段的形式「du Corbeau」，不用技能名稱「Corbeau」；
+  // 韓文對到的是別的字串（objects 的 Cadavre、符文之語的 Dévastation）時，前段每種詞性的形式還是用詞綴檔的（Perles cadavériques）
+  const frFront = lang.id === 'fr' && !exactFront.length ? front.filter(c => c.file === 'item-names.json' && lang.affixForm(c.zh)) : [];
+  const preferred = new Set(exactFront.map(c => c.zh)).size === 1 ? exactFront[0].zh : new Set(frFront.map(c => c.zh)).size === 1 ? frFront[0].zh : null;
+  const formSource = lang.id === 'fr' && preferred ? exactFront[0] ?? frFront[0] : null;
   for (const a of exactFront.length ? first : front.length ? front : first) for (const b of back.length ? back : second) {
-    if (a.ko && b.ko && removeSpaces(a.ko + b.ko) === removeSpaces(koValue)) return { zh: joinRare(a, b, preferred ?? a.zh), method: 'rareName' };
+    if (a.ko && b.ko && removeSpaces(a.ko + b.ko) === removeSpaces(koValue)) return { zh: rareCase(key, joinRare(formSource ?? a, b, preferred ?? a.zh)), method: 'rareName' };
   }
   // 前段常跟符文之語同名（Death → 死亡／死神），稀有名稱不會用符文之語的；再有多個就優先用詞綴檔的
   const notRuneword = front.filter(c => c.file !== 'item-runes.json');
@@ -110,7 +151,7 @@ function rareName(key, koValue) {
   const fronts = new Set(notRuneword.map(c => c.zh)).size > 1 && affixes.length ? affixes : notRuneword;
   const frontZh = new Set(fronts.map(c => c.zh));
   const backZh = new Set(back.map(c => c.zh));
-  if (frontZh.size === 1 && backZh.size === 1) return { zh: joinRare(fronts[0], back[0]), method: 'rareNameStructural' };
+  if (frontZh.size === 1 && backZh.size === 1) return { zh: rareCase(key, joinRare(fronts[0], back[0])), method: 'rareNameStructural' };
   return null;
 }
 
@@ -161,6 +202,7 @@ if (lang.gendered) {
     const core = key.replace(PREFIX, '');
     // affix:（魔法物品的詞綴）和 unique:（獨特怪物名字的前段，Storm → Штормовой／Штормовое…）都在執行時跟名詞組合
     if (/^(affix|unique):/.test(key) && affixForms.has(norm(core))) { out[key] = affixForms.get(norm(core)); forms++; }
+    else if (key.startsWith('affix:') && affixFormsByKey.has(norm(core))) { out[key] = affixFormsByKey.get(norm(core)); forms++; }
   }
   for (const key of Object.keys(ko)) {
     const core = key.replace(PREFIX, '');

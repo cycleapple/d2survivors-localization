@@ -33,8 +33,6 @@
  "Fury's Storm Fangs and Revive's Martyr now say how much they deal in all": "\"Sturmzähne\" von Wut und \"Märtyrer\" von Reanimation zeigen jetzt ihren Gesamtschaden an",
  "Magic charms. At KEEP no other line hides or sells them": "Magische Zauber. Bei \"Aufbewahren\" blendet keine andere Zeile sie aus oder verkauft sie",
  "KEEP wins over HIDDEN and SELL. Otherwise the strictest line wins": "\"Aufbewahren\" hat Vorrang vor \"Ausgeblendet\" und \"Verkaufen\". Sonst gilt die strengste Zeile",
- "Magic Arrow's Volley arrows now deal 73% of the damage each, up from 70%": "Bei Zauberpfeil mit \"Salve\" verursacht jetzt jeder Pfeil 73 % des Schadens statt 70 %",
- "Fire Wall's Crossfire walls now deal 55% of the damage each, up from half": "Bei Feuerwand mit \"Kreuzfeuer\" verursacht jetzt jede Wand 55 % des Schadens statt der Hälfte",
  "Tap Character in a run or the camp to use it": "Tippe in einem Durchgang oder im Lager auf \"Charakter\", um es zu benutzen",
  "Under a Terror tier's No Potions in the Belt, the belt's potions are greyed and its hover and a press say why": "Unter \"Keine Tränke im Gürtel\" einer Schreckensstufe sind die Tränke im Gürtel ausgegraut, und Tooltip und Drücken nennen den Grund",
  "Cain's Six Evolutions quest says the evolved skills may come from any of your trees": "Cains Quest \"Sechs Entwicklungen\" sagt, dass die entwickelten Fertigkeiten aus jedem deiner Bäume stammen dürfen",
@@ -75,7 +73,6 @@
  "Cold Arrow's Rime Trail now chills as long as the arrow does and costs 5% of its damage, not 15%": "\"Raureifspur\" von Kältepfeil verlangsamt jetzt so lange wie der Pfeil selbst und kostet 5% seines Schadens statt 15%",
  "Static Field's Static Ground now stays on you as you move, and takes 30% longer to recharge, not 50%": "\"Statischer Boden\" von Statikfeld bleibt jetzt bei dir, wenn du dich bewegst, und verlängert die Abklingzeit um 30% statt 50%",
  "Multiple Shot's and Ice Bolt's Return now turn back past their target, where they turned halfway and missed monsters further off": "\"Rückkehr\" von Mehrfachschuss und Eisblitz kehrt jetzt erst hinter dem Ziel um, statt auf halbem Weg umzudrehen und weiter entfernte Monster zu verfehlen",
- "Leap's Rumble no longer knocks the pack away before its second landing, so both landings strike the whole pack": "\"Grollen\" von Sprung stößt die Gruppe vor der zweiten Landung nicht mehr weg, sodass beide Landungen die ganze Gruppe treffen",
  "Howl's Echo now makes monsters flee as long as the first howl, and recharges 20% slower instead of 40%": "\"Echo\" von Heulen lässt Monster jetzt so lange fliehen wie das erste Heulen und verlängert die Abklingzeit um 20% statt 40%",
  "Grim Ward's Martyr Totem bursts on monsters out to twice its reach, where its fear sent them, instead of on an empty circle": "\"Märtyrertotem\" von Grausiger Schutz explodiert an den Monstern bis zur doppelten Reichweite, wohin seine Furcht sie getrieben hat, statt an einem leeren Kreis",
  "The stash has a Uniques tab that keeps one of each unique for every hero, sorted by slot, with the ones still to find shown dark": "Der Schatz hat einen Reiter \"Einzigartige\", der für alle Helden je ein Exemplar jedes einzigartigen Gegenstands aufbewahrt, nach Platz sortiert; noch nicht gefundene werden dunkel angezeigt",
@@ -110,7 +107,6 @@
  "MAGIC ITEMS": "MAGISCH GEGENSTÄNDE",
  "RARE ITEMS": "SELTEN GEGENSTÄNDE",
  "WEAPONS": "WAFFEN",
- "KEEP": "EINZAHLEN",
  "CHARMS": "ZAUBER",
  "TERROR #": "Schrecken {0}"
 }
