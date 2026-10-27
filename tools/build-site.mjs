@@ -23,7 +23,7 @@ try {
   manifest = null;
 }
 const state = siteState(LANGUAGES, SITE, manifest);
-const bookmarklet = `javascript:import('${new URL(SITE.bookmarkletPath, BASE).href}').then(m=>m.default()).catch(e=>alert('D2 繁體中文載入失敗：'+e))`;
+const bookmarklet = `javascript:import('${new URL(SITE.bookmarkletPath, BASE).href}').then(m=>m.default()).catch(e=>alert('D2 Survivors Localization: '+e))`;
 
 const pageUrl = l => (l ? new URL(`${l.path}/`, BASE).href : BASE);
 const alternates = () => [
@@ -221,7 +221,7 @@ function langPage(sl) {
           <article class="card">
             <h3>${esc(t['web.pc.title'])}</h3>
             <p class="bookmarklet-row">
-              <a class="btn btn-primary bookmarklet" id="bookmarklet" href="${esc(bookmarklet)}" draggable="true">D2 繁體中文</a>
+              <a class="btn btn-primary bookmarklet" id="bookmarklet" href="${esc(bookmarklet)}" draggable="true">${esc(t['web.bookmark.name'])}</a>
               <span class="bookmarklet-hint" id="bookmarklet-hint">${esc(t['web.pc.hint'])}</span>
             </p>
             <ol class="web-steps">
