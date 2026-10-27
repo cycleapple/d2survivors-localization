@@ -115,7 +115,12 @@ pub fn install_fonts(ctx: &egui::Context, ui_lang: &str) {
     fonts.font_data.insert("cinzel-ext".into(), egui::FontData::from_static(include_bytes!("../assets/fonts/Cinzel-LatinExt-SemiBold.ttf")).into());
     let emoji = ["NotoEmoji-Regular".to_string(), "emoji-icon-font".to_string()];
 
-    let body: Vec<String> = segoe.iter().cloned().chain(cjk.iter().flatten().cloned()).chain(hangul.clone()).chain(emoji.clone()).chain(["Ubuntu-Light".into()]).collect();
+    // 日文介面整行都用遊ゴシック（連拉丁字母、數字）：Segoe UI 和遊ゴシック的基線不一樣，混在一行裡英數字會忽高忽低
+    let body: Vec<String> = if ui_lang == "ja" {
+        cjk.iter().flatten().cloned().chain(segoe.clone()).chain(hangul.clone()).chain(emoji.clone()).chain(["Ubuntu-Light".into()]).collect()
+    } else {
+        segoe.iter().cloned().chain(cjk.iter().flatten().cloned()).chain(hangul.clone()).chain(emoji.clone()).chain(["Ubuntu-Light".into()]).collect()
+    };
     let title: Vec<String> = ["cinzel".to_string(), "cinzel-ext".to_string()]
         .into_iter()
         .chain(georgia)
@@ -125,6 +130,12 @@ pub fn install_fonts(ctx: &egui::Context, ui_lang: &str) {
         .chain(emoji)
         .collect();
     let mono: Vec<String> = ["Hack".to_string()].into_iter().chain(body.iter().cloned()).collect();
+    // 遊ゴシック的行高比較高，字會偏上：往下移一點，按鈕和欄位裡才會置中
+    if let Some(f) = fonts.font_data.get_mut("yugothic") {
+        let mut d = (**f).clone();
+        d.tweak.y_offset_factor = 0.12;
+        *f = d.into();
+    }
     fonts.families.insert(FontFamily::Proportional, body);
     fonts.families.insert(FontFamily::Monospace, mono);
     fonts.families.insert(display(), title);

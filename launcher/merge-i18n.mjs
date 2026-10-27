@@ -9,7 +9,7 @@ const tr = JSON.parse(fs.readFileSync('dict/launcher-i18n.json', 'utf8'));
 const LANGS = ['zh-TW', 'zh-CN', 'en', 'ja', 'de', 'fr', 'ru', 'pl'];
 
 const start = src.indexOf('const TABLE');
-const open = src.indexOf('&[', start) + 2;
+const open = src.indexOf('= &[', start) + 4;
 const close = src.indexOf('\n];', open);
 const body = src.slice(open, close);
 const rows = [];

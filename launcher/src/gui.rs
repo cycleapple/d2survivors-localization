@@ -666,17 +666,18 @@ impl App {
         }
         theme::panel(ui, |ui| {
             Self::section_label(ui, self.t("game_folder"));
-            ui.horizontal(|ui| {
-                let hint = system::display_path(&paths::default_game_dir());
-                let w = ui.available_width() - 140.0;
-                if ui.add(egui::TextEdit::singleline(&mut self.config.game_dir).hint_text(hint).desired_width(w)).lost_focus() {
-                    self.refresh_game();
-                }
+            // 按鈕先放在右邊，欄位用剩下的寬度（按鈕的字長短依語言不同）
+            let row = egui::vec2(ui.available_width(), ui.spacing().interact_size.y + 4.0);
+            ui.allocate_ui_with_layout(row, egui::Layout::right_to_left(egui::Align::Center), |ui| {
                 if ui.button(self.t("choose_folder")).clicked() {
                     if let Some(d) = system::pick_folder(&self.config.game_dir()) {
                         self.config.game_dir = d.display().to_string();
                         self.refresh_game();
                     }
+                }
+                let hint = system::display_path(&paths::default_game_dir());
+                if ui.add(egui::TextEdit::singleline(&mut self.config.game_dir).hint_text(hint).desired_width(ui.available_width())).lost_focus() {
+                    self.refresh_game();
                 }
             });
             ui.add_space(8.0);

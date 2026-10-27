@@ -10,7 +10,7 @@ const TABLE: &[(&str, [&str; 8])] = &[
     ("step_done", ["完成", "完成", "Done", "完了", "Fertig", "Terminé", "Готово", "Gotowe"]),
     ("new_badge", ["新", "新", "New", "新着", "Neu", "Nouveau", "Новинка", "Nowość"]),
     ("site_short", ["網站", "网站", "Website", "ウェブサイト", "Website", "Site web", "Сайт", "Strona"]),
-    ("licenses", ["授權", "许可", "Licenses", "Licenses", "Licenses", "Licenses", "Licenses", "Licenses"]),
+    ("licenses", ["授權", "许可", "Licenses", "ライセンス", "Lizenzen", "Licences", "Лицензии", "Licencje"]),
     ("next", ["下一步", "下一步", "Next", "次へ", "Weiter", "Suivant", "Далее", "Dalej"]),
     ("back", ["上一步", "上一步", "Back", "戻る", "Zurück", "Précédent", "Назад", "Wstecz"]),
     ("skip", ["略過", "跳过", "Skip", "スキップ", "Überspringen", "Passer", "Пропустить", "Pomiń"]),
