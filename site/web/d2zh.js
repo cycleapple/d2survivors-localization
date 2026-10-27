@@ -1,4 +1,4 @@
-// D2 Survivors 中文化（網頁版書籤）：繁體中文、简体中文、日本語
+// D2 Survivors 中文化（網頁版書籤）：繁體中文、简体中文、日本語，以及 Deutsch、Français、Русский
 // 書籤：javascript:import('<這個檔案的網址>').then(m=>m.default()).catch(e=>alert(e))
 //
 // 做法：跟桌面版一樣用遊戲內建的翻譯系統，只是改在瀏覽器裡做。
@@ -34,6 +34,21 @@ const MESSAGES = {
     failed: '日本語化の読み込みに失敗しました：', outdated: 'ゲームが更新されたため、日本語化の更新が必要です', page: 'D2 Survivors のゲームページ（https://d2survivors.lol/play/）を開いてから、このブックマークを押してください。',
     old: 'ブックマークの更新が必要です。日本語化サイトでブックマークを入れ直してください。', loop: '読み込みが繰り返されたため停止しました。ページを再読み込みしてください。', frame: '日本語化の読み込みに失敗しました：フレームを開けません。ページを再読み込みしてください。',
   },
+  de: {
+    loading: 'Deutsch wird geladen…', on: 'Deutsch ist aktiv. Lesezeichen erneut anklicken, um zwischen Deutsch und Englisch zu wechseln.', to: 'Wechsel zu Deutsch',
+    failed: 'Übersetzung konnte nicht geladen werden: ', outdated: 'Das Spiel wurde aktualisiert, die Übersetzung muss angepasst werden', page: 'Bitte zuerst die Spielseite von D2 Survivors öffnen (https://d2survivors.lol/play/) und dann das Lesezeichen anklicken.',
+    old: 'Das Lesezeichen ist veraltet. Bitte auf der Übersetzungsseite neu installieren.', loop: 'Die Übersetzung lädt immer wieder neu und wurde gestoppt. Bitte die Seite neu laden.', frame: 'Übersetzung konnte nicht geladen werden: Rahmen lässt sich nicht öffnen. Bitte die Seite neu laden.',
+  },
+  fr: {
+    loading: 'Chargement du français…', on: 'Le français est activé. Cliquez à nouveau sur le favori pour basculer entre français et anglais.', to: 'Passage au français',
+    failed: 'Échec du chargement de la traduction : ', outdated: 'Le jeu a été mis à jour, la traduction doit l’être aussi', page: 'Ouvrez d’abord la page de jeu de D2 Survivors (https://d2survivors.lol/play/), puis cliquez sur ce favori.',
+    old: 'Le favori est obsolète. Réinstallez-le depuis le site de la traduction.', loop: 'La traduction se recharge en boucle et a été arrêtée. Rechargez la page.', frame: 'Échec du chargement de la traduction : impossible d’ouvrir le cadre. Rechargez la page.',
+  },
+  ru: {
+    loading: 'Загрузка русского перевода…', on: 'Русский перевод включен. Нажмите закладку еще раз, чтобы переключиться между русским и английским.', to: 'Переключение на русский',
+    failed: 'Не удалось загрузить перевод: ', outdated: 'Игра обновилась, перевод нужно обновить', page: 'Сначала откройте страницу игры D2 Survivors (https://d2survivors.lol/play/), затем нажмите эту закладку.',
+    old: 'Закладка устарела. Установите ее заново на сайте перевода.', loop: 'Перевод постоянно перезагружается и был остановлен. Обновите страницу.', frame: 'Не удалось загрузить перевод: не открывается фрейм. Обновите страницу.',
+  },
 };
 
 const store = {
@@ -46,7 +61,7 @@ const normalize = id => id === 'zh' ? 'zh-TW' : id;
 function wanted(ids) {
   for (const id of [normalize(store.get(LANG_KEY)), store.get(LAST_KEY)]) if (ids.includes(id)) return id;
   for (const tag of navigator.languages ?? [navigator.language]) {
-    const id = /^zh\b.*\b(Hans|CN|SG|MY)\b/i.test(tag) ? 'zh-CN' : /^zh\b/i.test(tag) ? 'zh-TW' : /^ja\b/i.test(tag) ? 'ja' : null;
+    const id = /^zh\b.*\b(Hans|CN|SG|MY)\b/i.test(tag) ? 'zh-CN' : /^zh\b/i.test(tag) ? 'zh-TW' : /^(ja|de|fr|ru)\b/i.exec(tag)?.[1].toLowerCase() ?? null;
     if (id && ids.includes(id)) return id;
   }
   return ids.includes('zh-TW') ? 'zh-TW' : ids[0];

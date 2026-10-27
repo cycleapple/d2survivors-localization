@@ -30,8 +30,9 @@ node tools/serve.mjs site 8766      # 本機預覽（允許跨網域讀取）；
 - 第一次按書籤開哪個語言：遊戲設定裡的語言 → 上次用的（`d2zh:last`）→ 瀏覽器語言 → 繁中
 - 再按一次書籤＝目前的語言和英文切換。遊戲裡「選項 → 遊戲設定 → 語言」列出 English、한국어 和 manifest 裡有 `web` 欄位的語言；換語言時修改版會請外層用新語言的規則重新開一次（不然 `location.reload()` 會載入原版）
 - 網頁版改版比桌面版頻繁、壓縮後的變數名稱會變，所以 `web-rules.mjs` 用 regex（變數名稱抓下來再放回去；`pattern()` 的 `<1>`、`<2>`… 要照第一次出現的順序編號，跟 `$1`、`$2`… 對得上），跟桌面版的 `patch-rules.mjs` 分開。必要的規則（語言選單、接受語言設定、載入字典、外文字判斷）沒套上就不啟動，提示「需要更新」；其他的標 `optional`，沒套上照樣啟動、在 console 警告
-- 規則的 groups 跟桌面版一樣：`base`（每次都套用，包括英文）、`dict`、`cjk`、`magic-zh`、`magic-ja`（日文魔法物品名稱「前綴 後綴 物品」）、`fullwidth`（只有繁中用全形冒號）。斷行禁則、「暗色字不加描邊」（石頭按鈕的中日文畫成實心字）跟桌面版相同
-- 字型：網頁版沒有 D2R 的字型，改用系統字型（`local()`）註冊成遊戲的外文字字型家族。繁中：微軟正黑體、蘋方 TC、Noto Sans TC；簡中：微軟雅黑、蘋方 SC、Noto Sans SC；日文：Meiryo、Hiragino、Noto Sans JP
+- 規則的 groups 跟桌面版（`patch-rules.mjs`）一樣：`base`（每次都套用，包括英文）、`dict`、`cjk`、`magic-zh`、`magic-ja`（日文魔法物品名稱「前綴 後綴 物品」）、`fullwidth`（只有繁中用全形冒號）、`magic-de`／`magic-fr`／`magic-ru`、`unique-de`／`unique-fr`／`unique-ru`（有詞性的語言組魔法物品和獨特怪物的名字）、`cyrillic`（西里爾字母當外文字畫）、`font-ru`。斷行禁則、「暗色字不加描邊」（石頭按鈕的中日文、俄文畫成實心字）跟桌面版相同
+- 德、法、俄文的名稱組合：字典的 `affix:`、`unique:` 有每種詞性的形式（「[ms]…[fs]…」），照 `gender:<名詞>` 挑。順序：德文「前綴 物品 後綴」、獨特怪物「前段-後段 稱號」；法文「物品 前綴 後綴」、「後段 前段 稱號」；俄文「前綴 物品 後綴」、「稱號, 前段 後段」。輸出要跟桌面版一樣，參考實作是 `work/translation/compose-proto.mjs`；`work/web/compose-check.mjs` 用套好規則的遊戲模組跑同一組例子跟它對照（現在 33 個全部一樣）。規則裡新加的變數都用 `d2` 開頭，免得跟遊戲壓縮後的名稱撞到
+- 字型：網頁版沒有 D2R 的字型，改用系統字型（`local()`）註冊成遊戲的外文字字型家族。繁中：微軟正黑體、蘋方 TC、Noto Sans TC；簡中：微軟雅黑、蘋方 SC、Noto Sans SC；日文：Meiryo、Hiragino、Noto Sans JP；俄文（只註冊 U+0400–04FF）：Segoe UI、Arial、Roboto、Noto Sans。德、法文的字點陣字型本來就有（Latin-1），不用另外的字型
 
 ## 測試
 
@@ -45,7 +46,11 @@ node tools/serve.mjs site 8766      # 本機預覽（允許跨網域讀取）；
 - 載入約 0.8 秒
 - 「暗色字不加描邊」：主選單的石頭按鈕字變成實心黑字（原本像空心的灰字）
 
-還沒測：USE MY OWN FILES 實際讀檔、Safari／Firefox、手機、遊戲中的升級卡片和物品名稱（日文的魔法物品順序、禁則斷行只用 `build-web.mjs` 確認規則套得上）。
+正式的 manifest（22949d4，version 20261027-1223）：繁中、簡中、日文切換、書籤切換都正常。
+
+德、法、俄文（manifest 裡還是 draft，用暫存資料夾自己加上去的 manifest 測）：俄文標題、主選單（西里爾字母用系統字型畫、按鈕是實心黑字）、德文、法文主選單、書籤切換（法文 ↔ 英文）都正常。
+
+還沒測：USE MY OWN FILES 實際讀檔、Safari／Firefox、手機、遊戲中的升級卡片和物品名稱（日文的魔法物品順序、禁則斷行只用 `build-web.mjs` 確認規則套得上；德法俄的名稱組合用 `compose-check.mjs` 對照過，沒有在遊戲畫面上看過）。
 
 ## 待辦
 
