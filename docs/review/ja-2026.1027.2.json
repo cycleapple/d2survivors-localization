@@ -1,0 +1,660 @@
+[
+ {
+  "key": "+1 slower",
+  "current": "+1 それより遅い",
+  "suggested": "それより遅い場合 +1",
+  "category": "grammar",
+  "reason": "「+1 それより遅い」は意味が通らない。直前の「{1}以内 +{0}」と並ぶ条件表示なので「それより遅い場合 +1」"
+ },
+ {
+  "key": "Akara can start him over at level 1",
+  "current": "アカラが彼をレベル1からやり直させることができる",
+  "suggested": "アカラのもとでレベル1からやり直せる",
+  "category": "grammar",
+  "reason": "「アカラが彼をやり直させることができる」は不自然。ko も「アカラでレベル1から再開できる」"
+ },
+ {
+  "key": "Akara can start her over at level 1",
+  "current": "アカラが彼女をレベル1からやり直させることができる",
+  "suggested": "アカラのもとでレベル1からやり直せる",
+  "category": "grammar",
+  "reason": "同上（彼女をやり直させる→やり直せる）"
+ },
+ {
+  "key": "Your level-* * starts over and keeps the golden glow for good.",
+  "current": "レベル{0}の{1}は最初からやり直し、黄金の輝きを永久に保持します。",
+  "suggested": "レベル{0}の{1}は最初からやり直し、金色の輝きを永久に保持します。",
+  "category": "consistency",
+  "reason": "golden glow は他の文（Earns the golden glow ほか4件）で「金色の輝き」。ここだけ「黄金の輝き」"
+ },
+ {
+  "key": "Adds fire damage to the hero's attacks, not her spells",
+  "current": "英雄の攻撃に火炎ダメージを追加する（呪文には適用されない）",
+  "suggested": "英雄の攻撃に火炎ダメージを追加する（魔法には適用されない）",
+  "category": "consistency",
+  "reason": "spells は直後の #-# 版や Spells キーで「魔法」。ここだけ「呪文」"
+ },
+ {
+  "key": "* runs",
+  "current": "ラン{0}回",
+  "suggested": "ラン{0}件",
+  "category": "consistency",
+  "reason": "単数形「ラン 1件」と助数詞が不一致（件／回）。記録の件数なので「件」に統一"
+ },
+ {
+  "key": "* runs waiting to be sent",
+  "current": "送信待ちのラン: {0}",
+  "suggested": "送信待ちのラン: {0}件",
+  "category": "consistency",
+  "reason": "単数形「送信待ちのラン: 1件」に合わせて助数詞「件」を付ける"
+ },
+ {
+  "key": "Too many stat points",
+  "current": "ステータスポイントが多すぎる",
+  "suggested": "ステータス・ポイントが多すぎる",
+  "category": "term",
+  "reason": "D2R 公式・辞書内の他の全訳とも「ステータス・ポイント」（中黒あり）"
+ },
+ {
+  "key": "Too many skill points",
+  "current": "スキルポイントが多すぎる",
+  "suggested": "スキル・ポイントが多すぎる",
+  "category": "term",
+  "reason": "D2R 公式は「スキル・ポイント」（Reset Stat/Skill Points 等）"
+ },
+ {
+  "key": "Campfire (Enter)",
+  "current": "たき火（Enter）",
+  "suggested": "焚き火（Enter）",
+  "category": "consistency",
+  "reason": "campfire は辞書内でほぼ「焚き火」（From the campfire… など）。ここだけ「たき火」"
+ },
+ {
+  "key": "The portal takes you in #…",
+  "current": "{0}後にポータルで移動します…",
+  "suggested": "{0}秒後にポータルで移動します…",
+  "category": "placeholder",
+  "reason": "# はコード上 Math.ceil(残り秒) の素の数値（1～5）。単位がないと「3後に」になる"
+ },
+ {
+  "key": "*T: Charsi's wares - Esc: end the run",
+  "current": "{0}T: チャルシの商品 - Esc: ランを終了",
+  "suggested": "{0}T: チャルシの品揃え - Esc: ランを終了",
+  "category": "consistency",
+  "reason": "ラベル Charsi's Wares／ボタン CHARSI'S WARES は「チャルシの品揃え」。同じ案内文の別バリエーションも品揃え"
+ },
+ {
+  "key": "Enter: * - T: Charsi's wares - Esc: end the run",
+  "current": "Enter: {0} - T: チャルシの商品 - Esc: ランを終了",
+  "suggested": "Enter: {0} - T: チャルシの品揃え - Esc: ランを終了",
+  "category": "consistency",
+  "reason": "同上（商品→品揃え。next tier 版は品揃え）"
+ },
+ {
+  "key": "Enter: * - T: Charsi's wares - Esc: main menu",
+  "current": "Enter: {0} - T: チャルシの商品 - Esc: メインメニュー",
+  "suggested": "Enter: {0} - T: チャルシの品揃え - Esc: メインメニュー",
+  "category": "consistency",
+  "reason": "同上（play again 版は品揃え）"
+ },
+ {
+  "key": "* (Esc)",
+  "current": "{0}（Escキー）",
+  "suggested": "{0}（Esc）",
+  "category": "consistency",
+  "reason": "他の (Esc) 付きラベル（戻る（Esc）、閉じる（Esc）など）はすべて「（Esc）」。ここだけ「Escキー」"
+ },
+ {
+  "key": "A portal to # has opened",
+  "current": "{0}へのポータルが開いた",
+  "suggested": "{0}へのポータルが開きました",
+  "category": "consistency",
+  "reason": "同じバナーの「トリストラムへのポータルが開きました」と文体（です・ます）が不一致"
+ },
+ {
+  "key": "A portal to * has opened",
+  "current": "{0}へのポータルが開いた",
+  "suggested": "{0}へのポータルが開きました",
+  "category": "consistency",
+  "reason": "同上"
+ },
+ {
+  "key": "START",
+  "current": "スタート",
+  "suggested": "開始",
+  "category": "consistency",
+  "reason": "更新情報では焚き火の START を「開始」と呼んでいる（The campfire's START… 2件）。ボタン本体だけ「スタート」"
+ },
+ {
+  "key": "on Terror tier #",
+  "current": "恐怖 第{0}段階",
+  "suggested": "（恐怖 第{0}段階）",
+  "category": "other",
+  "reason": "この断片は onDifficulty() の戻り値としてのみ使われ、「Another run as the **」で「{0}{1}でもう一度ラン」に直結し「アマゾネス恐怖 第3段階でもう一度ラン」と続けて読めてしまう。括弧で区切る。同じ理由で on Nightmare/on Hell も「（ナイトメア）」型にすると Saved at the start of Act ** も「第3章（ナイトメア）開始時に保存」になる"
+ },
+ {
+  "key": "Bow and Crossbow Skills",
+  "current": "弓とクロスボウのスキル",
+  "suggested": "〈弓/クロスボウ〉スキル",
+  "category": "term",
+  "reason": "D2R の表記は〈弓/クロスボウ〉。同じ一覧の Passive and Magic／Javelin and Spear／Poison and Bone は〈…〉スキル形式で揃っている"
+ },
+ {
+  "key": "Gymnast's",
+  "current": "軽業師の",
+  "suggested": "妙技もつ",
+  "category": "term",
+  "reason": "D2R の Gymnastic＝妙技もつ。affix:Gymnast's も「妙技もつ」、同じ段の Acrobat's（鍛錬せし）・Athlete's（練達なる）も D2R 形"
+ },
+ {
+  "key": "Nature's",
+  "current": "自然の",
+  "suggested": "自然に満ちた",
+  "category": "term",
+  "reason": "D2R の Natural＝自然に満ちた。affix:Nature's も「自然に満ちた」（同段の Gaea's＝森羅宿す は D2R 形）"
+ },
+ {
+  "key": "Terra's",
+  "current": "大地の",
+  "suggested": "大地なる",
+  "category": "term",
+  "reason": "D2R の Terrene＝大地なる。affix:Terra's も「大地なる」"
+ },
+ {
+  "key": "Heavy",
+  "current": "重撃",
+  "suggested": "ヘビー",
+  "category": "consistency",
+  "reason": "modifier:Maul（別スキルの変化）も「重撃」で、別の変化が同名になる。Heavy（ファイアボルト／ジャブ）は別の名前に"
+ },
+ {
+  "key": "Volley",
+  "current": "一斉射撃",
+  "suggested": "斉射",
+  "category": "term",
+  "reason": "「一斉射撃」は D2R のアマゾネスのスキル Multiple Shot の公式名。マジックアローの変化がアマゾネスのスキル名に見える（Vengeance と同じ問題）"
+ },
+ {
+  "key": "Onslaught",
+  "current": "猛攻",
+  "suggested": "怒涛",
+  "category": "term",
+  "reason": "「猛攻」は D2R のパラディンのスキル Zeal の公式名。フェンドの変化が他スキル名に見える"
+ },
+ {
+  "key": "Ember",
+  "current": "燃える",
+  "suggested": "熾火",
+  "category": "other",
+  "reason": "ロイヤルストライクの変化名として「燃える」は動詞・形容詞で名前にならない（Static と同じ）。Ember 本体は affix／名前リスト用なので modifier:Ember＝熾火 を追加する形が安全"
+ },
+ {
+  "key": "It raises 2 spirit wolves instead of 5, each with 2.5 times the damage and life.",
+  "current": "スピリット・ウルフを5体ではなく2体呼び出し、それぞれのダメージとライフが2.5倍になる。",
+  "suggested": "スピリットウルフを5体ではなく2体呼び出し、それぞれのダメージとライフが2.5倍になる。",
+  "category": "term",
+  "reason": "D2R はスピリットウルフ召喚（中黒なし）。辞書の Summon Spirit Wolf も同じ"
+ },
+ {
+  "key": "Frost Wolves",
+  "current": "氷霜の狼",
+  "suggested": "フロストウルフ",
+  "category": "consistency",
+  "reason": "他の Frost 系変化はすべてカタカナ（フロストランス、フロストジャベリン…）。wolves も辞書では「ウルフ」"
+ },
+ {
+  "key": "Half the wolves' damage is cold damage, which chills, and they deal 35% more.",
+  "current": "オオカミのダメージの半分が冷却効果のある冷気ダメージになり、ダメージが35%増加する。",
+  "suggested": "ウルフのダメージの半分が冷却効果のある冷気ダメージになり、ダメージが35%増加する。",
+  "category": "consistency",
+  "reason": "wolves は他の文で「ウルフ」（レイヴン、ウルフ、グリズリー…）。ここだけ「オオカミ」"
+ },
+ {
+  "key": "It raises 50% more creepers, each with 30% of the poison and life.",
+  "current": "蔦を50%多く呼び出すが、それぞれの毒物ダメージとライフは30%になる。",
+  "suggested": "蔦を50%多く呼び出すが、それぞれの毒ダメージとライフは30%になる。",
+  "category": "term",
+  "reason": "D2R の Poison Damage は「毒ダメージ」。同じ変化説明の他の文も「毒ダメージ」"
+ },
+ {
+  "key": "It raises one creeper with 4.5 times the poison, whose bite stuns for 1 second.",
+  "current": "毒物ダメージが4.5倍の蔦を1本だけ呼び出し、その噛みつきは1秒間スタンさせる。",
+  "suggested": "毒ダメージが4.5倍の蔦を1本だけ呼び出し、その噛みつきは1秒間スタンさせる。",
+  "category": "term",
+  "reason": "同上（毒物ダメージ→毒ダメージ）"
+ },
+ {
+  "key": "Half its damage is poison, and it deals 40% more damage.",
+  "current": "ダメージの半分が毒物ダメージになり、ダメージが40%増加する。",
+  "suggested": "ダメージの半分が毒ダメージになり、ダメージが40%増加する。",
+  "category": "term",
+  "reason": "同上。「Half its damage is poison damage…」の訳は「毒ダメージ」"
+ },
+ {
+  "key": "Each tooth pierces 2 monsters, but deals 38% less damage.",
+  "current": "歯はそれぞれモンスター2体を貫通するが、ダメージが38%減少する。",
+  "suggested": "牙はそれぞれモンスター2体を貫通するが、ダメージが38%減少する。",
+  "category": "consistency",
+  "reason": "ティース（Teeth）の飛び道具は本体説明（Fires # teeth…）と 'a tooth' で「牙」。変化説明だけ「歯」になっている"
+ },
+ {
+  "key": "The teeth fly close together at one monster and deal 12% more damage.",
+  "current": "歯が1体のモンスターに集中して飛び、ダメージが12%増加する。",
+  "suggested": "牙が1体のモンスターに集中して飛び、ダメージが12%増加する。",
+  "category": "consistency",
+  "reason": "同上：Teeth の変化（Clench）。他の Teeth 文言は「牙」"
+ },
+ {
+  "key": "Each spear flies back along its line and hits again, but deals half the damage.",
+  "current": "スピアがそれぞれ同じ軌道を戻って再び命中するが、ダメージは半分になる。",
+  "suggested": "骨の槍がそれぞれ同じ軌道を戻って再び命中するが、ダメージは半分になる。",
+  "category": "consistency",
+  "reason": "Bone Spear の変化（Boomerang）。本体説明は「骨の槍{0}本」、ダメージ欄は「槍1本あたり」なのにここだけ「スピア」（アマゾネスの武器種と紛らわしい）"
+ },
+ {
+  "key": "It throws 1 spear instead of 3, which deals 240% more damage.",
+  "current": "スピアを3本ではなく1本投げ、ダメージが240%増加する。",
+  "suggested": "骨の槍を3本ではなく1本投げ、ダメージが240%増加する。",
+  "category": "consistency",
+  "reason": "同上：Bone Spear の変化。「スピア」→「骨の槍」"
+ },
+ {
+  "key": "It throws 2 more hammers, but each deals 72% of the damage.",
+  "current": "ハンマーを2本多く投げるが、それぞれのダメージは72%になる。",
+  "suggested": "鎚を2本多く投げるが、それぞれのダメージは72%になる。",
+  "category": "consistency",
+  "reason": "Blessed Hammer（祝福の鎚）の変化 Swarm。本体説明・ダメージ欄（鎚{0}本／鎚1本あたり）は「鎚」"
+ },
+ {
+  "key": "It throws 2 more hammers, but each deals 70% of the damage.",
+  "current": "ハンマーを2本多く投げるが、それぞれのダメージは70%になる。",
+  "suggested": "鎚を2本多く投げるが、それぞれのダメージは70%になる。",
+  "category": "consistency",
+  "reason": "Hammer of Zakarum の変化 Swarm。同上「ハンマー」→「鎚」"
+ },
+ {
+  "key": "Untouched by Duriel",
+  "current": "デュリエルに無傷",
+  "suggested": "デュリエル戦で無傷",
+  "category": "grammar",
+  "reason": "「デュリエルに無傷」は日本語として不自然。課題名（デュリエルから一度も攻撃を受けずに倒す）"
+ },
+ {
+  "key": "Untouched by Mephisto",
+  "current": "メフィストに無傷",
+  "suggested": "メフィスト戦で無傷",
+  "category": "grammar",
+  "reason": "同上"
+ },
+ {
+  "key": "Untouched by Diablo",
+  "current": "ディアブロに無傷",
+  "suggested": "ディアブロ戦で無傷",
+  "category": "grammar",
+  "reason": "同上"
+ },
+ {
+  "key": "Lowers enemy fire resistance #%, a fifth of that if immune.",
+  "current": "敵の火炎耐性を{0}%下げる。免疫の敵にはその5分の1。",
+  "suggested": "敵の火炎耐性を{0}%下げる。火炎無効の敵にはその5分の1。",
+  "category": "term",
+  "reason": "D2R の用語は「火炎無効」。「免疫」は D2R 日本語にない（同じ辞書内でも「無効のモンスター」が多数派）"
+ },
+ {
+  "key": "Lowers enemy cold resistance #%, a fifth of that if immune.",
+  "current": "敵の冷気耐性を{0}%下げる。免疫の敵にはその5分の1。",
+  "suggested": "敵の冷気耐性を{0}%下げる。冷気無効の敵にはその5分の1。",
+  "category": "term",
+  "reason": "同上「冷気無効」"
+ },
+ {
+  "key": "Lowers enemy lightning resistance #%, a fifth of that if immune.",
+  "current": "敵の電撃耐性を{0}%下げる。免疫の敵にはその5分の1。",
+  "suggested": "敵の電撃耐性を{0}%下げる。電撃無効の敵にはその5分の1。",
+  "category": "term",
+  "reason": "同上「電撃無効」"
+ },
+ {
+  "key": "Up to * of * life and * damage fight for you.",
+  "current": "最大{0}が味方として戦う（ライフ{1}、ダメージ{2}）。",
+  "suggested": "最大で{0}が味方として戦う（ライフ{1}、ダメージ{2}）。",
+  "category": "grammar",
+  "reason": "スキルレベル1では {0}=「スケルトン1体」になり、実際の表示が「最大スケルトン1体が味方として戦う」になる（2体以上は別キーで「最大3体のスケルトンが…」）"
+ },
+ {
+  "key": "skeletal mage",
+  "current": "スケルトン・メイジ",
+  "suggested": "スケルトンメイジ",
+  "category": "consistency",
+  "reason": "D2R のスキル名「スケルトンメイジ召喚」と他の文（スケルトンメイジ{0}体…、50% more mages…）は中黒なし。ここだけ「スケルトン・メイジ」"
+ },
+ {
+  "key": "Fires * of holy light that * *, for * damage (double to the undead).",
+  "current": "聖なる光を{0}放ち、モンスター{2}体を{1}、{3}のダメージを与える（アンデッドには2倍）。",
+  "suggested": "聖なる光を{0}放ち、{3}のダメージを与える（アンデッドには2倍）。モンスター{2}体を{1}。",
+  "category": "grammar",
+  "reason": "{1} は pierces→「貫通する」／pierce→（大文字小文字を区別しない検索でスキル Pierce に当たり）「貫通」。実際の表示が「モンスター2体を貫通する、40のダメージ」「モンスター2体を貫通、40の…」と崩れる。{1} を文末に置けばどちらの形でも自然になる"
+ },
+ {
+  "key": "Skills recharge #% faster and gain +#% physical damage.",
+  "current": "スキルの再使用が{0}%速くなり、物理ダメージ +{1}%。",
+  "suggested": "スキルのクールダウンが{0}%速くなり、物理ダメージ +{1}%。",
+  "category": "consistency",
+  "reason": "同じ英語 'Skills recharge #% faster' が #299 では「クールダウンが…速くなる」、ここでは「再使用が…」。ツールチップの 'Recharge:' も「クールダウン:」"
+ },
+ {
+  "key": "Adds +#% mana regeneration as Faster Cast Rate, so skills recharge #% faster.",
+  "current": "マナ再生 +{0}%をスキル発動速度として加算し、スキルの再使用が{1}%速くなる。",
+  "suggested": "マナ再生 +{0}%をスキル発動速度として加算し、スキルのクールダウンが{1}%速くなる。",
+  "category": "consistency",
+  "reason": "同上（skills recharge #% faster の訳を統一）"
+ },
+ {
+  "key": "Your ravens, wolves, grizzly and creepers get +#% life and damage.",
+  "current": "レイヴン、ウルフ、グリズリー、蔦のライフとダメージ +{0}%。",
+  "suggested": "レイヴン、ウルフ、グリズリー、毒蔦のライフとダメージ +{0}%。",
+  "category": "consistency",
+  "reason": "ダメージを与える creeper は Poison Creeper。直後の #435（creepers' poison）や 'Up to # creepers…' は「毒蔦」、ここだけ「蔦」"
+ },
+ {
+  "key": "+1% chance of a critical strike, +3% damage with a bow or claws",
+  "current": "致命の一撃の確率 +1%、弓またはクローでのダメージ +3%",
+  "suggested": "致命の一撃発動確率 +1%、弓またはクローでのダメージ +3%",
+  "category": "consistency",
+  "reason": "ほぼ同じ文の #615 は「致命の一撃発動確率」（D2R の Critical Strike Chance の表記）。ここだけ「致命の一撃の確率」"
+ },
+ {
+  "key": "Not legit: stats outside its set item's",
+  "current": "非正規: セットアイテムの範囲外の数値",
+  "suggested": "非正規: セットアイテムの範囲外の特性",
+  "category": "consistency",
+  "reason": "対になる #560（stats outside its unique's）は「特性」。同じ 'stats' がここだけ「数値」"
+ },
+ {
+  "key": "None kept yet",
+  "current": "まだ何も保管していません",
+  "suggested": "まだ何も収集していません",
+  "category": "consistency",
+  "reason": "ユニーク一覧の絞り込み {all,kept,missing} の 'kept' 用メッセージ。Kept は「収集済み」に統一済み（用語決定）なので「保管」は不一致"
+ },
+ {
+  "key": "Every one is kept",
+  "current": "すべて保管済み",
+  "suggested": "すべて収集済み",
+  "category": "consistency",
+  "reason": "同上（'missing' タブが空のときのメッセージ）。「保管済み」→「収集済み」"
+ },
+ {
+  "key": "Sells for * gold",
+  "current": "売却価格: {0}ゴールド",
+  "suggested": "売値: {0}ゴールド",
+  "category": "consistency",
+  "reason": "用語決定で Sell Price は一律「売値」。ここだけ「売却価格」"
+ },
+ {
+  "key": "Past rank *:",
+  "current": "ランク{0}以降:",
+  "suggested": "ランク{0}超過分:",
+  "category": "meaning",
+  "reason": "{0} は最大ランク（maxRank）で、最大を超えて買ったランクの合計を出す行。「ランク{0}以降」だと最大ランク自体も含むように読める（韓国語も「초과」）"
+ },
+ {
+  "key": "* free of *",
+  "current": "{1}中 残り{0}",
+  "suggested": "残り{0}/{1}",
+  "category": "grammar",
+  "reason": "「10中 残り3」は不自然。同じ意味の「Points free: * of *」（残りポイント: {0}/{1}）と同じ形に"
+ },
+ {
+  "key": "Evolved from **",
+  "current": "{0}{1}から進化",
+  "suggested": "{0}から進化{1}",
+  "category": "placeholder",
+  "reason": "{1} はコード上「 (+N from gear)」（装備ボーナス）。「ボーンスピア（装備 +1）から進化」だと進化元に+1が付くように読める。ボーナス表記は末尾に"
+ },
+ {
+  "key": "Named monsters left: *",
+  "current": "残りの名前付きモンスター: {0}",
+  "suggested": "残りの名のあるモンスター: {0}",
+  "category": "consistency",
+  "reason": "同じ「named monsters」を実績文では「名のあるモンスター」と訳している。統一"
+ },
+ {
+  "key": "Past rank *",
+  "current": "ランク{0}以降",
+  "suggested": "ランク{0}超過分",
+  "category": "meaning",
+  "reason": "Past rank N = 最大ランク N を超えた分の合計（コード: `Past rank ${e.maxRank}:`）。「以降」だとランクN自体を含む"
+ },
+ {
+  "key": "best #",
+  "current": "最高{0}",
+  "suggested": "ベスト{0}",
+  "category": "consistency",
+  "reason": "# はベストタイム（例 12:34）。「最高12:34」は時間として不自然で、隣の「no best time」=ベストタイムなし とも不一致"
+ },
+ {
+  "key": "AUTO UPDATE: *",
+  "current": "自動アップデート: {0}",
+  "suggested": "自動更新: {0}",
+  "category": "consistency",
+  "reason": "ラベル「AUTO UPDATE」は「自動更新」。同じ設定項目なので表記を合わせる"
+ },
+ {
+  "key": "An item's box shows the charges it has left in a run, such as (12/30 Charges)",
+  "current": "ラン中は、アイテムのツールチップに残りの使用回数が（使用可能数 12/30）のように表示されるようになりました",
+  "suggested": "ラン中は、アイテムのツールチップに残りの使用回数が（12/30回使用可能）のように表示されるようになりました",
+  "category": "consistency",
+  "reason": "実際に表示されるテンプレート「(#/# Charges)」の訳は「（{0}/{1}回使用可能）」。例示もそれに合わせる"
+ },
+ {
+  "key": "The Valkyrie's Frost Maiden now deals 45% more damage",
+  "current": "ヴァルキリーの「氷霜の乙女」のダメージが45%上昇しました",
+  "suggested": "ヴァルキリーの「フロストメイデン」のダメージが45%上昇しました",
+  "category": "consistency",
+  "reason": "変化名 Frost Maiden の辞書訳は「フロストメイデン」。文中の名前は名前そのものと一致させる（term-decisions の方針）"
+ },
+ {
+  "key": "Magic Arrow's Volley arrows now deal 73% of the damage each, up from 70%",
+  "current": "魔法の矢の「一斉射撃」の矢1本あたりのダメージが70%から73%になりました",
+  "suggested": "魔法の矢の「斉射」の矢1本あたりのダメージが70%から73%になりました",
+  "category": "term",
+  "reason": "変化名 Volley を「一斉射撃」にすると D2R のアマゾネスのスキル Multiple Shot（一斉射撃）と同名になる（Vengeance/復讐打撃と同じ問題）。辞書の Volley も「斉射」などに要変更"
+ },
+ {
+  "key": "Set items drop, all 127 of Diablo II's in their 32 sets, with green names",
+  "current": "セットアイテムがドロップする。『ディアブロ II』の32セット、全127種が緑色の名前で登場する",
+  "suggested": "セットアイテムがドロップするようになりました。『ディアブロ II』の32セット、全127種が緑色の名前で登場します",
+  "category": "grammar",
+  "reason": "更新情報は です・ます調（ガイド）。常体になっている"
+ },
+ {
+  "key": "Grand Charms can roll +1 to any class's skill tree, about once in 8 Hell runs",
+  "current": "護符（大）には任意のクラスのスキルツリー+1が付くことがある（ヘルのラン約8回に1回）",
+  "suggested": "護符（大）に任意のクラスのスキルツリー+1が付くことがあります（ヘルのラン約8回に1回）",
+  "category": "grammar",
+  "reason": "更新情報は です・ます調。常体になっている"
+ },
+ {
+  "key": "Gheed's Fortune lowers Charsi's and Gheed's prices for the hero who holds it",
+  "current": "ギードの運気を持つ英雄は、チャルシとギードの価格が下がる",
+  "suggested": "ギードの運気を持つ英雄は、チャルシとギードの価格が下がるようになりました",
+  "category": "grammar",
+  "reason": "更新情報は です・ます調。常体になっている"
+ },
+ {
+  "key": "A run on the leaderboard shows the hero's Charms window",
+  "current": "ランキングのランには、その英雄の護符欄が表示される",
+  "suggested": "ランキングのランに、その英雄の護符欄が表示されるようになりました",
+  "category": "grammar",
+  "reason": "更新情報は です・ます調。常体になっている"
+ },
+ {
+  "key": "Mind Blast deals three times as much damage",
+  "current": "マインドブラストのダメージが3倍になる",
+  "suggested": "マインドブラストのダメージが3倍になりました",
+  "category": "grammar",
+  "reason": "更新情報は です・ます調。常体になっている"
+ },
+ {
+  "key": "Cobra Strike's claw blows hit as hard as Tiger Strike's",
+  "current": "コブラストライクの爪攻撃のダメージがタイガーストライクと同じになる",
+  "suggested": "コブラストライクの爪攻撃のダメージがタイガーストライクと同じになりました",
+  "category": "grammar",
+  "reason": "更新情報は です・ます調。常体になっている"
+ },
+ {
+  "key": "Charged Bolt, Lightning and Death Sentries shoot at monsters farther away",
+  "current": "チャージドボルトセントリー、ライトニングセントリー、デスセントリーがより遠くのモンスターを撃つ",
+  "suggested": "チャージドボルトセントリー、ライトニングセントリー、デスセントリーがより遠くのモンスターを撃つようになりました",
+  "category": "grammar",
+  "reason": "更新情報は です・ます調。常体になっている"
+ },
+ {
+  "key": "Firestorm and Fissure deal 50% more damage",
+  "current": "火炎旋風と地割れのダメージが50%増加",
+  "suggested": "火炎旋風と地割れのダメージが50%増加しました",
+  "category": "grammar",
+  "reason": "更新情報は です・ます調。体言止めになっている"
+ },
+ {
+  "key": "On the website, the browser asks before Back, F5 or closing the tab leaves a run",
+  "current": "ウェブサイト版では、「戻る」、F5、タブを閉じる操作でランを離れる前に、ブラウザーが確認するようになりました",
+  "suggested": "ウェブサイト版では、「戻る」、F5、タブを閉じる操作でランを離れる前に、ブラウザが確認するようになりました",
+  "category": "consistency",
+  "reason": "辞書では「ブラウザ」が42件、「ブラウザー」は9件。同じパート内（460、132など）も「ブラウザ」"
+ },
+ {
+  "key": "Desktop app: the game's art loads sooner",
+  "current": "デスクトップ版: ゲームのグラフィックが早く読み込まれる",
+  "suggested": "デスクトップ版: ゲームのグラフィックが早く読み込まれるようになりました",
+  "category": "grammar",
+  "reason": "更新情報は です・ます調。常体になっている"
+ },
+ {
+  "key": "A marvelous gem...",
+  "current": "見事な宝石…",
+  "suggested": "宝石がきらめいた…",
+  "category": "term",
+  "reason": "D2R 公式の祭壇メッセージ（ShrMsg18）は「宝石がきらめいた…」"
+ },
+ {
+  "key": "A fiery death...",
+  "current": "炎の死…",
+  "suggested": "死の炎を浴びろ…",
+  "category": "term",
+  "reason": "D2R 公式の祭壇メッセージ（ShrMsg19）は「死の炎を浴びろ…」"
+ },
+ {
+  "key": "Death's advocate approaches.",
+  "current": "死の代弁者が近づいてくる。",
+  "suggested": "死の使いが近づいてくる…",
+  "category": "term",
+  "reason": "D2R 公式の祭壇メッセージ（ShrMsg20）は「死の使いが近づいてくる…」"
+ },
+ {
+  "key": "A circle of flame...",
+  "current": "炎の輪…",
+  "suggested": "炎の円環がもたらされた…",
+  "category": "term",
+  "reason": "D2R 公式の祭壇メッセージ（ShrMsg21）は「炎の円環がもたらされた…」"
+ },
+ {
+  "key": "Plague Fist",
+  "current": "プレイグ拳",
+  "suggested": "災禍の拳",
+  "category": "term",
+  "reason": "レア名の前半 Plague の D2R 公式は「災禍の」（PlagueRI）。「プレイグ」はユニークモンスター名の部品"
+ },
+ {
+  "key": "Plague Saw",
+  "current": "プレイグ鋸",
+  "suggested": "災禍の鋸",
+  "category": "term",
+  "reason": "レア名の前半 Plague の D2R 公式は「災禍の」。「プレイグ」はユニークモンスター名の部品"
+ },
+ {
+  "key": "Fiend Spawn",
+  "current": "魔魅なるスポーン",
+  "suggested": "魔魅なる落とし子",
+  "category": "term",
+  "reason": "レア名の後半 Spawn の D2R 公式は「落とし子」（2343）。「スポーン」はユニークモンスター名の部品"
+ },
+ {
+  "key": "Raven Visage",
+  "current": "レイヴン召喚仮面",
+  "suggested": "レイヴンの仮面",
+  "category": "term",
+  "reason": "レア名の前半 Raven の D2R 公式は「レイヴンの」。「レイヴン召喚」はドルイドのスキル名（大文字小文字を無視した一致の取り違え）"
+ },
+ {
+  "key": "Armageddon Brow",
+  "current": "天変地異頂",
+  "suggested": "天変地異の頂",
+  "category": "term",
+  "reason": "レア名の前半 Armageddon の D2R 公式は「天変地異の」（Holocaust）。「の」が抜けている"
+ },
+ {
+  "key": "Raven Greaves",
+  "current": "レイヴン召喚グリーヴ",
+  "suggested": "レイヴンのグリーヴ",
+  "category": "term",
+  "reason": "レア名の前半 Raven の D2R 公式は「レイヴンの」。「レイヴン召喚」はスキル名"
+ },
+ {
+  "key": "Stalker",
+  "current": "闊歩",
+  "suggested": "追跡者",
+  "category": "meaning",
+  "reason": "この key はシャドウウォリアー／シャドウマスターの変化名（最も強いモンスターを追って狙う）。「闊歩」は D2R のレア名後半（ブーツ）の訳で意味が合わない"
+ },
+ {
+  "key": "Plague Trample",
+  "current": "プレイグ蹂躙",
+  "suggested": "災禍の蹂躙",
+  "category": "term",
+  "reason": "レア名の前半 Plague の D2R 公式は「災禍の」"
+ },
+ {
+  "key": "Hailstone Spawn",
+  "current": "雹のスポーン",
+  "suggested": "雹の落とし子",
+  "category": "term",
+  "reason": "レア名の後半 Spawn の D2R 公式は「落とし子」"
+ },
+ {
+  "key": "Eye",
+  "current": "アイ",
+  "suggested": "眼",
+  "category": "term",
+  "reason": "レア名後半の一覧（[`Eye`,[`misc`]]）で使われる単語。D2R のレア名後半は「眼」。「アイ」はユニークモンスター名の部品"
+ },
+ {
+  "key": "Plague Wood",
+  "current": "プレイグ立ち木",
+  "suggested": "災禍の立ち木",
+  "category": "term",
+  "reason": "レア名の前半 Plague の D2R 公式は「災禍の」"
+ },
+ {
+  "key": "Plague Heart",
+  "current": "プレイグ心臓",
+  "suggested": "災禍の心臓",
+  "category": "term",
+  "reason": "レア名の前半 Plague の D2R 公式は「災禍の」"
+ },
+ {
+  "key": "Plague Razor",
+  "current": "プレイグ剃刀",
+  "suggested": "災禍の剃刀",
+  "category": "term",
+  "reason": "レア名の前半 Plague の D2R 公式は「災禍の」"
+ },
+ {
+  "key": "Raven Harp",
+  "current": "レイヴン召喚竪琴",
+  "suggested": "レイヴンの竪琴",
+  "category": "term",
+  "reason": "レア名の前半 Raven の D2R 公式は「レイヴンの」。「レイヴン召喚」はスキル名"
+ }
+]
