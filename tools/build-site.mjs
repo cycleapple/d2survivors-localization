@@ -102,7 +102,13 @@ function fillLangs(texts, lang) {
   return fill(texts);
 }
 
-const langLink = (o, sl) => `<a href="../${o.path}/" hreflang="${o.hreflang}" lang="${o.html}" data-lang="${o.id}"${o === sl ? ' aria-current="page"' : ''}>${esc(o.label)}</a>`;
+const langLink = (o, sl, prefix = '../') => `<a href="${prefix}${o.path}/" hreflang="${o.hreflang}" lang="${o.html}" data-lang="${o.id}"${o === sl ? ' aria-current="page"' : ''}>${esc(o.label)}</a>`;
+
+// 窄螢幕放不下語言分頁時，在頁面最上面把所有語言一次列出（各用自己的語言寫，可以折行）。寬螢幕藏起來
+const langStrip = (sl, label, prefix) => `<nav class="lang-strip lang-switch" aria-label="${esc(label)}">
+    <span class="globe" aria-hidden="true">🌐</span>
+    ${SITE_LANGS.map(o => langLink(o, sl, prefix)).join('\n    ')}
+  </nav>`;
 
 function langPage(sl) {
   const t = fillLangs(I18N[sl.id], sl.id);
@@ -133,20 +139,15 @@ function langPage(sl) {
 </head>
 <body data-platform="desktop">
   ${PLATFORM_BOOT}
+  ${langStrip(sl, t['langs.label'], '../')}
   <header class="topbar">
     <!-- 第一層選網站語言（各自一頁），第二層選桌面版／瀏覽器版（同一頁裡切換） -->
     <div class="wrap topbar-inner">
       <a class="brand" href="${BASE}">D2S <span>Localization</span></a>
       <nav class="tabs lang-switch" aria-label="${esc(t['langs.label'])}">
+        <span class="globe" aria-hidden="true">🌐</span>
         ${SITE_LANGS.map(o => langLink(o, sl)).join('\n        ')}
       </nav>
-      <!-- 窄螢幕放不下所有語言分頁時改用選單（style.css 切換） -->
-      <details class="lang-menu lang-switch">
-        <summary aria-label="${esc(t['langs.label'])}">${esc(sl.label)}</summary>
-        <div class="lang-menu-list">
-          ${SITE_LANGS.map(o => langLink(o, sl)).join('\n          ')}
-        </div>
-      </details>
     </div>
     <div class="wrap subbar-inner">
       <nav class="nav">
@@ -343,10 +344,11 @@ function rootPage() {
   })}
 </head>
 <body class="root-page">
+  ${langStrip(null, 'Language', '')}
   <main>
     <section class="hero">
       <div class="wrap">
-        <p class="eyebrow">Unofficial fan translation · <span lang="zh-Hant-TW">非官方玩家翻譯</span></p>
+        <p class="eyebrow root-eyebrow"><span aria-hidden="true">🌐</span> ${SITE_LANGS.map(s => `<span lang="${s.html}">${esc(s.label)}</span>`).join(' · ')}</p>
         <h1>D2 Survivors Localization</h1>
         <p class="lead">${esc(en['hero.lead'])}</p>
         <ul class="root-langs" id="root-langs">

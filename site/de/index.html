@@ -42,11 +42,22 @@
 </head>
 <body data-platform="desktop">
   <script>(function(){var P=['desktop','web'],q=new URLSearchParams(location.search).get('platform'),h={'#install':'desktop','#web':'web'}[location.hash],s;try{s=localStorage.getItem('d2s-site-platform')}catch(e){}document.body.dataset.platform=P.indexOf(q)>=0?q:h||(P.indexOf(s)>=0?s:/Windows/i.test(navigator.userAgent)?'desktop':'web')})()</script>
+  <nav class="lang-strip lang-switch" aria-label="Sprache der Website">
+    <span class="globe" aria-hidden="true">🌐</span>
+    <a href="../zh-tw/" hreflang="zh-TW" lang="zh-Hant-TW" data-lang="zh-TW">繁體中文</a>
+    <a href="../zh-cn/" hreflang="zh-CN" lang="zh-Hans-CN" data-lang="zh-CN">简体中文</a>
+    <a href="../en/" hreflang="en" lang="en" data-lang="en">English</a>
+    <a href="../ja/" hreflang="ja" lang="ja" data-lang="ja">日本語</a>
+    <a href="../de/" hreflang="de" lang="de" data-lang="de" aria-current="page">Deutsch</a>
+    <a href="../fr/" hreflang="fr" lang="fr" data-lang="fr">Français</a>
+    <a href="../ru/" hreflang="ru" lang="ru" data-lang="ru">Русский</a>
+  </nav>
   <header class="topbar">
     <!-- 第一層選網站語言（各自一頁），第二層選桌面版／瀏覽器版（同一頁裡切換） -->
     <div class="wrap topbar-inner">
       <a class="brand" href="https://cycleapple.github.io/d2survivors-localization/">D2S <span>Localization</span></a>
       <nav class="tabs lang-switch" aria-label="Sprache der Website">
+        <span class="globe" aria-hidden="true">🌐</span>
         <a href="../zh-tw/" hreflang="zh-TW" lang="zh-Hant-TW" data-lang="zh-TW">繁體中文</a>
         <a href="../zh-cn/" hreflang="zh-CN" lang="zh-Hans-CN" data-lang="zh-CN">简体中文</a>
         <a href="../en/" hreflang="en" lang="en" data-lang="en">English</a>
@@ -55,19 +66,6 @@
         <a href="../fr/" hreflang="fr" lang="fr" data-lang="fr">Français</a>
         <a href="../ru/" hreflang="ru" lang="ru" data-lang="ru">Русский</a>
       </nav>
-      <!-- 窄螢幕放不下所有語言分頁時改用選單（style.css 切換） -->
-      <details class="lang-menu lang-switch">
-        <summary aria-label="Sprache der Website">Deutsch</summary>
-        <div class="lang-menu-list">
-          <a href="../zh-tw/" hreflang="zh-TW" lang="zh-Hant-TW" data-lang="zh-TW">繁體中文</a>
-          <a href="../zh-cn/" hreflang="zh-CN" lang="zh-Hans-CN" data-lang="zh-CN">简体中文</a>
-          <a href="../en/" hreflang="en" lang="en" data-lang="en">English</a>
-          <a href="../ja/" hreflang="ja" lang="ja" data-lang="ja">日本語</a>
-          <a href="../de/" hreflang="de" lang="de" data-lang="de" aria-current="page">Deutsch</a>
-          <a href="../fr/" hreflang="fr" lang="fr" data-lang="fr">Français</a>
-          <a href="../ru/" hreflang="ru" lang="ru" data-lang="ru">Русский</a>
-        </div>
-      </details>
     </div>
     <div class="wrap subbar-inner">
       <nav class="nav">
@@ -239,8 +237,13 @@
         <ol class="changelog" id="changelog-list">
           <li>
             <time datetime="2026-10-27">2026-10-27</time>
+            <span class="kind kind-translation">Übersetzung</span>
+            <span class="changelog-summary">Russisch: 562 korrigiert; Patch-Regeln aktualisiert</span>
+          </li>
+          <li>
+            <time datetime="2026-10-27">2026-10-27</time>
             <span class="kind kind-language">Sprache</span>
-            <span class="changelog-summary">New update source: Traditional Chinese, plus Simplified Chinese, Japanese, German, French and Russian in beta, selectable in the launcher and the web bookmarklet</span>
+            <span class="changelog-summary">Neue Update-Quelle: Traditionelles Chinesisch sowie Vereinfachtes Chinesisch, Japanisch, Deutsch, Französisch und Russisch als Beta, wählbar im Launcher und im Web-Lesezeichen</span>
           </li>
         </ol>
       </div>
@@ -357,7 +360,7 @@
     </div>
   </footer>
 
-  <script id="page-data" type="application/json">{"lang":"de","t":{"changelog.kind.translation":"Übersetzung","changelog.kind.language":"Sprache","changelog.kind.game-fix":"Spiel-Update","changelog.kind.launcher":"Launcher","lang.coverage":"{0} Texte","status.available":"Verfügbar","status.beta":"Beta","status.planned":"Geplant","meta.updated":"Übersetzung aktualisiert","meta.game":"Spielversion","meta.launcher":"Launcher","meta.platform":"Windows","meta.browsers":"Browser","meta.devices":"Geräte","meta.devices.value":"PC & Handy","hero.download":"Launcher herunterladen","hero.soon":"Demnächst","web.copied":"Kopiert","web.copyfail":"Automatisches Kopieren ging nicht; markiere den Code unten von Hand.","web.pc.drag":"Zieh den Knopf in die Lesezeichenleiste; ein Klick hier bewirkt nichts."},"webChecked":"2026-10-27T13:04:28.142Z"}</script>
+  <script id="page-data" type="application/json">{"lang":"de","t":{"changelog.kind.translation":"Übersetzung","changelog.kind.language":"Sprache","changelog.kind.game-fix":"Spiel-Update","changelog.kind.launcher":"Launcher","lang.coverage":"{0} Texte","status.available":"Verfügbar","status.beta":"Beta","status.planned":"Geplant","meta.updated":"Übersetzung aktualisiert","meta.game":"Spielversion","meta.launcher":"Launcher","meta.platform":"Windows","meta.browsers":"Browser","meta.devices":"Geräte","meta.devices.value":"PC & Handy","hero.download":"Launcher herunterladen","hero.soon":"Demnächst","web.copied":"Kopiert","web.copyfail":"Automatisches Kopieren ging nicht; markiere den Code unten von Hand.","web.pc.drag":"Zieh den Knopf in die Lesezeichenleiste; ein Klick hier bewirkt nichts."},"webChecked":"2026-10-27T13:21:03.641Z"}</script>
   <script type="module" src="../app.js"></script>
 </body>
 </html>

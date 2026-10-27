@@ -75,26 +75,25 @@ pre code { background: none; border: 0; padding: 0; word-break: normal; }
 .tabs a:hover { color: var(--gold-hi); }
 .tabs a[aria-current="page"] { position: relative; color: var(--gold-hi); background: var(--bg-2); border-color: var(--line); }
 
-/* 語言選單：窄螢幕放不下所有語言分頁時取代分頁 */
-.lang-menu { display: none; position: relative; margin-left: auto; align-self: center; }
-.lang-menu summary {
-  list-style: none; cursor: pointer; font-size: 0.88rem; color: var(--gold-hi);
-  border: 1px solid var(--line); border-radius: 999px; padding: 4px 14px; white-space: nowrap;
-}
-.lang-menu summary::-webkit-details-marker { display: none; }
-.lang-menu summary::before { content: "🌐 "; }
-.lang-menu summary::after { content: " ▾"; color: var(--muted); }
-.lang-menu-list {
-  position: absolute; right: 0; top: calc(100% + 6px); z-index: 20; min-width: 160px;
-  display: flex; flex-direction: column; padding: 6px; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-}
-.lang-menu-list a { color: var(--text); text-decoration: none; padding: 8px 12px; border-radius: 4px; }
-.lang-menu-list a:hover { background: var(--bg-2); color: var(--gold-hi); }
-.lang-menu-list a[aria-current="page"] { color: #1a1206; background: var(--gold); }
+.tabs .globe { align-self: center; margin-right: 4px; font-size: 0.9rem; opacity: 0.8; }
+
+/* 窄螢幕：分頁放不下，改在頁面最上面一次列出所有語言（會折行），標題列只留版本分頁 */
+.lang-strip { display: none; }
 @media (max-width: 1000px) {
-  .tabs { display: none; }
-  .lang-menu { display: block; }
+  .tabs, .topbar-inner { display: none; }
+  .lang-strip {
+    display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 6px;
+    padding: 10px 12px; background: var(--bg-2); border-bottom: 1px solid var(--line-soft);
+  }
+  .lang-strip .globe { font-size: 1rem; margin-right: 2px; }
+  .lang-strip a {
+    font-size: 0.85rem; color: var(--text); text-decoration: none; white-space: nowrap;
+    padding: 3px 10px; border: 1px solid var(--line); border-radius: 999px;
+  }
+  .lang-strip a:hover { border-color: var(--gold); color: var(--gold-hi); }
+  .lang-strip a[aria-current="page"] { color: #1a1206; background: var(--gold); border-color: var(--gold); font-weight: 600; }
+  .topbar .subbar-inner { border-top: 0; }
+  html { scroll-padding-top: 64px; }
 }
 
 /* 第二層：桌面版／瀏覽器版子分頁，跟頁內導覽同一列 */
@@ -317,6 +316,7 @@ h3 { font-size: 1.15rem; margin: 0 0 10px; }
 .root-lang-desc { color: var(--muted); font-size: 0.9rem; flex: 1; }
 .root-lang-enter { color: var(--gold-hi); font-weight: 600; }
 .root-suggested { position: absolute; top: -10px; right: 14px; font-size: 0.75rem; padding: 1px 10px; border-radius: 999px; color: #1a1206; background: var(--gold); }
+.root-eyebrow { text-transform: none; letter-spacing: 0.05em; font-size: 0.9rem; }
 .root-planned { color: var(--muted); font-size: 0.9rem; margin: 28px auto 0; max-width: 760px; }
 @media (max-width: 760px) {
   .root-langs { grid-template-columns: 1fr; }
