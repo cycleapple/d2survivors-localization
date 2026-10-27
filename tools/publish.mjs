@@ -8,6 +8,7 @@ import { execFileSync } from 'node:child_process';
 import crypto from 'node:crypto';
 import fs from 'node:fs';
 import { TARGETS, target, layers } from './langs.mjs';
+import { autoSummary, UI_LANGUAGES } from './changelog-summary.mjs';
 
 // --dry-run：在 work/translation/publish-dry/ 的複本上跑，不清空 changelog-next.json、不 commit（試格式用）
 const DRY = process.argv.includes('--dry-run');
@@ -68,7 +69,8 @@ const dictChanged = stats.some(s => s.new || s.added || s.changed || s.removed |
 const changelog = readJson(CHANGELOG, { schema: 1, entries: [] });
 const next = readJson(NEXT, {});
 const hasNext = Object.keys(next).length > 0;
-if (hasNext && !next.summary?.['zh-TW']) fail(`${NEXT} 至少要有 summary["zh-TW"]`);
+if (hasNext && !(next.summary?.['zh-TW'] && next.summary?.en)) fail(`${NEXT} 至少要有 summary 的 zh-TW 和 en`);
+if (hasNext) { const missing = UI_LANGUAGES.filter(ui => !next.summary[ui]); if (missing.length) console.log(`注意：${NEXT} 的 summary 少了 ${missing.join('、')}（網站會顯示 en）`); }
 // 第一次（還沒有 changelog.json）也記一筆，讓網站和啟動器有東西可以讀
 const needEntry = dictChanged || rulesChanged || launcherChanged || !changelog.entries.length;
 
@@ -78,7 +80,7 @@ if (needEntry && changelog.entries[0]?.version !== manifest.version) {
     date: manifest.updated.slice(0, 10),
     kind: hasNext ? next.kind ?? 'translation' : 'translation',
     announce: hasNext ? !!next.announce : false,
-    summary: hasNext ? next.summary : autoSummary(),
+    summary: hasNext ? next.summary : autoSummary(stats, { rulesChanged, launcher: launcherChanged ? manifest.launcher?.latest : null }),
     ...(next.notes && { notes: next.notes }),
     game: { ...(manifest.game?.desktop && { desktop: manifest.game.desktop }) },
     ...(manifest.launcher?.latest && { launcher: manifest.launcher.latest }),
@@ -94,32 +96,6 @@ if (fs.existsSync(CHANGELOG)) {
   const buf = fs.readFileSync(CHANGELOG);
   const ref = { url: `changelog.json?v=${crypto.createHash('sha256').update(buf).digest('hex').slice(0, 12)}`, latest: changelog.entries[0].version };
   if (JSON.stringify(manifest.changelog) !== JSON.stringify(ref)) { manifest.changelog = ref; writeJson(`${OUT}/manifest.json`, manifest); }
-}
-
-// 沒寫 changelog-next.json 時的摘要：「繁中修正 30 條、新增 12 條」
-function autoSummary() {
-  const NAMES = {
-    'zh-TW': { 'zh-TW': '繁中', 'zh-CN': '簡中', ja: '日文', de: '德文', fr: '法文', ru: '俄文' },
-    'zh-CN': { 'zh-TW': '繁中', 'zh-CN': '简中', ja: '日文', de: '德文', fr: '法文', ru: '俄文' },
-    en: { 'zh-TW': 'Traditional Chinese', 'zh-CN': 'Simplified Chinese', ja: 'Japanese', de: 'German', fr: 'French', ru: 'Russian' },
-  };
-  const WORDS = {
-    'zh-TW': { changed: n => `修正 ${n} 條`, added: n => `新增 ${n} 條`, removed: n => `刪除 ${n} 條`, new: '新增', beta: '（測試中）', join: '、', sep: '；', rules: '更新修改規則', launcher: v => `啟動器 ${v}`, none: '更新翻譯', nowAvailable: '改為正式版', nowBeta: '改為測試中' },
-    'zh-CN': { changed: n => `修正 ${n} 条`, added: n => `新增 ${n} 条`, removed: n => `删除 ${n} 条`, new: '新增', beta: '（测试中）', join: '、', sep: '；', rules: '更新修改规则', launcher: v => `启动器 ${v}`, none: '更新翻译', nowAvailable: '改为正式版', nowBeta: '改为测试中' },
-    en: { changed: n => `${n} fixed`, added: n => `${n} added`, removed: n => `${n} removed`, new: 'New: ', beta: ' (beta)', join: ', ', sep: '; ', rules: 'Updated patch rules', launcher: v => `Launcher ${v}`, none: 'Updated translations', nowAvailable: 'now available', nowBeta: 'now in beta' },
-  };
-  return Object.fromEntries(Object.entries(WORDS).map(([ui, w]) => {
-    const parts = stats.map(s => {
-      const name = NAMES[ui][s.id] ?? s.id;
-      if (s.new) return ui === 'en' ? `${w.new}${name}${s.status === 'beta' ? w.beta : ''}` : `${w.new}${name}${s.status === 'beta' ? w.beta : ''}`;
-      const counts = ['changed', 'added', 'removed'].filter(k => s[k]).map(k => w[k](s[k]));
-      if (s.statusFrom) counts.unshift(w[s.status === 'available' ? 'nowAvailable' : 'nowBeta']);
-      return counts.length ? (ui === 'en' ? `${name}: ${counts.join(w.join)}` : `${name}${counts.join(w.join)}`) : null;
-    }).filter(Boolean);
-    if (rulesChanged) parts.push(w.rules);
-    if (launcherChanged && manifest.launcher?.latest) parts.push(w.launcher(manifest.launcher.latest));
-    return [ui, parts.join(w.sep) || w.none];
-  }));
 }
 
 if (DRY) { console.log(`試跑完成：${OUT}（沒有 commit）`); process.exit(0); }
