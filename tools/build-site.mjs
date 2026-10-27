@@ -102,6 +102,8 @@ function fillLangs(texts, lang) {
   return fill(texts);
 }
 
+const langLink = (o, sl) => `<a href="../${o.path}/" hreflang="${o.hreflang}" lang="${o.html}" data-lang="${o.id}"${o === sl ? ' aria-current="page"' : ''}>${esc(o.label)}</a>`;
+
 function langPage(sl) {
   const t = fillLangs(I18N[sl.id], sl.id);
   // 桌面捷徑的範例用這一頁的語言（不是遊戲翻譯語言的就用繁中）
@@ -136,8 +138,15 @@ function langPage(sl) {
     <div class="wrap topbar-inner">
       <a class="brand" href="${BASE}">D2S <span>Localization</span></a>
       <nav class="tabs lang-switch" aria-label="${esc(t['langs.label'])}">
-        ${SITE_LANGS.map(o => `<a href="../${o.path}/" hreflang="${o.hreflang}" lang="${o.html}" data-lang="${o.id}"${o === sl ? ' aria-current="page"' : ''}>${esc(o.label)}</a>`).join('\n        ')}
+        ${SITE_LANGS.map(o => langLink(o, sl)).join('\n        ')}
       </nav>
+      <!-- 窄螢幕放不下所有語言分頁時改用選單（style.css 切換） -->
+      <details class="lang-menu lang-switch">
+        <summary aria-label="${esc(t['langs.label'])}">${esc(sl.label)}</summary>
+        <div class="lang-menu-list">
+          ${SITE_LANGS.map(o => langLink(o, sl)).join('\n          ')}
+        </div>
+      </details>
     </div>
     <div class="wrap subbar-inner">
       <nav class="nav">

@@ -16,6 +16,7 @@ node tools/serve.mjs site 8766     # 本機預覽（或 python -m http.server 87
 | `/zh-cn/` | 简体中文（大陆用语） |
 | `/en/` | English |
 | `/ja/` | 日本語 |
+| `/de/`、`/fr/`、`/ru/` | Deutsch、Français、Русский |
 
 `BASE`（網站網址）在 `site/src/config.mjs` 的 `SITE.base`，暫定 `https://cycleapple.github.io/d2survivors-localization/`。換網域就改這個值再重新產生；canonical、hreflang、Open Graph、sitemap、書籤網址都從這裡來。頁面之間的連結和 CSS、JS 用相對路徑，本機預覽和子路徑都能用。
 
@@ -45,7 +46,7 @@ node tools/serve.mjs site 8766     # 本機預覽（或 python -m http.server 87
 
 ## 兩層分頁
 
-- 第一層是介面語言：各自一頁，用連結切換
+- 第一層是介面語言：各自一頁，用連結切換。寬螢幕是分頁；1000px 以下放不下，改成「🌐 語言 ▾」選單（`style.css` 的 `.lang-menu`）。之後語言再變多、寬螢幕也放不下時，調高這個寬度
 - 第二層是版本：桌面版（啟動器，`#install`）、瀏覽器版（書籤，`#web`），同一頁裡切換。兩邊內容都在 HTML 裡，標 `data-only="desktop"`／`"web"`，用 CSS 藏起另一邊
 - 顯示哪個版本：網址 `?platform=desktop`／`web` → `#install`／`#web` → 上次選的（localStorage）→ Windows 用桌面版，其他（Mac、Linux、手機）用瀏覽器版。在 `<body>` 開頭用一小段內嵌程式先決定，不會先閃一下桌面版
 

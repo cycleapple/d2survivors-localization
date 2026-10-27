@@ -41,21 +41,25 @@ export const SITE_LANGS = [
   { id: 'zh-CN', path: 'zh-cn', label: '简体中文', html: 'zh-Hans-CN', hreflang: 'zh-CN', og: 'zh_CN', fonts: ['Noto+Serif+SC:wght@600;700'] },
   { id: 'en', path: 'en', label: 'English', html: 'en', hreflang: 'en', og: 'en_US', fonts: [] },
   { id: 'ja', path: 'ja', label: '日本語', html: 'ja', hreflang: 'ja', og: 'ja_JP', fonts: ['Noto+Serif+JP:wght@600;700'] },
+  { id: 'de', path: 'de', label: 'Deutsch', html: 'de', hreflang: 'de', og: 'de_DE', fonts: [] },
+  { id: 'fr', path: 'fr', label: 'Français', html: 'fr', hreflang: 'fr', og: 'fr_FR', fonts: [] },
+  // Cinzel 沒有西里爾字母，標題改用 Philosopher
+  { id: 'ru', path: 'ru', label: 'Русский', html: 'ru', hreflang: 'ru', og: 'ru_RU', fonts: ['Philosopher:wght@400;700'] },
 ];
 
 // 遊戲翻譯的語言清單（順序就是網站上的順序）。manifest 裡有的語言以 manifest 為準（status：available／beta、條數、更新時間），
 // 沒有的就是 planned（計畫中）。name：用各個網站介面語言寫的語言名稱，沒有的介面語言用 en
 export const LANGUAGES = [
-  { id: 'zh-TW', native: '繁體中文', name: { 'zh-TW': '中文（繁體）', 'zh-CN': '中文（繁体）', en: 'Chinese (Traditional)', ja: '中国語（繁体字）' }, status: 'available', entries: 12758, updated: '2026-10-27' },
-  { id: 'zh-CN', native: '简体中文', name: { 'zh-TW': '中文（簡體）', 'zh-CN': '中文（简体）', en: 'Chinese (Simplified)', ja: '中国語（簡体字）' }, status: 'beta', entries: 12753, updated: '2026-10-27' },
-  { id: 'ja', native: '日本語', name: { 'zh-TW': '日文', 'zh-CN': '日语', en: 'Japanese', ja: '日本語' }, status: 'beta', entries: 12755, updated: '2026-10-27' },
-  // 翻譯中（manifest 還沒有的顯示「計畫中」）：德、法、俄文已翻完在等規則，波蘭文接著做
-  { id: 'de', native: 'Deutsch', name: { 'zh-TW': '德文', 'zh-CN': '德语', en: 'German', ja: 'ドイツ語' }, status: 'planned' },
-  { id: 'fr', native: 'Français', name: { 'zh-TW': '法文', 'zh-CN': '法语', en: 'French', ja: 'フランス語' }, status: 'planned' },
-  { id: 'ru', native: 'Русский', name: { 'zh-TW': '俄文', 'zh-CN': '俄语', en: 'Russian', ja: 'ロシア語' }, status: 'planned' },
-  { id: 'pl', native: 'Polski', name: { 'zh-TW': '波蘭文', 'zh-CN': '波兰语', en: 'Polish', ja: 'ポーランド語' }, status: 'planned' },
-  { id: 'es-ES', native: 'Español (España)', name: { 'zh-TW': '西班牙文（西班牙）', 'zh-CN': '西班牙语（西班牙）', en: 'Spanish (Spain)', ja: 'スペイン語（スペイン）' }, status: 'planned' },
-  { id: 'es-419', native: 'Español (Latinoamérica)', name: { 'zh-TW': '西班牙文（拉丁美洲）', 'zh-CN': '西班牙语（拉丁美洲）', en: 'Spanish (Latin America)', ja: 'スペイン語（中南米）' }, status: 'planned' },
-  { id: 'it', native: 'Italiano', name: { 'zh-TW': '義大利文', 'zh-CN': '意大利语', en: 'Italian', ja: 'イタリア語' }, status: 'planned' },
-  { id: 'pt-BR', native: 'Português (Brasil)', name: { 'zh-TW': '葡萄牙文（巴西）', 'zh-CN': '葡萄牙语（巴西）', en: 'Portuguese (Brazil)', ja: 'ポルトガル語（ブラジル）' }, status: 'planned' },
+  { id: 'zh-TW', native: '繁體中文', name: { 'zh-TW': '中文（繁體）', 'zh-CN': '中文（繁体）', en: 'Chinese (Traditional)', ja: '中国語（繁体字）', de: 'Chinesisch (traditionell)', fr: 'chinois (traditionnel)', ru: 'китайский (традиционный)' }, status: 'available', entries: 12758, updated: '2026-10-27' },
+  { id: 'zh-CN', native: '简体中文', name: { 'zh-TW': '中文（簡體）', 'zh-CN': '中文（简体）', en: 'Chinese (Simplified)', ja: '中国語（簡体字）', de: 'Chinesisch (vereinfacht)', fr: 'chinois (simplifié)', ru: 'китайский (упрощённый)' }, status: 'beta', entries: 12753, updated: '2026-10-27' },
+  { id: 'ja', native: '日本語', name: { 'zh-TW': '日文', 'zh-CN': '日语', en: 'Japanese', ja: '日本語', de: 'Japanisch', fr: 'japonais', ru: 'японский' }, status: 'beta', entries: 12755, updated: '2026-10-27' },
+  // 德、法、俄文已發布（beta，狀態以 manifest 為準）；波蘭文接著做，manifest 還沒有的顯示「計畫中」
+  { id: 'de', native: 'Deutsch', name: { 'zh-TW': '德文', 'zh-CN': '德语', en: 'German', ja: 'ドイツ語', de: 'Deutsch', fr: 'allemand', ru: 'немецкий' }, status: 'planned' },
+  { id: 'fr', native: 'Français', name: { 'zh-TW': '法文', 'zh-CN': '法语', en: 'French', ja: 'フランス語', de: 'Französisch', fr: 'français', ru: 'французский' }, status: 'planned' },
+  { id: 'ru', native: 'Русский', name: { 'zh-TW': '俄文', 'zh-CN': '俄语', en: 'Russian', ja: 'ロシア語', de: 'Russisch', fr: 'russe', ru: 'русский' }, status: 'planned' },
+  { id: 'pl', native: 'Polski', name: { 'zh-TW': '波蘭文', 'zh-CN': '波兰语', en: 'Polish', ja: 'ポーランド語', de: 'Polnisch', fr: 'polonais', ru: 'польский' }, status: 'planned' },
+  { id: 'es-ES', native: 'Español (España)', name: { 'zh-TW': '西班牙文（西班牙）', 'zh-CN': '西班牙语（西班牙）', en: 'Spanish (Spain)', ja: 'スペイン語（スペイン）', de: 'Spanisch (Spanien)', fr: 'espagnol (Espagne)', ru: 'испанский (Испания)' }, status: 'planned' },
+  { id: 'es-419', native: 'Español (Latinoamérica)', name: { 'zh-TW': '西班牙文（拉丁美洲）', 'zh-CN': '西班牙语（拉丁美洲）', en: 'Spanish (Latin America)', ja: 'スペイン語（中南米）', de: 'Spanisch (Lateinamerika)', fr: 'espagnol (Amérique latine)', ru: 'испанский (Латинская Америка)' }, status: 'planned' },
+  { id: 'it', native: 'Italiano', name: { 'zh-TW': '義大利文', 'zh-CN': '意大利语', en: 'Italian', ja: 'イタリア語', de: 'Italienisch', fr: 'italien', ru: 'итальянский' }, status: 'planned' },
+  { id: 'pt-BR', native: 'Português (Brasil)', name: { 'zh-TW': '葡萄牙文（巴西）', 'zh-CN': '葡萄牙语（巴西）', en: 'Portuguese (Brazil)', ja: 'ポルトガル語（ブラジル）', de: 'Portugiesisch (Brasilien)', fr: 'portugais (Brésil)', ru: 'португальский (Бразилия)' }, status: 'planned' },
 ];
