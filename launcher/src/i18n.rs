@@ -4,7 +4,14 @@
 /// (key, 繁中, 簡中, 英文)
 const TABLE: &[(&str, &str, &str, &str)] = &[
     ("app_title", "D2 Survivors 啟動器", "D2 Survivors 启动器", "D2 Survivors Launcher"),
-    ("step", "第 {} 步，共 {} 步", "第 {} 步，共 {} 步", "Step {} of {}"),
+    ("brand", "D2 Survivors 中文化", "D2 Survivors 汉化", "D2 Survivors Localization"),
+    ("step_lang", "語言", "语言", "Language"),
+    ("step_game", "遊戲", "游戏", "Game"),
+    ("step_d2", "Diablo II", "Diablo II", "Diablo II"),
+    ("step_done", "完成", "完成", "Done"),
+    ("new_badge", "新", "新", "New"),
+    ("site_short", "網站", "网站", "Website"),
+    ("licenses", "授權", "许可", "Licenses"),
     ("next", "下一步", "下一步", "Next"),
     ("back", "上一步", "上一步", "Back"),
     ("skip", "略過", "跳过", "Skip"),
@@ -29,8 +36,6 @@ const TABLE: &[(&str, &str, &str, &str)] = &[
     ("open_blizzard", "前往 Blizzard 的 Diablo II: Resurrected 頁面", "前往 Blizzard 的 Diablo II: Resurrected 页面", "Diablo II: Resurrected on Blizzard's website"),
     ("done_title", "準備好了", "准备好了", "All set"),
     ("done_desc", "按「啟動遊戲」會下載最新的翻譯並開啟遊戲。", "点「启动游戏」会下载最新的翻译并启动游戏。", "Click Play to download the latest translation and start the game."),
-    ("site_link", "中文化網站", "汉化网站", "Localization website"),
-    ("discord_link", "社群 Discord", "社区 Discord", "Community Discord"),
     ("donate", "☕ 請我喝杯咖啡", "☕ 请我喝杯咖啡", "☕ Buy me a coffee"),
     ("create_shortcut", "在桌面建立捷徑", "在桌面创建快捷方式", "Create a desktop shortcut"),
     ("shortcut_done", "已在桌面建立捷徑", "已在桌面创建快捷方式", "Desktop shortcut created"),
@@ -42,7 +47,6 @@ const TABLE: &[(&str, &str, &str, &str)] = &[
     ("status_translation", "翻譯", "翻译", "Translation"),
     ("status_game", "遊戲", "游戏", "Game"),
     ("status_launcher", "啟動器", "启动器", "Launcher"),
-    ("up_to_date", "已是最新版", "已是最新版", "up to date"),
     ("update_failed", "無法檢查更新，先用本機的翻譯", "无法检查更新，先用本地的翻译", "Couldn't check for updates; using the local copy"),
     ("launcher_new", "有新版 {}", "有新版 {}", "{} available"),
     ("launcher_required", "新的翻譯需要啟動器 {}，請先更新", "新的翻译需要启动器 {}，请先更新", "The latest translation needs launcher {}. Please update."),
@@ -77,9 +81,8 @@ const TABLE: &[(&str, &str, &str, &str)] = &[
 /// 選語言那一步的標題：玩家還沒選語言，用好幾種語言並列
 pub const LANGUAGE_TITLE: &str = "選擇語言 · 选择语言 · Language · 言語 · Sprache · Langue · Язык · Język";
 
-/// 語言清單的項目：名稱和狀態都用那個語言自己寫，例如「简体中文（测试中）」「Русский (бета)」。
-/// status 是 manifest 的 status（available 不加標示，beta 測試中，其他都當草稿）
-pub fn native_label(id: &str, name: &str, status: Option<&str>) -> String {
+/// 語言的狀態用那個語言自己寫：status 是 manifest 的 status（None＝available 不加標示，beta 測試中，其他都當草稿）
+pub fn native_status(id: &str, status: Option<&str>) -> Option<&'static str> {
     // (語言, 測試中, 草稿)
     const NATIVE: &[(&str, &str, &str)] = &[
         ("zh-TW", "測試中", "草稿"),
@@ -91,7 +94,7 @@ pub fn native_label(id: &str, name: &str, status: Option<&str>) -> String {
         ("ru", "бета", "черновик"),
         ("pl", "beta", "wersja robocza"),
     ];
-    let note = status.map(|s| {
+    status.map(|s| {
         let row = NATIVE.iter().find(|r| r.0 == id);
         match (s, row) {
             ("beta", Some(r)) => r.1,
@@ -99,7 +102,11 @@ pub fn native_label(id: &str, name: &str, status: Option<&str>) -> String {
             (_, Some(r)) => r.2,
             (_, None) => "draft",
         }
-    });
+    })
+}
+
+/// 語言名稱加上括號裡的說明（已經是那個語言寫的），例如「简体中文（测试中）」「Русский (бета)」
+pub fn with_note(id: &str, name: &str, note: Option<&str>) -> String {
     match note {
         // 中日文用全形括號
         Some(n) if id.starts_with("zh") || id == "ja" => format!("{name}（{n}）"),
@@ -143,6 +150,11 @@ mod tests {
             assert!(r.2.matches("{}").count() == n && r.3.matches("{}").count() == n, "{} 各語言的 {{}} 數量不一樣", r.0);
         }
         assert_eq!(tr("ja", "play"), "Play");
-        assert_eq!(trf("zh-TW", "step", &["1", "4"]), "第 1 步，共 4 步");
+        assert_eq!(trf("zh-TW", "launcher_new", &["0.3.0"]), "有新版 0.3.0");
+        let label = |id, name, status| with_note(id, name, native_status(id, status));
+        assert_eq!(label("zh-CN", "简体中文", Some("beta")), "简体中文（测试中）");
+        assert_eq!(label("ru", "Русский", Some("beta")), "Русский (бета)");
+        assert_eq!(label("pl", "Polski", Some("whatever")), "Polski (wersja robocza)");
+        assert_eq!(label("zh-TW", "繁體中文", None), "繁體中文");
     }
 }

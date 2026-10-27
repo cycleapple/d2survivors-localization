@@ -15,6 +15,7 @@ mod patcher;
 mod paths;
 mod selfupdate;
 mod system;
+mod theme;
 
 use jobs::Job;
 use paths::Config;
