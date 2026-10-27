@@ -30,7 +30,7 @@ node tools/serve.mjs site 8766     # 本機預覽（或 python -m http.server 87
 | `tools/build-site.mjs` | 頁面樣板，產生靜態頁 |
 | `site/app.js` | 語言頁的互動：版本切換、書籤按鈕、讀較新的 manifest 重畫 |
 | `site/root.js` | 首頁：標出建議語言 |
-| `site/style.css`、`site/assets/` | 樣式、截圖、分享圖（`og.jpg`、`og-<語言>.jpg`，1200×630） |
+| `site/style.css`、`site/assets/` | 樣式、截圖（`assets/shots/<語言>/`）、分享圖（`og.jpg`、`og-<語言>.jpg`，1200×630） |
 
 產生的檔案（commit 進 repo，部署時也會重新產生）：`site/index.html`、`site/<語言>/index.html`、`site/sitemap.xml`、`site/robots.txt`。**不要手動改**，改 `site/src/` 再重跑。
 
@@ -48,7 +48,7 @@ node tools/serve.mjs site 8766     # 本機預覽（或 python -m http.server 87
 - 結構化資料（JSON-LD，在 `<head>`）：語言頁是 SoftwareApplication（桌面版啟動器，operatingSystem Windows）、WebApplication（瀏覽器版書籤）、FAQPage（只放兩個版本都看得到的題目，文字跟頁面一樣）；首頁是 WebSite。alternateName 用 i18n 的 `seo.alternateNames`。不寫 author／publisher。部署後用 Google 的「複合式搜尋結果測試」檢查
 - 站長平台驗證：`SITE.verify` 的 google、bing、baidu 有值才輸出 google-site-verification、msvalidate.01、baidu-site-verification
 - favicon：`site/favicon.svg`、`favicon.ico`（16／32／48）、`apple-touch-icon.png`（180），每頁都有 link（Google 搜尋結果的小圖示要真的網址）
-- 分享圖：`assets/og-<語言>.jpg`，標題用該語言（i18n 的 `hero.title`、`og.subtitle`），og:image:alt 用 `og.alt`；首頁用 `og.jpg`。改了這些文字要在本機跑 `node tools/build-site.mjs --og`（需要 ImageMagick 和 Windows 字型），產生的圖 commit 進 repo
+- 分享圖：`assets/og-<語言>.jpg`，背景是該語言的升級卡片截圖（見「截圖」），標題用該語言（i18n 的 `hero.title`、`og.subtitle`），og:image:alt 用 `og.alt`（背景還是繁中截圖時自動加 `shots.fallback`）；首頁用 `og.jpg`。改了這些文字要在本機跑 `node tools/build-site.mjs --og`（需要 ImageMagick 和 Windows 字型），產生的圖 commit 進 repo
 - sitemap 的 lastmod：頁面內容跟上次產生的一樣就沿用舊日期，有變才寫當天
 - 檢查：`node tools/build-site.mjs --check` 把每頁的 title、description、canonical、hreflang、分享圖、JSON-LD 摘要寫到 `work/site/seo-check.txt`，也檢查重複、缺漏、FAQPage 題目是否在頁面上
 - `robots.txt` 只有放在網域根目錄才有效。現在在 `github.io/<repo>/` 底下，搜尋引擎不會讀；換成自己的網域之後才生效。在那之前，sitemap 請到 Google Search Console、Bing、百度站長平台手動提交
@@ -90,6 +90,22 @@ node tools/serve.mjs site 8766     # 本機預覽（或 python -m http.server 87
 - 段落裡附上聲明（`donate.statement`）：免費使用，所有功能都不收費，也不販售任何遊戲內容；贊助是自願的，用來支持翻譯和維護的時間，贊助與否不影響任何功能。跟 README 同一個意思，不寫「不營利」
 - 贊助的文字不提 Blizzard 或官方譯名
 
+## 截圖
+
+規格在 [release.md](release.md) 的「宣傳截圖」：全部語言 available 之後，請啟動器、網頁書籤聊天室截圖，網站放進各語言頁。
+
+- 檔案：`site/assets/shots/<頁面 path>/<場景>.webp`（path 是 `zh-tw`、`zh-cn`、`ja`、`de`、`fr`、`ru`、`pl`），寬 1600 以內。各語言共用的（啟動器的語言畫面）放 `shots/all/`
+- 場景在 `config.mjs` 的 `SHOTS`：
+  - 遊戲（兩個版本都顯示）：`title` 標題畫面、`menu` 主選單、`levelup` 升級卡片、`item` 物品說明框、`character` 角色畫面、`skills` 技能樹、`hud` 遊戲中
+  - 桌面版：`launcher-lang` 啟動器的語言畫面、`launcher-main` 主畫面
+  - 瀏覽器版：`web-desktop` 電腦、`web-mobile` 手機直式
+- 每頁先找自己語言的，再找 `all/`，再沒有就用 `zh-tw/` 的，圖說後面加 `shots.fallback`（「圖為繁中版」）。三個地方都沒有的場景不顯示，所以只要放檔案、重新產生就好
+- 版面：遊戲畫面一排，寬螢幕一次兩張、手機一次一張，放不下時 app.js 加上一張／下一張按鈕（也可以橫向滑）。桌面版、瀏覽器版的畫面另一排，同高度並排（手機直式的圖比較窄），只在那個版本顯示。下面一行出處（`shots.credit`：「遊戲畫面：D2 Survivors（framara），使用玩家自己的 Diablo II 檔案」）
+- 圖說是 i18n 的 `shots.<場景>`；img 的 width／height 建置時從 webp 讀
+- 結構化資料：SoftwareApplication 的 `screenshot` 是這一頁的遊戲畫面截圖
+- 換了 `levelup` 截圖要跑 `--og` 重做分享圖。`--check` 會列出每頁幾張截圖、幾張是自己語言的
+- 截圖裡不要有使用者的路徑、帳號、角色名稱
+
 ## 下載按鈕
 
 固定指到 `https://github.com/cycleapple/d2survivors-localization/releases/latest/download/d2s-launcher.exe`（`SITE.downloadUrl`）。manifest 裡有 `launcher.latest` 才算已發布（`publish.mjs` 只在有 GitHub Release 時寫入），在那之前按鈕顯示「即將推出」。
@@ -106,7 +122,7 @@ node tools/serve.mjs site 8766     # 本機預覽（或 python -m http.server 87
 2. `site/src/i18n.mjs` 加一份（照 `en` 的 key 翻，關鍵字參考翻譯聊天室給的）。這些要依語言調整：
    - 啟動器只有繁中介面：按鈕名稱照原文寫，後面加譯文，例如「啟動遊戲」（ゲームを起動）
    - SmartScreen 那題用該語言版 Windows 的按鈕文字
-   - 截圖是繁中版，說明要註明
+   - `shots.fallback`：還沒有自己語言的截圖時，圖說後面加的「圖為繁中版」
    - 書籤名稱 `web.bookmark.name`
 3. `LANGUAGES` 每一筆的 `name` 加這個語言（沒加就顯示英文名稱）
 4. `style.css` 視需要加 `:root:lang(xx)` 的字型

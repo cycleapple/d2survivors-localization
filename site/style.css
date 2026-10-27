@@ -155,12 +155,26 @@ h1 { font-size: clamp(2rem, 5vw, 3.2rem); margin: 0 0 16px; word-break: keep-all
 .meta { list-style: none; padding: 0; margin: 28px 0 0; display: flex; justify-content: center; flex-wrap: wrap; gap: 8px 24px; color: var(--muted); font-size: 0.9rem; }
 .meta strong { color: var(--text); font-weight: 600; }
 
-/* Screenshots */
+/* 截圖：一排橫向捲動，寬螢幕一次兩張；上一張／下一張按鈕由 app.js 在放不下時加上 */
 .screens { padding: 48px 0 8px; }
-.screens-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-.screens figure { margin: 0; }
-.screens img { border: 1px solid var(--line); border-radius: var(--radius); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5); }
+.shots {
+  display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 20px) / 2); gap: 20px; align-items: start;
+  overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: thin; padding: 4px 4px 12px;
+}
+.shots + .shots, .shots-nav + .shots { margin-top: 16px; }
+.shot { margin: 0; scroll-snap-align: start; }
+.screens img { border: 1px solid var(--line); border-radius: var(--radius); box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5); }
 .screens figcaption { color: var(--muted); font-size: 0.88rem; margin-top: 8px; text-align: center; }
+/* 啟動器、瀏覽器版（有直式的手機畫面）：同樣高度並排 */
+.shots-platform { grid-auto-columns: max-content; }
+.shots-platform .shot { width: min-content; }
+.shots-platform img { height: clamp(240px, 30vw, 360px); width: auto; max-width: none; }
+.shots-nav { display: flex; justify-content: center; gap: 8px; margin-top: 4px; }
+.shots-nav[hidden] { display: none; }
+.shots-nav button { min-width: 44px; min-height: 36px; padding: 0 12px; color: var(--gold-hi); background: transparent; border: 1px solid var(--line); border-radius: var(--radius); cursor: pointer; font: inherit; }
+.shots-nav button:hover:not(:disabled) { border-color: var(--gold); }
+.shots-nav button:disabled { opacity: 0.35; cursor: default; }
+.shots-credit { color: var(--muted); font-size: 0.8rem; text-align: center; margin: 12px 0 0; opacity: 0.8; }
 
 /* Sections */
 .section { padding: 64px 0; }
@@ -255,7 +269,8 @@ h3 { font-size: 1.15rem; margin: 0 0 10px; }
   .subtabs { margin: 0 auto; }
   .subtabs button small { display: none; }
   .hero { padding: 56px 0 40px; }
-  .screens-grid, .cards { grid-template-columns: 1fr; }
+  .cards { grid-template-columns: 1fr; }
+  .shots-game { grid-auto-columns: 88%; gap: 12px; }
   .section { padding: 48px 0; }
   .steps li { padding-left: 58px; }
   .steps li::before { left: 14px; }

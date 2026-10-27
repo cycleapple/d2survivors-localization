@@ -70,6 +70,40 @@ $('#copy-bookmarklet').addEventListener('click', async () => {
   }
 });
 
+// 截圖一排放不下時加上一張／下一張按鈕（換版本、改視窗大小時重新判斷）
+const screens = $('.screens');
+document.querySelectorAll('.shots').forEach(row => {
+  const nav = document.createElement('div');
+  nav.className = 'shots-nav';
+  if (row.dataset.only) nav.dataset.only = row.dataset.only;
+  // 捲到目前最近那張的前一張／下一張（用位置算，不用相對距離，連按也不會停在兩張中間）
+  const figs = [...row.querySelectorAll('.shot')];
+  const step = dir => {
+    const pos = figs.map(f => f.offsetLeft - figs[0].offsetLeft);
+    const cur = pos.reduce((best, p, i) => (Math.abs(p - row.scrollLeft) < Math.abs(pos[best] - row.scrollLeft) ? i : best), 0);
+    row.scrollTo({ left: pos[Math.max(0, Math.min(figs.length - 1, cur + dir))], behavior: 'smooth' });
+  };
+  const [prev, next] = [[-1, '‹', 'prev'], [1, '›', 'next']].map(([dir, text, key]) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.textContent = text;
+    b.setAttribute('aria-label', screens.dataset[key]);
+    b.addEventListener('click', () => step(dir));
+    nav.append(b);
+    return b;
+  });
+  const update = () => {
+    const max = row.scrollWidth - row.clientWidth;
+    nav.hidden = max <= 1;
+    prev.disabled = row.scrollLeft <= 1;
+    next.disabled = row.scrollLeft >= max - 1;
+  };
+  row.after(nav);
+  row.addEventListener('scroll', update, { passive: true });
+  new ResizeObserver(update).observe(row);
+  update();
+});
+
 // 「遊戲剛更新，翻譯修正中」：每小時的檢查一直沒通過（game.web_checked 太舊）就顯示
 function showStale(checked) {
   $('#stale-notice').hidden = !isStale(checked, SITE.staleHours);

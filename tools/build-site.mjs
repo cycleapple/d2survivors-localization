@@ -8,7 +8,7 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
-import { SITE, LINKS, SITE_LANGS, LANGUAGES } from '../site/src/config.mjs';
+import { SITE, LINKS, SITE_LANGS, LANGUAGES, SHOTS, OG_SHOT } from '../site/src/config.mjs';
 import { I18N } from '../site/src/i18n.mjs';
 import { esc, fmt, siteState, langGridHtml, heroMetaHtml, downloadBtnHtml, changelogHtml, RUNTIME_KEYS } from '../site/src/shared.mjs';
 
@@ -53,6 +53,38 @@ const ogImage = sl => {
   const file = sl && `assets/og-${sl.path}.jpg`;
   return new URL(file && fs.existsSync(path.join(ROOT, file)) ? file : 'assets/og.jpg', BASE).href;
 };
+
+// 截圖：自己語言的 → all/（共用）→ zh-tw/（暫用，圖說加註）。回傳 { file（相對於 site/）, width, height, fallback }，沒有就 null
+const SHOT_FALLBACK = 'zh-tw';
+function shotFor(sl, scene) {
+  for (const dir of [sl.path, 'all', SHOT_FALLBACK]) {
+    const file = `assets/shots/${dir}/${scene}.webp`;
+    if (fs.existsSync(path.join(ROOT, file))) return { file, ...webpSize(path.join(ROOT, file)), fallback: dir !== sl.path && dir !== 'all' };
+  }
+  return null;
+}
+
+// 讀 webp 的寬高（img 要寫 width／height，版面才不會跳），不靠套件
+function webpSize(file) {
+  const b = fs.readFileSync(file);
+  if (b.toString('ascii', 0, 4) !== 'RIFF' || b.toString('ascii', 8, 12) !== 'WEBP') throw new Error(`不是 webp：${file}`);
+  const chunk = b.toString('ascii', 12, 16);
+  if (chunk === 'VP8X') return { width: 1 + b.readUIntLE(24, 3), height: 1 + b.readUIntLE(27, 3) };
+  if (chunk === 'VP8L') {
+    const n = b.readUInt32LE(21);
+    return { width: 1 + (n & 0x3fff), height: 1 + ((n >> 14) & 0x3fff) };
+  }
+  if (chunk === 'VP8 ') return { width: b.readUInt16LE(26) & 0x3fff, height: b.readUInt16LE(28) & 0x3fff };
+  throw new Error(`看不懂的 webp：${file}`);
+}
+
+// 截圖不是這一頁的語言時，文字後面加註「圖為繁中版」（全形括號前不空格）
+const withFallback = (text, t, fallback) => {
+  const note = fallback && t['shots.fallback'];
+  return note ? text + (note.startsWith('（') ? '' : ' ') + note : text;
+};
+// 分享圖的替代文字（首頁 sl 是 null，用共用的 og.jpg，背景是 zh-tw 的）
+const ogAlt = (sl, t) => withFallback(t['og.alt'], t, sl ? shotFor(sl, OG_SHOT)?.fallback : true);
 
 // JSON-LD：放進 <script type="application/ld+json">，避免內容裡的 </script> 斷掉
 const jsonLd = data => `<script type="application/ld+json">${JSON.stringify(data, null, 1).replace(/</g, '\\u003c')}</script>`;
@@ -113,6 +145,7 @@ function langPageLd(sl, t, url, image, faq) {
         description: t['meta.description'],
         url: url + '#install',
         image,
+        screenshot: gameShotUrls(sl),
         applicationCategory: 'GameApplication',
         operatingSystem: 'Windows',
         inLanguage: translatedLangs(),
@@ -187,6 +220,34 @@ const langStrip = (sl, label, prefix) => `<nav class="lang-strip lang-switch" ar
     ${SITE_LANGS.map(o => langLink(o, sl, prefix)).join('\n    ')}
   </nav>`;
 
+// 截圖區：遊戲畫面一排（橫向捲動，寬螢幕一次兩張，app.js 加上一張／下一張），桌面版、瀏覽器版各自的畫面一排
+function shotsSection(sl, t) {
+  const figure = (scene, s) => {
+    const caption = withFallback(t[`shots.${scene}`], t, s.fallback);
+    return `<figure class="shot shot-${scene}">
+            <img src="../${s.file}" width="${s.width}" height="${s.height}" loading="lazy" alt="${esc(caption)}">
+            <figcaption>${esc(caption)}</figcaption>
+          </figure>`;
+  };
+  const row = (scenes, cls, attr = '') => {
+    const items = scenes.map(scene => [scene, shotFor(sl, scene)]).filter(([, s]) => s);
+    return items.length ? `<div class="shots ${cls}"${attr} tabindex="0" aria-label="${esc(t['shots.label'])}">
+          ${items.map(([scene, s]) => figure(scene, s)).join('\n          ')}
+        </div>` : '';
+  };
+  const rows = [row(SHOTS.game, 'shots-game'), row(SHOTS.desktop, 'shots-platform', ' data-only="desktop"'), row(SHOTS.web, 'shots-platform', ' data-only="web"')].filter(Boolean);
+  if (!rows.length) return '';
+  return `<section class="screens" aria-label="${esc(t['shots.label'])}" data-prev="${esc(t['shots.prev'])}" data-next="${esc(t['shots.next'])}">
+      <div class="wrap">
+        ${rows.join('\n        ')}
+        <p class="shots-credit">${esc(t['shots.credit'])}</p>
+      </div>
+    </section>`;
+}
+
+// 遊戲畫面截圖的網址（結構化資料的 screenshot）
+const gameShotUrls = sl => SHOTS.game.map(scene => shotFor(sl, scene)).filter(Boolean).map(s => new URL(s.file, BASE).href);
+
 function langPage(sl) {
   const t = fillLangs(I18N[sl.id], sl.id);
   // 桌面捷徑的範例用這一頁的語言（不是遊戲翻譯語言的就用繁中）
@@ -220,7 +281,7 @@ function langPage(sl) {
     fonts: sl.fonts,
     prefix: '../',
     image,
-    imageAlt: t['og.alt'],
+    imageAlt: ogAlt(sl, t),
     ld: langPageLd(sl, t, url, image, faq),
   })}
 </head>
@@ -277,18 +338,7 @@ function langPage(sl) {
       </div>
     </section>
 
-    <section class="screens">
-      <div class="wrap screens-grid">
-        <figure>
-          <img src="../assets/screen-levelup.webp" width="1239" height="929" loading="lazy" alt="${esc(t['screens.levelup'])}">
-          <figcaption>${esc(t['screens.levelup'])}</figcaption>
-        </figure>
-        <figure>
-          <img src="../assets/screen-hud.webp" width="1239" height="929" loading="lazy" alt="${esc(t['screens.hud'])}">
-          <figcaption>${esc(t['screens.hud'])}</figcaption>
-        </figure>
-      </div>
-    </section>
+    ${shotsSection(sl, t)}
 
     <section class="section" id="sources">
       <div class="wrap">
@@ -435,7 +485,7 @@ function rootPage() {
     fonts: SITE_LANGS.flatMap(s => s.fonts),
     prefix: '',
     image: ogImage(null),
-    imageAlt: en['og.alt'],
+    imageAlt: ogAlt(null, en),
     ld: {
       '@context': 'https://schema.org',
       '@type': 'WebSite',
@@ -536,24 +586,25 @@ console.log(manifest ? `manifest：${manifest.version || manifest.updated}` : `�
 if (process.argv.includes('--check')) seoCheck();
 
 // --og：用 ImageMagick 產生各語言的分享圖、favicon（只在本機跑，產生的圖 commit 進 repo；CI 不需要）。
-// 背景是升級卡片截圖，下面一條暗色帶放該語言的標題和副標。字型用 Windows 內建的
+// 背景是升級卡片截圖（config 的 OG_SHOT），下面一條暗色帶放該語言的標題和副標。字型用 Windows 內建的
 function makeImages() {
   const { execFileSync } = process.getBuiltinModule('node:child_process');
   const magick = (...args) => execFileSync('magick', args, { stdio: 'inherit' });
   const FONTS = 'C:/Windows/Fonts/';
   const font = { 'zh-TW': 'msjhbd.ttc', 'zh-CN': 'msyhbd.ttc', ja: 'YuGothB.ttc' };
   const assets = path.join(ROOT, 'assets');
-  const og = (out, title, subtitle, fontFile) => magick(
-    path.join(assets, 'screen-levelup.webp'), '-resize', '1200x', '-gravity', 'center', '-crop', '1200x630+0+0', '+repage',
+  // 背景用各語言自己的截圖（還沒有就用 zh-tw 的）
+  const og = (out, title, subtitle, fontFile, bg) => magick(
+    path.join(ROOT, bg), '-resize', '1200x', '-gravity', 'center', '-crop', '1200x630+0+0', '+repage',
     '-fill', 'rgba(12,10,8,0.55)', '-draw', 'rectangle 0,380 1200,420',
     '-fill', 'rgba(12,10,8,0.9)', '-draw', 'rectangle 0,420 1200,630',
     '-gravity', 'south', '-font', FONTS + fontFile, '-pointsize', '60', '-fill', '#ead39a', '-annotate', '+0+105', title,
     '-font', FONTS + (fontFile === 'georgiab.ttf' ? 'georgia.ttf' : fontFile), '-pointsize', '28', '-fill', '#ddd3c2', '-annotate', '+0+55', subtitle,
     '-quality', '85', out);
-  og(path.join(assets, 'og.jpg'), 'D2 Survivors Localization', I18N.en['og.subtitle'], 'georgiab.ttf');
+  og(path.join(assets, 'og.jpg'), 'D2 Survivors Localization', I18N.en['og.subtitle'], 'georgiab.ttf', `assets/shots/${SHOT_FALLBACK}/${OG_SHOT}.webp`);
   for (const sl of SITE_LANGS) {
     const t = I18N[sl.id];
-    og(path.join(assets, `og-${sl.path}.jpg`), t['hero.title'], t['og.subtitle'], font[sl.id] || 'georgiab.ttf');
+    og(path.join(assets, `og-${sl.path}.jpg`), t['hero.title'], t['og.subtitle'], font[sl.id] || 'georgiab.ttf', shotFor(sl, OG_SHOT).file);
   }
 
   // favicon：深色圓角方塊加金色「D2」（跟原本內嵌的 SVG 一樣，不用暴雪或遊戲的圖）
@@ -573,7 +624,7 @@ function makeImages() {
   console.log('分享圖、favicon 已產生');
 }
 
-// --check：每頁的 title、description、canonical、hreflang、og:image、JSON-LD 摘要，寫到 work/site/seo-check.txt，有問題就列出來
+// --check：每頁的 title、description、canonical、hreflang、og:image、JSON-LD、截圖摘要，寫到 work/site/seo-check.txt，有問題就列出來
 function seoCheck() {
   const pages = [['/', path.join(ROOT, 'index.html')], ...SITE_LANGS.map(s => [`/${s.path}/`, path.join(ROOT, s.path, 'index.html')])];
   const out = [], problems = [], seen = { title: new Map(), description: new Map() };
@@ -606,6 +657,9 @@ function seoCheck() {
     if (!imageFile || !fs.existsSync(imageFile)) problems.push(`${name} 分享圖不存在：${image}`);
     if (!imageAlt) problems.push(`${name} 沒有 og:image:alt`);
     if (!ld.length) problems.push(`${name} 沒有 JSON-LD`);
+    for (const [, src] of html.matchAll(/<img src="([^"]+)"/g)) if (!fs.existsSync(path.join(path.dirname(file), src))) problems.push(`${name} 圖片不存在：${src}`);
+    const sl = SITE_LANGS.find(s => `/${s.path}/` === name);
+    const shots = sl ? Object.values(SHOTS).flat().map(scene => shotFor(sl, scene)).filter(Boolean) : [];
     for (const key of ['title', 'description']) {
       const v = key === 'title' ? title : description;
       if (seen[key].has(v)) problems.push(`${name} 的 ${key} 跟 ${seen[key].get(v)} 重複`);
@@ -618,7 +672,8 @@ function seoCheck() {
   hreflang：${hreflang.join('  ')}
   og:image：${image.replace(BASE, '/')}（alt：${imageAlt}）
   JSON-LD：${ld.join('、')}
-`);
+${sl ? `  截圖：${shots.length} 張，自己語言的 ${shots.filter(x => !x.fallback).length} 張
+` : ''}`);
   }
   for (const f of ['favicon.svg', 'favicon.ico', 'apple-touch-icon.png', 'sitemap.xml', 'robots.txt']) if (!fs.existsSync(path.join(ROOT, f))) problems.push(`缺少 site/${f}`);
   const report = `網站 SEO 檢查（${new Date().toISOString()}，BASE ${BASE}）\n\n${out.join('\n')}\n${problems.length ? '問題：\n' + problems.map(p => '- ' + p).join('\n') : '沒有發現問題'}\n`;

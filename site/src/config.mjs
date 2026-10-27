@@ -52,6 +52,17 @@ export const SITE_LANGS = [
   { id: 'pl', path: 'pl', label: 'Polski', html: 'pl', hreflang: 'pl', og: 'pl_PL', fonts: [] },
 ];
 
+// 宣傳截圖（規格見 docs/release.md 的「宣傳截圖」）：site/assets/shots/<頁面 path>/<場景>.webp。
+// 每頁先找自己語言的，沒有就找 all/（各語言共用的），再沒有就用 zh-tw/ 的並在圖說註明（shots.fallback）；都沒有的場景不顯示。
+// 圖說是 i18n 的 shots.<場景>。game 是並排輪播，desktop／web 只在那個版本顯示
+export const SHOTS = {
+  game: ['title', 'menu', 'levelup', 'item', 'character', 'skills', 'hud'],
+  desktop: ['launcher-lang', 'launcher-main'],
+  web: ['web-desktop', 'web-mobile'],
+};
+// 分享圖（og-<path>.jpg）的背景用哪個場景
+export const OG_SHOT = 'levelup';
+
 // 遊戲翻譯的語言清單（順序就是網站上的順序）。manifest 裡有的語言以 manifest 為準（status：available／beta、條數、更新時間），
 // 沒有的就是 planned（計畫中）。name：用各個網站介面語言寫的語言名稱，沒有的介面語言用 en
 export const LANGUAGES = [
