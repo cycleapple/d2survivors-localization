@@ -142,6 +142,29 @@ manifest 各部分從哪裡來：
 | `game.web_checked` | `tools/web-rules.mjs` 有匯出 `WEB_CHECKED` 才輸出 |
 | `launcher` | 還沒有 GitHub Release，先不輸出。之後加的時候：`sha256_url` 指到的檔案是 sha256sum 格式（`<雜湊> <檔名>`），啟動器只取第一欄 |
 
+### 更新紀錄（changelog）
+
+每次真的發布（字典、規則、語言狀態、啟動器版本有變動；`game.web_checked` 每小時會變，不算）時，`publish` 在 `site/data/changelog.json` 最前面加一筆（最多留 50 筆），manifest 的 `changelog` 指到它（`url` 帶雜湊、`latest` 是最新一筆的 version）。網站、啟動器、Discord 公告都讀這份，格式見 [manifest-v2.md](manifest-v2.md) 的「更新紀錄」。
+
+每筆自動附上每種語言跟上一次發布比的 `added`／`changed`／`removed`。玩家看的那句話寫在 **`dict/changelog-next.json`**（發布之後會清空成 `{}`）：
+
+```json
+{
+  "kind": "translation",
+  "announce": false,
+  "summary": { "zh-TW": "修正 30 條技能說明", "zh-CN": "修正 30 条技能说明", "en": "Fixed 30 skill descriptions" },
+  "notes": { "zh-TW": ["「漩渦」改回官方譯名"] }
+}
+```
+
+- `kind`：`translation`（修譯文）、`language`（新語言、語言改成 beta／available）、`game-fix`（遊戲改版後修好）、`launcher`（啟動器新版）
+- `announce: true` 才會發 Discord 公告。平常修譯文用 `false`；新語言、遊戲改版修好用 `true`
+- `summary` 至少要有 `zh-TW`（沒有的話 publish 會停下來），最好三種都寫。`notes` 選填
+- 沒有這個檔或是 `{}`：依統計自動寫（「繁中修正 30 條、新增 12 條；新增日文（測試中）」），`kind` 是 `translation`、`announce` 是 `false`
+- 先看結果再發：`node tools/publish.mjs --dry-run` 在 `work/translation/publish-dry/` 的複本上跑，不清空 changelog-next、不 commit
+
+德、法、俄文改成 beta 發布的那次：`kind: "language"`、`announce: true`，三種介面語言都寫 summary。
+
 狀態（`status`）：繁中 `available`；簡中、日文 `beta`。兩者都翻完、統一過用詞，也進遊戲走過主要畫面，查不到的字串 0 條，但還沒有玩家實際玩過的回報。有玩家回報、修過一輪之後，改 `langs.mjs` 的 `status`。
 
 v1 的更新來源（`dist/`，`cycleapple/d2survivors-zh-tw-dist`）停在最後一版，不再更新。

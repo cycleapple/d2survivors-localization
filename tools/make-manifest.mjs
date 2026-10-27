@@ -61,8 +61,10 @@ const manifest = {
 };
 
 const file = path.join(outDir, 'manifest.json');
-const strip = m => JSON.stringify({ ...m, updated: undefined, version: undefined });
+// changelog 欄位是 publish.mjs 寫進去的（更新紀錄的網址和最新一筆），這裡照舊保留、比較時不算
+const strip = m => JSON.stringify({ ...m, updated: undefined, version: undefined, changelog: undefined });
 const old = fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, 'utf8')) : null;
+if (old?.changelog) manifest.changelog = old.changelog;
 if (old && strip(old) === strip(manifest)) {
   console.log(`沒有變動，${file} 不改寫（${old.version}）`);
 } else {
