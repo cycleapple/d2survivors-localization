@@ -1,32 +1,13 @@
 {
-  "app_title": { "ja": "D2 Survivors ランチャー", "de": "D2 Survivors Launcher", "fr": "Lanceur D2 Survivors", "ru": "Лаунчер D2 Survivors", "pl": "Launcher D2 Survivors" },
-  "brand": { "ja": "D2 Survivors 日本語化", "de": "D2 Survivors Übersetzung", "fr": "Traduction de D2 Survivors", "ru": "Русификация D2 Survivors", "pl": "Spolszczenie D2 Survivors" },
-  "step_lang": { "ja": "言語", "de": "Sprache", "fr": "Langue", "ru": "Язык", "pl": "Język" },
   "step_game": { "ja": "ゲーム", "de": "Spiel", "fr": "Jeu", "ru": "Игра", "pl": "Gra" },
   "step_d2": { "ja": "ディアブロ II", "de": "Diablo II", "fr": "Diablo II", "ru": "Diablo II", "pl": "Diablo II" },
   "step_done": { "ja": "完了", "de": "Fertig", "fr": "Terminé", "ru": "Готово", "pl": "Gotowe" },
   "new_badge": { "ja": "新着", "de": "Neu", "fr": "Nouveau", "ru": "Новинка", "pl": "Nowość" },
   "site_short": { "ja": "ウェブサイト", "de": "Website", "fr": "Site web", "ru": "Сайт", "pl": "Strona" },
-  "original_name": { "ja": "オリジナル", "de": "Original", "fr": "original", "ru": "оригинал", "pl": "oryginał" },
   "next": { "ja": "次へ", "de": "Weiter", "fr": "Suivant", "ru": "Далее", "pl": "Dalej" },
   "back": { "ja": "戻る", "de": "Zurück", "fr": "Précédent", "ru": "Назад", "pl": "Wstecz" },
   "skip": { "ja": "スキップ", "de": "Überspringen", "fr": "Passer", "ru": "Пропустить", "pl": "Pomiń" },
   "return": { "ja": "戻る", "de": "Zurück", "fr": "Retour", "ru": "Назад", "pl": "Wróć" },
-  "lang_desc": {
-    "ja": "ランチャーとゲームの両方でこの言語を使います。メイン画面でいつでも変更できます。",
-    "de": "Gilt für den Launcher und das Spiel. Sie können die Sprache jederzeit im Hauptfenster ändern.",
-    "fr": "Utilisée par le lanceur et par le jeu. Vous pouvez la changer à tout moment depuis l’écran principal.",
-    "ru": "Используется и в лаунчере, и в игре. Его можно изменить в любой момент на главном экране.",
-    "pl": "Używany w launcherze i w grze. Można go zmienić w dowolnej chwili na ekranie głównym."
-  },
-  "lang_loading": { "ja": "翻訳の一覧を読み込んでいます…", "de": "Liste der Übersetzungen wird geladen…", "fr": "Chargement de la liste des traductions…", "ru": "Загрузка списка переводов…", "pl": "Wczytywanie listy tłumaczeń…" },
-  "lang_offline": {
-    "ja": "翻訳の一覧を読み込めませんでした。インターネット接続を確認してください。今は英語または韓国語のオリジナルを選べます。",
-    "de": "Die Liste der Übersetzungen konnte nicht geladen werden. Prüfen Sie Ihre Internetverbindung. Vorerst können Sie das englische oder koreanische Original wählen.",
-    "fr": "Impossible de charger la liste des traductions. Vérifiez votre connexion ; en attendant, vous pouvez choisir l’original anglais ou coréen.",
-    "ru": "Не удалось загрузить список переводов. Проверьте подключение к интернету. Пока можно выбрать оригинал на английском или корейском.",
-    "pl": "Nie udało się wczytać listy tłumaczeń. Sprawdź połączenie z internetem. Na razie można wybrać oryginał po angielsku lub po koreańsku."
-  },
   "game_title": { "ja": "D2 Survivors", "de": "D2 Survivors", "fr": "D2 Survivors", "ru": "D2 Survivors", "pl": "D2 Survivors" },
   "game_found": { "ja": "D2 Survivors が見つかりました", "de": "D2 Survivors gefunden", "fr": "D2 Survivors trouvé", "ru": "Найдена игра D2 Survivors", "pl": "Znaleziono D2 Survivors" },
   "game_version": { "ja": "バージョン {}", "de": "Version {}", "fr": "version {}", "ru": "версия {}", "pl": "wersja {}" },
@@ -68,8 +49,6 @@
     "ru": "Нажмите «Играть», чтобы скачать последний перевод и запустить игру.",
     "pl": "Kliknij „Graj”, aby pobrać najnowsze tłumaczenie i uruchomić grę."
   },
-  "site_link": { "ja": "日本語化サイト", "de": "Website der Übersetzung", "fr": "Site de la traduction", "ru": "Сайт русификации", "pl": "Strona spolszczenia" },
-  "discord_link": { "ja": "コミュニティ Discord", "de": "Community-Discord", "fr": "Discord de la communauté", "ru": "Discord сообщества", "pl": "Discord społeczności" },
   "donate": { "ja": "☕ コーヒーをおごる", "de": "☕ Einen Kaffee spendieren", "fr": "☕ Offrez-moi un café", "ru": "☕ Угостите меня кофе", "pl": "☕ Postaw mi kawę" },
   "create_shortcut": { "ja": "デスクトップにショートカットを作成", "de": "Desktopverknüpfung erstellen", "fr": "Créer un raccourci sur le bureau", "ru": "Создать ярлык на рабочем столе", "pl": "Utwórz skrót na pulpicie" },
   "shortcut_done": { "ja": "デスクトップにショートカットを作成しました", "de": "Desktopverknüpfung erstellt", "fr": "Raccourci créé sur le bureau", "ru": "Ярлык на рабочем столе создан", "pl": "Utworzono skrót na pulpicie" },
@@ -81,14 +60,31 @@
   "status_translation": { "ja": "翻訳", "de": "Übersetzung", "fr": "Traduction", "ru": "Перевод", "pl": "Tłumaczenie" },
   "status_game": { "ja": "ゲーム", "de": "Spiel", "fr": "Jeu", "ru": "Игра", "pl": "Gra" },
   "status_launcher": { "ja": "ランチャー", "de": "Launcher", "fr": "Lanceur", "ru": "Лаунчер", "pl": "Launcher" },
-  "up_to_date": { "ja": "最新です", "de": "aktuell", "fr": "à jour", "ru": "последняя версия", "pl": "najnowsza wersja" },
-  "update_failed": { "ja": "更新を確認できませんでした。ローカルの翻訳を使います", "de": "Updates konnten nicht geprüft werden; die lokale Kopie wird verwendet", "fr": "Impossible de vérifier les mises à jour ; utilisation de la copie locale", "ru": "Не удалось проверить обновления; используется локальная копия", "pl": "Nie udało się sprawdzić aktualizacji; używana jest kopia lokalna" },
+  "update_failed": {
+    "ja": "更新を確認できませんでした。ローカルの翻訳を使います",
+    "de": "Updates konnten nicht geprüft werden; die lokale Kopie wird verwendet",
+    "fr": "Impossible de vérifier les mises à jour ; utilisation de la copie locale",
+    "ru": "Не удалось проверить обновления; используется локальная копия",
+    "pl": "Nie udało się sprawdzić aktualizacji; używana jest kopia lokalna"
+  },
   "launcher_new": { "ja": "新しいバージョン {} があります", "de": "{} verfügbar", "fr": "{} disponible", "ru": "Доступна версия {}", "pl": "Dostępna wersja {}" },
-  "launcher_required": { "ja": "最新の翻訳にはランチャー {} が必要です。更新してください。", "de": "Die neueste Übersetzung benötigt Launcher {}. Bitte aktualisieren Sie ihn.", "fr": "La dernière traduction nécessite le lanceur {}. Veuillez le mettre à jour.", "ru": "Для последнего перевода нужен лаунчер {}. Обновите его.", "pl": "Najnowsze tłumaczenie wymaga launchera {}. Zaktualizuj go." },
+  "launcher_required": {
+    "ja": "最新の翻訳にはランチャー {} が必要です。更新してください。",
+    "de": "Die neueste Übersetzung benötigt Launcher {}. Bitte aktualisieren Sie ihn.",
+    "fr": "La dernière traduction nécessite le lanceur {}. Veuillez le mettre à jour.",
+    "ru": "Для последнего перевода нужен лаунчер {}. Обновите его.",
+    "pl": "Najnowsze tłumaczenie wymaga launchera {}. Zaktualizuj go."
+  },
   "update_launcher": { "ja": "ランチャーを更新", "de": "Launcher aktualisieren", "fr": "Mettre à jour le lanceur", "ru": "Обновить лаунчер", "pl": "Zaktualizuj launcher" },
   "check_updates": { "ja": "更新を確認", "de": "Nach Updates suchen", "fr": "Rechercher des mises à jour", "ru": "Проверить обновления", "pl": "Sprawdź aktualizacje" },
   "settings": { "ja": "設定", "de": "Einstellungen", "fr": "Paramètres", "ru": "Настройки", "pl": "Ustawienia" },
-  "game_missing_banner": { "ja": "D2 Survivors が見つかりません。「設定」でフォルダーを指定してください。", "de": "D2 Survivors nicht gefunden. Legen Sie den Ordner in den Einstellungen fest.", "fr": "D2 Survivors introuvable. Indiquez son dossier dans les Paramètres.", "ru": "Игра D2 Survivors не найдена. Укажите ее папку в настройках.", "pl": "Nie znaleziono D2 Survivors. Wskaż folder gry w Ustawieniach." },
+  "game_missing_banner": {
+    "ja": "D2 Survivors が見つかりません。「設定」でフォルダーを指定してください。",
+    "de": "D2 Survivors nicht gefunden. Legen Sie den Ordner in den Einstellungen fest.",
+    "fr": "D2 Survivors introuvable. Indiquez son dossier dans les Paramètres.",
+    "ru": "Игра D2 Survivors не найдена. Укажите ее папку в настройках.",
+    "pl": "Nie znaleziono D2 Survivors. Wskaż folder gry w Ustawieniach."
+  },
   "changelog": { "ja": "更新履歴", "de": "Neuigkeiten", "fr": "Nouveautés", "ru": "Что нового", "pl": "Co nowego" },
   "got_it": { "ja": "OK", "de": "Verstanden", "fr": "Compris", "ru": "Понятно", "pl": "Rozumiem" },
   "fallback_game_updated": {
@@ -136,9 +132,16 @@
   "not_found": { "ja": "（見つかりません）", "de": "(nicht gefunden)", "fr": "(introuvable)", "ru": "(не найдено)", "pl": "(nie znaleziono)" },
   "update_source": { "ja": "更新元", "de": "Update-Quelle", "fr": "Source des mises à jour", "ru": "Источник обновлений", "pl": "Źródło aktualizacji" },
   "restore": { "ja": "オリジナルのゲームに戻す", "de": "Originalspiel wiederherstellen", "fr": "Restaurer le jeu original", "ru": "Восстановить оригинальную игру", "pl": "Przywróć oryginalną grę" },
-  "restore_hint": { "ja": "ゲームファイルを翻訳なしのオリジナルに戻します", "de": "Setzt die Spieldateien auf das unübersetzte Original zurück", "fr": "Remet les fichiers du jeu dans leur version originale non traduite", "ru": "Возвращает файлы игры к оригиналу без перевода", "pl": "Przywraca pliki gry do oryginalnej wersji bez tłumaczenia" },
+  "restore_hint": {
+    "ja": "ゲームファイルを翻訳なしのオリジナルに戻します",
+    "de": "Setzt die Spieldateien auf das unübersetzte Original zurück",
+    "fr": "Remet les fichiers du jeu dans leur version originale non traduite",
+    "ru": "Возвращает файлы игры к оригиналу без перевода",
+    "pl": "Przywraca pliki gry do oryginalnej wersji bez tłumaczenia"
+  },
   "rerun_wizard": { "ja": "セットアップウィザードを再実行", "de": "Einrichtungsassistenten erneut ausführen", "fr": "Relancer l’assistant de configuration", "ru": "Запустить мастер настройки заново", "pl": "Uruchom ponownie kreator konfiguracji" },
   "cli": { "ja": "コマンドライン", "de": "Befehlszeile", "fr": "Ligne de commande", "ru": "Командная строка", "pl": "Wiersz poleceń" },
   "log": { "ja": "ログ", "de": "Protokoll", "fr": "Journal", "ru": "Журнал", "pl": "Dziennik" },
-  "links": { "ja": "リンク", "de": "Links", "fr": "Liens", "ru": "Ссылки", "pl": "Linki" }
+  "links": { "ja": "リンク", "de": "Links", "fr": "Liens", "ru": "Ссылки", "pl": "Linki" },
+  "licenses": { "ja": "ライセンス", "de": "Lizenzen", "fr": "Licences", "ru": "Лицензии", "pl": "Licencje" }
 }

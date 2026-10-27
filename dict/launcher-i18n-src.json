@@ -1,23 +1,5 @@
 [
  {
-  "key": "app_title",
-  "zh-TW": "D2 Survivors 啟動器",
-  "zh-CN": "D2 Survivors 启动器",
-  "en": "D2 Survivors Launcher"
- },
- {
-  "key": "brand",
-  "zh-TW": "D2 Survivors 中文化",
-  "zh-CN": "D2 Survivors 汉化",
-  "en": "D2 Survivors Localization"
- },
- {
-  "key": "step_lang",
-  "zh-TW": "語言",
-  "zh-CN": "语言",
-  "en": "Language"
- },
- {
   "key": "step_game",
   "zh-TW": "遊戲",
   "zh-CN": "游戏",
@@ -48,12 +30,6 @@
   "en": "Website"
  },
  {
-  "key": "original_name",
-  "zh-TW": "原版",
-  "zh-CN": "原版",
-  "en": "original"
- },
- {
   "key": "next",
   "zh-TW": "下一步",
   "zh-CN": "下一步",
@@ -76,24 +52,6 @@
   "zh-TW": "返回",
   "zh-CN": "返回",
   "en": "Back"
- },
- {
-  "key": "lang_desc",
-  "zh-TW": "啟動器和遊戲都會用這個語言，之後可以隨時在主畫面切換。",
-  "zh-CN": "启动器和游戏都会使用这个语言，之后可以随时在主界面切换。",
-  "en": "Used for both the launcher and the game. You can change it any time on the main screen."
- },
- {
-  "key": "lang_loading",
-  "zh-TW": "正在讀取翻譯清單…",
-  "zh-CN": "正在读取翻译列表…",
-  "en": "Loading the list of translations…"
- },
- {
-  "key": "lang_offline",
-  "zh-TW": "讀不到翻譯清單，請確認網路。現在可以先選英文或韓文原版。",
-  "zh-CN": "读不到翻译列表，请确认网络。现在可以先选英文或韩文原版。",
-  "en": "Couldn't load the list of translations. Check your connection; for now you can pick the original English or Korean."
  },
  {
   "key": "game_title",
@@ -198,18 +156,6 @@
   "en": "Click Play to download the latest translation and start the game."
  },
  {
-  "key": "site_link",
-  "zh-TW": "中文化網站",
-  "zh-CN": "汉化网站",
-  "en": "Localization website"
- },
- {
-  "key": "discord_link",
-  "zh-TW": "社群 Discord",
-  "zh-CN": "社区 Discord",
-  "en": "Community Discord"
- },
- {
   "key": "donate",
   "zh-TW": "☕ 請我喝杯咖啡",
   "zh-CN": "☕ 请我喝杯咖啡",
@@ -274,12 +220,6 @@
   "zh-TW": "啟動器",
   "zh-CN": "启动器",
   "en": "Launcher"
- },
- {
-  "key": "up_to_date",
-  "zh-TW": "已是最新版",
-  "zh-CN": "已是最新版",
-  "en": "up to date"
  },
  {
   "key": "update_failed",
@@ -454,5 +394,11 @@
   "zh-TW": "連結",
   "zh-CN": "链接",
   "en": "Links"
+ },
+ {
+  "key": "licenses",
+  "zh-TW": "授權",
+  "zh-CN": "许可",
+  "en": "Licenses"
  }
 ]
