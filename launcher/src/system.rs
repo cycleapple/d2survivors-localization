@@ -3,8 +3,10 @@ use std::path::{Path, PathBuf};
 
 /// 中文化網站（暫定網址；換網域只改這裡）
 pub const SITE_URL: &str = "https://cycleapple.github.io/d2survivors-localization/";
-/// 中文化社群 Discord 的邀請連結（空的就不顯示）
-pub const DISCORD_URL: &str = "";
+/// 中文化社群 Discord 的邀請連結（永久；空的就不顯示）
+pub const DISCORD_URL: &str = "https://discord.gg/QMBbTHSsaK";
+/// 贊助連結（只放在完成頁和設定的連結區，不跳出、不提醒；贊助與否不影響任何功能）
+pub const DONATE_URL: &str = "https://paypal.me/DonateCYtw";
 /// D2 Survivors 官方網站（下載遊戲）
 pub const GAME_URL: &str = "https://d2survivors.lol/";
 /// Blizzard 官方的 Diablo II: Resurrected 頁面（只放官方連結，不放推廣碼）
@@ -38,6 +40,10 @@ pub fn d2_kind(dir: &Path) -> Option<D2Kind> {
 
 /// 找玩家的 Diablo II：D2 Survivors 自己記的路徑、D2R 的解除安裝登錄、經典版的登錄、預設安裝位置
 pub fn find_d2() -> Option<(PathBuf, D2Kind)> {
+    // 測試「找不到 Diablo II」的畫面用
+    if std::env::var_os("D2S_FAKE_NO_D2").is_some_and(|v| v == "1") {
+        return None;
+    }
     let mut candidates: Vec<PathBuf> = Vec::new();
     // D2 Survivors 設定好之後會記在 %APPDATA%\D2 Survivors\desktop.json 的 installDir
     if let Some(appdata) = std::env::var_os("APPDATA") {

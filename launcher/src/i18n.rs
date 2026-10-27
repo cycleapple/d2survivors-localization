@@ -9,7 +9,6 @@ const TABLE: &[(&str, &str, &str, &str)] = &[
     ("back", "上一步", "上一步", "Back"),
     ("skip", "略過", "跳过", "Skip"),
     ("return", "返回", "返回", "Back"),
-    ("lang_title", "選擇語言", "选择语言", "Choose your language"),
     ("lang_desc", "啟動器和遊戲都會用這個語言，之後可以隨時在主畫面切換。", "启动器和游戏都会使用这个语言，之后可以随时在主界面切换。", "Used for both the launcher and the game. You can change it any time on the main screen."),
     ("lang_loading", "正在讀取翻譯清單…", "正在读取翻译列表…", "Loading the list of translations…"),
     ("lang_offline", "讀不到翻譯清單，請確認網路。現在可以先選英文或韓文原版。", "读不到翻译列表，请确认网络。现在可以先选英文或韩文原版。", "Couldn't load the list of translations. Check your connection; for now you can pick the original English or Korean."),
@@ -32,16 +31,14 @@ const TABLE: &[(&str, &str, &str, &str)] = &[
     ("done_desc", "按「啟動遊戲」會下載最新的翻譯並開啟遊戲。", "点「启动游戏」会下载最新的翻译并启动游戏。", "Click Play to download the latest translation and start the game."),
     ("site_link", "中文化網站", "汉化网站", "Localization website"),
     ("discord_link", "社群 Discord", "社区 Discord", "Community Discord"),
+    ("donate", "☕ 請我喝杯咖啡", "☕ 请我喝杯咖啡", "☕ Buy me a coffee"),
     ("create_shortcut", "在桌面建立捷徑", "在桌面创建快捷方式", "Create a desktop shortcut"),
     ("shortcut_done", "已在桌面建立捷徑", "已在桌面创建快捷方式", "Desktop shortcut created"),
     ("finish", "完成", "完成", "Finish"),
     ("play", "啟動遊戲", "启动游戏", "Play"),
     ("game_language", "遊戲語言", "游戏语言", "Game language"),
-    ("original", "原版", "原版", "original"),
     ("beta", "測試中", "测试中", "beta"),
     ("draft", "草稿", "草稿", "draft"),
-    ("entries", "{} 條", "{} 条", "{} strings"),
-    ("not_downloaded", "尚未下載", "尚未下载", "not downloaded"),
     ("status_translation", "翻譯", "翻译", "Translation"),
     ("status_game", "遊戲", "游戏", "Game"),
     ("status_launcher", "啟動器", "启动器", "Launcher"),
@@ -73,6 +70,40 @@ const TABLE: &[(&str, &str, &str, &str)] = &[
     ("log", "詳細紀錄", "详细记录", "Log"),
     ("links", "連結", "链接", "Links"),
 ];
+
+/// 選語言那一步的標題：玩家還沒選語言，用好幾種語言並列
+pub const LANGUAGE_TITLE: &str = "選擇語言 · 选择语言 · Language · 言語 · Sprache · Langue · Язык · Język";
+
+/// 語言清單的項目：名稱和狀態都用那個語言自己寫，例如「简体中文（测试中）」「Русский (бета)」。
+/// status 是 manifest 的 status（available 不加標示，beta 測試中，其他都當草稿）
+pub fn native_label(id: &str, name: &str, status: Option<&str>) -> String {
+    // (語言, 測試中, 草稿)
+    const NATIVE: &[(&str, &str, &str)] = &[
+        ("zh-TW", "測試中", "草稿"),
+        ("zh-CN", "测试中", "草稿"),
+        ("ja", "ベータ版", "下書き"),
+        ("ko", "베타", "초안"),
+        ("de", "Beta", "Entwurf"),
+        ("fr", "bêta", "brouillon"),
+        ("ru", "бета", "черновик"),
+        ("pl", "beta", "wersja robocza"),
+    ];
+    let note = status.map(|s| {
+        let row = NATIVE.iter().find(|r| r.0 == id);
+        match (s, row) {
+            ("beta", Some(r)) => r.1,
+            ("beta", None) => "beta",
+            (_, Some(r)) => r.2,
+            (_, None) => "draft",
+        }
+    });
+    match note {
+        // 中日文用全形括號
+        Some(n) if id.starts_with("zh") || id == "ja" => format!("{name}（{n}）"),
+        Some(n) => format!("{name} ({n})"),
+        None => name.to_string(),
+    }
+}
 
 fn column(lang: &str) -> usize {
     match lang {

@@ -1,6 +1,6 @@
 // 啟動器視窗：第一次開啟的設定精靈、主畫面、設定頁
 use crate::game::{self, BUILTIN};
-use crate::i18n::{tr, trf};
+use crate::i18n::{self, tr, trf};
 use crate::jobs::{self, Fallback, Job, Outcome};
 use crate::manifest::{self, ChangelogEntry, LauncherInfo, Manifest};
 use crate::paths::{self, Config, DEFAULT_MANIFEST_URL};
@@ -146,18 +146,17 @@ impl App {
         (!self.config.d2_dir.trim().is_empty()).then_some(()).and_then(|_| system::d2_kind(&dir).map(|k| (dir, k)))
     }
 
-    /// 語言清單：manifest 裡桌面版能用的翻譯，加上遊戲原本的英文、韓文
+    /// 語言清單：manifest 裡桌面版能用的翻譯，加上遊戲原本的英文、韓文。
+    /// 名稱和「測試中」都用那個語言自己寫，還沒選語言的人也看得懂
     fn languages(&self) -> Vec<(String, String)> {
         let mut list: Vec<(String, String)> = Vec::new();
         if let Some(m) = &self.manifest {
             for (l, _) in m.desktop_languages() {
-                let mut notes: Vec<String> = l.status_key().map(|k| self.t(k).to_string()).into_iter().collect();
-                notes.push(if manifest::local_dict(l).is_some() { self.tf("entries", &[&l.entries.to_string()]) } else { self.t("not_downloaded").into() });
-                list.push((l.id.clone(), format!("{}（{}）", l.name, notes.join("・"))));
+                list.push((l.id.clone(), i18n::native_label(&l.id, &l.name, l.status_key().map(|_| l.status.as_str()))));
             }
         }
         for (id, _) in BUILTIN {
-            let name = if id == "en" { "English".to_string() } else { format!("한국어（{}）", self.t("original")) };
+            let name = if id == "en" { "English".to_string() } else { "한국어 (원본)".to_string() };
             list.push((id.to_string(), name));
         }
         list
@@ -253,9 +252,23 @@ impl App {
                 }
             });
         } else {
-            for (id, label) in languages {
-                ui.radio_value(&mut self.config.language, id, RichText::new(label).size(16.0));
-            }
+            // 精靈：兩欄的大按鈕，一次列出所有語言
+            let w = (ui.available_width() - 8.0) / 2.0;
+            egui::Grid::new("languages").num_columns(2).spacing([8.0, 8.0]).show(ui, |ui| {
+                for (i, (id, label)) in languages.into_iter().enumerate() {
+                    let selected = self.config.language == id;
+                    let text = RichText::new(label).size(17.0);
+                    let b = egui::Button::new(if selected { text.strong().color(Color32::WHITE) } else { text })
+                        .selected(selected)
+                        .min_size(egui::vec2(w, 40.0));
+                    if ui.add(b).clicked() {
+                        self.config.language = id;
+                    }
+                    if i % 2 == 1 {
+                        ui.end_row();
+                    }
+                }
+            });
         }
     }
 
@@ -279,7 +292,9 @@ impl App {
         let mut next: Option<Page> = None;
         match step {
             0 => {
-                ui.heading(self.t("lang_title"));
+                // 還沒選語言：標題用好幾種語言並列，說明照目前選的（預設是 Windows 的語言）
+                ui.label(RichText::new(format!("🌐 {}", i18n::LANGUAGE_TITLE)).size(19.0).color(GOLD));
+                ui.add_space(2.0);
                 ui.label(self.t("lang_desc"));
                 ui.add_space(10.0);
                 if self.manifest.is_none() {
@@ -363,14 +378,7 @@ impl App {
                 ui.label(self.t("done_desc"));
                 ui.add_space(12.0);
                 ui.label(RichText::new(self.t("links")).strong());
-                ui.horizontal(|ui| {
-                    if ui.link(self.t("site_link")).clicked() {
-                        system::open_url(system::SITE_URL);
-                    }
-                    if !system::DISCORD_URL.is_empty() && ui.link(self.t("discord_link")).clicked() {
-                        system::open_url(system::DISCORD_URL);
-                    }
-                });
+                self.links(ui);
                 ui.add_space(10.0);
                 let label = self.t("create_shortcut");
                 ui.checkbox(&mut self.make_shortcut, label);
@@ -429,6 +437,21 @@ impl App {
             let _ = self.config.save();
             self.page = p;
         }
+    }
+
+    /// 中文化網站、Discord、贊助（小連結，不跳出、不擋啟動）
+    fn links(&self, ui: &mut egui::Ui) {
+        ui.horizontal_wrapped(|ui| {
+            if ui.link(self.t("site_link")).clicked() {
+                system::open_url(system::SITE_URL);
+            }
+            if !system::DISCORD_URL.is_empty() && ui.link(self.t("discord_link")).clicked() {
+                system::open_url(system::DISCORD_URL);
+            }
+            if !system::DONATE_URL.is_empty() && ui.link(RichText::new(self.t("donate")).weak()).clicked() {
+                system::open_url(system::DONATE_URL);
+            }
+        });
     }
 
     fn finish_wizard(&mut self, ctx: &egui::Context) {
@@ -645,10 +668,10 @@ impl App {
             if ui.button(self.t("rerun_wizard")).clicked() {
                 self.page = Page::Wizard(0);
             }
-            if ui.link(self.t("site_link")).clicked() {
-                system::open_url(system::SITE_URL);
-            }
         });
+        ui.add_space(10.0);
+        ui.label(RichText::new(self.t("links")).strong());
+        self.links(ui);
         ui.add_space(10.0);
         egui::CollapsingHeader::new(self.t("cli")).show(ui, |ui| {
             ui.label(RichText::new(CLI_HELP).monospace().small());
@@ -747,7 +770,12 @@ fn install_fonts(ctx: &egui::Context, ui_lang: &str) {
 
 pub fn run(play: bool) -> eframe::Result {
     let options = eframe::NativeOptions {
-        viewport: egui::ViewportBuilder::default().with_inner_size([560.0, 560.0]).with_min_inner_size([460.0, 420.0]).with_title("D2 Survivors"),
+        viewport: egui::ViewportBuilder::default()
+            .with_inner_size([560.0, 560.0])
+            .with_min_inner_size([460.0, 420.0])
+            .with_title("D2 Survivors")
+            // 跟網站一樣的「D2」圖示（assets/make-icon.ps1 產生）
+            .with_icon(egui::IconData { rgba: include_bytes!("../assets/icon-64.rgba").to_vec(), width: 64, height: 64 }),
         ..Default::default()
     };
     eframe::run_native("D2 Survivors 啟動器", options, Box::new(move |cc| Ok(Box::new(App::new(cc, play)))))

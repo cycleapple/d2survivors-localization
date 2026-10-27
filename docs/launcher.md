@@ -10,18 +10,19 @@ cargo test --release                        # 有 backup/2026.1026.4/app.asar �
 ## 視窗
 
 - **設定精靈**（第一次開啟時；之後可以從「設定」→「重新執行設定精靈」再跑一次）：
-  1. 選語言：同時決定啟動器的介面語言和遊戲的翻譯語言。預設照 Windows 的地區格式（`GetUserDefaultLocaleName`，zh-TW／zh-HK → 繁中、zh-CN → 簡中、ja／de／fr／ru／ko，其他用英文）。清單是 manifest 裡有 `desktop` 的語言加上 English／한국어原版；還沒讀到 manifest 時顯示「讀取中」，讀不到就說明可以先選原版
+  1. 選語言：同時決定啟動器的介面語言和遊戲的翻譯語言。預設照 Windows 的地區格式（`GetUserDefaultLocaleName`，zh-TW／zh-HK → 繁中、zh-CN → 簡中、ja／de／fr／ru／pl／ko，其他用英文）。兩欄的大按鈕一次列出 manifest 裡有 `desktop` 的語言，加上 English、한국어 (원본)；每個語言的名稱和「測試中」都用那個語言自己寫（「简体中文（测试中）」「Русский (бета)」，`i18n::native_label`）。標題用 🌐 加上多種語言並列（`i18n::LANGUAGE_TITLE`），說明和「下一步」照目前選的語言、點了立刻換。還沒讀到 manifest 時顯示「讀取中」，讀不到就說明可以先選原版
   2. D2 Survivors：沿用 `game_dir` 的偵測（預設 `%LOCALAPPDATA%\Programs\D2 Survivors`），可以手動選資料夾。沒裝時給官方網站按鈕和「重新偵測」，也可以略過
-  3. Diablo II：依序找 D2 Survivors 自己記的 `%APPDATA%\D2 Survivors\desktop.json` 的 `installDir`、D2R 的解除安裝登錄（`InstallLocation`）、經典版的登錄（`InstallPath`）、`Program Files (x86)` 下的預設資料夾；資料夾裡有 `D2R.exe` 算 D2R，有 `d2data.mpq` 和 `Game.exe` 算經典版。找到的存進設定的 `d2_dir`／`d2_kind`（之後從 D2R 取字型、或改走在玩家電腦上配對官方譯名的備案時用）。都沒找到時說明需要購買 Diablo II: Resurrected，按鈕連到 Blizzard 官方頁面（只放官方連結）；偵測不到不擋流程
-  4. 完成：中文化網站、社群 Discord（`system.rs` 的 `DISCORD_URL`，空的就不顯示）、「在桌面建立捷徑」、「啟動遊戲」
-- **主畫面**：語言下拉選單、大的「啟動遊戲」按鈕、狀態區（翻譯版本、遊戲版本、啟動器版本和有沒有新版、最新一筆更新紀錄）。上方視需要顯示：找不到遊戲、退回英文的原因、錯誤、需要更新啟動器、還沒看過的更新紀錄
-- **設定**：遊戲資料夾、Diablo II 資料夾、更新來源、自動更新、啟動後關閉、還原原版、建立桌面捷徑、重新執行設定精靈、命令列說明、詳細紀錄
+  3. Diablo II：依序找 D2 Survivors 自己記的 `%APPDATA%\D2 Survivors\desktop.json` 的 `installDir`、D2R 的解除安裝登錄（`InstallLocation`）、經典版的登錄（`InstallPath`）、`Program Files (x86)` 下的預設資料夾；資料夾裡有 `D2R.exe` 算 D2R，有 `d2data.mpq` 和 `Game.exe` 算經典版。找到的存進設定的 `d2_dir`／`d2_kind`（之後從 D2R 取字型、或改走在玩家電腦上配對官方譯名的備案時用）。都沒找到時說明需要購買 Diablo II: Resurrected，按鈕連到 Blizzard 官方頁面（只放官方連結）；偵測不到不擋流程。測試「找不到」的畫面：設環境變數 `D2S_FAKE_NO_D2=1` 再按「重新偵測」
+  4. 完成：連結（中文化網站、社群 Discord、「☕ 請我喝杯咖啡」）、「在桌面建立捷徑」、「啟動遊戲」
+- **主畫面**：語言下拉選單（選項文字一樣用各自的語言）、大的「啟動遊戲」按鈕、狀態區（翻譯版本、遊戲版本、啟動器版本和有沒有新版、最新一筆更新紀錄）。上方視需要顯示：找不到遊戲、退回英文的原因、錯誤、需要更新啟動器、還沒看過的更新紀錄
+- **設定**：遊戲資料夾、Diablo II 資料夾、更新來源、自動更新、啟動後關閉、還原原版、建立桌面捷徑、重新執行設定精靈、連結（網站、Discord、贊助）、命令列說明、詳細紀錄
 - 背景的檢查更新失敗（離線、網址還沒上線）不跳紅色錯誤，狀態區顯示「無法檢查更新，先用本機的翻譯」；啟動、還原失敗才顯示錯誤
-- 網址集中在 `system.rs`：`SITE_URL`（中文化網站，暫定 GitHub Pages 網址，換網域只改這裡）、`DISCORD_URL`、`GAME_URL`、`D2R_URL`
-- 介面文字在 `i18n.rs`：繁中、簡中、英文；日、德、法、俄、韓文先用英文。介面語言跟著選的遊戲語言（選英文、韓文原版時用英文）。中日文用系統字型（微軟正黑、雅黑、遊ゴシック、Malgun Gothic），簡中介面把雅黑排前面
+- 網址集中在 `system.rs`：`SITE_URL`（中文化網站，暫定 GitHub Pages 網址，換網域只改這裡）、`DISCORD_URL`（永久邀請連結）、`DONATE_URL`（贊助，只是一個小連結：不跳出、不提醒、不影響功能）、`GAME_URL`、`D2R_URL`
+- 介面文字在 `launcher/src/i18n.rs` 的 `TABLE`：一行一個 key，依序是繁中、簡中、英文；日、德、法、俄、波蘭、韓文先用英文（要加語言：加一欄，`column()` 對應過去）。`{}` 是代入的值，各語言數量要一樣（`cargo test` 會檢查）。介面語言跟著選的遊戲語言（選英文、韓文原版時用英文）。中日文用系統字型（微軟正黑、雅黑、遊ゴシック、Malgun Gothic），簡中介面把雅黑排前面
 - 畫面上的路徑把使用者資料夾換成 `%LOCALAPPDATA%` 之類（`system::display_path`），截圖不會露出帳號
 - 桌面捷徑用 PowerShell 的 `WScript.Shell` 建立，指到啟動器本身、參數 `--play`（開視窗並直接啟動遊戲；出錯或退回英文時視窗留著）。捷徑指到啟動器現在的位置，所以啟動器要先放在固定的地方再建捷徑
-- 截圖在 `work/launcher/`（`wizard-*.png`、`main*.png`、`settings*.png`、`en-*.png`、`zh-CN-main.png`）。更新紀錄的內容是測試資料
+- 圖示：跟網站一樣的「D2」（深色圓角方塊上的金字）。`launcher/assets/make-icon.ps1` 產生 `icon.ico`（`build.rs` 用 winresource 放進 exe）和 `icon-64.rgba`（視窗標題列）
+- 截圖在 `work/launcher/`（`wizard-*.png`、`en-wizard-1-language.png`、`main*.png`、`settings.png`），用的是正式的 `site/data/manifest.json` 和 changelog
 
 ## 更新來源（manifest v2）
 
