@@ -81,6 +81,18 @@ export const RULES = [
   { label: '獨特怪物名字（俄文）', groups: ['unique-ru'], from: UNIQUE_FROM, to: unique('`${U(a)}, ${U(k(r))} ${W(i)}`') },
   // 波蘭文「稱號, 前段 後段」（D2R 的「%2, %0 %1」），前段照後段的詞性挑，不改大小寫：Żarłok, Mroczny Kieł
   { label: '獨特怪物名字（波蘭文）', groups: ['unique-pl'], from: UNIQUE_FROM, to: unique('`${a}, ${k(r)} ${i}`') },
+  // 日期：遊戲在語言是 ko 時寫死韓文的日期格式（「10월 27일」），翻譯放在 ko 槽位，排行榜和存檔的日期會變成韓文。
+  // 改成照 <html lang> 用瀏覽器的格式（繁中「10月27日」、德文「27. Okt.」、俄文「27 окт.」）
+  {
+    label: '日期格式（排行榜）', groups: ['dict'], file: '^Game-.*\\.js$',
+    from: 't===`ko`?`${n.getMonth()+1}월 ${n.getDate()}일`:',
+    to: 't===`ko`?n.toLocaleDateString(document.documentElement.lang,{month:`short`,day:`numeric`}):',
+  },
+  {
+    label: '日期格式（完整）', groups: ['dict'], file: '^Game-.*\\.js$',
+    from: 'return t===`ko`?`${n.getFullYear()}년 ${n.getMonth()+1}월 ${n.getDate()}일`:',
+    to: 'return t===`ko`?n.toLocaleDateString(document.documentElement.lang,{year:`numeric`,month:`long`,day:`numeric`}):',
+  },
   // 「標籤: 值」整句查不到時，翻譯器分開翻再接回去，一律接成半形「: 」；標籤是中文就改用全形「：」、不加空格。
   // 只有繁中：D2R 的簡中、日文本來就用半形冒號（「掉宝率: +%d%%」）
   {
