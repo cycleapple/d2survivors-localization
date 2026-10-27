@@ -2,21 +2,21 @@ node_modules/
 launcher/target/
 
 # 遊戲本身的檔案：原版 app.asar、存檔備份、從遊戲抽出的字典（作者的韓文翻譯）
-backup/
-versions/
+/backup/
+/versions/
 
 # D2R 原始字串檔、字型（暴雪的檔案，只能自己用）
-data/
+/data/
 
 # 本機工作區：解開的遊戲、從遊戲複製的 CASC 讀取器、一次性腳本、截圖、字型
-work/
+/work/
 
 # 舊的更新來源 repo（cycleapple/d2survivors-zh-tw-dist）的 clone，另外管理
-dist/
+/dist/
 
 # 各聊天室的分工規則，只在本機用
-CLAUDE.md
+/CLAUDE.md
 .claude/settings.local.json
 
 # Discord 伺服器建置腳本：含 Bot token（bottoken.txt）和伺服器 ID，不公開
-discord/
+/discord/
