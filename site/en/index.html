@@ -88,7 +88,8 @@
     "priceCurrency": "USD"
    },
    "downloadUrl": "https://github.com/cycleapple/d2survivors-localization/releases/latest/download/d2s-launcher.exe",
-   "softwareVersion": "1.0.0"
+   "softwareVersion": "1.0.0",
+   "license": "https://github.com/cycleapple/d2survivors-localization/blob/main/LICENSE"
   },
   {
    "@type": "WebApplication",
@@ -130,6 +131,14 @@
     },
     {
      "@type": "Question",
+     "name": "Is this open source?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "\u003cp>The code is. The source for the launcher, the bookmark, this website, and the tools is on \u003ca href=\"https://github.com/cycleapple/d2survivors-localization\" target=\"_blank\" rel=\"noopener\">GitHub\u003c/a> under the \u003ca href=\"https://github.com/cycleapple/d2survivors-localization/blob/main/LICENSE\" target=\"_blank\" rel=\"noopener\">MIT License\u003c/a>. The launcher is built automatically from that public source by GitHub Actions (\u003ca href=\"https://github.com/cycleapple/d2survivors-localization/actions/workflows/release-launcher.yml\" target=\"_blank\" rel=\"noopener\">build history\u003c/a>), and every release includes d2s-launcher.exe.sha256 so you can check it yourself.\u003c/p>\u003cp>The translation data (the dictionaries) is not openly licensed yet; all rights are reserved, see \u003ca href=\"https://github.com/cycleapple/d2survivors-localization/blob/main/dict/LICENSE\" target=\"_blank\" rel=\"noopener\">dict/LICENSE\u003c/a>. The official terms used in them belong to Blizzard Entertainment.\u003c/p>"
+     }
+    },
+    {
+     "@type": "Question",
      "name": "Can I play on Mac, Linux, or a phone?",
      "acceptedAnswer": {
       "@type": "Answer",
@@ -149,7 +158,7 @@
      "name": "Where do I report a translation error or something broken?",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "\u003cp>Typos, missing translations, and problems with the bookmark or launcher go to the \u003ca href=\"https://discord.gg/QMBbTHSsaK\" target=\"_blank\" rel=\"noopener\">localization community Discord\u003c/a>, where news is posted too.\u003c/p>\u003cp>Problems with the game itself (not caused by the translation) go to the \u003ca href=\"https://discord.gg/mYMGgZPuQb\" target=\"_blank\" rel=\"noopener\">official D2 Survivors Discord\u003c/a>.\u003c/p>"
+      "text": "\u003cp>Typos, missing translations, and problems with the bookmark or launcher go to the \u003ca href=\"https://discord.gg/QMBbTHSsaK\" target=\"_blank\" rel=\"noopener\">localization community Discord\u003c/a>, where news is posted too.\u003c/p>\u003cp>You can also report translation errors and bugs in the code on \u003ca href=\"https://github.com/cycleapple/d2survivors-localization/issues\" target=\"_blank\" rel=\"noopener\">GitHub Issues\u003c/a>.\u003c/p>\u003cp>Problems with the game itself (not caused by the translation) go to the \u003ca href=\"https://discord.gg/mYMGgZPuQb\" target=\"_blank\" rel=\"noopener\">official D2 Survivors Discord\u003c/a>.\u003c/p>"
      }
     },
     {
@@ -533,6 +542,7 @@
         <h2>FAQ</h2>
         <div class="faq">
           <details><summary>Is this an official translation?</summary><div class="answer"><p>No. It is an unofficial fan translation, not affiliated with the D2 Survivors developers or Blizzard Entertainment.</p></div></details>
+          <details><summary>Is this open source?</summary><div class="answer"><p>The code is. The source for the launcher, the bookmark, this website, and the tools is on <a href="https://github.com/cycleapple/d2survivors-localization" target="_blank" rel="noopener">GitHub</a> under the <a href="https://github.com/cycleapple/d2survivors-localization/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a>. The launcher is built automatically from that public source by GitHub Actions (<a href="https://github.com/cycleapple/d2survivors-localization/actions/workflows/release-launcher.yml" target="_blank" rel="noopener">build history</a>), and every release includes <code>d2s-launcher.exe.sha256</code> so you can check it yourself.</p><p>The translation data (the dictionaries) is not openly licensed yet; all rights are reserved, see <a href="https://github.com/cycleapple/d2survivors-localization/blob/main/dict/LICENSE" target="_blank" rel="noopener">dict/LICENSE</a>. The official terms used in them belong to Blizzard Entertainment.</p></div></details>
           <details><summary>Can I play on Mac, Linux, or a phone?</summary><div class="answer"><p>Yes. The launcher is Windows-only for now; on Mac, Linux, and phones, play the <a href="https://d2survivors.lol/play/" target="_blank" rel="noopener">web version</a> and use the bookmark from the Browser tab.</p></div></details>
           <details data-only="desktop"><summary>Will it touch my saves?</summary><div class="answer"><p>No. The launcher only replaces <code>resources\app.asar</code> in the game folder, after backing up the original. Saves live elsewhere and are never read or changed.</p></div></details>
           <details data-only="web"><summary>Will it touch my saves?</summary><div class="answer"><p>No. Saves stay in your browser as usual. The bookmark only swaps the game text in the page you have open and leaves nothing behind; reloading brings back the original.</p></div></details>
@@ -542,9 +552,9 @@
           <details data-only="web"><summary>Nothing happens when I tap the bookmark on my phone?</summary><div class="answer"><p>Android Chrome doesn’t run bookmarks tapped in the bookmarks list: type the bookmark name “D2 Localization” in the address bar and tap the bookmark that appears below. On iPhone, open Safari’s bookmarks while on the game page and tap it there.</p><p>Also check that the bookmark’s whole address was replaced with the bookmark code, starting with <code>javascript:</code>.</p></div></details>
           <details data-only="desktop"><summary>Why is some text still in English?</summary><div class="answer"><p>All of the game’s text is translated and has been checked in game for anything left untranslated. If you see English, the game has probably just been updated with new text; a later translation update fills it in, and the launcher downloads it automatically. If it stays in English, please let us know.</p></div></details>
           <details data-only="web"><summary>Why is some text still in English?</summary><div class="answer"><p>All of the game’s text is translated and has been checked in game for anything left untranslated. If you see English, the game has probably just been updated with new text; a later translation update fills it in, and the bookmark always loads the latest translation. If it stays in English, please let us know.</p></div></details>
-          <details data-only="desktop"><summary>Windows says “Windows protected your PC”. What do I do?</summary><div class="answer"><p>The launcher isn’t code-signed (a signing certificate costs money every year), so Windows SmartScreen warns about it until enough people have downloaded it.</p><p>Click <strong>More info</strong>, then <strong>Run anyway</strong>; Windows won’t ask again. Only download it from this site or <a href="https://github.com/cycleapple/d2survivors-localization/releases" target="_blank" rel="noopener">GitHub Releases</a>. Every release includes <code>d2s-launcher.exe.sha256</code>, which you can check with <code>certutil -hashfile d2s-launcher.exe SHA256</code>.</p><p>If your browser says the file isn’t commonly downloaded, choose <strong>Keep</strong> from the download’s menu.</p></div></details>
+          <details data-only="desktop"><summary>Windows says “Windows protected your PC”. What do I do?</summary><div class="answer"><p>The launcher isn’t code-signed (a signing certificate costs money every year), so Windows SmartScreen warns about it until enough people have downloaded it.</p><p>It isn’t signed, but the launcher’s <a href="https://github.com/cycleapple/d2survivors-localization" target="_blank" rel="noopener">source code</a> and <a href="https://github.com/cycleapple/d2survivors-localization/actions/workflows/release-launcher.yml" target="_blank" rel="noopener">build process</a> are both public.</p><p>Click <strong>More info</strong>, then <strong>Run anyway</strong>; Windows won’t ask again. Only download it from this site or <a href="https://github.com/cycleapple/d2survivors-localization/releases" target="_blank" rel="noopener">GitHub Releases</a>. Every release includes <code>d2s-launcher.exe.sha256</code>, which you can check with <code>certutil -hashfile d2s-launcher.exe SHA256</code>.</p><p>If your browser says the file isn’t commonly downloaded, choose <strong>Keep</strong> from the download’s menu.</p></div></details>
           <details><summary>Can I use Chinese in character names?</summary><div class="answer"><p>Not yet. The game itself only allows English letters and Korean in character names.</p></div></details>
-          <details><summary>Where do I report a translation error or something broken?</summary><div class="answer"><p>Typos, missing translations, and problems with the bookmark or launcher go to the <a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">localization community Discord</a>, where news is posted too.</p><p>Problems with the game itself (not caused by the translation) go to the <a href="https://discord.gg/mYMGgZPuQb" target="_blank" rel="noopener">official D2 Survivors Discord</a>.</p></div></details>
+          <details><summary>Where do I report a translation error or something broken?</summary><div class="answer"><p>Typos, missing translations, and problems with the bookmark or launcher go to the <a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">localization community Discord</a>, where news is posted too.</p><p>You can also report translation errors and bugs in the code on <a href="https://github.com/cycleapple/d2survivors-localization/issues" target="_blank" rel="noopener">GitHub Issues</a>.</p><p>Problems with the game itself (not caused by the translation) go to the <a href="https://discord.gg/mYMGgZPuQb" target="_blank" rel="noopener">official D2 Survivors Discord</a>.</p></div></details>
           <details><summary>How can I help translate or report a typo?</summary><div class="answer"><p>Gladly! Every language is fully released, but a translation can always get better. If you spot awkward wording or a typo, especially in your native language, please tell us. Get in touch <a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">here</a>.</p></div></details>
         </div>
         <!-- 贊助：低調放在常見問題後面，不跳視窗 -->
@@ -560,7 +570,7 @@
 
   <footer class="footer">
     <div class="wrap">
-      <p class="footer-community"><a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">Join the localization Discord</a><span class="sep" aria-hidden="true">·</span><a href="https://paypal.me/DonateCYtw" target="_blank" rel="noopener">☕ Buy me a coffee</a></p>
+      <p class="footer-community"><a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">Join the localization Discord</a><span class="sep" aria-hidden="true">·</span><a href="https://github.com/cycleapple/d2survivors-localization" target="_blank" rel="noopener">Source code (GitHub)</a><span class="sep" aria-hidden="true">·</span><a href="https://paypal.me/DonateCYtw" target="_blank" rel="noopener">☕ Buy me a coffee</a></p>
       <p>Unofficial fan translation, not affiliated with <a href="https://d2survivors.lol/" target="_blank" rel="noopener">D2 Survivors</a> (framara) or Blizzard Entertainment. Diablo® is a trademark of Blizzard Entertainment, Inc.</p>
       <p class="footer-small"><span data-only="desktop">Game 2026.1027.2 · Launcher v1.0.0</span><span data-only="web">Web · Translations 2026-10-27</span></p>
     </div>

@@ -16,6 +16,8 @@ export const SITE = {
   discordUrl: 'https://discord.gg/QMBbTHSsaK',
   // 站長平台的驗證碼（只填 content 的值）。有值才輸出 meta：google-site-verification、msvalidate.01、baidu-site-verification
   verify: { google: '', bing: '', baidu: '' },
+  // 原始碼 repo（公開）。頁尾的「原始碼」、常見問題的授權、GitHub Issues、編譯紀錄都從這裡接
+  repoUrl: 'https://github.com/cycleapple/d2survivors-localization',
   // 贊助連結（使用者的 PayPal）。放在常見問題下面的小段落和頁尾，留空就不顯示
   donateUrl: 'https://paypal.me/DonateCYtw',
   // 回報問題的其他網址（GitHub Issues…），沒有 discordUrl 時才用。留空就不顯示

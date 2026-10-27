@@ -88,7 +88,8 @@
     "priceCurrency": "USD"
    },
    "downloadUrl": "https://github.com/cycleapple/d2survivors-localization/releases/latest/download/d2s-launcher.exe",
-   "softwareVersion": "1.0.0"
+   "softwareVersion": "1.0.0",
+   "license": "https://github.com/cycleapple/d2survivors-localization/blob/main/LICENSE"
   },
   {
    "@type": "WebApplication",
@@ -130,6 +131,14 @@
     },
     {
      "@type": "Question",
+     "name": "オープンソースですか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "\u003cp>プログラムの部分はそうです。ランチャー、ブックマーク、このサイト、ツールのソースコードは \u003ca href=\"https://github.com/cycleapple/d2survivors-localization\" target=\"_blank\" rel=\"noopener\">GitHub\u003c/a> で \u003ca href=\"https://github.com/cycleapple/d2survivors-localization/blob/main/LICENSE\" target=\"_blank\" rel=\"noopener\">MIT ライセンス\u003c/a> のもと公開しています。ランチャーは公開しているソースコードから GitHub Actions で自動的にビルドしており（\u003ca href=\"https://github.com/cycleapple/d2survivors-localization/actions/workflows/release-launcher.yml\" target=\"_blank\" rel=\"noopener\">ビルド履歴\u003c/a>）、各リリースには d2s-launcher.exe.sha256 が付いているので、自分で照合できます。\u003c/p>\u003cp>翻訳データ（辞書）はまだオープンなライセンスではなく、すべての権利を留保しています。詳しくは \u003ca href=\"https://github.com/cycleapple/d2survivors-localization/blob/main/dict/LICENSE\" target=\"_blank\" rel=\"noopener\">dict/LICENSE\u003c/a> をご覧ください。辞書に含まれる公式訳の用語は Blizzard Entertainment に帰属します。\u003c/p>"
+     }
+    },
+    {
+     "@type": "Question",
      "name": "日本語版の完成度は？",
      "acceptedAnswer": {
       "@type": "Answer",
@@ -157,7 +166,7 @@
      "name": "翻訳の誤りや不具合はどこに報告すればいい？",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "\u003cp>誤字・訳抜け・ブックマークやランチャーの不具合は、\u003ca href=\"https://discord.gg/QMBbTHSsaK\" target=\"_blank\" rel=\"noopener\">翻訳コミュニティの Discord\u003c/a> に報告してください。最新情報もそこでお知らせします。\u003c/p>\u003cp>ゲーム自体の不具合（翻訳と関係ないもの）は \u003ca href=\"https://discord.gg/mYMGgZPuQb\" target=\"_blank\" rel=\"noopener\">D2 Survivors のゲーム公式 Discord\u003c/a>（英語）に報告してください。\u003c/p>"
+      "text": "\u003cp>誤字・訳抜け・ブックマークやランチャーの不具合は、\u003ca href=\"https://discord.gg/QMBbTHSsaK\" target=\"_blank\" rel=\"noopener\">翻訳コミュニティの Discord\u003c/a> に報告してください。最新情報もそこでお知らせします。\u003c/p>\u003cp>翻訳の誤りやプログラムの不具合は \u003ca href=\"https://github.com/cycleapple/d2survivors-localization/issues\" target=\"_blank\" rel=\"noopener\">GitHub Issues\u003c/a> でも報告できます。\u003c/p>\u003cp>ゲーム自体の不具合（翻訳と関係ないもの）は \u003ca href=\"https://discord.gg/mYMGgZPuQb\" target=\"_blank\" rel=\"noopener\">D2 Survivors のゲーム公式 Discord\u003c/a>（英語）に報告してください。\u003c/p>"
      }
     },
     {
@@ -541,6 +550,7 @@
         <h2>よくある質問</h2>
         <div class="faq">
           <details><summary>これは公式の翻訳ですか？</summary><div class="answer"><p>いいえ。プレイヤーが作った非公式の翻訳で、D2 Survivors の開発者とも Blizzard Entertainment とも関係ありません。</p></div></details>
+          <details><summary>オープンソースですか？</summary><div class="answer"><p>プログラムの部分はそうです。ランチャー、ブックマーク、このサイト、ツールのソースコードは <a href="https://github.com/cycleapple/d2survivors-localization" target="_blank" rel="noopener">GitHub</a> で <a href="https://github.com/cycleapple/d2survivors-localization/blob/main/LICENSE" target="_blank" rel="noopener">MIT ライセンス</a> のもと公開しています。ランチャーは公開しているソースコードから GitHub Actions で自動的にビルドしており（<a href="https://github.com/cycleapple/d2survivors-localization/actions/workflows/release-launcher.yml" target="_blank" rel="noopener">ビルド履歴</a>）、各リリースには <code>d2s-launcher.exe.sha256</code> が付いているので、自分で照合できます。</p><p>翻訳データ（辞書）はまだオープンなライセンスではなく、すべての権利を留保しています。詳しくは <a href="https://github.com/cycleapple/d2survivors-localization/blob/main/dict/LICENSE" target="_blank" rel="noopener">dict/LICENSE</a> をご覧ください。辞書に含まれる公式訳の用語は Blizzard Entertainment に帰属します。</p></div></details>
           <details><summary>日本語版の完成度は？</summary><div class="answer"><p>正式版です。すべての文字を翻訳し、ゲーム内で訳し漏れがないことを確認しました。そのうえで UI の全文と無作為に選んだ 300 件を改めて見直し、見つかった点をもとに辞書全体で約 640 か所を修正しています。用語は『ディアブロ II リザレクテッド』の公式日本語訳に準拠しています。</p><p>不自然な訳に気づいたら、ぜひ教えてください。</p></div></details>
           <details><summary>Mac、Linux、スマホでも遊べますか？</summary><div class="answer"><p>はい。ランチャーは今のところ Windows 版のみです。Mac・Linux・スマホでは<a href="https://d2survivors.lol/play/" target="_blank" rel="noopener">ブラウザ版</a>で遊び、「ブラウザ版」タブのブックマークで日本語に切り替えてください。</p></div></details>
           <details data-only="desktop"><summary>セーブデータに影響はありますか？</summary><div class="answer"><p>ありません。ランチャーが置き換えるのはゲームフォルダ内の <code>resources\app.asar</code> だけで、置き換える前に元のファイルをバックアップします。セーブデータは別の場所にあり、読み込みも変更もしません。</p></div></details>
@@ -551,9 +561,9 @@
           <details data-only="web"><summary>スマホでブックマークを押しても何も起きない</summary><div class="answer"><p>Android の Chrome では、ブックマーク一覧からタップしても実行されません。アドレスバーにブックマークの名前「D2 日本語化」を入力し、下に出てくるブックマークをタップしてください。iPhone は、ゲームページを開いた状態で Safari のブックマーク一覧からタップします。</p><p>ブックマークの URL がコードにまるごと置き換わっていて、<code>javascript:</code> で始まっているかも確認してください。</p></div></details>
           <details data-only="desktop"><summary>まだ英語のところがあるのはなぜ？</summary><div class="answer"><p>ゲーム内の文字はすべて翻訳済みで、訳し漏れがないことをゲーム内で確認しています。英語が表示される場合は、たいていゲームのアップデートで新しい文字が増えたためです。今後の翻訳の更新で対応し、ランチャーが自動でダウンロードします。いつまでも英語のままなら、ぜひ教えてください。</p></div></details>
           <details data-only="web"><summary>まだ英語のところがあるのはなぜ？</summary><div class="answer"><p>ゲーム内の文字はすべて翻訳済みで、訳し漏れがないことをゲーム内で確認しています。英語が表示される場合は、たいていゲームのアップデートで新しい文字が増えたためです。今後の翻訳の更新で対応し、ブックマークは毎回最新の翻訳を読み込みます。いつまでも英語のままなら、ぜひ教えてください。</p></div></details>
-          <details data-only="desktop"><summary>「Windows によって PC が保護されました」と表示されたら？</summary><div class="answer"><p>ランチャーにはコード署名がありません（署名の証明書は毎年費用がかかります）。そのため、ダウンロードした人が十分に増えるまでは Windows SmartScreen がこの警告を出します。</p><p>「<strong>詳細情報</strong>」を押してから「<strong>実行</strong>」を押してください。次からは表示されません。ダウンロードはこのサイトか <a href="https://github.com/cycleapple/d2survivors-localization/releases" target="_blank" rel="noopener">GitHub Releases</a> からだけにしてください。各リリースには <code>d2s-launcher.exe.sha256</code> が付いていて、<code>certutil -hashfile d2s-launcher.exe SHA256</code> で照合できます。</p><p>ブラウザが「このファイルは一般的にダウンロードされていません」と表示した場合は、ダウンロードのメニューから「保存」を選んでください。</p></div></details>
+          <details data-only="desktop"><summary>「Windows によって PC が保護されました」と表示されたら？</summary><div class="answer"><p>ランチャーにはコード署名がありません（署名の証明書は毎年費用がかかります）。そのため、ダウンロードした人が十分に増えるまでは Windows SmartScreen がこの警告を出します。</p><p>署名はありませんが、ランチャーの<a href="https://github.com/cycleapple/d2survivors-localization" target="_blank" rel="noopener">ソースコード</a>と<a href="https://github.com/cycleapple/d2survivors-localization/actions/workflows/release-launcher.yml" target="_blank" rel="noopener">ビルドの過程</a>はどちらも公開しています。</p><p>「<strong>詳細情報</strong>」を押してから「<strong>実行</strong>」を押してください。次からは表示されません。ダウンロードはこのサイトか <a href="https://github.com/cycleapple/d2survivors-localization/releases" target="_blank" rel="noopener">GitHub Releases</a> からだけにしてください。各リリースには <code>d2s-launcher.exe.sha256</code> が付いていて、<code>certutil -hashfile d2s-launcher.exe SHA256</code> で照合できます。</p><p>ブラウザが「このファイルは一般的にダウンロードされていません」と表示した場合は、ダウンロードのメニューから「保存」を選んでください。</p></div></details>
           <details><summary>キャラクター名に日本語は使えますか？</summary><div class="answer"><p>今のところ使えません。ゲーム自体がキャラクター名に英字と韓国語しか使えない仕様です。</p></div></details>
-          <details><summary>翻訳の誤りや不具合はどこに報告すればいい？</summary><div class="answer"><p>誤字・訳抜け・ブックマークやランチャーの不具合は、<a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">翻訳コミュニティの Discord</a> に報告してください。最新情報もそこでお知らせします。</p><p>ゲーム自体の不具合（翻訳と関係ないもの）は <a href="https://discord.gg/mYMGgZPuQb" target="_blank" rel="noopener">D2 Survivors のゲーム公式 Discord</a>（英語）に報告してください。</p></div></details>
+          <details><summary>翻訳の誤りや不具合はどこに報告すればいい？</summary><div class="answer"><p>誤字・訳抜け・ブックマークやランチャーの不具合は、<a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">翻訳コミュニティの Discord</a> に報告してください。最新情報もそこでお知らせします。</p><p>翻訳の誤りやプログラムの不具合は <a href="https://github.com/cycleapple/d2survivors-localization/issues" target="_blank" rel="noopener">GitHub Issues</a> でも報告できます。</p><p>ゲーム自体の不具合（翻訳と関係ないもの）は <a href="https://discord.gg/mYMGgZPuQb" target="_blank" rel="noopener">D2 Survivors のゲーム公式 Discord</a>（英語）に報告してください。</p></div></details>
           <details><summary>翻訳を手伝ったり、誤字を報告したりできますか？</summary><div class="answer"><p>大歓迎です！ すべての言語が正式版になりましたが、翻訳にはまだ良くできるところがあります。不自然な訳や誤字に気づいたら、特にネイティブの方はぜひ教えてください。<a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">こちら</a>からご連絡ください。</p></div></details>
         </div>
         <!-- 贊助：低調放在常見問題後面，不跳視窗 -->
@@ -569,7 +579,7 @@
 
   <footer class="footer">
     <div class="wrap">
-      <p class="footer-community"><a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">翻訳コミュニティの Discord に参加</a><span class="sep" aria-hidden="true">·</span><a href="https://paypal.me/DonateCYtw" target="_blank" rel="noopener">☕ コーヒーをおごる</a></p>
+      <p class="footer-community"><a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">翻訳コミュニティの Discord に参加</a><span class="sep" aria-hidden="true">·</span><a href="https://github.com/cycleapple/d2survivors-localization" target="_blank" rel="noopener">ソースコード（GitHub）</a><span class="sep" aria-hidden="true">·</span><a href="https://paypal.me/DonateCYtw" target="_blank" rel="noopener">☕ コーヒーをおごる</a></p>
       <p>プレイヤーによる非公式の翻訳です。<a href="https://d2survivors.lol/" target="_blank" rel="noopener">D2 Survivors</a>（framara）および Blizzard Entertainment とは関係ありません。Diablo® は Blizzard Entertainment, Inc. の商標です。</p>
       <p class="footer-small"><span data-only="desktop">Game 2026.1027.2 · Launcher v1.0.0</span><span data-only="web">Web · Translations 2026-10-27</span></p>
     </div>

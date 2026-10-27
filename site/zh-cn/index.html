@@ -90,7 +90,8 @@
     "priceCurrency": "USD"
    },
    "downloadUrl": "https://github.com/cycleapple/d2survivors-localization/releases/latest/download/d2s-launcher.exe",
-   "softwareVersion": "1.0.0"
+   "softwareVersion": "1.0.0",
+   "license": "https://github.com/cycleapple/d2survivors-localization/blob/main/LICENSE"
   },
   {
    "@type": "WebApplication",
@@ -132,6 +133,14 @@
     },
     {
      "@type": "Question",
+     "name": "这是开源的吗？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "\u003cp>程序部分是。启动器、书签、网站和工具的源代码都在 \u003ca href=\"https://github.com/cycleapple/d2survivors-localization\" target=\"_blank\" rel=\"noopener\">GitHub\u003c/a> 上，采用 \u003ca href=\"https://github.com/cycleapple/d2survivors-localization/blob/main/LICENSE\" target=\"_blank\" rel=\"noopener\">MIT 许可\u003c/a>。启动器由 GitHub Actions 从公开的源代码自动编译（\u003ca href=\"https://github.com/cycleapple/d2survivors-localization/actions/workflows/release-launcher.yml\" target=\"_blank\" rel=\"noopener\">编译记录\u003c/a>），每个 Release 都附有 d2s-launcher.exe.sha256，可以自行核对。\u003c/p>\u003cp>翻译数据（词典）目前没有开放许可，保留所有权利，详见 \u003ca href=\"https://github.com/cycleapple/d2survivors-localization/blob/main/dict/LICENSE\" target=\"_blank\" rel=\"noopener\">dict/LICENSE\u003c/a>。词典中沿用的官方译名归 Blizzard Entertainment 所有。\u003c/p>"
+     }
+    },
+    {
+     "@type": "Question",
      "name": "有简体中文版吗？",
      "acceptedAnswer": {
       "@type": "Answer",
@@ -159,7 +168,7 @@
      "name": "翻译有错或游戏坏了，去哪里反馈？",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "\u003cp>错别字、漏译、书签或启动器的问题，请到\u003ca href=\"https://discord.gg/QMBbTHSsaK\" target=\"_blank\" rel=\"noopener\">汉化社区 Discord\u003c/a> 反馈，那里也会发布最新消息。\u003c/p>\u003cp>游戏本身的问题（与翻译无关的）请到 \u003ca href=\"https://discord.gg/mYMGgZPuQb\" target=\"_blank\" rel=\"noopener\">D2 Survivors 游戏官方 Discord\u003c/a>（英文）反馈。\u003c/p>"
+      "text": "\u003cp>错别字、漏译、书签或启动器的问题，请到\u003ca href=\"https://discord.gg/QMBbTHSsaK\" target=\"_blank\" rel=\"noopener\">汉化社区 Discord\u003c/a> 反馈，那里也会发布最新消息。\u003c/p>\u003cp>翻译错误和程序问题也可以在 \u003ca href=\"https://github.com/cycleapple/d2survivors-localization/issues\" target=\"_blank\" rel=\"noopener\">GitHub Issues\u003c/a> 反馈。\u003c/p>\u003cp>游戏本身的问题（与翻译无关的）请到 \u003ca href=\"https://discord.gg/mYMGgZPuQb\" target=\"_blank\" rel=\"noopener\">D2 Survivors 游戏官方 Discord\u003c/a>（英文）反馈。\u003c/p>"
      }
     },
     {
@@ -543,6 +552,7 @@
         <h2>常见问题</h2>
         <div class="faq">
           <details><summary>这是官方翻译吗？</summary><div class="answer"><p>不是。这是玩家自制的非官方翻译，与 D2 Survivors 开发者及暴雪娱乐均无关。</p></div></details>
+          <details><summary>这是开源的吗？</summary><div class="answer"><p>程序部分是。启动器、书签、网站和工具的源代码都在 <a href="https://github.com/cycleapple/d2survivors-localization" target="_blank" rel="noopener">GitHub</a> 上，采用 <a href="https://github.com/cycleapple/d2survivors-localization/blob/main/LICENSE" target="_blank" rel="noopener">MIT 许可</a>。启动器由 GitHub Actions 从公开的源代码自动编译（<a href="https://github.com/cycleapple/d2survivors-localization/actions/workflows/release-launcher.yml" target="_blank" rel="noopener">编译记录</a>），每个 Release 都附有 <code>d2s-launcher.exe.sha256</code>，可以自行核对。</p><p>翻译数据（词典）目前没有开放许可，保留所有权利，详见 <a href="https://github.com/cycleapple/d2survivors-localization/blob/main/dict/LICENSE" target="_blank" rel="noopener">dict/LICENSE</a>。词典中沿用的官方译名归 Blizzard Entertainment 所有。</p></div></details>
           <details><summary>有简体中文版吗？</summary><div class="answer"><p>有，已正式推出。用语以《暗黑破坏神 II：狱火重生》官方简体中文为准，按大陆的说法翻译，不是从繁体中文直接转换。桌面版在启动器的语言界面选择「简体中文」即可；浏览器版点击书签后，会按浏览器语言自动选择简体中文，也可以在游戏的语言设置里切换。</p></div></details>
           <details><summary>可以在 Mac、Linux 或手机上玩吗？</summary><div class="answer"><p>可以。启动器目前只有 Windows 版；Mac、Linux 和手机请在浏览器里玩<a href="https://d2survivors.lol/play/" target="_blank" rel="noopener">网页版</a>，再用「浏览器版」页面里的书签切换成中文。</p></div></details>
           <details data-only="desktop"><summary>会影响我的存档吗？</summary><div class="answer"><p>不会。启动器只替换游戏文件夹中的 <code>resources\app.asar</code>，存档保存在其他位置，不会被读取或修改。替换前会先备份原版。</p></div></details>
@@ -553,9 +563,9 @@
           <details data-only="web"><summary>手机上点书签没有反应？</summary><div class="answer"><p>Android Chrome 从书签列表点击不会执行，要在地址栏输入书签名称「D2 汉化」，再点击下方出现的书签。iPhone 请在游戏页面打开 Safari 的书签列表点击。</p><p>也请确认书签的网址已整个替换成书签代码，开头是 <code>javascript:</code>。</p></div></details>
           <details data-only="desktop"><summary>为什么还有一些英文？</summary><div class="answer"><p>游戏里的文字都已翻译，也在游戏里检查过没有漏译。如果看到英文，通常是游戏刚更新、加入了新的文字；翻译会在之后的更新中补上，启动器会自动下载。一直没补上的话，欢迎反馈。</p></div></details>
           <details data-only="web"><summary>为什么还有一些英文？</summary><div class="answer"><p>游戏里的文字都已翻译，也在游戏里检查过没有漏译。如果看到英文，通常是游戏刚更新、加入了新的文字；翻译会在之后的更新中补上，书签每次都会加载最新的翻译。一直没补上的话，欢迎反馈。</p></div></details>
-          <details data-only="desktop"><summary>Windows 弹出「Windows 已保护你的电脑」怎么办？</summary><div class="answer"><p>启动器没有代码签名（需要每年付费购买），在下载量还不多之前，Windows SmartScreen 都会弹出这个警告。</p><p>点击「<strong>更多信息</strong>」，再点击「<strong>仍要运行</strong>」即可，之后不会再提示。请只从本站或 <a href="https://github.com/cycleapple/d2survivors-localization/releases" target="_blank" rel="noopener">GitHub Releases</a> 下载；每个 Release 都附有 <code>d2s-launcher.exe.sha256</code>，可以用 <code>certutil -hashfile d2s-launcher.exe SHA256</code> 核对。</p><p>浏览器下载时如果提示该文件不常被下载，在下载列表的菜单里选择「保留」。</p></div></details>
+          <details data-only="desktop"><summary>Windows 弹出「Windows 已保护你的电脑」怎么办？</summary><div class="answer"><p>启动器没有代码签名（需要每年付费购买），在下载量还不多之前，Windows SmartScreen 都会弹出这个警告。</p><p>虽然没有签名，但启动器的<a href="https://github.com/cycleapple/d2survivors-localization" target="_blank" rel="noopener">源代码</a>和<a href="https://github.com/cycleapple/d2survivors-localization/actions/workflows/release-launcher.yml" target="_blank" rel="noopener">编译过程</a>都是公开的。</p><p>点击「<strong>更多信息</strong>」，再点击「<strong>仍要运行</strong>」即可，之后不会再提示。请只从本站或 <a href="https://github.com/cycleapple/d2survivors-localization/releases" target="_blank" rel="noopener">GitHub Releases</a> 下载；每个 Release 都附有 <code>d2s-launcher.exe.sha256</code>，可以用 <code>certutil -hashfile d2s-launcher.exe SHA256</code> 核对。</p><p>浏览器下载时如果提示该文件不常被下载，在下载列表的菜单里选择「保留」。</p></div></details>
           <details><summary>角色名可以用中文吗？</summary><div class="answer"><p>暂时不行。游戏本身只允许英文字母和韩文作为角色名。</p></div></details>
-          <details><summary>翻译有错或游戏坏了，去哪里反馈？</summary><div class="answer"><p>错别字、漏译、书签或启动器的问题，请到<a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">汉化社区 Discord</a> 反馈，那里也会发布最新消息。</p><p>游戏本身的问题（与翻译无关的）请到 <a href="https://discord.gg/mYMGgZPuQb" target="_blank" rel="noopener">D2 Survivors 游戏官方 Discord</a>（英文）反馈。</p></div></details>
+          <details><summary>翻译有错或游戏坏了，去哪里反馈？</summary><div class="answer"><p>错别字、漏译、书签或启动器的问题，请到<a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">汉化社区 Discord</a> 反馈，那里也会发布最新消息。</p><p>翻译错误和程序问题也可以在 <a href="https://github.com/cycleapple/d2survivors-localization/issues" target="_blank" rel="noopener">GitHub Issues</a> 反馈。</p><p>游戏本身的问题（与翻译无关的）请到 <a href="https://discord.gg/mYMGgZPuQb" target="_blank" rel="noopener">D2 Survivors 游戏官方 Discord</a>（英文）反馈。</p></div></details>
           <details><summary>想帮忙翻译或反馈错别字？</summary><div class="answer"><p>欢迎！所有语言都已正式推出，但翻译总有可以改进的地方。看到不自然的说法或错别字，特别欢迎母语玩家告诉我们。请到<a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">这里</a>联系我们。</p></div></details>
         </div>
         <!-- 贊助：低調放在常見問題後面，不跳視窗 -->
@@ -571,7 +581,7 @@
 
   <footer class="footer">
     <div class="wrap">
-      <p class="footer-community"><a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">加入汉化社区 Discord</a><span class="sep" aria-hidden="true">·</span><a href="https://paypal.me/DonateCYtw" target="_blank" rel="noopener">☕ 请我喝杯咖啡</a></p>
+      <p class="footer-community"><a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">加入汉化社区 Discord</a><span class="sep" aria-hidden="true">·</span><a href="https://github.com/cycleapple/d2survivors-localization" target="_blank" rel="noopener">源代码（GitHub）</a><span class="sep" aria-hidden="true">·</span><a href="https://paypal.me/DonateCYtw" target="_blank" rel="noopener">☕ 请我喝杯咖啡</a></p>
       <p>非官方玩家自制翻译，与 <a href="https://d2survivors.lol/" target="_blank" rel="noopener">D2 Survivors</a>（framara）、暴雪娱乐（Blizzard Entertainment）无关。Diablo® 是 Blizzard Entertainment, Inc. 的商标。</p>
       <p class="footer-small"><span data-only="desktop">Game 2026.1027.2 · Launcher v1.0.0</span><span data-only="web">Web · Translations 2026-10-27</span></p>
     </div>

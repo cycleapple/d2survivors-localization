@@ -88,6 +88,15 @@ node tools/serve.mjs site 8766     # 本機預覽（或 python -m http.server 87
 - 邀請連結放在 `SITE.discordUrl`（使用者自己的伺服器），留空時下面都不顯示：首頁資訊列下的「加入中文化社群 Discord」、頁尾、常見問題「翻譯有錯或遊戲壞了，要去哪裡回報？」（`faq.items` 回答裡有 `{discord}` 的題目）、「想幫忙翻譯」那題的聯絡連結、「翻譯修正中」提示
 - `LINKS.d2sDiscord` 是 D2 Survivors **遊戲官方**的 Discord（英文），來源卡片上寫「遊戲官方 Discord」，跟中文化社群分開。遊戲本身的問題請玩家到官方，翻譯的問題到中文化社群
 
+## 開源
+
+- repo 網址在 `SITE.repoUrl`。頁尾有「原始碼（GitHub）」連結（`footer.source`，在 Discord 和贊助中間）
+- 常見問題第二題「這是開源的嗎？」：程式（啟動器、書籤、網站、工具）是 MIT（`LICENSE`）；啟動器由 GitHub Actions 從公開原始碼編譯，Release 附 sha256；翻譯字典沒有開放授權、保留所有權利（`dict/LICENSE`），官方譯名屬於 Blizzard。不要寫成「全部開源」或「翻譯可以自由使用」
+- SmartScreen 那題補一句原始碼和編譯過程都公開；回報問題那題加 GitHub Issues
+- 常見問題的回答裡可以用 `{repo}`、`{license}`、`{dictLicense}`、`{issues}`、`{actions}`，建置時換成 repo 的網址（`REPO_LINKS`）
+- JSON-LD：SoftwareApplication（啟動器）加 `license`。WebApplication 不加（書籤會載入字典）；`codeRepository` 是 SoftwareSourceCode 的屬性，不放
+- 字典的授權定下來之後，要改這題和 `dict/LICENSE` 的說法
+
 ## 贊助
 
 - 連結在 `SITE.donateUrl`（使用者的 PayPal），留空就不顯示

@@ -33,6 +33,14 @@ try {
 } catch (e) {
   if (e.code !== 'ENOENT') console.warn(`略過 data/changelog.json：${e.message}`);
 }
+// 原始碼相關的連結：常見問題裡的 {repo}、{license}、{dictLicense}、{issues}、{actions}，頁尾，JSON-LD 的 license
+const REPO_LINKS = {
+  repo: SITE.repoUrl,
+  license: `${SITE.repoUrl}/blob/main/LICENSE`,
+  dictLicense: `${SITE.repoUrl}/blob/main/dict/LICENSE`,
+  issues: `${SITE.repoUrl}/issues`,
+  actions: `${SITE.repoUrl}/actions/workflows/release-launcher.yml`,
+};
 const discordLink = (t, text) => `<a href="${esc(SITE.discordUrl)}" target="_blank" rel="noopener">${esc(text)}</a>`;
 const bookmarklet = `javascript:import('${new URL(SITE.bookmarkletPath, BASE).href}').then(m=>m.default()).catch(e=>alert('D2 Survivors Localization: '+e))`;
 
@@ -152,6 +160,8 @@ function langPageLd(sl, t, url, image, faq) {
         isAccessibleForFree: true,
         offers,
         ...(state.launcherReleased ? { downloadUrl: SITE.downloadUrl, softwareVersion: state.launcherVersion } : {}),
+        // 啟動器的程式是 MIT（翻譯字典不是，所以 WebApplication 不寫）。codeRepository 是 SoftwareSourceCode 的屬性，這裡不放
+        license: REPO_LINKS.license,
       },
       {
         '@type': 'WebApplication',
@@ -182,10 +192,11 @@ function langPageLd(sl, t, url, image, faq) {
 
 const footer = t => `<footer class="footer">
     <div class="wrap">
-      ${SITE.discordUrl || SITE.donateUrl ? `<p class="footer-community">${[
+      <p class="footer-community">${[
         SITE.discordUrl && discordLink(t, t['community.join']),
+        `<a href="${esc(SITE.repoUrl)}" target="_blank" rel="noopener">${esc(t['footer.source'])}</a>`,
         SITE.donateUrl && `<a href="${esc(SITE.donateUrl)}" target="_blank" rel="noopener">${esc(t['donate.short'])}</a>`,
-      ].filter(Boolean).join('<span class="sep" aria-hidden="true">·</span>')}</p>` : ''}
+      ].filter(Boolean).join('<span class="sep" aria-hidden="true">·</span>')}</p>
       <p>${t['footer.disclaimer']}</p>
       <p class="footer-small"><span data-only="desktop">Game ${esc(state.gameVersion)} · Launcher ${state.launcherReleased ? 'v' + esc(state.launcherVersion) : '—'}</span><span data-only="web">Web · Translations ${esc(state.updated || '')}</span></p>
     </div>
@@ -282,7 +293,8 @@ function langPage(sl) {
     .filter(([, a]) => SITE.discordUrl || !a.includes('{discord}'))
     .map(([q, a, p]) => [q, a
       .replace('{feedback}', feedbackUrl ? fmt(t['faq.feedback'], esc(feedbackUrl)) : t['faq.nofeedback'])
-      .replaceAll('{discord}', esc(SITE.discordUrl)), p]);
+      .replaceAll('{discord}', esc(SITE.discordUrl))
+      .replace(/\{(repo|license|dictLicense|issues|actions)\}/g, (_, k) => esc(REPO_LINKS[k])), p]);
   const url = pageUrl(sl);
   const image = ogImage(sl);
 

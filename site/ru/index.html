@@ -88,7 +88,8 @@
     "priceCurrency": "USD"
    },
    "downloadUrl": "https://github.com/cycleapple/d2survivors-localization/releases/latest/download/d2s-launcher.exe",
-   "softwareVersion": "1.0.0"
+   "softwareVersion": "1.0.0",
+   "license": "https://github.com/cycleapple/d2survivors-localization/blob/main/LICENSE"
   },
   {
    "@type": "WebApplication",
@@ -130,6 +131,14 @@
     },
     {
      "@type": "Question",
+     "name": "Это проект с открытым исходным кодом?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "\u003cp>Код — да. Исходники лаунчера, закладки, этого сайта и инструментов лежат на \u003ca href=\"https://github.com/cycleapple/d2survivors-localization\" target=\"_blank\" rel=\"noopener\">GitHub\u003c/a> под \u003ca href=\"https://github.com/cycleapple/d2survivors-localization/blob/main/LICENSE\" target=\"_blank\" rel=\"noopener\">лицензией MIT\u003c/a>. Лаунчер автоматически собирается из этого открытого кода в GitHub Actions (\u003ca href=\"https://github.com/cycleapple/d2survivors-localization/actions/workflows/release-launcher.yml\" target=\"_blank\" rel=\"noopener\">история сборок\u003c/a>), а к каждому релизу приложен d2s-launcher.exe.sha256, чтобы вы могли проверить файл сами.\u003c/p>\u003cp>Данные перевода (словари) пока не под открытой лицензией: все права защищены, см. \u003ca href=\"https://github.com/cycleapple/d2survivors-localization/blob/main/dict/LICENSE\" target=\"_blank\" rel=\"noopener\">dict/LICENSE\u003c/a>. Официальные термины в них принадлежат Blizzard Entertainment.\u003c/p>"
+     }
+    },
+    {
+     "@type": "Question",
      "name": "Насколько готов русский перевод?",
      "acceptedAnswer": {
       "@type": "Answer",
@@ -157,7 +166,7 @@
      "name": "Куда сообщать об ошибках перевода и проблемах?",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "\u003cp>Опечатки, непереведённый текст и проблемы с закладкой или лаунчером — в \u003ca href=\"https://discord.gg/QMBbTHSsaK\" target=\"_blank\" rel=\"noopener\">Discord сообщества переводчиков\u003c/a>, там же публикуются новости.\u003c/p>\u003cp>Проблемы самой игры (не связанные с переводом) — в \u003ca href=\"https://discord.gg/mYMGgZPuQb\" target=\"_blank\" rel=\"noopener\">официальный Discord D2 Survivors\u003c/a> (на английском).\u003c/p>"
+      "text": "\u003cp>Опечатки, непереведённый текст и проблемы с закладкой или лаунчером — в \u003ca href=\"https://discord.gg/QMBbTHSsaK\" target=\"_blank\" rel=\"noopener\">Discord сообщества переводчиков\u003c/a>, там же публикуются новости.\u003c/p>\u003cp>Об ошибках перевода и программы можно также сообщить в \u003ca href=\"https://github.com/cycleapple/d2survivors-localization/issues\" target=\"_blank\" rel=\"noopener\">GitHub Issues\u003c/a>.\u003c/p>\u003cp>Проблемы самой игры (не связанные с переводом) — в \u003ca href=\"https://discord.gg/mYMGgZPuQb\" target=\"_blank\" rel=\"noopener\">официальный Discord D2 Survivors\u003c/a> (на английском).\u003c/p>"
      }
     },
     {
@@ -541,6 +550,7 @@
         <h2>Вопросы и ответы</h2>
         <div class="faq">
           <details><summary>Это официальный перевод?</summary><div class="answer"><p>Нет. Это неофициальный фанатский перевод, не связанный с разработчиками D2 Survivors и Blizzard Entertainment.</p></div></details>
+          <details><summary>Это проект с открытым исходным кодом?</summary><div class="answer"><p>Код — да. Исходники лаунчера, закладки, этого сайта и инструментов лежат на <a href="https://github.com/cycleapple/d2survivors-localization" target="_blank" rel="noopener">GitHub</a> под <a href="https://github.com/cycleapple/d2survivors-localization/blob/main/LICENSE" target="_blank" rel="noopener">лицензией MIT</a>. Лаунчер автоматически собирается из этого открытого кода в GitHub Actions (<a href="https://github.com/cycleapple/d2survivors-localization/actions/workflows/release-launcher.yml" target="_blank" rel="noopener">история сборок</a>), а к каждому релизу приложен <code>d2s-launcher.exe.sha256</code>, чтобы вы могли проверить файл сами.</p><p>Данные перевода (словари) пока не под открытой лицензией: все права защищены, см. <a href="https://github.com/cycleapple/d2survivors-localization/blob/main/dict/LICENSE" target="_blank" rel="noopener">dict/LICENSE</a>. Официальные термины в них принадлежат Blizzard Entertainment.</p></div></details>
           <details><summary>Насколько готов русский перевод?</summary><div class="answer"><p>Перевод готов: всё переведено и проверено в игре на пропуски. Затем весь интерфейс и 300 случайных строк ещё раз независимо вычитали и по итогам внесли около 640 исправлений по всему словарю. Названия магических предметов и уникальных монстров собираются с учётом русского порядка слов и рода, например «Прочный наголовник разума», а у героинь — женские титулы. Около 66 % терминов взято прямо из официального перевода Diablo II: Resurrected. Кириллица выводится шрифтами D2R: Exocet для заголовков и Philosopher для текста.</p><p>Заметили ошибку — сообщите нам.</p></div></details>
           <details><summary>Можно ли играть на Mac, Linux или телефоне?</summary><div class="answer"><p>Да. Лаунчер пока есть только для Windows; на Mac, Linux и телефоне играйте в <a href="https://d2survivors.lol/play/" target="_blank" rel="noopener">браузерную версию</a> и используйте закладку со вкладки «В браузере».</p></div></details>
           <details data-only="desktop"><summary>Это затронет мои сохранения?</summary><div class="answer"><p>Нет. Лаунчер заменяет только <code>resources\app.asar</code> в папке игры, предварительно сохранив оригинал. Сохранения лежат в другом месте и не читаются и не меняются.</p></div></details>
@@ -551,9 +561,9 @@
           <details data-only="web"><summary>На телефоне закладка ничего не делает?</summary><div class="answer"><p>Android Chrome не запускает закладки из списка закладок: наберите название «D2 Русский» в адресной строке и нажмите на закладку в подсказках. На iPhone откройте закладки Safari, находясь на странице игры, и нажмите её там.</p><p>Проверьте также, что адрес закладки целиком заменён кодом, который начинается с <code>javascript:</code>.</p></div></details>
           <details data-only="desktop"><summary>Почему кое-где остался английский?</summary><div class="answer"><p>Весь текст игры переведён и проверен в игре на пропуски. Если вы видите английский, скорее всего, обновление игры добавило новый текст; перевод дополнят в одном из следующих обновлений, и лаунчер скачает его сам. Если текст так и остаётся английским, сообщите нам.</p></div></details>
           <details data-only="web"><summary>Почему кое-где остался английский?</summary><div class="answer"><p>Весь текст игры переведён и проверен в игре на пропуски. Если вы видите английский, скорее всего, обновление игры добавило новый текст; перевод дополнят в одном из следующих обновлений, а закладка всегда загружает свежий перевод. Если текст так и остаётся английским, сообщите нам.</p></div></details>
-          <details data-only="desktop"><summary>Windows пишет «Система Windows защитила ваш компьютер». Что делать?</summary><div class="answer"><p>У лаунчера нет цифровой подписи (сертификат стоит денег каждый год), поэтому Windows SmartScreen предупреждает, пока его не скачает достаточно людей.</p><p>Нажмите «<strong>Подробнее</strong>», затем «<strong>Выполнить в любом случае</strong>» — больше Windows спрашивать не будет. Скачивайте лаунчер только с этого сайта или с <a href="https://github.com/cycleapple/d2survivors-localization/releases" target="_blank" rel="noopener">GitHub Releases</a>. В каждом релизе есть <code>d2s-launcher.exe.sha256</code>; сверить можно командой <code>certutil -hashfile d2s-launcher.exe SHA256</code>.</p><p>Если браузер пишет, что файл редко скачивают, выберите в меню загрузки «<strong>Сохранить</strong>».</p></div></details>
+          <details data-only="desktop"><summary>Windows пишет «Система Windows защитила ваш компьютер». Что делать?</summary><div class="answer"><p>У лаунчера нет цифровой подписи (сертификат стоит денег каждый год), поэтому Windows SmartScreen предупреждает, пока его не скачает достаточно людей.</p><p>Подписи нет, но <a href="https://github.com/cycleapple/d2survivors-localization" target="_blank" rel="noopener">исходный код</a> и <a href="https://github.com/cycleapple/d2survivors-localization/actions/workflows/release-launcher.yml" target="_blank" rel="noopener">процесс сборки</a> лаунчера открыты.</p><p>Нажмите «<strong>Подробнее</strong>», затем «<strong>Выполнить в любом случае</strong>» — больше Windows спрашивать не будет. Скачивайте лаунчер только с этого сайта или с <a href="https://github.com/cycleapple/d2survivors-localization/releases" target="_blank" rel="noopener">GitHub Releases</a>. В каждом релизе есть <code>d2s-launcher.exe.sha256</code>; сверить можно командой <code>certutil -hashfile d2s-launcher.exe SHA256</code>.</p><p>Если браузер пишет, что файл редко скачивают, выберите в меню загрузки «<strong>Сохранить</strong>».</p></div></details>
           <details><summary>Можно ли назвать персонажа по-русски?</summary><div class="answer"><p>Нет. Сама игра разрешает в именах персонажей только английские буквы и корейский.</p></div></details>
-          <details><summary>Куда сообщать об ошибках перевода и проблемах?</summary><div class="answer"><p>Опечатки, непереведённый текст и проблемы с закладкой или лаунчером — в <a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">Discord сообщества переводчиков</a>, там же публикуются новости.</p><p>Проблемы самой игры (не связанные с переводом) — в <a href="https://discord.gg/mYMGgZPuQb" target="_blank" rel="noopener">официальный Discord D2 Survivors</a> (на английском).</p></div></details>
+          <details><summary>Куда сообщать об ошибках перевода и проблемах?</summary><div class="answer"><p>Опечатки, непереведённый текст и проблемы с закладкой или лаунчером — в <a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">Discord сообщества переводчиков</a>, там же публикуются новости.</p><p>Об ошибках перевода и программы можно также сообщить в <a href="https://github.com/cycleapple/d2survivors-localization/issues" target="_blank" rel="noopener">GitHub Issues</a>.</p><p>Проблемы самой игры (не связанные с переводом) — в <a href="https://discord.gg/mYMGgZPuQb" target="_blank" rel="noopener">официальный Discord D2 Survivors</a> (на английском).</p></div></details>
           <details><summary>Как помочь с переводом или сообщить об опечатке?</summary><div class="answer"><p>Будем рады! Все языки вышли в финальной версии, но перевод всегда можно улучшить. Если заметили неуклюжую фразу или опечатку, особенно в родном языке, сообщите нам. Пишите нам <a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">здесь</a>.</p></div></details>
         </div>
         <!-- 贊助：低調放在常見問題後面，不跳視窗 -->
@@ -569,7 +579,7 @@
 
   <footer class="footer">
     <div class="wrap">
-      <p class="footer-community"><a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">Discord сообщества переводчиков</a><span class="sep" aria-hidden="true">·</span><a href="https://paypal.me/DonateCYtw" target="_blank" rel="noopener">☕ Угостить кофе</a></p>
+      <p class="footer-community"><a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">Discord сообщества переводчиков</a><span class="sep" aria-hidden="true">·</span><a href="https://github.com/cycleapple/d2survivors-localization" target="_blank" rel="noopener">Исходный код (GitHub)</a><span class="sep" aria-hidden="true">·</span><a href="https://paypal.me/DonateCYtw" target="_blank" rel="noopener">☕ Угостить кофе</a></p>
       <p>Неофициальный фанатский перевод, не связанный с <a href="https://d2survivors.lol/" target="_blank" rel="noopener">D2 Survivors</a> (framara) и Blizzard Entertainment. Diablo® — товарный знак Blizzard Entertainment, Inc.</p>
       <p class="footer-small"><span data-only="desktop">Game 2026.1027.2 · Launcher v1.0.0</span><span data-only="web">Web · Translations 2026-10-27</span></p>
     </div>
