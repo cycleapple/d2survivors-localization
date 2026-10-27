@@ -90,8 +90,12 @@ function rareName(key, koValue) {
   // 「Blood」是稀有物品名稱的前段，「BloodUM」是獨特怪物名稱的前段：中文同名，日文不同（血濡れた／ブラッド），先用前者
   const affixKey = id => first.filter(c => c.file === 'item-nameaffixes.json' && c.id === id);
   const exactFront = affixKey(words[0]).length ? affixKey(words[0]) : affixKey(`${words[0]}UM`);
-  const front = exactFront.length ? exactFront : first.filter(c => /^[A-Z]/.test(c.id));
-  const back = second.filter(c => c.id === words[1].toLowerCase());
+  // 詞綴檔裡 key 不等於那個字的前段（Armageddon 的 key 是 Holocaust）也先用詞綴檔的，不要用同名的符文之語
+  const affixFront = first.filter(c => c.file === 'item-nameaffixes.json' && /^[A-Z]/.test(c.id));
+  const front = exactFront.length ? exactFront : affixFront.length ? affixFront : first.filter(c => /^[A-Z]/.test(c.id));
+  // 後段先用詞綴檔的：物品名稱檔也有同樣的小寫 key（bar 是長柄斧 Bardiche），詞性不一樣
+  const backAll = second.filter(c => c.id === words[1].toLowerCase());
+  const back = backAll.some(c => c.file === 'item-nameaffixes.json') ? backAll.filter(c => c.file === 'item-nameaffixes.json') : backAll;
   // 韓文比對用所有同名字串（詞綴的 koKR 常多一個「의」，符文之語的才對得上），中文前段還是用詞綴的
   const preferred = new Set(exactFront.map(c => c.zh)).size === 1 ? exactFront[0].zh : null;
   for (const a of exactFront.length ? first : front.length ? front : first) for (const b of back.length ? back : second) {
