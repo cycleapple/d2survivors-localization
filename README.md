@@ -12,7 +12,8 @@
 - 這是玩家自製的非官方翻譯，跟 Blizzard Entertainment、D2 Survivors 的作者都沒有關係，也沒有得到他們的認可。
 - 字典裡的物品、技能、怪物、地名等官方譯名取自《暗黑破壞神 II：獄火重生》，版權屬於 Blizzard Entertainment, Inc.。Diablo 是 Blizzard Entertainment, Inc. 的商標。
 - 其餘譯文是自己翻譯的。
-- 不收費、不營利。這個 repo 不包含任何遊戲的美術、音效、字型或程式。
+- 免費使用，所有功能都不收費，也不販售任何遊戲內容。贊助是自願的，用來支持翻譯和維護的時間，贊助與否不影響任何功能。
+- 這個 repo 不包含任何遊戲的美術、音效、字型或程式。
 - 權利人如果要求移除，請開 issue，會立即處理。
 
 ## 目錄
@@ -28,6 +29,10 @@
 | `site/data/` | 更新來源：manifest 和各語言字典（工具產生） | [docs/manifest-v2.md](docs/manifest-v2.md) |
 
 開源範圍、公開界線、發布流程：[docs/release.md](docs/release.md)
+
+## 贊助
+
+覺得好用的話，可以請我喝杯咖啡：[PayPal](https://paypal.me/DonateCYtw)
 
 ## 開發
 
