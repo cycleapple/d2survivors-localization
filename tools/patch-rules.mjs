@@ -3,7 +3,8 @@
 // from 必須剛好出現一次，換成 to。from／to 裡的 {{menu_name}}、{{html_lang}} 依語言代換。
 // groups：base 每種翻譯語言都套用（English／한국어原版是真正的原版，不套任何規則）；dict 換掉韓文字典的語言才套用；cjk 中日文才套用；
 //   magic-zh／magic-ja 魔法物品名稱的組合順序（照 D2R 各語言的 MagicFormat）；fullwidth 冒號用全形（只有繁中）；
-//   magic-de／magic-fr／magic-ru、unique-de／unique-fr／unique-ru 有詞性的語言組名稱；cyrillic、font-ru 俄文的字。
+//   magic-de／magic-fr／magic-ru、unique-de／unique-fr／unique-ru 有詞性的語言組名稱；cyrillic、font-ru 俄文的字；
+//   gender 女性職業用陰性稱號、caps 原文全大寫時譯文也全大寫（德、法、俄、波蘭文）。
 
 export const ASSETS_DIR = 'desktop/dist/web/assets';
 
@@ -11,8 +12,8 @@ export const ASSETS_DIR = 'desktop/dist/web/assets';
 export const DICT_TARGET = { file: '^ko-.*\\.js$', template: 'var e={{dict}};export{e as default};' };
 
 const CJK = '\\u3000-\\u9fff\\uff00-\\uffef';
-// 不放在行首的字：句末標點、右括號，加上日文的長音、中點和小寫假名（禁則）
-const CLOSING = '\\u3001\\u3002\\uff0c\\uff1a\\uff1b\\uff01\\uff1f\\uff09\\u300d\\u300f\\u3011\\u30fc\\u30fb\\u3041\\u3043\\u3045\\u3047\\u3049\\u3063\\u3083\\u3085\\u3087\\u308e\\u30a1\\u30a3\\u30a5\\u30a7\\u30a9\\u30c3\\u30e3\\u30e5\\u30e7\\u30ee\\u30f5\\u30f6';
+// 不放在行首的字：句末標點、右括號，加上日文的長音、中點和小寫假名（禁則），和半形的 : ; , . ! ? )（「ライトニングセントリー: +4%」不會斷在冒號前）
+const CLOSING = ':;,.!?)\\u3001\\u3002\\uff0c\\uff1a\\uff1b\\uff01\\uff1f\\uff09\\u300d\\u300f\\u3011\\u30fc\\u30fb\\u3041\\u3043\\u3045\\u3047\\u3049\\u3063\\u3083\\u3085\\u3087\\u308e\\u30a1\\u30a3\\u30a5\\u30a7\\u30a9\\u30c3\\u30e3\\u30e5\\u30e7\\u30ee\\u30f5\\u30f6';
 // 不放在行尾的字：左括號
 const OPENING = '\\u300c\\u300e\\u3010\\uff08';
 const HANGUL_RANGES = 'return t>=44032&&t<=55203||t>=12592&&t<=12687||t>=4352&&t<=4607}';
@@ -87,10 +88,44 @@ export const RULES = [
   // 德、法、俄、波蘭文的女性職業（Bg：amazon、assassin、sorceress）會顯示陽性（Zerstörer）。
   // 女性職業先查 title:<稱號>:f（Zerstörerin），查不到（翻譯函式原樣傳回）就照一般的 title:<稱號>。
   // 依賴壓縮名稱（rO、Ug、st、R、qe、title 翻譯函式 u、女性職業 Bg），對不上時 check-rules 會報（2026.1027.2）
+  // 只有 gender 群組（德、法、俄、波蘭文）：其他語言沒有 :f 的 key，查不到時翻譯器可能把「Destroyer:f」拆開翻成別的字串
   {
-    label: '女性職業的稱號', groups: ['dict'], file: '^Game-.*\\.js$',
+    label: '女性職業的稱號', groups: ['gender'], file: '^Game-.*\\.js$',
     from: 'function rO(e,t){let n=Ug(e,t);if(!n)return null;let r=st(e,t);return r>0&&!R(e,t)?`${u(n)} · ${qe(r)}`:u(n)}',
     to: 'function rO(e,t){let n=Ug(e,t);if(!n)return null;let F=Bg.includes(t)?u(`${n}:f`):null,T=F&&F!==`${n}:f`?F:u(n),r=st(e,t);return r>0&&!R(e,t)?`${T} · ${qe(r)}`:T}',
+  },
+  // 角色畫面的「Survivor」（沒有稱號時顯示的名字）不經過稱號函式，直接寫 fit(`Survivor`)：
+  // 女性職業先查 title:Survivor:f（Überlebende），查不到照原本的 Survivor。v 是 saveTransfer 匯入的翻譯函式，
+  // 依賴壓縮名稱（Ql、v），對不上時 check-rules 會報（2026.1027.2）
+  {
+    label: '女性職業的 Survivor', groups: ['gender'], file: '^saveTransfer-.*\\.js$',
+    from: 'r.push(e.inspect?this.nameBox(e.inspect.name):this.fit(`Survivor`,Ql.name,`white`),a)',
+    to: 'let $f=[`amazon`,`assassin`,`sorceress`].includes(e.cls)?v(`title:Survivor:f`):null;r.push(e.inspect?this.nameBox(e.inspect.name):this.fit($f&&$f!==`title:Survivor:f`?$f:`Survivor`,Ql.name,`white`),a)',
+  },
+  // 全大寫：翻譯器查字典不分大小寫，SHIELDS 和 Shields、ROGUE ENCAMPMENT 和 Rogue Encampment 是同一個譯文，
+  // 英文原文全大寫的地方（拾取篩選器、控制器設定、死亡畫面的按鈕）會變成大小寫混合。
+  // 英文有兩個以上的大寫字母、沒有小寫字母時，譯文也轉成全大寫（照語言轉：德文 ß → SS）。查不到的照原樣
+  {
+    label: '全大寫的原文', groups: ['caps'], file: '^lang-.*\\.js$',
+    from: 'let n=this.find(e,0),r=n??e;',
+    to: 'let n=this.find(e,0),r=n??e;n!==null&&/[A-Z].*[A-Z]/s.test(e)&&!/[a-z]/.test(e)&&(r=n.toLocaleUpperCase(`{{html_lang}}`));',
+  },
+  {
+    label: '全大寫的原文（分類查詢）', groups: ['caps'], file: '^lang-.*\\.js$',
+    from: 'translateAs(e,t){return this.exact.get(s(`${e}:${t.trim()}`))??this.translate(t)}',
+    to: 'translateAs(e,t){let n=this.exact.get(s(`${e}:${t.trim()}`));return n===void 0?this.translate(t):/[A-Z].*[A-Z]/s.test(t)&&!/[a-z]/.test(t)?n.toLocaleUpperCase(`{{html_lang}}`):n}',
+  },
+  // 升級卡片、HUD 的進化條件：遊戲在每個條件後面接半形「,」（點陣字型看起來像句點），中日文改成「、」。
+  // 條件先翻譯好再接（接上「、」後就沒有英文字母，畫的時候不會再查一次字典）。v 是 saveTransfer 匯入的翻譯函式（2026.1027.2）
+  {
+    label: '進化條件的頓號（升級卡片）', groups: ['cjk'], file: '^saveTransfer-.*\\.js$',
+    from: '{text:n<e.needs.length-1?`${t.text},`:t.text,color:t.met?`white`:`red`}',
+    to: '{text:n<e.needs.length-1?`${v(t.text)}、`:t.text,color:t.met?`white`:`red`}',
+  },
+  {
+    label: '進化條件的頓號（HUD）', groups: ['cjk'], file: '^saveTransfer-.*\\.js$',
+    from: 'n.text+(r<e.needs.length-1?`,`:``)',
+    to: '(r<e.needs.length-1?`${v(n.text)}、`:n.text)',
   },
   // 日期：遊戲在語言是 ko 時寫死韓文的日期格式（「10월 27일」），翻譯放在 ko 槽位，排行榜和存檔的日期會變成韓文。
   // 改成照 <html lang> 用瀏覽器的格式（繁中「10月27日」、德文「27. Okt.」、俄文「27 окт.」）
@@ -150,11 +185,13 @@ export const RULES = [
   // 遊戲的「外文字」用 canvas 畫字時就會用到它。大小字都用 D2R 繁中的內文字型：
   // 標題字型（方新書）筆畫太細，在石頭按鈕上比系統字型還難讀。
   // 字型檔是 tools/zh-fonts.mjs 從玩家自己的 D2R 取出的，只有 patch.mjs 在本機打包時才會放進去；
-  // 沒有字型檔時載入失敗，照舊用系統字型
+  // 沒有字型檔時（從啟動器套用的都是這樣）：先註冊這個語言的系統字型（簡中微軟雅黑、日文遊ゴシック、繁中微軟正黑），
+  // 不交給 Chromium 自己挑：自己挑時會照字找字型，簡中同一行混用兩種字型（繁中字型少了簡體字），日文粗體會用到中文字型。
+  // 系統字型先註冊、字型檔後註冊：同一個家族裡後註冊的優先，字型檔（只含字典用到的字）缺的字再用系統字型
   {
     label: '中文字型', groups: ['cjk'], file: '^lang-.*\\.js$',
     from: 'if(typeof FontFace>`u`)return;',
-    to: 'if(typeof FontFace>`u`)return;await Promise.all([[`D2R Kodia`,`body.woff2`],[`D2R Iris`,`body.woff2`],[`D2 Hangul`,`body.woff2`],[`D2 Hangul 14`,`body.woff2`]].map(async([f,n])=>{try{document.fonts.add(await new FontFace(f,`url(${new URL(`../fonts-zh/${n}`,document.baseURI).href})`,{unicodeRange:`U+3000-30FF, U+3400-4DBF, U+4E00-9FFF, U+FF00-FFEF`}).load())}catch{}}));',
+    to: 'if(typeof FontFace>`u`)return;{let $r=`U+3000-30FF, U+3400-4DBF, U+4E00-9FFF, U+FF00-FFEF`,$a=async(f,s)=>{try{document.fonts.add(await new FontFace(f,s,{unicodeRange:$r}).load())}catch{}},$n=[`D2R Kodia`,`D2R Iris`,`D2 Hangul`,`D2 Hangul 14`],$s=({[`zh-Hans`]:[`Microsoft YaHei`,`MicrosoftYaHei`,`Microsoft YaHei UI`,`DengXian`,`SimSun`],ja:[`Yu Gothic Medium`,`YuGothic-Medium`,`Yu Gothic Regular`,`YuGothic-Regular`,`Meiryo`,`MS Gothic`]})[`{{html_lang}}`]??[`Microsoft JhengHei`,`MicrosoftJhengHeiRegular`,`Microsoft JhengHei UI`,`PMingLiU`];await Promise.all($n.map(f=>$a(f,$s.map(n=>`local("${n}")`).join(`,`))));await Promise.all($n.map(f=>$a(f,`url(${new URL(`../fonts-zh/body.woff2`,document.baseURI).href})`)))}',
   },
   // 俄文字型：同樣的做法，標題字型（D2R Kodia）用 title.woff2（D2R 的 Exocet），其他用 body.woff2（Philosopher），範圍限定西里爾字母。
   // 字型檔是 zh-fonts.mjs --lang ru 取出的，跟中文一樣放在 fonts-zh/；沒有時用系統字型
@@ -207,10 +244,10 @@ export const LANGUAGES = [
   { id: 'zh-TW', name: '繁體中文', menu_name: '繁體中文', html_lang: 'zh-Hant', groups: ['base', 'dict', 'cjk', 'magic-zh', 'fullwidth'], dict: 'dict/zh-TW.json' },
   { id: 'zh-CN', name: '简体中文', menu_name: '简体中文', html_lang: 'zh-Hans', groups: ['base', 'dict', 'cjk', 'magic-zh'], dict: 'dict/zh-CN.json' },
   { id: 'ja', name: '日本語', menu_name: '日本語', html_lang: 'ja', groups: ['base', 'dict', 'cjk', 'magic-ja'], dict: 'dict/ja.json' },
-  { id: 'de', name: 'Deutsch', menu_name: 'Deutsch', html_lang: 'de', groups: ['base', 'dict', 'magic-de', 'unique-de'], dict: 'dict/de.json' },
-  { id: 'fr', name: 'Français', menu_name: 'Français', html_lang: 'fr', groups: ['base', 'dict', 'magic-fr', 'unique-fr'], dict: 'dict/fr.json' },
-  { id: 'ru', name: 'Русский', menu_name: 'Русский', html_lang: 'ru', groups: ['base', 'dict', 'cyrillic', 'font-ru', 'magic-ru', 'unique-ru'], dict: 'dict/ru.json' },
-  { id: 'pl', name: 'Polski', menu_name: 'Polski', html_lang: 'pl', groups: ['base', 'dict', 'latin-ext', 'font-pl', 'size-pl', 'magic-pl', 'unique-pl'], dict: 'dict/pl.json' },
+  { id: 'de', name: 'Deutsch', menu_name: 'Deutsch', html_lang: 'de', groups: ['base', 'dict', 'gender', 'caps', 'magic-de', 'unique-de'], dict: 'dict/de.json' },
+  { id: 'fr', name: 'Français', menu_name: 'Français', html_lang: 'fr', groups: ['base', 'dict', 'gender', 'caps', 'magic-fr', 'unique-fr'], dict: 'dict/fr.json' },
+  { id: 'ru', name: 'Русский', menu_name: 'Русский', html_lang: 'ru', groups: ['base', 'dict', 'gender', 'caps', 'cyrillic', 'font-ru', 'magic-ru', 'unique-ru'], dict: 'dict/ru.json' },
+  { id: 'pl', name: 'Polski', menu_name: 'Polski', html_lang: 'pl', groups: ['base', 'dict', 'gender', 'caps', 'latin-ext', 'font-pl', 'size-pl', 'magic-pl', 'unique-pl'], dict: 'dict/pl.json' },
 ];
 
 export function fillTemplate(s, lang) {

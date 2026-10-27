@@ -32,6 +32,13 @@
 
   16. 日期格式（dict）：遊戲在語言是 ko 時寫死韓文的日期（「10월 27일」），翻譯放在 ko 槽位，排行榜的日期會變成韓文。改成照 `<html lang>` 用 `toLocaleDateString`（繁中「10月27日」、德文「27. Okt.」）。2026.1027.2 實測排行榜
 
+  17. 女性職業的稱號（gender，德、法、俄、波蘭文）：amazon、assassin、sorceress 先查 `title:<稱號>:f`，查不到照 `title:<稱號>`。稱號函式（Game）和角色畫面沒有稱號時直接寫的「Survivor」（saveTransfer 的 `fit(\`Survivor\`)`）都套用（俄文「Выжившая」）。只放在有 `:f` key 的語言：其他語言查不到時，翻譯器可能把「Survivor:f」拆開翻
+  18. 全大寫（caps，德、法、俄、波蘭文）：翻譯器查字典不分大小寫，SHIELDS 和 Shields 是同一個譯文。英文原文有兩個以上大寫字母、沒有小寫字母時，譯文用 `toLocaleUpperCase(<html lang>)` 轉成全大寫（`translate` 和 `translateAs` 的完全符合）。主選單 НАСТРОЙКИ、拾取篩選器、控制器設定、死亡畫面的按鈕
+  19. 進化條件（cjk）：升級卡片和 HUD 的條件之間，遊戲接半形「,」，中日文改成「、」（條件先翻譯好再接）。中文斷行的「不放在行首」加上半形 `: ; , . ! ? )`（日文「ライトニングセントリー: +4%」不會斷在冒號前）
+  20. 中日文的系統字型（cjk）：沒有 `fonts-zh/body.woff2` 時（從啟動器套用的都是這樣），原本交給 Chromium 照字挑字型，簡中同一行混用兩種字型、日文粗體用到中文字型。改成先用 `local()` 註冊這個語言的系統字型（簡中微軟雅黑、日文遊ゴシック Medium／メイリオ、繁中微軟正黑），再註冊字型檔；同一個家族裡後註冊的優先，字型檔缺的字才用系統字型。本機打包時 patch.mjs 放進去的字型照語言分：繁中 `work/fonts-zh/`、簡中 `work/fonts/zh-CN/`、日文 `work/fonts/ja/`（`langs.mjs` 的 `fonts`）
+
+  17～20 是翻譯聊天室截圖檢查的需求（`work/qa/RULE-REQUESTS.md` 1～5），補截圖在 `work/qa/<語言>/desktop/*-fix.png`
+
   `tools/compare-shots.ps1` 可以把兩張截圖的同一塊放大並排，比較改前改後；`node tools/cdp.mjs 9229 preload "<js>"` 可以在頁面載入前掛上攔截（例如記錄 `fillText` 用的顏色）
 
 ## 測試
