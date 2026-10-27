@@ -9,6 +9,10 @@ const [usageFile, zhFile, outFile] = process.argv.slice(2);
 if (!outFile) { console.error('用法：node tools/term-analysis.mjs <usage.json> <zh-TW.json> <輸出 .json>'); process.exit(1); }
 const usage = JSON.parse(fs.readFileSync(usageFile, 'utf8'));
 const zh = JSON.parse(fs.readFileSync(zhFile, 'utf8'));
+// 審過、確定沒問題的「句子裡沒用名稱本身的譯名」（Blizzard 是公司不是法術、Return to Deckard Cain 不是技能變體…）：
+// dict/<語言>/term-exceptions.json（繁中是 dict/manual/term-exceptions.json），{ "名稱 key": ["句子 key", …] }
+const exceptionsFile = zhFile.replace(/dict\/(zh-TW)\.json$/, 'dict/manual/term-exceptions.json').replace(/dict\/([\w-]+)\.json$/, 'dict/$1/term-exceptions.json');
+const exceptions = fs.existsSync(exceptionsFile) ? JSON.parse(fs.readFileSync(exceptionsFile, 'utf8')) : {};
 
 // 「名稱」類的用途（會在句子裡被提到的東西）
 const NAME_KINDS = ['技能', '技能變體', '被動', '恰西強化', '區域', '章節名稱', 'D2 資料（monster-catalog）', '按鈕或標題（全大寫）'];
@@ -46,6 +50,7 @@ for (const [key, value] of sentences) {
   const longest = hit.filter(t => !hit.some(o => o !== t && o.key.length > t.key.length && o.key.includes(t.key)));
   for (const t of longest) {
     if (value.includes(t.zh)) continue;
+    if (exceptions[t.key]?.includes(key)) continue;
     (misses.get(t.key) ?? misses.set(t.key, { term: t.key, zh: t.zh, kinds: t.kinds, sentences: [] }).get(t.key)).sentences.push({ key, zh: value });
   }
 }

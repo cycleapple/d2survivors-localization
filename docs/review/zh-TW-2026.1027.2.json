@@ -1,0 +1,527 @@
+[
+ {
+  "key": "Heals the hero # life a second while she's near him",
+  "current": "她在英雄身旁時，每秒為英雄恢復{0}點生命",
+  "suggested": "英雄在他身旁時，每秒為英雄恢復{0}點生命",
+  "category": "meaning",
+  "reason": "這是傭兵的祈禱靈氣（skills.prayer，第二章男性傭兵）：she 是英雄、him 是傭兵。現譯「她在英雄身旁」把傭兵寫成「她」，主詞弄反；ko 也是「英雄在他身旁」"
+ },
+ {
+  "key": "Adds +#% physical damage to the hero while she's near him",
+  "current": "她在英雄身旁時，英雄的物理傷害 +{0}%",
+  "suggested": "英雄在他身旁時，英雄的物理傷害 +{0}%",
+  "category": "meaning",
+  "reason": "同上，力量靈氣（skills.might）是男性傭兵的技能，she 指英雄，現譯把傭兵寫成「她」"
+ },
+ {
+  "key": "The portal takes you in #…",
+  "current": "傳送門將在{0}後帶你離開…",
+  "suggested": "傳送門將在{0}秒後帶你離開…",
+  "category": "meaning",
+  "reason": "# 是倒數秒數（程式裡是 Math.ceil 的 5～1 整數，沒有單位），現譯會顯示成「在3後帶你離開」，缺「秒」"
+ },
+ {
+  "key": "Your level-* * starts over and keeps the golden glow for good.",
+  "current": "你的{0}級{1}將重新開始，並永久保有金色光輝。",
+  "suggested": "你的{0}級{1}將重新開始，並永久保有金色光芒。",
+  "category": "consistency",
+  "reason": "golden glow 在其他 5 處都譯「金色光芒」（Earns the golden glow、Keeps her golden glow 等），只有這裡是「金色光輝」"
+ },
+ {
+  "key": "* runs",
+  "current": "{0}局",
+  "suggested": "{0}筆紀錄",
+  "category": "consistency",
+  "reason": "單數「1 run」譯「1 筆紀錄」，ko 兩個都是「기록」（紀錄）；複數卻是「{0}局」，在同一個排行榜列表會前後不一"
+ },
+ {
+  "key": "1 run",
+  "current": "1 筆紀錄",
+  "suggested": "1筆紀錄",
+  "category": "style",
+  "reason": "跟複數「{0}筆紀錄」一致，數字和量詞之間不加空格（規範：中文和數字之間不用特別加空格）"
+ },
+ {
+  "key": "* heroes",
+  "current": "{0}位英雄",
+  "suggested": "{0}名英雄",
+  "category": "consistency",
+  "reason": "單數「1 hero」用「1 名英雄」，複數用「位」，量詞要一致"
+ },
+ {
+  "key": "1 hero",
+  "current": "1 名英雄",
+  "suggested": "1名英雄",
+  "category": "style",
+  "reason": "跟複數「{0}名英雄」一致，不加空格"
+ },
+ {
+  "key": "* runs waiting to be sent",
+  "current": "{0}局紀錄等待送出",
+  "suggested": "{0}筆紀錄等待上傳",
+  "category": "consistency",
+  "reason": "單數是「1 筆紀錄等待上傳」，複數變成「{0}局紀錄等待送出」，量詞跟動詞都不一致"
+ },
+ {
+  "key": "1 run waiting to be sent",
+  "current": "1 筆紀錄等待上傳",
+  "suggested": "1筆紀錄等待上傳",
+  "category": "style",
+  "reason": "跟複數一致，不加空格"
+ },
+ {
+  "key": "Enter: * -",
+  "current": "Enter 鍵：{0} -",
+  "suggested": "Enter：{0} -",
+  "category": "consistency",
+  "reason": "其他 Enter 提示（Enter: * - T: Charsi's wares - …、Enter: next tier - …）都寫「Enter：」，只有這個片段多了「鍵」，拼起來跟完整版提示不一樣"
+ },
+ {
+  "key": "* (Esc)",
+  "current": "{0}（Esc 鍵）",
+  "suggested": "{0}（Esc）",
+  "category": "consistency",
+  "reason": "其他按鍵標示都寫「返回（Esc）」「取消（Esc）」「營火（Enter）」等，只有這條寫「（Esc 鍵）」"
+ },
+ {
+  "key": "Enter: next tier - T: Charsi's wares - Esc: end the run",
+  "current": "Enter：下一階 - T：恰西的商品 - Esc：結束本局",
+  "suggested": "Enter：下一階 - T：恰西的商品 - Esc：結束這一局",
+  "category": "consistency",
+  "reason": "END THE RUN 按鈕和其他同類提示都是「結束這一局」，這條寫「結束本局」"
+ },
+ {
+  "key": "Something went wrong. SAVE AND EXIT keeps your run: please send a REPORT",
+  "current": "發生錯誤。「儲存並離開」可保留這一局：請送出回報",
+  "suggested": "發生錯誤。「儲存並離開」可保留這一局：請送出「回報」",
+  "category": "consistency",
+  "reason": "REPORT 是按鈕名稱，其他句子都寫成「回報」（例如「請送出「回報」」），而且同句的 SAVE AND EXIT 有加引號，這裡漏了"
+ },
+ {
+  "key": "Click the waypoint to start a run, or a hero by the fire to play as her",
+  "current": "點擊傳送平台開始一局，或點擊營火旁的英雄以她遊玩",
+  "suggested": "點擊傳送平台開始一局，或點擊營火旁的英雄，改用該英雄遊玩",
+  "category": "style",
+  "reason": "「以她遊玩」不是自然的中文說法"
+ },
+ {
+  "key": "Tap the waypoint to start a run, or a hero by the fire to play as her",
+  "current": "輕觸傳送平台開始一局，或輕觸營火旁的英雄以她遊玩",
+  "suggested": "輕觸傳送平台開始一局，或輕觸營火旁的英雄，改用該英雄遊玩",
+  "category": "style",
+  "reason": "同上，跟點擊版用一樣的寫法"
+ },
+ {
+  "key": "Plus",
+  "current": "加強",
+  "suggested": "＋ 鍵",
+  "category": "meaning",
+  "reason": "Switch 手把的 + 按鈕（名稱清單 switch，跟 Minus「－ 鍵」成對），譯成「加強」意思錯誤；韓文 플러스、日文 ＋ボタン、簡中 +键"
+ },
+ {
+  "key": "Fires # of ice that # # and #, for # damage.",
+  "current": "發射{0}枚冰彈，{1}{2}隻怪物並{3}，造成{4}點傷害。",
+  "suggested": "發射{0}冰彈，{1}{2}隻怪物並{3}，造成{4}點傷害。",
+  "category": "meaning",
+  "reason": "{0} 由程式填入 tb(n,`bolt`)，即「# bolts」→「{0}枚」，已含量詞；現在會顯示成「發射3枚枚冰彈」"
+ },
+ {
+  "key": "Fires # of lightning through all in line for # damage.",
+  "current": "發射{0}道閃電，貫穿直線上的所有目標，造成{1}點傷害。",
+  "suggested": "發射{0}閃電彈，貫穿直線上的所有目標，造成{1}點傷害。",
+  "category": "meaning",
+  "reason": "{0} 是 tb(n,`bolt`) →「3枚」，現在會變成「發射3枚道閃電」，量詞重複（同類的 chargedBolt 句子已在 overrides 用同樣方式修過）"
+ },
+ {
+  "key": "# of # damage # for #s.",
+  "current": "{0}枚冰彈造成{1}點傷害，{2}{3}秒。",
+  "suggested": "{0}冰彈造成{1}點傷害，{2}{3}秒。",
+  "category": "meaning",
+  "reason": "{0} 是 tb(n,`bolt`) →「3枚」，現在會顯示「3枚枚冰彈」"
+ },
+ {
+  "key": "Delivers # of # damage to the toughest in reach. The last releases all charges.",
+  "current": "對範圍內最強的怪物發動{0}次攻擊，每次造成{1}點傷害。最後一擊釋放所有集氣。",
+  "suggested": "對範圍內最強的怪物發動{0}，每次造成{1}點傷害。最後一擊釋放所有集氣。",
+  "category": "meaning",
+  "reason": "{0} 是 tb(n,`kick`) →「{0} 次踢擊」，現在會顯示「發動3 次踢擊次攻擊」"
+ },
+ {
+  "key": "Crushes # for # damage and knocks them back.",
+  "current": "重擊{0}隻怪物，造成{1}點傷害並將其擊退。",
+  "suggested": "重擊{0}，造成{1}點傷害並將其擊退。",
+  "category": "meaning",
+  "reason": "{0} 是 tb(n,`monster`) →「3隻怪物」，現在會顯示「重擊3隻怪物隻怪物」"
+ },
+ {
+  "key": "* hit the monsters in reach for * damage each.",
+  "current": "{0}次攻擊擊中範圍內的怪物，每次造成{1}點傷害。",
+  "suggested": "{0}擊中範圍內的怪物，每次造成{1}點傷害。",
+  "category": "meaning",
+  "reason": "{0} 是 tb(n,`swift blow`) →「3次快速攻擊」，現在會顯示「3次快速攻擊次攻擊擊中…」"
+ },
+ {
+  "key": "on striking",
+  "current": "（攻擊命中時）",
+  "suggested": "擊中時",
+  "category": "term",
+  "reason": "只用在 *% Chance to cast level * * * 的句首；D2R 官方「擊中時有 %d%% 機率施展…」，括號會讓句首變成「（攻擊命中時）有…」"
+ },
+ {
+  "key": "when struck",
+  "current": "（被擊中時）",
+  "suggested": "被擊中時",
+  "category": "term",
+  "reason": "同上，D2R 官方「被擊中時有 %d%% 機率施展…」，去掉括號"
+ },
+ {
+  "key": "when you Kill an Enemy",
+  "current": "（殺敵時）",
+  "suggested": "當你殺敵時",
+  "category": "term",
+  "reason": "同上，D2R 官方「當你殺敵時有 %d%% 機率施展…」，去掉括號"
+ },
+ {
+  "key": "Aegis",
+  "current": "神盾",
+  "suggested": "禦塔盾",
+  "category": "term",
+  "reason": "這個 key 是基本物品名稱（K(`Aegis`,`shield`)，跟 Pavise 大盾、Ward 同表），D2R 官方 Aegis（uow）是「禦塔盾」"
+ },
+ {
+  "key": "Paleocene",
+  "current": "忠貞",
+  "suggested": "古新世",
+  "category": "meaning",
+  "reason": "Paleocene 是地質年代「古新世」（韓 팔레오세、日 暁新世），「忠貞」意思不符；是每級防禦的魔法前綴，沒有 D2R 官方譯名"
+ },
+ {
+  "key": "Gritty",
+  "current": "碾壓",
+  "suggested": "堅毅",
+  "category": "meaning",
+  "reason": "Gritty 是「堅毅／粗礪」（韓 거친、日 気骨ある），「碾壓」意思不符；每級最大傷害的魔法前綴，沒有官方譯名"
+ },
+ {
+  "key": "of Traveling",
+  "current": "運輸之",
+  "suggested": "旅行之",
+  "category": "meaning",
+  "reason": "「運輸」是貨運的意思，不像物品詞綴；韓 여행의、日 旅の，譯「旅行之」"
+ },
+ {
+  "key": "of Anima",
+  "current": "和睦之",
+  "suggested": "靈魂之",
+  "category": "meaning",
+  "reason": "Anima 是靈魂／生命力（韓 생기의、日 生気の），跟 of Life、of Absorption 同一組的生命類詞綴；「和睦」意思不符"
+ },
+ {
+  "key": "One more level-up reroll per run, per rank",
+  "current": "每級：每局多一次升級重抽機會",
+  "suggested": "每階：每局多一次升級重抽機會",
+  "category": "term",
+  "reason": "rank（恰西的強化）在本專案一律是「階」，同組的「每秒生命 +{0}（每階）」「第{0}階」都用階；這裡寫「每級」會被看成角色等級"
+ },
+ {
+  "key": "One more level-up skip per run, per rank",
+  "current": "每級：每局多一次升級跳過機會",
+  "suggested": "每階：每局多一次升級跳過機會",
+  "category": "term",
+  "reason": "同上，rank → 階"
+ },
+ {
+  "key": "One more level-up banish per run, per rank",
+  "current": "每級：每局多一次升級排除機會",
+  "suggested": "每階：每局多一次升級排除機會",
+  "category": "term",
+  "reason": "同上，rank → 階"
+ },
+ {
+  "key": "Come back at half life once more per run, per rank",
+  "current": "每級：每局多一次以一半生命復活的機會",
+  "suggested": "每階：每局多一次以一半生命復活的機會",
+  "category": "term",
+  "reason": "同上，rank → 階"
+ },
+ {
+  "key": "Next rank:",
+  "current": "下一級：",
+  "suggested": "下一階：",
+  "category": "term",
+  "reason": "rank → 階；同一個說明框裡的「第{0}階」「第{0}階之後：」都用階"
+ },
+ {
+  "key": "Ranks",
+  "current": "階級",
+  "suggested": "強化階",
+  "category": "term",
+  "reason": "恰西商店的分頁（ranks.tab）；「階級」是社會階級的意思，本專案其他地方都叫「恰西的強化階」"
+ },
+ {
+  "key": "Click a rank to buy it",
+  "current": "點擊階級以購買",
+  "suggested": "點擊強化階以購買",
+  "category": "consistency",
+  "reason": "跟 Ranks 一起改，不用「階級」"
+ },
+ {
+  "key": "Tap a rank to see it",
+  "current": "點選階級以查看",
+  "suggested": "輕觸強化階以查看",
+  "category": "consistency",
+  "reason": "Tap 全字典多數用「輕觸」（49 條 vs 點選 4 條），同組的 Tap a ware/item to see it 都是「輕觸…即可查看」；也去掉「階級」"
+ },
+ {
+  "key": "Tap a rank, then tap it again",
+  "current": "點選階級後再點一次",
+  "suggested": "輕觸強化階，再輕觸一次",
+  "category": "consistency",
+  "reason": "對齊同組的「輕觸商品，再輕觸一次」「輕觸物品，再輕觸一次」"
+ },
+ {
+  "key": "Tap to compare",
+  "current": "點一下比較",
+  "suggested": "輕觸以比較",
+  "category": "consistency",
+  "reason": "Tap 統一用「輕觸」，跟「輕觸以繼續」等一致"
+ },
+ {
+  "key": "Lightning Pierce",
+  "current": "降低敵人閃電抗性",
+  "suggested": "降低敵人電擊抗性",
+  "category": "consistency",
+  "reason": "同組的 to Enemy Lightning Resistance、Lowers enemy lightning resistance 都用 D2R 官方的「電擊抗性」，只有這條寫「閃電抗性」"
+ },
+ {
+  "key": "An * kept aside by an older version is back now: your hero, or retired at Akara.",
+  "current": "舊版本另外保存的{0}回來了：成為你的英雄，或已在阿卡拉處退休。",
+  "suggested": "舊版本另外保存的{0}回來了：成為你的英雄，或在阿卡拉處退役。",
+  "category": "consistency",
+  "reason": "retired 在介面上是「已退役 · 換她上場」「無法讀取一位退役的英雄」，這裡寫「退休」；而且跟 A/An 只差冠詞的另一條譯法不同，兩條應一字不差"
+ },
+ {
+  "key": "A * kept aside by an older version is back now: your hero, or retired at Akara.",
+  "current": "舊版本另外保存的{0}現在回來了：成為你的英雄，或退休存放在阿卡拉處。",
+  "suggested": "舊版本另外保存的{0}回來了：成為你的英雄，或在阿卡拉處退役。",
+  "category": "consistency",
+  "reason": "同上，跟 An * 那條統一，並用「退役」"
+ },
+ {
+  "key": "Evolved: Revive's skeletons take this option",
+  "current": "進化後：重生的骷髏也會套用這個選項",
+  "suggested": "進化後：重生的骷髏也會套用這個變體",
+  "category": "term",
+  "reason": "這裡的 option 是技能變體（韓 변형），介面上「輕觸技能以開啟它的一個變體」也把 option 譯成變體"
+ },
+ {
+  "key": "You've read a Book for that tree",
+  "current": "你已讀過該技能樹的書",
+  "suggested": "你已讀過該技能樹的技能書",
+  "category": "term",
+  "reason": "Book 是技能書（規範：Tome／Book → 秘典／技能書，同批「秘典與技能書」）；只寫「書」太含糊"
+ },
+ {
+  "key": "a tooth",
+  "current": "每顆利牙",
+  "suggested": "每顆骨牙",
+  "category": "consistency",
+  "reason": "同一技能（剔骨之牙）的說明寫「射出{0}顆骨牙」，傷害標示卻是「每顆利牙」"
+ },
+ {
+  "key": "a second of its poison",
+  "current": "毒素的每秒",
+  "suggested": "每秒毒素",
+  "category": "style",
+  "reason": "per 片段會接在傷害數字後面（「毒素傷害: 12 每支箭」的格式），其他片段都是「每…」開頭；「毒素的每秒」不通順"
+ },
+ {
+  "key": "a second of a bite's poison",
+  "current": "咬擊毒素的每秒",
+  "suggested": "每秒咬擊毒素",
+  "category": "style",
+  "reason": "同上，「咬擊毒素的每秒」不通順，改成「每…」開頭"
+ },
+ {
+  "key": "HIDE MAGIC",
+  "current": "隱藏魔法",
+  "suggested": "隱藏魔法物品",
+  "category": "consistency",
+  "reason": "同一組篩選器是「出售魔法物品」「出售魔法與稀有物品」，只有這條省掉「物品」，單看「隱藏魔法」像是關掉魔法效果"
+ },
+ {
+  "key": "RARES FOR MY CLASS",
+  "current": "本職業稀有",
+  "suggested": "本職業稀有物品",
+  "category": "style",
+  "reason": "「本職業稀有」形容詞後面沒有名詞，讀起來沒講完；同組都有「物品」"
+ },
+ {
+  "key": "Summons your shadow, with # life and # damage a blow. Every third is a kick.",
+  "current": "召喚你的暗影，擁有{0}點生命，每擊造成{1}點傷害。每第三擊為踢擊。",
+  "suggested": "召喚你的暗影，擁有{0}點生命，每擊造成{1}點傷害。每三擊中有一擊為踢擊。",
+  "category": "style",
+  "reason": "「每第三擊」不是自然的中文說法"
+ },
+ {
+  "key": "* comes when the bar runs out",
+  "current": "量條耗盡時{0}將會現身",
+  "suggested": "計量條耗盡時{0}將會現身",
+  "category": "consistency",
+  "reason": "同一個計量條，相鄰的 It takes you when the bar runs out 用「計量條」，這裡寫成「量條」，像少了一個字"
+ },
+ {
+  "key": "Slay all ten of Act I's named monsters in one Act I.",
+  "current": "在同一次第一章中擊殺第一章全部十隻有名字的怪物。",
+  "suggested": "在同一次第一章中擊殺第一章全部十隻具名怪物。",
+  "category": "consistency",
+  "reason": "這個任務的進度顯示 Named monsters left: * 用「剩餘具名怪物」，任務說明應該用同一個詞"
+ },
+ {
+  "key": "Slay Duriel with none of his blows landing.",
+  "current": "不被都瑞爾的任何攻擊擊中並擊殺他。",
+  "suggested": "擊殺都瑞爾，且不被他的任何攻擊擊中。",
+  "category": "style",
+  "reason": "「不被……擊中並擊殺他」容易讀成「不被（擊中並擊殺）」。同系列的巴爾任務用「擊殺巴爾，且……」，這裡比照那個句型"
+ },
+ {
+  "key": "Slay Mephisto with none of his blows or missiles landing.",
+  "current": "不被墨菲斯托的任何攻擊或飛彈擊中並擊殺他。",
+  "suggested": "擊殺墨菲斯托，且不被他的任何攻擊或飛彈擊中。",
+  "category": "style",
+  "reason": "同上，比照「擊殺巴爾，且……」的句型，條件比較清楚"
+ },
+ {
+  "key": "Slay Diablo with none of his blows, missiles or novas landing.",
+  "current": "不被迪亞布羅的任何攻擊、飛彈或新星擊中並擊殺他。",
+  "suggested": "擊殺迪亞布羅，且不被他的任何攻擊、飛彈或新星擊中。",
+  "category": "style",
+  "reason": "同上，比照「擊殺巴爾，且……」的句型，條件比較清楚"
+ },
+ {
+  "key": "One hit a cast",
+  "current": "每次施放命中 1 次",
+  "suggested": "每次施放命中1次",
+  "category": "style",
+  "reason": "跟同一處的 * hits a cast →「每次施放命中{0}次」並排顯示，數字前後不該多空格（規範：中文和數字之間不加空格）"
+ },
+ {
+  "key": "Next rank",
+  "current": "下一級",
+  "suggested": "下一階",
+  "category": "consistency",
+  "reason": "rank（恰西的強化）在本專案是「階」，同一處的 Past rank * →「第{0}階之後」、Rank * →「第{0}階」，這裡寫「下一級」會跟角色等級混淆。（Next rank: 也該一起改成「下一階：」，那條不在這一批）"
+ },
+ {
+  "key": "A second copy may roll better than the one kept",
+  "current": "第二件的屬性可能比已保留的那件更好",
+  "suggested": "第二件的屬性可能比已收藏的那件更好",
+  "category": "consistency",
+  "reason": "拾取篩選器裡的 kept 是收藏裡的那件（Kept → 已收藏；相鄰的 Picks up a copy that rolls higher… 也用「你收藏的那件」）。「已保留」會跟 KEEP「保留」選項混在一起"
+ },
+ {
+  "key": "Enter or arrows to change - Esc to go back",
+  "current": "Enter 或方向鍵變更 - Esc 返回",
+  "suggested": "Enter 或方向鍵：變更 - Esc：返回",
+  "category": "style",
+  "reason": "同一組的其他操作提示都是「按鍵：動作」的格式（Enter：選擇 - Esc：返回、方向鍵或拖曳以調整 - Esc：返回），只有這條少了冒號"
+ },
+ {
+  "key": "Auto stats",
+  "current": "自動分配屬性點",
+  "suggested": "自動配點",
+  "category": "consistency",
+  "reason": "同一個選項在 AUTO STATS: # 叫「自動配點」，改版說明（Options say what AUTO STATS does、Auto stats, language and more）也都叫「自動配點」，只有這個 label 是「自動分配屬性點」，而且比較長"
+ },
+ {
+  "key": "A Druid holding a spear, trident or pike is drawn with it instead of his club",
+  "current": "手持長矛、三叉戟或長槍的德魯伊，現在會畫出他手上的武器，而不是棍棒",
+  "suggested": "手持長矛、三叉戟或步戰矛的德魯伊，現在會畫出他手上的武器，而不是短棒",
+  "category": "term",
+  "reason": "這些是 D2 的武器底材名稱：Pike 官方譯名是「步戰矛」（「長槍」在 D2R 是 Lance／War Pike 那一類），Club 是「短棒」"
+ },
+ {
+  "key": "Alma Negra's Fault Line deals 50% of the bash along its line, not 35%",
+  "current": "黑魂的「斷層線」沿線造成猛擊傷害的50%，而非35%",
+  "suggested": "黑魂的「斷層」沿線造成猛擊傷害的50%，而非35%",
+  "category": "consistency",
+  "reason": "變體 Fault Line 在字典裡（moved.js almaNegra.name）叫「斷層」，改版說明裡的名稱要跟變體卡片一樣"
+ },
+ {
+  "key": "The Cow tier comes as nine waves of Hell Bovines, with the Cow King as the last",
+  "current": "牛階共有九波地獄之牛，最後登場的是牛王",
+  "suggested": "乳牛階共有九波地獄之牛，最後登場的是牛王",
+  "category": "consistency",
+  "reason": "其他地方都是「乳牛階」（The Cow Tier、Clear the Cow tier.、其他改版說明），只有這條寫「牛階」"
+ },
+ {
+  "key": "Akara resets a kept hero's build, and you draft it again in bundled cards",
+  "current": "阿卡拉會重置已保留英雄的配置，你再以組合卡牌重新抽選",
+  "suggested": "阿卡拉會重置已保留英雄的配置，你再以組合卡片重新抽選",
+  "category": "consistency",
+  "reason": "本專案的 card 是「卡片」，字典裡用「卡片」的有幾十條，「卡牌」只有兩條"
+ },
+ {
+  "key": "Options say what AUTO STATS does",
+  "current": "設定中會說明「自動配點」的作用",
+  "suggested": "「選項」中會說明「自動配點」的作用",
+  "category": "consistency",
+  "reason": "Options 選單在字典裡叫「選項」，大部分改版說明也寫「選項」；「設定」容易跟「遊戲設定」「音效設定」頁面搞混"
+ },
+ {
+  "key": "Options keeps the sound and music sliders on a SOUND OPTIONS page of their own",
+  "current": "設定中的音效與音樂滑桿已移至獨立的「音效設定」頁面",
+  "suggested": "「選項」中的音效與音樂滑桿已移至獨立的「音效設定」頁面",
+  "category": "consistency",
+  "reason": "同上：Options 選單是「選項」。這句又提到「音效設定」頁面，寫成「設定中的……」會分不清是哪一層"
+ },
+ {
+  "key": "Spirit Veil",
+  "current": "靈魂帷幕",
+  "suggested": "魂靈面紗",
+  "category": "consistency",
+  "reason": "稀有名稱：Spirit 在其他 149 個名稱裡都是「魂靈」（魂靈之觸、魂靈粉碎者），Veil 在其他 38 個名稱裡都是「面紗」（掠鴉面紗、靈魂面紗）。D2R 沒有 Spirit Veil 這個名稱，目前的「靈魂帷幕」是 d2r-auto 誤配（大概配到 Spirit Shroud）"
+ },
+ {
+  "key": "Clear a tier with No Potions in the Belt.",
+  "current": "完成一個帶有「腰帶禁用藥水」的階。",
+  "suggested": "完成一個帶有「無法使用腰帶中的藥水」的階。",
+  "category": "consistency",
+  "reason": "詞綴 No Potions in the Belt 本身譯成「無法使用腰帶中的藥水」，長版的任務說明和其他改版說明也都這樣寫，只有這條是「腰帶禁用藥水」"
+ },
+ {
+  "key": "Tap again to see its modifiers",
+  "current": "再點一下查看變體",
+  "suggested": "再輕觸一次以查看變體",
+  "category": "consistency",
+  "reason": "觸控的 Tap 大部分譯成「輕觸」（再輕觸一次以選擇此技能樹等 30 多條）；「點一下」跟滑鼠版的 Click「點擊」分不出來"
+ },
+ {
+  "key": "Tap one to turn it on",
+  "current": "點選其中一個以啟用",
+  "suggested": "輕觸其中一個以啟用",
+  "category": "consistency",
+  "reason": "同上，Tap 統一用「輕觸」（滑鼠版 Click one to turn it on 是「點擊其中一個以啟用」）"
+ },
+ {
+  "key": "She won't be ranked again. Tap again",
+  "current": "她將不會再列入排名。請再點一下",
+  "suggested": "她將不會再列入排名。請再輕觸一次",
+  "category": "consistency",
+  "reason": "同一組確認訊息 This ends your saved run. Tap again、This counts as a death. Tap again 都是「請再輕觸一次」"
+ },
+ {
+  "key": "She goes back to level *. Tap again",
+  "current": "她將回到等級{0}。請再點一下",
+  "suggested": "她將回到等級{0}。請再輕觸一次",
+  "category": "consistency",
+  "reason": "同上，同一組確認訊息都是「請再輕觸一次」"
+ },
+ {
+  "key": "Tap a line to change it",
+  "current": "點選項目以變更",
+  "suggested": "輕觸項目以變更",
+  "category": "consistency",
+  "reason": "同上，Tap 統一用「輕觸」（同一畫面的 Tap a line to choose 是「輕觸一行進行選擇」）"
+ }
+]
