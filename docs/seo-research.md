@@ -1,15 +1,17 @@
 # 各語言玩家怎麼找 D2 Survivors（SEO 調查，2026-10-27）
 
-用 Bing（各語言的地區和介面語言）搜尋，再看 Bilibili、PTT。DuckDuckGo 要人機驗證、Reddit 在瀏覽器裡打不開，所以沒查；Google、百度、Yandex、Naver 也沒查。沒有搜尋量數字，只看得到「搜尋結果裡別人怎麼寫」。
+用 Bing、Google（各語言的地區和介面語言）搜尋，再看 Bilibili、PTT；Google 的自動完成建議是唯一接近「真實搜尋詞」的資料（見下面「Google 自動完成」）。Reddit 在兩個瀏覽器裡都被擋，改用 Google `site:reddit.com` 看標題。DuckDuckGo 要人機驗證，沒查；百度、Yandex、Naver 也沒查。沒有搜尋量數字。
 
 ## 共通
 
+- **「D2 Survivors」會跟 Destiny 2、The Division 2 撞名**，Google 自動完成在多數語言都把它當成那兩款遊戲
 - **每種語言都有人寫「Diablo 2 Survivors」**（法文寫「Diablo II Survivors」，俄文有人寫「Diablo Survivors」）。標題、說明都要同時出現「D2 Survivors」和「Diablo 2 Survivors」
 - **非官方攻略站很多，而且已經做了多語言**：d2survivors.com（有 /pl/）、d2survivors.org、d2survivors.wiki（有 /zh/、/ja/）、modstalgia.com（有 /de/、/ru/）。搜「D2 Survivors 日本語」「spolszczenie」「中文」時，排在前面的都是這些攻略站的「該語言攻略頁」，不是翻譯。我們的差別是**真的把遊戲翻成該語言**，標題和說明要講清楚這點（「遊戲本身中文化」而不只是「中文攻略」）
 - **可以要連結的地方**：d2survivors.wiki 有「related projects」頁（`/resources/related-projects`）；各攻略站的語言頁都可以請它們加一行「遊戲中文化／日本語化請見…」。外部連結是 SEO 最有效的部分
 
 ## 繁體中文（台灣、香港）
 
+- **需求最明確**：Google 自動完成直接建議「d2 survivors 中文化」「暗黑2倖存者中文化」（見最後一節）
 - **怎麼稱呼**：暗黑2倖存者、D2倖存者、暗黑破壞神2倖存者、暗黑破壞神倖存者、D2S；玩法叫「割草」「吸血鬼倖存者玩法」。Facebook 上也有人寫「D2 生存者」
 - **找翻譯的詞**：中文化、繁體中文化、中文版
 - **在哪裡討論**：
@@ -83,3 +85,22 @@
 - **怎麼稱呼**：D2 Survivors、Diablo 2 Survivors
 - 搜「D2 Survivors」的前幾名都是官方 d2survivors.lol 和多個攻略站，英文頁要搶這個詞不實際
 - **建議**：英文頁的目標改成「翻譯」相關的詞：D2 Survivors translation、Chinese／Japanese／German／French／Russian version。標題例如「D2 Survivors translations: Chinese, Japanese, German, French, Russian | Launcher & bookmark」
+
+## Google 自動完成（2026-10-27，從台灣連線）
+
+Google 的自動完成會受連線地點影響（這次是台灣），所以中文的資料最可靠，其他語言只能參考。
+
+- **繁中有明確需求**：輸入「d2 survivors 」會建議「中文化、中文、手機、攻略、漢化」；輸入「暗黑2倖存者」會建議「暗黑2倖存者中文、暗黑2倖存者中文化」。Google「其他人也搜尋了」還有：暗黑破壞神2倖存者、暗黑破壞神倖存者中文、暗黑2倖存者網頁
+- **「D2 Survivors」會撞名**：其他語言輸入「d2 survivors 」，建議的大多是 Destiny 2 的武器「Survivor's Epitaph」、The Division 2 的「Survivors」模式。只寫「D2 Survivors」容易被當成別的遊戲，**一定要一起寫「Diablo 2 Survivors」**
+- **英文圈常用的名稱**：「diablo 2 vampire survivors」「diablo survivors」。Reddit 上的標題多半寫「Diablo Survivors」（r/diablo2、r/Diablo、r/Diablo_2_Resurrected、r/SteamDeck、r/Modstalgia）。內文可以寫「Diablo 2 meets Vampire Survivors」這類描述
+- **簡中**：Google 搜「D2 Survivors 汉化」的結果幾乎都是《吸血鬼倖存者》的漢化，表示簡中玩家很少用 Google 找。B 站和百度才是重點
+- **日文**：Google 搜「D2 Survivors 日本語化」只有 d2survivors.wiki/ja 一筆相關，其他都不相關。需求還小，但完全沒有競爭
+
+## Google 搜尋結果補充
+
+- **繁中的競爭對手比 Bing 看到的多**：
+  - Threads 有一篇教人裝繁中書籤的貼文（580 個讚、11 小時前）
+  - GitHub Pages「D2 繁體中文｜書籤教學」，也提供「建立桌面捷徑」「安裝中文版」的批次檔
+  - Yahoo 新聞寫「目前遊戲支援英文和韓文，尚未推出中文版本」
+- **繁中的討論地點補充**：PTT C_Chat 板（「[情報] 暗黑2+吸血鬼倖存者模式線上玩」）、Threads、Facebook（Yahoo 奇摩電競的貼文有 300 多則回應）
+- **Reddit 沒看到要求翻譯的貼文**，討論都是玩法、手機、Steam Deck 安裝
