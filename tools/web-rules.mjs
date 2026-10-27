@@ -45,7 +45,7 @@ function pattern(src) {
 }
 
 export const WEB_PLAY_URL = 'https://d2survivors.lol/play/';
-export const WEB_CHECKED = '2026-10-27T15:16:28.869Z';
+export const WEB_CHECKED = '2026-10-27T15:20:04.655Z';
 
 export const WEB_LANGUAGES = [
   {
@@ -180,12 +180,14 @@ export const WEB_RULES = [
     find: pattern('if(typeof FontFace>`u`)return;'),
     replace: 'if(typeof FontFace>`u`)return;await Promise.all([`D2R Kodia`,`D2R Iris`,`D2 Hangul`,`D2 Hangul 14`].map(async f=>{try{document.fonts.add(await new FontFace(f,`{{fonts}}`,{unicodeRange:`U+0100-017F`}).load())}catch{}}));',
   },
-  // 外文字大小：遊戲照韓文放大（標題 ×1.25～1.4、內文 ×1.3 加粗）。波蘭文只有幾個字母走外文字、夾在點陣字母中間，
-  // 照韓文的比例會比旁邊的字大一號：標題 ×1.2、內文 ×1.0 不加粗
+  // 外文字大小：遊戲照韓文放大（有 D2R 韓文字型時標題 ×1.25～1.4、內文 ×1.3 加粗；沒有時 12／15／24 px）。
+  // 波蘭文只有幾個字母走外文字、夾在點陣字母中間，照韓文的比例會比旁邊的字大一號：標題 ×1.2、內文 ×1.0，不加粗。
+  // 兩個分支都改（網頁版現在有放 D2R 韓文字型，走第一個）。桌面版的小按鈕字（字高不到 16）用 ×1.5，是因為 Exocet 的大寫比較矮；
+  // 網頁版用系統字型，×1.5 的 Ś 會比旁邊的點陣大寫高一截，所以一律 ×1.2（2026-10-27 實測「NOWOŚCI」「WYJŚCIE」）
   {
     label: '外文字大小（波蘭文）', groups: ['size-pl'], optional: true, file: '^ui-.*\\.js$',
-    find: pattern('let <1>=<2>>=20?1.25:1.4;[this.foreignSize,this.foreignFamily]=<3>?[Math.round(<2>*<1>),<4>]:[Math.max(12,Math.round(<2>*1.3)),<5>],this.foreignWeight=<3>?``:`bold `'),
-    replace: 'let $1=1.2;[this.foreignSize,this.foreignFamily]=$3?[Math.round($2*$1),$4]:[Math.max(12,Math.round($2*1)),$5],this.foreignWeight=``',
+    find: pattern('if(<1>()){let <2>=<3>>=20?1.25:1.4;[this.foreignSize,this.foreignFamily]=<4>?[Math.round(<3>*<2>),<5>]:[Math.max(12,Math.round(<3>*1.3)),<6>],this.foreignWeight=<4>?``:`bold `}else[this.foreignSize,this.foreignFamily]=<3><14?[12,<7>]:<3><20?[15,<8>]:[24,<7>];'),
+    replace: '[this.foreignSize,this.foreignFamily]=$4?[Math.round($3*1.2),$5]:[Math.max(12,Math.round($3)),$1()?$6:$3<14?$7:$3<20?$8:$7],this.foreignWeight=``;',
   },
   // 點陣字型只在空白處斷行：含中日文的詞再拆成一個字一個字（句末標點黏前一個字、左括號黏後一個字，
   // 數字和英文黏著後面那個字），拆出來的片段接回去時不加空白
