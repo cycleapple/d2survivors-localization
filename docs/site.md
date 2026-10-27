@@ -73,6 +73,13 @@ node tools/serve.mjs site 8766     # 本機預覽（或 python -m http.server 87
 - 邀請連結放在 `SITE.discordUrl`（使用者自己的伺服器），留空時下面都不顯示：首頁資訊列下的「加入中文化社群 Discord」、頁尾、常見問題「翻譯有錯或遊戲壞了，要去哪裡回報？」（`faq.items` 回答裡有 `{discord}` 的題目）、「想幫忙翻譯」那題的聯絡連結、「翻譯修正中」提示
 - `LINKS.d2sDiscord` 是 D2 Survivors **遊戲官方**的 Discord（英文），來源卡片上寫「遊戲官方 Discord」，跟中文化社群分開。遊戲本身的問題請玩家到官方，翻譯的問題到中文化社群
 
+## 贊助
+
+- 連結在 `SITE.donateUrl`（使用者的 PayPal），留空就不顯示
+- 放在常見問題後面的小段落（標題、「覺得好用的話，可以請我喝杯咖啡」、PayPal 按鈕）和頁尾（跟 Discord 連結並排）。不跳視窗、不放在下載按鈕旁邊
+- 段落裡附上聲明（`donate.statement`）：免費使用，所有功能都不收費，也不販售任何遊戲內容；贊助是自願的，用來支持翻譯和維護的時間，贊助與否不影響任何功能。跟 README 同一個意思，不寫「不營利」
+- 贊助的文字不提 Blizzard 或官方譯名
+
 ## 下載按鈕
 
 固定指到 `https://github.com/cycleapple/d2survivors-localization/releases/latest/download/d2s-launcher.exe`（`SITE.downloadUrl`）。manifest 裡有 `launcher.latest` 才算已發布（`publish.mjs` 只在有 GitHub Release 時寫入），在那之前按鈕顯示「即將推出」。

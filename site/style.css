@@ -299,6 +299,14 @@ h3 { font-size: 1.15rem; margin: 0 0 10px; }
 .footer-community { font-size: 0.95rem; margin-bottom: 12px !important; }
 .footer .footer-community a { color: var(--gold-hi); }
 
+/* 贊助 */
+.support { margin-top: 40px; padding: 20px; border: 1px solid var(--line-soft); border-radius: var(--radius); background: var(--panel); }
+.support h3 { font-size: 1.05rem; margin-bottom: 6px; }
+.support p { margin: 0 0 10px; }
+.support-note { color: var(--muted); font-size: 0.85rem; margin-bottom: 0 !important; }
+.btn-small { min-height: 38px; padding: 0 16px; font-size: 0.92rem; }
+.footer-community .sep { margin: 0 10px; color: var(--muted); }
+
 /* 首頁（語言選擇） */
 .root-page .hero { min-height: calc(100vh - 120px); border-bottom: 0; }
 .root-langs { list-style: none; padding: 0; margin: 0 auto; max-width: 1040px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; text-align: left; }

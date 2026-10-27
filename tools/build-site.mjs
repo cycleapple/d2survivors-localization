@@ -75,7 +75,10 @@ function head({ title, description, url, ogLocale, ogAlt = [], fonts, prefix }) 
 
 const footer = t => `<footer class="footer">
     <div class="wrap">
-      ${SITE.discordUrl ? `<p class="footer-community">${discordLink(t, t['community.join'])}</p>` : ''}
+      ${SITE.discordUrl || SITE.donateUrl ? `<p class="footer-community">${[
+        SITE.discordUrl && discordLink(t, t['community.join']),
+        SITE.donateUrl && `<a href="${esc(SITE.donateUrl)}" target="_blank" rel="noopener">${esc(t['donate.short'])}</a>`,
+      ].filter(Boolean).join('<span class="sep" aria-hidden="true">·</span>')}</p>` : ''}
       <p>${t['footer.disclaimer']}</p>
       <p class="footer-small"><span data-only="desktop">Game ${esc(state.gameVersion)} · Launcher ${state.launcherReleased ? 'v' + esc(state.launcherVersion) : '—'}</span><span data-only="web">Web · Translations ${esc(state.updated || '')}</span></p>
     </div>
@@ -311,6 +314,13 @@ function langPage(sl) {
             .replace('{feedback}', feedbackUrl ? fmt(t['faq.feedback'], esc(feedbackUrl)) : t['faq.nofeedback'])
             .replaceAll('{discord}', esc(SITE.discordUrl))}</div></details>`).join('\n          ')}
         </div>
+        ${SITE.donateUrl ? `<!-- 贊助：低調放在常見問題後面，不跳視窗 -->
+        <aside class="support" id="support">
+          <h3>${esc(t['donate.title'])}</h3>
+          <p>${esc(t['donate.body'])}</p>
+          <p><a class="btn btn-ghost btn-small" href="${esc(SITE.donateUrl)}" target="_blank" rel="noopener">${esc(t['donate.button'])}</a></p>
+          <p class="support-note">${esc(t['donate.statement'])}</p>
+        </aside>` : ''}
       </div>
     </section>
   </main>

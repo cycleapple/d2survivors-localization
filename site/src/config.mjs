@@ -14,6 +14,8 @@ export const SITE = {
   fallback: { gameVersion: '2026.1026.4', launcherVersion: '0.1.0' },
   // 中文化社群的 Discord 邀請連結（使用者自己的伺服器，不是遊戲官方的 LINKS.d2sDiscord）。留空就不顯示
   discordUrl: 'https://discord.gg/QMBbTHSsaK',
+  // 贊助連結（使用者的 PayPal）。放在常見問題下面的小段落和頁尾，留空就不顯示
+  donateUrl: 'https://paypal.me/DonateCYtw',
   // 回報問題的其他網址（GitHub Issues…），沒有 discordUrl 時才用。留空就不顯示
   feedbackUrl: '',
   // 更新紀錄顯示幾筆（site/data/changelog.json，manifest 的 changelog.url）
