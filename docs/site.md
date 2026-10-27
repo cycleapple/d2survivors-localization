@@ -41,6 +41,7 @@ node tools/serve.mjs site 8766     # 本機預覽（或 python -m http.server 87
 每個語言頁都有：自己的 `<title>`、meta description、`<html lang>`、canonical、三個語言互相標的 hreflang 加上 `x-default`（指到語言選擇頁）、Open Graph（`og:locale` 和 alternate）、Twitter 大圖卡片。內容直接寫在 HTML 裡，不靠 JavaScript（百度幾乎不跑 JS）。
 
 - 用詞照 [seo-research.md](seo-research.md)：每種語言的 title、description 都同時有「D2 Survivors」和「Diablo 2 Survivors」（法文寫 Diablo II Survivors），加上該語言的稱呼和找翻譯的詞（暗黑2倖存者／中文版、暗黑破坏神2幸存者／汉化、ディアブロ2 サバイバーズ／日本語化、patch FR、Русификатор…）。英文頁搶不到「D2 Survivors」本身，改以「translation」為目標
+- 「D2 Survivors」在 Google 會跟 Destiny 2、The Division 2 撞名，所以 title、description 和首段（h1 下面）都要有「Diablo 2 Survivors」。英文首段可以寫「Diablo 2 meets Vampire Survivors」，但 title 不放 Vampire Survivors
 - 首段要寫清楚是**把遊戲本身翻成該語言**，不是攻略（搜尋結果前面多半是攻略站的語言版）
 - 長度：title 約 60 字元（中日文約 30 字），description 約 160 字元（中日文約 100 字）；重要的詞放前面。不要堆關鍵字，也不要提其他翻譯作者
 - `sitemap.xml` 每個網址都附 hreflang 對照
