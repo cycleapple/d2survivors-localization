@@ -67,13 +67,31 @@
 - **哪些要公告**：平常修譯文只進更新紀錄。新語言、語言升級成 beta／available、遊戲改版修好、啟動器新版才發 Discord
 - **論壇**（PTT、巴哈姆特、Bilibili、Reddit）：只發里程碑（正式上線、新增語言），手動貼。標明非官方、一句話講重點、附網站連結
 
-## 公開前的檢查
+## 公開前的檢查（2026-10-28 上線，已完成的打勾）
 
-- [ ] 網址定案（GitHub Pages 預設網址或自己的網域）；書籤和啟動器的預設 manifest 網址都指過去
-- [ ] 第一個啟動器 Release 發好，網站下載按鈕連得到
-- [ ] manifest v2 上線，啟動器、書籤都能選三種語言
-- [ ] 主 repo 改公開：`gh repo edit cycleapple/<repo> --visibility public --accept-visibility-change-consequences`
-- [ ] commit 作者信箱：公開後看得到。要隱藏的話，公開前改成 GitHub 的 noreply 信箱
+- [x] 網址定案（GitHub Pages 預設網址或自己的網域）；書籤和啟動器的預設 manifest 網址都指過去
+- [x] 第一個啟動器 Release 發好，網站下載按鈕連得到
+- [x] manifest v2 上線，啟動器、書籤都能選三種語言
+- [x] 主 repo 改公開：`gh repo edit cycleapple/<repo> --visibility public --accept-visibility-change-consequences`
+- [x] commit 作者信箱：公開後看得到。要隱藏的話，公開前改成 GitHub 的 noreply 信箱
 - [ ] 通知 D2 Survivors 作者（書籤會修改他的網頁版遊戲）
-- [ ] Discord 改成「已推出」（Discord 聊天室）：discord/content.py 的 SITE_SOON、LAUNCHER_SOON 改 False，ALL_AVAILABLE、POLISH 改 True，填 SHOTS → `python discord/preview.py --launch` 檢查 → `python discord/setup_server.py` → `python discord/launch_announcement.py --send`（截圖要先部署到 Pages）
+- [x] Discord 改成「已推出」（Discord 聊天室）：discord/content.py 的 SITE_SOON、LAUNCHER_SOON 改 False，ALL_AVAILABLE、POLISH 改 True，填 SHOTS → `python discord/preview.py --launch` 檢查 → `python discord/setup_server.py` → `python discord/launch_announcement.py --send`（截圖要先部署到 Pages）
 - [ ] 公告：Discord #announcements 用 launch_announcement.py 發（上線那筆 changelog 寫 announce: false，避免 announce.yml 重複發）；PTT、巴哈姆特、Bilibili 由使用者自己貼
+
+## 上線後待辦（2026-10-28）
+
+都不擋上線，照影響大小排：
+
+- 啟動器：德、法、俄、波蘭文主畫面底部的贊助連結被按鈕擋住
+- 德文、波蘭文升級卡片字太長，出現捲軸
+- 版面（可能原版也有）：傭兵列表超出右緣、技能樹分頁太窄、倉庫備註被搜尋框擋住、拾取篩選提示蓋到 HUD、恰西說明框對中日文太窄（work/qa/RULE-REQUESTS.md 第 6～9 項）
+- 中日文商店說明的換行：英文沒有換行時，譯文的 
+ 會變成空白，可以在「 · 」處斷行
+- 網頁版：德文稀有物品底材變小寫；存檔提醒蓋到 SURVIVORS 標誌；800×600 時版權聲明蓋到 HUD
+- 法文：冒號前的空格（« Vie : 100 »）、單數（1 victime、1 pièce d'or）
+- 日文：「筋力」和「力」並存；物品屬性要不要改成 D2R 的「命中率（+16）」格式
+- 俄文：獨特怪物前段「Пламень」詞性不一致，要 uniqueback: key 和規則
+- 波蘭文：unify-eu.mjs 對新 key 的詞性是猜的，新版本要人工看
+- 公告：PTT、巴哈姆特、Bilibili 由使用者自己貼
+- 簽章：累積一些下載量後申請 SignPath
+- 聯絡遊戲作者 framara
