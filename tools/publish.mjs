@@ -24,6 +24,12 @@ const fail = msg => { console.error(`發布失敗：${msg}`); process.exit(1); }
 const readJson = (file, fallback) => fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, 'utf8')) : fallback;
 const writeJson = (file, data) => fs.writeFileSync(file, JSON.stringify(data, null, 2) + '\n');
 
+// manifest 會讀到別的聊天室的檔案（修改規則）：工作目錄裡有還沒 commit 的改動就停下來，免得把做到一半的規則發布出去
+const FOREIGN = ['tools/patch-rules.mjs', 'tools/web-rules.mjs'];
+const dirty = FOREIGN.filter(p => { try { git('diff', '--quiet', 'HEAD', '--', p); return false; } catch { return true; } });
+if (dirty.length && !DRY) fail(`這些檔案有還沒 commit 的改動（別的聊天室在改）：${dirty.join('、')}。等它們 commit 再發布`);
+if (dirty.length) console.log(`注意：${dirty.join('、')} 有還沒 commit 的改動，試跑結果會包含它們`);
+
 // 上一次發布的狀態（跟這次比，算出每種語言新增／修改／刪除幾條）
 const beforeStatus = id => before?.languages.find(l => l.id === id)?.status;
 const before = readJson(`${OUT}/manifest.json`, null);
