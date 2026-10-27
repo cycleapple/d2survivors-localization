@@ -66,7 +66,7 @@
   <main id="top">
     <!-- game.web_checked 太舊時由 app.js 顯示（看當下時間，所以不在建置時決定） -->
     <div class="notice" id="stale-notice" role="status" hidden>
-      <div class="wrap"><strong>The game was just updated and the translation is being fixed.</strong> Until then, the bookmark and the launcher may not be able to apply it, and the game runs in English as usual. The fix will be listed in the changelog.</div>
+      <div class="wrap"><strong>The game was just updated and the translation is being fixed.</strong> Until then, the bookmark and the launcher may not be able to apply it, and the game runs in English as usual. The fix will be listed in the changelog. For the latest news, see the <a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">localization community Discord</a>.</div>
     </div>
 
     <section class="hero" id="download">
@@ -87,7 +87,7 @@
         <ul class="meta" data-only="desktop"><li>Game version <strong>2026.1027.1</strong></li><li>Launcher <strong>Coming soon · Windows</strong></li><li>Translations updated <strong>2026-10-27</strong></li></ul>
         <ul class="meta" data-only="web"><li>Browsers <strong>Chrome · Edge · Firefox · Safari</strong></li><li>Devices <strong>computer &amp; phone</strong></li><li>Translations updated <strong>2026-10-27</strong></li></ul>
         </div>
-        
+        <p class="hero-community"><a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">Join the localization Discord</a></p>
       </div>
     </section>
 
@@ -315,7 +315,8 @@
           <details data-only="web"><summary>Why is some text still in English?</summary><div class="answer"><p>Almost all UI, skills, items, and monsters are translated. Patch notes and some longer skill descriptions are still in progress and show in English for now; the bookmark always loads the latest translation, so they appear as soon as they’re done.</p></div></details>
           <details data-only="desktop"><summary>Windows says “Windows protected your PC”. What do I do?</summary><div class="answer"><p>The launcher isn’t code-signed (a signing certificate costs money every year), so Windows SmartScreen warns about it until enough people have downloaded it.</p><p>Click <strong>More info</strong>, then <strong>Run anyway</strong>; Windows won’t ask again. Only download it from this site or <a href="https://github.com/cycleapple/d2survivors-localization/releases" target="_blank" rel="noopener">GitHub Releases</a>. Every release includes <code>d2s-launcher.exe.sha256</code>, which you can check with <code>certutil -hashfile d2s-launcher.exe SHA256</code>.</p><p>If your browser says the file isn’t commonly downloaded, choose <strong>Keep</strong> from the download’s menu.</p></div></details>
           <details><summary>Can I use Chinese in character names?</summary><div class="answer"><p>Not yet. The game itself only allows English letters and Korean in character names.</p></div></details>
-          <details><summary>How can I help translate or report a typo?</summary><div class="answer"><p>Gladly! Every language other than Traditional Chinese is still in progress or in beta, and native speakers are especially welcome to help review. Contact details will be posted here soon.</p></div></details>
+          <details><summary>Where do I report a translation error or something broken?</summary><div class="answer"><p>Typos, missing translations, and problems with the bookmark or launcher go to the <a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">localization community Discord</a>, where news is posted too.</p><p>Problems with the game itself (not caused by the translation) go to the <a href="https://discord.gg/mYMGgZPuQb" target="_blank" rel="noopener">official D2 Survivors Discord</a>.</p></div></details>
+          <details><summary>How can I help translate or report a typo?</summary><div class="answer"><p>Gladly! Every language other than Traditional Chinese is still in progress or in beta, and native speakers are especially welcome to help review. Get in touch <a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">here</a>.</p></div></details>
         </div>
       </div>
     </section>
@@ -323,7 +324,7 @@
 
   <footer class="footer">
     <div class="wrap">
-      
+      <p class="footer-community"><a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">Join the localization Discord</a></p>
       <p>Unofficial fan translation, not affiliated with <a href="https://d2survivors.lol/" target="_blank" rel="noopener">D2 Survivors</a> (framara) or Blizzard Entertainment. Diablo® is a trademark of Blizzard Entertainment, Inc.</p>
       <p class="footer-small"><span data-only="desktop">Game 2026.1027.1 · Launcher —</span><span data-only="web">Web · Translations 2026-10-27</span></p>
     </div>

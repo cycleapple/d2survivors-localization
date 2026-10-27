@@ -13,7 +13,7 @@ export const SITE = {
   // manifest 讀不到時用的數字
   fallback: { gameVersion: '2026.1026.4', launcherVersion: '0.1.0' },
   // 中文化社群的 Discord 邀請連結（使用者自己的伺服器，不是遊戲官方的 LINKS.d2sDiscord）。留空就不顯示
-  discordUrl: '',
+  discordUrl: 'https://discord.gg/QMBbTHSsaK',
   // 回報問題的其他網址（GitHub Issues…），沒有 discordUrl 時才用。留空就不顯示
   feedbackUrl: '',
   // 更新紀錄顯示幾筆（site/data/changelog.json，manifest 的 changelog.url）

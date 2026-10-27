@@ -66,7 +66,7 @@
   <main id="top">
     <!-- game.web_checked 太舊時由 app.js 顯示（看當下時間，所以不在建置時決定） -->
     <div class="notice" id="stale-notice" role="status" hidden>
-      <div class="wrap"><strong>ゲームがアップデートされたため、翻訳を修正中です。</strong>その間はブックマークやランチャーで翻訳を適用できないことがありますが、ゲームはいつもどおり英語版で遊べます。修正が終わったら更新履歴でお知らせします。</div>
+      <div class="wrap"><strong>ゲームがアップデートされたため、翻訳を修正中です。</strong>その間はブックマークやランチャーで翻訳を適用できないことがありますが、ゲームはいつもどおり英語版で遊べます。修正が終わったら更新履歴でお知らせします。 最新情報は<a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">翻訳コミュニティの Discord</a> をご覧ください。</div>
     </div>
 
     <section class="hero" id="download">
@@ -87,7 +87,7 @@
         <ul class="meta" data-only="desktop"><li>対応ゲームバージョン <strong>2026.1027.1</strong></li><li>ランチャー <strong>近日公開 · Windows</strong></li><li>翻訳の更新 <strong>2026-10-27</strong></li></ul>
         <ul class="meta" data-only="web"><li>ブラウザ <strong>Chrome · Edge · Firefox · Safari</strong></li><li>デバイス <strong>PC・スマホ</strong></li><li>翻訳の更新 <strong>2026-10-27</strong></li></ul>
         </div>
-        
+        <p class="hero-community"><a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">翻訳コミュニティの Discord に参加</a></p>
       </div>
     </section>
 
@@ -316,7 +316,8 @@
           <details data-only="web"><summary>まだ英語のところがあるのはなぜ？</summary><div class="answer"><p>UI・スキル・アイテム・モンスターはほとんど翻訳済みですが、パッチノートや長めのスキル説明の一部は翻訳中で、それまでは英語で表示されます。ブックマークは毎回最新の翻訳を読み込むので、翻訳が終わりしだい反映されます。</p></div></details>
           <details data-only="desktop"><summary>「Windows によって PC が保護されました」と表示されたら？</summary><div class="answer"><p>ランチャーにはコード署名がありません（署名の証明書は毎年費用がかかります）。そのため、ダウンロードした人が十分に増えるまでは Windows SmartScreen がこの警告を出します。</p><p>「<strong>詳細情報</strong>」を押してから「<strong>実行</strong>」を押してください。次からは表示されません。ダウンロードはこのサイトか <a href="https://github.com/cycleapple/d2survivors-localization/releases" target="_blank" rel="noopener">GitHub Releases</a> からだけにしてください。各リリースには <code>d2s-launcher.exe.sha256</code> が付いていて、<code>certutil -hashfile d2s-launcher.exe SHA256</code> で照合できます。</p><p>ブラウザが「このファイルは一般的にダウンロードされていません」と表示した場合は、ダウンロードのメニューから「保存」を選んでください。</p></div></details>
           <details><summary>キャラクター名に日本語は使えますか？</summary><div class="answer"><p>今のところ使えません。ゲーム自体がキャラクター名に英字と韓国語しか使えない仕様です。</p></div></details>
-          <details><summary>翻訳を手伝ったり、誤字を報告したりできますか？</summary><div class="answer"><p>大歓迎です！ 繁体字中国語以外の言語はまだ制作中かベータ版で、特にネイティブの方の校正が助かります。連絡先は準備ができしだいここでお知らせします。</p></div></details>
+          <details><summary>翻訳の誤りや不具合はどこに報告すればいい？</summary><div class="answer"><p>誤字・訳抜け・ブックマークやランチャーの不具合は、<a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">翻訳コミュニティの Discord</a> に報告してください。最新情報もそこでお知らせします。</p><p>ゲーム自体の不具合（翻訳と関係ないもの）は <a href="https://discord.gg/mYMGgZPuQb" target="_blank" rel="noopener">D2 Survivors のゲーム公式 Discord</a>（英語）に報告してください。</p></div></details>
+          <details><summary>翻訳を手伝ったり、誤字を報告したりできますか？</summary><div class="answer"><p>大歓迎です！ 繁体字中国語以外の言語はまだ制作中かベータ版で、特にネイティブの方の校正が助かります。<a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">こちら</a>からご連絡ください。</p></div></details>
         </div>
       </div>
     </section>
@@ -324,7 +325,7 @@
 
   <footer class="footer">
     <div class="wrap">
-      
+      <p class="footer-community"><a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">翻訳コミュニティの Discord に参加</a></p>
       <p>プレイヤーによる非公式の翻訳です。<a href="https://d2survivors.lol/" target="_blank" rel="noopener">D2 Survivors</a>（framara）および Blizzard Entertainment とは関係ありません。Diablo® は Blizzard Entertainment, Inc. の商標です。</p>
       <p class="footer-small"><span data-only="desktop">Game 2026.1027.1 · Launcher —</span><span data-only="web">Web · Translations 2026-10-27</span></p>
     </div>

@@ -66,7 +66,7 @@
   <main id="top">
     <!-- game.web_checked 太舊時由 app.js 顯示（看當下時間，所以不在建置時決定） -->
     <div class="notice" id="stale-notice" role="status" hidden>
-      <div class="wrap"><strong>遊戲剛更新，翻譯修正中。</strong>這段期間書籤和啟動器可能套不上翻譯，遊戲會照常以英文版執行；修好後會寫在更新紀錄。</div>
+      <div class="wrap"><strong>遊戲剛更新，翻譯修正中。</strong>這段期間書籤和啟動器可能套不上翻譯，遊戲會照常以英文版執行；修好後會寫在更新紀錄。 最新消息請看<a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">中文化社群 Discord</a>。</div>
     </div>
 
     <section class="hero" id="download">
@@ -87,7 +87,7 @@
         <ul class="meta" data-only="desktop"><li>支援遊戲版本 <strong>2026.1027.1</strong></li><li>啟動器 <strong>即將推出 · Windows</strong></li><li>翻譯更新 <strong>2026-10-27</strong></li></ul>
         <ul class="meta" data-only="web"><li>瀏覽器 <strong>Chrome · Edge · Firefox · Safari</strong></li><li>裝置 <strong>電腦・手機</strong></li><li>翻譯更新 <strong>2026-10-27</strong></li></ul>
         </div>
-        
+        <p class="hero-community"><a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">加入中文化社群 Discord</a></p>
       </div>
     </section>
 
@@ -315,7 +315,8 @@
           <details data-only="web"><summary>為什麼還有一些英文？</summary><div class="answer"><p>大部分介面、技能、物品、怪物都已翻譯完成，但更新說明和部分較長的技能說明還在翻譯中，會先顯示英文。書籤每次都載入最新的翻譯，翻好就會出現。</p></div></details>
           <details data-only="desktop"><summary>Windows 跳出「Windows 已保護您的電腦」怎麼辦？</summary><div class="answer"><p>啟動器沒有程式碼簽章（要每年付費購買），在下載的人還不多之前，Windows SmartScreen 都會跳出這個警告。</p><p>按「<strong>其他資訊</strong>」，再按「<strong>仍要執行</strong>」就可以了，之後不會再問。請只從本站或 <a href="https://github.com/cycleapple/d2survivors-localization/releases" target="_blank" rel="noopener">GitHub Releases</a> 下載；每個 Release 都附有 <code>d2s-launcher.exe.sha256</code>，可以用 <code>certutil -hashfile d2s-launcher.exe SHA256</code> 核對。</p><p>瀏覽器下載時如果說這個檔案不常被下載，在下載清單的選單裡選「保留」。</p></div></details>
           <details><summary>角色名稱可以打中文嗎？</summary><div class="answer"><p>目前不行。遊戲本身只允許英文字母和韓文作為角色名稱。</p></div></details>
-          <details><summary>想幫忙翻譯或回報錯字？</summary><div class="answer"><p>歡迎！除了繁體中文，其他語言都還在製作或測試中，特別需要母語玩家幫忙校對。聯絡方式整理好之後會公布在這裡。</p></div></details>
+          <details><summary>翻譯有錯或遊戲壞了，要去哪裡回報？</summary><div class="answer"><p>錯字、漏譯、書籤或啟動器的問題，請到<a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">中文化社群 Discord</a> 回報，那裡也會公告最新消息。</p><p>遊戲本身的問題（跟翻譯無關的）請到 <a href="https://discord.gg/mYMGgZPuQb" target="_blank" rel="noopener">D2 Survivors 遊戲官方 Discord</a>（英文）回報。</p></div></details>
+          <details><summary>想幫忙翻譯或回報錯字？</summary><div class="answer"><p>歡迎！除了繁體中文，其他語言都還在製作或測試中，特別需要母語玩家幫忙校對。請到<a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">這裡</a>聯絡我們。</p></div></details>
         </div>
       </div>
     </section>
@@ -323,7 +324,7 @@
 
   <footer class="footer">
     <div class="wrap">
-      
+      <p class="footer-community"><a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">加入中文化社群 Discord</a></p>
       <p>非官方玩家自製翻譯，與 <a href="https://d2survivors.lol/" target="_blank" rel="noopener">D2 Survivors</a>（framara）、Blizzard Entertainment 無關。Diablo® 是 Blizzard Entertainment, Inc. 的商標。</p>
       <p class="footer-small"><span data-only="desktop">Game 2026.1027.1 · Launcher —</span><span data-only="web">Web · Translations 2026-10-27</span></p>
     </div>
