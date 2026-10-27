@@ -15,7 +15,7 @@ export const SITE = {
   // 中文化社群的 Discord 邀請連結（使用者自己的伺服器，不是遊戲官方的 LINKS.d2sDiscord）。留空就不顯示
   discordUrl: 'https://discord.gg/QMBbTHSsaK',
   // 站長平台的驗證碼（只填 content 的值）。有值才輸出 meta：google-site-verification、msvalidate.01、baidu-site-verification
-  verify: { google: '', bing: '', baidu: '' },
+  verify: { google: 'TDrJgao0OgFoMX3UnlkOdZFuGUjjoieOoEfPzPnkGDg', bing: '', baidu: '' },
   // 原始碼 repo（公開）。頁尾的「原始碼」、常見問題的授權、GitHub Issues、編譯紀錄都從這裡接
   repoUrl: 'https://github.com/cycleapple/d2survivors-localization',
   // 贊助連結（使用者的 PayPal）。放在常見問題下面的小段落和頁尾，留空就不顯示
