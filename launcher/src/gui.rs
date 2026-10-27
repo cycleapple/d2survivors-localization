@@ -97,7 +97,7 @@ impl App {
             rx,
         };
         app.refresh_game();
-        cc.egui_ctx.send_viewport_cmd(egui::ViewportCommand::Title(app.t("brand").into()));
+        cc.egui_ctx.send_viewport_cmd(egui::ViewportCommand::Title(system::APP_NAME.into()));
         if play && app.config.wizard_done {
             // 捷徑的 --play：開啟後直接啟動遊戲（裡面會先檢查更新）
             app.start(Job::Launch, &cc.egui_ctx);
@@ -322,7 +322,7 @@ impl App {
         });
     }
 
-    /// 中文化網站、Discord、贊助：小圖示加文字，不跳出、不擋啟動
+    /// 網站、Discord、贊助：小圖示加文字，不跳出、不擋啟動
     fn links(&self, ui: &mut egui::Ui) {
         ui.horizontal_wrapped(|ui| {
             ui.spacing_mut().item_spacing.x = 14.0;
@@ -350,11 +350,9 @@ impl App {
         ui.add_space(10.0);
         match step {
             0 => {
-                // 還沒選語言：標題用好幾種語言並列，說明照目前選的（預設是 Windows 的語言）
-                ui.label(RichText::new(format!("🌐  {}", i18n::LANGUAGE_TITLE)).font(theme::display_font(17.0)).color(GOLD));
-                ui.add_space(2.0);
-                ui.label(RichText::new(self.t("lang_desc")).color(MUTED));
-                ui.add_space(10.0);
+                // 還沒選語言：不放標題和說明，只有 🌐 和語言按鈕（每個都用自己的語言寫）。選了之後下一步才用那個語言
+                ui.vertical_centered(|ui| ui.label(RichText::new("🌐").size(26.0).color(GOLD)));
+                ui.add_space(8.0);
                 if self.manifest.is_none() {
                     if self.busy {
                         ui.horizontal(|ui| {
@@ -367,8 +365,6 @@ impl App {
                     ui.add_space(6.0);
                 }
                 self.language_picker(ui, false);
-                ui.add_space(4.0);
-                self.mode_note(ui);
             }
             1 => {
                 ui.heading(RichText::new(self.t("game_title")).color(GOLD));
@@ -500,9 +496,9 @@ impl App {
     }
 
     fn create_shortcut(&mut self, ctx: &egui::Context) {
-        let (tx, name, ctx) = (self.tx.clone(), self.t("app_title").to_string(), ctx.clone());
+        let (tx, ctx) = (self.tx.clone(), ctx.clone());
         std::thread::spawn(move || {
-            let _ = tx.send(Msg::Shortcut(system::create_shortcut(&name).map_err(|e| format!("{e:#}"))));
+            let _ = tx.send(Msg::Shortcut(system::create_shortcut().map_err(|e| format!("{e:#}"))));
             ctx.request_repaint();
         });
     }
@@ -740,7 +736,7 @@ impl App {
                 ui.add(egui::Image::new(egui::load::SizedTexture::new(icon.id(), [26.0, 26.0])));
             }
             ui.add_space(2.0);
-            ui.label(RichText::new(self.t("brand")).font(theme::display_font(20.0)).color(GOLD));
+            ui.label(RichText::new(system::APP_NAME).font(theme::display_font(20.0)).color(GOLD));
             ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| match self.page {
                 Page::Main => {
                     if ui.button(format!("⚙  {}", self.t("settings"))).clicked() {
@@ -776,7 +772,6 @@ impl eframe::App for App {
         if self.font_lang != lang {
             theme::install_fonts(ctx, &lang);
             self.font_lang = lang;
-            ctx.send_viewport_cmd(egui::ViewportCommand::Title(self.t("brand").into()));
         }
         theme::paint_background(ctx);
 
@@ -816,10 +811,10 @@ pub fn run(play: bool) -> eframe::Result {
         viewport: egui::ViewportBuilder::default()
             .with_inner_size([580.0 * zoom, 620.0 * zoom])
             .with_min_inner_size([480.0, 500.0])
-            .with_title("D2 Survivors")
+            .with_title(system::APP_NAME)
             // 跟網站一樣的「D2」圖示（assets/make-icon.ps1 產生）
             .with_icon(egui::IconData { rgba: include_bytes!("../assets/icon-64.rgba").to_vec(), width: 64, height: 64 }),
         ..Default::default()
     };
-    eframe::run_native("D2 Survivors 啟動器", options, Box::new(move |cc| Ok(Box::new(App::new(cc, play)))))
+    eframe::run_native(system::APP_NAME, options, Box::new(move |cc| Ok(Box::new(App::new(cc, play)))))
 }

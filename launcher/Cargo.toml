@@ -2,7 +2,7 @@
 name = "d2s-launcher"
 version = "0.2.0"
 edition = "2021"
-description = "D2 Survivors 中文化啟動器：切換語言、自動更新翻譯"
+description = "D2 Survivors Localization: switch the game's language and keep translations up to date"
 license = "MIT"
 
 [dependencies]

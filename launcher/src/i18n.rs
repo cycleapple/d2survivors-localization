@@ -3,8 +3,6 @@
 
 /// (key, 繁中, 簡中, 英文)
 const TABLE: &[(&str, &str, &str, &str)] = &[
-    ("app_title", "D2 Survivors 啟動器", "D2 Survivors 启动器", "D2 Survivors Launcher"),
-    ("brand", "D2 Survivors 中文化", "D2 Survivors 汉化", "D2 Survivors Localization"),
     ("step_lang", "語言", "语言", "Language"),
     ("step_game", "遊戲", "游戏", "Game"),
     ("step_d2", "Diablo II", "Diablo II", "Diablo II"),
@@ -77,9 +75,6 @@ const TABLE: &[(&str, &str, &str, &str)] = &[
     ("log", "詳細紀錄", "详细记录", "Log"),
     ("links", "連結", "链接", "Links"),
 ];
-
-/// 選語言那一步的標題：玩家還沒選語言，用好幾種語言並列
-pub const LANGUAGE_TITLE: &str = "選擇語言 · 选择语言 · Language · 言語 · Sprache · Langue · Язык · Język";
 
 /// 語言的狀態用那個語言自己寫：status 是 manifest 的 status（None＝available 不加標示，beta 測試中，其他都當草稿）
 pub fn native_status(id: &str, status: Option<&str>) -> Option<&'static str> {

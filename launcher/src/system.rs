@@ -1,9 +1,11 @@
 // 跟 Windows 打交道的小功能：偵測 Diablo II、系統語言、開網頁、建立桌面捷徑、選資料夾
 use std::path::{Path, PathBuf};
 
-/// 中文化網站（暫定網址；換網域只改這裡）
+/// 程式名稱：每種介面語言都一樣，不翻譯（網站的 og:site_name、README 也是這個名稱）
+pub const APP_NAME: &str = "D2 Survivors Localization";
+/// 網站（暫定網址；換網域只改這裡）
 pub const SITE_URL: &str = "https://cycleapple.github.io/d2survivors-localization/";
-/// 中文化社群 Discord 的邀請連結（永久；空的就不顯示）
+/// 社群 Discord 的邀請連結（永久；空的就不顯示）
 pub const DISCORD_URL: &str = "https://discord.gg/QMBbTHSsaK";
 /// 贊助連結（只放在完成頁和設定的連結區，不跳出、不提醒；贊助與否不影響任何功能）
 pub const DONATE_URL: &str = "https://paypal.me/DonateCYtw";
@@ -142,16 +144,23 @@ pub fn open_url(url: &str) {
     }
 }
 
-/// 在桌面建立啟動器的捷徑（--play：開啟後直接啟動遊戲）
-pub fn create_shortcut(name: &str) -> anyhow::Result<PathBuf> {
+/// 舊版建的捷徑名稱（依介面語言），建新捷徑時刪掉，桌面上不要同時有兩個
+const OLD_SHORTCUTS: [&str; 3] = ["D2 Survivors 啟動器", "D2 Survivors 启动器", "D2 Survivors Launcher"];
+
+/// 在桌面建立啟動器的捷徑「D2 Survivors Localization」（--play：開啟後直接啟動遊戲）
+pub fn create_shortcut() -> anyhow::Result<PathBuf> {
     let exe = std::env::current_exe()?;
     let dir = exe.parent().unwrap_or(Path::new("."));
     let q = |s: &str| s.replace('\'', "''");
-    // 用 Windows 內建的 WScript.Shell 建 .lnk，不用另外帶 COM 的程式庫
+    // 用 Windows 內建的 WScript.Shell 建 .lnk，不用另外帶 COM 的程式庫。
+    // 舊名稱的捷徑只在指向 d2s-launcher 時才刪，不碰別的東西
+    let old = OLD_SHORTCUTS.iter().map(|n| format!("'{}'", q(n))).collect::<Vec<_>>().join(",");
     let script = format!(
-        "$d=[Environment]::GetFolderPath('Desktop');$p=Join-Path $d '{name}.lnk';$s=(New-Object -ComObject WScript.Shell).CreateShortcut($p);\
-         $s.TargetPath='{exe}';$s.Arguments='--play';$s.WorkingDirectory='{dir}';$s.IconLocation='{exe},0';$s.Save();$p",
-        name = q(name),
+        "$d=[Environment]::GetFolderPath('Desktop');$w=New-Object -ComObject WScript.Shell;\
+         foreach($n in @({old})){{$o=Join-Path $d ($n+'.lnk');if((Test-Path -LiteralPath $o) -and ($w.CreateShortcut($o).TargetPath -like '*d2s-launcher*')){{Remove-Item -LiteralPath $o}}}};\
+         $p=Join-Path $d '{name}.lnk';$s=$w.CreateShortcut($p);\
+         $s.TargetPath='{exe}';$s.Arguments='--play';$s.WorkingDirectory='{dir}';$s.IconLocation='{exe},0';$s.Description='{name}';$s.Save();$p",
+        name = q(APP_NAME),
         exe = q(&exe.to_string_lossy()),
         dir = q(&dir.to_string_lossy()),
     );
