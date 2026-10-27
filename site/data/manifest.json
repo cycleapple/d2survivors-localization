@@ -1,0 +1,186 @@
+{
+  "schema": 2,
+  "updated": "2026-10-27T12:11:57.088Z",
+  "version": "20261027-1211",
+  "game": {
+    "desktop": "2026.1027.1"
+  },
+  "languages": [
+    {
+      "id": "zh-TW",
+      "name": "繁體中文",
+      "status": "available",
+      "entries": 12758,
+      "dict": {
+        "url": "dict/zh-TW.json?v=5f21d9d7829e",
+        "sha256": "5f21d9d7829e35dc1a499a0f993cba051d37949245f6a0ddf671edf7371cf85b",
+        "size": 792774
+      },
+      "desktop": {
+        "menu_name": "繁體中文",
+        "html_lang": "zh-Hant",
+        "groups": [
+          "base",
+          "dict",
+          "cjk",
+          "magic-zh",
+          "fullwidth"
+        ]
+      }
+    },
+    {
+      "id": "zh-CN",
+      "name": "简体中文",
+      "status": "beta",
+      "entries": 12753,
+      "dict": {
+        "url": "dict/zh-CN.json?v=5c4845aaa084",
+        "sha256": "5c4845aaa0844efa50d8eac1f28efb389dcdba68dce300f8a253468aca7e8e9a",
+        "size": 792294
+      },
+      "desktop": {
+        "menu_name": "简体中文",
+        "html_lang": "zh-Hans",
+        "groups": [
+          "base",
+          "dict",
+          "cjk",
+          "magic-zh"
+        ]
+      }
+    },
+    {
+      "id": "ja",
+      "name": "日本語",
+      "status": "beta",
+      "entries": 12755,
+      "dict": {
+        "url": "dict/ja.json?v=455142d09c72",
+        "sha256": "455142d09c720e402a38e373a6b4c737e176b1bb0bd02e7e2b80957615c53f74",
+        "size": 950317
+      },
+      "desktop": {
+        "menu_name": "日本語",
+        "html_lang": "ja",
+        "groups": [
+          "base",
+          "dict",
+          "cjk",
+          "magic-ja"
+        ]
+      }
+    }
+  ],
+  "desktop": {
+    "assets_dir": "desktop/dist/web/assets",
+    "dict_target": {
+      "file": "^ko-.*\\.js$",
+      "template": "var e={{dict}};export{e as default};"
+    },
+    "rules": [
+      {
+        "label": "啟動器指定語言",
+        "groups": [
+          "base"
+        ],
+        "file": "^lang-.*\\.js$",
+        "from": "let e=null;try{e=localStorage.getItem(A)}catch{}",
+        "to": "let e=null;try{let q=new URLSearchParams(location.search).get(`d2slang`);if(q&&!sessionStorage.getItem(`d2slang`)){sessionStorage.setItem(`d2slang`,q);localStorage.setItem(A,q)}e=localStorage.getItem(A)}catch{}"
+      },
+      {
+        "label": "語言選單名稱",
+        "groups": [
+          "dict"
+        ],
+        "file": "^lang-.*\\.js$",
+        "from": "ko:`한국어`",
+        "to": "ko:`{{menu_name}}`"
+      },
+      {
+        "label": "頁面語言標記",
+        "groups": [
+          "dict"
+        ],
+        "file": "^lang-.*\\.js$",
+        "from": "document.documentElement.lang=`ko`",
+        "to": "document.documentElement.lang=`{{html_lang}}`"
+      },
+      {
+        "label": "魔法物品名稱組合",
+        "groups": [
+          "magic-zh"
+        ],
+        "file": "^lang-.*\\.js$",
+        "from": "this.translateAs(`item`,t)].filter(Boolean).join(` `)",
+        "to": "this.translateAs(`item`,t)].filter(Boolean).join(``)"
+      },
+      {
+        "label": "魔法物品名稱組合（日文）",
+        "groups": [
+          "magic-ja"
+        ],
+        "file": "^lang-.*\\.js$",
+        "from": "return[a(i),a(r),this.translateAs(`item`,t)].filter(Boolean).join(` `)",
+        "to": "return[a(r),a(i),this.translateAs(`item`,t)].filter(Boolean).join(``)"
+      },
+      {
+        "label": "標籤與值的冒號",
+        "groups": [
+          "fullwidth"
+        ],
+        "file": "^lang-.*\\.js$",
+        "from": "return`${t.replace(/:?\\s*$/,`:`)} ${r}`",
+        "to": "return/[\\u4e00-\\u9fff]/.test(t)?`${t.replace(/[:：]?\\s*$/,`：`)}${r}`:`${t.replace(/:?\\s*$/,`:`)} ${r}`"
+      },
+      {
+        "label": "外文字判斷",
+        "groups": [
+          "cjk"
+        ],
+        "from": "return t>=44032&&t<=55203||t>=12592&&t<=12687||t>=4352&&t<=4607}",
+        "to": "return t>=44032&&t<=55203||t>=12592&&t<=12687||t>=4352&&t<=4607||t>=19968&&t<=40959||t>=13312&&t<=19903||t>=12288&&t<=12351||t>=65280&&t<=65519||t>=12352&&t<=12543}"
+      },
+      {
+        "label": "中文斷行",
+        "groups": [
+          "cjk"
+        ],
+        "from": "for(let i of r.split(` `)){let r=e?`${e} ${i}`:i;",
+        "to": "for(let i of r.split(` `).flatMap(w=>(w.match(/[\\u300c\\u300e\\u3010\\uff08]*[\\u3000-\\u9fff\\uff00-\\uffef][\\u3001\\u3002\\uff0c\\uff1a\\uff1b\\uff01\\uff1f\\uff09\\u300d\\u300f\\u3011\\u30fc\\u30fb\\u3041\\u3043\\u3045\\u3047\\u3049\\u3063\\u3083\\u3085\\u3087\\u308e\\u30a1\\u30a3\\u30a5\\u30a7\\u30a9\\u30c3\\u30e3\\u30e5\\u30e7\\u30ee\\u30f5\\u30f6]*|[^\\u3000-\\u9fff\\uff00-\\uffef]+(?:[\\u300c\\u300e\\u3010\\uff08]*[\\u3000-\\u9fff\\uff00-\\uffef][\\u3001\\u3002\\uff0c\\uff1a\\uff1b\\uff01\\uff1f\\uff09\\u300d\\u300f\\u3011\\u30fc\\u30fb\\u3041\\u3043\\u3045\\u3047\\u3049\\u3063\\u3083\\u3085\\u3087\\u308e\\u30a1\\u30a3\\u30a5\\u30a7\\u30a9\\u30c3\\u30e3\\u30e5\\u30e7\\u30ee\\u30f5\\u30f6]*)?/g)??[w]).map((x,j)=>j?`\\u0001${x}`:x))){let g=i[0]===`\\u0001`;i=g?i.slice(1):i;let r=e?g?e+i:`${e} ${i}`:i;"
+      },
+      {
+        "label": "中文字型",
+        "groups": [
+          "cjk"
+        ],
+        "file": "^lang-.*\\.js$",
+        "from": "if(typeof FontFace>`u`)return;",
+        "to": "if(typeof FontFace>`u`)return;await Promise.all([[`D2R Kodia`,`body.woff2`],[`D2R Iris`,`body.woff2`],[`D2 Hangul`,`body.woff2`],[`D2 Hangul 14`,`body.woff2`]].map(async([f,n])=>{try{document.fonts.add(await new FontFace(f,`url(${new URL(`../fonts-zh/${n}`,document.baseURI).href})`,{unicodeRange:`U+3000-30FF, U+3400-4DBF, U+4E00-9FFF, U+FF00-FFEF`}).load())}catch{}}));"
+      },
+      {
+        "label": "暗色字不加描邊",
+        "groups": [
+          "cjk"
+        ],
+        "from": "c=[];if(a.outline){let e=`rgb(${o(a.outline.level,a.outline.own)})`;for(let[t,n]of[[-1,0],[1,0],[0,-1],[0,1],[-1,-1],[1,-1],[-1,1],[1,1]])c.push([e,t*s,n*s])}c.push([`rgb(${o(a.level,a.own)})`,0,0]);",
+        "to": "c=[],F=o(a.level,a.own),U=a.outline&&o(a.outline.level,a.outline.own),M=e=>Math.max(...e.split(`,`).map(Number)),D=U&&M(F)<75&&M(U)<M(F);if(a.outline&&!D){let e=`rgb(${U})`;for(let[t,n]of[[-1,0],[1,0],[0,-1],[0,1],[-1,-1],[1,-1],[-1,1],[1,1]])c.push([e,t*s,n*s])}c.push([`rgb(${D?U:F})`,0,0]);D&&c.push([`rgb(${U})`,1,0]);"
+      },
+      {
+        "label": "版權聲明寬度",
+        "groups": [
+          "cjk"
+        ],
+        "from": "let r={...Y(e),maxWidth:ur},i=[e.text(J,r)",
+        "to": "let r={...Y(e),maxWidth:ur},i=[e.text(J,document.documentElement.lang===`{{html_lang}}`?{...r,maxWidth:360}:r)"
+      },
+      {
+        "label": "技能變體專用譯名",
+        "groups": [
+          "dict"
+        ],
+        "from": "]},mre={raiseSkeleton:`Evolved: Revive's skeletons take this option`},Vs={};function Hs(e,t){",
+        "to": "]},mre={raiseSkeleton:`Evolved: Revive's skeletons take this option`},Vs={};for(let l of Object.values(Bs))for(let o of l){let n=o.name;Object.defineProperty(o,`name`,{get:()=>h()?m(`modifier`,n):n,enumerable:!0,configurable:!0})}function Hs(e,t){"
+      }
+    ]
+  }
+}
