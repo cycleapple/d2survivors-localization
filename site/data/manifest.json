@@ -1,10 +1,10 @@
 {
   "schema": 2,
-  "updated": "2026-10-27T16:58:27.251Z",
-  "version": "20261027-1658",
+  "updated": "2026-10-27T17:27:47.387Z",
+  "version": "20261027-1727",
   "game": {
     "desktop": "2026.1027.2",
-    "web_checked": "2026-10-27T15:51:01.406Z"
+    "web_checked": "2026-10-27T17:00:14.344Z"
   },
   "languages": [
     {
@@ -55,11 +55,11 @@
       "id": "zh-CN",
       "name": "简体中文",
       "status": "beta",
-      "entries": 12974,
+      "entries": 12982,
       "dict": {
-        "url": "dict/zh-CN.json?v=de3293e1828f",
-        "sha256": "de3293e1828f54199ee408a1fe78596b2ec5dd804c21fec7d62f6a70695cd029",
-        "size": 815071
+        "url": "dict/zh-CN.json?v=fc35b86f4d3d",
+        "sha256": "fc35b86f4d3dbca1c093f099141936dc7ed36ea12ce7b3af850842e8359614b9",
+        "size": 815535
       },
       "desktop": {
         "menu_name": "简体中文",
@@ -694,7 +694,7 @@
         "optional": true,
         "file": "^translate-.*\\.js$",
         "find": "return\\[([\\w$]+)\\(([\\w$]+)\\),\\1\\(([\\w$]+)\\),this\\.translateAs\\(`item`,([\\w$]+)\\)\\]\\.filter\\(Boolean\\)\\.join\\(` `\\)",
-        "replace": "let d2g=this.exact.get(`gender:${$4.trim()}`.replace(/\\s+/g,` `).trim().toUpperCase())??`ms`,d2k=d2v=>{if(!d2v.startsWith(`[`))return d2v;let d2o=d2v.split(`[`).slice(1),d2w=d2o.find(d2x=>d2x.startsWith(d2g+`]`))??d2o[0];return d2w.slice(d2w.indexOf(`]`)+1).trim()},d2U=d2v=>d2v?d2v[0].toUpperCase()+d2v.slice(1):d2v,d2W=d2v=>d2v?d2v[0].toLowerCase()+d2v.slice(1):d2v,d2b=this.translateAs(`item`,$4),d2p=d2k($1($3)),d2q=d2k($1($2));return d2U([d2p&&(d2p.endsWith(` -`)?`${d2p.slice(0,-2)}-${d2b}`:`${d2p} ${d2b}`),!d2p&&d2b,d2q].filter(Boolean).join(` `))"
+        "replace": "let d2g=this.exact.get(`gender:${$4.trim()}`.replace(/\\s+/g,` `).trim().toUpperCase())??`ms`,d2k=d2v=>{if(!d2v.startsWith(`[`))return d2v;let d2o=d2v.split(`[`).slice(1),d2w=d2o.find(d2x=>d2x.startsWith(d2g+`]`))??d2o[0];return d2w.slice(d2w.indexOf(`]`)+1).trim()},d2U=d2v=>d2v?d2v[0].toUpperCase()+d2v.slice(1):d2v,d2W=d2v=>d2v?d2v[0].toLowerCase()+d2v.slice(1):d2v,d2b=this.translateAs(`item`,$4),d2p=d2k($1($3)),d2q=d2k($1($2));return d2U([d2p&&(d2p.endsWith(` -`)?`${d2p.slice(0,-2)}-${d2b}`:`${d2p} ${d2b.includes(` `)?d2W(d2b):d2b}`),!d2p&&d2b,d2q].filter(Boolean).join(` `))"
       },
       {
         "label": "魔法物品名稱組合（法文）",
@@ -761,6 +761,35 @@
         "optional": true,
         "find": "let\\[([\\w$]+),([\\w$]+),([\\w$]+)\\]=([\\w$]+)\\.map\\(([\\w$]+)=>([\\w$]+)\\(`unique`,\\5\\)\\);return`\\$\\{\\3\\} \\$\\{\\1\\} \\$\\{\\2\\}`",
         "replace": "let[$1,$2,$3]=$4.map($5=>$6(`unique`,$5)),d2G=$6(`gender`,$4[1]);d2G=/^(ms|fs|ns|pl|mp|fp|nl)$/.test(d2G)?d2G:`ms`;let d2k=d2v=>{if(!d2v.startsWith(`[`))return d2v;let d2o=d2v.split(`[`).slice(1),d2w=d2o.find(d2x=>d2x.startsWith(d2G+`]`))??d2o[0];return d2w.slice(d2w.indexOf(`]`)+1).trim()},d2U=d2v=>d2v?d2v[0].toUpperCase()+d2v.slice(1):d2v,d2W=d2v=>d2v?d2v[0].toLowerCase()+d2v.slice(1):d2v;return`${$3}, ${d2k($1)} ${$2}`"
+      },
+      {
+        "label": "女性職業的稱號",
+        "groups": [
+          "dict"
+        ],
+        "optional": true,
+        "file": "^Game-.*\\.js$",
+        "find": "function ([\\w$]+)\\(([\\w$]+),([\\w$]+)\\)\\{let ([\\w$]+)=([\\w$]+)\\(\\2,\\3\\);if\\(!\\4\\)return null;let ([\\w$]+)=([\\w$]+)\\(\\2,\\3\\);return \\6>0&&!([\\w$]+)\\(\\2,\\3\\)\\?`\\$\\{([\\w$]+)\\(\\4\\)\\} · \\$\\{([\\w$]+)\\(\\6\\)\\}`:\\9\\(\\4\\)\\}",
+        "replace": "function $1($2,$3){let $4=$5($2,$3);if(!$4)return null;let d2F=[`amazon`,`assassin`,`sorceress`].includes($3)?$9(`${$4}:f`):null,d2T=d2F&&d2F!==`${$4}:f`?d2F:$9($4),$6=$7($2,$3);return $6>0&&!$8($2,$3)?`${d2T} · ${$10($6)}`:d2T}"
+      },
+      {
+        "label": "技能變體專用譯名（翻譯函式）",
+        "groups": [
+          "dict"
+        ],
+        "optional": true,
+        "file": "^lang-.*\\.js$",
+        "find": "function ([\\w$]+)\\(([\\w$]+),([\\w$]+)\\)\\{return ([\\w$]+)\\?\\4\\.translateAs\\(\\2,\\3\\):\\3\\}",
+        "replace": "globalThis.__d2zhMods=d2t=>{for(let d2l of Object.values(d2t))for(let d2o of d2l){let d2n=d2o.name;Object.defineProperty(d2o,`name`,{get:()=>$4?$4.translateAs(`modifier`,d2n):d2n,enumerable:!0,configurable:!0})}return d2t};function $1($2,$3){return $4?$4.translateAs($2,$3):$3}"
+      },
+      {
+        "label": "技能變體專用譯名（變體表）",
+        "groups": [
+          "dict"
+        ],
+        "optional": true,
+        "find": ",([\\w$]+)=\\{fireBolt:\\[\\{id:([\\s\\S]*?)\\]\\},([\\w$]+)=\\{raiseSkeleton:",
+        "replace": ",$1=(globalThis.__d2zhMods||(d2t=>d2t))({fireBolt:[{id:$2]}),$3={raiseSkeleton:"
       },
       {
         "label": "標籤與值的冒號",
@@ -859,7 +888,7 @@
     ]
   },
   "changelog": {
-    "url": "changelog.json?v=c4fca4988390",
-    "latest": "20261027-1658"
+    "url": "changelog.json?v=af75f368f0bc",
+    "latest": "20261027-1727"
   }
 }

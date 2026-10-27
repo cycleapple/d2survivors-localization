@@ -2,6 +2,83 @@
   "schema": 1,
   "entries": [
     {
+      "version": "20261027-1727",
+      "date": "2026-10-27",
+      "kind": "translation",
+      "announce": false,
+      "summary": {
+        "zh-TW": "網頁版也套用技能變體專用譯名、女性職業的陰性稱號；簡中依截圖檢查修正商店提示、章節名稱、抗性標籤等 35 條",
+        "zh-CN": "网页版也使用技能变体专用译名、女性职业的阴性称号；简中根据截图检查修正商店提示、章节名称、抗性标签等 35 条",
+        "en": "The web version now also uses dedicated skill-variant names and feminine titles for female classes; Simplified Chinese: 35 fixes from the screenshot check (shop hints, act names, resistance labels)",
+        "ja": "ブラウザー版でもスキル変化の専用名と女性クラスの女性形の称号を使うように。簡体字中国語：スクリーンショット確認による修正 35 件（ショップのヒント、章の名前、耐性の表示など）",
+        "de": "Auch die Browserversion verwendet jetzt eigene Namen für Fertigkeitsvarianten und weibliche Titel für weibliche Klassen; vereinfachtes Chinesisch: 35 Korrekturen aus der Screenshot-Prüfung (Händlerhinweise, Aktnamen, Widerstandsanzeigen)",
+        "fr": "La version navigateur utilise aussi les noms propres aux variantes de compétences et les titres au féminin pour les classes féminines ; chinois simplifié : 35 corrections issues de la vérification des captures (aides de la boutique, noms des actes, résistances)",
+        "ru": "Браузерная версия теперь тоже использует отдельные названия вариантов умений и женские титулы для женских классов; упрощенный китайский: 35 исправлений по итогам проверки скриншотов (подсказки магазина, названия актов, сопротивления)",
+        "pl": "Wersja przeglądarkowa również używa osobnych nazw wariantów umiejętności i żeńskich tytułów dla żeńskich klas; chiński uproszczony: 35 poprawek po sprawdzeniu zrzutów ekranu (podpowiedzi sklepu, nazwy aktów, odporności)"
+      },
+      "game": {
+        "desktop": "2026.1027.2"
+      },
+      "languages": [
+        {
+          "id": "zh-TW",
+          "status": "available",
+          "entries": 12975,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "zh-CN",
+          "status": "beta",
+          "entries": 12982,
+          "added": 8,
+          "changed": 27,
+          "removed": 0
+        },
+        {
+          "id": "ja",
+          "status": "beta",
+          "entries": 12985,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "de",
+          "status": "beta",
+          "entries": 13021,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "fr",
+          "status": "beta",
+          "entries": 13029,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ru",
+          "status": "beta",
+          "entries": 13051,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "pl",
+          "status": "beta",
+          "entries": 13002,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        }
+      ]
+    },
+    {
       "version": "20261027-1658",
       "date": "2026-10-27",
       "kind": "translation",
