@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>D2 Survivors Localization</title>
+  <meta name="description" content="D2 Survivors 非官方多語系翻譯：繁體中文已可使用，啟動器一鍵安裝、自動更新、隨時還原。">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230c0a08'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='15' font-weight='700' text-anchor='middle' fill='%23c9a45c'%3ED2%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Noto+Serif+TC:wght@600;700&family=Noto+Serif+SC:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <!-- 第一層選網站語言，第二層選桌面版／瀏覽器版 -->
+    <div class="wrap topbar-inner">
+      <a class="brand" href="#top">D2S <span>Localization</span></a>
+      <div class="tabs lang-switch" id="lang-switch" role="group" aria-label="Language"></div>
+    </div>
+    <div class="wrap subbar-inner">
+      <nav class="nav">
+        <a href="#download" data-i18n="nav.download"></a>
+        <a href="#sources" data-i18n="nav.sources"></a>
+        <a href="#languages" data-i18n="nav.languages"></a>
+        <a href="#install" id="nav-install" data-i18n="nav.install"></a>
+        <a href="#faq" data-i18n="nav.faq"></a>
+      </nav>
+      <div class="subtabs" id="platform-switch" role="group" data-i18n-label="platform.label"></div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero" id="download">
+      <div class="wrap">
+        <p class="eyebrow" data-i18n="hero.eyebrow"></p>
+        <h1 data-i18n="hero.title"></h1>
+        <p class="lead" data-i18n="hero.lead"></p>
+        <div class="cta" data-only="desktop">
+          <a class="btn btn-primary" id="download-btn"></a>
+          <a class="btn btn-ghost" href="#install" data-i18n="hero.howto"></a>
+        </div>
+        <div class="cta" data-only="web">
+          <a class="btn btn-primary" href="#web" data-i18n="hero.bookmark"></a>
+          <a class="btn btn-ghost" href="https://d2survivors.lol/play/" target="_blank" rel="noopener" data-i18n="hero.play"></a>
+        </div>
+        <ul class="meta" id="hero-meta"></ul>
+      </div>
+    </section>
+
+    <section class="screens">
+      <div class="wrap screens-grid">
+        <figure>
+          <img src="assets/screen-levelup.webp" width="1239" height="929" loading="lazy" alt="" data-i18n-alt="screens.levelup">
+          <figcaption data-i18n="screens.levelup"></figcaption>
+        </figure>
+        <figure>
+          <img src="assets/screen-hud.webp" width="1239" height="929" loading="lazy" alt="" data-i18n-alt="screens.hud">
+          <figcaption data-i18n="screens.hud"></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section" id="sources">
+      <div class="wrap">
+        <h2 data-i18n="sources.title"></h2>
+        <p class="section-lead" data-i18n="sources.lead"></p>
+        <div class="cards" id="source-cards"></div>
+        <p class="source-note" data-i18n="sources.note"></p>
+      </div>
+    </section>
+
+    <section class="section" id="languages">
+      <div class="wrap">
+        <h2 data-i18n="languages.title"></h2>
+        <p class="section-lead" data-i18n="languages.lead"></p>
+        <ul class="lang-grid" id="lang-grid"></ul>
+      </div>
+    </section>
+
+    <section class="section" id="install" data-only="desktop">
+      <div class="wrap">
+        <h2 data-i18n="install.title"></h2>
+        <p class="section-lead" data-i18n="install.lead"></p>
+        <p class="switch-hint"><span data-i18n="switch.toWeb"></span> <button type="button" class="link-btn" data-platform="web" data-i18n="switch.toWeb.btn"></button></p>
+        <ol class="steps" id="steps"></ol>
+
+        <div class="cards">
+          <article class="card">
+            <h3 data-i18n="restore.title"></h3>
+            <div data-i18n-html="restore.body"></div>
+          </article>
+          <article class="card">
+            <h3 data-i18n="cli.title"></h3>
+            <p data-i18n="cli.lead"></p>
+            <pre><code>d2s-launcher.exe --launch --lang zh-TW</code></pre>
+            <dl class="cli-list" id="cli-list"></dl>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="web" data-only="web">
+      <div class="wrap">
+        <h2 data-i18n="web.title"></h2>
+        <p class="section-lead" data-i18n-html="web.lead"></p>
+        <p class="switch-hint"><span data-i18n="switch.toDesktop"></span> <button type="button" class="link-btn" data-platform="desktop" data-i18n="switch.toDesktop.btn"></button></p>
+        <div class="cards">
+          <article class="card">
+            <h3 data-i18n="web.pc.title"></h3>
+            <p class="bookmarklet-row">
+              <a class="btn btn-primary bookmarklet" id="bookmarklet" draggable="true">D2 繁體中文</a>
+              <span class="bookmarklet-hint" id="bookmarklet-hint" data-i18n="web.pc.hint"></span>
+            </p>
+            <ol class="web-steps" id="web-pc-steps"></ol>
+          </article>
+          <article class="card">
+            <h3 data-i18n="web.mobile.title"></h3>
+            <p class="bookmarklet-row">
+              <button type="button" class="btn btn-ghost" id="copy-bookmarklet" data-i18n="web.copy"></button>
+              <span class="bookmarklet-hint" id="copy-status" role="status"></span>
+            </p>
+            <pre class="bookmarklet-code"><code id="bookmarklet-code"></code></pre>
+            <ol class="web-steps" id="web-mobile-steps"></ol>
+          </article>
+        </div>
+        <div class="card web-usage">
+          <h3 data-i18n="web.usage.title"></h3>
+          <ul id="web-usage"></ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="wrap narrow">
+        <h2 data-i18n="faq.title"></h2>
+        <div class="faq" id="faq-list"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <p data-i18n-html="footer.disclaimer"></p>
+      <p class="footer-small" id="footer-small"></p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+ "modifier:Vengeance": "復仇",
+ "modifier:Sacrifice": "獻祭",
+ "modifier:Inferno": "烈焰",
+ "modifier:Firestorm": "火海",
+ "modifier:Maul": "重錘",
+ "modifier:Venom": "劇毒",
+ "modifier:Taunt": "挑釁",
+ "modifier:Alpha": "獸王",
+ "Spirit of Barbs' Vengeance now returns 20% less above 40% life, not half": "荊棘之靈的「復仇」現在於生命高於40%時反彈量減少20%，而非減半",
+ "Immolation Arrow's Firestorm blast now deals 30% less damage, not 45% less": "熾炎箭的「火海」爆炸現在傷害降低30%，而非45%"
+}

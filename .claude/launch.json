@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "site",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "8765", "-d", "site"],
+      "port": 8765
+    },
+    {
+      "name": "site-cors",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["tools/serve.mjs", "site", "8766"],
+      "port": 8766
+    }
+  ]
+}

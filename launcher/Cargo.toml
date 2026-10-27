@@ -1,0 +1,23 @@
+[package]
+name = "d2s-launcher"
+version = "0.1.0"
+edition = "2021"
+description = "D2 Survivors 繁體中文啟動器：切換語言、自動更新翻譯"
+
+[dependencies]
+anyhow = "1"
+eframe = { version = "0.31", default-features = false, features = ["default_fonts", "glow"] }
+hex = "0.4"
+regex = "1"
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1", features = ["preserve_order"] }
+sha2 = "0.10"
+ureq = "2"
+
+[target.'cfg(windows)'.dependencies]
+windows-sys = { version = "0.59", features = ["Win32_System_Console"] }
+
+[profile.release]
+opt-level = 3
+lto = true
+strip = true

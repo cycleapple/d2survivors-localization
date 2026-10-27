@@ -1,0 +1,14 @@
+{
+ "modifier:Vengeance": "復讐",
+ "modifier:Sacrifice": "生贄",
+ "modifier:Inferno": "業火",
+ "modifier:Firestorm": "火の海",
+ "modifier:Maul": "重撃",
+ "modifier:Venom": "猛毒",
+ "modifier:Taunt": "引きつけ",
+ "modifier:Alpha": "群れの長",
+ "modifier:Static": "静電気",
+ "modifier:Champion": "精鋭",
+ "Spirit of Barbs' Vengeance now returns 20% less above 40% life, not half": "荊棘の精霊の「復讐」で、ライフ40%超のときの反射量が半分ではなく20%減になりました",
+ "Immolation Arrow's Firestorm blast now deals 30% less damage, not 45% less": "爆炎矢の「火の海」の爆発のダメージ減少が45%から30%になりました"
+}

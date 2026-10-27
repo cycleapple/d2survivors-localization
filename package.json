@@ -1,0 +1,11 @@
+{
+  "name": "d2survivors-zh-tw",
+  "private": true,
+  "type": "module",
+  "description": "D2 Survivors 繁體中文語系（個人自製）",
+  "dependencies": {
+    "@electron/asar": "3.2.17",
+    "acorn": "8.14.0",
+    "acorn-walk": "8.3.4"
+  }
+}

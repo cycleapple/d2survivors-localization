@@ -1,0 +1,81 @@
+{
+ "updated": "2026-10-27T08:37:08.273Z",
+ "dictHash": "41a6ecc39a46",
+ "entries": 12616,
+ "rules": [
+  {
+   "label": "語言選單",
+   "file": "^lang-.*\\.js$",
+   "find": "\\{en:`ENGLISH`,ko:`한국어`\\}",
+   "replace": "{en:`ENGLISH`,ko:`한국어`,zh:`繁體中文`}",
+   "optional": false
+  },
+  {
+   "label": "接受 zh 設定",
+   "file": "^lang-.*\\.js$",
+   "find": "([\\w$]+)=([\\w$]+)===`en`\\|\\|\\2===`ko`\\?\\2:",
+   "replace": "$1=$2===`en`||$2===`ko`||$2===`zh`?$2:",
+   "optional": false
+  },
+  {
+   "label": "載入繁中字典",
+   "file": "^lang-.*\\.js$",
+   "find": "if\\(([\\w$]+)\\(\\)!==`ko`\\)return;document\\.documentElement\\.lang=`ko`;let\\[([\\w$]+)\\]=await Promise\\.all\\(\\[([\\w$]+)\\(\\(\\)=>import\\(",
+   "replace": "if($1()!==`ko`&&$1()!==`zh`)return;document.documentElement.lang=$1()===`zh`?`zh-Hant`:`ko`;let[$2]=await Promise.all([$3(()=>$1()===`zh`?import(`{{zh_dict}}`).then(e=>e.default):import(",
+   "optional": false
+  },
+  {
+   "label": "換語言時重新開修改版",
+   "file": "^lang-.*\\.js$",
+   "find": "([\\w$]+)\\(\\(\\)=>location\\.reload\\(\\)\\)",
+   "replace": "$1(()=>parent!==window&&parent.__d2zh?parent.__d2zh.reboot():location.reload())",
+   "optional": true
+  },
+  {
+   "label": "語言切換介面",
+   "file": "^lang-.*\\.js$",
+   "find": "function ([\\w$]+)\\(([\\w$]+)\\)\\{if\\(\\2!==([\\w$]+)\\(\\)\\)\\{",
+   "replace": "window.__d2zhLang={get:()=>$3(),set:e=>$1(e)};function $1($2){if($2!==$3()){",
+   "optional": true
+  },
+  {
+   "label": "中文字型",
+   "file": "^lang-.*\\.js$",
+   "find": "if\\(typeof FontFace>`u`\\)return;",
+   "replace": "if(typeof FontFace>`u`)return;await Promise.all([`D2R Kodia`,`D2R Iris`,`D2 Hangul`,`D2 Hangul 14`].map(async f=>{try{document.fonts.add(await new FontFace(f,`local(\"Microsoft JhengHei UI Bold\"), local(\"Microsoft JhengHei Bold\"), local(\"PingFang TC Semibold\"), local(\"Noto Sans TC Bold\"), local(\"Noto Sans CJK TC Bold\"), local(\"Microsoft JhengHei\"), local(\"PingFang TC\"), local(\"Noto Sans TC\"), local(\"Noto Sans CJK TC\")`,{unicodeRange:`U+3000-303F, U+3400-4DBF, U+4E00-9FFF, U+FF00-FFEF`}).load())}catch{}}));",
+   "optional": true
+  },
+  {
+   "label": "魔法物品名稱組合",
+   "file": "^translate-.*\\.js$",
+   "find": "this\\.translateAs\\(`item`,([\\w$]+)\\)\\]\\.filter\\(Boolean\\)\\.join\\(` `\\)",
+   "replace": "this.translateAs(`item`,$1)].filter(Boolean).join(document.documentElement.lang===`zh-Hant`?``:` `)",
+   "optional": true
+  },
+  {
+   "label": "標籤與值的冒號",
+   "file": "^translate-.*\\.js$",
+   "find": "return`\\$\\{([\\w$]+)\\.replace\\(/:\\?\\\\s\\*\\$/,`:`\\)\\} \\$\\{([\\w$]+)\\}`",
+   "replace": "return/[\\u4e00-\\u9fff]/.test($1)?`${$1.replace(/[:：]?\\s*$/,`：`)}${$2}`:`${$1.replace(/:?\\s*$/,`:`)} ${$2}`",
+   "optional": true
+  },
+  {
+   "label": "外文字判斷",
+   "find": "return ([\\w$]+)>=44032&&\\1<=55203\\|\\|\\1>=12592&&\\1<=12687\\|\\|\\1>=4352&&\\1<=4607\\}",
+   "replace": "return $1>=44032&&$1<=55203||$1>=12592&&$1<=12687||$1>=4352&&$1<=4607||$1>=19968&&$1<=40959||$1>=13312&&$1<=19903||$1>=12288&&$1<=12351||$1>=65280&&$1<=65519}",
+   "optional": false
+  },
+  {
+   "label": "中文斷行",
+   "find": "for\\(let ([\\w$]+) of ([\\w$]+)\\.split\\(` `\\)\\)\\{let ([\\w$]+)=([\\w$]+)\\?`\\$\\{\\4\\} \\$\\{\\1\\}`:\\1;",
+   "replace": "for(let $1 of $2.split(` `).flatMap(w=>(w.match(/[\\u3000-\\u9fff\\uff00-\\uffef][\\u3001\\u3002\\uff0c\\uff1a\\uff1b\\uff01\\uff1f\\uff09\\u300d]*|[^\\u3000-\\u9fff\\uff00-\\uffef]+/g)??[w]).map((x,j)=>j?`\\u0001${x}`:x))){let g=$1[0]===`\\u0001`;$1=g?$1.slice(1):$1;let $3=$4?g?$4+$1:`${$4} ${$1}`:$1;",
+   "optional": true
+  },
+  {
+   "label": "版權聲明寬度",
+   "find": "let ([\\w$]+)=\\{\\.\\.\\.([\\w$]+)\\(([\\w$]+)\\),maxWidth:([\\w$]+)\\},([\\w$]+)=\\[\\3\\.text\\(([\\w$]+),\\1\\),",
+   "replace": "let $1={...$2($3),maxWidth:$4},$5=[$3.text($6,document.documentElement.lang===`zh-Hant`?{...$1,maxWidth:360}:$1),",
+   "optional": true
+  }
+ ]
+}
