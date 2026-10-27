@@ -1,12 +1,1 @@
-{
-  "kind": "language",
-  "announce": false,
-  "summary": {
-    "zh-TW": "新的更新來源上線：繁體中文、簡體中文（測試中）、日文（測試中），啟動器和網頁版書籤都能選",
-    "zh-CN": "新的更新来源上线：繁体中文、简体中文（测试中）、日文（测试中），启动器和网页版书签都能选",
-    "en": "New update source: Traditional Chinese, Simplified Chinese (beta) and Japanese (beta), selectable in the launcher and the web bookmarklet"
-  },
-  "notes": {
-    "zh-TW": ["簡中、日文都翻完、進遊戲驗證過，還沒有玩家回報，所以先標「測試中」", "日文的斷行加上禁則（長音、小寫假名不放行首）"]
-  }
-}
+{}
