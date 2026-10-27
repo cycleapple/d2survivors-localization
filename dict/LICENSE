@@ -1,0 +1,14 @@
+Translation data — all rights reserved (license not decided yet)
+
+This folder (dict/) and the dictionaries generated from it (site/data/,
+site/web/) are NOT covered by the MIT License in the repository root.
+Until a license is chosen, all rights to the translations are reserved by
+the translators.
+
+Official names taken from Diablo II: Resurrected (items, skills, monsters,
+places, etc.) remain the property of Blizzard Entertainment, Inc. Diablo is a
+trademark of Blizzard Entertainment, Inc. This repository contains none of the
+game's code, art, audio or fonts. Rights holders may request removal by
+opening an issue.
+
+D2 Survivors belongs to its author (framara).

@@ -19,21 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
----------------------------------------------------------------------------
-
-Scope of this license
-
-The MIT License above covers the source code in this repository (tools/,
-launcher/, site/ scripts and styles, .github/).
-
-It does NOT cover:
-
-- Translation data: dict/ and the dictionaries generated from it
-  (site/web/*.json, site/data/). The license for the translations has not
-  been decided yet; until it is, all rights are reserved by the translators.
-- Official names taken from Diablo II: Resurrected, which remain the
-  property of Blizzard Entertainment, Inc. Diablo is a trademark of
-  Blizzard Entertainment, Inc.
-- D2 Survivors itself, which belongs to its author. This repository contains
-  none of the game's code, art, audio or fonts.

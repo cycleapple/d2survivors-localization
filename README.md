@@ -44,4 +44,6 @@ npm install
 
 ## 授權
 
-程式碼用 [MIT](LICENSE)。翻譯資料（`dict/` 和產生出來的字典）不在 MIT 範圍內，授權另外決定；官方譯名的權利屬於 Blizzard Entertainment, Inc.。
+- 程式碼（`tools/`、`launcher/`、`site/` 的程式和樣式、`.github/`）：[MIT](LICENSE)
+- 翻譯資料（`dict/` 和產生出來的字典）：**不在 MIT 範圍內**，授權還沒決定，在那之前保留所有權利。見 [dict/LICENSE](dict/LICENSE)
+- 官方譯名的權利屬於 Blizzard Entertainment, Inc.；D2 Survivors 屬於它的作者 framara
