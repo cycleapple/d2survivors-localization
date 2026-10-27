@@ -83,7 +83,9 @@
     "@type": "Offer",
     "price": "0",
     "priceCurrency": "USD"
-   }
+   },
+   "downloadUrl": "https://github.com/cycleapple/d2survivors-localization/releases/latest/download/d2s-launcher.exe",
+   "softwareVersion": "1.0.0"
   },
   {
    "@type": "WebApplication",
@@ -128,7 +130,7 @@
      "name": "有简体中文版吗？",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "\u003cp>有，目前在测试中，部分翻译还在校对。桌面版在启动器的「遊戲語言」中选择「简体中文」即可；浏览器版点击书签后，会按浏览器语言自动选择简体中文，也可以在游戏的语言设置里切换。\u003c/p>"
+      "text": "\u003cp>有，已正式推出。用语以《暗黑破坏神 II：狱火重生》官方简体中文为准，按大陆的说法翻译，不是从繁体中文直接转换。桌面版在启动器的语言界面选择「简体中文」即可；浏览器版点击书签后，会按浏览器语言自动选择简体中文，也可以在游戏的语言设置里切换。\u003c/p>"
      }
     },
     {
@@ -160,7 +162,7 @@
      "name": "想帮忙翻译或反馈错别字？",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "\u003cp>欢迎！除了繁体中文，其他语言都还在制作或测试中，特别需要母语玩家帮忙校对。请到\u003ca href=\"https://discord.gg/QMBbTHSsaK\" target=\"_blank\" rel=\"noopener\">这里\u003c/a>联系我们。\u003c/p>"
+      "text": "\u003cp>欢迎！所有语言都已正式推出，但翻译总有可以改进的地方。看到不自然的说法或错别字，特别欢迎母语玩家告诉我们。请到\u003ca href=\"https://discord.gg/QMBbTHSsaK\" target=\"_blank\" rel=\"noopener\">这里\u003c/a>联系我们。\u003c/p>"
      }
     }
    ]
@@ -226,7 +228,7 @@
         <p class="lead" data-only="desktop">把 Diablo 2 Survivors（D2 Survivors／暗黑2幸存者、暗黑破坏神2幸存者）游戏本体汉化。不是中文攻略，而是界面、技能、物品、怪物、升级卡全部变成中文，用语以《暗黑破坏神 II：狱火重生》官方译名为准。启动器一键安装、自动更新，随时可以还原原版。</p>
         <p class="lead" data-only="web">把 Diablo 2 Survivors（D2 Survivors／暗黑2幸存者）游戏本体汉化，不是攻略。在浏览器里玩网页版时，点一下书签就能切换成中文（繁体）、中文（简体）、日语、德语、法语、俄语或波兰语，用语以《暗黑破坏神 II：狱火重生》官方译名为准。无需安装，电脑和手机都能玩。</p>
         <div class="cta" data-only="desktop">
-          <a class="btn btn-primary" id="download-btn" aria-disabled="true">即将推出</a>
+          <a class="btn btn-primary" id="download-btn" href="https://github.com/cycleapple/d2survivors-localization/releases/latest/download/d2s-launcher.exe">下载启动器 <small>v1.0.0</small></a>
           <a class="btn btn-ghost" href="#install">安装说明</a>
         </div>
         <div class="cta" data-only="web">
@@ -234,7 +236,7 @@
           <a class="btn btn-ghost" href="https://d2survivors.lol/play/" target="_blank" rel="noopener">打开游戏页面</a>
         </div>
         <div id="hero-meta">
-        <ul class="meta" data-only="desktop"><li>支持的游戏版本 <strong>2026.1027.2</strong></li><li>启动器 <strong>即将推出 · Windows</strong></li><li>翻译更新 <strong>2026-10-27</strong></li></ul>
+        <ul class="meta" data-only="desktop"><li>支持的游戏版本 <strong>2026.1027.2</strong></li><li>启动器 <strong>v1.0.0 · Windows</strong></li><li>翻译更新 <strong>2026-10-27</strong></li></ul>
         <ul class="meta" data-only="web"><li>浏览器 <strong>Chrome · Edge · Firefox · Safari</strong></li><li>设备 <strong>电脑・手机</strong></li><li>翻译更新 <strong>2026-10-27</strong></li></ul>
         </div>
         <p class="hero-community"><a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">加入汉化社区 Discord</a></p>
@@ -251,6 +253,16 @@
           <figure class="shot shot-hud">
             <img src="../assets/shots/zh-tw/hud.webp" width="1239" height="929" loading="lazy" alt="游戏画面：区域名称、生命、法力、金币（图为繁体中文版）">
             <figcaption>游戏画面：区域名称、生命、法力、金币（图为繁体中文版）</figcaption>
+          </figure>
+        </div>
+        <div class="shots shots-platform" data-only="web" tabindex="0" aria-label="游戏截图">
+          <figure class="shot shot-web-desktop">
+            <img src="../assets/shots/zh-cn/web-desktop.webp" width="800" height="600" loading="lazy" alt="浏览器版：电脑">
+            <figcaption>浏览器版：电脑</figcaption>
+          </figure>
+          <figure class="shot shot-web-mobile">
+            <img src="../assets/shots/zh-tw/web-mobile.webp" width="390" height="844" loading="lazy" alt="浏览器版：手机（图为繁体中文版）">
+            <figcaption>浏览器版：手机（图为繁体中文版）</figcaption>
           </figure>
         </div>
         <p class="shots-credit">游戏画面：D2 Survivors（framara），使用玩家自己的 Diablo II 文件</p>
@@ -284,56 +296,56 @@
             </ul>
           </article>
         </div>
-        <p class="source-note">译名参考：繁体中文版的技能、物品、怪物、区域等名称沿用《暗黑破坏神 II：狱火重生》官方繁体中文译名，简体中文版计划沿用官方简体中文译名；其余文本由本项目翻译。</p>
+        <p class="source-note">译名参考：技能、物品、怪物、区域等名称沿用《暗黑破坏神 II：狱火重生》官方译名（繁体中文版用官方繁体中文，简体中文版用官方简体中文）；其余文本由本项目翻译。</p>
       </div>
     </section>
 
     <section class="section" id="languages">
       <div class="wrap">
         <h2>支持的语言</h2>
-        <p class="section-lead">繁体中文已可使用；标注「测试中」的语言可以选择，但翻译仍在校对。其他语言正在陆续制作中。</p>
+        <p class="section-lead">中文（繁体）、中文（简体）、日语、德语、法语、俄语和波兰语均已正式推出，可以直接选择。标注「计划中」的语言之后陆续制作。</p>
         <ul class="lang-grid" id="lang-grid">
           <li class="lang available">
       <div class="lang-head"><span class="lang-name" lang="zh-TW">繁體中文</span><span class="lang-code">zh-TW</span></div>
       <span class="lang-sub">中文（繁体）</span>
       <span class="status available">可用</span>
-      <span class="lang-sub">12,853 条</span>
+      <span class="lang-sub">12,984 条</span>
     </li>
-<li class="lang beta">
+<li class="lang available">
       <div class="lang-head"><span class="lang-name" lang="zh-CN">简体中文</span><span class="lang-code">zh-CN</span></div>
       <span class="lang-sub">中文（简体）</span>
-      <span class="status beta">测试中</span>
-      <span class="lang-sub">12,852 条</span>
+      <span class="status available">可用</span>
+      <span class="lang-sub">12,983 条</span>
     </li>
-<li class="lang beta">
+<li class="lang available">
       <div class="lang-head"><span class="lang-name" lang="ja">日本語</span><span class="lang-code">ja</span></div>
       <span class="lang-sub">日语</span>
-      <span class="status beta">测试中</span>
-      <span class="lang-sub">12,854 条</span>
+      <span class="status available">可用</span>
+      <span class="lang-sub">12,989 条</span>
     </li>
-<li class="lang beta">
+<li class="lang available">
       <div class="lang-head"><span class="lang-name" lang="de">Deutsch</span><span class="lang-code">de</span></div>
       <span class="lang-sub">德语</span>
-      <span class="status beta">测试中</span>
-      <span class="lang-sub">12,803 条</span>
+      <span class="status available">可用</span>
+      <span class="lang-sub">13,023 条</span>
     </li>
-<li class="lang beta">
+<li class="lang available">
       <div class="lang-head"><span class="lang-name" lang="fr">Français</span><span class="lang-code">fr</span></div>
       <span class="lang-sub">法语</span>
-      <span class="status beta">测试中</span>
-      <span class="lang-sub">12,803 条</span>
+      <span class="status available">可用</span>
+      <span class="lang-sub">13,032 条</span>
     </li>
-<li class="lang beta">
+<li class="lang available">
       <div class="lang-head"><span class="lang-name" lang="ru">Русский</span><span class="lang-code">ru</span></div>
       <span class="lang-sub">俄语</span>
-      <span class="status beta">测试中</span>
-      <span class="lang-sub">12,803 条</span>
+      <span class="status available">可用</span>
+      <span class="lang-sub">13,073 条</span>
     </li>
-<li class="lang beta">
+<li class="lang available">
       <div class="lang-head"><span class="lang-name" lang="pl">Polski</span><span class="lang-code">pl</span></div>
       <span class="lang-sub">波兰语</span>
-      <span class="status beta">测试中</span>
-      <span class="lang-sub">12,803 条</span>
+      <span class="status available">可用</span>
+      <span class="lang-sub">13,063 条</span>
     </li>
 <li class="lang planned">
       <div class="lang-head"><span class="lang-name" lang="es-ES">Español (España)</span><span class="lang-code">es-ES</span></div>
@@ -370,28 +382,28 @@
         <ol class="changelog" id="changelog-list">
           <li>
             <time datetime="2026-10-27">2026-10-27</time>
+            <span class="kind kind-launcher">启动器</span>
+            <span class="changelog-summary">启动器 1.0.0 正式推出；七种语言都是正式版</span>
+          </li>
+          <li>
+            <time datetime="2026-10-27">2026-10-27</time>
+            <span class="kind kind-language">语言</span>
+            <span class="changelog-summary">七种语言全部升为正式版：繁中、简中、日、德、法、俄、波兰文都通过第二轮审校、游戏内漏翻检查与桌面版／网页版截图检查；死亡画面的物理伤害、各语言的截图修正一并更新</span>
+          </li>
+          <li>
+            <time datetime="2026-10-27">2026-10-27</time>
+            <span class="kind kind-translation">翻译</span>
+            <span class="changelog-summary">网页版也使用技能变体专用译名、女性职业的阴性称号；简中根据截图检查修正商店提示、章节名称、抗性标签等 35 条</span>
+          </li>
+          <li>
+            <time datetime="2026-10-27">2026-10-27</time>
+            <span class="kind kind-translation">翻译</span>
+            <span class="changelog-summary">繁中新增 122 条；简中修正 1 条、新增 122 条；日文修正 639 条、新增 131 条；德文修正 1735 条、新增 218 条；法文修正 423 条、新增 226 条；俄文修正 581 条、新增 248 条；波兰文修正 458 条、新增 199 条；更新修改规则</span>
+          </li>
+          <li>
+            <time datetime="2026-10-27">2026-10-27</time>
             <span class="kind kind-translation">翻译</span>
             <span class="changelog-summary">繁中、简中：对照游戏代码修正技能说明与名称（牺牲类技能的生命门槛、圣光弹、霜灼／霜燃撞名等），补上属性等级的标签</span>
-          </li>
-          <li>
-            <time datetime="2026-10-27">2026-10-27</time>
-            <span class="kind kind-game-fix">游戏更新</span>
-            <span class="changelog-summary">支持游戏 2026.1027.2：七种语言补上 98 条新字符串（专家模式、天梯等）；繁中、简中完成第二轮审校</span>
-          </li>
-          <li>
-            <time datetime="2026-10-27">2026-10-27</time>
-            <span class="kind kind-language">语言</span>
-            <span class="changelog-summary">新增波兰文（测试中）；德、法、波兰文缩短“重新启动以更新”按钮</span>
-          </li>
-          <li>
-            <time datetime="2026-10-27">2026-10-27</time>
-            <span class="kind kind-translation">翻译</span>
-            <span class="changelog-summary">俄文修正 562 条；更新修改规则</span>
-          </li>
-          <li>
-            <time datetime="2026-10-27">2026-10-27</time>
-            <span class="kind kind-language">语言</span>
-            <span class="changelog-summary">新的更新来源上线：繁体中文，以及测试中的简体中文、日文、德文、法文、俄文，启动器和网页版书签都能选</span>
           </li>
         </ol>
       </div>
@@ -400,30 +412,32 @@
     <section class="section" id="install" data-only="desktop">
       <div class="wrap">
         <h2>安装</h2>
-        <p class="section-lead">不需要手动修改任何游戏文件，全部交给启动器处理。请先关闭游戏。启动器目前只有繁体中文界面，下面的按钮名称按启动器上的原文标注。</p>
+        <p class="section-lead">不需要手动修改任何游戏文件，全部交给启动器处理。请先关闭游戏。启动器的界面会使用你选择的语言。</p>
         <p class="switch-hint">使用 Mac、Linux、手机，或想直接在浏览器里玩？ <button type="button" class="link-btn" data-platform="web">查看浏览器版</button></p>
         <ol class="steps">
           <li><strong>先装好 D2 Survivors</strong><p>从 <a href="https://d2survivors.lol/download/" target="_blank" rel="noopener">D2 Survivors 官网</a>下载桌面版，按游戏的设置界面指定《暗黑破坏神 II》的安装位置，确认能正常进入游戏。</p></li>
           <li><strong>下载启动器</strong><p>下载 <code>d2s-launcher.exe</code>，放在任意文件夹即可，无需安装。</p></li>
-          <li><strong>打开启动器</strong><p>启动器会在默认位置 <code>%LOCALAPPDATA%\Programs\D2 Survivors</code> 查找游戏；找不到时点击「設定」（设置）指定游戏文件夹。</p></li>
-          <li><strong>选择语言并启动游戏</strong><p>在「遊戲語言」（游戏语言）中选择语言，点击「啟動遊戲」（启动游戏）。首次运行会下载翻译，并自动备份原版 <code>app.asar</code>。</p></li>
-          <li><strong>以后都从启动器打开游戏</strong><p>勾选「啟動時自動更新翻譯」（启动时自动更新翻译）后，每次启动都会获取最新翻译，游戏更新后也会自动重新应用。</p></li>
+          <li><strong>选择语言</strong><p>第一次打开会先出现语言界面，每种语言都用它自己的文字显示。点击你的语言、再点「→」，启动器的界面和游戏的翻译都会使用这个语言。</p></li>
+          <li><strong>按设置向导完成三步</strong><p>①「游戏」：找到 D2 Survivors（默认在 <code>%LOCALAPPDATA%\Programs\D2 Survivors</code>，装在别处就点「选择文件夹…」）。②「Diablo II」：查找你电脑上的《暗黑破坏神 II：狱火重生》或经典版，找不到也可以点「跳过」。③「完成」：可以点「在桌面创建快捷方式」，再点「启动游戏」。第一次会下载翻译，并自动备份原版 <code>app.asar</code>。</p></li>
+          <li><strong>之后从快捷方式或启动器启动游戏</strong><p>默认每次启动都会获取最新的翻译（「设置」中的「启动时自动更新翻译」），游戏更新后也会自动重新应用。想换语言，在主界面的「游戏语言」中切换即可。</p></li>
         </ol>
         <div class="cards">
           <article class="card">
             <h3>还原原版</h3>
-            <div><ul><li>在启动器中点击「還原原版」（还原原版），游戏的 <code>app.asar</code> 就会换回原始文件。</li><li>想暂时玩英文或韩文版，在「遊戲語言」中选择 English 或「한국어（原版）」再启动即可。</li><li>完全卸载：先还原原版，再删除启动器和 <code>%LOCALAPPDATA%\D2SurvivorsLauncher</code> 文件夹。</li></ul></div>
+            <div><ul><li>在启动器的「设置」中点「还原原版游戏」，游戏的 <code>app.asar</code> 就会换回原始文件。</li><li>想暂时玩英文或韩文版，在「游戏语言」中选择 English 或 한국어 (원본) 再启动，就是没有修改过的原版。</li><li>完全卸载：先还原原版，再删除启动器、桌面快捷方式和 <code>%LOCALAPPDATA%\D2SurvivorsLauncher</code> 文件夹。</li></ul></div>
           </article>
           <article class="card">
             <h3>桌面快捷方式</h3>
-            <p>把下面这行设为快捷方式的目标，双击即可直接用指定语言启动游戏，不会弹出启动器窗口。</p>
+            <p>想自己创建快捷方式的话，把下面这行设为快捷方式的目标，双击即可直接用指定语言启动游戏，不会弹出启动器窗口。（启动器的「在桌面创建快捷方式」会打开窗口并直接启动游戏。）</p>
             <pre><code>d2s-launcher.exe --launch --lang zh-CN</code></pre>
             <dl class="cli-list">
               <dt><code>--launch</code></dt><dd>应用语言并启动游戏</dd>
-              <dt><code>--lang &lt;id&gt;</code></dt><dd>指定语言，例如 zh-TW、en、ko</dd>
+              <dt><code>--play</code></dt><dd>打开启动器窗口并直接启动游戏（桌面快捷方式用的）</dd>
+              <dt><code>--lang &lt;id&gt;</code></dt><dd>指定语言：zh-TW、zh-CN、ja、de、fr、ru、pl，或原版 en、ko</dd>
               <dt><code>--no-update</code></dt><dd>本次不检查翻译更新</dd>
               <dt><code>--update</code></dt><dd>只更新翻译</dd>
               <dt><code>--restore</code></dt><dd>还原原版</dd>
+              <dt><code>--self-update</code></dt><dd>更新启动器本身</dd>
               <dt><code>--status</code></dt><dd>显示当前语言、游戏版本和翻译状态</dd>
             </dl>
           </article>
@@ -481,20 +495,20 @@
         <h2>常见问题</h2>
         <div class="faq">
           <details><summary>这是官方翻译吗？</summary><div class="answer"><p>不是。这是玩家自制的非官方翻译，与 D2 Survivors 开发者及暴雪娱乐均无关。</p></div></details>
-          <details><summary>有简体中文版吗？</summary><div class="answer"><p>有，目前在测试中，部分翻译还在校对。桌面版在启动器的「遊戲語言」中选择「简体中文」即可；浏览器版点击书签后，会按浏览器语言自动选择简体中文，也可以在游戏的语言设置里切换。</p></div></details>
+          <details><summary>有简体中文版吗？</summary><div class="answer"><p>有，已正式推出。用语以《暗黑破坏神 II：狱火重生》官方简体中文为准，按大陆的说法翻译，不是从繁体中文直接转换。桌面版在启动器的语言界面选择「简体中文」即可；浏览器版点击书签后，会按浏览器语言自动选择简体中文，也可以在游戏的语言设置里切换。</p></div></details>
           <details><summary>可以在 Mac、Linux 或手机上玩吗？</summary><div class="answer"><p>可以。启动器目前只有 Windows 版；Mac、Linux 和手机请在浏览器里玩<a href="https://d2survivors.lol/play/" target="_blank" rel="noopener">网页版</a>，再用「浏览器版」页面里的书签切换成中文。</p></div></details>
           <details data-only="desktop"><summary>会影响我的存档吗？</summary><div class="answer"><p>不会。启动器只替换游戏文件夹中的 <code>resources\app.asar</code>，存档保存在其他位置，不会被读取或修改。替换前会先备份原版。</p></div></details>
           <details data-only="web"><summary>会影响我的存档吗？</summary><div class="answer"><p>不会。存档照常保存在浏览器里。书签只在当前打开的页面里替换游戏文字，不会留下任何修改，刷新页面就回到原版。</p></div></details>
-          <details data-only="desktop"><summary>游戏更新后怎么办？</summary><div class="answer"><p>游戏更新会替换 <code>app.asar</code>，翻译会暂时消失。照常从启动器打开游戏就会重新应用。</p><p>如果新版本改动太大、修改规则无法匹配，启动器会报错而不会强行修改文件；这时先点击「還原原版」正常游玩，等翻译更新即可。</p></div></details>
+          <details data-only="desktop"><summary>游戏更新后怎么办？</summary><div class="answer"><p>游戏更新会替换 <code>app.asar</code>，翻译会暂时消失。照常从启动器或快捷方式打开游戏就会重新应用。</p><p>如果新版本改动太大、修改规则无法匹配，启动器不会强行修改文件，而是先用原版启动游戏，并显示「游戏刚更新，翻译修正中」。翻译修好后，下次启动就会自动重新应用，什么都不用做。</p></div></details>
           <details data-only="web"><summary>游戏网页版更新后怎么办？</summary><div class="answer"><p>书签每次都会先检查修改规则是否匹配游戏的新版本。无法匹配时会提示「中文化需要更新」并且不会启动，原版游戏也不受影响；请先照常玩英文版，等这里更新即可。</p></div></details>
-          <details data-only="desktop"><summary>为什么游戏语言菜单里的韩语变成了中文？</summary><div class="answer"><p>翻译借用了游戏内置的韩语语言位置，所以应用翻译后，菜单里的韩语会显示为所选语言的名称（例如「简体中文」）。想玩韩语版，在启动器中选择「한국어（原版）」再启动。</p></div></details>
+          <details data-only="desktop"><summary>为什么游戏语言菜单里的韩语变成了中文？</summary><div class="answer"><p>翻译借用了游戏内置的韩语语言位置，所以应用翻译后，菜单里的韩语会显示为所选语言的名称（例如「简体中文」）。想玩韩语版，在启动器中选择「한국어 (원본)」再启动。</p></div></details>
           <details data-only="web"><summary>手机上点书签没有反应？</summary><div class="answer"><p>Android Chrome 从书签列表点击不会执行，要在地址栏输入书签名称「D2 汉化」，再点击下方出现的书签。iPhone 请在游戏页面打开 Safari 的书签列表点击。</p><p>也请确认书签的网址已整个替换成书签代码，开头是 <code>javascript:</code>。</p></div></details>
-          <details data-only="desktop"><summary>为什么还有一些英文？</summary><div class="answer"><p>大部分界面、技能、物品、怪物都已翻译完成，但更新说明和部分较长的技能说明还在翻译中，会先显示英文。启动器会自动更新，翻译完成后就会出现。</p></div></details>
-          <details data-only="web"><summary>为什么还有一些英文？</summary><div class="answer"><p>大部分界面、技能、物品、怪物都已翻译完成，但更新说明和部分较长的技能说明还在翻译中，会先显示英文。书签每次都加载最新翻译，翻译完成后就会出现。</p></div></details>
+          <details data-only="desktop"><summary>为什么还有一些英文？</summary><div class="answer"><p>游戏里的文字都已翻译，也在游戏里检查过没有漏译。如果看到英文，通常是游戏刚更新、加入了新的文字；翻译会在之后的更新中补上，启动器会自动下载。一直没补上的话，欢迎反馈。</p></div></details>
+          <details data-only="web"><summary>为什么还有一些英文？</summary><div class="answer"><p>游戏里的文字都已翻译，也在游戏里检查过没有漏译。如果看到英文，通常是游戏刚更新、加入了新的文字；翻译会在之后的更新中补上，书签每次都会加载最新的翻译。一直没补上的话，欢迎反馈。</p></div></details>
           <details data-only="desktop"><summary>Windows 弹出「Windows 已保护你的电脑」怎么办？</summary><div class="answer"><p>启动器没有代码签名（需要每年付费购买），在下载量还不多之前，Windows SmartScreen 都会弹出这个警告。</p><p>点击「<strong>更多信息</strong>」，再点击「<strong>仍要运行</strong>」即可，之后不会再提示。请只从本站或 <a href="https://github.com/cycleapple/d2survivors-localization/releases" target="_blank" rel="noopener">GitHub Releases</a> 下载；每个 Release 都附有 <code>d2s-launcher.exe.sha256</code>，可以用 <code>certutil -hashfile d2s-launcher.exe SHA256</code> 核对。</p><p>浏览器下载时如果提示该文件不常被下载，在下载列表的菜单里选择「保留」。</p></div></details>
           <details><summary>角色名可以用中文吗？</summary><div class="answer"><p>暂时不行。游戏本身只允许英文字母和韩文作为角色名。</p></div></details>
           <details><summary>翻译有错或游戏坏了，去哪里反馈？</summary><div class="answer"><p>错别字、漏译、书签或启动器的问题，请到<a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">汉化社区 Discord</a> 反馈，那里也会发布最新消息。</p><p>游戏本身的问题（与翻译无关的）请到 <a href="https://discord.gg/mYMGgZPuQb" target="_blank" rel="noopener">D2 Survivors 游戏官方 Discord</a>（英文）反馈。</p></div></details>
-          <details><summary>想帮忙翻译或反馈错别字？</summary><div class="answer"><p>欢迎！除了繁体中文，其他语言都还在制作或测试中，特别需要母语玩家帮忙校对。请到<a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">这里</a>联系我们。</p></div></details>
+          <details><summary>想帮忙翻译或反馈错别字？</summary><div class="answer"><p>欢迎！所有语言都已正式推出，但翻译总有可以改进的地方。看到不自然的说法或错别字，特别欢迎母语玩家告诉我们。请到<a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">这里</a>联系我们。</p></div></details>
         </div>
         <!-- 贊助：低調放在常見問題後面，不跳視窗 -->
         <aside class="support" id="support">
@@ -511,11 +525,11 @@
     <div class="wrap">
       <p class="footer-community"><a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">加入汉化社区 Discord</a><span class="sep" aria-hidden="true">·</span><a href="https://paypal.me/DonateCYtw" target="_blank" rel="noopener">☕ 请我喝杯咖啡</a></p>
       <p>非官方玩家自制翻译，与 <a href="https://d2survivors.lol/" target="_blank" rel="noopener">D2 Survivors</a>（framara）、暴雪娱乐（Blizzard Entertainment）无关。Diablo® 是 Blizzard Entertainment, Inc. 的商标。</p>
-      <p class="footer-small"><span data-only="desktop">Game 2026.1027.2 · Launcher —</span><span data-only="web">Web · Translations 2026-10-27</span></p>
+      <p class="footer-small"><span data-only="desktop">Game 2026.1027.2 · Launcher v1.0.0</span><span data-only="web">Web · Translations 2026-10-27</span></p>
     </div>
   </footer>
 
-  <script id="page-data" type="application/json">{"lang":"zh-CN","t":{"changelog.kind.translation":"翻译","changelog.kind.language":"语言","changelog.kind.game-fix":"游戏更新","changelog.kind.launcher":"启动器","lang.coverage":"{0} 条","status.available":"可用","status.beta":"测试中","status.planned":"计划中","meta.updated":"翻译更新","meta.game":"支持的游戏版本","meta.launcher":"启动器","meta.platform":"Windows","meta.browsers":"浏览器","meta.devices":"设备","meta.devices.value":"电脑・手机","hero.download":"下载启动器","hero.soon":"即将推出","web.copied":"已复制","web.copyfail":"无法自动复制，请手动选中下面的代码。","web.pc.drag":"请把按钮拖到书签栏，直接点击不会安装。"},"webChecked":"2026-10-27T15:20:04.655Z"}</script>
+  <script id="page-data" type="application/json">{"lang":"zh-CN","t":{"changelog.kind.translation":"翻译","changelog.kind.language":"语言","changelog.kind.game-fix":"游戏更新","changelog.kind.launcher":"启动器","lang.coverage":"{0} 条","status.available":"可用","status.beta":"测试中","status.planned":"计划中","meta.updated":"翻译更新","meta.game":"支持的游戏版本","meta.launcher":"启动器","meta.platform":"Windows","meta.browsers":"浏览器","meta.devices":"设备","meta.devices.value":"电脑・手机","hero.download":"下载启动器","hero.soon":"即将推出","web.copied":"已复制","web.copyfail":"无法自动复制，请手动选中下面的代码。","web.pc.drag":"请把按钮拖到书签栏，直接点击不会安装。"},"webChecked":"2026-10-27T22:26:27.496Z"}</script>
   <script type="module" src="../app.js"></script>
 </body>
 </html>

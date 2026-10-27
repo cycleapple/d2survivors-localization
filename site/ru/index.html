@@ -81,7 +81,9 @@
     "@type": "Offer",
     "price": "0",
     "priceCurrency": "USD"
-   }
+   },
+   "downloadUrl": "https://github.com/cycleapple/d2survivors-localization/releases/latest/download/d2s-launcher.exe",
+   "softwareVersion": "1.0.0"
   },
   {
    "@type": "WebApplication",
@@ -126,7 +128,7 @@
      "name": "Насколько готов русский перевод?",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "\u003cp>Это бета: всё переведено и проверено в игре, но отзывов игроков пока нет. Названия магических предметов и уникальных монстров собираются с учётом русского порядка слов и рода, например «Прочный наголовник разума». Около 66 % терминов взято прямо из официального перевода Diablo II: Resurrected. Кириллица выводится шрифтами D2R: Exocet для заголовков и Philosopher для текста.\u003c/p>\u003cp>Заметили ошибку — сообщите нам.\u003c/p>"
+      "text": "\u003cp>Перевод готов: всё переведено и проверено в игре на пропуски. Затем весь интерфейс и 300 случайных строк ещё раз независимо вычитали и по итогам внесли около 640 исправлений по всему словарю. Названия магических предметов и уникальных монстров собираются с учётом русского порядка слов и рода, например «Прочный наголовник разума», а у героинь — женские титулы. Около 66 % терминов взято прямо из официального перевода Diablo II: Resurrected. Кириллица выводится шрифтами D2R: Exocet для заголовков и Philosopher для текста.\u003c/p>\u003cp>Заметили ошибку — сообщите нам.\u003c/p>"
      }
     },
     {
@@ -158,7 +160,7 @@
      "name": "Как помочь с переводом или сообщить об опечатке?",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "\u003cp>Будем рады! Все языки, кроме традиционного китайского, ещё в работе или в бете, и помощь носителей языка с вычиткой особенно ценна. Пишите нам \u003ca href=\"https://discord.gg/QMBbTHSsaK\" target=\"_blank\" rel=\"noopener\">здесь\u003c/a>.\u003c/p>"
+      "text": "\u003cp>Будем рады! Все языки вышли в финальной версии, но перевод всегда можно улучшить. Если заметили неуклюжую фразу или опечатку, особенно в родном языке, сообщите нам. Пишите нам \u003ca href=\"https://discord.gg/QMBbTHSsaK\" target=\"_blank\" rel=\"noopener\">здесь\u003c/a>.\u003c/p>"
      }
     }
    ]
@@ -224,7 +226,7 @@
         <p class="lead" data-only="desktop">Играйте в Diablo 2 Survivors на русском. Этот русификатор переводит саму игру, а не просто гайд: интерфейс, умения, предметы, монстров и карточки уровня, с терминами из официального перевода Diablo II: Resurrected. Лаунчер устанавливает, обновляет и откатывает его в один клик.</p>
         <p class="lead" data-only="web">Играйте в Diablo 2 Survivors на своём языке. Это перевод самой игры, а не гайд: в браузерной версии один клик по закладке переключает игру на китайский (традиционный), китайский (упрощённый), японский, немецкий, французский, русский или польский — с терминами из официального перевода Diablo II: Resurrected. Ничего устанавливать не нужно, работает на ПК и телефоне.</p>
         <div class="cta" data-only="desktop">
-          <a class="btn btn-primary" id="download-btn" aria-disabled="true">Скоро</a>
+          <a class="btn btn-primary" id="download-btn" href="https://github.com/cycleapple/d2survivors-localization/releases/latest/download/d2s-launcher.exe">Скачать лаунчер <small>v1.0.0</small></a>
           <a class="btn btn-ghost" href="#install">Как установить</a>
         </div>
         <div class="cta" data-only="web">
@@ -232,7 +234,7 @@
           <a class="btn btn-ghost" href="https://d2survivors.lol/play/" target="_blank" rel="noopener">Открыть страницу игры</a>
         </div>
         <div id="hero-meta">
-        <ul class="meta" data-only="desktop"><li>Версия игры <strong>2026.1027.2</strong></li><li>Лаунчер <strong>Скоро · Windows</strong></li><li>Перевод обновлён <strong>2026-10-27</strong></li></ul>
+        <ul class="meta" data-only="desktop"><li>Версия игры <strong>2026.1027.2</strong></li><li>Лаунчер <strong>v1.0.0 · Windows</strong></li><li>Перевод обновлён <strong>2026-10-27</strong></li></ul>
         <ul class="meta" data-only="web"><li>Браузеры <strong>Chrome · Edge · Firefox · Safari</strong></li><li>Устройства <strong>ПК и телефон</strong></li><li>Перевод обновлён <strong>2026-10-27</strong></li></ul>
         </div>
         <p class="hero-community"><a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">Discord сообщества переводчиков</a></p>
@@ -249,6 +251,16 @@
           <figure class="shot shot-hud">
             <img src="../assets/shots/zh-tw/hud.webp" width="1239" height="929" loading="lazy" alt="В игре: названия локаций, здоровье, мана и золото (на снимке китайская версия)">
             <figcaption>В игре: названия локаций, здоровье, мана и золото (на снимке китайская версия)</figcaption>
+          </figure>
+        </div>
+        <div class="shots shots-platform" data-only="web" tabindex="0" aria-label="Скриншоты">
+          <figure class="shot shot-web-desktop">
+            <img src="../assets/shots/zh-tw/web-desktop.webp" width="800" height="600" loading="lazy" alt="Браузерная версия на компьютере (на снимке китайская версия)">
+            <figcaption>Браузерная версия на компьютере (на снимке китайская версия)</figcaption>
+          </figure>
+          <figure class="shot shot-web-mobile">
+            <img src="../assets/shots/zh-tw/web-mobile.webp" width="390" height="844" loading="lazy" alt="Браузерная версия на телефоне (на снимке китайская версия)">
+            <figcaption>Браузерная версия на телефоне (на снимке китайская версия)</figcaption>
           </figure>
         </div>
         <p class="shots-credit">Кадры из игры: D2 Survivors (framara), на собственных файлах Diablo II игрока</p>
@@ -289,49 +301,49 @@
     <section class="section" id="languages">
       <div class="wrap">
         <h2>Языки</h2>
-        <p class="section-lead">Традиционный китайский готов. Языки с пометкой «Бета» можно выбрать, но перевод ещё вычитывается. Другие языки на подходе.</p>
+        <p class="section-lead">Готовы и вышли в финальной версии: китайский (традиционный), китайский (упрощённый), японский, немецкий, французский, русский и польский. Языки с пометкой «В планах» появятся позже.</p>
         <ul class="lang-grid" id="lang-grid">
           <li class="lang available">
       <div class="lang-head"><span class="lang-name" lang="zh-TW">繁體中文</span><span class="lang-code">zh-TW</span></div>
       <span class="lang-sub">китайский (традиционный)</span>
       <span class="status available">Готов</span>
-      <span class="lang-sub">12 853 строк</span>
+      <span class="lang-sub">12 984 строк</span>
     </li>
-<li class="lang beta">
+<li class="lang available">
       <div class="lang-head"><span class="lang-name" lang="zh-CN">简体中文</span><span class="lang-code">zh-CN</span></div>
       <span class="lang-sub">китайский (упрощённый)</span>
-      <span class="status beta">Бета</span>
-      <span class="lang-sub">12 852 строк</span>
+      <span class="status available">Готов</span>
+      <span class="lang-sub">12 983 строк</span>
     </li>
-<li class="lang beta">
+<li class="lang available">
       <div class="lang-head"><span class="lang-name" lang="ja">日本語</span><span class="lang-code">ja</span></div>
       <span class="lang-sub">японский</span>
-      <span class="status beta">Бета</span>
-      <span class="lang-sub">12 854 строк</span>
+      <span class="status available">Готов</span>
+      <span class="lang-sub">12 989 строк</span>
     </li>
-<li class="lang beta">
+<li class="lang available">
       <div class="lang-head"><span class="lang-name" lang="de">Deutsch</span><span class="lang-code">de</span></div>
       <span class="lang-sub">немецкий</span>
-      <span class="status beta">Бета</span>
-      <span class="lang-sub">12 803 строк</span>
+      <span class="status available">Готов</span>
+      <span class="lang-sub">13 023 строк</span>
     </li>
-<li class="lang beta">
+<li class="lang available">
       <div class="lang-head"><span class="lang-name" lang="fr">Français</span><span class="lang-code">fr</span></div>
       <span class="lang-sub">французский</span>
-      <span class="status beta">Бета</span>
-      <span class="lang-sub">12 803 строк</span>
+      <span class="status available">Готов</span>
+      <span class="lang-sub">13 032 строк</span>
     </li>
-<li class="lang beta">
+<li class="lang available">
       <div class="lang-head"><span class="lang-name" lang="ru">Русский</span><span class="lang-code">ru</span></div>
       <span class="lang-sub">русский</span>
-      <span class="status beta">Бета</span>
-      <span class="lang-sub">12 803 строк</span>
+      <span class="status available">Готов</span>
+      <span class="lang-sub">13 073 строк</span>
     </li>
-<li class="lang beta">
+<li class="lang available">
       <div class="lang-head"><span class="lang-name" lang="pl">Polski</span><span class="lang-code">pl</span></div>
       <span class="lang-sub">польский</span>
-      <span class="status beta">Бета</span>
-      <span class="lang-sub">12 803 строк</span>
+      <span class="status available">Готов</span>
+      <span class="lang-sub">13 063 строк</span>
     </li>
 <li class="lang planned">
       <div class="lang-head"><span class="lang-name" lang="es-ES">Español (España)</span><span class="lang-code">es-ES</span></div>
@@ -368,28 +380,28 @@
         <ol class="changelog" id="changelog-list">
           <li>
             <time datetime="2026-10-27">2026-10-27</time>
+            <span class="kind kind-launcher">Лаунчер</span>
+            <span class="changelog-summary">Вышел лаунчер 1.0.0; все семь языков теперь в финальной версии</span>
+          </li>
+          <li>
+            <time datetime="2026-10-27">2026-10-27</time>
+            <span class="kind kind-language">Язык</span>
+            <span class="changelog-summary">Все семь языков теперь в финальной версии: традиционный и упрощенный китайский, японский, немецкий, французский, русский и польский прошли вторую вычитку, проверку непереведенного текста в игре и проверку скриншотов на компьютере и в браузере; также исправлен физический урон на экране смерти и учтены замечания по скриншотам</span>
+          </li>
+          <li>
+            <time datetime="2026-10-27">2026-10-27</time>
+            <span class="kind kind-translation">Перевод</span>
+            <span class="changelog-summary">Браузерная версия теперь тоже использует отдельные названия вариантов умений и женские титулы для женских классов; упрощенный китайский: 35 исправлений по итогам проверки скриншотов (подсказки магазина, названия актов, сопротивления)</span>
+          </li>
+          <li>
+            <time datetime="2026-10-27">2026-10-27</time>
+            <span class="kind kind-translation">Перевод</span>
+            <span class="changelog-summary">Традиционный китайский: добавлено 122; Упрощенный китайский: исправлено 1, добавлено 122; Японский: исправлено 639, добавлено 131; Немецкий: исправлено 1735, добавлено 218; Французский: исправлено 423, добавлено 226; Русский: исправлено 581, добавлено 248; Польский: исправлено 458, добавлено 199; Обновлены правила патча</span>
+          </li>
+          <li>
+            <time datetime="2026-10-27">2026-10-27</time>
             <span class="kind kind-translation">Перевод</span>
             <span class="changelog-summary">Традиционный и упрощенный китайский: описания и названия умений сверены с кодом игры (порог здоровья у умений с жертвой, Заряд Света, совпадающие названия), добавлены подписи уровней характеристик</span>
-          </li>
-          <li>
-            <time datetime="2026-10-27">2026-10-27</time>
-            <span class="kind kind-game-fix">Обновление игры</span>
-            <span class="changelog-summary">Поддержка версии игры 2026.1027.2: 98 новых строк (героический режим, рейтинг и др.) на всех семи языках; вторая вычитка традиционного и упрощенного китайского</span>
-          </li>
-          <li>
-            <time datetime="2026-10-27">2026-10-27</time>
-            <span class="kind kind-language">Язык</span>
-            <span class="changelog-summary">Добавлен польский (бета); укорочена кнопка перезапуска для обновления на немецком, французском и польском</span>
-          </li>
-          <li>
-            <time datetime="2026-10-27">2026-10-27</time>
-            <span class="kind kind-translation">Перевод</span>
-            <span class="changelog-summary">Русский: исправлено 562; Обновлены правила патча</span>
-          </li>
-          <li>
-            <time datetime="2026-10-27">2026-10-27</time>
-            <span class="kind kind-language">Язык</span>
-            <span class="changelog-summary">Новый источник обновлений: традиционный китайский, а также упрощенный китайский, японский, немецкий, французский и русский в бете — на выбор в лаунчере и веб-закладке</span>
           </li>
         </ol>
       </div>
@@ -398,30 +410,32 @@
     <section class="section" id="install" data-only="desktop">
       <div class="wrap">
         <h2>Установка</h2>
-        <p class="section-lead">Файлы игры вручную править не нужно — всё делает лаунчер. Сначала закройте игру. Интерфейс лаунчера пока только на традиционном китайском, поэтому кнопки ниже названы так, как они написаны в лаунчере.</p>
+        <p class="section-lead">Файлы игры вручную править не нужно — всё делает лаунчер. Сначала закройте игру. Лаунчер работает на том языке, который вы выберете.</p>
         <p class="switch-hint">Mac, Linux, телефон или игра в браузере? <button type="button" class="link-btn" data-platform="web">Браузерная версия</button></p>
         <ol class="steps">
           <li><strong>Сначала установите D2 Survivors</strong><p>Скачайте версию для ПК с <a href="https://d2survivors.lol/download/" target="_blank" rel="noopener">официального сайта D2 Survivors</a>, укажите в настройках папку с Diablo II и убедитесь, что игра запускается.</p></li>
           <li><strong>Скачайте лаунчер</strong><p>Скачайте <code>d2s-launcher.exe</code> и положите в любую папку. Установка не нужна.</p></li>
-          <li><strong>Откройте лаунчер</strong><p>Он ищет игру в <code>%LOCALAPPDATA%\Programs\D2 Survivors</code>. Если игра в другом месте, нажмите «設定» (Настройки) и укажите папку игры.</p></li>
-          <li><strong>Выберите язык и играйте</strong><p>Выберите язык в «遊戲語言» (язык игры) и нажмите «啟動遊戲» (запустить игру). При первом запуске перевод скачается, а исходный <code>app.asar</code> сохранится в резервную копию.</p></li>
-          <li><strong>Всегда запускайте через лаунчер</strong><p>С галочкой «啟動時自動更新翻譯» (автообновление при запуске) каждый запуск подтягивает свежий перевод, в том числе после обновлений игры.</p></li>
+          <li><strong>Выберите язык</strong><p>При первом запуске появится экран со всеми языками, каждый написан на нём самом. Нажмите свой язык, затем «→» — и лаунчер, и перевод игры будут на этом языке.</p></li>
+          <li><strong>Пройдите мастер настройки из трёх шагов</strong><p>① «Игра»: лаунчер находит D2 Survivors (по умолчанию в <code>%LOCALAPPDATA%\Programs\D2 Survivors</code>; если игра в другом месте — «Выбрать папку…»). ② «Diablo II»: ищет вашу Diablo II: Resurrected или классическую Diablo II; если не нашёл, можно нажать «Пропустить». ③ «Готово»: при желании нажмите «Создать ярлык на рабочем столе», затем «Играть». При первом запуске скачается перевод, а оригинальный <code>app.asar</code> сохранится в резервную копию.</p></li>
+          <li><strong>Дальше запускайте игру с ярлыка или из лаунчера</strong><p>По умолчанию при каждом запуске скачивается свежий перевод («Обновлять переводы при запуске» в «Настройках»), а после обновлений игры он применяется заново автоматически. Сменить язык можно в главном окне, в списке «Язык игры».</p></li>
         </ol>
         <div class="cards">
           <article class="card">
             <h3>Вернуть оригинал</h3>
-            <div><ul><li>Нажмите в лаунчере «還原原版» (вернуть оригинал) — исходный <code>app.asar</code> вернётся на место.</li><li>Чтобы поиграть на английском или корейском, выберите English или «한국어（原版）» и запустите.</li><li>Полное удаление: верните оригинал, затем удалите лаунчер и папку <code>%LOCALAPPDATA%\D2SurvivorsLauncher</code>.</li></ul></div>
+            <div><ul><li>Откройте в лаунчере «Настройки» и нажмите «Восстановить оригинальную игру» — исходный <code>app.asar</code> вернётся на место.</li><li>Чтобы поиграть на английском или корейском, выберите в «Языке игры» English или 한국어 и запустите — это неизменённый оригинал.</li><li>Полное удаление: верните оригинал, затем удалите лаунчер, ярлык на рабочем столе и папку <code>%LOCALAPPDATA%\D2SurvivorsLauncher</code>.</li></ul></div>
           </article>
           <article class="card">
             <h3>Ярлык на рабочем столе</h3>
-            <p>Укажите эту строку как объект ярлыка — игра запустится на выбранном языке без окна лаунчера.</p>
+            <p>Чтобы сделать свой ярлык, укажите эту строку как его объект — игра запустится на выбранном языке без окна лаунчера. (Ярлык из «Создать ярлык на рабочем столе» открывает окно и сразу запускает игру.)</p>
             <pre><code>d2s-launcher.exe --launch --lang ru</code></pre>
             <dl class="cli-list">
               <dt><code>--launch</code></dt><dd>Применить язык и запустить игру</dd>
-              <dt><code>--lang &lt;id&gt;</code></dt><dd>Язык, например ru, en, ko</dd>
+              <dt><code>--play</code></dt><dd>Открыть окно лаунчера и сразу запустить игру (так работает ярлык на рабочем столе)</dd>
+              <dt><code>--lang &lt;id&gt;</code></dt><dd>Язык: zh-TW, zh-CN, ja, de, fr, ru, pl или оригинал en, ko</dd>
               <dt><code>--no-update</code></dt><dd>В этот раз не проверять обновления</dd>
               <dt><code>--update</code></dt><dd>Только обновить перевод</dd>
               <dt><code>--restore</code></dt><dd>Вернуть оригинал</dd>
+              <dt><code>--self-update</code></dt><dd>Обновить сам лаунчер</dd>
               <dt><code>--status</code></dt><dd>Показать текущий язык, версию игры и состояние перевода</dd>
             </dl>
           </article>
@@ -479,20 +493,20 @@
         <h2>Вопросы и ответы</h2>
         <div class="faq">
           <details><summary>Это официальный перевод?</summary><div class="answer"><p>Нет. Это неофициальный фанатский перевод, не связанный с разработчиками D2 Survivors и Blizzard Entertainment.</p></div></details>
-          <details><summary>Насколько готов русский перевод?</summary><div class="answer"><p>Это бета: всё переведено и проверено в игре, но отзывов игроков пока нет. Названия магических предметов и уникальных монстров собираются с учётом русского порядка слов и рода, например «Прочный наголовник разума». Около 66 % терминов взято прямо из официального перевода Diablo II: Resurrected. Кириллица выводится шрифтами D2R: Exocet для заголовков и Philosopher для текста.</p><p>Заметили ошибку — сообщите нам.</p></div></details>
+          <details><summary>Насколько готов русский перевод?</summary><div class="answer"><p>Перевод готов: всё переведено и проверено в игре на пропуски. Затем весь интерфейс и 300 случайных строк ещё раз независимо вычитали и по итогам внесли около 640 исправлений по всему словарю. Названия магических предметов и уникальных монстров собираются с учётом русского порядка слов и рода, например «Прочный наголовник разума», а у героинь — женские титулы. Около 66 % терминов взято прямо из официального перевода Diablo II: Resurrected. Кириллица выводится шрифтами D2R: Exocet для заголовков и Philosopher для текста.</p><p>Заметили ошибку — сообщите нам.</p></div></details>
           <details><summary>Можно ли играть на Mac, Linux или телефоне?</summary><div class="answer"><p>Да. Лаунчер пока есть только для Windows; на Mac, Linux и телефоне играйте в <a href="https://d2survivors.lol/play/" target="_blank" rel="noopener">браузерную версию</a> и используйте закладку со вкладки «В браузере».</p></div></details>
           <details data-only="desktop"><summary>Это затронет мои сохранения?</summary><div class="answer"><p>Нет. Лаунчер заменяет только <code>resources\app.asar</code> в папке игры, предварительно сохранив оригинал. Сохранения лежат в другом месте и не читаются и не меняются.</p></div></details>
           <details data-only="web"><summary>Это затронет мои сохранения?</summary><div class="answer"><p>Нет. Сохранения, как обычно, хранятся в браузере. Закладка лишь подменяет текст игры на открытой странице и ничего не оставляет после себя; после перезагрузки вернётся оригинал.</p></div></details>
-          <details data-only="desktop"><summary>Что будет после обновления игры?</summary><div class="answer"><p>Обновление заменяет <code>app.asar</code>, и перевод пропадает, пока вы снова не запустите игру через лаунчер — он применит его заново.</p><p>Если новая версия изменилась слишком сильно, лаунчер покажет ошибку, а не будет ничего ломать. Верните оригинал и играйте как обычно, пока перевод не обновится.</p></div></details>
+          <details data-only="desktop"><summary>Что будет после обновления игры?</summary><div class="answer"><p>Обновление заменяет <code>app.asar</code>, и перевод пропадает, пока вы снова не запустите игру через лаунчер или ярлык — он применит его заново.</p><p>Если новая версия изменилась слишком сильно, лаунчер ничего не ломает: он запускает оригинальную игру и сообщает, что перевод исправляется. Когда его исправят, при следующем запуске он применится сам — делать ничего не нужно.</p></div></details>
           <details data-only="web"><summary>Что будет после обновления браузерной версии?</summary><div class="answer"><p>Закладка каждый раз проверяет, подходят ли её правила к новой версии. Если нет — сообщает, что перевод нужно обновить, и не запускается; оригинальная игра не затрагивается. Пока играйте на английском.</p></div></details>
-          <details data-only="desktop"><summary>Почему в языковом меню игры вместо корейского мой язык?</summary><div class="answer"><p>Перевод занимает встроенный в игру слот корейского языка, поэтому в меню на его месте отображается выбранный язык. Чтобы играть на корейском, выберите в лаунчере «한국어（原版）».</p></div></details>
+          <details data-only="desktop"><summary>Почему в языковом меню игры вместо корейского мой язык?</summary><div class="answer"><p>Перевод занимает встроенный в игру слот корейского языка, поэтому в меню на его месте отображается выбранный язык. Чтобы играть на корейском, выберите в лаунчере «한국어 (원본)».</p></div></details>
           <details data-only="web"><summary>На телефоне закладка ничего не делает?</summary><div class="answer"><p>Android Chrome не запускает закладки из списка закладок: наберите название «D2 Русский» в адресной строке и нажмите на закладку в подсказках. На iPhone откройте закладки Safari, находясь на странице игры, и нажмите её там.</p><p>Проверьте также, что адрес закладки целиком заменён кодом, который начинается с <code>javascript:</code>.</p></div></details>
-          <details data-only="desktop"><summary>Почему кое-где остался английский?</summary><div class="answer"><p>Почти весь интерфейс, умения, предметы и монстры переведены. Списки изменений и некоторые длинные описания умений ещё в работе и пока показываются на английском; лаунчер подтянет их автоматически.</p></div></details>
-          <details data-only="web"><summary>Почему кое-где остался английский?</summary><div class="answer"><p>Почти весь интерфейс, умения, предметы и монстры переведены. Списки изменений и некоторые длинные описания умений ещё в работе и пока показываются на английском; закладка всегда загружает свежий перевод.</p></div></details>
+          <details data-only="desktop"><summary>Почему кое-где остался английский?</summary><div class="answer"><p>Весь текст игры переведён и проверен в игре на пропуски. Если вы видите английский, скорее всего, обновление игры добавило новый текст; перевод дополнят в одном из следующих обновлений, и лаунчер скачает его сам. Если текст так и остаётся английским, сообщите нам.</p></div></details>
+          <details data-only="web"><summary>Почему кое-где остался английский?</summary><div class="answer"><p>Весь текст игры переведён и проверен в игре на пропуски. Если вы видите английский, скорее всего, обновление игры добавило новый текст; перевод дополнят в одном из следующих обновлений, а закладка всегда загружает свежий перевод. Если текст так и остаётся английским, сообщите нам.</p></div></details>
           <details data-only="desktop"><summary>Windows пишет «Система Windows защитила ваш компьютер». Что делать?</summary><div class="answer"><p>У лаунчера нет цифровой подписи (сертификат стоит денег каждый год), поэтому Windows SmartScreen предупреждает, пока его не скачает достаточно людей.</p><p>Нажмите «<strong>Подробнее</strong>», затем «<strong>Выполнить в любом случае</strong>» — больше Windows спрашивать не будет. Скачивайте лаунчер только с этого сайта или с <a href="https://github.com/cycleapple/d2survivors-localization/releases" target="_blank" rel="noopener">GitHub Releases</a>. В каждом релизе есть <code>d2s-launcher.exe.sha256</code>; сверить можно командой <code>certutil -hashfile d2s-launcher.exe SHA256</code>.</p><p>Если браузер пишет, что файл редко скачивают, выберите в меню загрузки «<strong>Сохранить</strong>».</p></div></details>
           <details><summary>Можно ли назвать персонажа по-русски?</summary><div class="answer"><p>Нет. Сама игра разрешает в именах персонажей только английские буквы и корейский.</p></div></details>
           <details><summary>Куда сообщать об ошибках перевода и проблемах?</summary><div class="answer"><p>Опечатки, непереведённый текст и проблемы с закладкой или лаунчером — в <a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">Discord сообщества переводчиков</a>, там же публикуются новости.</p><p>Проблемы самой игры (не связанные с переводом) — в <a href="https://discord.gg/mYMGgZPuQb" target="_blank" rel="noopener">официальный Discord D2 Survivors</a> (на английском).</p></div></details>
-          <details><summary>Как помочь с переводом или сообщить об опечатке?</summary><div class="answer"><p>Будем рады! Все языки, кроме традиционного китайского, ещё в работе или в бете, и помощь носителей языка с вычиткой особенно ценна. Пишите нам <a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">здесь</a>.</p></div></details>
+          <details><summary>Как помочь с переводом или сообщить об опечатке?</summary><div class="answer"><p>Будем рады! Все языки вышли в финальной версии, но перевод всегда можно улучшить. Если заметили неуклюжую фразу или опечатку, особенно в родном языке, сообщите нам. Пишите нам <a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">здесь</a>.</p></div></details>
         </div>
         <!-- 贊助：低調放在常見問題後面，不跳視窗 -->
         <aside class="support" id="support">
@@ -509,11 +523,11 @@
     <div class="wrap">
       <p class="footer-community"><a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">Discord сообщества переводчиков</a><span class="sep" aria-hidden="true">·</span><a href="https://paypal.me/DonateCYtw" target="_blank" rel="noopener">☕ Угостить кофе</a></p>
       <p>Неофициальный фанатский перевод, не связанный с <a href="https://d2survivors.lol/" target="_blank" rel="noopener">D2 Survivors</a> (framara) и Blizzard Entertainment. Diablo® — товарный знак Blizzard Entertainment, Inc.</p>
-      <p class="footer-small"><span data-only="desktop">Game 2026.1027.2 · Launcher —</span><span data-only="web">Web · Translations 2026-10-27</span></p>
+      <p class="footer-small"><span data-only="desktop">Game 2026.1027.2 · Launcher v1.0.0</span><span data-only="web">Web · Translations 2026-10-27</span></p>
     </div>
   </footer>
 
-  <script id="page-data" type="application/json">{"lang":"ru","t":{"changelog.kind.translation":"Перевод","changelog.kind.language":"Язык","changelog.kind.game-fix":"Обновление игры","changelog.kind.launcher":"Лаунчер","lang.coverage":"{0} строк","status.available":"Готов","status.beta":"Бета","status.planned":"В планах","meta.updated":"Перевод обновлён","meta.game":"Версия игры","meta.launcher":"Лаунчер","meta.platform":"Windows","meta.browsers":"Браузеры","meta.devices":"Устройства","meta.devices.value":"ПК и телефон","hero.download":"Скачать лаунчер","hero.soon":"Скоро","web.copied":"Скопировано","web.copyfail":"Не удалось скопировать автоматически; выделите код ниже вручную.","web.pc.drag":"Перетащите кнопку на панель закладок; клик здесь ничего не делает."},"webChecked":"2026-10-27T15:20:04.655Z"}</script>
+  <script id="page-data" type="application/json">{"lang":"ru","t":{"changelog.kind.translation":"Перевод","changelog.kind.language":"Язык","changelog.kind.game-fix":"Обновление игры","changelog.kind.launcher":"Лаунчер","lang.coverage":"{0} строк","status.available":"Готов","status.beta":"Бета","status.planned":"В планах","meta.updated":"Перевод обновлён","meta.game":"Версия игры","meta.launcher":"Лаунчер","meta.platform":"Windows","meta.browsers":"Браузеры","meta.devices":"Устройства","meta.devices.value":"ПК и телефон","hero.download":"Скачать лаунчер","hero.soon":"Скоро","web.copied":"Скопировано","web.copyfail":"Не удалось скопировать автоматически; выделите код ниже вручную.","web.pc.drag":"Перетащите кнопку на панель закладок; клик здесь ничего не делает."},"webChecked":"2026-10-27T22:26:27.496Z"}</script>
   <script type="module" src="../app.js"></script>
 </body>
 </html>

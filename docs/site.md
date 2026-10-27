@@ -120,7 +120,7 @@ node tools/serve.mjs site 8766     # 本機預覽（或 python -m http.server 87
 
 1. `site/src/config.mjs` 的 `SITE_LANGS` 加一筆，例如 `{ id: 'de', path: 'de', label: 'Deutsch', html: 'de', hreflang: 'de', og: 'de_DE', fonts: [] }`。`fonts` 是 Google Fonts 要多載的標題字型（拉丁字母用 Cinzel 就夠，空陣列）
 2. `site/src/i18n.mjs` 加一份（照 `en` 的 key 翻，關鍵字參考翻譯聊天室給的）。這些要依語言調整：
-   - 啟動器只有繁中介面：按鈕名稱照原文寫，後面加譯文，例如「啟動遊戲」（ゲームを起動）
+   - 安裝步驟、還原原版、桌面捷徑裡的按鈕名稱：照 `launcher/src/i18n.rs` 的 `TABLE` 裡該語言的寫法（啟動器的介面跟著選的語言）；啟動器沒有的語言用英文那欄
    - SmartScreen 那題用該語言版 Windows 的按鈕文字
    - `shots.fallback`：還沒有自己語言的截圖時，圖說後面加的「圖為繁中版」
    - 書籤名稱 `web.bookmark.name`

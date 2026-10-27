@@ -11,7 +11,7 @@ export const SITE = {
   // 網頁版書籤載入的程式，相對於網站根目錄
   bookmarkletPath: 'web/d2zh.js',
   // manifest 讀不到時用的數字
-  fallback: { gameVersion: '2026.1026.4', launcherVersion: '0.1.0' },
+  fallback: { gameVersion: '2026.1027.2', launcherVersion: '1.0.0' },
   // 中文化社群的 Discord 邀請連結（使用者自己的伺服器，不是遊戲官方的 LINKS.d2sDiscord）。留空就不顯示
   discordUrl: 'https://discord.gg/QMBbTHSsaK',
   // 站長平台的驗證碼（只填 content 的值）。有值才輸出 meta：google-site-verification、msvalidate.01、baidu-site-verification
