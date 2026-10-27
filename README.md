@@ -1,6 +1,6 @@
-# D2 Survivors 中文化（非官方）
+# D2 Survivors Localization（非官方）
 
-[D2 Survivors](https://d2survivors.lol/) 的玩家自製翻譯：繁體中文、简体中文、日本語。
+[D2 Survivors](https://d2survivors.lol/)（Diablo 2 Survivors）的玩家自製翻譯：繁體中文、简体中文、日本語、Deutsch、Français、Русский、Polski。
 
 - **桌面版**（Windows）：啟動器選好語言、按「啟動遊戲」，自動下載最新翻譯並套用到遊戲。遊戲自己更新後，下次從啟動器開會自動重新套用
 - **瀏覽器版**（電腦、手機）：在 d2survivors.lol 的網頁版遊戲按一下書籤，就切換成中文
