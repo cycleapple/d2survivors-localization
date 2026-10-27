@@ -113,8 +113,15 @@ cargo test --release                        # 有 backup/2026.1026.4/app.asar �
 
 要進遊戲看：把整個遊戲資料夾複製一份，`D2S_USER_DATA` 指到另一個資料夾（遊戲本身支援，存檔和設定就不會動到平常的），裡面 `d2` 用 junction 指到平常的 `%APPDATA%\D2 Survivors\d2`（取出的 D2 素材，1.5 GB），`desktop.json` 的 `checkForUpdates` 設成 false。再用 `D2S_QUERY=d2slang=ko` 和 `--remote-debugging-port` 開複製的那份，用 `tools/cdp.mjs` 截圖
 
+## 1.0.0
+
+- `Cargo.toml` 的 version 是 1.0.0；預設 manifest 網址照舊是 `https://cycleapple.github.io/d2survivors-localization/data/manifest.json`
+- 發布：推 tag `launcher-v1.0.0` → `release-launcher.yml` 建 Release，附 `d2s-launcher.exe` 和 `d2s-launcher.exe.sha256`
+- 發布前的檢查（2026-10-28）：把 HEAD 的 `launcher/`、`.github/` 用 `git archive` 匯出到乾淨的資料夾，照 workflow 的步驟跑一次（tag 和 version 比對、`cargo test --release`、`cargo build --release`、算 sha256），兩個檔案都做得出來，exe 的 ProductVersion 是 1.0.0。確認 build 不靠沒進 repo 的檔案（圖示、Cinzel 字型、OFL 都在 repo 裡）
+
 ## 待辦
 
 - 還不會取出 D2R 的字型（字型不能放進 manifest 公開），所以從啟動器套用時中日文用系統字型；暗色字的修正照樣有效
-- 網址定案後，改 `paths.rs` 的預設網址（或編譯時設 `D2S_MANIFEST_URL`），再發一版
-- 第一個 Release 還沒發（還沒有 remote）。workflow 只做過 YAML 語法檢查，在本機模擬過版本檢查和 sha256 那兩步，還沒在 GitHub 上實際跑過
+- 網址換成自己的網域的話，改 `paths.rs` 的預設網址（或編譯時設 `D2S_MANIFEST_URL`）和 `system.rs` 的 `SITE_URL`，再發一版
+- workflow 還沒在 GitHub 上實際跑過（第一次推 tag 時確認）
+- 新增的介面文字（關於頁、沒裝遊戲的卡片等）只有繁中、簡中、英文，其他五種語言要等翻譯聊天室補（`dict/launcher-i18n.json` → `node launcher/merge-i18n.mjs --write`）
