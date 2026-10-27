@@ -22,7 +22,7 @@ node tools/serve.mjs site 8766     # 本機預覽（或 python -m http.server 87
 
 | 檔案 | 說明 |
 |---|---|
-| `site/src/config.mjs` | 設定：`SITE`（BASE、下載網址、manifest 路徑、書籤路徑、manifest 讀不到時的版本號）、`LINKS`（官方連結）、`SITE_LANGS`（介面語言）、`LANGUAGES`（遊戲翻譯語言清單） |
+| `site/src/config.mjs` | 設定：`SITE`（BASE、下載網址、manifest 路徑、書籤路徑、manifest 讀不到時的版本號、中文化社群 Discord、更新紀錄筆數、「翻譯修正中」的時數）、`LINKS`（官方連結）、`SITE_LANGS`（介面語言）、`LANGUAGES`（遊戲翻譯語言清單） |
 | `site/src/i18n.mjs` | 每種介面語言的文字。`key@web` 是瀏覽器版專用的文字；`faq.items`、`sources.cards` 的連結第三欄標 `desktop`／`web` 只在那個版本顯示 |
 | `site/src/shared.mjs` | 建置腳本和網頁共用：合併 manifest、產生語言進度、首頁資訊列、下載按鈕 |
 | `tools/build-site.mjs` | 頁面樣板，產生靜態頁 |
@@ -53,6 +53,23 @@ node tools/serve.mjs site 8766     # 本機預覽（或 python -m http.server 87
 - 建置時讀 `site/data/manifest.json`：語言的 `status`（`available` 可用／`beta` 測試中）、`entries`、`updated`、`game.desktop`、`launcher.latest`。manifest 沒有的語言顯示「計畫中」。讀不到就用 `config.mjs` 的數字
 - 網頁開啟後再讀一次 `data/manifest.json`（`cache: 'no-cache'`），比較新就重畫語言進度、首頁資訊列、下載按鈕。翻譯剛發布、網站還沒重新產生時也會是新的數字
 - 語言進度只顯示字典條數，不算百分比：遊戲改版會加 key，字典也有遊戲外的字串，百分比會失準
+
+## 更新紀錄
+
+- 讀 `site/data/changelog.json`（`tools/publish.mjs` 產生，格式見 [manifest-v2.md](manifest-v2.md) 的「更新紀錄」），顯示最近 `SITE.changelogCount`（5）筆的日期、種類（翻譯／語言／遊戲改版／啟動器）、`summary`
+- `summary` 用頁面語言；沒有的話中文頁用繁中、英文頁用英文，再沒有就用有的那個
+- 建置時寫進 HTML；網頁開啟後讀 manifest 的 `changelog.url` 再畫一次。兩邊都沒有就不顯示這個區塊（HTML 裡留著隱藏的區塊，讀到才打開）
+
+## 「遊戲剛更新，翻譯修正中」
+
+- manifest 的 `game.web_checked` 超過 `SITE.staleHours`（3）小時沒更新，頁面上方（標題列下面）就顯示提示。每小時的 `.github/workflows/web-check.yml` 只在規則都套得上時才更新這個時間，所以時間太舊＝網頁版可能壞了
+- 要看「現在」的時間，所以由 `app.js` 判斷，不在建置時決定；manifest 讀不到時用建置時嵌進頁面的時間。沒有 `web_checked` 就不顯示
+- 有中文化社群 Discord 時，提示後面加一句「最新消息請看中文化社群 Discord」
+
+## 中文化社群 Discord
+
+- 邀請連結放在 `SITE.discordUrl`（使用者自己的伺服器），留空時下面都不顯示：首頁資訊列下的「加入中文化社群 Discord」、頁尾、常見問題「翻譯有錯或遊戲壞了，要去哪裡回報？」（`faq.items` 回答裡有 `{discord}` 的題目）、「想幫忙翻譯」那題的聯絡連結、「翻譯修正中」提示
+- `LINKS.d2sDiscord` 是 D2 Survivors **遊戲官方**的 Discord（英文），來源卡片上寫「遊戲官方 Discord」，跟中文化社群分開。遊戲本身的問題請玩家到官方，翻譯的問題到中文化社群
 
 ## 下載按鈕
 

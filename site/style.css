@@ -248,6 +248,28 @@ h3 { font-size: 1.15rem; margin: 0 0 10px; }
 .web-steps { margin: 12px 0 0; padding-left: 1.4em; }
 .web-steps li { margin-bottom: 8px; }
 .web-usage { margin-top: 16px; }
+/* 遊戲剛更新，翻譯修正中 */
+.notice { background: rgba(217, 162, 63, 0.12); border-bottom: 1px solid rgba(217, 162, 63, 0.45); color: var(--text); font-size: 0.92rem; padding: 12px 0; }
+.notice strong { color: var(--warn); }
+.notice[hidden] { display: none; }
+
+/* 更新紀錄 */
+.changelog { list-style: none; padding: 0; margin: 0; }
+.changelog li { display: grid; grid-template-columns: auto auto 1fr; gap: 4px 14px; align-items: baseline; padding: 12px 0; border-bottom: 1px solid var(--line-soft); }
+.changelog time { color: var(--muted); font-size: 0.88rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.changelog .kind { justify-self: start; font-size: 0.75rem; padding: 0 8px; border: 1px solid var(--line); border-radius: 999px; color: var(--gold-hi); white-space: nowrap; }
+.changelog .kind-game-fix { color: var(--warn); border-color: rgba(217, 162, 63, 0.5); }
+.changelog .kind-language { color: var(--ok); border-color: rgba(124, 195, 106, 0.45); }
+@media (max-width: 760px) {
+  .changelog li { grid-template-columns: auto 1fr; }
+  .changelog-summary { grid-column: 1 / -1; }
+}
+
+/* 中文化社群 Discord */
+.hero-community { margin: 16px 0 0; font-size: 0.92rem; }
+.footer-community { font-size: 0.95rem; margin-bottom: 12px !important; }
+.footer .footer-community a { color: var(--gold-hi); }
+
 /* 首頁（語言選擇） */
 .root-page .hero { min-height: calc(100vh - 120px); border-bottom: 0; }
 .root-langs { list-style: none; padding: 0; margin: 0 auto; max-width: 960px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; text-align: left; }

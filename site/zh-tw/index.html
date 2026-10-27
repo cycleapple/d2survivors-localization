@@ -61,6 +61,11 @@
   </header>
 
   <main id="top">
+    <!-- game.web_checked 太舊時由 app.js 顯示（看當下時間，所以不在建置時決定） -->
+    <div class="notice" id="stale-notice" role="status" hidden>
+      <div class="wrap"><strong>遊戲剛更新，翻譯修正中。</strong>這段期間書籤和啟動器可能套不上翻譯，遊戲會照常以英文版執行；修好後會寫在更新紀錄。</div>
+    </div>
+
     <section class="hero" id="download">
       <div class="wrap">
         <p class="eyebrow">非官方玩家翻譯</p>
@@ -79,6 +84,7 @@
         <ul class="meta" data-only="desktop"><li>支援遊戲版本 <strong>2026.1027.1</strong></li><li>啟動器 <strong>即將推出 · Windows</strong></li><li>翻譯更新 <strong>2026-10-27</strong></li></ul>
         <ul class="meta" data-only="web"><li>瀏覽器 <strong>Chrome · Edge · Firefox · Safari</strong></li><li>裝置 <strong>電腦・手機</strong></li><li>翻譯更新 <strong>2026-10-27</strong></li></ul>
         </div>
+        
       </div>
     </section>
 
@@ -108,7 +114,7 @@
               <li><a href="https://d2survivors.lol/" target="_blank" rel="noopener">官方網站<span class="host">d2survivors.lol</span></a></li>
               <li data-only="desktop"><a href="https://d2survivors.lol/download/" target="_blank" rel="noopener">下載桌面版（Windows／Mac／Linux）<span class="host">d2survivors.lol</span></a></li>
               <li data-only="web"><a href="https://d2survivors.lol/play/" target="_blank" rel="noopener">在瀏覽器玩（網頁版）<span class="host">d2survivors.lol</span></a></li>
-              <li><a href="https://discord.gg/mYMGgZPuQb" target="_blank" rel="noopener">官方 Discord<span class="host">discord.gg</span></a></li>
+              <li><a href="https://discord.gg/mYMGgZPuQb" target="_blank" rel="noopener">遊戲官方 Discord（英文）<span class="host">discord.gg</span></a></li>
             </ul>
           </article>
           <article class="card">
@@ -198,6 +204,16 @@
       
     </li>
         </ul>
+      </div>
+    </section>
+
+    <section class="section" id="changelog" hidden>
+      <div class="wrap narrow">
+        <h2>更新紀錄</h2>
+        <p class="section-lead">翻譯、語言和啟動器的更新。啟動器和書籤每次開啟都會拿到最新的翻譯，不用重新下載。</p>
+        <ol class="changelog" id="changelog-list">
+          
+        </ol>
       </div>
     </section>
 
@@ -304,12 +320,13 @@
 
   <footer class="footer">
     <div class="wrap">
+      
       <p>非官方玩家自製翻譯，與 <a href="https://d2survivors.lol/" target="_blank" rel="noopener">D2 Survivors</a>（framara）、Blizzard Entertainment 無關。Diablo® 是 Blizzard Entertainment, Inc. 的商標。</p>
       <p class="footer-small"><span data-only="desktop">Game 2026.1027.1 · Launcher —</span><span data-only="web">Web · Translations 2026-10-27</span></p>
     </div>
   </footer>
 
-  <script id="page-data" type="application/json">{"lang":"zh-TW","t":{"lang.coverage":"{0} 條","status.available":"可用","status.beta":"測試中","status.planned":"計畫中","meta.updated":"翻譯更新","meta.game":"支援遊戲版本","meta.launcher":"啟動器","meta.platform":"Windows","meta.browsers":"瀏覽器","meta.devices":"裝置","meta.devices.value":"電腦・手機","hero.download":"下載啟動器","hero.soon":"即將推出","web.copied":"已複製","web.copyfail":"沒辦法自動複製，請手動選取下面的程式碼。","web.pc.drag":"請把按鈕拖到書籤列，直接點不會安裝。"}}</script>
+  <script id="page-data" type="application/json">{"lang":"zh-TW","t":{"changelog.kind.translation":"翻譯","changelog.kind.language":"語言","changelog.kind.game-fix":"遊戲改版","changelog.kind.launcher":"啟動器","lang.coverage":"{0} 條","status.available":"可用","status.beta":"測試中","status.planned":"計畫中","meta.updated":"翻譯更新","meta.game":"支援遊戲版本","meta.launcher":"啟動器","meta.platform":"Windows","meta.browsers":"瀏覽器","meta.devices":"裝置","meta.devices.value":"電腦・手機","hero.download":"下載啟動器","hero.soon":"即將推出","web.copied":"已複製","web.copyfail":"沒辦法自動複製，請手動選取下面的程式碼。","web.pc.drag":"請把按鈕拖到書籤列，直接點不會安裝。"},"webChecked":"2026-10-27T12:22:13.404Z"}</script>
   <script type="module" src="../app.js"></script>
 </body>
 </html>

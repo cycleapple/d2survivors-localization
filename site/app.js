@@ -2,10 +2,10 @@
 // 頁面文字都是 tools/build-site.mjs 產生好的，這裡不換字。
 
 import { SITE, LANGUAGES } from './src/config.mjs';
-import { siteState, langGridHtml, heroMetaHtml, downloadBtnHtml } from './src/shared.mjs';
+import { siteState, langGridHtml, heroMetaHtml, downloadBtnHtml, changelogHtml, isStale } from './src/shared.mjs';
 
 const $ = sel => document.querySelector(sel);
-const { lang, t } = JSON.parse($('#page-data').textContent);
+const { lang, t, webChecked } = JSON.parse($('#page-data').textContent);
 
 const PLATFORMS = ['desktop', 'web'];
 // 每個版本的安裝區塊
@@ -70,17 +70,38 @@ $('#copy-bookmarklet').addEventListener('click', async () => {
   }
 });
 
+// 「遊戲剛更新，翻譯修正中」：每小時的檢查一直沒通過（game.web_checked 太舊）就顯示
+function showStale(checked) {
+  $('#stale-notice').hidden = !isStale(checked, SITE.staleHours);
+}
+
 // 頁面裡的數字是建置時的；manifest 比較新的話（翻譯剛發布、網站還沒重新產生）就重畫
 async function loadManifest() {
   try {
-    const res = await fetch(new URL('../' + SITE.manifestPath, location.href), { cache: 'no-cache' });
-    if (!res.ok) return;
+    const manifestUrl = new URL('../' + SITE.manifestPath, location.href);
+    const res = await fetch(manifestUrl, { cache: 'no-cache' });
+    if (!res.ok) throw new Error(res.status);
     const manifest = await res.json();
-    if (manifest.schema !== 2) return;
+    if (manifest.schema !== 2) throw new Error(`schema ${manifest.schema}`);
     const state = siteState(LANGUAGES, SITE, manifest);
     $('#lang-grid').innerHTML = langGridHtml(state, t, lang);
     $('#hero-meta').innerHTML = heroMetaHtml(state, t);
     $('#download-btn').outerHTML = downloadBtnHtml(state, t, SITE.downloadUrl);
+    showStale(manifest.game?.web_checked);
+    if (manifest.changelog?.url) loadChangelog(new URL(manifest.changelog.url, manifestUrl));
+  } catch {
+    showStale(webChecked);
+  }
+}
+
+async function loadChangelog(url) {
+  try {
+    const res = await fetch(url);
+    if (!res.ok) return;
+    const entries = (await res.json()).entries || [];
+    if (!entries.length) return;
+    $('#changelog-list').innerHTML = changelogHtml(entries, t, lang, SITE.changelogCount);
+    $('#changelog').hidden = false;
   } catch {}
 }
 

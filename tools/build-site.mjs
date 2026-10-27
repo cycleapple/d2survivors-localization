@@ -8,7 +8,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { SITE, LINKS, SITE_LANGS, LANGUAGES } from '../site/src/config.mjs';
 import { I18N } from '../site/src/i18n.mjs';
-import { esc, siteState, langGridHtml, heroMetaHtml, downloadBtnHtml, RUNTIME_KEYS } from '../site/src/shared.mjs';
+import { esc, fmt, siteState, langGridHtml, heroMetaHtml, downloadBtnHtml, changelogHtml, RUNTIME_KEYS } from '../site/src/shared.mjs';
 
 const ROOT = 'site';
 const BASE = SITE.base;
@@ -23,6 +23,15 @@ try {
   manifest = null;
 }
 const state = siteState(LANGUAGES, SITE, manifest);
+
+// 更新紀錄：沒有這個檔就不顯示（網頁開啟後讀到 manifest 的 changelog 再顯示）
+let changelog = [];
+try {
+  changelog = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/changelog.json'), 'utf8')).entries || [];
+} catch (e) {
+  if (e.code !== 'ENOENT') console.warn(`略過 data/changelog.json：${e.message}`);
+}
+const discordLink = (t, text) => `<a href="${esc(SITE.discordUrl)}" target="_blank" rel="noopener">${esc(text)}</a>`;
 const bookmarklet = `javascript:import('${new URL(SITE.bookmarkletPath, BASE).href}').then(m=>m.default()).catch(e=>alert('D2 Survivors Localization: '+e))`;
 
 const pageUrl = l => (l ? new URL(`${l.path}/`, BASE).href : BASE);
@@ -66,6 +75,7 @@ function head({ title, description, url, ogLocale, ogAlt = [], fonts, prefix }) 
 
 const footer = t => `<footer class="footer">
     <div class="wrap">
+      ${SITE.discordUrl ? `<p class="footer-community">${discordLink(t, t['community.join'])}</p>` : ''}
       <p>${t['footer.disclaimer']}</p>
       <p class="footer-small"><span data-only="desktop">Game ${esc(state.gameVersion)} · Launcher ${state.launcherReleased ? 'v' + esc(state.launcherVersion) : '—'}</span><span data-only="web">Web · Translations ${esc(state.updated || '')}</span></p>
     </div>
@@ -86,7 +96,11 @@ function langPage(sl) {
   const runtime = {
     lang: sl.id,
     t: Object.fromEntries(RUNTIME_KEYS.map(k => [k, t[k]])),
+    // manifest 讀不到時用建置時的時間判斷要不要顯示「翻譯修正中」
+    webChecked: manifest?.game?.web_checked || null,
   };
+  const feedbackUrl = SITE.discordUrl || SITE.feedbackUrl;
+  const faq = t['faq.items'].filter(([, a]) => SITE.discordUrl || !a.includes('{discord}'));
 
   return `<!doctype html>
 <html lang="${sl.html}">
@@ -127,6 +141,11 @@ function langPage(sl) {
   </header>
 
   <main id="top">
+    <!-- game.web_checked 太舊時由 app.js 顯示（看當下時間，所以不在建置時決定） -->
+    <div class="notice" id="stale-notice" role="status" hidden>
+      <div class="wrap">${t['notice.stale']}${SITE.discordUrl ? ' ' + fmt(t['notice.discord'], esc(SITE.discordUrl)) : ''}</div>
+    </div>
+
     <section class="hero" id="download">
       <div class="wrap">
         <p class="eyebrow">${esc(t['hero.eyebrow'])}</p>
@@ -143,6 +162,7 @@ function langPage(sl) {
         <div id="hero-meta">
         ${heroMetaHtml(state, t)}
         </div>
+        ${SITE.discordUrl ? `<p class="hero-community">${discordLink(t, t['community.join'])}</p>` : ''}
       </div>
     </section>
 
@@ -184,6 +204,16 @@ function langPage(sl) {
         <ul class="lang-grid" id="lang-grid">
           ${langGridHtml(state, t, sl.id)}
         </ul>
+      </div>
+    </section>
+
+    <section class="section" id="changelog"${changelog.length ? '' : ' hidden'}>
+      <div class="wrap narrow">
+        <h2>${esc(t['changelog.title'])}</h2>
+        <p class="section-lead">${esc(t['changelog.lead'])}</p>
+        <ol class="changelog" id="changelog-list">
+          ${changelogHtml(changelog, t, sl.id, SITE.changelogCount)}
+        </ol>
       </div>
     </section>
 
@@ -253,7 +283,9 @@ function langPage(sl) {
       <div class="wrap narrow">
         <h2>${esc(t['faq.title'])}</h2>
         <div class="faq">
-          ${t['faq.items'].map(([q, a, p]) => `<details${only(p)}><summary>${esc(q)}</summary><div class="answer">${a.replace('{feedback}', SITE.feedbackUrl ? t['faq.feedback'].replace('{0}', esc(SITE.feedbackUrl)) : t['faq.nofeedback'])}</div></details>`).join('\n          ')}
+          ${faq.map(([q, a, p]) => `<details${only(p)}><summary>${esc(q)}</summary><div class="answer">${a
+            .replace('{feedback}', feedbackUrl ? fmt(t['faq.feedback'], esc(feedbackUrl)) : t['faq.nofeedback'])
+            .replaceAll('{discord}', esc(SITE.discordUrl))}</div></details>`).join('\n          ')}
         </div>
       </div>
     </section>

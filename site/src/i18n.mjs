@@ -1,6 +1,7 @@
 // 網站文字：每種介面語言一份。改了要重新產生：node tools/build-site.mjs
 // 「key@web」是瀏覽器版專用的文字（頁面裡兩個版本各輸出一份）；faq.items 和 sources.cards 連結的第三欄標版本，只在那個版本顯示
-// 值裡有 HTML 的 key：*.steps、restore.body、web.lead、faq.items 的回答、footer.disclaimer
+// 值裡有 HTML 的 key：*.steps、restore.body、web.lead、faq.items 的回答、footer.disclaimer、notice.*
+// faq.items 的回答裡有 {discord} 的，config 的 SITE.discordUrl 留空時整題不顯示
 
 export const I18N = {
   'zh-TW': {
@@ -48,7 +49,7 @@ export const I18N = {
         title: 'D2 Survivors',
         sub: '原作：framara',
         body: '免費的非官方粉絲遊戲，以《暗黑破壞神 II》為舞台的倖存者類遊戲。本翻譯專案與原作者無關，遊戲本身的問題請到官方管道回報。',
-        links: [['官方網站', 'd2sHome'], ['下載桌面版（Windows／Mac／Linux）', 'd2sDownload', 'desktop'], ['在瀏覽器玩（網頁版）', 'd2sPlay', 'web'], ['官方 Discord', 'd2sDiscord']],
+        links: [['官方網站', 'd2sHome'], ['下載桌面版（Windows／Mac／Linux）', 'd2sDownload', 'desktop'], ['在瀏覽器玩（網頁版）', 'd2sPlay', 'web'], ['遊戲官方 Discord（英文）', 'd2sDiscord']],
       },
       {
         title: '《暗黑破壞神 II》',
@@ -113,6 +114,15 @@ export const I18N = {
       '重新整理頁面會回到原版，要再按一次書籤。',
       '存檔照常存在瀏覽器裡，不受影響。書籤每次都從這個網站載入最新的翻譯，需要連上網路。',
     ],
+    'changelog.title': '更新紀錄',
+    'changelog.lead': '翻譯、語言和啟動器的更新。啟動器和書籤每次開啟都會拿到最新的翻譯，不用重新下載。',
+    'changelog.kind.translation': '翻譯',
+    'changelog.kind.language': '語言',
+    'changelog.kind.game-fix': '遊戲改版',
+    'changelog.kind.launcher': '啟動器',
+    'notice.stale': '<strong>遊戲剛更新，翻譯修正中。</strong>這段期間書籤和啟動器可能套不上翻譯，遊戲會照常以英文版執行；修好後會寫在更新紀錄。',
+    'notice.discord': '最新消息請看<a href="{0}" target="_blank" rel="noopener">中文化社群 Discord</a>。',
+    'community.join': '加入中文化社群 Discord',
     'faq.title': '常見問題',
     // 第三欄標 desktop／web 的只在那個版本顯示
     'faq.items': [
@@ -128,6 +138,7 @@ export const I18N = {
       ['為什麼還有一些英文？', '<p>大部分介面、技能、物品、怪物都已翻譯完成，但更新說明和部分較長的技能說明還在翻譯中，會先顯示英文。書籤每次都載入最新的翻譯，翻好就會出現。</p>', 'web'],
       ['Windows 跳出「Windows 已保護您的電腦」怎麼辦？', '<p>啟動器沒有程式碼簽章（要每年付費購買），在下載的人還不多之前，Windows SmartScreen 都會跳出這個警告。</p><p>按「<strong>其他資訊</strong>」，再按「<strong>仍要執行</strong>」就可以了，之後不會再問。請只從本站或 <a href="https://github.com/cycleapple/d2survivors-localization/releases" target="_blank" rel="noopener">GitHub Releases</a> 下載；每個 Release 都附有 <code>d2s-launcher.exe.sha256</code>，可以用 <code>certutil -hashfile d2s-launcher.exe SHA256</code> 核對。</p><p>瀏覽器下載時如果說這個檔案不常被下載，在下載清單的選單裡選「保留」。</p>', 'desktop'],
       ['角色名稱可以打中文嗎？', '<p>目前不行。遊戲本身只允許英文字母和韓文作為角色名稱。</p>'],
+      ['翻譯有錯或遊戲壞了，要去哪裡回報？', '<p>錯字、漏譯、書籤或啟動器的問題，請到<a href="{discord}" target="_blank" rel="noopener">中文化社群 Discord</a> 回報，那裡也會公告最新消息。</p><p>遊戲本身的問題（跟翻譯無關的）請到 <a href="https://discord.gg/mYMGgZPuQb" target="_blank" rel="noopener">D2 Survivors 遊戲官方 Discord</a>（英文）回報。</p>'],
       ['想幫忙翻譯或回報錯字？', '<p>歡迎！除了繁體中文，其他語言都還在製作或測試中，特別需要母語玩家幫忙校對。{feedback}</p>'],
     ],
     'faq.feedback': '請到<a href="{0}" target="_blank" rel="noopener">這裡</a>聯絡我們。',
@@ -179,7 +190,7 @@ export const I18N = {
         title: 'D2 Survivors',
         sub: '原作：framara',
         body: '免费的非官方同人游戏，以《暗黑破坏神 II》为背景的幸存者类游戏。本翻译项目与原作者无关，游戏本身的问题请通过官方渠道反馈。',
-        links: [['官方网站', 'd2sHome'], ['下载桌面版（Windows / Mac / Linux）', 'd2sDownload', 'desktop'], ['在浏览器里玩（网页版）', 'd2sPlay', 'web'], ['官方 Discord', 'd2sDiscord']],
+        links: [['官方网站', 'd2sHome'], ['下载桌面版（Windows / Mac / Linux）', 'd2sDownload', 'desktop'], ['在浏览器里玩（网页版）', 'd2sPlay', 'web'], ['游戏官方 Discord（英文）', 'd2sDiscord']],
       },
       {
         title: '《暗黑破坏神 II》',
@@ -244,6 +255,15 @@ export const I18N = {
       '刷新页面会回到原版，需要再点一次书签。',
       '存档照常保存在浏览器里，不受影响。书签每次都从本站加载最新翻译，需要联网。',
     ],
+    'changelog.title': '更新记录',
+    'changelog.lead': '翻译、语言和启动器的更新。启动器和书签每次打开都会获取最新翻译，无需重新下载。',
+    'changelog.kind.translation': '翻译',
+    'changelog.kind.language': '语言',
+    'changelog.kind.game-fix': '游戏更新',
+    'changelog.kind.launcher': '启动器',
+    'notice.stale': '<strong>游戏刚更新，翻译修正中。</strong>这段时间书签和启动器可能无法应用翻译，游戏会照常以英文版运行；修好后会写在更新记录里。',
+    'notice.discord': '最新消息请看<a href="{0}" target="_blank" rel="noopener">汉化社区 Discord</a>。',
+    'community.join': '加入汉化社区 Discord',
     'faq.title': '常见问题',
     'faq.items': [
       ['这是官方翻译吗？', '<p>不是。这是玩家自制的非官方翻译，与 D2 Survivors 开发者及暴雪娱乐均无关。</p>'],
@@ -259,6 +279,7 @@ export const I18N = {
       ['为什么还有一些英文？', '<p>大部分界面、技能、物品、怪物都已翻译完成，但更新说明和部分较长的技能说明还在翻译中，会先显示英文。书签每次都加载最新翻译，翻译完成后就会出现。</p>', 'web'],
       ['Windows 弹出「Windows 已保护你的电脑」怎么办？', '<p>启动器没有代码签名（需要每年付费购买），在下载量还不多之前，Windows SmartScreen 都会弹出这个警告。</p><p>点击「<strong>更多信息</strong>」，再点击「<strong>仍要运行</strong>」即可，之后不会再提示。请只从本站或 <a href="https://github.com/cycleapple/d2survivors-localization/releases" target="_blank" rel="noopener">GitHub Releases</a> 下载；每个 Release 都附有 <code>d2s-launcher.exe.sha256</code>，可以用 <code>certutil -hashfile d2s-launcher.exe SHA256</code> 核对。</p><p>浏览器下载时如果提示该文件不常被下载，在下载列表的菜单里选择「保留」。</p>', 'desktop'],
       ['角色名可以用中文吗？', '<p>暂时不行。游戏本身只允许英文字母和韩文作为角色名。</p>'],
+      ['翻译有错或游戏坏了，去哪里反馈？', '<p>错别字、漏译、书签或启动器的问题，请到<a href="{discord}" target="_blank" rel="noopener">汉化社区 Discord</a> 反馈，那里也会发布最新消息。</p><p>游戏本身的问题（与翻译无关的）请到 <a href="https://discord.gg/mYMGgZPuQb" target="_blank" rel="noopener">D2 Survivors 游戏官方 Discord</a>（英文）反馈。</p>'],
       ['想帮忙翻译或反馈错别字？', '<p>欢迎！除了繁体中文，其他语言都还在制作或测试中，特别需要母语玩家帮忙校对。{feedback}</p>'],
     ],
     'faq.feedback': '请到<a href="{0}" target="_blank" rel="noopener">这里</a>联系我们。',
@@ -310,7 +331,7 @@ export const I18N = {
         title: 'D2 Survivors',
         sub: 'Created by framara',
         body: 'A free, unofficial fan-made survivors-like set in the world of Diablo II. This translation project is not affiliated with its author; please report game issues through the official channels.',
-        links: [['Official website', 'd2sHome'], ['Desktop download (Windows / Mac / Linux)', 'd2sDownload', 'desktop'], ['Play in the browser', 'd2sPlay', 'web'], ['Official Discord', 'd2sDiscord']],
+        links: [['Official website', 'd2sHome'], ['Desktop download (Windows / Mac / Linux)', 'd2sDownload', 'desktop'], ['Play in the browser', 'd2sPlay', 'web'], ['Official game Discord', 'd2sDiscord']],
       },
       {
         title: 'Diablo II',
@@ -375,6 +396,15 @@ export const I18N = {
       'Reloading the page brings back the original game; use the bookmark again.',
       'Saves stay in your browser as usual. The bookmark loads the latest translation from this site each time, so it needs a connection.',
     ],
+    'changelog.title': 'Changelog',
+    'changelog.lead': 'Updates to translations, languages, and the launcher. The launcher and the bookmark pick up the latest translation every time, with no new download.',
+    'changelog.kind.translation': 'Translation',
+    'changelog.kind.language': 'Language',
+    'changelog.kind.game-fix': 'Game update',
+    'changelog.kind.launcher': 'Launcher',
+    'notice.stale': '<strong>The game was just updated and the translation is being fixed.</strong> Until then, the bookmark and the launcher may not be able to apply it, and the game runs in English as usual. The fix will be listed in the changelog.',
+    'notice.discord': 'For the latest news, see the <a href="{0}" target="_blank" rel="noopener">localization community Discord</a>.',
+    'community.join': 'Join the localization Discord',
     'faq.title': 'FAQ',
     'faq.items': [
       ['Is this an official translation?', '<p>No. It is an unofficial fan translation, not affiliated with the D2 Survivors developers or Blizzard Entertainment.</p>'],
@@ -389,6 +419,7 @@ export const I18N = {
       ['Why is some text still in English?', '<p>Almost all UI, skills, items, and monsters are translated. Patch notes and some longer skill descriptions are still in progress and show in English for now; the bookmark always loads the latest translation, so they appear as soon as they’re done.</p>', 'web'],
       ['Windows says “Windows protected your PC”. What do I do?', '<p>The launcher isn’t code-signed (a signing certificate costs money every year), so Windows SmartScreen warns about it until enough people have downloaded it.</p><p>Click <strong>More info</strong>, then <strong>Run anyway</strong>; Windows won’t ask again. Only download it from this site or <a href="https://github.com/cycleapple/d2survivors-localization/releases" target="_blank" rel="noopener">GitHub Releases</a>. Every release includes <code>d2s-launcher.exe.sha256</code>, which you can check with <code>certutil -hashfile d2s-launcher.exe SHA256</code>.</p><p>If your browser says the file isn’t commonly downloaded, choose <strong>Keep</strong> from the download’s menu.</p>', 'desktop'],
       ['Can I use Chinese in character names?', '<p>Not yet. The game itself only allows English letters and Korean in character names.</p>'],
+      ['Where do I report a translation error or something broken?', '<p>Typos, missing translations, and problems with the bookmark or launcher go to the <a href="{discord}" target="_blank" rel="noopener">localization community Discord</a>, where news is posted too.</p><p>Problems with the game itself (not caused by the translation) go to the <a href="https://discord.gg/mYMGgZPuQb" target="_blank" rel="noopener">official D2 Survivors Discord</a>.</p>'],
       ['How can I help translate or report a typo?', '<p>Gladly! Every language other than Traditional Chinese is still in progress or in beta, and native speakers are especially welcome to help review. {feedback}</p>'],
     ],
     'faq.feedback': 'Get in touch <a href="{0}" target="_blank" rel="noopener">here</a>.',

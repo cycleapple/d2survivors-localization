@@ -12,8 +12,15 @@ export const SITE = {
   bookmarkletPath: 'web/d2zh.js',
   // manifest 讀不到時用的數字
   fallback: { gameVersion: '2026.1026.4', launcherVersion: '0.1.0' },
-  // 回報問題的網址（GitHub Issues、Discord…），留空就不顯示
+  // 中文化社群的 Discord 邀請連結（使用者自己的伺服器，不是遊戲官方的 LINKS.d2sDiscord）。留空就不顯示
+  discordUrl: '',
+  // 回報問題的其他網址（GitHub Issues…），沒有 discordUrl 時才用。留空就不顯示
   feedbackUrl: '',
+  // 更新紀錄顯示幾筆（site/data/changelog.json，manifest 的 changelog.url）
+  changelogCount: 5,
+  // manifest 的 game.web_checked 超過幾小時沒更新，就顯示「遊戲剛更新，翻譯修正中」
+  // （每小時的 web-check 只在規則都套得上時才更新這個時間）
+  staleHours: 3,
 };
 
 // 官方連結（D2 Survivors 官網上的 Battle.net 商店連結也是這個）

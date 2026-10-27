@@ -63,8 +63,31 @@ export function downloadBtnHtml(state, t, downloadUrl) {
     : `<a class="btn btn-primary" id="download-btn" aria-disabled="true">${esc(t['hero.soon'])}</a>`;
 }
 
+// 多語言欄位（changelog 的 summary）：該語言 → 中文頁用繁中、其他用英文 → 有什麼用什麼
+export function pickText(obj, lang) {
+  if (!obj) return '';
+  const order = [lang, lang.startsWith('zh') ? 'zh-TW' : 'en', 'en', 'zh-TW'];
+  return obj[order.find(k => obj[k])] ?? Object.values(obj)[0] ?? '';
+}
+
+// 更新紀錄（changelog.json 的 entries，新的在前）
+export function changelogHtml(entries, t, lang, count) {
+  return entries.slice(0, count).map(e => `<li>
+            <time datetime="${esc(e.date)}">${esc(e.date)}</time>
+            <span class="kind kind-${esc(e.kind)}">${esc(t['changelog.kind.' + e.kind] || e.kind)}</span>
+            <span class="changelog-summary">${esc(pickText(e.summary, lang))}</span>
+          </li>`).join('\n          ');
+}
+
+// game.web_checked 太舊＝每小時的檢查一直沒通過，網頁版可能壞了
+export function isStale(webChecked, hours, now = Date.now()) {
+  const time = Date.parse(webChecked || '');
+  return Number.isFinite(time) && now - time > hours * 3600e3;
+}
+
 // 網頁讀 manifest 後要用到的文字（建置時嵌進頁面）
 export const RUNTIME_KEYS = [
+  'changelog.kind.translation', 'changelog.kind.language', 'changelog.kind.game-fix', 'changelog.kind.launcher',
   'lang.coverage', 'status.available', 'status.beta', 'status.planned',
   'meta.updated', 'meta.game', 'meta.launcher', 'meta.platform', 'meta.browsers', 'meta.devices', 'meta.devices.value',
   'hero.download', 'hero.soon', 'web.copied', 'web.copyfail', 'web.pc.drag',
