@@ -31,9 +31,12 @@ function forms(row) {
   TOKEN.lastIndex = 0;
   const count = (en.match(TOKEN) ?? []).length;
   if ((zh.match(TOKEN) ?? []).length !== count) return [];
-  let i = 0, k = 0;
-  const zhT = zh.replace(TOKEN, (_, plus) => `${plus}{${i++}}`).replace(/%%/g, '%');
-  const koT = ko.replace(TOKEN, (_, plus) => `${plus}{${k++}}`).replace(/%%/g, '%');
+  // D2R 的譯文可以用 %0、%1… 指定是英文的第幾個參數（日、法、俄文常調換順序），換成遊戲的 {位置}；%d、%s 照出現順序
+  const argOf = (t, i) => /[0-9]$/.test(t) ? Number(t.at(-1)) : i;
+  const enArgs = (en.match(TOKEN) ?? []).map(argOf);
+  const slots = s => { let i = 0; return s.replace(TOKEN, (t, plus) => { const a = argOf(t, i++); const p = enArgs.indexOf(a); return `${plus}{${p < 0 ? a : p}}`; }).replace(/%%/g, '%'); };
+  const zhT = slots(zh);
+  const koT = slots(ko);
   const enStar = en.replace(TOKEN, (_, plus) => `${plus}*`).replace(/%%/g, '%');
   const enHash = en.replace(TOKEN, (_, plus) => `${plus}#`).replace(/%%/g, '%');
   return [{ en: enStar, ko: koT, zh: zhT }, { en: enHash, ko: koT, zh: zhT }];
