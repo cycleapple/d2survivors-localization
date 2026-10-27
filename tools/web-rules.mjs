@@ -45,7 +45,7 @@ function pattern(src) {
 }
 
 export const WEB_PLAY_URL = 'https://d2survivors.lol/play/';
-export const WEB_CHECKED = '2026-10-27T13:04:28.142Z';
+export const WEB_CHECKED = '2026-10-27T13:21:03.641Z';
 
 export const WEB_LANGUAGES = [
   {
@@ -70,13 +70,17 @@ export const WEB_LANGUAGES = [
     id: 'ru', menu_name: 'Русский', html_lang: 'ru', groups: ['base', 'dict', 'cyrillic', 'font-ru', 'magic-ru', 'unique-ru'],
     fonts: ['Segoe UI Bold', 'Arial Bold', 'Roboto Bold', 'Noto Sans Bold', 'Segoe UI', 'Arial', 'Roboto', 'Noto Sans'],
   },
+  {
+    id: 'pl', menu_name: 'Polski', html_lang: 'pl', groups: ['base', 'dict', 'latin-ext', 'font-pl', 'size-pl', 'magic-pl', 'unique-pl'],
+    fonts: ['Segoe UI Bold', 'Arial Bold', 'Roboto Bold', 'Noto Sans Bold', 'Segoe UI', 'Arial', 'Roboto', 'Noto Sans'],
+  },
 ];
 
 const MAGIC = pattern('return[<1>(<2>),<1>(<3>),this.translateAs(`item`,<4>)].filter(Boolean).join(` `)');
 
-// 有詞性的語言（德、法、俄）的名稱組合，跟桌面版（patch-rules.mjs）的同名規則輸出一樣，參考實作是
+// 有詞性的語言（德、法、俄、波蘭）的名稱組合，跟桌面版（patch-rules.mjs）的同名規則輸出一樣，參考實作是
 // work/translation/compose-proto.mjs。字典裡 affix:<詞綴>、unique:<前段> 是每種詞性的形式「[ms]прочный[fs]прочная…」，
-// gender:<名詞> 是名詞的詞性（ms／fs／ns／pl，法文複數 mp／fp）。
+// gender:<名詞> 是名詞的詞性（ms／fs／ns／pl，法文複數 mp／fp，波蘭文的中性和複數都是 nl）。
 // 規則裡新加的變數都用 d2 開頭，免得跟遊戲壓縮後的名稱撞到。
 // 挑出詞性 G 的形式：沒有標記就原樣，找不到那個詞性就用第一個
 const PICK = G => `d2k=d2v=>{if(!d2v.startsWith(\`[\`))return d2v;let d2o=d2v.split(\`[\`).slice(1),d2w=d2o.find(d2x=>d2x.startsWith(${G}+\`]\`))??d2o[0];return d2w.slice(d2w.indexOf(\`]\`)+1).trim()}`;
@@ -88,7 +92,7 @@ const magic = expr => `let d2g=this.exact.get(\`gender:\${$4.trim()}\`.replace(/
 // 獨特怪物：$4 是英文的 [前段, 後段, 稱號]，$1／$2／$3 是各段的譯文，$6 是查詢函式。
 // $6(`gender`,…) 查不到時會退回一般翻譯，所以要確認拿到的是詞性代碼
 const UNIQUE = pattern('let[<1>,<2>,<3>]=<4>.map(<5>=><6>(`unique`,<5>));return`${<3>} ${<1>} ${<2>}`');
-const unique = expr => `let[$1,$2,$3]=$4.map($5=>$6(\`unique\`,$5)),d2G=$6(\`gender\`,$4[1]);d2G=/^(ms|fs|ns|pl|mp|fp)$/.test(d2G)?d2G:\`ms\`;let ${PICK('d2G')},${CASE};return${expr}`;
+const unique = expr => `let[$1,$2,$3]=$4.map($5=>$6(\`unique\`,$5)),d2G=$6(\`gender\`,$4[1]);d2G=/^(ms|fs|ns|pl|mp|fp|nl)$/.test(d2G)?d2G:\`ms\`;let ${PICK('d2G')},${CASE};return${expr}`;
 
 export const WEB_RULES = [
   // 語言選單多幾個語言（選單直接用這個物件的 key 排列）
@@ -124,11 +128,13 @@ export const WEB_RULES = [
   // 日文是「前綴 後綴 物品」（D2R 日文的 MagicFormat「%0%2%1」），也不加空格：頑丈な魔力のキャップ
   { label: '魔法物品名稱組合（日文）', groups: ['magic-ja'], optional: true, file: '^translate-.*\\.js$', find: MAGIC, replace: 'return[$1($3),$1($2),this.translateAs(`item`,$4)].filter(Boolean).join(``)' },
   // 德文「前綴 物品 後綴」（D2R MagicFormat %0 %1 %2），前綴結尾是「 -」時跟物品用連字號接（Engels-Ring），句首大寫：Robuste Kappe des Geistes
-  { label: '魔法物品名稱組合（德文）', groups: ['magic-de'], optional: true, file: '^translate-.*\.js$', find: MAGIC, replace: magic('d2U([d2p&&(d2p.endsWith(` -`)?`${d2p.slice(0,-2)}-${d2b}`:`${d2p} ${d2b}`),!d2p&&d2b,d2q].filter(Boolean).join(` `))') },
+  { label: '魔法物品名稱組合（德文）', groups: ['magic-de'], optional: true, file: '^translate-.*\\.js$', find: MAGIC, replace: magic('d2U([d2p&&(d2p.endsWith(` -`)?`${d2p.slice(0,-2)}-${d2b}`:`${d2p} ${d2b}`),!d2p&&d2b,d2q].filter(Boolean).join(` `))') },
   // 法文「物品 前綴 後綴」（%1 %0 %2）：Coiffe solide de l’esprit
-  { label: '魔法物品名稱組合（法文）', groups: ['magic-fr'], optional: true, file: '^translate-.*\.js$', find: MAGIC, replace: magic('[d2b,d2p,d2q].filter(Boolean).join(` `)') },
+  { label: '魔法物品名稱組合（法文）', groups: ['magic-fr'], optional: true, file: '^translate-.*\\.js$', find: MAGIC, replace: magic('[d2b,d2p,d2q].filter(Boolean).join(` `)') },
   // 俄文「前綴 物品 後綴」（%0 %1 %2），有前綴時物品小寫開頭，句首大寫：Прочный наголовник разума
-  { label: '魔法物品名稱組合（俄文）', groups: ['magic-ru'], optional: true, file: '^translate-.*\.js$', find: MAGIC, replace: magic('d2U([d2p,d2p?d2W(d2b):d2b,d2q].filter(Boolean).join(` `))') },
+  { label: '魔法物品名稱組合（俄文）', groups: ['magic-ru'], optional: true, file: '^translate-.*\\.js$', find: MAGIC, replace: magic('d2U([d2p,d2p?d2W(d2b):d2b,d2q].filter(Boolean).join(` `))') },
+  // 波蘭文「前綴 物品 後綴」（%0 %1 %2），D2R 的名稱本來就每個字大寫開頭，不改大小寫：Masywne Rękawice Lisa
+  { label: '魔法物品名稱組合（波蘭文）', groups: ['magic-pl'], optional: true, file: '^translate-.*\\.js$', find: MAGIC, replace: magic('[d2p,d2b,d2q].filter(Boolean).join(` `)') },
   // 獨特怪物名字（遊戲照韓文排成「稱號 前段 後段」）
   // 德文「前段-後段 稱號」（D2R Monster2Format a0n1）：Düsternis-Hauer der Hungrige
   { label: '獨特怪物名字（德文）', groups: ['unique-de'], optional: true, find: UNIQUE, replace: 'let[$1,$2,$3]=$4.map($5=>$6(`unique`,$5));return`${$1.endsWith(` -`)?`${$1.slice(0,-2)}-${$2}`:`${$1} ${$2}`} ${$3}`' },
@@ -136,6 +142,8 @@ export const WEB_RULES = [
   { label: '獨特怪物名字（法文）', groups: ['unique-fr'], optional: true, find: UNIQUE, replace: unique('`${$2} ${d2k($1)} ${d2W($3)}`') },
   // 俄文「稱號, 前段 後段」（D2R 的「%2, %0 %1」），前段照後段的詞性挑：Голод, Мрачный клык
   { label: '獨特怪物名字（俄文）', groups: ['unique-ru'], optional: true, find: UNIQUE, replace: unique('`${d2U($3)}, ${d2U(d2k($1))} ${d2W($2)}`') },
+  // 波蘭文「稱號, 前段 後段」（D2R「%2, %0 %1」），前段照後段的詞性挑，不改大小寫：Żarłok, Mroczny Kieł
+  { label: '獨特怪物名字（波蘭文）', groups: ['unique-pl'], optional: true, find: UNIQUE, replace: unique('`${$3}, ${d2k($1)} ${$2}`') },
   // 「標籤: 值」分開翻再接回去時，標籤是中文就用全形「：」、不加空格（只有繁中：D2R 的簡中、日文本來就用半形冒號）
   {
     label: '標籤與值的冒號', groups: ['fullwidth'], optional: true, file: '^translate-.*\\.js$',
@@ -156,9 +164,28 @@ export const WEB_RULES = [
   },
   // 俄文字型：外文字的字型家族在西里爾字母的範圍改用系統字型
   {
-    label: '俄文字型', groups: ['font-ru'], optional: true, file: '^lang-.*\.js$',
+    label: '俄文字型', groups: ['font-ru'], optional: true, file: '^lang-.*\\.js$',
     find: pattern('if(typeof FontFace>`u`)return;'),
     replace: 'if(typeof FontFace>`u`)return;await Promise.all([`D2R Kodia`,`D2R Iris`,`D2 Hangul`,`D2 Hangul 14`].map(async f=>{try{document.fonts.add(await new FontFace(f,`{{fonts}}`,{unicodeRange:`U+0400-04FF`}).load())}catch{}}));',
+  },
+  // 波蘭文：ą ć ę ł ń ś ź ż（Latin Extended-A，U+0100–017F）點陣字型沒有（只有 Latin-1），一樣當外文字
+  {
+    label: '外文字判斷（拉丁擴充 A）', groups: ['latin-ext'],
+    find: pattern('return <1>>=44032&&<1><=55203||<1>>=12592&&<1><=12687||<1>>=4352&&<1><=4607}'),
+    replace: 'return $1>=44032&&$1<=55203||$1>=12592&&$1<=12687||$1>=4352&&$1<=4607||$1>=256&&$1<=383}',
+  },
+  // 波蘭文字型：外文字的字型家族在 Latin Extended-A 的範圍改用系統字型
+  {
+    label: '波蘭文字型', groups: ['font-pl'], optional: true, file: '^lang-.*\\.js$',
+    find: pattern('if(typeof FontFace>`u`)return;'),
+    replace: 'if(typeof FontFace>`u`)return;await Promise.all([`D2R Kodia`,`D2R Iris`,`D2 Hangul`,`D2 Hangul 14`].map(async f=>{try{document.fonts.add(await new FontFace(f,`{{fonts}}`,{unicodeRange:`U+0100-017F`}).load())}catch{}}));',
+  },
+  // 外文字大小：遊戲照韓文放大（標題 ×1.25～1.4、內文 ×1.3 加粗）。波蘭文只有幾個字母走外文字、夾在點陣字母中間，
+  // 照韓文的比例會比旁邊的字大一號：標題 ×1.2、內文 ×1.0 不加粗
+  {
+    label: '外文字大小（波蘭文）', groups: ['size-pl'], optional: true, file: '^ui-.*\\.js$',
+    find: pattern('let <1>=<2>>=20?1.25:1.4;[this.foreignSize,this.foreignFamily]=<3>?[Math.round(<2>*<1>),<4>]:[Math.max(12,Math.round(<2>*1.3)),<5>],this.foreignWeight=<3>?``:`bold `'),
+    replace: 'let $1=1.2;[this.foreignSize,this.foreignFamily]=$3?[Math.round($2*$1),$4]:[Math.max(12,Math.round($2*1)),$5],this.foreignWeight=``',
   },
   // 點陣字型只在空白處斷行：含中日文的詞再拆成一個字一個字（句末標點黏前一個字、左括號黏後一個字，
   // 數字和英文黏著後面那個字），拆出來的片段接回去時不加空白
@@ -170,7 +197,7 @@ export const WEB_RULES = [
   // 外文字的顏色照點陣字型推算：石頭按鈕的黑字會被當成「灰色填色＋黑色描邊」，中日文看起來像空心的灰字。
   // 填色很暗（門檻 75）又比描邊淡時，只用描邊的顏色畫實心字，再往右 1 像素多畫一次當粗體。跟桌面版的同名規則一樣
   {
-    label: '暗色字不加描邊', groups: ['cjk', 'cyrillic'], optional: true, file: '^ui-.*\.js$',
+    label: '暗色字不加描邊', groups: ['cjk', 'cyrillic', 'latin-ext'], optional: true, file: '^ui-.*\\.js$',
     find: pattern('<1>=[];if(<2>.outline){let <3>=`rgb(${<4>(<2>.outline.level,<2>.outline.own)})`;for(let[<5>,<6>]of[[-1,0],[1,0],[0,-1],[0,1],[-1,-1],[1,-1],[-1,1],[1,1]])<1>.push([<3>,<5>*<7>,<6>*<7>])}<1>.push([`rgb(${<4>(<2>.level,<2>.own)})`,0,0]);'),
     replace: '$1=[];let d2F=$4($2.level,$2.own),d2U=$2.outline&&$4($2.outline.level,$2.outline.own),d2M=e=>Math.max(...e.split(`,`).map(Number)),d2D=d2U&&d2M(d2F)<75&&d2M(d2U)<d2M(d2F);if($2.outline&&!d2D){let $3=`rgb(${d2U})`;for(let[$5,$6]of[[-1,0],[1,0],[0,-1],[0,1],[-1,-1],[1,-1],[-1,1],[1,1]])$1.push([$3,$5*$7,$6*$7])}$1.push([`rgb(${d2D?d2U:d2F})`,0,0]);d2D&&$1.push([`rgb(${d2U})`,1,0]);',
   },

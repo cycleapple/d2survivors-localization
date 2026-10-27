@@ -49,6 +49,11 @@ const MESSAGES = {
     failed: 'Не удалось загрузить перевод: ', outdated: 'Игра обновилась, перевод нужно обновить', page: 'Сначала откройте страницу игры D2 Survivors (https://d2survivors.lol/play/), затем нажмите эту закладку.',
     old: 'Закладка устарела. Установите ее заново на сайте перевода.', loop: 'Перевод постоянно перезагружается и был остановлен. Обновите страницу.', frame: 'Не удалось загрузить перевод: не открывается фрейм. Обновите страницу.',
   },
+  pl: {
+    loading: 'Wczytywanie polskiego tłumaczenia…', on: 'Polski jest włączony. Kliknij zakładkę ponownie, aby przełączać między polskim a angielskim.', to: 'Przełączanie na polski',
+    failed: 'Nie udało się wczytać tłumaczenia: ', outdated: 'Gra została zaktualizowana, tłumaczenie wymaga aktualizacji', page: 'Najpierw otwórz stronę gry D2 Survivors (https://d2survivors.lol/play/), a potem kliknij tę zakładkę.',
+    old: 'Zakładka jest nieaktualna. Zainstaluj ją ponownie ze strony tłumaczenia.', loop: 'Tłumaczenie ciągle się przeładowuje i zostało zatrzymane. Odśwież stronę.', frame: 'Nie udało się wczytać tłumaczenia: nie można otworzyć ramki. Odśwież stronę.',
+  },
 };
 
 // manifest 的 status：beta＝測試中、draft＝草稿（用那個語言自己寫）
@@ -59,6 +64,7 @@ const STATUS = {
   de: { beta: '(Beta)', draft: '(Entwurf)' },
   fr: { beta: '(bêta)', draft: '(brouillon)' },
   ru: { beta: '(бета)', draft: '(черновик)' },
+  pl: { beta: '(beta)', draft: '(wersja robocza)' },
   en: { beta: '(beta)', draft: '(draft)' },
 };
 
@@ -72,7 +78,7 @@ const normalize = id => id === 'zh' ? 'zh-TW' : id;
 function wanted(ids) {
   for (const id of [normalize(store.get(LANG_KEY)), store.get(LAST_KEY)]) if (ids.includes(id)) return id;
   for (const tag of navigator.languages ?? [navigator.language]) {
-    const id = /^zh\b.*\b(Hans|CN|SG|MY)\b/i.test(tag) ? 'zh-CN' : /^zh\b/i.test(tag) ? 'zh-TW' : /^(ja|de|fr|ru)\b/i.exec(tag)?.[1].toLowerCase() ?? null;
+    const id = /^zh\b.*\b(Hans|CN|SG|MY)\b/i.test(tag) ? 'zh-CN' : /^zh\b/i.test(tag) ? 'zh-TW' : /^(ja|de|fr|ru|pl)\b/i.exec(tag)?.[1].toLowerCase() ?? null;
     if (id && ids.includes(id)) return id;
   }
   return ids.includes('zh-TW') ? 'zh-TW' : ids[0];
