@@ -115,8 +115,41 @@ pre code { background: none; border: 0; padding: 0; word-break: normal; }
 /* 只顯示目前版本的內容 */
 body[data-platform="desktop"] [data-only="web"],
 body[data-platform="web"] [data-only="desktop"] { display: none; }
-.switch-hint { color: var(--muted); font-size: 0.9rem; margin: -16px 0 24px; }
 .link-btn { font: inherit; color: var(--gold-hi); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; }
+
+/* 選版本的大卡片：首屏一份、安裝區塊開頭一份（compact）。選中的用金框和淡金底，靠 body[data-platform] 判斷 */
+.platform-pick { display: grid; grid-template-columns: repeat(2, minmax(0, 270px)); justify-content: center; gap: 12px; margin: 8px auto 28px; }
+.pick-label { grid-column: 1 / -1; margin: 0; color: var(--muted); font-size: 0.85rem; letter-spacing: 0.05em; }
+.pick {
+  position: relative; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 14px 12px 16px;
+  font: inherit; color: var(--text); text-align: center; cursor: pointer;
+  background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); transition: border-color 0.15s, background 0.15s;
+}
+.pick:hover { border-color: var(--gold); }
+.pick-icon { font-size: 1.6rem; line-height: 1.25; }
+.pick-title { font-weight: 700; font-size: 1.1rem; color: var(--gold-hi); }
+.pick-sub { font-size: 0.8rem; color: var(--muted); }
+.pick-desc { font-size: 0.86rem; line-height: 1.45; margin-top: 6px; }
+body[data-platform="desktop"] .pick[data-platform="desktop"],
+body[data-platform="web"] .pick[data-platform="web"] { border-color: var(--gold); background: rgba(201, 164, 92, 0.14); box-shadow: inset 0 0 0 1px var(--gold); }
+body[data-platform="desktop"] .pick[data-platform="desktop"]::after,
+body[data-platform="web"] .pick[data-platform="web"]::after {
+  content: "✓"; position: absolute; top: 6px; right: 8px; width: 20px; height: 20px; border-radius: 50%;
+  font-size: 0.75rem; line-height: 20px; font-weight: 700; color: #1a1206; background: var(--gold);
+}
+.platform-pick.compact { justify-content: start; grid-template-columns: repeat(2, max-content); margin: 0 0 28px; }
+.compact .pick { flex-direction: row; justify-content: flex-start; align-items: baseline; gap: 8px; padding: 10px 38px 10px 14px; text-align: left; white-space: nowrap; }
+.compact .pick-icon { font-size: 1.2rem; }
+.compact .pick-title { font-size: 1rem; }
+.compact .pick::after { top: 50% !important; margin-top: -10px; }
+@media (max-width: 760px) {
+  .platform-pick { gap: 8px; }
+  .pick { padding: 12px 8px 14px; }
+  .pick-desc { font-size: 0.8rem; }
+  .platform-pick.compact { grid-template-columns: 1fr 1fr; }
+  .compact .pick { flex-direction: column; align-items: flex-start; gap: 0; padding: 8px 30px 8px 12px; white-space: normal; }
+  .compact .pick-icon { display: none; }
+}
 
 /* Hero */
 .hero {
@@ -231,7 +264,7 @@ h3 { font-size: 1.15rem; margin: 0 0 10px; }
 .card .card-sub { color: var(--muted); font-size: 0.85rem; margin: -6px 0 10px; }
 .links { list-style: none; padding: 0; margin: 14px 0 0; display: grid; gap: 8px; }
 .links a {
-  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px 12px;
   padding: 10px 14px; border: 1px solid var(--line); border-radius: var(--radius);
   text-decoration: none; color: var(--gold-hi); background: var(--bg-2);
 }

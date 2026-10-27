@@ -58,6 +58,11 @@ node tools/serve.mjs site 8766     # 本機預覽（或 python -m http.server 87
 
 - 第一層是介面語言：各自一頁，用連結切換。寬螢幕是分頁（前面有 🌐）；1000px 以下放不下，改成在頁面最上面一次列出所有語言（`.lang-strip`，會折成兩、三行，目前的語言反白），標題列只留版本分頁。每個語言都用自己的語言寫，不用只寫一種語言的「語言」標籤或下拉選單，看不懂中文的訪客也找得到。之後語言再變多、寬螢幕的分頁放不下時，調高這個寬度
 - 第二層是版本：桌面版（啟動器，`#install`）、瀏覽器版（書籤，`#web`），同一頁裡切換。兩邊內容都在 HTML 裡，標 `data-only="desktop"`／`"web"`，用 CSS 藏起另一邊
+- 切換版本的地方有三個：
+  - 首屏標題下面的兩張大卡片（`.platform-pick`）：圖示、版本名稱、`platform.*.sub`、一句說明 `platform.*.desc`，上面一行 `platform.choose`。手機上也並排，不用捲動就看得到
+  - 標題列的小分頁：標題列固定在上方，捲到哪裡都在
+  - 安裝區塊開頭的小卡片（`.platform-pick.compact`）：按另一個版本會捲到那個版本的安裝區塊
+- 選中的卡片是金框、淡金底加 ✓，靠 `body[data-platform]` 的 CSS 判斷，JS 還沒跑也對
 - 顯示哪個版本：網址 `?platform=desktop`／`web` → `#install`／`#web` → 上次選的（localStorage）→ Windows 用桌面版，其他（Mac、Linux、手機）用瀏覽器版。在 `<body>` 開頭用一小段內嵌程式先決定，不會先閃一下桌面版
 
 ## manifest v2

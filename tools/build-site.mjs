@@ -197,6 +197,17 @@ function perPlatform(t, key, render) {
   return web === undefined ? render(t[key], '') : render(t[key], ' data-only="desktop"') + '\n        ' + render(web, ' data-only="web"');
 }
 
+// 選版本的兩張大卡片：首屏標題下面一份，安裝區塊開頭各一份（compact，按了會捲到另一個版本的安裝區塊）。
+// 選中的那張靠 body[data-platform] 的 CSS 標出來，JS 還沒跑也對
+const PLATFORM_ICON = { desktop: '🖥️', web: '🌐' };
+const platformPicker = (t, compact = false) => `<div class="platform-pick${compact ? ' compact' : ''}" role="group" aria-label="${esc(t['platform.label'])}">
+          ${compact ? '' : `<p class="pick-label">${esc(t['platform.choose'])}</p>\n          `}${['desktop', 'web'].map(p => `<button type="button" class="pick" data-platform="${p}">
+            <span class="pick-icon" aria-hidden="true">${PLATFORM_ICON[p]}</span>
+            <span class="pick-title">${esc(t['platform.' + p])}</span>
+            <span class="pick-sub">${esc(t[`platform.${p}.sub`])}</span>
+            ${compact ? '' : `<span class="pick-desc">${esc(t[`platform.${p}.desc`])}</span>\n          `}</button>`).join('\n          ')}
+        </div>`;
+
 // 版本分頁用：在 JS 執行前先決定顯示哪個版本，避免先閃一下桌面版
 const PLATFORM_BOOT = `<script>(function(){var P=['desktop','web'],q=new URLSearchParams(location.search).get('platform'),h={'#install':'desktop','#web':'web'}[location.hash],s;try{s=localStorage.getItem('d2s-site-platform')}catch(e){}document.body.dataset.platform=P.indexOf(q)>=0?q:h||(P.indexOf(s)>=0?s:/Windows/i.test(navigator.userAgent)?'desktop':'web')})()</script>`;
 
@@ -322,6 +333,7 @@ function langPage(sl) {
       <div class="wrap">
         <p class="eyebrow">${esc(t['hero.eyebrow'])}</p>
         <h1>${esc(t['hero.title'])}</h1>
+        ${platformPicker(t)}
         ${perPlatform(t, 'hero.lead', (s, a) => `<p class="lead"${a}>${esc(s)}</p>`)}
         <div class="cta" data-only="desktop">
           ${downloadBtnHtml(state, t, SITE.downloadUrl)}
@@ -382,7 +394,7 @@ function langPage(sl) {
       <div class="wrap">
         <h2>${esc(t['install.title'])}</h2>
         <p class="section-lead">${esc(t['install.lead'])}</p>
-        <p class="switch-hint">${esc(t['switch.toWeb'])} <button type="button" class="link-btn" data-platform="web">${esc(t['switch.toWeb.btn'])}</button></p>
+        ${platformPicker(t, true)}
         <ol class="steps">
           ${t['install.steps'].map(([title, body]) => `<li><strong>${esc(title)}</strong><p>${body}</p></li>`).join('\n          ')}
         </ol>
@@ -407,7 +419,7 @@ function langPage(sl) {
       <div class="wrap">
         <h2>${esc(t['web.title'])}</h2>
         <p class="section-lead">${t['web.lead']}</p>
-        <p class="switch-hint">${esc(t['switch.toDesktop'])} <button type="button" class="link-btn" data-platform="desktop">${esc(t['switch.toDesktop.btn'])}</button></p>
+        ${platformPicker(t, true)}
         <div class="cards">
           <article class="card">
             <h3>${esc(t['web.pc.title'])}</h3>

@@ -15,7 +15,7 @@ let platform = document.body.dataset.platform;
 
 function showPlatform() {
   document.body.dataset.platform = platform;
-  document.querySelectorAll('#platform-switch button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.platform === platform)));
+  document.querySelectorAll('#platform-switch button, .pick').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.platform === platform)));
 }
 
 function setPlatform(next) {
@@ -32,12 +32,12 @@ function setPlatform(next) {
   return true;
 }
 
-// 子分頁，以及安裝區塊裡「看另一個版本」的按鈕（這個會捲到那個版本的安裝區塊）
+// 標題列的子分頁、首屏的版本卡片，以及安裝區塊開頭的版本卡片（這個會捲到另一個版本的安裝區塊）
 document.addEventListener('click', e => {
   const btn = e.target.closest('button[data-platform]');
   if (!btn) return;
-  const fromHint = !btn.closest('#platform-switch');
-  if (setPlatform(btn.dataset.platform) && fromHint) $('#' + INSTALL_SECTION[platform]).scrollIntoView();
+  const inSection = btn.closest('.section');
+  if (setPlatform(btn.dataset.platform) && inSection) $('#' + INSTALL_SECTION[platform]).scrollIntoView();
 });
 
 // 連到 #install／#web 時切到那個版本，不然會連到被藏起來的區塊
