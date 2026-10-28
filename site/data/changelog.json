@@ -2,6 +2,84 @@
   "schema": 1,
   "entries": [
     {
+      "version": "20261028-0647",
+      "date": "2026-10-28",
+      "kind": "launcher",
+      "announce": true,
+      "summary": {
+        "zh-TW": "啟動器 1.0.1：遊戲剛更新、暫時用原版開啟時，主畫面會清楚提示；遊戲語言卡在韓文時會說明怎麼切回",
+        "zh-CN": "启动器 1.0.1：游戏刚更新、暂时用原版打开时，主界面会清楚提示；游戏语言卡在韩文时会说明怎么切回",
+        "en": "Launcher 1.0.1: a clear notice when the game just updated and opens untranslated for now, and steps to fix a game stuck in Korean",
+        "ja": "ランチャー 1.0.1：ゲーム更新直後に原版で起動した場合はメイン画面で分かりやすく通知、ゲームが韓国語のままの場合は戻し方を表示",
+        "de": "Launcher 1.0.1: deutlicher Hinweis, wenn das Spiel gerade aktualisiert wurde und vorerst unübersetzt startet; Anleitung, falls das Spiel auf Koreanisch hängt",
+        "fr": "Lanceur 1.0.1 : avis clair quand le jeu vient d'être mis à jour et démarre temporairement sans traduction ; marche à suivre si le jeu reste en coréen",
+        "ru": "Лаунчер 1.0.1: понятное уведомление, если игра только что обновилась и пока запускается без перевода, и инструкция, если игра осталась на корейском",
+        "pl": "Launcher 1.0.1: wyraźny komunikat, gdy gra właśnie się zaktualizowała i tymczasowo uruchamia się bez tłumaczenia, oraz instrukcja, gdy gra utknęła po koreańsku"
+      },
+      "game": {
+        "desktop": "2026.1027.4"
+      },
+      "launcher": "1.0.1",
+      "languages": [
+        {
+          "id": "zh-TW",
+          "status": "available",
+          "entries": 13038,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "zh-CN",
+          "status": "available",
+          "entries": 13037,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ja",
+          "status": "available",
+          "entries": 13043,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "de",
+          "status": "available",
+          "entries": 13077,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "fr",
+          "status": "available",
+          "entries": 13086,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ru",
+          "status": "available",
+          "entries": 13125,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "pl",
+          "status": "available",
+          "entries": 13115,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        }
+      ]
+    },
+    {
       "version": "20261028-0636",
       "date": "2026-10-28",
       "kind": "translation",

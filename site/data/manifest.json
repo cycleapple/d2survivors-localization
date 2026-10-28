@@ -1,7 +1,7 @@
 {
   "schema": 2,
-  "updated": "2026-10-28T06:36:01.257Z",
-  "version": "20261028-0636",
+  "updated": "2026-10-28T06:47:40.151Z",
+  "version": "20261028-0647",
   "game": {
     "desktop": "2026.1027.4",
     "web_checked": "2026-10-27T22:26:27.496Z"
@@ -1000,13 +1000,13 @@
     ]
   },
   "launcher": {
-    "latest": "1.0.0",
+    "latest": "1.0.1",
     "minimum": "1.0.0",
     "download": "https://github.com/cycleapple/d2survivors-localization/releases/latest/download/d2s-launcher.exe",
     "sha256_url": "https://github.com/cycleapple/d2survivors-localization/releases/latest/download/d2s-launcher.exe.sha256"
   },
   "changelog": {
-    "url": "changelog.json?v=5526ccceed11",
-    "latest": "20261028-0636"
+    "url": "changelog.json?v=24d41f740087",
+    "latest": "20261028-0647"
   }
 }
