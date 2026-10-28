@@ -67,7 +67,7 @@ site/data/dict/ja.json
   "desktop": {                             // = v1 的 patch，內容不變
     "assets_dir": "desktop/dist/web/assets",
     "dict_target": { "file": "^ko-.*\\.js$", "template": "var e={{dict}};export{e as default};" },
-    "rules": [ { "label": "…", "groups": ["base"], "file": "…", "from": "…", "to": "…" } ]
+    "rules": [ { "label": "…", "groups": ["base"], "file": "…", "from": "…", "to": "…", "optional": true } ]   // optional：加分規則（預設 false＝必要）。必要規則對不上就退回原版；只有加分規則對不上時照樣套用、略過那幾條
   },
 
   "web": {
