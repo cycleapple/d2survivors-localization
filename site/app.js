@@ -70,6 +70,18 @@ $('#copy-bookmarklet').addEventListener('click', async () => {
   }
 });
 
+// 截圖捲到附近（上下 200px 內）才開始下載，而且等頁面載完才開始看，不跟首屏搶網路；
+// 藏起來的那個版本的一排等切換過去、看得到時才載
+const shotObserver = new IntersectionObserver(entries => {
+  for (const e of entries) {
+    if (!e.isIntersecting) continue;
+    e.target.querySelectorAll('img[data-src]').forEach(img => { img.src = img.dataset.src; img.removeAttribute('data-src'); });
+    shotObserver.unobserve(e.target);
+  }
+}, { rootMargin: '200px 0px' });
+const watchShots = () => document.querySelectorAll('.shots').forEach(row => shotObserver.observe(row));
+if (document.readyState === 'complete') watchShots(); else addEventListener('load', watchShots, { once: true });
+
 // 截圖一排放不下時加上一張／下一張按鈕（換版本、改視窗大小時重新判斷）
 const screens = $('.screens');
 document.querySelectorAll('.shots').forEach(row => {

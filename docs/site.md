@@ -53,6 +53,13 @@ node tools/serve.mjs site 8766     # 本機預覽（或 python -m http.server 87
 - 檢查：`node tools/build-site.mjs --check` 把每頁的 title、description、canonical、hreflang、分享圖、JSON-LD 摘要寫到 `work/site/seo-check.txt`，也檢查重複、缺漏、FAQPage 題目是否在頁面上
 - `robots.txt` 只有放在網域根目錄才有效。現在在 `github.io/<repo>/` 底下，搜尋引擎不會讀；換成自己的網域之後才生效。在那之前，sitemap 請到 Google Search Console、Bing、百度站長平台手動提交
 - Google Fonts 只載入該語言需要的字型（繁中 Noto Serif TC、簡中 Noto Serif SC、英文只有 Cinzel）
+- 載入速度（手機版 Lighthouse 從 60 分上下提高到 93～96，2026-10-28）：
+  - 字型的 CSS 不擋住畫面：`media="print" onload="this.media='all'"`，加上 `<noscript>` 備案；字型到之前先用系統字型（`display=swap`）
+  - 中日文的 Noto Serif 只載這一頁用標題字型的地方實際出現的字（`&text=`）：品牌、h1～h3；首頁是語言名稱。建置時從產生好的 HTML 算（`withFonts`、`displayText`）。只載 700，600 沒用到
+  - 首頁只載 Cinzel 和語言名稱的幾個字，不載 Philosopher
+  - 截圖放 `data-src`，頁面載完、捲到附近（200px 內）才由 app.js 換成 `src`。`loading="lazy"` 在手機上的範圍太大，首屏還沒畫好就會先下載 1～2 MB 的截圖。`style="aspect-ratio"` 先佔好位置，沒有 JS 時用 `<noscript>` 裡的圖
+  - 新加用標題字型（`var(--font-display)`）的元素時，要把它加進 `displayText`，不然那些中日文字會用系統字型
+  - 量測：`work/` 以外的地方裝 Lighthouse，`node <lighthouse>/cli/index.js <網址> --only-categories=performance`；不要在沒有 package.json 的資料夾跑 `npm install`（會往上找到家目錄的 package.json）
 
 ## 兩層分頁
 

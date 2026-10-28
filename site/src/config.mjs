@@ -43,10 +43,10 @@ export const LINKS = {
 // 網站介面語言：每個一頁（<path>/index.html）。加 /ja/：這裡加一筆、i18n.mjs 加一份 ja，再重新產生
 // hreflang 給搜尋引擎、html 給 <html lang>、og 給 Open Graph、fonts 是 Google Fonts 要多載的字型
 export const SITE_LANGS = [
-  { id: 'zh-TW', path: 'zh-tw', label: '繁體中文', html: 'zh-Hant-TW', hreflang: 'zh-TW', og: 'zh_TW', fonts: ['Noto+Serif+TC:wght@600;700'] },
-  { id: 'zh-CN', path: 'zh-cn', label: '简体中文', html: 'zh-Hans-CN', hreflang: 'zh-CN', og: 'zh_CN', fonts: ['Noto+Serif+SC:wght@600;700'] },
+  { id: 'zh-TW', path: 'zh-tw', label: '繁體中文', html: 'zh-Hant-TW', hreflang: 'zh-TW', og: 'zh_TW', fonts: ['Noto+Serif+TC:wght@700'] },
+  { id: 'zh-CN', path: 'zh-cn', label: '简体中文', html: 'zh-Hans-CN', hreflang: 'zh-CN', og: 'zh_CN', fonts: ['Noto+Serif+SC:wght@700'] },
   { id: 'en', path: 'en', label: 'English', html: 'en', hreflang: 'en', og: 'en_US', fonts: [] },
-  { id: 'ja', path: 'ja', label: '日本語', html: 'ja', hreflang: 'ja', og: 'ja_JP', fonts: ['Noto+Serif+JP:wght@600;700'] },
+  { id: 'ja', path: 'ja', label: '日本語', html: 'ja', hreflang: 'ja', og: 'ja_JP', fonts: ['Noto+Serif+JP:wght@700'] },
   { id: 'de', path: 'de', label: 'Deutsch', html: 'de', hreflang: 'de', og: 'de_DE', fonts: [] },
   { id: 'fr', path: 'fr', label: 'Français', html: 'fr', hreflang: 'fr', og: 'fr_FR', fonts: [] },
   // Cinzel 沒有西里爾字母，標題改用 Philosopher

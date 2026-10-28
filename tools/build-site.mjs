@@ -49,7 +49,31 @@ const alternates = () => [
   ...SITE_LANGS.map(l => `<link rel="alternate" hreflang="${l.hreflang}" href="${pageUrl(l)}">`),
   `<link rel="alternate" hreflang="x-default" href="${BASE}">`,
 ].join('\n  ');
-const fontsLink = families => `<link href="https://fonts.googleapis.com/css2?${['Cinzel:wght@500;700', ...families].map(f => 'family=' + f).join('&')}&display=swap" rel="stylesheet">`;
+// 標題字型（Google Fonts）：不擋住畫面（media="print" 載完再換成 all），字型到之前先用系統字型（display=swap）。
+// 中日文的 Noto Serif 整套很大，只載這一頁用標題字型的地方實際出現的字（&text=）；Cinzel、Philosopher 是拉丁、西里爾字母，照常整套載。
+// head() 先放 FONTS_SLOT，整頁產生完再用 withFonts() 換成連結（要先有頁面內容才算得出用到哪些字）
+const GOOGLE_FONTS = 'https://fonts.googleapis.com/css2?';
+const FONTS_SLOT = '<!--fonts-->';
+const isCjkFamily = f => f.startsWith('Noto+Serif');
+const fontLink = href => `<link rel="stylesheet" href="${esc(href)}" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="${esc(href)}"></noscript>`;
+const plainText = s => s.replace(/<[^>]+>/g, '').replace(/&(amp|lt|gt|quot|#39);/g, m => ({ '&amp;': '&', '&lt;': '<', '&gt;': '>', '&quot;': '"', '&#39;': "'" })[m]);
+const nonAscii = s => [...new Set([...s].filter(c => c > '\x7f'))].sort().join('');
+// style.css 裡用 var(--font-display) 的地方：品牌、h1～h3（首頁的語言名稱另外算）
+const displayText = html => [
+  ...[...html.matchAll(/<(h[1-3])\b[^>]*>([\s\S]*?)<\/\1>/g)].map(m => m[2]),
+  ...[...html.matchAll(/class="brand"[^>]*>([\s\S]*?)<\/a>/g)].map(m => m[1]),
+].map(plainText).join('');
+// families：Cinzel 以外要載的；cjkText(family) 回傳那個中日文字型要載的字（沒有就不載）
+function withFonts(html, families, cjkText) {
+  const latin = ['Cinzel:wght@500;700', ...families.filter(f => !isCjkFamily(f))];
+  const links = [`${GOOGLE_FONTS}${latin.map(f => 'family=' + f).join('&')}&display=swap`];
+  for (const f of families.filter(isCjkFamily)) {
+    const text = cjkText(f);
+    if (text) links.push(`${GOOGLE_FONTS}family=${f}&text=${encodeURIComponent(text)}&display=swap`);
+  }
+  return html.replace(FONTS_SLOT, links.map(fontLink).join('\n  '));
+}
 
 // 站長平台驗證：config 有填才輸出
 const VERIFY_META = { google: 'google-site-verification', bing: 'msvalidate.01', baidu: 'baidu-site-verification' };
@@ -98,7 +122,7 @@ const ogAlt = (sl, t) => withFallback(t['og.alt'], t, sl ? shotFor(sl, OG_SHOT)?
 const jsonLd = data => `<script type="application/ld+json">${JSON.stringify(data, null, 1).replace(/</g, '\\u003c')}</script>`;
 
 // <head> 共用部分：SEO、Open Graph、Twitter 卡片、favicon、結構化資料
-function head({ title, description, url, ogLocale, ogAlt = [], fonts, prefix, image, imageAlt, ld }) {
+function head({ title, description, url, ogLocale, ogAlt = [], prefix, image, imageAlt, ld }) {
   return `<meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${esc(title)}</title>
@@ -128,7 +152,7 @@ function head({ title, description, url, ogLocale, ogAlt = [], fonts, prefix, im
   <link rel="apple-touch-icon" href="${prefix}apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  ${fontsLink(fonts)}
+  ${FONTS_SLOT}
   <link rel="stylesheet" href="${prefix}style.css">
   ${jsonLd(ld)}`;
 }
@@ -248,12 +272,15 @@ const langStrip = (sl, label, prefix) => `<nav class="lang-strip lang-switch" ar
     ${SITE_LANGS.map(o => langLink(o, sl, prefix)).join('\n    ')}
   </nav>`;
 
-// 截圖區：遊戲畫面一排（橫向捲動，寬螢幕一次兩張，app.js 加上一張／下一張），桌面版、瀏覽器版各自的畫面一排
+// 截圖區：遊戲畫面一排（橫向捲動，寬螢幕一次兩張，app.js 加上一張／下一張），桌面版、瀏覽器版各自的畫面一排。
+// 圖片網址放 data-src，捲到附近才由 app.js 換成 src：loading="lazy" 在手機上的範圍很大，首屏還沒畫好就會先下載這排 1～2 MB 的圖。
+// 沒有 JS 時用 noscript 裡的 img；aspect-ratio 讓還沒載入的圖先佔好位置
 function shotsSection(sl, t) {
   const figure = (scene, s) => {
     const caption = withFallback(t[`shots.${scene}`], t, s.fallback);
+    const attrs = `width="${s.width}" height="${s.height}" alt="${esc(caption)}"`;
     return `<figure class="shot shot-${scene}">
-            <img src="../${s.file}" width="${s.width}" height="${s.height}" loading="lazy" alt="${esc(caption)}">
+            <img data-src="../${s.file}" ${attrs} style="aspect-ratio: ${s.width} / ${s.height}"><noscript><img src="../${s.file}" ${attrs}></noscript>
             <figcaption>${esc(caption)}</figcaption>
           </figure>`;
   };
@@ -296,7 +323,7 @@ function langPage(sl) {
   const url = pageUrl(sl);
   const image = ogImage(sl);
 
-  return `<!doctype html>
+  const html = `<!doctype html>
 <html lang="${sl.html}">
 <head>
   ${head({
@@ -305,7 +332,6 @@ function langPage(sl) {
     url,
     ogLocale: sl.og,
     ogAlt: SITE_LANGS.filter(o => o !== sl).map(o => o.og),
-    fonts: sl.fonts,
     prefix: '../',
     image,
     imageAlt: ogAlt(sl, t),
@@ -492,6 +518,7 @@ function langPage(sl) {
 </body>
 </html>
 `;
+  return withFonts(html, sl.fonts, () => nonAscii(displayText(html)));
 }
 
 // 首頁：語言選擇。不自動跳轉（爬蟲才看得到），只依瀏覽器語言標出建議的語言
@@ -501,7 +528,7 @@ function rootPage() {
   // 首頁是 x-default，用英文；各語言的標題和說明在下面的卡片裡
   const title = 'Diablo 2 Survivors Translations | D2 Survivors Localization';
   const description = `Unofficial translations of the game itself for Diablo 2 Survivors (D2 Survivors). Pick your language: ${SITE_LANGS.map(s => s.label).join(', ')}.`;
-  return `<!doctype html>
+  const html = `<!doctype html>
 <html lang="en">
 <head>
   ${head({
@@ -510,7 +537,6 @@ function rootPage() {
     url: BASE,
     ogLocale: 'en_US',
     ogAlt: SITE_LANGS.filter(s => s.og !== 'en_US').map(s => s.og),
-    fonts: SITE_LANGS.flatMap(s => s.fonts),
     prefix: '',
     image: ogImage(null),
     imageAlt: ogAlt(null, en),
@@ -560,6 +586,14 @@ function rootPage() {
 </body>
 </html>
 `;
+  // 首頁：Cinzel 加上語言名稱用到的中日文字（簡中卡片用 SC、日文用 JP，其他照 :root 的 --font-display 用 TC，包括俄文的西里爾字母）
+  const cjkFamily = { 'zh-Hans': 'Noto+Serif+SC', ja: 'Noto+Serif+JP' };
+  const names = {};
+  for (const [, lang, name] of html.matchAll(/<li lang="([^"]+)"[^>]*>\s*<a class="root-lang"[^>]*>\s*<span class="root-lang-name">([^<]*)</g)) {
+    const fam = cjkFamily[lang.split('-').slice(0, 2).join('-')] || cjkFamily[lang.split('-')[0]] || 'Noto+Serif+TC';
+    names[fam] = (names[fam] || '') + plainText(name);
+  }
+  return withFonts(html, [...new Set(SITE_LANGS.flatMap(l => l.fonts).filter(isCjkFamily))], f => nonAscii(names[f.split(':')[0]] || ''));
 }
 
 // lastmod：頁面內容跟上次產生的一樣就沿用舊的日期（從現有的 sitemap.xml 讀），有變才寫今天
