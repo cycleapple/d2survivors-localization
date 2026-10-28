@@ -2,6 +2,84 @@
   "schema": 1,
   "entries": [
     {
+      "version": "20261028-0625",
+      "date": "2026-10-28",
+      "kind": "game-fix",
+      "announce": true,
+      "summary": {
+        "zh-TW": "已支援遊戲 2026.1027.4：修正啟動器選了翻譯卻開出英文或韓文的問題；這一版的 45 條新字串（狀態效果、阿卡拉的商店）接著補上",
+        "zh-CN": "已支持游戏 2026.1027.4：修复启动器选了翻译却打开英文或韩文的问题；这一版的 45 条新字符串（状态效果、阿卡拉的商店）随后补上",
+        "en": "Supports game 2026.1027.4: fixes the launcher opening the game in English or Korean after choosing a translation; this version's 45 new strings (status effects, Akara's shop) follow shortly",
+        "ja": "ゲーム 2026.1027.4 に対応：翻訳を選んでも英語や韓国語で起動していた問題を修正。このバージョンの新しい文字列 45 件（状態異常、アカラの店）は続けて追加します",
+        "de": "Unterstützt Spielversion 2026.1027.4: Der Launcher startet das Spiel nicht mehr auf Englisch oder Koreanisch, obwohl eine Übersetzung gewählt ist; die 45 neuen Texte dieser Version (Zustände, Akaras Laden) folgen in Kürze",
+        "fr": "Compatible avec le jeu 2026.1027.4 : le lanceur n'ouvre plus le jeu en anglais ou en coréen après le choix d'une traduction ; les 45 nouveaux textes de cette version (états, boutique d'Akara) suivent sous peu",
+        "ru": "Поддержка версии игры 2026.1027.4: лаунчер больше не запускает игру на английском или корейском после выбора перевода; 45 новых строк этой версии (состояния, лавка Акары) появятся вскоре",
+        "pl": "Obsługa wersji gry 2026.1027.4: launcher nie uruchamia już gry po angielsku lub koreańsku mimo wybranego tłumaczenia; 45 nowych tekstów tej wersji (stany, sklep Akary) pojawi się wkrótce"
+      },
+      "game": {
+        "desktop": "2026.1027.4"
+      },
+      "launcher": "1.0.0",
+      "languages": [
+        {
+          "id": "zh-TW",
+          "status": "available",
+          "entries": 12993,
+          "added": 9,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "zh-CN",
+          "status": "available",
+          "entries": 12992,
+          "added": 9,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ja",
+          "status": "available",
+          "entries": 12998,
+          "added": 9,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "de",
+          "status": "available",
+          "entries": 13032,
+          "added": 9,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "fr",
+          "status": "available",
+          "entries": 13041,
+          "added": 9,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ru",
+          "status": "available",
+          "entries": 13080,
+          "added": 7,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "pl",
+          "status": "available",
+          "entries": 13070,
+          "added": 7,
+          "changed": 0,
+          "removed": 0
+        }
+      ]
+    },
+    {
       "version": "20261027-2249",
       "date": "2026-10-27",
       "kind": "launcher",

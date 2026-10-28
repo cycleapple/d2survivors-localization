@@ -1,4 +1,5 @@
 {
+ "# seconds left": "Остается {0} сек",
  "title:Slayer": "Истребитель",
  "title:Champion": "Защитник",
  "Slayer": "Истребитель",
@@ -8453,6 +8454,14 @@
  "title:Guardian": "Страж",
  "Guardian": "Страж",
  "Ladder": "РЕЙТИНГИ",
+ "Trade": "Торговать",
+ "Potions": "Зелья",
+ "Antidote Potion": "Противоядие",
+ "Thawing Potion": "Зелье оттаивания",
+ "Poison Resist +#%": "+{0}% к сопротивлению яду",
+ "Cold Resist +#%": "+{0}% к сопротивлению льду",
+ "+#% to Maximum Poison Resist": "+{0}% к максимальному сопротивлению яду",
+ "Weapons": "Оружие",
  "gender:Circle": "ms",
  "gender:Aegis": "fs",
  "gender:Aerin Shield": "ms",
@@ -9164,6 +9173,8 @@
  "gender:Large Charm": "ms",
  "gender:Grand Charm": "ms",
  "gender:CHARMS": "pl",
+ "gender:Potions": "pl",
+ "gender:Weapons": "pl",
  "Each pays +#% MF · +#% XP · +#% gold": "Каждый дает: +{0}% к поиску маг. предметов · +{1}% к опыту · +{2}% к золоту",
  "SHOW ITEMS: #": "ПОКАЗ ПРЕДМЕТОВ: {0}",
  "SHOW DAMAGE: #": "ПОКАЗ УРОНА: {0}",
@@ -13779,8 +13790,6 @@
  "Slain by *: * magic damage": "Причина гибели: {0} — магический урон: {1}",
  "Slain by *'s *: * magic damage": "Причина гибели: {1} ({0}) — магический урон: {2}",
  "Fire Resist +#%": "+{0}% к сопротивлению огню",
- "Cold Resist +#%": "+{0}% к сопротивлению льду",
  "Lightning Resist +#%": "+{0}% к сопротивлению молнии",
- "Poison Resist +#%": "+{0}% к сопротивлению яду",
  "Attacker Takes Damage of #": "Атакующий получает урон: {0}"
 }
