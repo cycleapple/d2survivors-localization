@@ -24,9 +24,9 @@ export const SITE = {
   feedbackUrl: '',
   // 更新紀錄顯示幾筆（site/data/changelog.json，manifest 的 changelog.url）
   changelogCount: 5,
-  // manifest 的 game.web_checked 超過幾小時沒更新，就顯示「遊戲剛更新，翻譯修正中」
-  // （每小時的 web-check 只在規則都套得上時才更新這個時間）
-  staleHours: 3,
+  // 「遊戲剛更新，翻譯修正中」：repoUrl 上有開著的這個標籤的 issue 才顯示（每小時的 web-check.yml 檢查失敗時開，修好後手動關）。
+  // manifest 的 game.web_checked 只在發布時更新，不能拿來判斷
+  gameUpdateLabel: 'game-update',
 };
 
 // 官方連結（D2 Survivors 官網上的 Battle.net 商店連結也是這個）

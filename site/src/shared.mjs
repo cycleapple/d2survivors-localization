@@ -79,10 +79,10 @@ export function changelogHtml(entries, t, lang, count) {
           </li>`).join('\n          ');
 }
 
-// game.web_checked 太舊＝每小時的檢查一直沒通過，網頁版可能壞了
-export function isStale(webChecked, hours, now = Date.now()) {
-  const time = Date.parse(webChecked || '');
-  return Number.isFinite(time) && now - time > hours * 3600e3;
+// 查「遊戲剛更新」issue 的 GitHub API 網址（只要一筆，有就代表網頁版的規則對不上）
+export function gameUpdateApi(site) {
+  const repo = new URL(site.repoUrl).pathname.replace(/\/$/, '');
+  return `https://api.github.com/repos${repo}/issues?labels=${encodeURIComponent(site.gameUpdateLabel)}&state=open&per_page=1`;
 }
 
 // 網頁讀 manifest 後要用到的文字（建置時嵌進頁面）

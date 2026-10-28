@@ -2,10 +2,10 @@
 // 頁面文字都是 tools/build-site.mjs 產生好的，這裡不換字。
 
 import { SITE, LANGUAGES } from './src/config.mjs';
-import { siteState, langGridHtml, heroMetaHtml, downloadBtnHtml, changelogHtml, isStale } from './src/shared.mjs';
+import { siteState, langGridHtml, heroMetaHtml, downloadBtnHtml, changelogHtml, gameUpdateApi } from './src/shared.mjs';
 
 const $ = sel => document.querySelector(sel);
-const { lang, t, webChecked } = JSON.parse($('#page-data').textContent);
+const { lang, t } = JSON.parse($('#page-data').textContent);
 
 const PLATFORMS = ['desktop', 'web'];
 // 每個版本的安裝區塊
@@ -104,9 +104,28 @@ document.querySelectorAll('.shots').forEach(row => {
   update();
 });
 
-// 「遊戲剛更新，翻譯修正中」：每小時的檢查一直沒通過（game.web_checked 太舊）就顯示
-function showStale(checked) {
-  $('#stale-notice').hidden = !isStale(checked, SITE.staleHours);
+// 「遊戲剛更新，翻譯修正中」：GitHub 上有開著的 game-update issue 才顯示（每小時的 web-check 失敗時開，修好後手動關）。
+// 讀不到（限流、離線、錯誤）一律不顯示，寧可漏掉也不誤報。結果在 sessionStorage 記 10 分鐘，換頁不重查
+const GAME_UPDATE_CACHE = 'd2s-site-game-update';
+async function checkGameUpdate() {
+  let open = null;
+  try {
+    const cached = JSON.parse(sessionStorage.getItem(GAME_UPDATE_CACHE));
+    if (cached && Date.now() - cached.at < 10 * 60e3) open = cached.open;
+  } catch {}
+  if (open === null) {
+    try {
+      const res = await fetch(gameUpdateApi(SITE), { headers: { Accept: 'application/vnd.github+json' } });
+      if (!res.ok) return;
+      const issues = await res.json();
+      if (!Array.isArray(issues)) return;
+      open = issues.length > 0;
+      try { sessionStorage.setItem(GAME_UPDATE_CACHE, JSON.stringify({ at: Date.now(), open })); } catch {}
+    } catch {
+      return;
+    }
+  }
+  $('#stale-notice').hidden = !open;
 }
 
 // 頁面裡的數字是建置時的；manifest 比較新的話（翻譯剛發布、網站還沒重新產生）就重畫
@@ -121,11 +140,8 @@ async function loadManifest() {
     $('#lang-grid').innerHTML = langGridHtml(state, t, lang);
     $('#hero-meta').innerHTML = heroMetaHtml(state, t);
     $('#download-btn').outerHTML = downloadBtnHtml(state, t, SITE.downloadUrl);
-    showStale(manifest.game?.web_checked);
     if (manifest.changelog?.url) loadChangelog(new URL(manifest.changelog.url, manifestUrl));
-  } catch {
-    showStale(webChecked);
-  }
+  } catch {}
 }
 
 async function loadChangelog(url) {
@@ -141,3 +157,4 @@ async function loadChangelog(url) {
 
 showPlatform();
 loadManifest();
+checkGameUpdate();

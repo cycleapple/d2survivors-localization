@@ -284,8 +284,6 @@ function langPage(sl) {
   const runtime = {
     lang: sl.id,
     t: Object.fromEntries(RUNTIME_KEYS.map(k => [k, t[k]])),
-    // manifest 讀不到時用建置時的時間判斷要不要顯示「翻譯修正中」
-    webChecked: manifest?.game?.web_checked || null,
   };
   const feedbackUrl = SITE.discordUrl || SITE.feedbackUrl;
   // 常見問題：頁面和 FAQPage 結構化資料用同一份文字
@@ -342,7 +340,7 @@ function langPage(sl) {
   </header>
 
   <main id="top">
-    <!-- game.web_checked 太舊時由 app.js 顯示（看當下時間，所以不在建置時決定） -->
+    <!-- GitHub 上有開著的 game-update issue 時由 app.js 顯示（看當下狀態，所以不在建置時決定） -->
     <div class="notice" id="stale-notice" role="status" hidden>
       <div class="wrap">${t['notice.stale']}${SITE.discordUrl ? ' ' + fmt(t['notice.discord'], esc(SITE.discordUrl)) : ''}</div>
     </div>

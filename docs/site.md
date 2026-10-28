@@ -79,8 +79,9 @@ node tools/serve.mjs site 8766     # 本機預覽（或 python -m http.server 87
 
 ## 「遊戲剛更新，翻譯修正中」
 
-- manifest 的 `game.web_checked` 超過 `SITE.staleHours`（3）小時沒更新，頁面上方（標題列下面）就顯示提示。每小時的 `.github/workflows/web-check.yml` 只在規則都套得上時才更新這個時間，所以時間太舊＝網頁版可能壞了
-- 要看「現在」的時間，所以由 `app.js` 判斷，不在建置時決定；manifest 讀不到時用建置時嵌進頁面的時間。沒有 `web_checked` 就不顯示
+- GitHub 上有開著的 `game-update` 標籤 issue（`SITE.gameUpdateLabel`）時，頁面上方（標題列下面）顯示提示。這個 issue 是每小時的 `.github/workflows/web-check.yml` 在必要規則對不上時開的，修好、重新發布後手動關掉
+- `app.js` 在瀏覽器裡呼叫 GitHub API（`issues?labels=game-update&state=open&per_page=1`，未登入每個 IP 每小時 60 次）。API 失敗、被限流、回傳不是陣列時一律不顯示（寧可漏掉也不誤報）；結果在 sessionStorage 記 10 分鐘。HTML 裡預設是 `hidden`，不在建置時決定
+- 以前是看 manifest 的 `game.web_checked` 有沒有超過 3 小時，但那個時間只在發布時更新，發布 3 小時後一定誤報，2026-10-28 改掉了。不要再拿它判斷
 - 有中文化社群 Discord 時，提示後面加一句「最新消息請看中文化社群 Discord」
 
 ## 中文化社群 Discord
