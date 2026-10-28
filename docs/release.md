@@ -57,6 +57,14 @@
 - 只截遊戲畫面，不另外抽出遊戲的美術素材；圖說註明「遊戲畫面：D2 Survivors（framara），使用玩家自己的 Diablo II 檔案」
 - 截完由宣傳網站放進各語言頁（每頁用自己語言的截圖）、分享圖，也提供給 Discord 置頂和公告使用
 
+## 自動處理遊戲更新（2026-10-28 起）
+
+- GitHub Actions 偵測：網頁版 `web-check.yml`（每小時 :17）、桌面版 `desktop-check.yml`（每小時 :47），有問題就開 `game-update`／`desktop-update` issue
+- 本機的 Claude 排程任務「D2 Survivors 遊戲更新自動處理」（`C:\Users\cycle\.claude\scheduled-tasks\d2s-auto-game-update\SKILL.md`，每小時）：有開著的 issue 就照「遊戲更新後的流程」補翻、修規則；發布前的檢查全部通過就 publish、push、關 issue，結果發到 Discord #alerts；有任何一項沒過就不發布，只留言和通知
+- 要改的檔案有別人還沒 commit 的改動時，它會跳過這次，不會蓋掉別人的工作
+- 需要電腦和 Claude 桌面版開著；關著的時候下次開啟補跑
+- 不會改啟動器程式、不發 Release、不動真正安裝的遊戲
+
 ## 公告
 
 - **更新紀錄**：每次發布自動寫進 `site/data/changelog.json`，網站和啟動器會顯示（格式見 [manifest-v2.md](manifest-v2.md) 的「更新紀錄」）
