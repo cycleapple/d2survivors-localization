@@ -1,5 +1,6 @@
 # 發布啟動器：推 tag launcher-v<版本>（跟 launcher/Cargo.toml 的 version 一樣）就在 Windows 上編譯，
 # 把 d2s-launcher.exe 和 d2s-launcher.exe.sha256 放到這個 tag 的 Release。
+# Release 說明：.github/release-notes/launcher.md（英文為主、其他語言摺疊），後面接 GitHub 自動產生的變更紀錄
 # 之後 node tools/publish.mjs 會讀最新的 Release，更新 manifest 的 launcher.latest
 #   git tag launcher-v0.2.0 && git push origin launcher-v0.2.0
 name: release-launcher
@@ -52,4 +53,4 @@ jobs:
         run: |
           $ver = '${{ github.ref_name }}' -replace '^launcher-v', ''
           gh release create '${{ github.ref_name }}' out/d2s-launcher.exe out/d2s-launcher.exe.sha256 `
-            --title "啟動器 $ver" --generate-notes --latest
+            --title "Launcher $ver" --notes-file ../.github/release-notes/launcher.md --generate-notes --latest

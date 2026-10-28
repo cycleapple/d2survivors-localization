@@ -1,49 +1,58 @@
-# D2 Survivors Localization（非官方）
+# D2 Survivors Localization (unofficial)
 
-[D2 Survivors](https://d2survivors.lol/)（Diablo 2 Survivors）的玩家自製翻譯：繁體中文、简体中文、日本語、Deutsch、Français、Русский、Polski。
+**English** | [繁體中文](docs/readme/README.zh-TW.md) | [简体中文](docs/readme/README.zh-CN.md) | [日本語](docs/readme/README.ja.md) | [Deutsch](docs/readme/README.de.md) | [Français](docs/readme/README.fr.md) | [Русский](docs/readme/README.ru.md) | [Polski](docs/readme/README.pl.md)
 
-- **桌面版**（Windows）：啟動器選好語言、按「啟動遊戲」，自動下載最新翻譯並套用到遊戲。遊戲自己更新後，下次從啟動器開會自動重新套用
-- **瀏覽器版**（電腦、手機）：在 d2survivors.lol 的網頁版遊戲按一下書籤，就切換成中文
+A fan-made translation of [D2 Survivors](https://d2survivors.lol/) (Diablo 2 Survivors) into Traditional Chinese, Simplified Chinese, Japanese, German, French, Russian and Polish.
 
-做法是沿用遊戲內建的翻譯系統（換掉韓文字典的位置），不是在畫面上另外蓋一層字，所以介面、物品、技能、說明都能翻到。物品、技能、怪物、地名用《暗黑破壞神 II：獄火重生》的官方譯名。
+**Website:** https://cycleapple.github.io/d2survivors-localization/ · **Discord:** https://discord.gg/QMBbTHSsaK
 
-## 聲明
+- **Desktop (Windows):** download the [launcher](https://github.com/cycleapple/d2survivors-localization/releases/latest/download/d2s-launcher.exe), pick a language and press Play. It downloads the latest translation and applies it to the game. When the game updates itself, the launcher re-applies the translation the next time you start from it.
+- **Browser (PC and mobile):** on the web version at d2survivors.lol, tap a bookmark to switch the game to your language. Tap it again to switch back to English.
 
-- 這是玩家自製的非官方翻譯，跟 Blizzard Entertainment、D2 Survivors 的作者都沒有關係，也沒有得到他們的認可。
-- 字典裡的物品、技能、怪物、地名等官方譯名取自《暗黑破壞神 II：獄火重生》，版權屬於 Blizzard Entertainment, Inc.。Diablo 是 Blizzard Entertainment, Inc. 的商標。
-- 其餘譯文是自己翻譯的。
-- 免費使用，所有功能都不收費，也不販售任何遊戲內容。贊助是自願的，用來支持翻譯和維護的時間，贊助與否不影響任何功能。
-- 這個 repo 不包含任何遊戲的美術、音效、字型或程式。
-- 權利人如果要求移除，請開 issue，會立即處理。
+It plugs into the game's own translation system (it takes over the Korean dictionary slot) instead of drawing text on top of the screen, so the UI, items, skills and tooltips are all translated. Items, skills, monsters and places use the official names from *Diablo II: Resurrected*.
 
-## 目錄
+## Leaderboards
 
-| 資料夾 | 內容 | 文件 |
+- The browser version does not upload leaderboard scores while a translation is active.
+- The game marks a translated desktop install as *patched*. To compete on the leaderboard, choose English in the launcher and it restores the untouched original game.
+
+## Disclaimer
+
+- This is an unofficial fan translation. It is not affiliated with or endorsed by Blizzard Entertainment or the author of D2 Survivors.
+- Official names in the dictionaries (items, skills, monsters, places, etc.) come from *Diablo II: Resurrected* and belong to Blizzard Entertainment, Inc. Diablo is a trademark of Blizzard Entertainment, Inc.
+- All other text is our own translation.
+- It is free. Nothing is paywalled and no game content is sold. Donations are voluntary, support the time spent translating and maintaining, and do not unlock anything.
+- This repository contains none of the game's art, audio, fonts or code.
+- Rights holders who want something removed can open an issue and it will be handled right away.
+
+## Repository layout
+
+| Folder | Contents | Docs |
 |---|---|---|
-| `dict/` | 字典：D2R 官方譯名自動配對、人工翻譯、合併後的各語言字典 | [docs/translation.md](docs/translation.md)、[翻譯規範](docs/translation-guide.md)、[用語決策](docs/term-decisions.md) |
-| `tools/` | 抽字串、配對、檢查、合併、打包、發布的 Node.js 工具 | [docs/translation.md](docs/translation.md) |
-| `tools/patch-rules.mjs` | 桌面版對遊戲的修改規則（啟動器和 `patch.mjs` 共用） | [docs/desktop-patch.md](docs/desktop-patch.md) |
-| `launcher/` | 桌面版啟動器（Rust） | [docs/launcher.md](docs/launcher.md) |
-| `site/` | 網站（下載、安裝說明） | [docs/site.md](docs/site.md) |
-| `site/web/`、`tools/web-rules.mjs` | 瀏覽器版書籤 | [docs/web.md](docs/web.md) |
-| `site/data/` | 更新來源：manifest 和各語言字典（工具產生） | [docs/manifest-v2.md](docs/manifest-v2.md) |
+| `dict/` | Dictionaries: auto-matched official D2R names, manual translations, merged per-language dictionaries | [docs/translation.md](docs/translation.md), [style guide](docs/translation-guide.md), [term decisions](docs/term-decisions.md) |
+| `tools/` | Node.js tools to extract strings, match, check, merge, package and publish | [docs/translation.md](docs/translation.md) |
+| `tools/patch-rules.mjs` | How the desktop game is patched (shared by the launcher and `patch.mjs`) | [docs/desktop-patch.md](docs/desktop-patch.md) |
+| `launcher/` | Desktop launcher (Rust) | [docs/launcher.md](docs/launcher.md) |
+| `site/` | Website (downloads, install guide) | [docs/site.md](docs/site.md) |
+| `site/web/`, `tools/web-rules.mjs` | Browser bookmarklet | [docs/web.md](docs/web.md) |
+| `site/data/` | Update feed: manifest and per-language dictionaries (generated) | [docs/manifest-v2.md](docs/manifest-v2.md) |
 
-開源範圍、公開界線、發布流程：[docs/release.md](docs/release.md)
+What is open source, what stays out of the repo, and how releases work: [docs/release.md](docs/release.md). The docs under `docs/` are written in Traditional Chinese.
 
-## 贊助
+## Donate
 
-覺得好用的話，可以請我喝杯咖啡：[PayPal](https://paypal.me/DonateCYtw)
+If you enjoy it, you can buy me a coffee: [PayPal](https://paypal.me/DonateCYtw)
 
-## 開發
+## Development
 
 ```
 npm install
 ```
 
-產生字典需要自己的 D2 Survivors（桌面版）和《暗黑破壞神 II：獄火重生》：遊戲本身的檔案和 D2R 的原始字串檔都不放在 repo 裡（`backup/`、`versions/`、`data/`、`work/`），要用工具從自己的安裝取出。步驟見 [docs/translation.md](docs/translation.md)。
+Building the dictionaries needs your own copy of D2 Survivors (desktop) and *Diablo II: Resurrected*. Game files and raw D2R string files are not in the repo (`backup/`, `versions/`, `data/`, `work/`); the tools extract them from your own install. Steps: [docs/translation.md](docs/translation.md).
 
-## 授權
+## License
 
-- 程式碼（`tools/`、`launcher/`、`site/` 的程式和樣式、`.github/`）：[MIT](LICENSE)
-- 翻譯資料（`dict/` 和產生出來的字典）：**不在 MIT 範圍內**，授權還沒決定，在那之前保留所有權利。見 [dict/LICENSE](dict/LICENSE)
-- 官方譯名的權利屬於 Blizzard Entertainment, Inc.；D2 Survivors 屬於它的作者 framara
+- Code (`tools/`, `launcher/`, the code and styles in `site/`, `.github/`): [MIT](LICENSE)
+- Translation data (`dict/` and the dictionaries generated from it): **not covered by MIT**. The license is not decided yet; until then all rights are reserved. See [dict/LICENSE](dict/LICENSE)
+- Official names belong to Blizzard Entertainment, Inc.; D2 Survivors belongs to its author, framara
