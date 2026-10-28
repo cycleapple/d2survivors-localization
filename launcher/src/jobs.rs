@@ -27,6 +27,27 @@ pub enum Fallback {
 }
 
 impl Fallback {
+    /// 記在 state.json 的代碼
+    pub fn id(self) -> &'static str {
+        match self {
+            Fallback::GameUpdated => "game_updated",
+            Fallback::NoTranslation => "no_translation",
+        }
+    }
+
+    pub fn from_id(id: &str) -> Option<Self> {
+        match id {
+            "game_updated" => Some(Fallback::GameUpdated),
+            "no_translation" => Some(Fallback::NoTranslation),
+            _ => None,
+        }
+    }
+
+    /// 上次啟動記下的原因（啟動器重新開啟時主畫面照樣顯示）
+    pub fn last() -> Option<Self> {
+        State::load().fallback.as_deref().and_then(Self::from_id)
+    }
+
     /// i18n 的 key
     pub fn key(self) -> &'static str {
         match self {
@@ -84,6 +105,10 @@ pub fn run(job: Job, config: &Config, manifest: Option<Manifest>, log: &dyn Fn(S
                 }
             };
             out.game_version = game.version();
+            let state = State::load();
+            if state.fallback.as_deref() != out.fallback.map(Fallback::id) {
+                let _ = State { fallback: out.fallback.map(|f| f.id().to_string()), ..state }.save();
+            }
             if job == Job::Launch {
                 game.launch(slot)?;
                 log("遊戲已啟動".into());

@@ -38,6 +38,8 @@ pub struct App {
     launcher: Option<LauncherInfo>,
     /// 上次啟動時翻譯套不上、改用原版
     fallback: Option<Fallback>,
+    /// 遊戲自己記的語言是 ko（舊版啟動器寫的）：開原版會變成韓文，主畫面教玩家切回 English
+    game_lang_ko: bool,
     /// 最新一筆更新紀錄，和它是不是還沒看過
     changelog: Option<ChangelogEntry>,
     changelog_unseen: bool,
@@ -87,7 +89,9 @@ impl App {
             launcher: manifest.as_ref().and_then(|m| m.launcher.clone()),
             manifest,
             config,
-            fallback: None,
+            // 上次啟動改用原版的話，重新開啟啟動器時照樣提示（翻譯修好、下次套上時才清掉）
+            fallback: Fallback::last(),
+            game_lang_ko: system::stored_game_lang().as_deref() == Some("ko"),
             changelog: None,
             changelog_unseen: false,
             game_version: None,
@@ -217,6 +221,11 @@ impl App {
                         }
                         if job == Job::Launch || job == Job::Install {
                             self.fallback = o.fallback;
+                            self.game_lang_ko = system::stored_game_lang().as_deref() == Some("ko");
+                            // 遊戲視窗會蓋住啟動器：工作列閃一下，玩家回來時看得到黃色提示卡片
+                            if job == Job::Launch && o.fallback.is_some() {
+                                ctx.send_viewport_cmd(egui::ViewportCommand::RequestUserAttention(egui::UserAttentionType::Informational));
+                            }
                         }
                         if o.game_version.is_some() {
                             self.game_version = o.game_version;
@@ -666,10 +675,24 @@ impl App {
     }
 
     fn banners(&mut self, ui: &mut egui::Ui, ctx: &egui::Context) {
+        // 翻譯套不上、改用原版開：主畫面最上面的黃色卡片（標題、原因；遊戲記的語言是韓文時加上切回 English 的步驟）
+        let korean = self.game_lang_ko && self.config.language != "ko";
         if let Some(f) = self.fallback {
             theme::banner(ui, Tone::Warn, |ui| {
+                ui.label(RichText::new(format!("⚠  {}", self.t("fallback_title"))).font(theme::display_font(16.0)).color(WARN));
+                ui.add_space(2.0);
                 ui.label(RichText::new(self.t(f.key())).color(TEXT));
-                ui.label(RichText::new(self.t("original_lang_hint")).small().color(MUTED));
+                ui.add_space(4.0);
+                if korean {
+                    ui.label(RichText::new(self.t("korean_fix")).color(GOLD_HI));
+                } else {
+                    ui.label(RichText::new(self.t("original_lang_hint")).small().color(MUTED));
+                }
+            });
+        } else if korean && self.config.language == "en" {
+            // 選了英文原版，但遊戲記的是韓文
+            theme::banner(ui, Tone::Warn, |ui| {
+                ui.label(RichText::new(self.t("korean_fix")).color(TEXT));
             });
         }
         if let Some(e) = self.error.clone() {

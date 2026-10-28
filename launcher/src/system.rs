@@ -138,6 +138,37 @@ fn os_locale() -> String {
     std::env::var("LANG").unwrap_or_default().replace('_', "-")
 }
 
+/// 遊戲自己記的語言（localStorage 的 d2s:lang），只讀、不改。
+/// 舊版啟動器會寫進 ko，之後開原版就變成韓文；主畫面看到 ko 時告訴玩家怎麼在遊戲裡切回 English。
+/// localStorage 是 Chromium 的 leveldb，跟存檔放在一起，改寫弄壞就會丟資料，所以不改：
+/// 整個資料夾複製到暫存資料夾、用 leveldb 讀複本（玩家的檔案只複製，不開啟），讀完刪掉。
+/// key 是「_<origin>\0\x01<名稱>」，值的第一個位元組 1 是 Latin-1、0 是 UTF-16LE。讀不到傳回 None
+pub fn stored_game_lang() -> Option<String> {
+    let user_data = std::env::var_os("D2S_USER_DATA").map(PathBuf::from).or_else(|| std::env::var_os("APPDATA").map(|a| PathBuf::from(a).join("D2 Survivors")))?;
+    let src = user_data.join("Local Storage").join("leveldb");
+    let tmp = std::env::temp_dir().join(format!("d2s-launcher-ls-{}", std::process::id()));
+    let _ = std::fs::remove_dir_all(&tmp);
+    std::fs::create_dir_all(&tmp).ok()?;
+    let read = || -> Option<String> {
+        for e in std::fs::read_dir(&src).ok()?.filter_map(|e| e.ok()) {
+            if e.file_name() != "LOCK" && e.file_type().ok()?.is_file() {
+                std::fs::copy(e.path(), tmp.join(e.file_name())).ok()?;
+            }
+        }
+        let opt = rusty_leveldb::Options { create_if_missing: false, ..Default::default() };
+        let mut db = rusty_leveldb::DB::open(&tmp, opt).ok()?;
+        let value = db.get(b"_app://game\x00\x01d2s:lang")?;
+        match value.split_first()? {
+            (1, s) => Some(s.iter().map(|&b| b as char).collect()),
+            (0, s) => Some(String::from_utf16_lossy(&s.chunks_exact(2).map(|c| u16::from_le_bytes([c[0], c[1]])).collect::<Vec<_>>())),
+            _ => None,
+        }
+    };
+    let lang = read();
+    let _ = std::fs::remove_dir_all(&tmp);
+    lang
+}
+
 /// 用預設瀏覽器開網頁
 pub fn open_url(url: &str) {
     #[cfg(windows)]

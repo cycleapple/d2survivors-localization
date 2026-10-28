@@ -83,7 +83,9 @@ impl Config {
         let mut c: Self = fs::read(Self::path()).ok().and_then(|b| serde_json::from_slice(&b).ok()).unwrap_or_default();
         let u = c.manifest_url.trim();
         if u == V1_MANIFEST_URL || u == DEFAULT_MANIFEST_URL {
+            // 換成預設值（留空），也寫回設定檔：不然舊網址一直留在檔案裡
             c.manifest_url.clear();
+            let _ = c.save();
         }
         c
     }
@@ -117,6 +119,8 @@ pub struct State {
     pub installed: Option<Installed>,
     /// 看過的最新一筆更新紀錄（manifest 的 changelog.latest）
     pub changelog_seen: String,
+    /// 上次啟動時翻譯套不上、改用原版開的原因（jobs::Fallback::id）。下次開啟啟動器時主畫面照樣顯示，翻譯套上或選原版時清掉
+    pub fallback: Option<String>,
 }
 
 #[derive(Clone, Serialize, Deserialize)]

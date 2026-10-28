@@ -52,15 +52,17 @@ cargo test --release                        # 有 backup/2026.1026.4/app.asar �
 ## 原版（English／한국어）
 
 - 選 English 或 한국어原版時，換回備份的原版 app.asar，**不套任何規則**（連「啟動器指定語言」也不套），跟遊戲附的 `app.asar.sha256` 對得上，排行榜紀錄不會標成 patched。介面上寫明「原版：排行榜紀錄不會被標成 patched」；選翻譯語言時寫「翻譯版的排行榜紀錄會被標成 patched」
-- 原版不理會啟動器指定的語言，照遊戲自己存的語言（localStorage 的 `d2s:lang`）開，所以介面上提示語言不對時到遊戲的 OPTIONS → GAME → LANGUAGE 切換（韓文畫面是 설정 → GAME → 언어）
+- 原版不理會啟動器指定的語言，照遊戲自己存的語言（localStorage 的 `d2s:lang`）開，所以介面上提示語言不對時到遊戲的 OPTIONS → GAME → LANGUAGE 切換（韓文畫面是主選單第二個按鈕 설정 → 게임 설정 → 언어）
 - 為了不讓翻譯版改到遊戲存的語言：「啟動器指定語言」規則只把 `d2slang` 記在 sessionStorage，不寫進 localStorage；「遊戲裡切換語言」規則讓遊戲裡的切換同時更新 sessionStorage（遊戲本身照常存進 localStorage，那是玩家自己選的）。所以用翻譯版玩過、再選 English 原版，遊戲會照原本存的語言（通常是英文）開。舊版啟動器（0.2.0 之前）曾把 `ko` 寫進去，那些玩家要照上面的提示切一次
-- 不修改遊戲的 localStorage（leveldb）：格式是 Chromium 內部的，改壞會弄掉存檔設定，不值得冒險
+- 不修改遊戲的 localStorage（leveldb）：格式是 Chromium 內部的（寫入要照日誌格式補 CRC、序號），跟存檔放在同一個資料夾，改壞會弄掉存檔，不值得冒險
+- 只讀（1.0.1）：`system::stored_game_lang()` 把 `Local Storage\leveldb` 整個複製到暫存資料夾，用 rusty-leveldb 讀複本的 `_app://game\0\x01d2s:lang`（值的第一個位元組 1 是 Latin-1），讀完刪掉；玩家的檔案只複製、不開啟。讀到 `ko` 而玩家選的不是한국어時，主畫面的黃色卡片寫出切回 English 的步驟（「설정」→「게임 설정」→「언어」→ ENGLISH，只要一次）。`--status` 也會印出讀到的值
 
 ## 遊戲改版時退回原版
 
 遊戲自己更新後，規則可能對不上（`patcher.rs` 的 `RuleMismatch`）。這時不要讓玩家開不了遊戲：
 
-- 換回真正的原版開遊戲（跟上面的原版一樣，不套任何規則），視窗上方和命令列都顯示「遊戲剛更新，翻譯修正中，先用原版開啟」和語言的提示。視窗不會自動關掉，讓玩家看到原因
+- 換回真正的原版開遊戲（跟上面的原版一樣，不套任何規則），命令列顯示「遊戲剛更新，翻譯修正中，先用原版開啟」和語言的提示；視窗不會自動關掉
+- 主畫面最上面是黃色的提示卡片（1.0.1）：標題「這次用原版開啟」、原因，遊戲記的語言是韓文時加上切回 English 的步驟。遊戲視窗會蓋住啟動器，所以啟動後工作列閃一下。原因記在 `state.json` 的 `fallback`，重新開啟啟動器時照樣顯示；下次翻譯套上（或選原版）時清掉
 - 設定裡選的語言不會改。下次開啟照常檢查更新，翻譯修好、規則對得上就自動套回去（安裝紀錄的 key 不一樣就會重做）
 - 第一次開啟又沒有網路、選的翻譯還沒下載時（`game.rs` 的 `NoTranslation`），也一樣用原版開，提示「翻譯還沒下載（請確認網路）」
 - 遊戲開著、app.asar 寫不進去時照舊報錯（退回也要寫檔，沒辦法）
@@ -112,6 +114,14 @@ cargo test --release                        # 有 backup/2026.1026.4/app.asar �
 3. `d2s-launcher --install --manifest site/data/manifest.json --lang ja`，再比對輸出
 
 要進遊戲看：把整個遊戲資料夾複製一份，`D2S_USER_DATA` 指到另一個資料夾（遊戲本身支援，存檔和設定就不會動到平常的），裡面 `d2` 用 junction 指到平常的 `%APPDATA%\D2 Survivors\d2`（取出的 D2 素材，1.5 GB），`desktop.json` 的 `checkForUpdates` 設成 false。再用 `D2S_QUERY=d2slang=ko` 和 `--remote-debugging-port` 開複製的那份，用 `tools/cdp.mjs` 截圖
+
+## 1.0.1
+
+- 遊戲 2026.1027.4 自動更新後規則對不上，玩家選繁中卻開成英文或韓文（舊版啟動器寫的 ko）。規則另外修好（`tools/patch-rules.mjs`）；啟動器這邊：
+  - 退回原版的提示改成主畫面明顯的黃色卡片，重新開啟啟動器也看得到，啟動時工作列閃一下
+  - 讀遊戲記的語言（只讀），是韓文時寫出切回 English 的步驟
+  - 設定檔裡的舊 v1 更新來源（dist repo 的網址）換成預設值時也寫回 `config.json`（1.0.0 只在讀的時候換）
+- 發布：推 tag `launcher-v1.0.1`
 
 ## 1.0.0
 

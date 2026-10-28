@@ -81,6 +81,10 @@ fn cli(args: &[String]) -> anyhow::Result<()> {
             println!("遊戲：{}", config.game_dir().display());
             println!("語言：{}", game::language_name(&config.language, m.as_ref()));
             println!("更新來源：{}", config.manifest_url());
+            println!("遊戲記的語言（localStorage）：{}", system::stored_game_lang().as_deref().unwrap_or("讀不到"));
+            if let Some(f) = jobs::Fallback::last() {
+                println!("上次啟動改用原版：{}", i18n::tr("zh-TW", f.key()));
+            }
             if let Some(m) = &m {
                 println!("翻譯：{}（{}）", m.version, m.updated);
                 for (l, _) in m.desktop_languages() {
