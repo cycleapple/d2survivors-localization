@@ -1,0 +1,151 @@
+# 桌面版改版偵測：每小時讀 D2 Survivors 桌面版的更新資訊（https://d2survivors.lol/download/latest.yml，遊戲自己的
+# electron-updater 也是讀這份）。版本跟 site/data/manifest.json 的 game.desktop 不同時：
+#   1. 下載新版安裝檔（同一版只下載一次：有這個版本的 issue 就不再處理，安裝檔也有快取），核對 sha512
+#   2. 解出 resources/app.asar，用 tools/check-rules.mjs 檢查桌面版規則、數出字典還沒有的新字串
+#   3. 開一個 desktop-update issue 記錄結果。必要規則對不上時另外加 game-update 標籤（網站會顯示「翻譯修正中」），
+#      並通知 Discord 的維護者頻道（secret DISCORD_WEBHOOK_ALERTS）
+# 修好規則、補完翻譯、publish 之後（manifest 的 game.desktop 會變成新版本），手動關掉 issue。
+name: Desktop check
+
+on:
+  schedule:
+    - cron: '47 * * * *'
+  workflow_dispatch:
+    inputs:
+      force:
+        description: '測試用：就算已經支援這個版本也照樣下載、檢查，只印結果、不開 issue'
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: desktop-check
+  cancel-in-progress: false
+
+env:
+  FEED: https://d2survivors.lol/download/
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compare the latest desktop version with the supported one
+        id: ver
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          curl -fsS "${FEED}latest.yml" -o latest.yml
+          latest=$(sed -n 's/^version: *//p' latest.yml | head -1 | tr -d "\"' ")
+          file=$(sed -n 's/^path: *//p' latest.yml | head -1 | tr -d "\"' ")
+          sha=$(sed -n 's/^sha512: *//p' latest.yml | head -1 | tr -d "\"' ")
+          supported=$(node -e "console.log(require('./site/data/manifest.json').game?.desktop || '')")
+          echo "latest=$latest supported=$supported file=$file"
+          echo "latest=$latest" >> "$GITHUB_OUTPUT"
+          echo "file=$file" >> "$GITHUB_OUTPUT"
+          echo "sha=$sha" >> "$GITHUB_OUTPUT"
+          if [ -z "$latest" ] || [ -z "$file" ]; then echo "latest.yml 格式看不懂"; exit 1; fi
+          if [ "${{ inputs.force }}" = "true" ]; then echo "測試模式：照樣檢查"; echo "skip=0" >> "$GITHUB_OUTPUT"; exit 0; fi
+          if [ "$latest" = "$supported" ]; then echo "已經支援 $latest"; echo "skip=1" >> "$GITHUB_OUTPUT"; exit 0; fi
+          seen=$(gh issue list --label desktop-update --state all --search "$latest in:title" --json number --jq 'length')
+          if [ "$seen" != "0" ]; then echo "$latest 已經有 issue，不重複處理"; echo "skip=1" >> "$GITHUB_OUTPUT"; exit 0; fi
+          echo "skip=0" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/cache@v4
+        if: steps.ver.outputs.skip == '0'
+        with:
+          path: installer
+          key: d2s-desktop-${{ steps.ver.outputs.latest }}
+
+      - name: Download the installer and extract app.asar
+        if: steps.ver.outputs.skip == '0'
+        env:
+          FILE: ${{ steps.ver.outputs.file }}
+          SHA: ${{ steps.ver.outputs.sha }}
+        run: |
+          mkdir -p installer
+          [ -f installer/setup.exe ] || curl -fsSL "${FEED}${FILE}" -o installer/setup.exe
+          got=$(openssl dgst -sha512 -binary installer/setup.exe | base64 -w0)
+          if [ "$got" != "$SHA" ]; then echo "sha512 不符，安裝檔可能不完整"; rm -f installer/setup.exe; exit 1; fi
+          sudo apt-get install -y -qq p7zip-full >/dev/null
+          7z x -y -oinst installer/setup.exe '$PLUGINSDIR/app-64.7z' >/dev/null
+          7z x -y -oapp 'inst/$PLUGINSDIR/app-64.7z' resources/app.asar >/dev/null
+          ls -la app/resources/app.asar
+
+      - uses: actions/setup-node@v4
+        if: steps.ver.outputs.skip == '0'
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Check desktop rules and count new strings
+        id: check
+        if: steps.ver.outputs.skip == '0'
+        run: |
+          npm ci --silent
+          npx asar extract app/resources/app.asar extracted
+          set +e
+          node tools/check-rules.mjs extracted > rules.log 2>&1
+          code=$?
+          set -e
+          cat rules.log
+          # check-rules 新版會印 RESULT required_failed=… optional_failed=…；舊版只看 exit code
+          req=$(sed -n 's/.*required_failed=\([0-9]*\).*/\1/p' rules.log | tail -1)
+          opt=$(sed -n 's/.*optional_failed=\([0-9]*\).*/\1/p' rules.log | tail -1)
+          [ -z "$req" ] && { [ "$code" = "0" ] && req=0 || req=$(grep -c '^失敗' rules.log); }
+          [ -z "$opt" ] && opt=0
+          node tools/extract-keys.mjs app/resources/app.asar new-ko.json > /dev/null
+          node -e "
+            const ko = require('./new-ko.json'); const keys = Object.keys(ko.dict ?? ko);
+            const out = [];
+            for (const id of ['zh-TW','zh-CN','ja','de','fr','ru','pl']) {
+              let d; try { d = require('./dict/' + id + '.json'); } catch { continue; }
+              out.push(id + ' ' + keys.filter(k => !(k in d)).length);
+            }
+            require('fs').writeFileSync('missing.txt', out.join('\n') + '\n');
+            console.log('字典還沒有的 key：\n' + out.join('\n'));
+          "
+          echo "required=$req" >> "$GITHUB_OUTPUT"
+          echo "optional=$opt" >> "$GITHUB_OUTPUT"
+
+      - name: Open an issue and notify Discord
+        if: steps.ver.outputs.skip == '0' && inputs.force != true
+        env:
+          GH_TOKEN: ${{ github.token }}
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_ALERTS }}
+          LATEST: ${{ steps.ver.outputs.latest }}
+          REQ: ${{ steps.check.outputs.required }}
+          OPT: ${{ steps.check.outputs.optional }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          gh label create desktop-update --color 1d76db --description '桌面版遊戲有新版本' 2>/dev/null || true
+          gh label create game-update --color d93f0b --description '遊戲改版，規則要更新' 2>/dev/null || true
+          labels=desktop-update
+          if [ "${REQ:-0}" != "0" ]; then labels="desktop-update,game-update"; state="必要規則 $REQ 條對不上，玩家會開出原版"; else state="必要規則都對得上（加分規則 ${OPT:-0} 條對不上）"; fi
+          {
+            echo "D2 Survivors 桌面版出了 **$LATEST**（manifest 目前支援 $(node -e "console.log(require('./site/data/manifest.json').game?.desktop)")）。"
+            echo
+            echo "- $state"
+            echo "- 各語言字典還沒有的 key："
+            sed 's/^/  - /' missing.txt
+            echo
+            echo "照 docs/translation.md 的「遊戲更新後的流程」處理：備份新版 app.asar、補翻新字串、修規則、publish。manifest 的 game.desktop 變成 $LATEST 後關掉這個 issue。"
+            echo
+            echo "檢查紀錄：$RUN_URL"
+            echo
+            echo '<details><summary>check-rules 輸出</summary>'
+            echo
+            echo '```'
+            grep -E '失敗|RESULT|條要改' rules.log | head -60
+            echo '```'
+            echo '</details>'
+          } > body.md
+          url=$(gh issue create --label "$labels" --title "桌面版 $LATEST：$state" --body-file body.md)
+          if [ -n "$DISCORD_WEBHOOK" ]; then
+            jq -n --arg c "🖥️ 桌面版 D2 Survivors $LATEST：$state $url" '{content: $c}' |
+              curl -fsS -H 'Content-Type: application/json' -d @- "$DISCORD_WEBHOOK" || echo "Discord 通知失敗"
+          fi
