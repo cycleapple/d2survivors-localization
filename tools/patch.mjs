@@ -4,7 +4,7 @@
 import { extractAll, createPackage } from '@electron/asar';
 import fs from 'node:fs';
 import path from 'node:path';
-import { ASSETS_DIR, DICT_TARGET, RULES, LANGUAGES, fillTemplate } from './patch-rules.mjs';
+import { ASSETS_DIR, DICT_TARGET, RULES, LANGUAGES, applyRule } from './patch-rules.mjs';
 import { takeLang } from './langs.mjs';
 
 const { lang: target, args } = takeLang(process.argv.slice(2));
@@ -24,12 +24,6 @@ function findAsset(re) {
   return path.join(assets, hits[0]);
 }
 
-// 字串只能剛好出現一次，否則代表遊戲版本改了，要人工看
-function replaceOnce(text, from, to, label) {
-  const n = text.split(from).length - 1;
-  if (n !== 1) throw new Error(`${label}：預期出現 1 次，實際 ${n} 次`);
-  return text.replace(from, () => to);
-}
 
 // 這個語言的字型（tools/zh-fonts.mjs 從本機 D2R 取出的）：有就放進 fonts-zh/（資料夾名稱沿用，俄文也放這裡），
 // 「中文字型」「俄文字型」規則會載入它
@@ -49,16 +43,11 @@ fs.writeFileSync(findAsset(new RegExp(DICT_TARGET.file)), DICT_TARGET.template.r
 const skipped = [];
 for (const rule of RULES.filter(r => r.groups.some(g => lang.groups.includes(g)))) {
   try {
-    const from = fillTemplate(rule.from, lang), to = fillTemplate(rule.to, lang);
-    let file;
-    if (rule.file) file = findAsset(new RegExp(rule.file));
-    else {
-      // 在 assets 裡找唯一含有 from 的 .js 檔
-      const hits = fs.readdirSync(assets).filter(n => n.endsWith('.js') && fs.readFileSync(path.join(assets, n), 'utf8').includes(from));
-      if (hits.length !== 1) throw new Error(`${rule.label}：預期在 1 個檔案裡，實際 ${hits.length} 個`);
-      file = path.join(assets, hits[0]);
-    }
-    fs.writeFileSync(file, replaceOnce(fs.readFileSync(file, 'utf8'), from, to, rule.label));
+    // find／replace（沒有的話逐字比對 from／to），在 file 指定的檔案、或所有 .js 裡要剛好出現一次（patch-rules.mjs 的 applyRule）
+    const cands = fs.readdirSync(assets).filter(n => rule.file ? new RegExp(rule.file).test(n) : n.endsWith('.js'));
+    const hits = cands.map(n => [n, applyRule(fs.readFileSync(path.join(assets, n), 'utf8'), rule, lang)]).filter(([, r]) => r.count > 0);
+    if (hits.length !== 1 || hits[0][1].count !== 1) throw new Error(`${rule.label}：預期在 1 個檔案裡出現 1 次，實際 ${hits.map(([n, r]) => `${n}×${r.count}`).join('、') || '0 次'}`);
+    fs.writeFileSync(path.join(assets, hits[0][0]), hits[0][1].out);
   } catch (e) {
     if (!rule.optional) throw e;
     skipped.push(rule.label);

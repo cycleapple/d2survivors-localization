@@ -85,6 +85,11 @@ pub struct Rule {
     /// 加分的規則：對不上時略過這一條、照樣套用翻譯（1.0.2 起；舊版啟動器不認得這個欄位，照舊一條對不上就退回原版）
     #[serde(default)]
     pub optional: bool,
+    /// 不怕小改動的寫法（1.0.3 起）：regex，壓縮後的名稱用群組抓下來（寫法見 tools/patch-rules.mjs）。有的話用 find／replace，不看 from／to
+    #[serde(default)]
+    pub find: Option<String>,
+    #[serde(default)]
+    pub replace: Option<String>,
 }
 
 #[derive(Clone, Serialize, Deserialize)]

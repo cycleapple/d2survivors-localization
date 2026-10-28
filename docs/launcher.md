@@ -115,6 +115,13 @@ cargo test --release                        # 有 backup/2026.1026.4/app.asar �
 
 要進遊戲看：把整個遊戲資料夾複製一份，`D2S_USER_DATA` 指到另一個資料夾（遊戲本身支援，存檔和設定就不會動到平常的），裡面 `d2` 用 junction 指到平常的 `%APPDATA%\D2 Survivors\d2`（取出的 D2 素材，1.5 GB），`desktop.json` 的 `checkForUpdates` 設成 false。再用 `D2S_QUERY=d2slang=ko` 和 `--remote-debugging-port` 開複製的那份，用 `tools/cdp.mjs` 截圖
 
+## 1.0.3
+
+- 規則支援 find／replace（manifest `desktop.rules[].find`／`replace`，見 [desktop-patch.md](desktop-patch.md)）：壓縮後的名稱用群組抓下來，遊戲小改版時照樣套得上。有 find 的規則只看 find／replace；`patcher.rs` 的 `Find` 把反向參照換成群組再比對，`expand` 做 `$1` 的代換（跟 `tools/patch-rules.mjs` 的 `expandReplace` 一樣，有單元測試）
+- 舊版（1.0.0～1.0.2）照 from／to 套用，不用提高 `launcher.minimum`
+- 測試：2026.1027.2、2026.1027.4 兩個版本，七種語言的輸出跟 Node 的 `applyRule` 每個檔案都一樣；English／한국어是原版的 sha
+- 發布：推 tag `launcher-v1.0.3`
+
 ## 1.0.2
 
 - 規則分必要和加分（manifest `desktop.rules[].optional`，見 [desktop-patch.md](desktop-patch.md)）：只有加分的對不上時照樣套用翻譯、略過那幾條，主畫面一行提示「遊戲剛更新，部分細節修正中（略過 N 項修改）」；必要的對不上才退回原版、顯示黃色卡片。略過的清單記在 `state.json` 的 `installed.skipped`，命令列也會印出來

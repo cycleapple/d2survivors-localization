@@ -241,6 +241,133 @@ export const RULES = [
   },
 ];
 
+// ── 不怕小改動的寫法：find／replace（啟動器 1.0.3 起）──
+// 上面的 from／to 是逐字比對（舊版啟動器 1.0.0～1.0.2 只看這兩個欄位，照舊能用）。遊戲改版時壓縮後的名稱常常換掉，
+// 所以每條規則另外有 find（regex）和 replace：壓縮後的名稱用群組抓下來再放回去，跟網頁書籤的 web-rules.mjs 同一個做法。
+// 寫法：‹1›、‹2›… 是一個名稱（第一次出現時抓下來，之後再出現要一樣），‹n*› 是任意一段（最短）；號碼照第一次出現的順序編。
+// find 只會用到：跳脫過的原始碼、([A-Za-z0-9_$]+)、([\s\S]*?) 和反向參照 \1…，JavaScript 和啟動器（Rust regex，反向參照換成群組再比對）解讀一樣。
+// replace 的 $1…（兩位數時要有那麼多群組）放回抓到的名稱、$$ 是 $，其他字元照原樣；{{html_lang}}、{{menu_name}} 先代換。
+// 規則加進去的變數名稱都用 $ 開頭（$g、$k…），不會跟抓到的名稱撞在一起
+const IDENT = '([A-Za-z0-9_$]+)';
+const reEsc = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+export function rulePattern(src) {
+  const seen = new Set();
+  // 跳脫之後 ‹n*› 的 * 變成 \*
+  return reEsc(src).replace(/‹(\d+)((?:\\\*)?)›/g, (_, n, any) => {
+    if (seen.has(n)) return `\\${n}`;
+    if (+n !== seen.size + 1) throw new Error(`rulePattern：‹${n}› 要照第一次出現的順序編號：${src}`);
+    seen.add(n);
+    return any ? '([\\s\\S]*?)' : IDENT;
+  });
+}
+const T = (from, to) => ({ find: rulePattern(from), replace: to.replace(/\$/g, '$$$$').replace(/‹(\d+)\*?›/g, '$$$1') });
+
+const pickT = G => `$k=$v=>{if(!$v.startsWith(\`[\`))return $v;let $o=$v.split(\`[\`).slice(1),$w=$o.find($x=>$x.startsWith(${G}+\`]\`))??$o[0];return $w.slice($w.indexOf(\`]\`)+1).trim()}`;
+const CASE_T = '$U=$v=>$v?$v[0].toUpperCase()+$v.slice(1):$v,$W=$v=>$v?$v[0].toLowerCase()+$v.slice(1):$v';
+// 魔法物品：‹1› 查 affix:、‹2› 後綴、‹3› 前綴、‹4› 物品；物品的詞性直接查字典（key 的正規化照遊戲寫在這裡，不依賴遊戲的函式名稱）
+const MAGIC_T = 'return[‹1›(‹2›),‹1›(‹3›),this.translateAs(`item`,‹4›)].filter(Boolean).join(` `)';
+const magicT = expr => `let $g=this.exact.get(\`gender:\${‹4›.trim()}\`.replace(/\\s+/g,\` \`).trim().toUpperCase())??\`ms\`,${pickT('$g')},${CASE_T},$b=this.translateAs(\`item\`,‹4›),$p=$k(‹1›(‹3›)),$q=$k(‹1›(‹2›));return ${expr}`;
+// 獨特怪物：‹1›／‹2›／‹3› 前段、後段、稱號的譯文，‹4› 英文的三段，‹5› map 的參數，‹6› 查詢函式
+const UNIQUE_T = 'let[‹1›,‹2›,‹3›]=‹4›.map(‹5›=>‹6›(`unique`,‹5›));return`${‹3›} ${‹1›} ${‹2›}`';
+const uniqueT = expr => `let[‹1›,‹2›,‹3›]=‹4›.map(‹5›=>‹6›(\`unique\`,‹5›)),$G=‹6›(\`gender\`,‹4›[1]);$G=/^(ms|fs|ns|nl|pl|mp|fp)$/.test($G)?$G:\`ms\`;let ${pickT('$G')},${CASE_T};return${expr}`;
+const HANGUL_T = 'return ‹1›>=44032&&‹1›<=55203||‹1›>=12592&&‹1›<=12687||‹1›>=4352&&‹1›<=4607}';
+const ranges = list => list.map(([a, b]) => `||‹1›>=${a}&&‹1›<=${b}`).join('') + '}';
+const FEMALE = '[`amazon`,`assassin`,`sorceress`]';
+
+const ROBUST = {
+  '啟動器指定語言': T('let ‹1›=null;try{‹1›=localStorage.getItem(‹2›)}catch{}',
+    'let ‹1›=null;try{let $q=new URLSearchParams(location.search).get(`d2slang`);$q&&!sessionStorage.getItem(`d2slang`)&&sessionStorage.setItem(`d2slang`,$q);‹1›=sessionStorage.getItem(`d2slang`)??localStorage.getItem(‹2›)}catch{}'),
+  '遊戲裡切換語言': T('‹1›=‹2›;try{localStorage.setItem(‹3›,‹2›)}catch{return}', '‹1›=‹2›;try{sessionStorage.setItem(`d2slang`,‹2›);localStorage.setItem(‹3›,‹2›)}catch{return}'),
+  '魔法物品名稱組合': T('this.translateAs(`item`,‹1›)].filter(Boolean).join(` `)', 'this.translateAs(`item`,‹1›)].filter(Boolean).join(``)'),
+  '魔法物品名稱組合（日文）': T(MAGIC_T, 'return[‹1›(‹3›),‹1›(‹2›),this.translateAs(`item`,‹4›)].filter(Boolean).join(``)'),
+  '魔法物品名稱組合（德文）': T(MAGIC_T, magicT('$U([$p&&($p.endsWith(` -`)?`${$p.slice(0,-2)}-${$b}`:`${$p} ${$b.includes(` `)?$W($b):$b}`),!$p&&$b,$q].filter(Boolean).join(` `))')),
+  '魔法物品名稱組合（法文）': T(MAGIC_T, magicT('[$b,$p,$q].filter(Boolean).join(` `)')),
+  '魔法物品名稱組合（俄文）': T(MAGIC_T, magicT('$U([$p,$p?$W($b):$b,$q].filter(Boolean).join(` `))')),
+  '魔法物品名稱組合（波蘭文）': T(MAGIC_T, magicT('[$p,$b,$q].filter(Boolean).join(` `)')),
+  '獨特怪物名字（德文）': T(UNIQUE_T, 'let[‹1›,‹2›,‹3›]=‹4›.map(‹5›=>‹6›(`unique`,‹5›));return`${‹1›.endsWith(` -`)?`${‹1›.slice(0,-2)}-${‹2›}`:`${‹1›} ${‹2›}`} ${‹3›}`'),
+  '獨特怪物名字（法文）': T(UNIQUE_T, uniqueT('`${‹2›} ${$k(‹1›)} ${$W(‹3›)}`')),
+  '獨特怪物名字（俄文）': T(UNIQUE_T, uniqueT('`${$U(‹3›)}, ${$U($k(‹1›))} ${$W(‹2›)}`')),
+  '獨特怪物名字（波蘭文）': T(UNIQUE_T, uniqueT('`${‹3›}, ${$k(‹1›)} ${‹2›}`')),
+  // 女性職業的名單直接寫在這裡（遊戲的名單變數名稱不在這段程式碼裡）
+  '女性職業的稱號': T('function ‹1›(‹2›,‹3›){let ‹4›=‹5›(‹2›,‹3›);if(!‹4›)return null;let ‹6›=‹7›(‹2›,‹3›);return ‹6›>0&&!‹8›(‹2›,‹3›)?`${‹9›(‹4›)} · ${‹10›(‹6›)}`:‹9›(‹4›)}',
+    `function ‹1›(‹2›,‹3›){let ‹4›=‹5›(‹2›,‹3›);if(!‹4›)return null;let $F=${FEMALE}.includes(‹3›)?‹9›(\`\${‹4›}:f\`):null,$T=$F&&$F!==\`\${‹4›}:f\`?$F:‹9›(‹4›),‹6›=‹7›(‹2›,‹3›);return ‹6›>0&&!‹8›(‹2›,‹3›)?\`\${$T} · \${‹10›(‹6›)}\`:$T}`),
+  // 角色畫面的 Survivor：查詢放在語言模組（下面的「女性職業的 Survivor（查詢函式）」），saveTransfer 裡不用知道翻譯函式的名稱
+  '女性職業的 Survivor': T('‹1›.inspect?this.nameBox(‹1›.inspect.name):this.fit(`Survivor`,‹2›.name,`white`)',
+    '‹1›.inspect?this.nameBox(‹1›.inspect.name):this.fit(globalThis.__d2Survivor?.(‹1›.cls)??`Survivor`,‹2›.name,`white`)'),
+  '全大寫的原文': T('let ‹1›=this.find(‹2›,0),‹3›=‹1›??‹2›;', 'let ‹1›=this.find(‹2›,0),‹3›=‹1›??‹2›;‹1›!==null&&/[A-Z].*[A-Z]/s.test(‹2›)&&!/[a-z]/.test(‹2›)&&(‹3›=‹1›.toLocaleUpperCase(`{{html_lang}}`));'),
+  '全大寫的原文（分類查詢）': T('translateAs(‹1›,‹2›){return this.exact.get(‹3›(`${‹1›}:${‹2›.trim()}`))??this.translate(‹2›)}',
+    'translateAs(‹1›,‹2›){let $n=this.exact.get(‹3›(`${‹1›}:${‹2›.trim()}`));return $n===void 0?this.translate(‹2›):/[A-Z].*[A-Z]/s.test(‹2›)&&!/[a-z]/.test(‹2›)?$n.toLocaleUpperCase(`{{html_lang}}`):$n}'),
+  // 升級卡片：‹4› 是同一個函式裡翻譯標題用的函式，條件也用它先翻好
+  '進化條件的頓號（升級卡片）': T('function ‹1›(‹2›){let ‹3›=‹4›(‹2›.head).split(` `).map(‹5›=>({text:‹5›,color:`gold`})),‹6›=‹2›.needs.map((‹7›,‹8›)=>({text:‹8›<‹2›.needs.length-1?`${‹7›.text},`:‹7›.text,',
+    'function ‹1›(‹2›){let ‹3›=‹4›(‹2›.head).split(` `).map(‹5›=>({text:‹5›,color:`gold`})),‹6›=‹2›.needs.map((‹7›,‹8›)=>({text:‹8›<‹2›.needs.length-1?`${‹4›(‹7›.text)}、`:‹7›.text,'),
+  // HUD（網頁元素，之後由遊戲的網頁翻譯處理）：「、」放在條件後面另外一段文字，條件本身不加符號
+  '進化條件的頓號（HUD）': T('‹1›.needs.forEach((‹2›,‹3›)=>‹4›.append(` `,‹5›(`span`,‹2›.met?`met`:`missing`,‹2›.text+(‹3›<‹1›.needs.length-1?`,`:``))))',
+    '‹1›.needs.forEach((‹2›,‹3›)=>‹4›.append(‹3›?``:` `,‹5›(`span`,‹2›.met?`met`:`missing`,‹2›.text),‹3›<‹1›.needs.length-1?`、`:``))'),
+  '日期格式（排行榜）': T('‹1›===`ko`?`${‹2›.getMonth()+1}월 ${‹2›.getDate()}일`:', '‹1›===`ko`?‹2›.toLocaleDateString(document.documentElement.lang,{month:`short`,day:`numeric`}):'),
+  '日期格式（完整）': T('return ‹1›===`ko`?`${‹2›.getFullYear()}년 ${‹2›.getMonth()+1}월 ${‹2›.getDate()}일`:', 'return ‹1›===`ko`?‹2›.toLocaleDateString(document.documentElement.lang,{year:`numeric`,month:`long`,day:`numeric`}):'),
+  '標籤與值的冒號': T('return`${‹1›.replace(/:?\\s*$/,`:`)} ${‹2›}`', 'return/[\\u4e00-\\u9fff]/.test(‹1›)?`${‹1›.replace(/[:：]?\\s*$/,`：`)}${‹2›}`:`${‹1›.replace(/:?\\s*$/,`:`)} ${‹2›}`'),
+  '外文字判斷': T(HANGUL_T, HANGUL_T.slice(0, -1) + ranges([[19968, 40959], [13312, 19903], [12288, 12351], [65280, 65519], [12352, 12543]])),
+  '外文字判斷（西里爾字母）': T(HANGUL_T, HANGUL_T.slice(0, -1) + ranges([[1024, 1279]])),
+  '外文字判斷（拉丁擴充 A）': T(HANGUL_T, HANGUL_T.slice(0, -1) + ranges([[256, 383]])),
+  '外文字大小（波蘭文）': T('if(‹1›()){let ‹2›=‹3›>=20?1.25:1.4;[this.foreignSize,this.foreignFamily]=‹4›?[Math.round(‹3›*‹2›),‹5›]:[Math.max(12,Math.round(‹3›*1.3)),‹6›],this.foreignWeight=‹4›?``:`bold `}else[this.foreignSize,this.foreignFamily]=‹3›<14?[12,‹7›]:‹3›<20?[15,‹8›]:[24,‹7›];',
+    '[this.foreignSize,this.foreignFamily]=‹4›?[Math.round(‹3›*(‹3›<16?1.5:1.2)),‹5›]:[Math.max(12,Math.round(‹3›)),‹1›()?‹6›:‹3›<14?‹7›:‹3›<20?‹8›:‹7›],this.foreignWeight=``;'),
+  // 標題字型家族直接比對名稱 D2R Kodia（遊戲的變數名稱不在這段程式碼裡）
+  '外文字不被切掉（波蘭文）': T('for(let ‹1› of ‹2›)‹3›(‹1›)&&‹4›.fillText(‹1›,‹5›+‹6›,‹7›+this.baseline+‹8›),‹5›+=this.advanceOf(‹1›)',
+    'for(let ‹1› of ‹2›){if(‹3›(‹1›)){let $Z=this.foreignFamily===`D2R Kodia`?4:1,$c=document.createElement(`canvas`),$q=$c.getContext(`2d`),$F=‹4›.font.replace(/([\\d.]+)px/,($x,$v)=>$v*$Z+`px`);$q.font=$F;let $M=$q.measureText(‹1›),$A=$M.actualBoundingBoxAscent/$Z,$D=$M.actualBoundingBoxDescent/$Z,$L=$M.actualBoundingBoxLeft/$Z,$R=$M.actualBoundingBoxRight/$Z,$h=‹7›+this.baseline,$d=Math.max(0,Math.min(Math.ceil($A-$h),Math.floor(‹4›.canvas.height-$h-$D))),$y=$h+$d,$k=$A>$y?$y/$A:1;if($Z>1){$c.width=Math.ceil(($L+$R+2)*$Z);$c.height=Math.ceil(($A+$D+2)*$Z);$q.font=$F;$q.fillStyle=‹4›.fillStyle;$q.fillText(‹1›,($L+1)*$Z,($A+1)*$Z);‹4›.imageSmoothingQuality=`high`;‹4›.drawImage($c,‹5›+‹6›-$L-1,$y+‹8›-($A+1)*$k,$c.width/$Z,$c.height/$Z*$k)}else{‹4›.save();‹4›.translate(‹5›+‹6›,$y+‹8›);‹4›.scale(1,$k);‹4›.fillText(‹1›,0,0);‹4›.restore()}}‹5›+=this.advanceOf(‹1›)}'),
+  '中文斷行': T('for(let ‹1› of ‹2›.split(` `)){let ‹3›=‹4›?`${‹4›} ${‹1›}`:‹1›;',
+    `for(let ‹1› of ‹2›.split(\` \`).flatMap($w=>($w.match(/[${OPENING}]*[${CJK}][${CLOSING}]*|[^${CJK}]+(?:[${OPENING}]*[${CJK}][${CLOSING}]*)?/g)??[$w]).map(($x,$j)=>$j?\`\\u0001\${$x}\`:$x))){let $g=‹1›[0]===\`\\u0001\`;‹1›=$g?‹1›.slice(1):‹1›;let ‹3›=‹4›?$g?‹4›+‹1›:\`\${‹4›} \${‹1›}\`:‹1›;`),
+  '暗色字不加描邊': T('‹1›=[];if(‹2›.outline){let ‹3›=`rgb(${‹4›(‹2›.outline.level,‹2›.outline.own)})`;for(let[‹5›,‹6›]of[[-1,0],[1,0],[0,-1],[0,1],[-1,-1],[1,-1],[-1,1],[1,1]])‹1›.push([‹3›,‹5›*‹7›,‹6›*‹7›])}‹1›.push([`rgb(${‹4›(‹2›.level,‹2›.own)})`,0,0]);',
+    '‹1›=[],$F=‹4›(‹2›.level,‹2›.own),$U=‹2›.outline&&‹4›(‹2›.outline.level,‹2›.outline.own),$M=$e=>Math.max(...$e.split(`,`).map(Number)),$D=$U&&$M($F)<75&&$M($U)<$M($F);if(‹2›.outline&&!$D){let ‹3›=`rgb(${$U})`;for(let[‹5›,‹6›]of[[-1,0],[1,0],[0,-1],[0,1],[-1,-1],[1,-1],[-1,1],[1,1]])‹1›.push([‹3›,‹5›*‹7›,‹6›*‹7›])}‹1›.push([`rgb(${$D?$U:$F})`,0,0]);$D&&‹1›.push([`rgb(${$U})`,1,0]);'),
+  '版權聲明寬度': T('let ‹1›={...‹2›(‹3›),maxWidth:‹4›},‹5›=[‹3›.text(‹6›,‹1›)', 'let ‹1›={...‹2›(‹3›),maxWidth:‹4›},‹5›=[‹3›.text(‹6›,document.documentElement.lang===`{{html_lang}}`?{...‹1›,maxWidth:360}:‹1›)'),
+  // 變體表整個用語言模組的 __d2Mods 包起來（下面的「技能變體專用譯名（翻譯函式）」），不用知道 keepSave 匯入的名稱
+  '技能變體專用譯名': T(',‹1›={fireBolt:[{id:‹2*›]},‹3›={raiseSkeleton:', ',‹1›=(globalThis.__d2Mods||($t=>$t))({fireBolt:[{id:‹2›]}),‹3›={raiseSkeleton:'),
+};
+for (const r of RULES) if (ROBUST[r.label]) Object.assign(r, ROBUST[r.label]);
+
+// 只有 find／replace 才需要的兩條：在語言模組裡放查詢函式，給上面的 Survivor、變體名稱用（規則對不上時那兩條照原樣，?.／|| 保護不會出錯）。
+// 舊版啟動器照 from／to 套用：from＝to＝語言模組裡只出現一次的 `d2s:lang`，等於不改
+const HELPER_LEGACY = { file: '^lang-.*\\.js$', from: '`d2s:lang`', to: '`d2s:lang`' };
+RULES.splice(RULES.findIndex(r => r.label === '女性職業的 Survivor'), 0, {
+  label: '女性職業的 Survivor（查詢函式）', groups: ['gender'], optional: true, ...HELPER_LEGACY,
+  ...T('function ‹1›(‹2›){return ‹3›?‹3›.translateAs(`title`,‹2›):‹2›}',
+    `globalThis.__d2Survivor=$c=>{if(!‹3›||!${FEMALE}.includes($c))return null;let $v=‹3›.translateAs(\`title\`,\`Survivor:f\`);return $v===\`Survivor:f\`?null:$v};function ‹1›(‹2›){return ‹3›?‹3›.translateAs(\`title\`,‹2›):‹2›}`),
+});
+RULES.splice(RULES.findIndex(r => r.label === '技能變體專用譯名'), 0, {
+  label: '技能變體專用譯名（翻譯函式）', groups: ['dict'], optional: true, ...HELPER_LEGACY,
+  ...T('function ‹1›(‹2›,‹3›){return ‹4›?‹4›.translateAs(‹2›,‹3›):‹3›}',
+    'globalThis.__d2Mods=$t=>{for(let $l of Object.values($t))for(let $o of $l){let $n=$o.name;Object.defineProperty($o,`name`,{get:()=>‹4›?‹4›.translateAs(`modifier`,$n):$n,enumerable:!0,configurable:!0})}return $t};function ‹1›(‹2›,‹3›){return ‹4›?‹4›.translateAs(‹2›,‹3›):‹3›}'),
+});
+
+// 套用一條規則：有 find 用 find／replace，沒有就逐字比對 from／to。傳回出現次數（要是 1 才算套上）和改好的文字。
+// 啟動器（launcher/src/patcher.rs）做的事一樣
+export function applyRule(text, rule, lang) {
+  if (!rule.find) {
+    const from = fillTemplate(rule.from, lang);
+    const count = text.split(from).length - 1;
+    return { count, out: count === 1 ? text.replace(from, () => fillTemplate(rule.to, lang)) : text };
+  }
+  const found = [...text.matchAll(new RegExp(rule.find, 'g'))];
+  if (found.length !== 1) return { count: found.length, out: text };
+  const m = found[0];
+  return { count: 1, out: text.slice(0, m.index) + expandReplace(fillTemplate(rule.replace, lang), m) + text.slice(m.index + m[0].length) };
+}
+
+// replace 的代換：$$ → $；$ 加數字是群組（兩位數只在有那麼多群組時），其他照原樣（所以程式碼裡的 ${…} 不受影響）
+export function expandReplace(rep, m) {
+  let out = '';
+  for (let i = 0; i < rep.length; i++) {
+    const c = rep[i], d1 = rep[i + 1], d2 = rep[i + 2];
+    if (c === '$' && d1 === '$') { out += '$'; i++; continue; }
+    if (c === '$' && d1 >= '0' && d1 <= '9') {
+      const two = d2 >= '0' && d2 <= '9' && +(d1 + d2) < m.length;
+      const n = two ? +(d1 + d2) : +d1;
+      if (n >= 1 && n < m.length) { out += m[n] ?? ''; i += two ? 2 : 1; continue; }
+    }
+    out += c;
+  }
+  return out;
+}
+
 // 啟動器能選的翻譯語言（en、ko 原版是啟動器內建的）
 export const LANGUAGES = [
   { id: 'zh-TW', name: '繁體中文', menu_name: '繁體中文', html_lang: 'zh-Hant', groups: ['base', 'dict', 'cjk', 'magic-zh', 'fullwidth'], dict: 'dict/zh-TW.json' },
