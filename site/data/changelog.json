@@ -2,6 +2,84 @@
   "schema": 1,
   "entries": [
     {
+      "version": "20261028-1320",
+      "date": "2026-10-28",
+      "kind": "game-fix",
+      "announce": true,
+      "summary": {
+        "zh-TW": "已支援遊戲 2026.1028.1（新增 110 條翻譯）",
+        "zh-CN": "已支持游戏 2026.1028.1（新增 110 条翻译）",
+        "en": "Supports game 2026.1028.1 (110 new strings translated)",
+        "ja": "ゲーム 2026.1028.1 に対応しました（新しい文字列 110 件を翻訳）",
+        "de": "Unterstützt Spielversion 2026.1028.1 (110 neue Texte übersetzt)",
+        "fr": "Prise en charge du jeu 2026.1028.1 (110 nouveaux textes traduits)",
+        "ru": "Поддержка версии игры 2026.1028.1 (переведено 110 новых строк)",
+        "pl": "Obsługa wersji gry 2026.1028.1 (przetłumaczono 110 nowych tekstów)"
+      },
+      "game": {
+        "desktop": "2026.1028.1"
+      },
+      "launcher": "1.0.3",
+      "languages": [
+        {
+          "id": "zh-TW",
+          "status": "available",
+          "entries": 13148,
+          "added": 110,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "zh-CN",
+          "status": "available",
+          "entries": 13147,
+          "added": 110,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ja",
+          "status": "available",
+          "entries": 13153,
+          "added": 110,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "de",
+          "status": "available",
+          "entries": 13187,
+          "added": 110,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "fr",
+          "status": "available",
+          "entries": 13196,
+          "added": 110,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ru",
+          "status": "available",
+          "entries": 13235,
+          "added": 110,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "pl",
+          "status": "available",
+          "entries": 13225,
+          "added": 110,
+          "changed": 0,
+          "removed": 0
+        }
+      ]
+    },
+    {
       "version": "20261028-0733",
       "date": "2026-10-28",
       "kind": "launcher",
