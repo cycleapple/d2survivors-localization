@@ -67,7 +67,14 @@ site/data/dict/ja.json
   "desktop": {                             // = v1 的 patch，內容不變
     "assets_dir": "desktop/dist/web/assets",
     "dict_target": { "file": "^ko-.*\\.js$", "template": "var e={{dict}};export{e as default};" },
-    "rules": [ { "label": "…", "groups": ["base"], "file": "…", "from": "…", "to": "…", "optional": true } ]   // optional：加分規則（預設 false＝必要）。必要規則對不上就退回原版；只有加分規則對不上時照樣套用、略過那幾條
+    "rules": [ { "label": "…", "groups": ["base"], "file": "…", "from": "…", "to": "…", "optional": true, "find": "…", "replace": "…" } ]
+    // optional：加分規則（預設 false＝必要）。必要規則對不上就退回原版；只有加分規則對不上時照樣套用、略過那幾條（啟動器 1.0.2 起）
+    // find／replace（可省略，啟動器 1.0.3 起）：不怕壓縮後名稱改掉的寫法。有 find 的規則，新版啟動器只看 find／replace、不看 from／to：
+    //   find 是 JavaScript 寫法的 regex，只用跳脫過的字元、([A-Za-z0-9_$]+)、([\s\S]*?) 和反向參照 \1…；在 file（或所有 .js）裡要剛好符合一次
+    //   replace 的 $1…（兩位數只在有那麼多群組時）放回群組、$$ 是 $，其他字元照原樣（程式碼裡的 ${…} 不受影響）；{{html_lang}}、{{menu_name}} 先代換
+    //   寫法和產生方式見 tools/patch-rules.mjs 的 rulePattern
+    // from／to 照樣保留：舊版啟動器（1.0.0～1.0.2）不認得 find／replace，照逐字比對的 from／to 套用（只對得上寫規則時的遊戲版本）。
+    //   只有新版才需要的規則（例如語言模組裡的查詢函式）from＝to＝語言模組裡的 `d2s:lang`，舊版套用等於不改。所以不用提高 launcher.minimum
   },
 
   "web": {
