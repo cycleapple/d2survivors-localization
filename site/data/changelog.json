@@ -2,6 +2,84 @@
   "schema": 1,
   "entries": [
     {
+      "version": "20261028-0704",
+      "date": "2026-10-28",
+      "kind": "launcher",
+      "announce": true,
+      "summary": {
+        "zh-TW": "啟動器 1.0.2：遊戲小改版時，翻譯照常套用，只暫時略過少數細節，不再整個退回英文",
+        "zh-CN": "启动器 1.0.2：游戏小改版时，汉化照常套用，只暂时略过少数细节，不再整个退回英文",
+        "en": "Launcher 1.0.2: after a small game update the translation still applies and only skips a few details, instead of falling back to English",
+        "ja": "ランチャー 1.0.2：ゲームの小さな更新では翻訳はそのまま適用され、一部の細かい修正だけを一時的にスキップします（英語に戻らなくなりました）",
+        "de": "Launcher 1.0.2: Nach kleinen Spielupdates bleibt die Übersetzung aktiv, nur einzelne Details werden vorübergehend übersprungen – kein Rückfall mehr auf Englisch",
+        "fr": "Lanceur 1.0.2 : après une petite mise à jour du jeu, la traduction reste appliquée et seuls quelques détails sont ignorés, sans retour à l'anglais",
+        "ru": "Лаунчер 1.0.2: после небольших обновлений игры перевод продолжает работать, временно пропускаются лишь отдельные мелочи — без отката на английский",
+        "pl": "Launcher 1.0.2: po drobnej aktualizacji gry tłumaczenie nadal działa, pomijane są tylko niektóre szczegóły, bez powrotu do angielskiego"
+      },
+      "game": {
+        "desktop": "2026.1027.4"
+      },
+      "launcher": "1.0.2",
+      "languages": [
+        {
+          "id": "zh-TW",
+          "status": "available",
+          "entries": 13038,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "zh-CN",
+          "status": "available",
+          "entries": 13037,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ja",
+          "status": "available",
+          "entries": 13043,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "de",
+          "status": "available",
+          "entries": 13077,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "fr",
+          "status": "available",
+          "entries": 13086,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ru",
+          "status": "available",
+          "entries": 13125,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "pl",
+          "status": "available",
+          "entries": 13115,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        }
+      ]
+    },
+    {
       "version": "20261028-0647",
       "date": "2026-10-28",
       "kind": "launcher",
