@@ -176,6 +176,7 @@ site/data/dict/ja.json
 ## 遊戲改版的應對
 
 - **網頁版**：`.github/workflows/web-check.yml` 每小時用 `build-web.mjs --check` 檢查線上的遊戲。必要規則對不上就開 `game-update` issue，並通知 Discord 的維護者頻道（secret `DISCORD_WEBHOOK_ALERTS`）。書籤本身在規則對不上時不啟動、提示「需要更新」，原版遊戲照常能玩
-- **桌面版**：遊戲檔案不在網路上，沒辦法自動偵測。啟動器套用失敗（規則對不上）時，**改用英文原版開遊戲**並提示「遊戲剛更新，翻譯修正中」，不要讓玩家開不了遊戲
+- **桌面版**：`.github/workflows/desktop-check.yml` 每小時讀遊戲自己的更新資訊 `https://d2survivors.lol/download/latest.yml`。版本跟 manifest 的 `game.desktop` 不同時，下載新版安裝檔（同一版只下載一次），解出 `app.asar`，跑 `check-rules.mjs`、數出各語言字典還沒有的新字串，開 `desktop-update` issue；必要規則對不上時另外加 `game-update`（網站會顯示提示）並通知 #alerts。手動測試：Actions → Desktop check → Run workflow，勾 force（只印結果、不開 issue）
+- 啟動器套用時，必要規則對不上就**改用原版開遊戲**並在主畫面顯示黃色卡片；只有加分規則（optional）對不上時照樣套用翻譯
 - **新字串**：補翻之前顯示英文，不算壞掉。補翻寫進 `dict/manual/new-<遊戲版本>.json`
 - **修好之後**：發布時 `changelog-next.json` 的 `kind` 寫 `game-fix`、`announce` 寫 `true`
