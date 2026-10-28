@@ -2,6 +2,84 @@
   "schema": 1,
   "entries": [
     {
+      "version": "20261028-0733",
+      "date": "2026-10-28",
+      "kind": "launcher",
+      "announce": false,
+      "summary": {
+        "zh-TW": "啟動器 1.0.3：修改規則改成不怕遊戲小改版的寫法，遊戲更新後更不容易失效",
+        "zh-CN": "启动器 1.0.3：修改规则改成不怕游戏小改版的写法，游戏更新后更不容易失效",
+        "en": "Launcher 1.0.3: patch rules now survive small game updates, so the translation breaks less often",
+        "ja": "ランチャー 1.0.3：パッチ規則をゲームの小さな更新に強い方式に変更し、更新後も壊れにくくなりました",
+        "de": "Launcher 1.0.3: Die Patch-Regeln überstehen jetzt kleine Spielupdates, die Übersetzung fällt seltener aus",
+        "fr": "Lanceur 1.0.3 : les règles de modification résistent désormais aux petites mises à jour du jeu",
+        "ru": "Лаунчер 1.0.3: правила изменений теперь переживают небольшие обновления игры, перевод ломается реже",
+        "pl": "Launcher 1.0.3: reguły modyfikacji są teraz odporne na drobne aktualizacje gry, tłumaczenie psuje się rzadziej"
+      },
+      "game": {
+        "desktop": "2026.1027.4"
+      },
+      "launcher": "1.0.3",
+      "languages": [
+        {
+          "id": "zh-TW",
+          "status": "available",
+          "entries": 13038,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "zh-CN",
+          "status": "available",
+          "entries": 13037,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ja",
+          "status": "available",
+          "entries": 13043,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "de",
+          "status": "available",
+          "entries": 13077,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "fr",
+          "status": "available",
+          "entries": 13086,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ru",
+          "status": "available",
+          "entries": 13125,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "pl",
+          "status": "available",
+          "entries": 13115,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        }
+      ]
+    },
+    {
       "version": "20261028-0704",
       "date": "2026-10-28",
       "kind": "launcher",

@@ -1,7 +1,7 @@
 {
   "schema": 2,
-  "updated": "2026-10-28T07:04:05.994Z",
-  "version": "20261028-0704",
+  "updated": "2026-10-28T07:33:01.501Z",
+  "version": "20261028-0733",
   "game": {
     "desktop": "2026.1027.4",
     "web_checked": "2026-10-27T22:26:27.496Z"
@@ -324,7 +324,9 @@
         ],
         "file": "^lang-.*\\.js$",
         "from": "let e=null;try{e=localStorage.getItem(A)}catch{}",
-        "to": "let e=null;try{let q=new URLSearchParams(location.search).get(`d2slang`);q&&!sessionStorage.getItem(`d2slang`)&&sessionStorage.setItem(`d2slang`,q);e=sessionStorage.getItem(`d2slang`)??localStorage.getItem(A)}catch{}"
+        "to": "let e=null;try{let q=new URLSearchParams(location.search).get(`d2slang`);q&&!sessionStorage.getItem(`d2slang`)&&sessionStorage.setItem(`d2slang`,q);e=sessionStorage.getItem(`d2slang`)??localStorage.getItem(A)}catch{}",
+        "find": "let ([A-Za-z0-9_$]+)=null;try\\{\\1=localStorage\\.getItem\\(([A-Za-z0-9_$]+)\\)\\}catch\\{\\}",
+        "replace": "let $1=null;try{let $$q=new URLSearchParams(location.search).get(`d2slang`);$$q&&!sessionStorage.getItem(`d2slang`)&&sessionStorage.setItem(`d2slang`,$$q);$1=sessionStorage.getItem(`d2slang`)??localStorage.getItem($2)}catch{}"
       },
       {
         "label": "遊戲裡切換語言",
@@ -334,7 +336,9 @@
         "optional": true,
         "file": "^lang-.*\\.js$",
         "from": "j=e;try{localStorage.setItem(A,e)}catch{return}",
-        "to": "j=e;try{sessionStorage.setItem(`d2slang`,e);localStorage.setItem(A,e)}catch{return}"
+        "to": "j=e;try{sessionStorage.setItem(`d2slang`,e);localStorage.setItem(A,e)}catch{return}",
+        "find": "([A-Za-z0-9_$]+)=([A-Za-z0-9_$]+);try\\{localStorage\\.setItem\\(([A-Za-z0-9_$]+),\\2\\)\\}catch\\{return\\}",
+        "replace": "$1=$2;try{sessionStorage.setItem(`d2slang`,$2);localStorage.setItem($3,$2)}catch{return}"
       },
       {
         "label": "語言選單名稱",
@@ -362,7 +366,9 @@
         "optional": true,
         "file": "^lang-.*\\.js$",
         "from": "this.translateAs(`item`,t)].filter(Boolean).join(` `)",
-        "to": "this.translateAs(`item`,t)].filter(Boolean).join(``)"
+        "to": "this.translateAs(`item`,t)].filter(Boolean).join(``)",
+        "find": "this\\.translateAs\\(`item`,([A-Za-z0-9_$]+)\\)\\]\\.filter\\(Boolean\\)\\.join\\(` `\\)",
+        "replace": "this.translateAs(`item`,$1)].filter(Boolean).join(``)"
       },
       {
         "label": "魔法物品名稱組合（日文）",
@@ -372,7 +378,9 @@
         "optional": true,
         "file": "^lang-.*\\.js$",
         "from": "return[a(i),a(r),this.translateAs(`item`,t)].filter(Boolean).join(` `)",
-        "to": "return[a(r),a(i),this.translateAs(`item`,t)].filter(Boolean).join(``)"
+        "to": "return[a(r),a(i),this.translateAs(`item`,t)].filter(Boolean).join(``)",
+        "find": "return\\[([A-Za-z0-9_$]+)\\(([A-Za-z0-9_$]+)\\),\\1\\(([A-Za-z0-9_$]+)\\),this\\.translateAs\\(`item`,([A-Za-z0-9_$]+)\\)\\]\\.filter\\(Boolean\\)\\.join\\(` `\\)",
+        "replace": "return[$1($3),$1($2),this.translateAs(`item`,$4)].filter(Boolean).join(``)"
       },
       {
         "label": "魔法物品名稱組合（德文）",
@@ -382,7 +390,9 @@
         "optional": true,
         "file": "^lang-.*\\.js$",
         "from": "return[a(i),a(r),this.translateAs(`item`,t)].filter(Boolean).join(` `)",
-        "to": "let g=this.exact.get(s(`gender:${t.trim()}`))??`ms`,k=v=>{if(!v.startsWith(`[`))return v;let o=v.split(`[`).slice(1),w=o.find(x=>x.startsWith(g+`]`))??o[0];return w.slice(w.indexOf(`]`)+1).trim()},U=v=>v?v[0].toUpperCase()+v.slice(1):v,W=v=>v?v[0].toLowerCase()+v.slice(1):v,b=this.translateAs(`item`,t),p=k(a(r)),q=k(a(i));return U([p&&(p.endsWith(` -`)?`${p.slice(0,-2)}-${b}`:`${p} ${b.includes(` `)?W(b):b}`),!p&&b,q].filter(Boolean).join(` `))"
+        "to": "let g=this.exact.get(s(`gender:${t.trim()}`))??`ms`,k=v=>{if(!v.startsWith(`[`))return v;let o=v.split(`[`).slice(1),w=o.find(x=>x.startsWith(g+`]`))??o[0];return w.slice(w.indexOf(`]`)+1).trim()},U=v=>v?v[0].toUpperCase()+v.slice(1):v,W=v=>v?v[0].toLowerCase()+v.slice(1):v,b=this.translateAs(`item`,t),p=k(a(r)),q=k(a(i));return U([p&&(p.endsWith(` -`)?`${p.slice(0,-2)}-${b}`:`${p} ${b.includes(` `)?W(b):b}`),!p&&b,q].filter(Boolean).join(` `))",
+        "find": "return\\[([A-Za-z0-9_$]+)\\(([A-Za-z0-9_$]+)\\),\\1\\(([A-Za-z0-9_$]+)\\),this\\.translateAs\\(`item`,([A-Za-z0-9_$]+)\\)\\]\\.filter\\(Boolean\\)\\.join\\(` `\\)",
+        "replace": "let $$g=this.exact.get(`gender:$${$4.trim()}`.replace(/\\s+/g,` `).trim().toUpperCase())??`ms`,$$k=$$v=>{if(!$$v.startsWith(`[`))return $$v;let $$o=$$v.split(`[`).slice(1),$$w=$$o.find($$x=>$$x.startsWith($$g+`]`))??$$o[0];return $$w.slice($$w.indexOf(`]`)+1).trim()},$$U=$$v=>$$v?$$v[0].toUpperCase()+$$v.slice(1):$$v,$$W=$$v=>$$v?$$v[0].toLowerCase()+$$v.slice(1):$$v,$$b=this.translateAs(`item`,$4),$$p=$$k($1($3)),$$q=$$k($1($2));return $$U([$$p&&($$p.endsWith(` -`)?`$${$$p.slice(0,-2)}-$${$$b}`:`$${$$p} $${$$b.includes(` `)?$$W($$b):$$b}`),!$$p&&$$b,$$q].filter(Boolean).join(` `))"
       },
       {
         "label": "魔法物品名稱組合（法文）",
@@ -392,7 +402,9 @@
         "optional": true,
         "file": "^lang-.*\\.js$",
         "from": "return[a(i),a(r),this.translateAs(`item`,t)].filter(Boolean).join(` `)",
-        "to": "let g=this.exact.get(s(`gender:${t.trim()}`))??`ms`,k=v=>{if(!v.startsWith(`[`))return v;let o=v.split(`[`).slice(1),w=o.find(x=>x.startsWith(g+`]`))??o[0];return w.slice(w.indexOf(`]`)+1).trim()},U=v=>v?v[0].toUpperCase()+v.slice(1):v,W=v=>v?v[0].toLowerCase()+v.slice(1):v,b=this.translateAs(`item`,t),p=k(a(r)),q=k(a(i));return [b,p,q].filter(Boolean).join(` `)"
+        "to": "let g=this.exact.get(s(`gender:${t.trim()}`))??`ms`,k=v=>{if(!v.startsWith(`[`))return v;let o=v.split(`[`).slice(1),w=o.find(x=>x.startsWith(g+`]`))??o[0];return w.slice(w.indexOf(`]`)+1).trim()},U=v=>v?v[0].toUpperCase()+v.slice(1):v,W=v=>v?v[0].toLowerCase()+v.slice(1):v,b=this.translateAs(`item`,t),p=k(a(r)),q=k(a(i));return [b,p,q].filter(Boolean).join(` `)",
+        "find": "return\\[([A-Za-z0-9_$]+)\\(([A-Za-z0-9_$]+)\\),\\1\\(([A-Za-z0-9_$]+)\\),this\\.translateAs\\(`item`,([A-Za-z0-9_$]+)\\)\\]\\.filter\\(Boolean\\)\\.join\\(` `\\)",
+        "replace": "let $$g=this.exact.get(`gender:$${$4.trim()}`.replace(/\\s+/g,` `).trim().toUpperCase())??`ms`,$$k=$$v=>{if(!$$v.startsWith(`[`))return $$v;let $$o=$$v.split(`[`).slice(1),$$w=$$o.find($$x=>$$x.startsWith($$g+`]`))??$$o[0];return $$w.slice($$w.indexOf(`]`)+1).trim()},$$U=$$v=>$$v?$$v[0].toUpperCase()+$$v.slice(1):$$v,$$W=$$v=>$$v?$$v[0].toLowerCase()+$$v.slice(1):$$v,$$b=this.translateAs(`item`,$4),$$p=$$k($1($3)),$$q=$$k($1($2));return [$$b,$$p,$$q].filter(Boolean).join(` `)"
       },
       {
         "label": "魔法物品名稱組合（俄文）",
@@ -402,7 +414,9 @@
         "optional": true,
         "file": "^lang-.*\\.js$",
         "from": "return[a(i),a(r),this.translateAs(`item`,t)].filter(Boolean).join(` `)",
-        "to": "let g=this.exact.get(s(`gender:${t.trim()}`))??`ms`,k=v=>{if(!v.startsWith(`[`))return v;let o=v.split(`[`).slice(1),w=o.find(x=>x.startsWith(g+`]`))??o[0];return w.slice(w.indexOf(`]`)+1).trim()},U=v=>v?v[0].toUpperCase()+v.slice(1):v,W=v=>v?v[0].toLowerCase()+v.slice(1):v,b=this.translateAs(`item`,t),p=k(a(r)),q=k(a(i));return U([p,p?W(b):b,q].filter(Boolean).join(` `))"
+        "to": "let g=this.exact.get(s(`gender:${t.trim()}`))??`ms`,k=v=>{if(!v.startsWith(`[`))return v;let o=v.split(`[`).slice(1),w=o.find(x=>x.startsWith(g+`]`))??o[0];return w.slice(w.indexOf(`]`)+1).trim()},U=v=>v?v[0].toUpperCase()+v.slice(1):v,W=v=>v?v[0].toLowerCase()+v.slice(1):v,b=this.translateAs(`item`,t),p=k(a(r)),q=k(a(i));return U([p,p?W(b):b,q].filter(Boolean).join(` `))",
+        "find": "return\\[([A-Za-z0-9_$]+)\\(([A-Za-z0-9_$]+)\\),\\1\\(([A-Za-z0-9_$]+)\\),this\\.translateAs\\(`item`,([A-Za-z0-9_$]+)\\)\\]\\.filter\\(Boolean\\)\\.join\\(` `\\)",
+        "replace": "let $$g=this.exact.get(`gender:$${$4.trim()}`.replace(/\\s+/g,` `).trim().toUpperCase())??`ms`,$$k=$$v=>{if(!$$v.startsWith(`[`))return $$v;let $$o=$$v.split(`[`).slice(1),$$w=$$o.find($$x=>$$x.startsWith($$g+`]`))??$$o[0];return $$w.slice($$w.indexOf(`]`)+1).trim()},$$U=$$v=>$$v?$$v[0].toUpperCase()+$$v.slice(1):$$v,$$W=$$v=>$$v?$$v[0].toLowerCase()+$$v.slice(1):$$v,$$b=this.translateAs(`item`,$4),$$p=$$k($1($3)),$$q=$$k($1($2));return $$U([$$p,$$p?$$W($$b):$$b,$$q].filter(Boolean).join(` `))"
       },
       {
         "label": "魔法物品名稱組合（波蘭文）",
@@ -412,7 +426,9 @@
         "optional": true,
         "file": "^lang-.*\\.js$",
         "from": "return[a(i),a(r),this.translateAs(`item`,t)].filter(Boolean).join(` `)",
-        "to": "let g=this.exact.get(s(`gender:${t.trim()}`))??`ms`,k=v=>{if(!v.startsWith(`[`))return v;let o=v.split(`[`).slice(1),w=o.find(x=>x.startsWith(g+`]`))??o[0];return w.slice(w.indexOf(`]`)+1).trim()},U=v=>v?v[0].toUpperCase()+v.slice(1):v,W=v=>v?v[0].toLowerCase()+v.slice(1):v,b=this.translateAs(`item`,t),p=k(a(r)),q=k(a(i));return [p,b,q].filter(Boolean).join(` `)"
+        "to": "let g=this.exact.get(s(`gender:${t.trim()}`))??`ms`,k=v=>{if(!v.startsWith(`[`))return v;let o=v.split(`[`).slice(1),w=o.find(x=>x.startsWith(g+`]`))??o[0];return w.slice(w.indexOf(`]`)+1).trim()},U=v=>v?v[0].toUpperCase()+v.slice(1):v,W=v=>v?v[0].toLowerCase()+v.slice(1):v,b=this.translateAs(`item`,t),p=k(a(r)),q=k(a(i));return [p,b,q].filter(Boolean).join(` `)",
+        "find": "return\\[([A-Za-z0-9_$]+)\\(([A-Za-z0-9_$]+)\\),\\1\\(([A-Za-z0-9_$]+)\\),this\\.translateAs\\(`item`,([A-Za-z0-9_$]+)\\)\\]\\.filter\\(Boolean\\)\\.join\\(` `\\)",
+        "replace": "let $$g=this.exact.get(`gender:$${$4.trim()}`.replace(/\\s+/g,` `).trim().toUpperCase())??`ms`,$$k=$$v=>{if(!$$v.startsWith(`[`))return $$v;let $$o=$$v.split(`[`).slice(1),$$w=$$o.find($$x=>$$x.startsWith($$g+`]`))??$$o[0];return $$w.slice($$w.indexOf(`]`)+1).trim()},$$U=$$v=>$$v?$$v[0].toUpperCase()+$$v.slice(1):$$v,$$W=$$v=>$$v?$$v[0].toLowerCase()+$$v.slice(1):$$v,$$b=this.translateAs(`item`,$4),$$p=$$k($1($3)),$$q=$$k($1($2));return [$$p,$$b,$$q].filter(Boolean).join(` `)"
       },
       {
         "label": "獨特怪物名字（德文）",
@@ -421,7 +437,9 @@
         ],
         "optional": true,
         "from": "let[r,i,a]=n.map(t=>e(`unique`,t));return`${a} ${r} ${i}`",
-        "to": "let[r,i,a]=n.map(t=>e(`unique`,t));return`${r.endsWith(` -`)?`${r.slice(0,-2)}-${i}`:`${r} ${i}`} ${a}`"
+        "to": "let[r,i,a]=n.map(t=>e(`unique`,t));return`${r.endsWith(` -`)?`${r.slice(0,-2)}-${i}`:`${r} ${i}`} ${a}`",
+        "find": "let\\[([A-Za-z0-9_$]+),([A-Za-z0-9_$]+),([A-Za-z0-9_$]+)\\]=([A-Za-z0-9_$]+)\\.map\\(([A-Za-z0-9_$]+)=>([A-Za-z0-9_$]+)\\(`unique`,\\5\\)\\);return`\\$\\{\\3\\} \\$\\{\\1\\} \\$\\{\\2\\}`",
+        "replace": "let[$1,$2,$3]=$4.map($5=>$6(`unique`,$5));return`$${$1.endsWith(` -`)?`$${$1.slice(0,-2)}-$${$2}`:`$${$1} $${$2}`} $${$3}`"
       },
       {
         "label": "獨特怪物名字（法文）",
@@ -430,7 +448,9 @@
         ],
         "optional": true,
         "from": "let[r,i,a]=n.map(t=>e(`unique`,t));return`${a} ${r} ${i}`",
-        "to": "let[r,i,a]=n.map(t=>e(`unique`,t)),G=e(`gender`,n[1]);G=/^(ms|fs|ns|nl|pl|mp|fp)$/.test(G)?G:`ms`;let k=v=>{if(!v.startsWith(`[`))return v;let o=v.split(`[`).slice(1),w=o.find(x=>x.startsWith(G+`]`))??o[0];return w.slice(w.indexOf(`]`)+1).trim()},U=v=>v?v[0].toUpperCase()+v.slice(1):v,W=v=>v?v[0].toLowerCase()+v.slice(1):v;return`${i} ${k(r)} ${W(a)}`"
+        "to": "let[r,i,a]=n.map(t=>e(`unique`,t)),G=e(`gender`,n[1]);G=/^(ms|fs|ns|nl|pl|mp|fp)$/.test(G)?G:`ms`;let k=v=>{if(!v.startsWith(`[`))return v;let o=v.split(`[`).slice(1),w=o.find(x=>x.startsWith(G+`]`))??o[0];return w.slice(w.indexOf(`]`)+1).trim()},U=v=>v?v[0].toUpperCase()+v.slice(1):v,W=v=>v?v[0].toLowerCase()+v.slice(1):v;return`${i} ${k(r)} ${W(a)}`",
+        "find": "let\\[([A-Za-z0-9_$]+),([A-Za-z0-9_$]+),([A-Za-z0-9_$]+)\\]=([A-Za-z0-9_$]+)\\.map\\(([A-Za-z0-9_$]+)=>([A-Za-z0-9_$]+)\\(`unique`,\\5\\)\\);return`\\$\\{\\3\\} \\$\\{\\1\\} \\$\\{\\2\\}`",
+        "replace": "let[$1,$2,$3]=$4.map($5=>$6(`unique`,$5)),$$G=$6(`gender`,$4[1]);$$G=/^(ms|fs|ns|nl|pl|mp|fp)$$/.test($$G)?$$G:`ms`;let $$k=$$v=>{if(!$$v.startsWith(`[`))return $$v;let $$o=$$v.split(`[`).slice(1),$$w=$$o.find($$x=>$$x.startsWith($$G+`]`))??$$o[0];return $$w.slice($$w.indexOf(`]`)+1).trim()},$$U=$$v=>$$v?$$v[0].toUpperCase()+$$v.slice(1):$$v,$$W=$$v=>$$v?$$v[0].toLowerCase()+$$v.slice(1):$$v;return`$${$2} $${$$k($1)} $${$$W($3)}`"
       },
       {
         "label": "獨特怪物名字（俄文）",
@@ -439,7 +459,9 @@
         ],
         "optional": true,
         "from": "let[r,i,a]=n.map(t=>e(`unique`,t));return`${a} ${r} ${i}`",
-        "to": "let[r,i,a]=n.map(t=>e(`unique`,t)),G=e(`gender`,n[1]);G=/^(ms|fs|ns|nl|pl|mp|fp)$/.test(G)?G:`ms`;let k=v=>{if(!v.startsWith(`[`))return v;let o=v.split(`[`).slice(1),w=o.find(x=>x.startsWith(G+`]`))??o[0];return w.slice(w.indexOf(`]`)+1).trim()},U=v=>v?v[0].toUpperCase()+v.slice(1):v,W=v=>v?v[0].toLowerCase()+v.slice(1):v;return`${U(a)}, ${U(k(r))} ${W(i)}`"
+        "to": "let[r,i,a]=n.map(t=>e(`unique`,t)),G=e(`gender`,n[1]);G=/^(ms|fs|ns|nl|pl|mp|fp)$/.test(G)?G:`ms`;let k=v=>{if(!v.startsWith(`[`))return v;let o=v.split(`[`).slice(1),w=o.find(x=>x.startsWith(G+`]`))??o[0];return w.slice(w.indexOf(`]`)+1).trim()},U=v=>v?v[0].toUpperCase()+v.slice(1):v,W=v=>v?v[0].toLowerCase()+v.slice(1):v;return`${U(a)}, ${U(k(r))} ${W(i)}`",
+        "find": "let\\[([A-Za-z0-9_$]+),([A-Za-z0-9_$]+),([A-Za-z0-9_$]+)\\]=([A-Za-z0-9_$]+)\\.map\\(([A-Za-z0-9_$]+)=>([A-Za-z0-9_$]+)\\(`unique`,\\5\\)\\);return`\\$\\{\\3\\} \\$\\{\\1\\} \\$\\{\\2\\}`",
+        "replace": "let[$1,$2,$3]=$4.map($5=>$6(`unique`,$5)),$$G=$6(`gender`,$4[1]);$$G=/^(ms|fs|ns|nl|pl|mp|fp)$$/.test($$G)?$$G:`ms`;let $$k=$$v=>{if(!$$v.startsWith(`[`))return $$v;let $$o=$$v.split(`[`).slice(1),$$w=$$o.find($$x=>$$x.startsWith($$G+`]`))??$$o[0];return $$w.slice($$w.indexOf(`]`)+1).trim()},$$U=$$v=>$$v?$$v[0].toUpperCase()+$$v.slice(1):$$v,$$W=$$v=>$$v?$$v[0].toLowerCase()+$$v.slice(1):$$v;return`$${$$U($3)}, $${$$U($$k($1))} $${$$W($2)}`"
       },
       {
         "label": "獨特怪物名字（波蘭文）",
@@ -448,7 +470,9 @@
         ],
         "optional": true,
         "from": "let[r,i,a]=n.map(t=>e(`unique`,t));return`${a} ${r} ${i}`",
-        "to": "let[r,i,a]=n.map(t=>e(`unique`,t)),G=e(`gender`,n[1]);G=/^(ms|fs|ns|nl|pl|mp|fp)$/.test(G)?G:`ms`;let k=v=>{if(!v.startsWith(`[`))return v;let o=v.split(`[`).slice(1),w=o.find(x=>x.startsWith(G+`]`))??o[0];return w.slice(w.indexOf(`]`)+1).trim()},U=v=>v?v[0].toUpperCase()+v.slice(1):v,W=v=>v?v[0].toLowerCase()+v.slice(1):v;return`${a}, ${k(r)} ${i}`"
+        "to": "let[r,i,a]=n.map(t=>e(`unique`,t)),G=e(`gender`,n[1]);G=/^(ms|fs|ns|nl|pl|mp|fp)$/.test(G)?G:`ms`;let k=v=>{if(!v.startsWith(`[`))return v;let o=v.split(`[`).slice(1),w=o.find(x=>x.startsWith(G+`]`))??o[0];return w.slice(w.indexOf(`]`)+1).trim()},U=v=>v?v[0].toUpperCase()+v.slice(1):v,W=v=>v?v[0].toLowerCase()+v.slice(1):v;return`${a}, ${k(r)} ${i}`",
+        "find": "let\\[([A-Za-z0-9_$]+),([A-Za-z0-9_$]+),([A-Za-z0-9_$]+)\\]=([A-Za-z0-9_$]+)\\.map\\(([A-Za-z0-9_$]+)=>([A-Za-z0-9_$]+)\\(`unique`,\\5\\)\\);return`\\$\\{\\3\\} \\$\\{\\1\\} \\$\\{\\2\\}`",
+        "replace": "let[$1,$2,$3]=$4.map($5=>$6(`unique`,$5)),$$G=$6(`gender`,$4[1]);$$G=/^(ms|fs|ns|nl|pl|mp|fp)$$/.test($$G)?$$G:`ms`;let $$k=$$v=>{if(!$$v.startsWith(`[`))return $$v;let $$o=$$v.split(`[`).slice(1),$$w=$$o.find($$x=>$$x.startsWith($$G+`]`))??$$o[0];return $$w.slice($$w.indexOf(`]`)+1).trim()},$$U=$$v=>$$v?$$v[0].toUpperCase()+$$v.slice(1):$$v,$$W=$$v=>$$v?$$v[0].toLowerCase()+$$v.slice(1):$$v;return`$${$3}, $${$$k($1)} $${$2}`"
       },
       {
         "label": "女性職業的稱號",
@@ -458,7 +482,21 @@
         "optional": true,
         "file": "^Game-.*\\.js$",
         "from": "function SO(e,t){let n=o_(e,t);if(!n)return null;let r=xi(e,t);return r>0&&!V(e,t)?`${u(n)} · ${Dt(r)}`:u(n)}",
-        "to": "function SO(e,t){let n=o_(e,t);if(!n)return null;let F=r_.includes(t)?u(`${n}:f`):null,T=F&&F!==`${n}:f`?F:u(n),r=xi(e,t);return r>0&&!V(e,t)?`${T} · ${Dt(r)}`:T}"
+        "to": "function SO(e,t){let n=o_(e,t);if(!n)return null;let F=r_.includes(t)?u(`${n}:f`):null,T=F&&F!==`${n}:f`?F:u(n),r=xi(e,t);return r>0&&!V(e,t)?`${T} · ${Dt(r)}`:T}",
+        "find": "function ([A-Za-z0-9_$]+)\\(([A-Za-z0-9_$]+),([A-Za-z0-9_$]+)\\)\\{let ([A-Za-z0-9_$]+)=([A-Za-z0-9_$]+)\\(\\2,\\3\\);if\\(!\\4\\)return null;let ([A-Za-z0-9_$]+)=([A-Za-z0-9_$]+)\\(\\2,\\3\\);return \\6>0&&!([A-Za-z0-9_$]+)\\(\\2,\\3\\)\\?`\\$\\{([A-Za-z0-9_$]+)\\(\\4\\)\\} · \\$\\{([A-Za-z0-9_$]+)\\(\\6\\)\\}`:\\9\\(\\4\\)\\}",
+        "replace": "function $1($2,$3){let $4=$5($2,$3);if(!$4)return null;let $$F=[`amazon`,`assassin`,`sorceress`].includes($3)?$9(`$${$4}:f`):null,$$T=$$F&&$$F!==`$${$4}:f`?$$F:$9($4),$6=$7($2,$3);return $6>0&&!$8($2,$3)?`$${$$T} · $${$10($6)}`:$$T}"
+      },
+      {
+        "label": "女性職業的 Survivor（查詢函式）",
+        "groups": [
+          "gender"
+        ],
+        "optional": true,
+        "file": "^lang-.*\\.js$",
+        "from": "`d2s:lang`",
+        "to": "`d2s:lang`",
+        "find": "function ([A-Za-z0-9_$]+)\\(([A-Za-z0-9_$]+)\\)\\{return ([A-Za-z0-9_$]+)\\?\\3\\.translateAs\\(`title`,\\2\\):\\2\\}",
+        "replace": "globalThis.__d2Survivor=$$c=>{if(!$3||![`amazon`,`assassin`,`sorceress`].includes($$c))return null;let $$v=$3.translateAs(`title`,`Survivor:f`);return $$v===`Survivor:f`?null:$$v};function $1($2){return $3?$3.translateAs(`title`,$2):$2}"
       },
       {
         "label": "女性職業的 Survivor",
@@ -468,7 +506,9 @@
         "optional": true,
         "file": "^saveTransfer-.*\\.js$",
         "from": "r.push(e.inspect?this.nameBox(e.inspect.name):this.fit(`Survivor`,iu.name,`white`),a)",
-        "to": "let $f=[`amazon`,`assassin`,`sorceress`].includes(e.cls)?v(`title:Survivor:f`):null;r.push(e.inspect?this.nameBox(e.inspect.name):this.fit($f&&$f!==`title:Survivor:f`?$f:`Survivor`,iu.name,`white`),a)"
+        "to": "let $f=[`amazon`,`assassin`,`sorceress`].includes(e.cls)?v(`title:Survivor:f`):null;r.push(e.inspect?this.nameBox(e.inspect.name):this.fit($f&&$f!==`title:Survivor:f`?$f:`Survivor`,iu.name,`white`),a)",
+        "find": "([A-Za-z0-9_$]+)\\.inspect\\?this\\.nameBox\\(\\1\\.inspect\\.name\\):this\\.fit\\(`Survivor`,([A-Za-z0-9_$]+)\\.name,`white`\\)",
+        "replace": "$1.inspect?this.nameBox($1.inspect.name):this.fit(globalThis.__d2Survivor?.($1.cls)??`Survivor`,$2.name,`white`)"
       },
       {
         "label": "全大寫的原文",
@@ -478,7 +518,9 @@
         "optional": true,
         "file": "^lang-.*\\.js$",
         "from": "let n=this.find(e,0),r=n??e;",
-        "to": "let n=this.find(e,0),r=n??e;n!==null&&/[A-Z].*[A-Z]/s.test(e)&&!/[a-z]/.test(e)&&(r=n.toLocaleUpperCase(`{{html_lang}}`));"
+        "to": "let n=this.find(e,0),r=n??e;n!==null&&/[A-Z].*[A-Z]/s.test(e)&&!/[a-z]/.test(e)&&(r=n.toLocaleUpperCase(`{{html_lang}}`));",
+        "find": "let ([A-Za-z0-9_$]+)=this\\.find\\(([A-Za-z0-9_$]+),0\\),([A-Za-z0-9_$]+)=\\1\\?\\?\\2;",
+        "replace": "let $1=this.find($2,0),$3=$1??$2;$1!==null&&/[A-Z].*[A-Z]/s.test($2)&&!/[a-z]/.test($2)&&($3=$1.toLocaleUpperCase(`{{html_lang}}`));"
       },
       {
         "label": "全大寫的原文（分類查詢）",
@@ -488,7 +530,9 @@
         "optional": true,
         "file": "^lang-.*\\.js$",
         "from": "translateAs(e,t){return this.exact.get(s(`${e}:${t.trim()}`))??this.translate(t)}",
-        "to": "translateAs(e,t){let n=this.exact.get(s(`${e}:${t.trim()}`));return n===void 0?this.translate(t):/[A-Z].*[A-Z]/s.test(t)&&!/[a-z]/.test(t)?n.toLocaleUpperCase(`{{html_lang}}`):n}"
+        "to": "translateAs(e,t){let n=this.exact.get(s(`${e}:${t.trim()}`));return n===void 0?this.translate(t):/[A-Z].*[A-Z]/s.test(t)&&!/[a-z]/.test(t)?n.toLocaleUpperCase(`{{html_lang}}`):n}",
+        "find": "translateAs\\(([A-Za-z0-9_$]+),([A-Za-z0-9_$]+)\\)\\{return this\\.exact\\.get\\(([A-Za-z0-9_$]+)\\(`\\$\\{\\1\\}:\\$\\{\\2\\.trim\\(\\)\\}`\\)\\)\\?\\?this\\.translate\\(\\2\\)\\}",
+        "replace": "translateAs($1,$2){let $$n=this.exact.get($3(`$${$1}:$${$2.trim()}`));return $$n===void 0?this.translate($2):/[A-Z].*[A-Z]/s.test($2)&&!/[a-z]/.test($2)?$$n.toLocaleUpperCase(`{{html_lang}}`):$$n}"
       },
       {
         "label": "進化條件的頓號（升級卡片）",
@@ -498,7 +542,9 @@
         "optional": true,
         "file": "^saveTransfer-.*\\.js$",
         "from": "{text:n<e.needs.length-1?`${t.text},`:t.text,color:t.met?`white`:`red`}",
-        "to": "{text:n<e.needs.length-1?`${v(t.text)}、`:t.text,color:t.met?`white`:`red`}"
+        "to": "{text:n<e.needs.length-1?`${v(t.text)}、`:t.text,color:t.met?`white`:`red`}",
+        "find": "function ([A-Za-z0-9_$]+)\\(([A-Za-z0-9_$]+)\\)\\{let ([A-Za-z0-9_$]+)=([A-Za-z0-9_$]+)\\(\\2\\.head\\)\\.split\\(` `\\)\\.map\\(([A-Za-z0-9_$]+)=>\\(\\{text:\\5,color:`gold`\\}\\)\\),([A-Za-z0-9_$]+)=\\2\\.needs\\.map\\(\\(([A-Za-z0-9_$]+),([A-Za-z0-9_$]+)\\)=>\\(\\{text:\\8<\\2\\.needs\\.length-1\\?`\\$\\{\\7\\.text\\},`:\\7\\.text,",
+        "replace": "function $1($2){let $3=$4($2.head).split(` `).map($5=>({text:$5,color:`gold`})),$6=$2.needs.map(($7,$8)=>({text:$8<$2.needs.length-1?`$${$4($7.text)}、`:$7.text,"
       },
       {
         "label": "進化條件的頓號（HUD）",
@@ -508,7 +554,9 @@
         "optional": true,
         "file": "^saveTransfer-.*\\.js$",
         "from": "n.text+(r<e.needs.length-1?`,`:``)",
-        "to": "(r<e.needs.length-1?`${v(n.text)}、`:n.text)"
+        "to": "(r<e.needs.length-1?`${v(n.text)}、`:n.text)",
+        "find": "([A-Za-z0-9_$]+)\\.needs\\.forEach\\(\\(([A-Za-z0-9_$]+),([A-Za-z0-9_$]+)\\)=>([A-Za-z0-9_$]+)\\.append\\(` `,([A-Za-z0-9_$]+)\\(`span`,\\2\\.met\\?`met`:`missing`,\\2\\.text\\+\\(\\3<\\1\\.needs\\.length-1\\?`,`:``\\)\\)\\)\\)",
+        "replace": "$1.needs.forEach(($2,$3)=>$4.append($3?``:` `,$5(`span`,$2.met?`met`:`missing`,$2.text),$3<$1.needs.length-1?`、`:``))"
       },
       {
         "label": "日期格式（排行榜）",
@@ -518,7 +566,9 @@
         "optional": true,
         "file": "^Game-.*\\.js$",
         "from": "t===`ko`?`${n.getMonth()+1}월 ${n.getDate()}일`:",
-        "to": "t===`ko`?n.toLocaleDateString(document.documentElement.lang,{month:`short`,day:`numeric`}):"
+        "to": "t===`ko`?n.toLocaleDateString(document.documentElement.lang,{month:`short`,day:`numeric`}):",
+        "find": "([A-Za-z0-9_$]+)===`ko`\\?`\\$\\{([A-Za-z0-9_$]+)\\.getMonth\\(\\)\\+1\\}월 \\$\\{\\2\\.getDate\\(\\)\\}일`:",
+        "replace": "$1===`ko`?$2.toLocaleDateString(document.documentElement.lang,{month:`short`,day:`numeric`}):"
       },
       {
         "label": "日期格式（完整）",
@@ -528,7 +578,9 @@
         "optional": true,
         "file": "^Game-.*\\.js$",
         "from": "return t===`ko`?`${n.getFullYear()}년 ${n.getMonth()+1}월 ${n.getDate()}일`:",
-        "to": "return t===`ko`?n.toLocaleDateString(document.documentElement.lang,{year:`numeric`,month:`long`,day:`numeric`}):"
+        "to": "return t===`ko`?n.toLocaleDateString(document.documentElement.lang,{year:`numeric`,month:`long`,day:`numeric`}):",
+        "find": "return ([A-Za-z0-9_$]+)===`ko`\\?`\\$\\{([A-Za-z0-9_$]+)\\.getFullYear\\(\\)\\}년 \\$\\{\\2\\.getMonth\\(\\)\\+1\\}월 \\$\\{\\2\\.getDate\\(\\)\\}일`:",
+        "replace": "return $1===`ko`?$2.toLocaleDateString(document.documentElement.lang,{year:`numeric`,month:`long`,day:`numeric`}):"
       },
       {
         "label": "標籤與值的冒號",
@@ -538,7 +590,9 @@
         "optional": true,
         "file": "^lang-.*\\.js$",
         "from": "return`${t.replace(/:?\\s*$/,`:`)} ${r}`",
-        "to": "return/[\\u4e00-\\u9fff]/.test(t)?`${t.replace(/[:：]?\\s*$/,`：`)}${r}`:`${t.replace(/:?\\s*$/,`:`)} ${r}`"
+        "to": "return/[\\u4e00-\\u9fff]/.test(t)?`${t.replace(/[:：]?\\s*$/,`：`)}${r}`:`${t.replace(/:?\\s*$/,`:`)} ${r}`",
+        "find": "return`\\$\\{([A-Za-z0-9_$]+)\\.replace\\(/:\\?\\\\s\\*\\$/,`:`\\)\\} \\$\\{([A-Za-z0-9_$]+)\\}`",
+        "replace": "return/[\\u4e00-\\u9fff]/.test($1)?`$${$1.replace(/[:：]?\\s*$$/,`：`)}$${$2}`:`$${$1.replace(/:?\\s*$$/,`:`)} $${$2}`"
       },
       {
         "label": "外文字判斷",
@@ -546,7 +600,9 @@
           "cjk"
         ],
         "from": "return t>=44032&&t<=55203||t>=12592&&t<=12687||t>=4352&&t<=4607}",
-        "to": "return t>=44032&&t<=55203||t>=12592&&t<=12687||t>=4352&&t<=4607||t>=19968&&t<=40959||t>=13312&&t<=19903||t>=12288&&t<=12351||t>=65280&&t<=65519||t>=12352&&t<=12543}"
+        "to": "return t>=44032&&t<=55203||t>=12592&&t<=12687||t>=4352&&t<=4607||t>=19968&&t<=40959||t>=13312&&t<=19903||t>=12288&&t<=12351||t>=65280&&t<=65519||t>=12352&&t<=12543}",
+        "find": "return ([A-Za-z0-9_$]+)>=44032&&\\1<=55203\\|\\|\\1>=12592&&\\1<=12687\\|\\|\\1>=4352&&\\1<=4607\\}",
+        "replace": "return $1>=44032&&$1<=55203||$1>=12592&&$1<=12687||$1>=4352&&$1<=4607||$1>=19968&&$1<=40959||$1>=13312&&$1<=19903||$1>=12288&&$1<=12351||$1>=65280&&$1<=65519||$1>=12352&&$1<=12543}"
       },
       {
         "label": "外文字判斷（西里爾字母）",
@@ -554,7 +610,9 @@
           "cyrillic"
         ],
         "from": "return t>=44032&&t<=55203||t>=12592&&t<=12687||t>=4352&&t<=4607}",
-        "to": "return t>=44032&&t<=55203||t>=12592&&t<=12687||t>=4352&&t<=4607||t>=1024&&t<=1279}"
+        "to": "return t>=44032&&t<=55203||t>=12592&&t<=12687||t>=4352&&t<=4607||t>=1024&&t<=1279}",
+        "find": "return ([A-Za-z0-9_$]+)>=44032&&\\1<=55203\\|\\|\\1>=12592&&\\1<=12687\\|\\|\\1>=4352&&\\1<=4607\\}",
+        "replace": "return $1>=44032&&$1<=55203||$1>=12592&&$1<=12687||$1>=4352&&$1<=4607||$1>=1024&&$1<=1279}"
       },
       {
         "label": "外文字判斷（拉丁擴充 A）",
@@ -562,7 +620,9 @@
           "latin-ext"
         ],
         "from": "return t>=44032&&t<=55203||t>=12592&&t<=12687||t>=4352&&t<=4607}",
-        "to": "return t>=44032&&t<=55203||t>=12592&&t<=12687||t>=4352&&t<=4607||t>=256&&t<=383}"
+        "to": "return t>=44032&&t<=55203||t>=12592&&t<=12687||t>=4352&&t<=4607||t>=256&&t<=383}",
+        "find": "return ([A-Za-z0-9_$]+)>=44032&&\\1<=55203\\|\\|\\1>=12592&&\\1<=12687\\|\\|\\1>=4352&&\\1<=4607\\}",
+        "replace": "return $1>=44032&&$1<=55203||$1>=12592&&$1<=12687||$1>=4352&&$1<=4607||$1>=256&&$1<=383}"
       },
       {
         "label": "外文字大小（波蘭文）",
@@ -571,7 +631,9 @@
         ],
         "optional": true,
         "from": "if(ne()){let e=a>=20?1.25:1.4;[this.foreignSize,this.foreignFamily]=o?[Math.round(a*e),g]:[Math.max(12,Math.round(a*1.3)),te],this.foreignWeight=o?``:`bold `}else[this.foreignSize,this.foreignFamily]=a<14?[12,re]:a<20?[15,ee]:[24,re];",
-        "to": "[this.foreignSize,this.foreignFamily]=o?[Math.round(a*(a<16?1.5:1.2)),g]:[Math.max(12,Math.round(a)),ne()?te:a<14?re:a<20?ee:re],this.foreignWeight=``;"
+        "to": "[this.foreignSize,this.foreignFamily]=o?[Math.round(a*(a<16?1.5:1.2)),g]:[Math.max(12,Math.round(a)),ne()?te:a<14?re:a<20?ee:re],this.foreignWeight=``;",
+        "find": "if\\(([A-Za-z0-9_$]+)\\(\\)\\)\\{let ([A-Za-z0-9_$]+)=([A-Za-z0-9_$]+)>=20\\?1\\.25:1\\.4;\\[this\\.foreignSize,this\\.foreignFamily\\]=([A-Za-z0-9_$]+)\\?\\[Math\\.round\\(\\3\\*\\2\\),([A-Za-z0-9_$]+)\\]:\\[Math\\.max\\(12,Math\\.round\\(\\3\\*1\\.3\\)\\),([A-Za-z0-9_$]+)\\],this\\.foreignWeight=\\4\\?``:`bold `\\}else\\[this\\.foreignSize,this\\.foreignFamily\\]=\\3<14\\?\\[12,([A-Za-z0-9_$]+)\\]:\\3<20\\?\\[15,([A-Za-z0-9_$]+)\\]:\\[24,\\7\\];",
+        "replace": "[this.foreignSize,this.foreignFamily]=$4?[Math.round($3*($3<16?1.5:1.2)),$5]:[Math.max(12,Math.round($3)),$1()?$6:$3<14?$7:$3<20?$8:$7],this.foreignWeight=``;"
       },
       {
         "label": "外文字不被切掉（波蘭文）",
@@ -580,7 +642,9 @@
         ],
         "optional": true,
         "from": "for(let n of t)Pp(n)&&e.fillText(n,s+a,r+this.baseline+o),s+=this.advanceOf(n)",
-        "to": "for(let n of t){if(Pp(n)){let Z=this.foreignFamily===g?4:1,c=document.createElement(`canvas`),q=c.getContext(`2d`),F=e.font.replace(/([\\d.]+)px/,(x,v)=>v*Z+`px`);q.font=F;let M=q.measureText(n),A=M.actualBoundingBoxAscent/Z,D=M.actualBoundingBoxDescent/Z,L=M.actualBoundingBoxLeft/Z,R=M.actualBoundingBoxRight/Z,h=r+this.baseline,d=Math.max(0,Math.min(Math.ceil(A-h),Math.floor(e.canvas.height-h-D))),y=h+d,k=A>y?y/A:1;if(Z>1){c.width=Math.ceil((L+R+2)*Z);c.height=Math.ceil((A+D+2)*Z);q.font=F;q.fillStyle=e.fillStyle;q.fillText(n,(L+1)*Z,(A+1)*Z);e.imageSmoothingQuality=`high`;e.drawImage(c,s+a-L-1,y+o-(A+1)*k,c.width/Z,c.height/Z*k)}else{e.save();e.translate(s+a,y+o);e.scale(1,k);e.fillText(n,0,0);e.restore()}}s+=this.advanceOf(n)}"
+        "to": "for(let n of t){if(Pp(n)){let Z=this.foreignFamily===g?4:1,c=document.createElement(`canvas`),q=c.getContext(`2d`),F=e.font.replace(/([\\d.]+)px/,(x,v)=>v*Z+`px`);q.font=F;let M=q.measureText(n),A=M.actualBoundingBoxAscent/Z,D=M.actualBoundingBoxDescent/Z,L=M.actualBoundingBoxLeft/Z,R=M.actualBoundingBoxRight/Z,h=r+this.baseline,d=Math.max(0,Math.min(Math.ceil(A-h),Math.floor(e.canvas.height-h-D))),y=h+d,k=A>y?y/A:1;if(Z>1){c.width=Math.ceil((L+R+2)*Z);c.height=Math.ceil((A+D+2)*Z);q.font=F;q.fillStyle=e.fillStyle;q.fillText(n,(L+1)*Z,(A+1)*Z);e.imageSmoothingQuality=`high`;e.drawImage(c,s+a-L-1,y+o-(A+1)*k,c.width/Z,c.height/Z*k)}else{e.save();e.translate(s+a,y+o);e.scale(1,k);e.fillText(n,0,0);e.restore()}}s+=this.advanceOf(n)}",
+        "find": "for\\(let ([A-Za-z0-9_$]+) of ([A-Za-z0-9_$]+)\\)([A-Za-z0-9_$]+)\\(\\1\\)&&([A-Za-z0-9_$]+)\\.fillText\\(\\1,([A-Za-z0-9_$]+)\\+([A-Za-z0-9_$]+),([A-Za-z0-9_$]+)\\+this\\.baseline\\+([A-Za-z0-9_$]+)\\),\\5\\+=this\\.advanceOf\\(\\1\\)",
+        "replace": "for(let $1 of $2){if($3($1)){let $$Z=this.foreignFamily===`D2R Kodia`?4:1,$$c=document.createElement(`canvas`),$$q=$$c.getContext(`2d`),$$F=$4.font.replace(/([\\d.]+)px/,($$x,$$v)=>$$v*$$Z+`px`);$$q.font=$$F;let $$M=$$q.measureText($1),$$A=$$M.actualBoundingBoxAscent/$$Z,$$D=$$M.actualBoundingBoxDescent/$$Z,$$L=$$M.actualBoundingBoxLeft/$$Z,$$R=$$M.actualBoundingBoxRight/$$Z,$$h=$7+this.baseline,$$d=Math.max(0,Math.min(Math.ceil($$A-$$h),Math.floor($4.canvas.height-$$h-$$D))),$$y=$$h+$$d,$$k=$$A>$$y?$$y/$$A:1;if($$Z>1){$$c.width=Math.ceil(($$L+$$R+2)*$$Z);$$c.height=Math.ceil(($$A+$$D+2)*$$Z);$$q.font=$$F;$$q.fillStyle=$4.fillStyle;$$q.fillText($1,($$L+1)*$$Z,($$A+1)*$$Z);$4.imageSmoothingQuality=`high`;$4.drawImage($$c,$5+$6-$$L-1,$$y+$8-($$A+1)*$$k,$$c.width/$$Z,$$c.height/$$Z*$$k)}else{$4.save();$4.translate($5+$6,$$y+$8);$4.scale(1,$$k);$4.fillText($1,0,0);$4.restore()}}$5+=this.advanceOf($1)}"
       },
       {
         "label": "中文斷行",
@@ -589,7 +653,9 @@
         ],
         "optional": true,
         "from": "for(let i of r.split(` `)){let r=e?`${e} ${i}`:i;",
-        "to": "for(let i of r.split(` `).flatMap(w=>(w.match(/[\\u300c\\u300e\\u3010\\uff08]*[\\u3000-\\u9fff\\uff00-\\uffef][:;,.!?)\\u3001\\u3002\\uff0c\\uff1a\\uff1b\\uff01\\uff1f\\uff09\\u300d\\u300f\\u3011\\u30fc\\u30fb\\u3041\\u3043\\u3045\\u3047\\u3049\\u3063\\u3083\\u3085\\u3087\\u308e\\u30a1\\u30a3\\u30a5\\u30a7\\u30a9\\u30c3\\u30e3\\u30e5\\u30e7\\u30ee\\u30f5\\u30f6]*|[^\\u3000-\\u9fff\\uff00-\\uffef]+(?:[\\u300c\\u300e\\u3010\\uff08]*[\\u3000-\\u9fff\\uff00-\\uffef][:;,.!?)\\u3001\\u3002\\uff0c\\uff1a\\uff1b\\uff01\\uff1f\\uff09\\u300d\\u300f\\u3011\\u30fc\\u30fb\\u3041\\u3043\\u3045\\u3047\\u3049\\u3063\\u3083\\u3085\\u3087\\u308e\\u30a1\\u30a3\\u30a5\\u30a7\\u30a9\\u30c3\\u30e3\\u30e5\\u30e7\\u30ee\\u30f5\\u30f6]*)?/g)??[w]).map((x,j)=>j?`\\u0001${x}`:x))){let g=i[0]===`\\u0001`;i=g?i.slice(1):i;let r=e?g?e+i:`${e} ${i}`:i;"
+        "to": "for(let i of r.split(` `).flatMap(w=>(w.match(/[\\u300c\\u300e\\u3010\\uff08]*[\\u3000-\\u9fff\\uff00-\\uffef][:;,.!?)\\u3001\\u3002\\uff0c\\uff1a\\uff1b\\uff01\\uff1f\\uff09\\u300d\\u300f\\u3011\\u30fc\\u30fb\\u3041\\u3043\\u3045\\u3047\\u3049\\u3063\\u3083\\u3085\\u3087\\u308e\\u30a1\\u30a3\\u30a5\\u30a7\\u30a9\\u30c3\\u30e3\\u30e5\\u30e7\\u30ee\\u30f5\\u30f6]*|[^\\u3000-\\u9fff\\uff00-\\uffef]+(?:[\\u300c\\u300e\\u3010\\uff08]*[\\u3000-\\u9fff\\uff00-\\uffef][:;,.!?)\\u3001\\u3002\\uff0c\\uff1a\\uff1b\\uff01\\uff1f\\uff09\\u300d\\u300f\\u3011\\u30fc\\u30fb\\u3041\\u3043\\u3045\\u3047\\u3049\\u3063\\u3083\\u3085\\u3087\\u308e\\u30a1\\u30a3\\u30a5\\u30a7\\u30a9\\u30c3\\u30e3\\u30e5\\u30e7\\u30ee\\u30f5\\u30f6]*)?/g)??[w]).map((x,j)=>j?`\\u0001${x}`:x))){let g=i[0]===`\\u0001`;i=g?i.slice(1):i;let r=e?g?e+i:`${e} ${i}`:i;",
+        "find": "for\\(let ([A-Za-z0-9_$]+) of ([A-Za-z0-9_$]+)\\.split\\(` `\\)\\)\\{let ([A-Za-z0-9_$]+)=([A-Za-z0-9_$]+)\\?`\\$\\{\\4\\} \\$\\{\\1\\}`:\\1;",
+        "replace": "for(let $1 of $2.split(` `).flatMap($$w=>($$w.match(/[\\u300c\\u300e\\u3010\\uff08]*[\\u3000-\\u9fff\\uff00-\\uffef][:;,.!?)\\u3001\\u3002\\uff0c\\uff1a\\uff1b\\uff01\\uff1f\\uff09\\u300d\\u300f\\u3011\\u30fc\\u30fb\\u3041\\u3043\\u3045\\u3047\\u3049\\u3063\\u3083\\u3085\\u3087\\u308e\\u30a1\\u30a3\\u30a5\\u30a7\\u30a9\\u30c3\\u30e3\\u30e5\\u30e7\\u30ee\\u30f5\\u30f6]*|[^\\u3000-\\u9fff\\uff00-\\uffef]+(?:[\\u300c\\u300e\\u3010\\uff08]*[\\u3000-\\u9fff\\uff00-\\uffef][:;,.!?)\\u3001\\u3002\\uff0c\\uff1a\\uff1b\\uff01\\uff1f\\uff09\\u300d\\u300f\\u3011\\u30fc\\u30fb\\u3041\\u3043\\u3045\\u3047\\u3049\\u3063\\u3083\\u3085\\u3087\\u308e\\u30a1\\u30a3\\u30a5\\u30a7\\u30a9\\u30c3\\u30e3\\u30e5\\u30e7\\u30ee\\u30f5\\u30f6]*)?/g)??[$$w]).map(($$x,$$j)=>$$j?`\\u0001$${$$x}`:$$x))){let $$g=$1[0]===`\\u0001`;$1=$$g?$1.slice(1):$1;let $3=$4?$$g?$4+$1:`$${$4} $${$1}`:$1;"
       },
       {
         "label": "中文字型",
@@ -627,7 +693,9 @@
         ],
         "optional": true,
         "from": "c=[];if(a.outline){let e=`rgb(${o(a.outline.level,a.outline.own)})`;for(let[t,n]of[[-1,0],[1,0],[0,-1],[0,1],[-1,-1],[1,-1],[-1,1],[1,1]])c.push([e,t*s,n*s])}c.push([`rgb(${o(a.level,a.own)})`,0,0]);",
-        "to": "c=[],F=o(a.level,a.own),U=a.outline&&o(a.outline.level,a.outline.own),M=e=>Math.max(...e.split(`,`).map(Number)),D=U&&M(F)<75&&M(U)<M(F);if(a.outline&&!D){let e=`rgb(${U})`;for(let[t,n]of[[-1,0],[1,0],[0,-1],[0,1],[-1,-1],[1,-1],[-1,1],[1,1]])c.push([e,t*s,n*s])}c.push([`rgb(${D?U:F})`,0,0]);D&&c.push([`rgb(${U})`,1,0]);"
+        "to": "c=[],F=o(a.level,a.own),U=a.outline&&o(a.outline.level,a.outline.own),M=e=>Math.max(...e.split(`,`).map(Number)),D=U&&M(F)<75&&M(U)<M(F);if(a.outline&&!D){let e=`rgb(${U})`;for(let[t,n]of[[-1,0],[1,0],[0,-1],[0,1],[-1,-1],[1,-1],[-1,1],[1,1]])c.push([e,t*s,n*s])}c.push([`rgb(${D?U:F})`,0,0]);D&&c.push([`rgb(${U})`,1,0]);",
+        "find": "([A-Za-z0-9_$]+)=\\[\\];if\\(([A-Za-z0-9_$]+)\\.outline\\)\\{let ([A-Za-z0-9_$]+)=`rgb\\(\\$\\{([A-Za-z0-9_$]+)\\(\\2\\.outline\\.level,\\2\\.outline\\.own\\)\\}\\)`;for\\(let\\[([A-Za-z0-9_$]+),([A-Za-z0-9_$]+)\\]of\\[\\[-1,0\\],\\[1,0\\],\\[0,-1\\],\\[0,1\\],\\[-1,-1\\],\\[1,-1\\],\\[-1,1\\],\\[1,1\\]\\]\\)\\1\\.push\\(\\[\\3,\\5\\*([A-Za-z0-9_$]+),\\6\\*\\7\\]\\)\\}\\1\\.push\\(\\[`rgb\\(\\$\\{\\4\\(\\2\\.level,\\2\\.own\\)\\}\\)`,0,0\\]\\);",
+        "replace": "$1=[],$$F=$4($2.level,$2.own),$$U=$2.outline&&$4($2.outline.level,$2.outline.own),$$M=$$e=>Math.max(...$$e.split(`,`).map(Number)),$$D=$$U&&$$M($$F)<75&&$$M($$U)<$$M($$F);if($2.outline&&!$$D){let $3=`rgb($${$$U})`;for(let[$5,$6]of[[-1,0],[1,0],[0,-1],[0,1],[-1,-1],[1,-1],[-1,1],[1,1]])$1.push([$3,$5*$7,$6*$7])}$1.push([`rgb($${$$D?$$U:$$F})`,0,0]);$$D&&$1.push([`rgb($${$$U})`,1,0]);"
       },
       {
         "label": "版權聲明寬度",
@@ -636,7 +704,21 @@
         ],
         "optional": true,
         "from": "let r={...Y(e),maxWidth:_r},i=[e.text(q,r)",
-        "to": "let r={...Y(e),maxWidth:_r},i=[e.text(q,document.documentElement.lang===`{{html_lang}}`?{...r,maxWidth:360}:r)"
+        "to": "let r={...Y(e),maxWidth:_r},i=[e.text(q,document.documentElement.lang===`{{html_lang}}`?{...r,maxWidth:360}:r)",
+        "find": "let ([A-Za-z0-9_$]+)=\\{\\.\\.\\.([A-Za-z0-9_$]+)\\(([A-Za-z0-9_$]+)\\),maxWidth:([A-Za-z0-9_$]+)\\},([A-Za-z0-9_$]+)=\\[\\3\\.text\\(([A-Za-z0-9_$]+),\\1\\)",
+        "replace": "let $1={...$2($3),maxWidth:$4},$5=[$3.text($6,document.documentElement.lang===`{{html_lang}}`?{...$1,maxWidth:360}:$1)"
+      },
+      {
+        "label": "技能變體專用譯名（翻譯函式）",
+        "groups": [
+          "dict"
+        ],
+        "optional": true,
+        "file": "^lang-.*\\.js$",
+        "from": "`d2s:lang`",
+        "to": "`d2s:lang`",
+        "find": "function ([A-Za-z0-9_$]+)\\(([A-Za-z0-9_$]+),([A-Za-z0-9_$]+)\\)\\{return ([A-Za-z0-9_$]+)\\?\\4\\.translateAs\\(\\2,\\3\\):\\3\\}",
+        "replace": "globalThis.__d2Mods=$$t=>{for(let $$l of Object.values($$t))for(let $$o of $$l){let $$n=$$o.name;Object.defineProperty($$o,`name`,{get:()=>$4?$4.translateAs(`modifier`,$$n):$$n,enumerable:!0,configurable:!0})}return $$t};function $1($2,$3){return $4?$4.translateAs($2,$3):$3}"
       },
       {
         "label": "技能變體專用譯名",
@@ -645,7 +727,9 @@
         ],
         "optional": true,
         "from": "]},Ts={raiseSkeleton:`Evolved: Revive's skeletons take this option`},Es={};function Ds(e,t){",
-        "to": "]},Ts={raiseSkeleton:`Evolved: Revive's skeletons take this option`},Es={};for(let l of Object.values(ws))for(let o of l){let n=o.name;Object.defineProperty(o,`name`,{get:()=>h()?m(`modifier`,n):n,enumerable:!0,configurable:!0})}function Ds(e,t){"
+        "to": "]},Ts={raiseSkeleton:`Evolved: Revive's skeletons take this option`},Es={};for(let l of Object.values(ws))for(let o of l){let n=o.name;Object.defineProperty(o,`name`,{get:()=>h()?m(`modifier`,n):n,enumerable:!0,configurable:!0})}function Ds(e,t){",
+        "find": ",([A-Za-z0-9_$]+)=\\{fireBolt:\\[\\{id:([\\s\\S]*?)\\]\\},([A-Za-z0-9_$]+)=\\{raiseSkeleton:",
+        "replace": ",$1=(globalThis.__d2Mods||($$t=>$$t))({fireBolt:[{id:$2]}),$3={raiseSkeleton:"
       }
     ]
   },
@@ -1026,13 +1110,13 @@
     ]
   },
   "launcher": {
-    "latest": "1.0.2",
+    "latest": "1.0.3",
     "minimum": "1.0.0",
     "download": "https://github.com/cycleapple/d2survivors-localization/releases/latest/download/d2s-launcher.exe",
     "sha256_url": "https://github.com/cycleapple/d2survivors-localization/releases/latest/download/d2s-launcher.exe.sha256"
   },
   "changelog": {
-    "url": "changelog.json?v=28d474db20b8",
-    "latest": "20261028-0704"
+    "url": "changelog.json?v=fe92e57c42c6",
+    "latest": "20261028-0733"
   }
 }
