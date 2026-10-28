@@ -1,4 +1,5 @@
 {
+ "# seconds left": "{0} seconde(s) restante(s)",
  "title:Slayer": "Égorgeuse",
  "title:Champion": "remarquable",
  "Slayer": "Égorgeuse",
@@ -8871,6 +8872,14 @@
  "title:Guardian": "Gardienne",
  "Guardian": "Gardienne",
  "Ladder": "TOURNOI",
+ "Trade": "acheter/vendre",
+ "Potions": "Potions",
+ "Antidote Potion": "Antidote",
+ "Thawing Potion": "Potion de dégel",
+ "Poison Resist +#%": "Résistance au Poison : +{0}%",
+ "Cold Resist +#%": "Résistance au Froid : +{0}%",
+ "+#% to Maximum Poison Resist": "+{0}% au max. de résistance au Poison",
+ "Weapons": "Armes",
  "gender:Circle": "ms",
  "gender:Aegis": "fs",
  "gender:Aerin Shield": "ms",
@@ -9575,5 +9584,7 @@
  "gender:Cow King's Hooves": "mp",
  "gender:Large Charm": "ms",
  "gender:Grand Charm": "ms",
- "gender:CHARMS": "mp"
+ "gender:CHARMS": "mp",
+ "gender:Potions": "mp",
+ "gender:Weapons": "mp"
 }

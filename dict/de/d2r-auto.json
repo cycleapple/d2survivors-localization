@@ -1,4 +1,5 @@
 {
+ "# seconds left": "Noch {0} Sek.",
  "title:Slayer": "Schlitzer",
  "title:Champion": "Champion -",
  "Slayer": "Schlitzer",
@@ -8908,6 +8909,14 @@
  "title:Guardian": "Wächter",
  "Guardian": "Wächter",
  "Ladder": "RANGLISTE",
+ "Trade": "Handeln",
+ "Potions": "Tränke",
+ "Antidote Potion": "Gegengiftelixier",
+ "Thawing Potion": "Auftauelixier",
+ "Poison Resist +#%": "Giftwiderstand +{0}%",
+ "Cold Resist +#%": "Kältewiderstand +{0}%",
+ "+#% to Maximum Poison Resist": "+{0}% zu max. Giftwiderstand",
+ "Weapons": "Waffen",
  "gender:Aegis": "fs",
  "gender:Aerin Shield": "ms",
  "gender:Akaran Rondache": "fs",
@@ -9537,5 +9546,7 @@
  "gender:Cow King's Hooves": "pl",
  "gender:Large Charm": "ms",
  "gender:Grand Charm": "ms",
- "gender:CHARMS": "pl"
+ "gender:CHARMS": "pl",
+ "gender:Potions": "pl",
+ "gender:Weapons": "pl"
 }

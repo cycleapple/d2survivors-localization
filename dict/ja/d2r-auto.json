@@ -1,4 +1,5 @@
 {
+ "# seconds left": "残り {0}秒",
  "title:Slayer": "殺し",
  "title:Champion": "凶悪なる",
  "Slayer": "殺し",
@@ -8668,5 +8669,13 @@
  "Level * *": "レベル{0} {1}",
  "title:Guardian": "守護せし者",
  "Guardian": "守護せし者",
- "Ladder": "ラダー"
+ "Ladder": "ラダー",
+ "Trade": "取引",
+ "Potions": "ポーション",
+ "Antidote Potion": "解毒のポーション",
+ "Thawing Potion": "解氷のポーション",
+ "Poison Resist +#%": "毒物耐性（+{0}%）",
+ "Cold Resist +#%": "冷気耐性（+{0}%）",
+ "+#% to Maximum Poison Resist": "最大毒物耐性（+{0}%）",
+ "Weapons": "武器"
 }

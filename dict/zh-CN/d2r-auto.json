@@ -1,4 +1,5 @@
 {
+ "# seconds left": "剩余{0}秒",
  "title:Slayer": "重煞者",
  "title:Champion": "[勇士]",
  "Slayer": "重煞者",
@@ -8952,5 +8953,13 @@
  "Level * *": "{0}级{1}",
  "title:Guardian": "墓穴守卫",
  "Guardian": "墓穴守卫",
- "Ladder": "天梯"
+ "Ladder": "天梯",
+ "Trade": "交易",
+ "Potions": "药水",
+ "Antidote Potion": "解毒药水",
+ "Thawing Potion": "解冻药水",
+ "Poison Resist +#%": "毒素抗性 +{0}%",
+ "Cold Resist +#%": "冰霜抗性 +{0}%",
+ "+#% to Maximum Poison Resist": "+{0}% 毒素抗性上限",
+ "Weapons": "武器"
 }

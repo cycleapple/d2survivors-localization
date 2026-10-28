@@ -1,4 +1,5 @@
 {
+ "# seconds left": "{0} sek. do końca",
  "title:Slayer": "Pogromca",
  "title:Champion": "Czempion –",
  "Slayer": "Pogromca",
@@ -8529,6 +8530,14 @@
  "title:Guardian": "Strażnik",
  "Guardian": "Strażnik",
  "Ladder": "RANKING",
+ "Trade": "handel",
+ "Potions": "Mikstury",
+ "Antidote Potion": "Antidotum",
+ "Thawing Potion": "Mikstura odtajania",
+ "Poison Resist +#%": "+{0}% do odporności na trucizny",
+ "Cold Resist +#%": "+{0}% do odporności na zimno",
+ "+#% to Maximum Poison Resist": "+{0}% do maksymalnej odporności na trucizny",
+ "Weapons": "Broń",
  "gender:Circle": "fs",
  "gender:Aegis": "fs",
  "gender:Aerin Shield": "fs",
@@ -9239,5 +9248,7 @@
  "gender:Cow King's Hooves": "nl",
  "gender:Large Charm": "ms",
  "gender:Grand Charm": "ms",
- "gender:CHARMS": "nl"
+ "gender:CHARMS": "nl",
+ "gender:Potions": "nl",
+ "gender:Weapons": "nl"
 }

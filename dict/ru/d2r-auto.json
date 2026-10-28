@@ -1,4 +1,5 @@
 {
+ "# seconds left": "Остается {0} сек",
  "title:Slayer": "Истребитель",
  "title:Champion": "Элита",
  "Slayer": "Истребитель",
@@ -8453,6 +8454,14 @@
  "title:Guardian": "Страж",
  "Guardian": "Страж",
  "Ladder": "РЕЙТИНГИ",
+ "Trade": "Торговать",
+ "Potions": "Зелья",
+ "Antidote Potion": "Противоядие",
+ "Thawing Potion": "Зелье оттаивания",
+ "Poison Resist +#%": "+{0}% к сопротивлению яду",
+ "Cold Resist +#%": "+{0}% к сопротивлению льду",
+ "+#% to Maximum Poison Resist": "+{0}% к максимальному сопротивлению яду",
+ "Weapons": "Оружие",
  "gender:Circle": "ms",
  "gender:Aegis": "fs",
  "gender:Aerin Shield": "ms",
@@ -9163,5 +9172,7 @@
  "gender:Cow King's Hooves": "pl",
  "gender:Large Charm": "ms",
  "gender:Grand Charm": "ms",
- "gender:CHARMS": "pl"
+ "gender:CHARMS": "pl",
+ "gender:Potions": "pl",
+ "gender:Weapons": "pl"
 }

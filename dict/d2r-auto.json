@@ -1,4 +1,5 @@
 {
+ "# seconds left": "還剩 {0} 秒",
  "title:Slayer": "屠殺者",
  "title:Champion": "精英",
  "Slayer": "屠殺者",
@@ -8925,5 +8926,13 @@
  "Level * *": "等級 {0} {1}",
  "title:Guardian": "守護者",
  "Guardian": "守護者",
- "Ladder": "天梯"
+ "Ladder": "天梯",
+ "Trade": "交易",
+ "Potions": "藥水",
+ "Antidote Potion": "解毒藥水",
+ "Thawing Potion": "融冰藥水",
+ "Poison Resist +#%": "毒素抗性 +{0}%",
+ "Cold Resist +#%": "冰寒抗性 +{0}%",
+ "+#% to Maximum Poison Resist": "毒素抗性上限 +{0}%",
+ "Weapons": "武器"
 }
