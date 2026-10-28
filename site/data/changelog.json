@@ -2,6 +2,84 @@
   "schema": 1,
   "entries": [
     {
+      "version": "20261028-0636",
+      "date": "2026-10-28",
+      "kind": "translation",
+      "announce": false,
+      "summary": {
+        "zh-TW": "遊戲 2026.1027.4 的 45 條新字串七種語言都翻好了：生命球旁的狀態效果、阿卡拉的藥水與武器商店、離開遊戲的確認",
+        "zh-CN": "游戏 2026.1027.4 的 45 条新字符串七种语言都翻好了：生命球旁的状态效果、阿卡拉的药水与武器商店、退出游戏的确认",
+        "en": "The 45 new strings of game 2026.1027.4 are translated in all seven languages: status effects by the life globe, Akara's potion and weapon shop, exit confirmations",
+        "ja": "ゲーム 2026.1027.4 の新しい文字列 45 件を 7 言語すべてで翻訳：ライフ球の横の状態異常、アカラのポーションと武器の店、終了時の確認",
+        "de": "Die 45 neuen Texte von Spielversion 2026.1027.4 sind in allen sieben Sprachen übersetzt: Zustände an der Lebenskugel, Akaras Trank- und Waffenladen, Bestätigung beim Beenden",
+        "fr": "Les 45 nouveaux textes du jeu 2026.1027.4 sont traduits dans les sept langues : états près du globe de vie, boutique de potions et d'armes d'Akara, confirmations pour quitter",
+        "ru": "45 новых строк версии игры 2026.1027.4 переведены на все семь языков: состояния у сферы здоровья, лавка зелий и оружия Акары, подтверждение выхода",
+        "pl": "45 nowych tekstów wersji gry 2026.1027.4 jest przetłumaczonych na wszystkie siedem języków: stany przy kuli życia, sklep Akary z miksturami i bronią, potwierdzenie wyjścia"
+      },
+      "game": {
+        "desktop": "2026.1027.4"
+      },
+      "launcher": "1.0.0",
+      "languages": [
+        {
+          "id": "zh-TW",
+          "status": "available",
+          "entries": 13038,
+          "added": 45,
+          "changed": 1,
+          "removed": 0
+        },
+        {
+          "id": "zh-CN",
+          "status": "available",
+          "entries": 13037,
+          "added": 45,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ja",
+          "status": "available",
+          "entries": 13043,
+          "added": 45,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "de",
+          "status": "available",
+          "entries": 13077,
+          "added": 45,
+          "changed": 1,
+          "removed": 0
+        },
+        {
+          "id": "fr",
+          "status": "available",
+          "entries": 13086,
+          "added": 45,
+          "changed": 3,
+          "removed": 0
+        },
+        {
+          "id": "ru",
+          "status": "available",
+          "entries": 13125,
+          "added": 45,
+          "changed": 1,
+          "removed": 0
+        },
+        {
+          "id": "pl",
+          "status": "available",
+          "entries": 13115,
+          "added": 45,
+          "changed": 2,
+          "removed": 0
+        }
+      ]
+    },
+    {
       "version": "20261028-0625",
       "date": "2026-10-28",
       "kind": "game-fix",
