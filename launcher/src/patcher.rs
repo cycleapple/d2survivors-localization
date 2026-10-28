@@ -43,7 +43,13 @@ fn find_asset(names: &[String], pattern: &str) -> Result<String> {
     Ok(hits[0].clone())
 }
 
-pub fn build(original: Vec<u8>, spec: &PatchSpec, target: &Target) -> Result<Vec<u8>> {
+/// 修改好的 app.asar，和對不上、略過的加分規則（label）
+pub struct Built {
+    pub bytes: Vec<u8>,
+    pub skipped: Vec<String>,
+}
+
+pub fn build(original: Vec<u8>, spec: &PatchSpec, target: &Target) -> Result<Built> {
     let mut asar = Asar::parse(original)?;
     let dir = spec.assets_dir.trim_end_matches('/');
     let names = asar.list(dir)?;
@@ -56,31 +62,40 @@ pub fn build(original: Vec<u8>, spec: &PatchSpec, target: &Target) -> Result<Vec
         asar.write(&path(&file), js.into_bytes())?;
     }
 
+    let mut skipped = Vec::new();
     for rule in spec.rules.iter().filter(|r| r.groups.iter().any(|g| target.groups.contains(g))) {
         let from = target.fill(&rule.from);
         let to = target.fill(&rule.to);
-        let file = match &rule.file {
-            Some(p) => find_asset(&names, p)?,
-            None => {
-                let mut hits = Vec::new();
-                for n in names.iter().filter(|n| n.ends_with(".js")) {
-                    if asar.read_string(&path(n))?.contains(&from) {
-                        hits.push(n.clone());
+        // 先找到、確認只出現一次，最後才寫：加分的規則對不上時略過，這個檔案保持原樣
+        let found = (|| -> Result<(String, String)> {
+            let file = match &rule.file {
+                Some(p) => find_asset(&names, p)?,
+                None => {
+                    let mut hits = Vec::new();
+                    for n in names.iter().filter(|n| n.ends_with(".js")) {
+                        if asar.read_string(&path(n))?.contains(&from) {
+                            hits.push(n.clone());
+                        }
                     }
+                    if hits.len() != 1 {
+                        return Err(RuleMismatch(format!("「{}」：預期在 1 個檔案裡，實際 {} 個", rule.label, hits.len())).into());
+                    }
+                    hits.remove(0)
                 }
-                if hits.len() != 1 {
-                    return Err(RuleMismatch(format!("「{}」：預期在 1 個檔案裡，實際 {} 個", rule.label, hits.len())).into());
-                }
-                hits.remove(0)
+            };
+            let text = asar.read_string(&path(&file))?;
+            let n = text.matches(&from).count();
+            if n != 1 {
+                return Err(RuleMismatch(format!("「{}」：預期出現 1 次，實際 {n} 次", rule.label)).into());
             }
-        };
-        let text = asar.read_string(&path(&file))?;
-        let n = text.matches(&from).count();
-        if n != 1 {
-            return Err(RuleMismatch(format!("「{}」：預期出現 1 次，實際 {n} 次", rule.label)).into());
+            Ok((file, text))
+        })();
+        match found {
+            Ok((file, text)) => asar.write(&path(&file), text.replacen(&from, &to, 1).into_bytes())?,
+            Err(e) if rule.optional && e.downcast_ref::<RuleMismatch>().is_some() => skipped.push(rule.label.clone()),
+            Err(e) => return Err(e),
         }
-        asar.write(&path(&file), text.replacen(&from, &to, 1).into_bytes())?;
     }
 
-    asar.pack()
+    Ok(Built { bytes: asar.pack()?, skipped })
 }

@@ -82,6 +82,9 @@ pub struct Rule {
     pub file: Option<String>,
     pub from: String,
     pub to: String,
+    /// 加分的規則：對不上時略過這一條、照樣套用翻譯（1.0.2 起；舊版啟動器不認得這個欄位，照舊一條對不上就退回原版）
+    #[serde(default)]
+    pub optional: bool,
 }
 
 #[derive(Clone, Serialize, Deserialize)]

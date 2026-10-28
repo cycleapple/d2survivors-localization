@@ -45,18 +45,27 @@ console.log(fonts.length ? `字型：${fonts.join('、')}` : `沒有 ${LOCAL_FON
 const dict = JSON.parse(fs.readFileSync(dictFile, 'utf8'));
 fs.writeFileSync(findAsset(new RegExp(DICT_TARGET.file)), DICT_TARGET.template.replace('{{dict}}', () => JSON.stringify(dict)));
 
+// 加分的規則（optional）對不上就略過、照樣打包；必要的對不上就停下來
+const skipped = [];
 for (const rule of RULES.filter(r => r.groups.some(g => lang.groups.includes(g)))) {
-  const from = fillTemplate(rule.from, lang), to = fillTemplate(rule.to, lang);
-  let file;
-  if (rule.file) file = findAsset(new RegExp(rule.file));
-  else {
-    // 在 assets 裡找唯一含有 from 的 .js 檔
-    const hits = fs.readdirSync(assets).filter(n => n.endsWith('.js') && fs.readFileSync(path.join(assets, n), 'utf8').includes(from));
-    if (hits.length !== 1) throw new Error(`${rule.label}：預期在 1 個檔案裡，實際 ${hits.length} 個`);
-    file = path.join(assets, hits[0]);
+  try {
+    const from = fillTemplate(rule.from, lang), to = fillTemplate(rule.to, lang);
+    let file;
+    if (rule.file) file = findAsset(new RegExp(rule.file));
+    else {
+      // 在 assets 裡找唯一含有 from 的 .js 檔
+      const hits = fs.readdirSync(assets).filter(n => n.endsWith('.js') && fs.readFileSync(path.join(assets, n), 'utf8').includes(from));
+      if (hits.length !== 1) throw new Error(`${rule.label}：預期在 1 個檔案裡，實際 ${hits.length} 個`);
+      file = path.join(assets, hits[0]);
+    }
+    fs.writeFileSync(file, replaceOnce(fs.readFileSync(file, 'utf8'), from, to, rule.label));
+  } catch (e) {
+    if (!rule.optional) throw e;
+    skipped.push(rule.label);
+    console.warn(`略過加分的規則：${e.message}`);
   }
-  fs.writeFileSync(file, replaceOnce(fs.readFileSync(file, 'utf8'), from, to, rule.label));
 }
+if (skipped.length) console.warn(`略過 ${skipped.length} 條加分的規則（遊戲可能改版了，用 tools/check-rules.mjs 檢查）`);
 
 await createPackage(tmp, out);
 fs.rmSync(tmp, { recursive: true, force: true });

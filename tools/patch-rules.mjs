@@ -1,6 +1,8 @@
 // app.asar 的修改規則。patch.mjs 直接用，make-manifest.mjs 寫進 manifest.json 給啟動器用。
 // 每條規則：在 assets 裡找到檔案（file 是檔名的 regex；沒有的話就找唯一含有 from 的 .js），
 // from 必須剛好出現一次，換成 to。from／to 裡的 {{menu_name}}、{{html_lang}} 依語言代換。
+// optional: true 是加分的規則（稱號、名稱組合、斷行、標點、版面…）：對不上時略過那一條，照樣套用翻譯（啟動器提示「部分細節修正中」）；
+// 沒標的是必要的（字典位置、啟動器指定語言、選單名稱、頁面語言、外文字判斷、字型），對不上就整個退回原版。跟網頁書籤的 web-rules.mjs 一樣
 // groups：base 每種翻譯語言都套用（English／한국어原版是真正的原版，不套任何規則）；dict 換掉韓文字典的語言才套用；cjk 中日文才套用；
 //   magic-zh／magic-ja 魔法物品名稱的組合順序（照 D2R 各語言的 MagicFormat）；fullwidth 冒號用全形（只有繁中）；
 //   magic-de／magic-fr／magic-ru、unique-de／unique-fr／unique-ru 有詞性的語言組名稱；cyrillic、font-ru 俄文的字；
@@ -45,7 +47,7 @@ export const RULES = [
   },
   // 在遊戲裡切換語言時，sessionStorage 也跟著換（遊戲本身照常存進 localStorage，那是玩家自己選的）
   {
-    label: '遊戲裡切換語言', groups: ['base'], file: '^lang-.*\\.js$',
+    label: '遊戲裡切換語言', groups: ['base'], optional: true, file: '^lang-.*\\.js$',
     from: 'j=e;try{localStorage.setItem(A,e)}catch{return}',
     to: 'j=e;try{sessionStorage.setItem(`d2slang`,e);localStorage.setItem(A,e)}catch{return}',
   },
@@ -54,43 +56,43 @@ export const RULES = [
   // 魔法物品名稱：遊戲照韓文排成「後綴 前綴 物品」（i 是物品名稱後面那段、r 是前面那段）。
   // 中文的順序一樣（D2R 繁中、簡中的 MagicFormat「%2%0%1」，%0 前綴、%1 物品、%2 後綴），但不加空格：能量之緋紅便帽
   {
-    label: '魔法物品名稱組合', groups: ['magic-zh'], file: '^lang-.*\\.js$',
+    label: '魔法物品名稱組合', groups: ['magic-zh'], optional: true, file: '^lang-.*\\.js$',
     from: 'this.translateAs(`item`,t)].filter(Boolean).join(` `)',
     to: 'this.translateAs(`item`,t)].filter(Boolean).join(``)',
   },
   // 日文是「前綴 後綴 物品」（D2R 日文的 MagicFormat「%0%2%1」），也不加空格：頑丈な魔力のキャップ
   {
-    label: '魔法物品名稱組合（日文）', groups: ['magic-ja'], file: '^lang-.*\\.js$',
+    label: '魔法物品名稱組合（日文）', groups: ['magic-ja'], optional: true, file: '^lang-.*\\.js$',
     from: 'return[a(i),a(r),this.translateAs(`item`,t)].filter(Boolean).join(` `)',
     to: 'return[a(r),a(i),this.translateAs(`item`,t)].filter(Boolean).join(``)',
   },
   // 德文「前綴 物品 後綴」（D2R MagicFormat %0 %1 %2），前綴結尾是「 -」時跟物品用連字號接（Engels-Ring），句首大寫：Robuste Kappe des Geistes
   // 有前綴、物品名稱又是兩個字以上時，物品名稱第一個字母改小寫（「Robuste」+「Schwere Handschuhe」→ Robuste schwere Handschuhe）；
   // 字典裡的物品名稱是大寫開頭（白色物品單獨顯示時用），一個字的（Kappe）和沒有前綴的照舊
-  { label: '魔法物品名稱組合（德文）', groups: ['magic-de'], file: '^lang-.*\\.js$', from: MAGIC_FROM, to: magic('U([p&&(p.endsWith(` -`)?`${p.slice(0,-2)}-${b}`:`${p} ${b.includes(` `)?W(b):b}`),!p&&b,q].filter(Boolean).join(` `))') },
+  { label: '魔法物品名稱組合（德文）', groups: ['magic-de'], optional: true, file: '^lang-.*\\.js$', from: MAGIC_FROM, to: magic('U([p&&(p.endsWith(` -`)?`${p.slice(0,-2)}-${b}`:`${p} ${b.includes(` `)?W(b):b}`),!p&&b,q].filter(Boolean).join(` `))') },
   // 法文「物品 前綴 後綴」（%1 %0 %2）：Coiffe solide de l’esprit
-  { label: '魔法物品名稱組合（法文）', groups: ['magic-fr'], file: '^lang-.*\\.js$', from: MAGIC_FROM, to: magic('[b,p,q].filter(Boolean).join(` `)') },
+  { label: '魔法物品名稱組合（法文）', groups: ['magic-fr'], optional: true, file: '^lang-.*\\.js$', from: MAGIC_FROM, to: magic('[b,p,q].filter(Boolean).join(` `)') },
   // 俄文「前綴 物品 後綴」（%0 %1 %2），有前綴時物品小寫開頭，句首大寫：Прочный наголовник разума
-  { label: '魔法物品名稱組合（俄文）', groups: ['magic-ru'], file: '^lang-.*\\.js$', from: MAGIC_FROM, to: magic('U([p,p?W(b):b,q].filter(Boolean).join(` `))') },
+  { label: '魔法物品名稱組合（俄文）', groups: ['magic-ru'], optional: true, file: '^lang-.*\\.js$', from: MAGIC_FROM, to: magic('U([p,p?W(b):b,q].filter(Boolean).join(` `))') },
   // 波蘭文「前綴 物品 後綴」（%0 %1 %2），不改大小寫（D2R 的名稱本來就每個字大寫開頭）：Masywny Kaptur Umysłu
-  { label: '魔法物品名稱組合（波蘭文）', groups: ['magic-pl'], file: '^lang-.*\\.js$', from: MAGIC_FROM, to: magic('[p,b,q].filter(Boolean).join(` `)') },
+  { label: '魔法物品名稱組合（波蘭文）', groups: ['magic-pl'], optional: true, file: '^lang-.*\\.js$', from: MAGIC_FROM, to: magic('[p,b,q].filter(Boolean).join(` `)') },
   // 獨特怪物名字（遊戲照韓文排成「稱號 前段 後段」）。
   // 依賴壓縮名稱（Ma 的 e、n），遊戲改版後用 tools/find-anchors.mjs 找新的寫法（2026.1027.2）
   // 德文「前段-後段 稱號」（D2R Monster2Format a0n1）：Düsternis-Hauer der Hungrige
-  { label: '獨特怪物名字（德文）', groups: ['unique-de'], from: UNIQUE_FROM, to: 'let[r,i,a]=n.map(t=>e(`unique`,t));return`${r.endsWith(` -`)?`${r.slice(0,-2)}-${i}`:`${r} ${i}`} ${a}`' },
+  { label: '獨特怪物名字（德文）', groups: ['unique-de'], optional: true, from: UNIQUE_FROM, to: 'let[r,i,a]=n.map(t=>e(`unique`,t));return`${r.endsWith(` -`)?`${r.slice(0,-2)}-${i}`:`${r} ${i}`} ${a}`' },
   // 法文「後段 前段 稱號」，前段照後段的詞性挑：Croc mélancolique l’Affamé
-  { label: '獨特怪物名字（法文）', groups: ['unique-fr'], from: UNIQUE_FROM, to: unique('`${i} ${k(r)} ${W(a)}`') },
+  { label: '獨特怪物名字（法文）', groups: ['unique-fr'], optional: true, from: UNIQUE_FROM, to: unique('`${i} ${k(r)} ${W(a)}`') },
   // 俄文「稱號, 前段 後段」（D2R 的「%2, %0 %1」），前段照後段的詞性挑：Голод, Мрачный клык
-  { label: '獨特怪物名字（俄文）', groups: ['unique-ru'], from: UNIQUE_FROM, to: unique('`${U(a)}, ${U(k(r))} ${W(i)}`') },
+  { label: '獨特怪物名字（俄文）', groups: ['unique-ru'], optional: true, from: UNIQUE_FROM, to: unique('`${U(a)}, ${U(k(r))} ${W(i)}`') },
   // 波蘭文「稱號, 前段 後段」（D2R 的「%2, %0 %1」），前段照後段的詞性挑，不改大小寫：Żarłok, Mroczny Kieł
-  { label: '獨特怪物名字（波蘭文）', groups: ['unique-pl'], from: UNIQUE_FROM, to: unique('`${a}, ${k(r)} ${i}`') },
+  { label: '獨特怪物名字（波蘭文）', groups: ['unique-pl'], optional: true, from: UNIQUE_FROM, to: unique('`${a}, ${k(r)} ${i}`') },
   // 英雄稱號的陰性形式：遊戲只有 Matriarch／Patriarch 依職業分，Destroyer、Conqueror、Guardian、Slayer、Champion 不分，
   // 德、法、俄、波蘭文的女性職業（Bg：amazon、assassin、sorceress）會顯示陽性（Zerstörer）。
   // 女性職業先查 title:<稱號>:f（Zerstörerin），查不到（翻譯函式原樣傳回）就照一般的 title:<稱號>。
   // 依賴壓縮名稱（SO、o_、xi、V、Dt、title 翻譯函式 u、女性職業 r_），對不上時 check-rules 會報（2026.1027.4；2026.1027.2 是 rO、Ug、st、R、qe、Bg）
   // 只有 gender 群組（德、法、俄、波蘭文）：其他語言沒有 :f 的 key，查不到時翻譯器可能把「Destroyer:f」拆開翻成別的字串
   {
-    label: '女性職業的稱號', groups: ['gender'], file: '^Game-.*\\.js$',
+    label: '女性職業的稱號', groups: ['gender'], optional: true, file: '^Game-.*\\.js$',
     from: 'function SO(e,t){let n=o_(e,t);if(!n)return null;let r=xi(e,t);return r>0&&!V(e,t)?`${u(n)} · ${Dt(r)}`:u(n)}',
     to: 'function SO(e,t){let n=o_(e,t);if(!n)return null;let F=r_.includes(t)?u(`${n}:f`):null,T=F&&F!==`${n}:f`?F:u(n),r=xi(e,t);return r>0&&!V(e,t)?`${T} · ${Dt(r)}`:T}',
   },
@@ -98,7 +100,7 @@ export const RULES = [
   // 女性職業先查 title:Survivor:f（Überlebende），查不到照原本的 Survivor。v 是 saveTransfer 匯入的翻譯函式，
   // 依賴壓縮名稱（iu、v），對不上時 check-rules 會報（2026.1027.4；2026.1027.2 是 Ql）
   {
-    label: '女性職業的 Survivor', groups: ['gender'], file: '^saveTransfer-.*\\.js$',
+    label: '女性職業的 Survivor', groups: ['gender'], optional: true, file: '^saveTransfer-.*\\.js$',
     from: 'r.push(e.inspect?this.nameBox(e.inspect.name):this.fit(`Survivor`,iu.name,`white`),a)',
     to: 'let $f=[`amazon`,`assassin`,`sorceress`].includes(e.cls)?v(`title:Survivor:f`):null;r.push(e.inspect?this.nameBox(e.inspect.name):this.fit($f&&$f!==`title:Survivor:f`?$f:`Survivor`,iu.name,`white`),a)',
   },
@@ -106,43 +108,43 @@ export const RULES = [
   // 英文原文全大寫的地方（拾取篩選器、控制器設定、死亡畫面的按鈕）會變成大小寫混合。
   // 英文有兩個以上的大寫字母、沒有小寫字母時，譯文也轉成全大寫（照語言轉：德文 ß → SS）。查不到的照原樣
   {
-    label: '全大寫的原文', groups: ['caps'], file: '^lang-.*\\.js$',
+    label: '全大寫的原文', groups: ['caps'], optional: true, file: '^lang-.*\\.js$',
     from: 'let n=this.find(e,0),r=n??e;',
     to: 'let n=this.find(e,0),r=n??e;n!==null&&/[A-Z].*[A-Z]/s.test(e)&&!/[a-z]/.test(e)&&(r=n.toLocaleUpperCase(`{{html_lang}}`));',
   },
   {
-    label: '全大寫的原文（分類查詢）', groups: ['caps'], file: '^lang-.*\\.js$',
+    label: '全大寫的原文（分類查詢）', groups: ['caps'], optional: true, file: '^lang-.*\\.js$',
     from: 'translateAs(e,t){return this.exact.get(s(`${e}:${t.trim()}`))??this.translate(t)}',
     to: 'translateAs(e,t){let n=this.exact.get(s(`${e}:${t.trim()}`));return n===void 0?this.translate(t):/[A-Z].*[A-Z]/s.test(t)&&!/[a-z]/.test(t)?n.toLocaleUpperCase(`{{html_lang}}`):n}',
   },
   // 升級卡片、HUD 的進化條件：遊戲在每個條件後面接半形「,」（點陣字型看起來像句點），中日文改成「、」。
   // 條件先翻譯好再接（接上「、」後就沒有英文字母，畫的時候不會再查一次字典）。v 是 saveTransfer 匯入的翻譯函式（2026.1027.2）
   {
-    label: '進化條件的頓號（升級卡片）', groups: ['cjk'], file: '^saveTransfer-.*\\.js$',
+    label: '進化條件的頓號（升級卡片）', groups: ['cjk'], optional: true, file: '^saveTransfer-.*\\.js$',
     from: '{text:n<e.needs.length-1?`${t.text},`:t.text,color:t.met?`white`:`red`}',
     to: '{text:n<e.needs.length-1?`${v(t.text)}、`:t.text,color:t.met?`white`:`red`}',
   },
   {
-    label: '進化條件的頓號（HUD）', groups: ['cjk'], file: '^saveTransfer-.*\\.js$',
+    label: '進化條件的頓號（HUD）', groups: ['cjk'], optional: true, file: '^saveTransfer-.*\\.js$',
     from: 'n.text+(r<e.needs.length-1?`,`:``)',
     to: '(r<e.needs.length-1?`${v(n.text)}、`:n.text)',
   },
   // 日期：遊戲在語言是 ko 時寫死韓文的日期格式（「10월 27일」），翻譯放在 ko 槽位，排行榜和存檔的日期會變成韓文。
   // 改成照 <html lang> 用瀏覽器的格式（繁中「10月27日」、德文「27. Okt.」、俄文「27 окт.」）
   {
-    label: '日期格式（排行榜）', groups: ['dict'], file: '^Game-.*\\.js$',
+    label: '日期格式（排行榜）', groups: ['dict'], optional: true, file: '^Game-.*\\.js$',
     from: 't===`ko`?`${n.getMonth()+1}월 ${n.getDate()}일`:',
     to: 't===`ko`?n.toLocaleDateString(document.documentElement.lang,{month:`short`,day:`numeric`}):',
   },
   {
-    label: '日期格式（完整）', groups: ['dict'], file: '^Game-.*\\.js$',
+    label: '日期格式（完整）', groups: ['dict'], optional: true, file: '^Game-.*\\.js$',
     from: 'return t===`ko`?`${n.getFullYear()}년 ${n.getMonth()+1}월 ${n.getDate()}일`:',
     to: 'return t===`ko`?n.toLocaleDateString(document.documentElement.lang,{year:`numeric`,month:`long`,day:`numeric`}):',
   },
   // 「標籤: 值」整句查不到時，翻譯器分開翻再接回去，一律接成半形「: 」；標籤是中文就改用全形「：」、不加空格。
   // 只有繁中：D2R 的簡中、日文本來就用半形冒號（「掉宝率: +%d%%」）
   {
-    label: '標籤與值的冒號', groups: ['fullwidth'], file: '^lang-.*\\.js$',
+    label: '標籤與值的冒號', groups: ['fullwidth'], optional: true, file: '^lang-.*\\.js$',
     from: 'return`${t.replace(/:?\\s*$/,`:`)} ${r}`',
     to: 'return/[\\u4e00-\\u9fff]/.test(t)?`${t.replace(/[:：]?\\s*$/,`：`)}${r}`:`${t.replace(/:?\\s*$/,`:`)} ${r}`',
   },
@@ -158,7 +160,7 @@ export const RULES = [
   // 標題字型（exocet）不管有沒有 D2R 韓文字型都用 D2R Kodia 這個家族，才會用到 font-pl 註冊的 Exocet。
   // 依賴壓縮名稱（ne 是否有 D2R 韓文字型，g／te／re／ee 是四個字型家族），遊戲改版後用 tools/find-anchors.mjs 找新的寫法（2026.1027.2）
   {
-    label: '外文字大小（波蘭文）', groups: ['size-pl'],
+    label: '外文字大小（波蘭文）', groups: ['size-pl'], optional: true,
     from: 'if(ne()){let e=a>=20?1.25:1.4;[this.foreignSize,this.foreignFamily]=o?[Math.round(a*e),g]:[Math.max(12,Math.round(a*1.3)),te],this.foreignWeight=o?``:`bold `}else[this.foreignSize,this.foreignFamily]=a<14?[12,re]:a<20?[15,ee]:[24,re];',
     to: '[this.foreignSize,this.foreignFamily]=o?[Math.round(a*(a<16?1.5:1.2)),g]:[Math.max(12,Math.round(a)),ne()?te:a<14?re:a<20?ee:re],this.foreignWeight=``;',
   },
@@ -169,7 +171,7 @@ export const RULES = [
   // 另外符號比點陣字型的格子高（字形高 773／1000，S 只到 592），文字 canvas 上方放不下時，
   // 先往下移（最多移到底部的空間用完），還超出的部分把這個字垂直壓扁到放得下
   {
-    label: '外文字不被切掉（波蘭文）', groups: ['size-pl'],
+    label: '外文字不被切掉（波蘭文）', groups: ['size-pl'], optional: true,
     from: 'for(let n of t)Pp(n)&&e.fillText(n,s+a,r+this.baseline+o),s+=this.advanceOf(n)',
     to: 'for(let n of t){if(Pp(n)){let Z=this.foreignFamily===g?4:1,c=document.createElement(`canvas`),q=c.getContext(`2d`),F=e.font.replace(/([\\d.]+)px/,(x,v)=>v*Z+`px`);q.font=F;let M=q.measureText(n),A=M.actualBoundingBoxAscent/Z,D=M.actualBoundingBoxDescent/Z,L=M.actualBoundingBoxLeft/Z,R=M.actualBoundingBoxRight/Z,h=r+this.baseline,d=Math.max(0,Math.min(Math.ceil(A-h),Math.floor(e.canvas.height-h-D))),y=h+d,k=A>y?y/A:1;if(Z>1){c.width=Math.ceil((L+R+2)*Z);c.height=Math.ceil((A+D+2)*Z);q.font=F;q.fillStyle=e.fillStyle;q.fillText(n,(L+1)*Z,(A+1)*Z);e.imageSmoothingQuality=`high`;e.drawImage(c,s+a-L-1,y+o-(A+1)*k,c.width/Z,c.height/Z*k)}else{e.save();e.translate(s+a,y+o);e.scale(1,k);e.fillText(n,0,0);e.restore()}}s+=this.advanceOf(n)}',
   },
@@ -177,7 +179,7 @@ export const RULES = [
   // 切完空白後，把含中文的詞再拆成一個字一個字（句末標點黏在前一個字後面、左括號黏在後一個字前面，
   // 數字和英文黏著後面那個字，「1発」「D2と」不會拆開）；拆出來的片段前面標 \u0001，接回去時不加空白
   {
-    label: '中文斷行', groups: ['cjk'],
+    label: '中文斷行', groups: ['cjk'], optional: true,
     from: 'for(let i of r.split(` `)){let r=e?`${e} ${i}`:i;',
     to: `for(let i of r.split(\` \`).flatMap(w=>(w.match(/[${OPENING}]*[${CJK}][${CLOSING}]*|[^${CJK}]+(?:[${OPENING}]*[${CJK}][${CLOSING}]*)?/g)??[w]).map((x,j)=>j?\`\\u0001\${x}\`:x))){let g=i[0]===\`\\u0001\`;i=g?i.slice(1):i;let r=e?g?e+i:\`\${e} \${i}\`:i;`,
   },
@@ -213,7 +215,7 @@ export const RULES = [
   // （英文按鈕字很粗，單畫一次的中文太細）；亮色字（金字、白字）的填色亮，不受影響。
   // 「很暗」的門檻 75：按鈕字的填色最亮 63，升級畫面標題那種褐金色是 97，要照原本的畫法
   {
-    label: '暗色字不加描邊', groups: ['cjk', 'cyrillic', 'latin-ext'],
+    label: '暗色字不加描邊', groups: ['cjk', 'cyrillic', 'latin-ext'], optional: true,
     from: 'c=[];if(a.outline){let e=`rgb(${o(a.outline.level,a.outline.own)})`;for(let[t,n]of[[-1,0],[1,0],[0,-1],[0,1],[-1,-1],[1,-1],[-1,1],[1,1]])c.push([e,t*s,n*s])}c.push([`rgb(${o(a.level,a.own)})`,0,0]);',
     to: 'c=[],F=o(a.level,a.own),U=a.outline&&o(a.outline.level,a.outline.own),M=e=>Math.max(...e.split(`,`).map(Number)),D=U&&M(F)<75&&M(U)<M(F);if(a.outline&&!D){let e=`rgb(${U})`;for(let[t,n]of[[-1,0],[1,0],[0,-1],[0,1],[-1,-1],[1,-1],[-1,1],[1,1]])c.push([e,t*s,n*s])}c.push([`rgb(${D?U:F})`,0,0]);D&&c.push([`rgb(${U})`,1,0]);',
   },
@@ -221,7 +223,7 @@ export const RULES = [
   // 這個語言時把第一段（非官方聲明）的上限縮成 360，剛好在句號處折成兩行；標題畫面下一行的 © 聲明照 700，
   // 切回英文時也照原本的 700
   {
-    label: '版權聲明寬度', groups: ['cjk'],
+    label: '版權聲明寬度', groups: ['cjk'], optional: true,
     // 依賴壓縮名稱（Y、_r、q），遊戲改版後用 tools/find-anchors.mjs 找新的寫法（2026.1027.4；2026.1027.2 是 fr、J）
     from: 'let r={...Y(e),maxWidth:_r},i=[e.text(q,r)',
     to: 'let r={...Y(e),maxWidth:_r},i=[e.text(q,document.documentElement.lang===`{{html_lang}}`?{...r,maxWidth:360}:r)',
@@ -232,7 +234,7 @@ export const RULES = [
   // 沒在翻譯（英文）時照原本的英文。m = 語言模組的 translateAs，h = 是否正在翻譯（keepSave 的匯入名稱）。
   // 專用譯名在 dict/manual/modifiers.json，決定的原因見 docs/term-decisions.md
   {
-    label: '技能變體專用譯名', groups: ['dict'],
+    label: '技能變體專用譯名', groups: ['dict'], optional: true,
     // 依賴壓縮名稱（變體表 ws、後面的 Ts、Es、Ds，匯入的 h、m），遊戲改版後用 tools/find-anchors.mjs 找新的寫法（2026.1027.4；2026.1027.2 是 ks、As、js、Ms）
     from: "]},Ts={raiseSkeleton:`Evolved: Revive's skeletons take this option`},Es={};function Ds(e,t){",
     to: "]},Ts={raiseSkeleton:`Evolved: Revive's skeletons take this option`},Es={};for(let l of Object.values(ws))for(let o of l){let n=o.name;Object.defineProperty(o,`name`,{get:()=>h()?m(`modifier`,n):n,enumerable:!0,configurable:!0})}function Ds(e,t){",

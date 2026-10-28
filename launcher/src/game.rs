@@ -119,24 +119,27 @@ impl Game {
 
         log("修改 app.asar…".into());
         let patched = patcher::build(original.bytes, spec, &Target::language(desktop, &dict))?;
-        self.put(&patched, key, log)?;
+        if !patched.skipped.is_empty() {
+            log(format!("⚠ 遊戲可能改版了，略過 {} 條加分的修改：{}", patched.skipped.len(), patched.skipped.join("、")));
+        }
+        self.put(&patched.bytes, key, patched.skipped, log)?;
         Ok(Some("ko"))
     }
 
-    fn put(&self, bytes: &[u8], key: String, log: &dyn Fn(String)) -> Result<()> {
+    fn put(&self, bytes: &[u8], key: String, skipped: Vec<String>, log: &dyn Fn(String)) -> Result<()> {
         let sha = sha256_hex(bytes);
         let current = fs::read(self.asar()).ok().map(|b| sha256_hex(&b));
         if current.as_deref() != Some(sha.as_str()) {
             paths::write_atomic(&self.asar(), bytes).context("無法寫入 app.asar，請先關掉遊戲")?;
             log(format!("已裝進遊戲：{}", self.asar().display()));
         }
-        State { installed: Some(Installed { key, sha256: sha }), ..State::load() }.save()
+        State { installed: Some(Installed { key, sha256: sha, skipped }), ..State::load() }.save()
     }
 
     /// 還原成原版 app.asar
     pub fn restore(&self, log: &dyn Fn(String)) -> Result<()> {
         let original = self.original()?;
-        self.put(&original.bytes, format!("{}:original", original.sha256), log)?;
+        self.put(&original.bytes, format!("{}:original", original.sha256), Vec::new(), log)?;
         log(format!("已還原原版（{}）", original.version));
         Ok(())
     }

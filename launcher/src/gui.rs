@@ -40,6 +40,8 @@ pub struct App {
     fallback: Option<Fallback>,
     /// 遊戲自己記的語言是 ko（舊版啟動器寫的）：開原版會變成韓文，主畫面教玩家切回 English
     game_lang_ko: bool,
+    /// 裝在遊戲裡的翻譯略過了幾條加分的規則（遊戲剛改版）：主畫面一行輕的提示
+    skipped: usize,
     /// 最新一筆更新紀錄，和它是不是還沒看過
     changelog: Option<ChangelogEntry>,
     changelog_unseen: bool,
@@ -84,6 +86,7 @@ impl App {
             egui::ColorImage::from_rgba_unmultiplied([64, 64], include_bytes!("../assets/icon-64.rgba")),
             egui::TextureOptions::LINEAR,
         );
+        let skipped = paths::State::load().installed.map_or(0, |i| i.skipped_for(&config.language));
         let mut app = Self {
             page,
             launcher: manifest.as_ref().and_then(|m| m.launcher.clone()),
@@ -92,6 +95,7 @@ impl App {
             // 上次啟動改用原版的話，重新開啟啟動器時照樣提示（翻譯修好、下次套上時才清掉）
             fallback: Fallback::last(),
             game_lang_ko: system::stored_game_lang().as_deref() == Some("ko"),
+            skipped,
             changelog: None,
             changelog_unseen: false,
             game_version: None,
@@ -222,6 +226,7 @@ impl App {
                         if job == Job::Launch || job == Job::Install {
                             self.fallback = o.fallback;
                             self.game_lang_ko = system::stored_game_lang().as_deref() == Some("ko");
+                            self.skipped = paths::State::load().installed.map_or(0, |i| i.skipped_for(&self.config.language));
                             // 遊戲視窗會蓋住啟動器：工作列閃一下，玩家回來時看得到黃色提示卡片
                             if job == Job::Launch && o.fallback.is_some() {
                                 ctx.send_viewport_cmd(egui::ViewportCommand::RequestUserAttention(egui::UserAttentionType::Informational));
@@ -541,6 +546,11 @@ impl App {
         ui.add_enabled_ui(!self.busy, |ui| self.language_picker(ui, true));
         ui.add_space(4.0);
         self.mode_note(ui);
+        // 只略過了加分的修改：翻譯照常使用，一行提示就好（退回原版時是上面的黃色卡片）
+        if self.skipped > 0 && self.fallback.is_none() {
+            ui.add_space(2.0);
+            ui.label(RichText::new(format!("ⓘ {}", self.tf("partial_notice", &[&self.skipped.to_string()]))).small().color(WARN));
+        }
         ui.add_space(16.0);
 
         let game_ok = game::exists(&self.config.game_dir());
@@ -746,13 +756,14 @@ impl App {
             }
         });
         ui.add_space(2.0);
-        ui.horizontal(|ui| {
+        // 連結和「檢查更新」排在同一個會換行的列：放不下時整個連結（或按鈕）移到下一行，不會被蓋住、也不會從字中間斷開
+        // （德、法、俄、波蘭文的連結比較長，原本按鈕靠右放、蓋住了贊助連結）
+        ui.horizontal_wrapped(|ui| {
+            ui.style_mut().wrap_mode = Some(egui::TextWrapMode::Extend);
             self.links(ui);
-            ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
-                if ui.add_enabled(!self.busy, egui::Button::new(RichText::new(format!("↻ {}", self.t("check_updates"))).small()).small()).clicked() {
-                    self.start(Job::Update, ctx);
-                }
-            });
+            if ui.add_enabled(!self.busy, egui::Button::new(RichText::new(format!("↻ {}", self.t("check_updates"))).small()).small()).clicked() {
+                self.start(Job::Update, ctx);
+            }
         });
     }
 
@@ -855,12 +866,19 @@ impl App {
             }
             ui.add_space(2.0);
             ui.label(RichText::new(system::APP_NAME).font(theme::display_font(20.0)).color(GOLD));
+            // 按鈕的字比較長的語言（O programie、À propos…）放不下時只顯示圖示，滑過去看文字，標題不會被蓋住
+            let (settings, about) = (format!("⚙  {}", self.t("settings")), format!("ⓘ  {}", self.t("about")));
+            let font = egui::TextStyle::Button.resolve(ui.style());
+            let pad = ui.spacing().button_padding.x * 2.0 + ui.spacing().item_spacing.x;
+            let full = ui.fonts(|f| f.layout_no_wrap(settings.clone(), font.clone(), TEXT).size().x + f.layout_no_wrap(about.clone(), font, TEXT).size().x) + pad * 2.0;
+            let icons = full > ui.available_width() - 4.0;
             ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| match self.page {
                 Page::Main => {
-                    if ui.button(format!("⚙  {}", self.t("settings"))).clicked() {
+                    let (settings_text, about_text) = if icons { ("⚙".to_string(), "ⓘ".to_string()) } else { (settings.clone(), about.clone()) };
+                    if ui.button(settings_text).on_hover_text(self.t("settings")).clicked() {
                         self.page = Page::Settings;
                     }
-                    if ui.button(format!("ⓘ  {}", self.t("about"))).clicked() {
+                    if ui.button(about_text).on_hover_text(self.t("about")).clicked() {
                         self.page = Page::About;
                     }
                 }

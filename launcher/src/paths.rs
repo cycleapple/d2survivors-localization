@@ -128,6 +128,16 @@ pub struct Installed {
     /// 由哪個原版、哪個語言、哪份字典和規則做出來的
     pub key: String,
     pub sha256: String,
+    /// 對不上、略過的加分規則（label）
+    #[serde(default)]
+    pub skipped: Vec<String>,
+}
+
+impl Installed {
+    /// 裝在遊戲裡的是 language 這個翻譯、而且略過了幾條加分的規則：主畫面的「部分細節修正中」
+    pub fn skipped_for(&self, language: &str) -> usize {
+        if self.key.contains(&format!(":{language}:")) { self.skipped.len() } else { 0 }
+    }
 }
 
 impl State {

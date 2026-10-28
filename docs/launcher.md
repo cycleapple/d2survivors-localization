@@ -115,6 +115,14 @@ cargo test --release                        # 有 backup/2026.1026.4/app.asar �
 
 要進遊戲看：把整個遊戲資料夾複製一份，`D2S_USER_DATA` 指到另一個資料夾（遊戲本身支援，存檔和設定就不會動到平常的），裡面 `d2` 用 junction 指到平常的 `%APPDATA%\D2 Survivors\d2`（取出的 D2 素材，1.5 GB），`desktop.json` 的 `checkForUpdates` 設成 false。再用 `D2S_QUERY=d2slang=ko` 和 `--remote-debugging-port` 開複製的那份，用 `tools/cdp.mjs` 截圖
 
+## 1.0.2
+
+- 規則分必要和加分（manifest `desktop.rules[].optional`，見 [desktop-patch.md](desktop-patch.md)）：只有加分的對不上時照樣套用翻譯、略過那幾條，主畫面一行提示「遊戲剛更新，部分細節修正中（略過 N 項修改）」；必要的對不上才退回原版、顯示黃色卡片。略過的清單記在 `state.json` 的 `installed.skipped`，命令列也會印出來
+- 主畫面底部：連結和「檢查更新」排在同一個會換行的列，德、法、俄、波蘭文的贊助連結不會再被按鈕蓋住，也不會從字中間斷開
+- 標題列：「關於」「設定」的字放不下時只顯示圖示（滑過去看文字），標題不會被蓋住
+- 測試：遊戲複本換成 2026.1027.2 的原版、用現在（2026.1027.4）的規則裝繁中／德文／波蘭文：分別略過 2／3／4 條加分的規則，翻譯照樣裝上，改過的 .js 語法都正確，沒有退回原版
+- 發布：推 tag `launcher-v1.0.2`
+
 ## 1.0.1
 
 - 遊戲 2026.1027.4 自動更新後規則對不上，玩家選繁中卻開成英文或韓文（舊版啟動器寫的 ko）。規則另外修好（`tools/patch-rules.mjs`）；啟動器這邊：

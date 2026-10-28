@@ -2,6 +2,15 @@
 
 修改規則在 `tools/patch-rules.mjs`，`tools/patch.mjs` 和啟動器共用同一份（啟動器從 manifest 讀，見 [manifest-v2.md](manifest-v2.md)）。網頁版的規則另外在 `tools/web-rules.mjs`，見 [web.md](web.md)。
 
+## 必要和加分的規則（啟動器 1.0.2 起）
+
+- 規則標 `optional: true` 的是**加分**的：稱號、名稱組合、斷行、標點、大小寫、版面寬度、變體名稱、暗色字、日期等。對不上時略過那一條，照樣套用翻譯；啟動器主畫面一行提示「遊戲剛更新，部分細節修正中（略過 N 項修改）」，略過的清單記在 `state.json` 的 `installed.skipped`
+- 沒標的是**必要**的（9 條）：啟動器指定語言、語言選單名稱、頁面語言標記、外文字判斷（中日文、西里爾字母、拉丁擴充 A）、中文／俄文／波蘭文字型；加上字典位置。對不上就整個退回原版，主畫面顯示黃色卡片
+- `tools/patch.mjs` 一樣：加分的對不上時印警告、略過，必要的對不上就停下來
+- `tools/check-rules.mjs` 分開列「必要失敗」「加分失敗」；exit code 只在必要失敗（或找不到字典位置）時是 1。最後一行是給自動偵測讀的 `RESULT required_failed=<n> optional_failed=<n>`
+- 舊版啟動器（1.0.0、1.0.1）不認得 `optional`（serde 沒設 deny_unknown_fields，直接忽略），照舊一條對不上就退回原版
+- 2026.1027.4 的例子：壞掉的 5 條（女性稱號 2 條、波蘭文符號、版權寬度、變體名稱）都是加分的，1.0.2 會照樣套用翻譯
+
 ## 驗證結果（2026.1026.4）
 
 - Electron fuse `EnableEmbeddedAsarIntegrityValidation` 是關閉的，重新打包的 asar 可以正常載入。
