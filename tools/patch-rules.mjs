@@ -87,20 +87,20 @@ export const RULES = [
   // 英雄稱號的陰性形式：遊戲只有 Matriarch／Patriarch 依職業分，Destroyer、Conqueror、Guardian、Slayer、Champion 不分，
   // 德、法、俄、波蘭文的女性職業（Bg：amazon、assassin、sorceress）會顯示陽性（Zerstörer）。
   // 女性職業先查 title:<稱號>:f（Zerstörerin），查不到（翻譯函式原樣傳回）就照一般的 title:<稱號>。
-  // 依賴壓縮名稱（rO、Ug、st、R、qe、title 翻譯函式 u、女性職業 Bg），對不上時 check-rules 會報（2026.1027.2）
+  // 依賴壓縮名稱（SO、o_、xi、V、Dt、title 翻譯函式 u、女性職業 r_），對不上時 check-rules 會報（2026.1027.4；2026.1027.2 是 rO、Ug、st、R、qe、Bg）
   // 只有 gender 群組（德、法、俄、波蘭文）：其他語言沒有 :f 的 key，查不到時翻譯器可能把「Destroyer:f」拆開翻成別的字串
   {
     label: '女性職業的稱號', groups: ['gender'], file: '^Game-.*\\.js$',
-    from: 'function rO(e,t){let n=Ug(e,t);if(!n)return null;let r=st(e,t);return r>0&&!R(e,t)?`${u(n)} · ${qe(r)}`:u(n)}',
-    to: 'function rO(e,t){let n=Ug(e,t);if(!n)return null;let F=Bg.includes(t)?u(`${n}:f`):null,T=F&&F!==`${n}:f`?F:u(n),r=st(e,t);return r>0&&!R(e,t)?`${T} · ${qe(r)}`:T}',
+    from: 'function SO(e,t){let n=o_(e,t);if(!n)return null;let r=xi(e,t);return r>0&&!V(e,t)?`${u(n)} · ${Dt(r)}`:u(n)}',
+    to: 'function SO(e,t){let n=o_(e,t);if(!n)return null;let F=r_.includes(t)?u(`${n}:f`):null,T=F&&F!==`${n}:f`?F:u(n),r=xi(e,t);return r>0&&!V(e,t)?`${T} · ${Dt(r)}`:T}',
   },
   // 角色畫面的「Survivor」（沒有稱號時顯示的名字）不經過稱號函式，直接寫 fit(`Survivor`)：
   // 女性職業先查 title:Survivor:f（Überlebende），查不到照原本的 Survivor。v 是 saveTransfer 匯入的翻譯函式，
-  // 依賴壓縮名稱（Ql、v），對不上時 check-rules 會報（2026.1027.2）
+  // 依賴壓縮名稱（iu、v），對不上時 check-rules 會報（2026.1027.4；2026.1027.2 是 Ql）
   {
     label: '女性職業的 Survivor', groups: ['gender'], file: '^saveTransfer-.*\\.js$',
-    from: 'r.push(e.inspect?this.nameBox(e.inspect.name):this.fit(`Survivor`,Ql.name,`white`),a)',
-    to: 'let $f=[`amazon`,`assassin`,`sorceress`].includes(e.cls)?v(`title:Survivor:f`):null;r.push(e.inspect?this.nameBox(e.inspect.name):this.fit($f&&$f!==`title:Survivor:f`?$f:`Survivor`,Ql.name,`white`),a)',
+    from: 'r.push(e.inspect?this.nameBox(e.inspect.name):this.fit(`Survivor`,iu.name,`white`),a)',
+    to: 'let $f=[`amazon`,`assassin`,`sorceress`].includes(e.cls)?v(`title:Survivor:f`):null;r.push(e.inspect?this.nameBox(e.inspect.name):this.fit($f&&$f!==`title:Survivor:f`?$f:`Survivor`,iu.name,`white`),a)',
   },
   // 全大寫：翻譯器查字典不分大小寫，SHIELDS 和 Shields、ROGUE ENCAMPMENT 和 Rogue Encampment 是同一個譯文，
   // 英文原文全大寫的地方（拾取篩選器、控制器設定、死亡畫面的按鈕）會變成大小寫混合。
@@ -170,8 +170,8 @@ export const RULES = [
   // 先往下移（最多移到底部的空間用完），還超出的部分把這個字垂直壓扁到放得下
   {
     label: '外文字不被切掉（波蘭文）', groups: ['size-pl'],
-    from: 'for(let n of t)Ap(n)&&e.fillText(n,s+a,r+this.baseline+o),s+=this.advanceOf(n)',
-    to: 'for(let n of t){if(Ap(n)){let Z=this.foreignFamily===g?4:1,c=document.createElement(`canvas`),q=c.getContext(`2d`),F=e.font.replace(/([\\d.]+)px/,(x,v)=>v*Z+`px`);q.font=F;let M=q.measureText(n),A=M.actualBoundingBoxAscent/Z,D=M.actualBoundingBoxDescent/Z,L=M.actualBoundingBoxLeft/Z,R=M.actualBoundingBoxRight/Z,h=r+this.baseline,d=Math.max(0,Math.min(Math.ceil(A-h),Math.floor(e.canvas.height-h-D))),y=h+d,k=A>y?y/A:1;if(Z>1){c.width=Math.ceil((L+R+2)*Z);c.height=Math.ceil((A+D+2)*Z);q.font=F;q.fillStyle=e.fillStyle;q.fillText(n,(L+1)*Z,(A+1)*Z);e.imageSmoothingQuality=`high`;e.drawImage(c,s+a-L-1,y+o-(A+1)*k,c.width/Z,c.height/Z*k)}else{e.save();e.translate(s+a,y+o);e.scale(1,k);e.fillText(n,0,0);e.restore()}}s+=this.advanceOf(n)}',
+    from: 'for(let n of t)Pp(n)&&e.fillText(n,s+a,r+this.baseline+o),s+=this.advanceOf(n)',
+    to: 'for(let n of t){if(Pp(n)){let Z=this.foreignFamily===g?4:1,c=document.createElement(`canvas`),q=c.getContext(`2d`),F=e.font.replace(/([\\d.]+)px/,(x,v)=>v*Z+`px`);q.font=F;let M=q.measureText(n),A=M.actualBoundingBoxAscent/Z,D=M.actualBoundingBoxDescent/Z,L=M.actualBoundingBoxLeft/Z,R=M.actualBoundingBoxRight/Z,h=r+this.baseline,d=Math.max(0,Math.min(Math.ceil(A-h),Math.floor(e.canvas.height-h-D))),y=h+d,k=A>y?y/A:1;if(Z>1){c.width=Math.ceil((L+R+2)*Z);c.height=Math.ceil((A+D+2)*Z);q.font=F;q.fillStyle=e.fillStyle;q.fillText(n,(L+1)*Z,(A+1)*Z);e.imageSmoothingQuality=`high`;e.drawImage(c,s+a-L-1,y+o-(A+1)*k,c.width/Z,c.height/Z*k)}else{e.save();e.translate(s+a,y+o);e.scale(1,k);e.fillText(n,0,0);e.restore()}}s+=this.advanceOf(n)}',
   },
   // 點陣字型的斷行只在空白處斷，中文句子會整行超出。
   // 切完空白後，把含中文的詞再拆成一個字一個字（句末標點黏在前一個字後面、左括號黏在後一個字前面，
@@ -222,9 +222,9 @@ export const RULES = [
   // 切回英文時也照原本的 700
   {
     label: '版權聲明寬度', groups: ['cjk'],
-    // 依賴壓縮名稱（Y、fr、J），遊戲改版後用 tools/find-anchors.mjs 找新的寫法（2026.1027.2；2026.1027.1 是 ur）
-    from: 'let r={...Y(e),maxWidth:fr},i=[e.text(J,r)',
-    to: 'let r={...Y(e),maxWidth:fr},i=[e.text(J,document.documentElement.lang===`{{html_lang}}`?{...r,maxWidth:360}:r)',
+    // 依賴壓縮名稱（Y、_r、q），遊戲改版後用 tools/find-anchors.mjs 找新的寫法（2026.1027.4；2026.1027.2 是 fr、J）
+    from: 'let r={...Y(e),maxWidth:_r},i=[e.text(q,r)',
+    to: 'let r={...Y(e),maxWidth:_r},i=[e.text(q,document.documentElement.lang===`{{html_lang}}`?{...r,maxWidth:360}:r)',
   },
   // 技能變體名稱：有些變體跟別的技能同名（荊棘之靈的 Vengeance vs 聖騎士的 Vengeance），遊戲只有一個 key，
   // 變體卡片會顯示成別的職業的技能。變體表（keepSave 的 zs={技能 id:[{id,name,describe}…]}）定義完之後，
@@ -233,9 +233,9 @@ export const RULES = [
   // 專用譯名在 dict/manual/modifiers.json，決定的原因見 docs/term-decisions.md
   {
     label: '技能變體專用譯名', groups: ['dict'],
-    // 依賴壓縮名稱（變體表 ks、後面的 As、js、Ms，匯入的 h、m），遊戲改版後用 tools/find-anchors.mjs 找新的寫法（2026.1027.2；2026.1027.1 是 Bs、mre、Vs、Hs）
-    from: "]},As={raiseSkeleton:`Evolved: Revive's skeletons take this option`},js={};function Ms(e,t){",
-    to: "]},As={raiseSkeleton:`Evolved: Revive's skeletons take this option`},js={};for(let l of Object.values(ks))for(let o of l){let n=o.name;Object.defineProperty(o,`name`,{get:()=>h()?m(`modifier`,n):n,enumerable:!0,configurable:!0})}function Ms(e,t){",
+    // 依賴壓縮名稱（變體表 ws、後面的 Ts、Es、Ds，匯入的 h、m），遊戲改版後用 tools/find-anchors.mjs 找新的寫法（2026.1027.4；2026.1027.2 是 ks、As、js、Ms）
+    from: "]},Ts={raiseSkeleton:`Evolved: Revive's skeletons take this option`},Es={};function Ds(e,t){",
+    to: "]},Ts={raiseSkeleton:`Evolved: Revive's skeletons take this option`},Es={};for(let l of Object.values(ws))for(let o of l){let n=o.name;Object.defineProperty(o,`name`,{get:()=>h()?m(`modifier`,n):n,enumerable:!0,configurable:!0})}function Ds(e,t){",
   },
 ];
 
