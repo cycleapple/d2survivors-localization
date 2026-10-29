@@ -70,6 +70,19 @@ $('#copy-bookmarklet').addEventListener('click', async () => {
   }
 });
 
+// 手機書籤教學：iPhone／Android 分頁，預設照裝置（Android 用 Android，其他用 iPhone）
+document.querySelectorAll('.guide').forEach(guide => {
+  const show = os => {
+    guide.dataset.os = os;
+    guide.querySelectorAll('.os-tabs button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.os === os)));
+  };
+  show(/Android/i.test(navigator.userAgent) ? 'android' : 'ios');
+  guide.querySelector('.os-tabs').addEventListener('click', e => {
+    const b = e.target.closest('button[data-os]');
+    if (b) show(b.dataset.os);
+  });
+});
+
 // 截圖捲到附近（上下 200px 內）才開始下載，而且等頁面載完才開始看，不跟首屏搶網路；
 // 藏起來的那個版本的一排等切換過去、看得到時才載
 const shotObserver = new IntersectionObserver(entries => {
@@ -82,14 +95,14 @@ const shotObserver = new IntersectionObserver(entries => {
 const watchShots = () => document.querySelectorAll('.shots').forEach(row => shotObserver.observe(row));
 if (document.readyState === 'complete') watchShots(); else addEventListener('load', watchShots, { once: true });
 
-// 截圖一排放不下時加上一張／下一張按鈕（換版本、改視窗大小時重新判斷）
+// 截圖、手機書籤教學的一排放不下時加上一張／下一張按鈕（換版本、改視窗大小時重新判斷）
 const screens = $('.screens');
-document.querySelectorAll('.shots').forEach(row => {
+document.querySelectorAll('.shots, .guide-steps').forEach(row => {
   const nav = document.createElement('div');
   nav.className = 'shots-nav';
   if (row.dataset.only) nav.dataset.only = row.dataset.only;
   // 捲到目前最近那張的前一張／下一張（用位置算，不用相對距離，連按也不會停在兩張中間）
-  const figs = [...row.querySelectorAll('.shot')];
+  const figs = [...row.children];
   const step = dir => {
     const pos = figs.map(f => f.offsetLeft - figs[0].offsetLeft);
     const cur = pos.reduce((best, p, i) => (Math.abs(p - row.scrollLeft) < Math.abs(pos[best] - row.scrollLeft) ? i : best), 0);
@@ -99,7 +112,7 @@ document.querySelectorAll('.shots').forEach(row => {
     const b = document.createElement('button');
     b.type = 'button';
     b.textContent = text;
-    b.setAttribute('aria-label', screens.dataset[key]);
+    b.setAttribute('aria-label', row.dataset[key] || screens?.dataset[key] || '');
     b.addEventListener('click', () => step(dir));
     nav.append(b);
     return b;

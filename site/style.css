@@ -325,6 +325,68 @@ h3 { font-size: 1.15rem; margin: 0 0 10px; }
 .web-steps { margin: 12px 0 0; padding-left: 1.4em; }
 .web-steps li { margin-bottom: 8px; }
 .web-usage { margin-top: 16px; }
+
+/* 手機書籤教學：iPhone／Android 分頁，每步一個 HTML/CSS 畫的示意畫面（.phone）加說明，一排橫向捲動 */
+#web .cards { grid-template-columns: 1fr; }
+.os-tabs { display: inline-flex; gap: 4px; margin: 18px 0 12px; padding: 3px; border: 1px solid var(--line); border-radius: 999px; }
+.os-tabs button { font: inherit; font-size: 0.9rem; color: var(--muted); background: transparent; border: 0; border-radius: 999px; padding: 5px 16px; cursor: pointer; }
+.os-tabs button:hover { color: var(--gold-hi); }
+.os-tabs button[aria-pressed="true"] { color: #1a1206; background: var(--gold); }
+.guide[data-os="ios"] [data-os-pane="android"],
+.guide[data-os="android"] [data-os-pane="ios"] { display: none; }
+.guide-steps {
+  list-style: none; margin: 0; padding: 4px 4px 12px; counter-reset: guide-step;
+  display: grid; grid-auto-flow: column; grid-auto-columns: 200px; gap: 18px; align-items: start;
+  overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: thin;
+}
+.guide-step { counter-increment: guide-step; scroll-snap-align: start; }
+.guide-step p { margin: 10px 0 0; font-size: 0.9rem; line-height: 1.55; }
+.guide-step p::before {
+  content: counter(guide-step); display: inline-grid; place-items: center; width: 22px; height: 22px; margin-right: 6px;
+  border-radius: 50%; font-size: 0.8rem; font-weight: 700; color: #1a1206; background: var(--gold); vertical-align: 1px;
+}
+.guide-note { color: var(--muted); font-size: 0.82rem; margin: 4px 0 0; }
+
+.phone {
+  position: relative; width: 200px; height: 300px; overflow: hidden; box-sizing: border-box;
+  border: 6px solid #2b2620; border-radius: 26px; background: #f2f2f7; color: #1c1c1e;
+  font: 11px/1.35 -apple-system, "Segoe UI", system-ui, sans-serif; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+}
+.phone.android { border-radius: 18px; background: #fff; font-family: Roboto, "Segoe UI", system-ui, sans-serif; }
+.ph-url { display: flex; justify-content: center; gap: 6px; margin: 8px 8px 6px; padding: 5px 8px; border-radius: 9px; background: #e3e3e8; color: #555; white-space: nowrap; overflow: hidden; }
+.android .ph-url { justify-content: space-between; border-radius: 999px; background: #eef0f3; }
+.ph-url.focus { position: relative; z-index: 1; justify-content: flex-start; background: #fff; box-shadow: inset 0 0 0 2px #1a73e8; color: #111; }
+.ph-page { display: grid; gap: 8px; justify-items: start; padding: 6px 12px; }
+.ph-ph { display: block; flex: 1; width: 100%; height: 7px; border-radius: 4px; background: #d6d6dc; }
+.ph-btn { padding: 6px 10px; border-radius: 6px; background: var(--gold); color: #1a1206; font-weight: 700; }
+.ph-code, .mono { font: 10px/1.3 Consolas, "Cascadia Mono", monospace; }
+.ph-code { padding: 2px 5px; border: 0; border-radius: 4px; background: #e6e6eb; color: #555; }
+.ph-sheet { position: absolute; left: 0; right: 0; bottom: 0; padding: 6px 0 10px; border-radius: 14px 14px 0 0; background: #fff; box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.18); }
+.ph-row { display: flex; align-items: center; gap: 8px; min-height: 30px; padding: 4px 12px; border-bottom: 1px solid #ececf0; }
+.ph-ico { width: 16px; text-align: center; }
+.ph-t { display: flex; flex-direction: column; flex: 1; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.ph-t small { color: #777; font-size: 9px; overflow: hidden; text-overflow: ellipsis; }
+.ph-head { display: flex; justify-content: space-between; align-items: center; gap: 4px; padding: 12px 18px 8px; border-bottom: 1px solid #e0e0e5; background: #f9f9fb; }
+.ph-head > span { flex: none; min-width: 30px; color: #007aff; }
+.ph-head > .hl, .ph-foot > .hl { padding: 1px 6px; }
+.ph-head > span:last-child { text-align: right; }
+.ph-head b { flex: 1; font-weight: 600; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.android .ph-head { justify-content: flex-start; background: #fff; }
+.android .ph-head > span { color: #444; }
+.android .ph-head b { text-align: left; }
+.ph-foot { position: absolute; left: 0; right: 0; bottom: 0; display: flex; justify-content: space-between; padding: 10px 20px 16px; border-top: 1px solid #e0e0e5; background: #f9f9fb; color: #007aff; }
+.ph-field { margin: 8px 10px 0; padding: 7px 9px; border-radius: 8px; background: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.android .ph-field { margin-top: 2px; border: 1px solid #c4c7cc; border-radius: 4px; }
+.ph-label { margin: 10px 10px 0; color: #1a73e8; font-size: 10px; }
+.ph-menu { position: absolute; top: 34px; right: 6px; width: 150px; border-radius: 8px; background: #fff; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25); }
+.ph-icons { display: flex; justify-content: space-between; padding: 8px 10px; border-bottom: 1px solid #ececf0; font-size: 13px; }
+.ph-dots { padding: 0 4px; font-weight: 700; }
+.ph-pop { position: absolute; top: 76px; right: 10px; width: 110px; border-radius: 6px; background: #fff; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25); }
+.ph-game { position: absolute; inset: 40px 0 0; background: radial-gradient(ellipse at 50% 40%, #4a3a26, #15110c 70%); }
+.ph-suggest { position: relative; z-index: 1; margin: 0 8px; border-radius: 10px; background: #fff; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3); overflow: hidden; }
+/* 要按的地方 */
+.phone .hl { outline: 2px solid #e8590c; outline-offset: -2px; border-radius: 6px; background-color: #fff3e6; }
+.phone .ph-btn.hl { outline-offset: 2px; background-color: var(--gold); }
 /* 遊戲剛更新，翻譯修正中 */
 .notice { background: rgba(217, 162, 63, 0.12); border-bottom: 1px solid rgba(217, 162, 63, 0.45); color: var(--text); font-size: 0.92rem; padding: 12px 0; }
 .notice strong { color: var(--warn); }
