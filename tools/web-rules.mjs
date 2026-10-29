@@ -46,7 +46,7 @@ function pattern(src) {
 }
 
 export const WEB_PLAY_URL = 'https://d2survivors.lol/play/';
-export const WEB_CHECKED = '2026-10-29T15:19:23.234Z';
+export const WEB_CHECKED = '2026-10-29T22:15:35.211Z';
 
 export const WEB_LANGUAGES = [
   {
@@ -124,8 +124,8 @@ export const WEB_RULES = [
   },
   {
     label: '排行榜：不排進佇列', groups: ['base'], file: '^saveTransfer-.*\\.js$',
-    find: pattern('function <1>(<2>,<3>=Date.now()){return <4>([...<5>().filter(<3>=><3>.id!==<2>.runId)'),
-    replace: 'function $1($2,$3=Date.now()){return!1;return $4([...$5().filter($3=>$3.id!==$2.runId)',
+    find: pattern('function <1>(<2>,<3>=Date.now()){return <4>(<5>([...<6>().filter(<3>=><3>.id!==<2>.runId)'),
+    replace: 'function $1($2,$3=Date.now()){return!1;return $4($5([...$6().filter($3=>$3.id!==$2.runId)',
   },
   {
     label: '排行榜：不送出佇列', groups: ['base'], file: '^saveTransfer-.*\\.js$',
