@@ -300,39 +300,44 @@ function shotsSection(sl, t) {
     </section>`;
 }
 
-// 手機書籤教學：iPhone（Safari）／Android（Chrome）各五步，每步一個用 HTML/CSS 畫的示意畫面加一句說明（不用截圖：各語言用自己的文字，也不拖慢手機）。
-// 示意畫面裡的瀏覽器按鈕文字是 i18n 的 guide.ui（照各語言的 Safari、Chrome 用語）；說明裡的 {name} 是建議的書籤名稱（web.bookmark.name），
+// 手機書籤教學：iPhone（Safari）／Android（Chrome）各五步。每步一個用 HTML/CSS 畫的深色示意畫面（不用截圖：各語言用自己的文字，也不拖慢手機），
+// 下面是粗體短標題、一句說明、需要時一行小字補充（i18n 的 guide.<os>.steps：[標題, 說明, 補充]）。
+// 示意畫面只畫跟這一步有關的那一截（.crop-top／.crop-bottom 另一邊淡出），每個畫面只有一個要按的地方（.tap：金色光暈加點按漣漪）。
+// 畫面裡的瀏覽器按鈕文字是 i18n 的 guide.ui（照各語言的 Safari、Chrome 用語）；文字裡的 {name} 是建議的書籤名稱（web.bookmark.name），
 // {copy} 是複製按鈕的文字，{play} 是遊戲網址的連結，其他 {key} 換成那個系統的 guide.ui
 function mobileGuide(t) {
   const name = t['web.bookmark.name'];
   const host = new URL(BASE).host;
   const code = 'javascript:import(…';
   const page = t['hero.title'];
-  const ph = (n = 1) => '<span class="ph-ph"></span>'.repeat(n);
-  const row = (inner, hl) => `<div class="ph-row${hl ? ' hl' : ''}">${inner}</div>`;
-  const copyScreen = `<div class="ph-url">${esc(host)}</div><div class="ph-page">${ph(2)}<span class="ph-btn hl">${esc(t['web.copy'])}</span><code class="ph-code">${code}</code></div>`;
+  const ph = w => `<span class="ph-ph"${w ? ` style="width:${w}%"` : ''}></span>`;
+  const row = (icon, inner, cls = '') => `<div class="ph-row${cls ? ' ' + cls : ''}"><span class="ph-ico">${icon}</span>${inner}</div>`;
+  const label = s => `<span class="ph-t">${esc(s)}</span>`;
+  // 第 1 步：我們網站的縮小版；最後一步：D2 Survivors 的標題畫面（只用文字和 CSS，不用遊戲美術）
+  const siteMini = `<div class="ph-site"><span class="ph-brand">D2S <i>Localization</i></span><b class="ph-title">${esc(page)}</b><span class="ph-btn tap">${esc(t['web.copy'])}</span><code class="ph-code">${code}</code></div>`;
+  const title = `<div class="ph-gametitle"><b>D2</b><b>SURVIVORS</b>${ph(40)}${ph(40)}</div>`;
   const screens = {
     ios: ui => [
-      copyScreen,
-      `<div class="ph-url">${esc(host)}</div><div class="ph-page">${ph(3)}</div>
-        <div class="ph-sheet">${row(ph())}${row(`<span class="ph-ico">📖</span><span class="ph-t">${esc(ui.addBookmark)}</span>`, true)}${row(ph())}</div>`,
-      `<div class="ph-head"><span></span><b>${esc(ui.bookmarks)}</b><span></span></div>${row(`<span class="ph-ico">☆</span>${ph()}`)}${row(`<span class="ph-ico">📖</span><span class="ph-t">${esc(page)}</span>`)}
-        <div class="ph-foot"><span></span><span class="hl">${esc(ui.edit)}</span></div>`,
-      `<div class="ph-head"><span></span><b>${esc(ui.editBookmark)}</b><span class="hl">${esc(ui.done)}</span></div>
-        <div class="ph-field hl">${esc(name)}</div><div class="ph-field hl mono">${code}</div>`,
-      `<div class="ph-url">d2survivors.lol/play/</div><div class="ph-game"></div>
-        <div class="ph-sheet"><div class="ph-head"><span></span><b>${esc(ui.bookmarks)}</b><span></span></div>${row(ph())}${row(`<span class="ph-ico">📖</span><span class="ph-t">${esc(name)}</span>`, true)}</div>`,
+      ['crop-top', `<div class="ph-url">${esc(host)}</div>${siteMini}`],
+      ['crop-bottom', `<div class="ph-sheet"><div class="ph-sheet-head"><span class="ph-fav">D2</span><span class="ph-t"><b>${esc(page)}</b><small>${esc(host)}</small></span></div>
+        <div class="ph-apps"><i></i><i></i><i></i><i></i></div>${row('📖', label(ui.addBookmark), 'tap')}${row('☆', ph(60), 'dim')}</div>`],
+      ['crop-bottom', `<div class="ph-head"><span></span><b>${esc(ui.bookmarks)}</b><span></span></div>${row('▤', ph(55), 'dim')}${row('📖', label(page))}
+        <div class="ph-foot"><span></span><span class="tap">${esc(ui.edit)}</span></div>`],
+      ['crop-top', `<div class="ph-head"><span></span><b>${esc(ui.editBookmark)}</b><span class="tap">${esc(ui.done)}</span></div>
+        <div class="ph-field glow">${esc(name)}</div><div class="ph-field glow mono">${code}</div>`],
+      ['crop-bottom', `<div class="ph-url">d2survivors.lol/play/</div>${title}
+        <div class="ph-sheet"><div class="ph-head"><span></span><b>${esc(ui.bookmarks)}</b><span></span></div>${row('📖', label(name), 'tap')}</div>`],
     ],
     android: ui => [
-      copyScreen,
-      `<div class="ph-url"><span>${esc(host)}</span><span class="ph-dots hl">⋮</span></div><div class="ph-page">${ph(3)}</div>
-        <div class="ph-menu"><div class="ph-icons"><span>→</span><span class="hl">☆</span><span>⤓</span><span>ⓘ</span><span>↻</span></div>${row(ph())}${row(ph())}${row(ph())}</div>`,
-      `<div class="ph-head"><span>←</span><b>${esc(ui.bookmarks)}</b><span></span></div>${row(`<span class="ph-ico">★</span><span class="ph-t">${esc(page)}</span><span class="ph-dots hl">⋮</span>`)}
-        <div class="ph-pop">${row(`<span class="ph-t">${esc(ui.edit)}</span>`, true)}${row(ph())}</div>`,
-      `<div class="ph-head"><span>←</span><b>${esc(ui.editBookmark)}</b><span></span></div>
-        <div class="ph-label">${esc(ui.name)}</div><div class="ph-field hl">${esc(name)}</div><div class="ph-label">${esc(ui.url)}</div><div class="ph-field hl mono">${code}</div>`,
-      `<div class="ph-url focus"><span>${esc(name)}</span></div><div class="ph-game"></div>
-        <div class="ph-suggest">${row(`<span class="ph-ico">☆</span><span class="ph-t"><b>${esc(name)}</b><small>${code}</small></span>`, true)}${row(`<span class="ph-ico">⌕</span>${ph()}`)}</div>`,
+      ['crop-top', `<div class="ph-url">${esc(host)}<span class="ph-dots">⋮</span></div>${siteMini}`],
+      ['crop-top', `<div class="ph-url">${esc(host)}<span class="ph-dots glow">⋮</span></div>${siteMini.replace(' tap', '')}
+        <div class="ph-menu"><div class="ph-icons"><span>→</span><span class="tap">☆</span><span>⤓</span><span>ⓘ</span><span>↻</span></div>${row('', ph(70), 'dim')}${row('', ph(50), 'dim')}</div>`],
+      ['crop-top', `<div class="ph-head"><span>←</span><b>${esc(ui.bookmarks)}</b></div>${row('★', `${label(page)}<span class="ph-dots glow">⋮</span>`)}
+        <div class="ph-pop">${row('', label(ui.edit), 'tap')}${row('', ph(60), 'dim')}</div>`],
+      ['crop-top', `<div class="ph-head"><span>←</span><b>${esc(ui.editBookmark)}</b></div>
+        <div class="ph-label">${esc(ui.name)}</div><div class="ph-field glow">${esc(name)}</div><div class="ph-label">${esc(ui.url)}</div><div class="ph-field glow mono">${code}</div>`],
+      ['crop-top', `<div class="ph-url focus">${esc(name)}</div>${title}
+        <div class="ph-suggest">${row('☆', `<span class="ph-t"><b>${esc(name)}</b><small>${code}</small></span>`, 'tap')}${row('⌕', ph(60), 'dim')}</div>`],
     ],
   };
   const play = `<a href="${LINKS.d2sPlay}" target="_blank" rel="noopener">d2survivors.lol/play/</a>`;
@@ -341,7 +346,11 @@ function mobileGuide(t) {
     const ui = t['guide.ui'][os];
     const shots = screens[os](ui);
     return `<ol class="guide-steps" data-os-pane="${os}" data-prev="${esc(t['shots.prev'])}" data-next="${esc(t['shots.next'])}">
-              ${t[`guide.${os}.steps`].map((s, i) => `<li class="guide-step"><div class="phone ${os}" aria-hidden="true">${shots[i]}</div><p>${fill(s, ui)}</p></li>`).join('\n              ')}
+              ${t[`guide.${os}.steps`].map(([head, body, note], i) => `<li class="guide-step">
+                <div class="phone ${os} ${shots[i][0]}" aria-hidden="true"><div class="ph-screen">${shots[i][1]}</div></div>
+                <h4><span class="step-no">${i + 1}</span>${fill(head, ui)}</h4>
+                <p>${fill(body, ui)}</p>${note ? `\n                <p class="step-note">${fill(note, ui)}</p>` : ''}
+              </li>`).join('\n              ')}
             </ol>`;
   };
   return `<div class="os-tabs" role="group" aria-label="${esc(t['web.mobile.title'])}">

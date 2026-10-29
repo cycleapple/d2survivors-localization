@@ -103,25 +103,41 @@ document.querySelectorAll('.shots, .guide-steps').forEach(row => {
   if (row.dataset.only) nav.dataset.only = row.dataset.only;
   // 捲到目前最近那張的前一張／下一張（用位置算，不用相對距離，連按也不會停在兩張中間）
   const figs = [...row.children];
-  const step = dir => {
-    const pos = figs.map(f => f.offsetLeft - figs[0].offsetLeft);
-    const cur = pos.reduce((best, p, i) => (Math.abs(p - row.scrollLeft) < Math.abs(pos[best] - row.scrollLeft) ? i : best), 0);
-    row.scrollTo({ left: pos[Math.max(0, Math.min(figs.length - 1, cur + dir))], behavior: 'smooth' });
+  const positions = () => figs.map(f => f.offsetLeft - figs[0].offsetLeft);
+  const current = () => {
+    const pos = positions();
+    return pos.reduce((best, p, i) => (Math.abs(p - row.scrollLeft) < Math.abs(pos[best] - row.scrollLeft) ? i : best), 0);
   };
-  const [prev, next] = [[-1, '‹', 'prev'], [1, '›', 'next']].map(([dir, text, key]) => {
+  const go = i => row.scrollTo({ left: positions()[Math.max(0, Math.min(figs.length - 1, i))], behavior: 'smooth' });
+  const button = (text, label, onClick) => {
     const b = document.createElement('button');
     b.type = 'button';
     b.textContent = text;
-    b.setAttribute('aria-label', row.dataset[key] || screens?.dataset[key] || '');
-    b.addEventListener('click', () => step(dir));
-    nav.append(b);
+    b.setAttribute('aria-label', label);
+    b.addEventListener('click', onClick);
     return b;
-  });
+  };
+  const prev = button('‹', row.dataset.prev || screens?.dataset.prev || '', () => go(current() - 1));
+  const next = button('›', row.dataset.next || screens?.dataset.next || '', () => go(current() + 1));
+  // 手機書籤教學：中間放第幾步的圓點（目前那顆是金色），點了跳到那一步
+  const dots = row.matches('.guide-steps') ? figs.map((_, i) => button('', String(i + 1), () => go(i))) : [];
+  nav.append(prev);
+  if (dots.length) {
+    const box = document.createElement('div');
+    box.className = 'shots-dots';
+    box.append(...dots);
+    nav.append(box);
+  }
+  nav.append(next);
   const update = () => {
     const max = row.scrollWidth - row.clientWidth;
     nav.hidden = max <= 1;
     prev.disabled = row.scrollLeft <= 1;
     next.disabled = row.scrollLeft >= max - 1;
+    const cur = dots.length ? current() : -1;
+    dots.forEach((d, i) => (i === cur ? d.setAttribute('aria-current', 'step') : d.removeAttribute('aria-current')));
+    // 一次一張時，高度跟著目前這一步（不然整排都是最高那一步的高度，短的步驟下面會空一大塊）
+    if (dots.length) row.style.height = nav.hidden ? '' : `${figs[cur].offsetHeight + 12}px`;
   };
   row.after(nav);
   row.addEventListener('scroll', update, { passive: true });

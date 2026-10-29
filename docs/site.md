@@ -139,12 +139,16 @@ node tools/serve.mjs site 8766     # 本機預覽（或 python -m http.server 87
 ### 手機書籤教學
 
 - 瀏覽器版的「手機」卡片：複製程式碼的按鈕下面，iPhone（Safari）／Android（Chrome）兩個分頁，各五步：複製 → 加入書籤 → 打開書籤編輯 → 名稱改成建議名稱、網址換成程式碼 → 到遊戲頁執行（iPhone 從書籤清單點，Android 在網址列打名稱再點有 ☆ 的建議）
-- 每步一個用 HTML/CSS 畫的示意畫面（`.phone`，`build-site.mjs` 的 `mobileGuide`），不用截圖：各語言用自己的文字，也不影響手機速度。要按的地方用橘框（`.hl`）
-- 文字在 i18n：`guide.tab.*`、`guide.ios.steps`、`guide.android.steps`（`{copy}`、`{name}`、`{play}` 和 `guide.ui` 的 key 會被換掉）、`guide.ui`（示意畫面裡 Safari、Chrome 的按鈕文字，照各語言的系統用語）、`guide.note`（畫面僅供參考）
+- 每步一個用 HTML/CSS 畫的示意畫面（`.phone`，`build-site.mjs` 的 `mobileGuide`），不用截圖：各語言用自己的文字，也不影響手機速度
+  - 深色模式的 Safari／Chrome，配網站的色調。只畫跟這一步有關的那一截：`.crop-top`（下緣淡出）、`.crop-bottom`（上緣淡出）
+  - 第 1 步畫本站的縮小版（標題、金色複製按鈕），最後一步畫 D2 Survivors 的標題畫面（只用文字和 CSS，不用遊戲美術）
+  - 每個畫面只有一個要按的地方（`.tap`：金色光暈加點按漣漪，`prefers-reduced-motion` 時關掉漣漪）；次要的提示用 `.glow`
+- 每步下面是粗體短標題、一句說明、需要時一行小字補充。手機上一次一張（置中），下面是上一張／下一張和第幾步的圓點（app.js，高度跟著目前那一步）；761px 以上直接排成格子，不輪播
+- 文字在 i18n：`guide.tab.*`、`guide.ios.steps`、`guide.android.steps`（每步 `[標題, 說明, 補充]`；`{copy}`、`{name}`、`{play}` 和 `guide.ui` 的 key 會被換掉）、`guide.ui`（示意畫面裡 Safari、Chrome 的按鈕文字，照各語言的系統用語）、`guide.note`（畫面僅供參考）
+- 瀏覽器版卡片的標題（`#web .card > h3`）用內文字型：Cinzel 的小寫是小型大寫，「iPhone」會變成「iPHONE」
 - 建議的書籤名稱就是 `web.bookmark.name`（電腦版拖曳按鈕的名字，常見問題也用同一個）
 - iOS 26 以後 Safari 的分享、書籤按鈕收進「⋯」選單，說明裡有寫；Safari、Chrome 改版時檢查 `guide.ui` 和說明
 - 預設分頁照裝置：Android 用 Android，其他用 iPhone。沒有 JS 時兩套都顯示
-- 一排放不下時跟截圖共用上一張／下一張按鈕（app.js）
 - 常見問題有一題「加入主畫面後可以用中文嗎？」：不行（全螢幕沒有網址列和書籤，翻譯也不會留到下次）
 
 ## 加一種介面語言（例如 /de/）

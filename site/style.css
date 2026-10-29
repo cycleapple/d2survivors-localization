@@ -134,8 +134,9 @@ body[data-platform="desktop"] .pick[data-platform="desktop"],
 body[data-platform="web"] .pick[data-platform="web"] { border-color: var(--gold); background: rgba(201, 164, 92, 0.14); box-shadow: inset 0 0 0 1px var(--gold); }
 body[data-platform="desktop"] .pick[data-platform="desktop"]::after,
 body[data-platform="web"] .pick[data-platform="web"]::after {
-  content: "✓"; position: absolute; top: 6px; right: 8px; width: 20px; height: 20px; border-radius: 50%;
-  font-size: 0.75rem; line-height: 20px; font-weight: 700; color: #1a1206; background: var(--gold);
+  /* 勾勾用 SVG 畫（文字的 ✓ 在各字型裡位置不一，會偏離圓心） */
+  content: ""; position: absolute; top: 6px; right: 8px; width: 20px; height: 20px; border-radius: 50%;
+  background: var(--gold) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5.5 10.5l3 3 6-6.5' fill='none' stroke='%231a1206' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 20px no-repeat;
 }
 .platform-pick.compact { justify-content: start; grid-template-columns: repeat(2, max-content); margin: 0 0 28px; }
 .compact .pick { flex-direction: row; justify-content: flex-start; align-items: baseline; gap: 8px; padding: 10px 38px 10px 14px; text-align: left; white-space: nowrap; }
@@ -202,11 +203,19 @@ h1 { font-size: clamp(2rem, 5vw, 3.2rem); margin: 0 0 16px; word-break: keep-all
 .shots-platform { grid-auto-columns: max-content; }
 .shots-platform .shot { width: min-content; }
 .shots-platform img { height: clamp(240px, 30vw, 360px); width: auto; max-width: none; }
-.shots-nav { display: flex; justify-content: center; gap: 8px; margin-top: 4px; }
+.shots-nav { display: flex; justify-content: center; align-items: center; gap: 14px; margin-top: 8px; }
 .shots-nav[hidden] { display: none; }
-.shots-nav button { min-width: 44px; min-height: 36px; padding: 0 12px; color: var(--gold-hi); background: transparent; border: 1px solid var(--line); border-radius: var(--radius); cursor: pointer; font: inherit; }
-.shots-nav button:hover:not(:disabled) { border-color: var(--gold); }
-.shots-nav button:disabled { opacity: 0.35; cursor: default; }
+.shots-nav > button {
+  display: grid; place-items: center; width: 40px; height: 40px; padding: 0 0 2px; border-radius: 50%; cursor: pointer;
+  font: inherit; font-size: 1.35rem; line-height: 1; color: var(--gold-hi);
+  background: rgba(201, 164, 92, 0.08); border: 1px solid rgba(201, 164, 92, 0.6); transition: background 0.15s, border-color 0.15s;
+}
+.shots-nav > button:hover:not(:disabled) { background: rgba(201, 164, 92, 0.2); border-color: var(--gold); }
+.shots-nav > button:disabled { opacity: 0.3; cursor: default; }
+/* 第幾步的圓點（手機書籤教學） */
+.shots-dots { display: flex; align-items: center; gap: 6px; }
+.shots-dots button { width: 8px; height: 8px; padding: 0; border: 0; border-radius: 999px; background: var(--line); cursor: pointer; transition: width 0.2s, background 0.2s; }
+.shots-dots button[aria-current="step"] { width: 20px; background: var(--gold); }
 .shots-credit { color: var(--muted); font-size: 0.8rem; text-align: center; margin: 12px 0 0; opacity: 0.8; }
 
 /* Sections */
@@ -326,67 +335,106 @@ h3 { font-size: 1.15rem; margin: 0 0 10px; }
 .web-steps li { margin-bottom: 8px; }
 .web-usage { margin-top: 16px; }
 
-/* 手機書籤教學：iPhone／Android 分頁，每步一個 HTML/CSS 畫的示意畫面（.phone）加說明，一排橫向捲動 */
+/* 手機書籤教學：iPhone／Android 分頁，每步一個 HTML/CSS 畫的深色示意畫面（.phone）＋短標題＋說明。
+   手機上一次一張（置中、下面圓點和上一張／下一張），寬螢幕直接排成格子 */
 #web .cards { grid-template-columns: 1fr; }
-.os-tabs { display: inline-flex; gap: 4px; margin: 18px 0 12px; padding: 3px; border: 1px solid var(--line); border-radius: 999px; }
+#web .card > h3 { font-family: var(--font-body); font-weight: 700; }
+.os-tabs { display: inline-flex; gap: 4px; margin: 18px 0 14px; padding: 3px; border: 1px solid var(--line); border-radius: 999px; }
 .os-tabs button { font: inherit; font-size: 0.9rem; color: var(--muted); background: transparent; border: 0; border-radius: 999px; padding: 5px 16px; cursor: pointer; }
 .os-tabs button:hover { color: var(--gold-hi); }
 .os-tabs button[aria-pressed="true"] { color: #1a1206; background: var(--gold); }
 .guide[data-os="ios"] [data-os-pane="android"],
 .guide[data-os="android"] [data-os-pane="ios"] { display: none; }
 .guide-steps {
-  list-style: none; margin: 0; padding: 4px 4px 12px; counter-reset: guide-step;
-  display: grid; grid-auto-flow: column; grid-auto-columns: 200px; gap: 18px; align-items: start;
-  overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: thin;
+  list-style: none; margin: 0; padding: 4px 2px 6px;
+  display: grid; grid-auto-flow: column; grid-auto-columns: 100%; gap: 16px; align-items: start;
+  overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: none;
+  transition: height 0.25s;
 }
-.guide-step { counter-increment: guide-step; scroll-snap-align: start; }
-.guide-step p { margin: 10px 0 0; font-size: 0.9rem; line-height: 1.55; }
-.guide-step p::before {
-  content: counter(guide-step); display: inline-grid; place-items: center; width: 22px; height: 22px; margin-right: 6px;
-  border-radius: 50%; font-size: 0.8rem; font-weight: 700; color: #1a1206; background: var(--gold); vertical-align: 1px;
+.guide-steps::-webkit-scrollbar { display: none; }
+.guide-step { width: 100%; max-width: 300px; justify-self: center; scroll-snap-align: center; }
+.guide-step h4 { display: flex; align-items: center; gap: 8px; margin: 12px 0 4px; font-family: var(--font-body); font-size: 1rem; color: var(--gold-hi); }
+.step-no { flex: none; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; font-size: 0.8rem; font-weight: 700; color: #1a1206; background: var(--gold); }
+.guide-step p { margin: 0; font-size: 0.9rem; line-height: 1.55; }
+.guide-step .step-note { margin-top: 4px; font-size: 0.8rem; color: var(--muted); }
+.guide-note { color: var(--muted); font-size: 0.82rem; margin: 10px 0 0; }
+@media (min-width: 761px) {
+  .guide-steps { grid-auto-flow: row; grid-auto-columns: auto; grid-template-columns: repeat(auto-fill, minmax(176px, 1fr)); gap: 24px 18px; overflow: visible; scroll-snap-type: none; }
+  .guide-step { max-width: none; }
 }
-.guide-note { color: var(--muted); font-size: 0.82rem; margin: 4px 0 0; }
 
+/* 示意畫面：深色模式的 Safari／Chrome，配網站的色調。只畫跟這一步有關的那一截，裁掉的那邊淡出 */
 .phone {
-  position: relative; width: 200px; height: 300px; overflow: hidden; box-sizing: border-box;
-  border: 6px solid #2b2620; border-radius: 26px; background: #f2f2f7; color: #1c1c1e;
-  font: 11px/1.35 -apple-system, "Segoe UI", system-ui, sans-serif; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+  position: relative; width: 100%; max-width: 232px; margin: 0 auto; overflow: hidden; box-sizing: border-box;
+  border: 5px solid #050403; border-radius: 22px; background: #110e0b; color: #e6ddcd;
+  box-shadow: 0 0 0 1px var(--line), 0 10px 24px rgba(0, 0, 0, 0.5);
+  font: 10.5px/1.35 -apple-system, "Segoe UI", system-ui, sans-serif;
 }
-.phone.android { border-radius: 18px; background: #fff; font-family: Roboto, "Segoe UI", system-ui, sans-serif; }
-.ph-url { display: flex; justify-content: center; gap: 6px; margin: 8px 8px 6px; padding: 5px 8px; border-radius: 9px; background: #e3e3e8; color: #555; white-space: nowrap; overflow: hidden; }
-.android .ph-url { justify-content: space-between; border-radius: 999px; background: #eef0f3; }
-.ph-url.focus { position: relative; z-index: 1; justify-content: flex-start; background: #fff; box-shadow: inset 0 0 0 2px #1a73e8; color: #111; }
-.ph-page { display: grid; gap: 8px; justify-items: start; padding: 6px 12px; }
-.ph-ph { display: block; flex: 1; width: 100%; height: 7px; border-radius: 4px; background: #d6d6dc; }
+.phone.android { font-family: Roboto, "Segoe UI", system-ui, sans-serif; }
+.phone.crop-top { padding-bottom: 22px; border-bottom: 0; border-radius: 22px 22px 0 0; -webkit-mask-image: linear-gradient(#000 calc(100% - 26px), transparent); mask-image: linear-gradient(#000 calc(100% - 26px), transparent); }
+.phone.crop-bottom { padding-top: 22px; border-top: 0; border-radius: 0 0 22px 22px; -webkit-mask-image: linear-gradient(transparent, #000 26px); mask-image: linear-gradient(transparent, #000 26px); }
+.ph-screen { position: relative; }
+.ph-url { display: flex; justify-content: center; align-items: center; gap: 6px; margin: 8px 10px; padding: 5px 10px; border-radius: 10px; background: #241e17; color: #a39885; white-space: nowrap; overflow: hidden; }
+.android .ph-url { justify-content: space-between; border-radius: 999px; }
+.ph-url.focus { justify-content: flex-start; background: #1b1611; color: #f1e8d8; box-shadow: inset 0 0 0 1.5px var(--gold); }
+.ph-dots { padding: 0 4px; border-radius: 4px; font-weight: 700; color: #e6ddcd; }
+.ph-ph { display: block; flex: 1; height: 6px; border-radius: 3px; background: #3a3127; }
+.ph-site { display: grid; gap: 7px; justify-items: start; padding: 6px 14px 4px; }
+.ph-brand { font-family: var(--font-display); font-size: 9px; font-weight: 700; letter-spacing: 0.08em; color: var(--gold); }
+.ph-brand i { font-style: normal; color: var(--muted); }
+.ph-title { font-family: var(--font-display); font-size: 14px; line-height: 1.25; color: var(--gold-hi); }
 .ph-btn { padding: 6px 10px; border-radius: 6px; background: var(--gold); color: #1a1206; font-weight: 700; }
-.ph-code, .mono { font: 10px/1.3 Consolas, "Cascadia Mono", monospace; }
-.ph-code { padding: 2px 5px; border: 0; border-radius: 4px; background: #e6e6eb; color: #555; }
-.ph-sheet { position: absolute; left: 0; right: 0; bottom: 0; padding: 6px 0 10px; border-radius: 14px 14px 0 0; background: #fff; box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.18); }
-.ph-row { display: flex; align-items: center; gap: 8px; min-height: 30px; padding: 4px 12px; border-bottom: 1px solid #ececf0; }
-.ph-ico { width: 16px; text-align: center; }
+.ph-code { padding: 2px 6px; border: 0; border-radius: 4px; background: #1f1a14; color: #8f8574; font: 9px/1.3 Consolas, "Cascadia Mono", monospace; }
+.mono { font-family: Consolas, "Cascadia Mono", monospace; font-size: 9.5px; }
+.ph-sheet { border-top: 1px solid #3a3026; border-radius: 14px 14px 0 0; background: #1d1813; padding: 4px 0 6px; }
+.ph-sheet-head { display: flex; align-items: center; gap: 8px; padding: 6px 12px; }
+.ph-fav { flex: none; display: grid; place-items: center; width: 24px; height: 24px; border-radius: 6px; background: var(--gold); color: #1a1206; font-family: var(--font-display); font-size: 9px; font-weight: 700; }
+.ph-apps { display: flex; gap: 10px; padding: 4px 12px 8px; }
+.ph-apps i { width: 26px; height: 26px; border-radius: 50%; background: #2b241c; }
+.ph-row { display: flex; align-items: center; gap: 8px; min-height: 28px; padding: 3px 12px; border-top: 1px solid #2a231b; }
+.ph-row.dim { opacity: 0.55; }
+.ph-ico { flex: none; width: 14px; text-align: center; color: #a39885; }
 .ph-t { display: flex; flex-direction: column; flex: 1; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
-.ph-t small { color: #777; font-size: 9px; overflow: hidden; text-overflow: ellipsis; }
-.ph-head { display: flex; justify-content: space-between; align-items: center; gap: 4px; padding: 12px 18px 8px; border-bottom: 1px solid #e0e0e5; background: #f9f9fb; }
-.ph-head > span { flex: none; min-width: 30px; color: #007aff; }
-.ph-head > .hl, .ph-foot > .hl { padding: 1px 6px; }
+.ph-t b, .ph-t small { overflow: hidden; text-overflow: ellipsis; }
+.ph-t small { color: #8f8574; font-size: 9px; }
+.ph-head { display: flex; align-items: center; gap: 6px; padding: 10px 14px 8px; border-bottom: 1px solid #2a231b; }
+.ph-head b { flex: 1; min-width: 0; font-weight: 600; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ph-head > span { flex: none; min-width: 24px; padding: 1px 5px; border-radius: 6px; color: var(--gold-hi); }
 .ph-head > span:last-child { text-align: right; }
-.ph-head b { flex: 1; font-weight: 600; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.android .ph-head { justify-content: flex-start; background: #fff; }
-.android .ph-head > span { color: #444; }
 .android .ph-head b { text-align: left; }
-.ph-foot { position: absolute; left: 0; right: 0; bottom: 0; display: flex; justify-content: space-between; padding: 10px 20px 16px; border-top: 1px solid #e0e0e5; background: #f9f9fb; color: #007aff; }
-.ph-field { margin: 8px 10px 0; padding: 7px 9px; border-radius: 8px; background: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.android .ph-field { margin-top: 2px; border: 1px solid #c4c7cc; border-radius: 4px; }
-.ph-label { margin: 10px 10px 0; color: #1a73e8; font-size: 10px; }
-.ph-menu { position: absolute; top: 34px; right: 6px; width: 150px; border-radius: 8px; background: #fff; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25); }
-.ph-icons { display: flex; justify-content: space-between; padding: 8px 10px; border-bottom: 1px solid #ececf0; font-size: 13px; }
-.ph-dots { padding: 0 4px; font-weight: 700; }
-.ph-pop { position: absolute; top: 76px; right: 10px; width: 110px; border-radius: 6px; background: #fff; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25); }
-.ph-game { position: absolute; inset: 40px 0 0; background: radial-gradient(ellipse at 50% 40%, #4a3a26, #15110c 70%); }
-.ph-suggest { position: relative; z-index: 1; margin: 0 8px; border-radius: 10px; background: #fff; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3); overflow: hidden; }
-/* 要按的地方 */
-.phone .hl { outline: 2px solid #e8590c; outline-offset: -2px; border-radius: 6px; background-color: #fff3e6; }
-.phone .ph-btn.hl { outline-offset: 2px; background-color: var(--gold); }
+.android .ph-head > span { color: #e6ddcd; }
+.ph-foot { display: flex; justify-content: space-between; padding: 8px 16px 10px; border-top: 1px solid #2a231b; background: #1d1813; color: var(--gold-hi); }
+.ph-foot > span { padding: 1px 6px; border-radius: 6px; }
+.ph-field { margin: 8px 12px 0; padding: 6px 9px; border-radius: 8px; background: #241e17; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.android .ph-field { margin-top: 2px; border-radius: 4px; background: transparent; border: 1px solid #4a3d2e; }
+.ph-label { margin: 8px 12px 0; color: var(--gold); font-size: 9.5px; }
+.ph-menu { position: absolute; top: 38px; right: 8px; width: 60%; border: 1px solid #3a3026; border-radius: 8px; background: #241e17; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5); }
+.ph-icons { display: flex; justify-content: space-between; padding: 7px 10px; font-size: 12px; }
+.ph-icons span { padding: 0 3px; border-radius: 5px; }
+.ph-pop { width: 62%; margin: 2px 10px 0 auto; border: 1px solid #3a3026; border-radius: 6px; background: #241e17; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5); overflow: hidden; }
+.ph-pop .ph-row:first-child, .ph-suggest .ph-row:first-child { border-top: 0; }
+.ph-suggest { margin: 0 10px 6px; border: 1px solid #3a3026; border-radius: 10px; background: #241e17; overflow: hidden; }
+/* D2 Survivors 的標題畫面（只用文字和 CSS） */
+.ph-gametitle { display: grid; justify-items: center; gap: 5px; padding: 14px 10px 12px; background: radial-gradient(ellipse at 50% 30%, #3b1d10, #0b0806 72%); }
+.ph-gametitle b { font-family: "Cinzel", serif; line-height: 1; background: linear-gradient(#f3cf78, #b8321f); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.ph-gametitle b:first-child { font-size: 22px; }
+.ph-gametitle b:nth-child(2) { margin-bottom: 4px; font-size: 11px; letter-spacing: 0.22em; }
+.ph-gametitle .ph-ph { flex: none; background: #3a2b1d; }
+/* 次要的提示框，以及要按的地方：金色光暈加點按漣漪 */
+.phone .glow { box-shadow: 0 0 0 1px rgba(201, 164, 92, 0.55); }
+.phone .tap { position: relative; border-radius: 6px; box-shadow: 0 0 0 1.5px var(--gold), 0 0 14px 2px rgba(201, 164, 92, 0.5); }
+.phone .ph-row.tap { background: rgba(201, 164, 92, 0.12); border-radius: 0; }
+.phone .tap::after {
+  content: ""; position: absolute; left: 50%; top: 50%; width: 30px; height: 30px; margin: -15px 0 0 -15px; border-radius: 50%;
+  background: rgba(234, 211, 154, 0.35); pointer-events: none; animation: guide-tap 2.2s ease-out infinite;
+}
+@keyframes guide-tap {
+  0% { transform: scale(0.2); opacity: 0.9; }
+  60%, 100% { transform: scale(1.8); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .phone .tap::after { display: none; }
+}
 /* 遊戲剛更新，翻譯修正中 */
 .notice { background: rgba(217, 162, 63, 0.12); border-bottom: 1px solid rgba(217, 162, 63, 0.45); color: var(--text); font-size: 0.92rem; padding: 12px 0; }
 .notice strong { color: var(--warn); }
