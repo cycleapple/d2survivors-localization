@@ -100,6 +100,8 @@ site/data/dict/ja.json
 
 ### wiki 字典
 
+> 暫緩（2026-10-30）：使用者決定先不做 wiki，目前 manifest 沒有這一欄，書籤也還沒支援。格式先留著，之後重啟時照這裡做。
+
 官方 wiki 是作者用遊戲程式產生的靜態頁面（約 256 頁），每段文字都寫成一對：`<span data-in="en">…</span><span data-in="ko" lang="ko">…</span>`（也有 `div`、`p` 等），用 `<html lang>` 切換顯示。書籤在 wiki 頁面上把 `data-in="ko"` 那一份換成譯文、把 `<html lang>` 設成 `ko`，跟遊戲一樣借用韓文的位置；外觀照官方 wiki，不另外做頁面，也不轉載 wiki 內容。
 
 `site/data/wiki/<id>.json`：
