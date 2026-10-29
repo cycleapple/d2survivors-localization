@@ -1,0 +1,14 @@
+{
+ "If the browser can't start the sound at your first key or click, the next one tries again, where it stayed silent until a reload": "Kann der Browser den Ton bei deiner ersten Taste oder deinem ersten Klick nicht starten, versucht es die nächste erneut; bisher blieb es bis zum Neuladen stumm",
+ "Gold banked for Charsi, and in a run the gold found so far": "Bei Charsi hinterlegtes Gold und im Durchgang das bisher gefundene Gold",
+ "Runewords drop again when the game runs on Diablo II: Resurrected's files, and the Uniques tab pictures each on its own base": "Runenworte fallen wieder, wenn das Spiel mit den Dateien von Diablo II: Resurrected läuft, und der Reiter \"Einzigartige\" zeigt jedes auf seiner eigenen Basis",
+ "Fortitude gives 1 to 1.5 Life per level and Leaf 2 Defense per level, where both gave none, and ones you've found are fixed": "Stärke gibt 1 bis 1.5 Leben pro Stufe und Blatt 2 Verteidigung pro Stufe, wo beide nichts gaben; bereits gefundene werden korrigiert",
+ "Griswold's Valor absorbs cold damage based on your level instead of none": "Griswolds Heldenmut absorbiert Kälteschaden abhängig von deiner Stufe statt gar nicht",
+ "Items in the stash and shops outside the camp read their per-level lines at your hero's level instead of level 1": "Gegenstände im Schatz und in Läden außerhalb des Lagers zeigen Werte pro Stufe für die Stufe deines Helden statt für Stufe 1",
+ "Famine's Enhanced Damage range reads 320-370% with stat ranges shown, where it left out Ohm's 50%": "Der Bereich von Erhöhter Schaden bei Hungersnot zeigt mit Wertebereichen 320-370%, wo die 50% von Ohm fehlten",
+ "Restores all Life and Mana": "Stellt das gesamte Leben und Mana wieder her",
+ "A caster's skill learned again beside its own evolutions gains their synergies, as Poison Dagger from Poison Explosion and Poison Nova": "Eine Fertigkeit eines Zauberers, die neben ihren eigenen Entwicklungen erneut erlernt wird, erhält deren Synergien, etwa Giftdolch von Giftexplosion und Giftnova",
+ "In a run the inventory's gold box counts the run's gold too, so picked up gold and the LOOT FILTER's sales show there at once": "Im Durchgang zählt das Goldfeld des Inventars auch das Gold des Durchgangs, sodass aufgehobenes Gold und die Verkäufe des BEUTEFILTERS sofort dort erscheinen",
+ "The Refilling Shrine fills your mana as well as your life, as in Diablo II, so Energy Shield's mana too": "Der Füllende Schrein füllt wie in Diablo II neben deinem Leben auch dein Mana auf, also auch das Mana von Energieschild",
+ "A Full Rejuvenation Potion restores all your mana as well as your life, as in Diablo II, so Energy Shield's mana too": "Ein Starker Regenerationstrank stellt wie in Diablo II neben deinem Leben auch dein gesamtes Mana wieder her, also auch das Mana von Energieschild"
+}
