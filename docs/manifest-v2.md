@@ -60,6 +60,13 @@ site/data/dict/ja.json
         "html_lang": "zh-Hant",
         "groups": ["…"],
         "fonts": ["Microsoft JhengHei", "PingFang TC", "Noto Sans TC"]
+      },
+      "wiki": {                            // 沒有這一欄＝官方 wiki（d2survivors.lol/wiki/）不翻；見下面「wiki 字典」
+        "url": "wiki/zh-TW.json?v=…",      // 相對於 manifest.json
+        "sha256": "…",
+        "entries": 5608,                   // 有譯文的條數
+        "total": 5608,                     // 上次掃描時 wiki 的條數（entries < total：沒翻到的顯示英文）
+        "checked": "2026-10-30T00:00:00Z"  // 上次掃描官方 wiki 的時間
       }
     }
   ],
@@ -91,6 +98,28 @@ site/data/dict/ja.json
 - `draft`：翻譯還在做（`tools/langs.mjs` 標的）。`publish` 不會把 draft 的語言寫進 manifest，所以正常發布的 manifest 裡不會出現。萬一出現（例如手動產生的測試用 manifest），啟動器和書籤標成「草稿」，網站顯示成「計畫中」
 - 讀到不認得的值：當成 `draft` 處理，不要當成正式版
 
+### wiki 字典
+
+官方 wiki 是作者用遊戲程式產生的靜態頁面（約 256 頁），每段文字都寫成一對：`<span data-in="en">…</span><span data-in="ko" lang="ko">…</span>`（也有 `div`、`p` 等），用 `<html lang>` 切換顯示。書籤在 wiki 頁面上把 `data-in="ko"` 那一份換成譯文、把 `<html lang>` 設成 `ko`，跟遊戲一樣借用韓文的位置；外觀照官方 wiki，不另外做頁面，也不轉載 wiki 內容。
+
+`site/data/wiki/<id>.json`：
+
+```jsonc
+{
+  "version": "20261030-0100",
+  "strings": {
+    // key：data-in="en" 元素的 innerHTML，標籤換成編號佔位符 <0>…</0>、<1/>（照出現順序編號，屬性不進 key），空白合併成一個
+    // value：譯文，佔位符跟 key 一樣（可以換順序，不能少、不能多）；書籤把佔位符換回英文那份對應的元素（保留 href、class）
+    "Every class’s skills, passives, evolutions and skill modifiers.": "每個職業的技能、被動、進化和技能修飾。",
+    "Read <0>Skill systems</0> first.": "先看<0>技能體系</0>。"
+  }
+}
+```
+
+- 遊戲裡也有的名稱（技能、物品、怪物、地名）用 `dict/<id>.json` 的同一個譯名
+- 沒有譯文的 key 顯示英文，不顯示韓文
+- 抽字串、翻譯、產生檔案：翻譯；在 wiki 頁面套用：網頁書籤
+
 ## 各欄位歸誰
 
 | 部分 | 產生的程式 | 讀的程式 | 誰維護 |
@@ -100,6 +129,7 @@ site/data/dict/ja.json
 | `languages[].web`、`web` | `tools/web-rules.mjs` | 書籤 | 網頁書籤 |
 | `launcher` | `tools/publish.mjs` 讀最新的 GitHub Release | 啟動器 | 啟動器 |
 | `game` | `tools/publish.mjs` | 網站（顯示） | 翻譯 |
+| `languages[].wiki`、`site/data/wiki/` | `tools/publish.mjs`（讀 `dict/wiki/`） | 書籤 | 翻譯 |
 
 - `desktop`、`web` 兩塊、`languages[].desktop`、`languages[].web` 裡面的欄位，由各自的負責方決定，改了只要兩邊（產生和讀取）一致就好，在這份文件更新說明
 - 最上層和 `languages[]` 的共用欄位要改，先改這份文件、通知另外兩邊
