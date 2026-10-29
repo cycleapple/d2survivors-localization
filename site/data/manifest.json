@@ -1,21 +1,21 @@
 {
   "schema": 2,
-  "updated": "2026-10-28T23:20:03.535Z",
-  "version": "20261028-2320",
+  "updated": "2026-10-29T10:15:37.752Z",
+  "version": "20261029-1015",
   "game": {
-    "desktop": "2026.1028.2",
-    "web_checked": "2026-10-28T23:13:01.511Z"
+    "desktop": "2026.1029.1",
+    "web_checked": "2026-10-29T10:14:16.279Z"
   },
   "languages": [
     {
       "id": "zh-TW",
       "name": "繁體中文",
       "status": "available",
-      "entries": 13358,
+      "entries": 13370,
       "dict": {
-        "url": "dict/zh-TW.json?v=059f763fe5f7",
-        "sha256": "059f763fe5f724d9ff005235be430b6ac5c58b8dae99fd82a3a35f94b76880e2",
-        "size": 853664
+        "url": "dict/zh-TW.json?v=f1a1cc2b44d4",
+        "sha256": "f1a1cc2b44d481dd936c241ba2f03200593388f3bbf559ffd5650493568ce12c",
+        "size": 856372
       },
       "desktop": {
         "menu_name": "繁體中文",
@@ -55,11 +55,11 @@
       "id": "zh-CN",
       "name": "简体中文",
       "status": "available",
-      "entries": 13357,
+      "entries": 13369,
       "dict": {
-        "url": "dict/zh-CN.json?v=b86472c18713",
-        "sha256": "b86472c1871336b2dcde05733808ca7fdfc697c0908178027f9387689d8483e9",
-        "size": 853434
+        "url": "dict/zh-CN.json?v=883df4b38e57",
+        "sha256": "883df4b38e57467a9f2ffecedaba30c55c566678e75620c4e2d467941af1bdcb",
+        "size": 856121
       },
       "desktop": {
         "menu_name": "简体中文",
@@ -97,11 +97,11 @@
       "id": "ja",
       "name": "日本語",
       "status": "available",
-      "entries": 13363,
+      "entries": 13375,
       "dict": {
-        "url": "dict/ja.json?v=2e8d4f0a86c3",
-        "sha256": "2e8d4f0a86c32a7a46f42394134b92aa734ca0458e7fab57b7fc964e5613649e",
-        "size": 1027253
+        "url": "dict/ja.json?v=73d9f15c30e7",
+        "sha256": "73d9f15c30e7988d3f2dc17443283bebec6bbd0227943a781f03f8beb12e934c",
+        "size": 1030667
       },
       "desktop": {
         "menu_name": "日本語",
@@ -145,11 +145,11 @@
       "id": "de",
       "name": "Deutsch",
       "status": "available",
-      "entries": 13397,
+      "entries": 13409,
       "dict": {
-        "url": "dict/de.json?v=99adab52ade0",
-        "sha256": "99adab52ade07b6de6738273bccfbe34d68ae14320d4ad7f4ba689716a7a487b",
-        "size": 944828
+        "url": "dict/de.json?v=7b994d3802dc",
+        "sha256": "7b994d3802dc5a28ec0ed55e2a3865131af48c9a90bec98f679b84b13a4fab3a",
+        "size": 947636
       },
       "desktop": {
         "menu_name": "Deutsch",
@@ -180,11 +180,11 @@
       "id": "fr",
       "name": "Français",
       "status": "available",
-      "entries": 13406,
+      "entries": 13418,
       "dict": {
-        "url": "dict/fr.json?v=6381bddca97e",
-        "sha256": "6381bddca97eb2cad74e717c2a2b4a846372f578a819f2fa6232a47ef441832f",
-        "size": 990354
+        "url": "dict/fr.json?v=ef27e90cdcaf",
+        "sha256": "ef27e90cdcaf2972196c64a6d335e602977f7fec6a6ed88d83777327058f57ac",
+        "size": 993249
       },
       "desktop": {
         "menu_name": "Français",
@@ -215,11 +215,11 @@
       "id": "ru",
       "name": "Русский",
       "status": "available",
-      "entries": 13445,
+      "entries": 13457,
       "dict": {
-        "url": "dict/ru.json?v=c5c2df2dddaa",
-        "sha256": "c5c2df2dddaa8d766cc1be61d26c3f222664def400361ea12e8cfa214dc2cb7c",
-        "size": 1291754
+        "url": "dict/ru.json?v=50d7861d358d",
+        "sha256": "50d7861d358de0a55f6e5874aa213e9b06a8ea2df18a18c5e34593b3c871dfc9",
+        "size": 1295548
       },
       "desktop": {
         "menu_name": "Русский",
@@ -263,11 +263,11 @@
       "id": "pl",
       "name": "Polski",
       "status": "available",
-      "entries": 13435,
+      "entries": 13447,
       "dict": {
-        "url": "dict/pl.json?v=dbbda80f59b2",
-        "sha256": "dbbda80f59b2a9570bc7048a82ce9030d1228c74ca5a389de56f437e3edb37a8",
-        "size": 955528
+        "url": "dict/pl.json?v=0182c6584a55",
+        "sha256": "0182c6584a55d55627917b4d2d6590a55db6b7c4cfa44adb122efc7eec104695",
+        "size": 958306
       },
       "desktop": {
         "menu_name": "Polski",
@@ -1116,7 +1116,7 @@
     "sha256_url": "https://github.com/cycleapple/d2survivors-localization/releases/latest/download/d2s-launcher.exe.sha256"
   },
   "changelog": {
-    "url": "changelog.json?v=77c162cc0829",
-    "latest": "20261028-2320"
+    "url": "changelog.json?v=2a89503518eb",
+    "latest": "20261029-1015"
   }
 }

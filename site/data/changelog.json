@@ -2,6 +2,84 @@
   "schema": 1,
   "entries": [
     {
+      "version": "20261029-1015",
+      "date": "2026-10-29",
+      "kind": "game-fix",
+      "announce": true,
+      "summary": {
+        "zh-TW": "已支援遊戲 2026.1029.1",
+        "zh-CN": "已支持游戏 2026.1029.1",
+        "en": "Supports game 2026.1029.1",
+        "ja": "ゲーム 2026.1029.1 に対応しました",
+        "de": "Unterstützt Spielversion 2026.1029.1",
+        "fr": "Prise en charge du jeu 2026.1029.1",
+        "ru": "Поддержка версии игры 2026.1029.1",
+        "pl": "Obsługa wersji gry 2026.1029.1"
+      },
+      "game": {
+        "desktop": "2026.1029.1"
+      },
+      "launcher": "1.0.3",
+      "languages": [
+        {
+          "id": "zh-TW",
+          "status": "available",
+          "entries": 13370,
+          "added": 12,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "zh-CN",
+          "status": "available",
+          "entries": 13369,
+          "added": 12,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ja",
+          "status": "available",
+          "entries": 13375,
+          "added": 12,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "de",
+          "status": "available",
+          "entries": 13409,
+          "added": 12,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "fr",
+          "status": "available",
+          "entries": 13418,
+          "added": 12,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ru",
+          "status": "available",
+          "entries": 13457,
+          "added": 12,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "pl",
+          "status": "available",
+          "entries": 13447,
+          "added": 12,
+          "changed": 0,
+          "removed": 0
+        }
+      ]
+    },
+    {
       "version": "20261028-2320",
       "date": "2026-10-28",
       "kind": "game-fix",
