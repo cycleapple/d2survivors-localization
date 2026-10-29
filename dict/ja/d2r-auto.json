@@ -8742,5 +8742,6 @@
  "Socketed (#)": "ソケット（{0}）",
  "Ethereal (Cannot be Repaired)": "イシリアル（修理不可能）",
  "Ethereal (Cannot be Repaired), Socketed (#)": "イシリアル（修理不可能）、ソケット（{0}）",
- "Runewords": "ルーンワード"
+ "Runewords": "ルーンワード",
+ "Inventory": "所持品"
 }

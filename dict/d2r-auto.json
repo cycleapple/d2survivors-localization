@@ -8999,5 +8999,6 @@
  "Socketed (#)": "鑲孔（{0}）",
  "Ethereal (Cannot be Repaired)": "無形（無法修復）",
  "Ethereal (Cannot be Repaired), Socketed (#)": "無形（無法修復），鑲孔（{0}）",
- "Runewords": "符文之語"
+ "Runewords": "符文之語",
+ "Inventory": "物品"
 }
