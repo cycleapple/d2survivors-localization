@@ -1,5 +1,6 @@
 // D2 Survivors 中文化（網頁版書籤）：繁體中文、简体中文、日本語，以及 Deutsch、Français、Русский
 // 書籤：javascript:import('<這個檔案的網址>').then(m=>m.default()).catch(e=>alert(e))
+//   各語言的安裝碼帶語言：m.default('zh-TW')＝第一次就開這個語言（不看遊戲設定和上次用的）
 //
 // 做法：跟桌面版一樣用遊戲內建的翻譯系統，只是改在瀏覽器裡做。
 // 1. 讀 manifest（../data/manifest.json），抓下遊戲頁面和所有模組，照目前的語言套用 manifest 的 web.rules
@@ -7,7 +8,7 @@
 // 2. 修改過的模組做成 blob 網址，用 import map 換掉原本的模組
 // 3. 停掉頁面上正在跑的原版，換成一個同網域的 iframe，在裡面重新開一次修改版
 // 任何一步失敗都在第 3 步之前，原版遊戲不受影響。
-// 在遊戲裡換語言時，用新語言的規則重新開一次修改版。再按一次書籤＝目前的語言和英文切換。重新整理頁面就回到原版。
+// 在遊戲裡換語言時，用新語言的規則重新開一次修改版。再按一次書籤＝重新整理頁面回到原版。
 
 import { loadGame, applyRules, rulesFor, ruleVars, relink, bootHtml } from './core.js';
 
@@ -20,37 +21,44 @@ const fetch0 = window.fetch.bind(window);
 
 const MESSAGES = {
   'zh-TW': {
-    loading: '正在載入繁體中文…', on: '繁體中文已開啟。再按一次書籤可以切換中英文。翻譯模式下成績不會上傳到排行榜，要上榜請重新整理頁面用原版。', to: '切換成繁體中文',
+    loading: '正在載入繁體中文…', on: '繁體中文已開啟。再按一次書籤會重新整理頁面，回到原版英文。翻譯模式下成績不會上傳到排行榜，要上榜請用原版。',
+    stuck: '切換失敗。請重新整理頁面，再按一次書籤。',
     failed: '中文化載入失敗：', outdated: '遊戲改版了，中文化需要更新', page: '請先打開 D2 Survivors 的遊戲頁面（https://d2survivors.lol/play/），再按這個書籤。',
     old: '書籤需要更新：請到中文化網站重新安裝書籤。', loop: '中文化一直重新載入，已停止。請重新整理頁面。', frame: '中文化載入失敗：框架打不開。請重新整理頁面。',
   },
   'zh-CN': {
-    loading: '正在加载简体中文…', on: '简体中文已开启。再按一次书签可以切换中英文。汉化模式下成绩不会上传到排行榜，要上榜请刷新页面用原版。', to: '切换成简体中文',
+    loading: '正在加载简体中文…', on: '简体中文已开启。再按一次书签会刷新页面，回到原版英文。汉化模式下成绩不会上传到排行榜，要上榜请用原版。',
+    stuck: '切换失败。请刷新页面，再按一次书签。',
     failed: '汉化加载失败：', outdated: '游戏更新了，汉化需要更新', page: '请先打开 D2 Survivors 的游戏页面（https://d2survivors.lol/play/），再按这个书签。',
     old: '书签需要更新：请到汉化网站重新安装书签。', loop: '汉化一直重新加载，已停止。请刷新页面。', frame: '汉化加载失败：框架打不开。请刷新页面。',
   },
   ja: {
-    loading: '日本語を読み込んでいます…', on: '日本語になりました。もう一度ブックマークを押すと英語に切り替わります。翻訳中の記録はリーダーボードに送信されません。ランキングに載せるにはページを再読み込みして元の版で遊んでください。', to: '日本語に切り替えます',
+    loading: '日本語を読み込んでいます…', on: '日本語になりました。もう一度ブックマークを押すとページを再読み込みして、元の英語版に戻ります。翻訳中の記録はリーダーボードに送信されません。ランキングに載せるには元の版で遊んでください。',
+    stuck: '切り替えに失敗しました。ページを再読み込みしてから、もう一度ブックマークを押してください。',
     failed: '日本語化の読み込みに失敗しました：', outdated: 'ゲームが更新されたため、日本語化の更新が必要です', page: 'D2 Survivors のゲームページ（https://d2survivors.lol/play/）を開いてから、このブックマークを押してください。',
     old: 'ブックマークの更新が必要です。日本語化サイトでブックマークを入れ直してください。', loop: '読み込みが繰り返されたため停止しました。ページを再読み込みしてください。', frame: '日本語化の読み込みに失敗しました：フレームを開けません。ページを再読み込みしてください。',
   },
   de: {
-    loading: 'Deutsch wird geladen…', on: 'Deutsch ist aktiv. Lesezeichen erneut anklicken, um zwischen Deutsch und Englisch zu wechseln. Mit der Übersetzung werden keine Läufe an die Bestenliste gesendet; für die Bestenliste die Seite neu laden und das Original spielen.', to: 'Wechsel zu Deutsch',
+    loading: 'Deutsch wird geladen…', on: 'Deutsch ist aktiv. Ein erneuter Klick auf das Lesezeichen lädt die Seite neu und kehrt zum englischen Original zurück. Mit der Übersetzung werden keine Läufe an die Bestenliste gesendet; für die Bestenliste das Original spielen.',
+    stuck: 'Wechsel fehlgeschlagen. Bitte die Seite neu laden und das Lesezeichen erneut anklicken.',
     failed: 'Übersetzung konnte nicht geladen werden: ', outdated: 'Das Spiel wurde aktualisiert, die Übersetzung muss angepasst werden', page: 'Bitte zuerst die Spielseite von D2 Survivors öffnen (https://d2survivors.lol/play/) und dann das Lesezeichen anklicken.',
     old: 'Das Lesezeichen ist veraltet. Bitte auf der Übersetzungsseite neu installieren.', loop: 'Die Übersetzung lädt immer wieder neu und wurde gestoppt. Bitte die Seite neu laden.', frame: 'Übersetzung konnte nicht geladen werden: Rahmen lässt sich nicht öffnen. Bitte die Seite neu laden.',
   },
   fr: {
-    loading: 'Chargement du français…', on: 'Le français est activé. Cliquez à nouveau sur le favori pour basculer entre français et anglais. Avec la traduction, les parties ne sont pas envoyées au classement ; pour y figurer, rechargez la page et jouez à la version originale.', to: 'Passage au français',
+    loading: 'Chargement du français…', on: 'Le français est activé. Cliquer à nouveau sur le favori recharge la page et revient à la version originale en anglais. Avec la traduction, les parties ne sont pas envoyées au classement ; pour y figurer, jouez à la version originale.',
+    stuck: 'Le changement a échoué. Rechargez la page, puis cliquez à nouveau sur le favori.',
     failed: 'Échec du chargement de la traduction : ', outdated: 'Le jeu a été mis à jour, la traduction doit l’être aussi', page: 'Ouvrez d’abord la page de jeu de D2 Survivors (https://d2survivors.lol/play/), puis cliquez sur ce favori.',
     old: 'Le favori est obsolète. Réinstallez-le depuis le site de la traduction.', loop: 'La traduction se recharge en boucle et a été arrêtée. Rechargez la page.', frame: 'Échec du chargement de la traduction : impossible d’ouvrir le cadre. Rechargez la page.',
   },
   ru: {
-    loading: 'Загрузка русского перевода…', on: 'Русский перевод включен. Нажмите закладку еще раз, чтобы переключиться между русским и английским. С переводом забеги не отправляются в таблицу лидеров; чтобы попасть в нее, обновите страницу и играйте в оригинал.', to: 'Переключение на русский',
+    loading: 'Загрузка русского перевода…', on: 'Русский перевод включен. Повторное нажатие закладки перезагрузит страницу и вернет английский оригинал. С переводом забеги не отправляются в таблицу лидеров; чтобы попасть в нее, играйте в оригинал.',
+    stuck: 'Не удалось переключить язык. Обновите страницу и снова нажмите закладку.',
     failed: 'Не удалось загрузить перевод: ', outdated: 'Игра обновилась, перевод нужно обновить', page: 'Сначала откройте страницу игры D2 Survivors (https://d2survivors.lol/play/), затем нажмите эту закладку.',
     old: 'Закладка устарела. Установите ее заново на сайте перевода.', loop: 'Перевод постоянно перезагружается и был остановлен. Обновите страницу.', frame: 'Не удалось загрузить перевод: не открывается фрейм. Обновите страницу.',
   },
   pl: {
-    loading: 'Wczytywanie polskiego tłumaczenia…', on: 'Polski jest włączony. Kliknij zakładkę ponownie, aby przełączać między polskim a angielskim. Z tłumaczeniem wyniki nie są wysyłane do rankingu; aby się w nim znaleźć, odśwież stronę i graj w oryginał.', to: 'Przełączanie na polski',
+    loading: 'Wczytywanie polskiego tłumaczenia…', on: 'Polski jest włączony. Ponowne kliknięcie zakładki odświeży stronę i przywróci oryginalną wersję angielską. Z tłumaczeniem wyniki nie są wysyłane do rankingu; aby się w nim znaleźć, graj w oryginał.',
+    stuck: 'Nie udało się przełączyć języka. Odśwież stronę i ponownie kliknij zakładkę.',
     failed: 'Nie udało się wczytać tłumaczenia: ', outdated: 'Gra została zaktualizowana, tłumaczenie wymaga aktualizacji', page: 'Najpierw otwórz stronę gry D2 Survivors (https://d2survivors.lol/play/), a potem kliknij tę zakładkę.',
     old: 'Zakładka jest nieaktualna. Zainstaluj ją ponownie ze strony tłumaczenia.', loop: 'Tłumaczenie ciągle się przeładowuje i zostało zatrzymane. Odśwież stronę.', frame: 'Nie udało się wczytać tłumaczenia: nie można otworzyć ramki. Odśwież stronę.',
   },
@@ -85,9 +93,12 @@ function wanted(ids) {
 }
 let msg = MESSAGES[wanted(Object.keys(MESSAGES))];
 
-export default function run() {
-  if (window.__d2zh) return window.__d2zh.toggle();
-  return start().catch(e => {
+export default function run(lang) {
+  // 再按一次書籤：重新整理頁面回到原版英文（在頁面裡再開一份遊戲，手機上可能開不起來）
+  if (window.__d2zh) return location.reload();
+  lang = normalize(lang);
+  msg = MESSAGES[lang] ?? msg;
+  return start(lang).catch(e => {
     hideStatus();
     console.error(e);
     alert(`${msg.failed}${e.message || e}`);
@@ -100,7 +111,7 @@ async function get(url, cache = 'default') {
   return res.text();
 }
 
-async function start() {
+async function start(asked) {
   if (!GAME_HOSTS.includes(location.hostname) || !document.getElementById('d2-files')) {
     alert(msg.page);
     return;
@@ -120,7 +131,8 @@ async function start() {
   });
   const ids = langs.map(l => l.id);
   if (!ids.length) throw new Error(msg.old);
-  const first = wanted(ids);
+  // 安裝碼帶的語言優先；沒帶或不認得就照 wanted()
+  const first = ids.includes(asked) ? asked : wanted(ids);
   msg = MESSAGES[first] ?? msg;
   showStatus(msg.loading);
 
@@ -150,37 +162,38 @@ async function start() {
   await stopPage();
   store.set(LANG_KEY, first);
   store.set(LAST_KEY, first);
-  openShell(page, { ids, build, first, playUrl });
+  openShell(page, { ids, build, playUrl });
 }
 
-// 停掉原版：關掉它的聲音、畫面更新、計時器、WebGL
-async function stopPage() {
+// 停掉一份遊戲：關掉它的聲音、畫面更新、計時器、WebGL。
+// 外層的原版（win＝window），還有換語言時要換掉的舊 iframe（手機能同時開的 WebGL context 有限，不能等回收）
+async function stopPage(win = window) {
   // 遊戲用 Web Lock 防止開兩個分頁，要等 pagehide（persisted）才放掉；遊戲也會在 pagehide 時存檔
-  try { window.dispatchEvent(new PageTransitionEvent('pagehide', { persisted: true })); } catch { /* 舊瀏覽器 */ }
+  try { win.dispatchEvent(new PageTransitionEvent('pagehide', { persisted: true })); } catch { /* 舊瀏覽器 */ }
   // AudioContext 沒辦法從外面找到：攔截 state、currentTime 一小段時間，遊戲讀到的那個就是。
   // 遊戲每次按鍵都會檢查 state（被瀏覽器暫停就恢復），所以送一個沒有作用的按鍵（F24）讓它讀一次
   const contexts = new Set();
-  const proto = window.BaseAudioContext?.prototype;
+  const proto = win.BaseAudioContext?.prototype;
   const hooked = ['state', 'currentTime'].map(name => [name, proto && Object.getOwnPropertyDescriptor(proto, name)]).filter(([, d]) => d?.get);
   for (const [name, d] of hooked) Object.defineProperty(proto, name, { ...d, get() { contexts.add(this); return d.get.call(this); } });
-  for (const type of ['keydown', 'keyup']) window.dispatchEvent(new KeyboardEvent(type, { key: 'F24', code: 'F24', bubbles: true }));
+  for (const type of ['keydown', 'keyup']) win.dispatchEvent(new KeyboardEvent(type, { key: 'F24', code: 'F24', bubbles: true }));
   await new Promise(r => setTimeout(r, 300));
   for (const [name, d] of hooked) Object.defineProperty(proto, name, d);
   // 背景音樂是接進 AudioContext 的 <audio>，關掉 AudioContext 就一起沒聲音了
   for (const c of contexts) c.close().catch(() => {});
 
   // 原版可能還在載入（await 到一半）：之後的網路請求都不回應，讓它停在那裡
-  window.fetch = () => new Promise(() => {});
-  window.requestAnimationFrame = () => 0;
-  const last = setTimeout(() => {});
-  for (let i = 0; i <= last; i++) { clearTimeout(i); clearInterval(i); }
-  for (const c of document.querySelectorAll('canvas')) {
+  win.fetch = () => new Promise(() => {});
+  win.requestAnimationFrame = () => 0;
+  const last = win.setTimeout(() => {});
+  for (let i = 0; i <= last; i++) { win.clearTimeout(i); win.clearInterval(i); }
+  for (const c of win.document.querySelectorAll('canvas')) {
     try { (c.getContext('webgl2') || c.getContext('webgl'))?.getExtension('WEBGL_lose_context')?.loseContext(); } catch { /* 2D canvas */ }
   }
 }
 
 // 外層頁面只剩一個滿版的 iframe；document.open 會清掉原版的 DOM 和 window 上的事件
-function openShell(firstPage, { ids, build, first, playUrl }) {
+function openShell(firstPage, { ids, build, playUrl }) {
   const gamePaths = [new URL(playUrl).pathname, new URL('index.html', playUrl).pathname];
   const title = document.title;
   document.open();
@@ -205,7 +218,7 @@ background:rgba(12,10,8,.92);color:#e8dfcc;font:14px/1.4 "Microsoft JhengHei","M
   let blobs = [];
   let boots = [];
   const current = () => normalize(store.get(LANG_KEY));
-  const show = (page, auto) => {
+  const show = async (page, auto) => {
     // 修改版自己一直重新載入（例如 Service Worker 沒接手）就停下來，不要無限迴圈。
     // 只算 iframe 自己換頁回到 /play/ 的那種；玩家自己換語言（遊戲的語言選單、按書籤）不算
     if (auto) {
@@ -219,6 +232,8 @@ background:rgba(12,10,8,.92);color:#e8dfcc;font:14px/1.4 "Microsoft JhengHei","M
     }
     const old = frame;
     const oldBlobs = blobs;
+    // 先停掉舊的那份再開新的：手機上同時開兩份可能超過 WebGL context 的上限或記憶體，新的開不起來
+    if (old) try { await stopPage(old.contentWindow); } catch { /* 已經關掉 */ }
     const next = frame = document.createElement('iframe');
     blobs = page.blobs;
     next.title = title;
@@ -232,8 +247,9 @@ background:rgba(12,10,8,.92);color:#e8dfcc;font:14px/1.4 "Microsoft JhengHei","M
       try { doc = next.contentDocument; } catch { /* 不同網域 */ }
       if (!doc) { toast(msg.frame, 0); return; }
       doc.open();
-      doc.write(page.html);
+      doc.write(page.html.replace('<head>', `<head>${FRAME_COUNTER}`));
       doc.close();
+      if (old) watch(next);
       // 之後 iframe 自己換頁（遊戲的「重新載入」、選檔案的 setup.html 選完回來…）會載入原版：
       // 回到遊戲頁面（/play/）時再換成修改版。setup.html 照原版
       next.addEventListener('load', () => {
@@ -244,8 +260,6 @@ background:rgba(12,10,8,.92);color:#e8dfcc;font:14px/1.4 "Microsoft JhengHei","M
       next.focus();
     }, { once: true });
     if (old) {
-      // 遊戲在 pagehide 時存檔、放掉防止開兩個分頁的鎖
-      try { old.contentWindow.dispatchEvent(new PageTransitionEvent('pagehide', { persisted: true })); } catch { /* 已經關掉 */ }
       old.replaceWith(next);
       for (const url of oldBlobs) URL.revokeObjectURL(url);
     } else {
@@ -272,7 +286,7 @@ background:rgba(12,10,8,.92);color:#e8dfcc;font:14px/1.4 "Microsoft JhengHei","M
           try {
             const page = await build(id);
             if (again) { for (const url of page.blobs) URL.revokeObjectURL(url); continue; }
-            show(page, a);
+            await show(page, a);
           } catch (e) {
             if (!again) { console.error(e); toast(`${msg.failed}${e.message || e}`, 0); }
           }
@@ -284,23 +298,26 @@ background:rgba(12,10,8,.92);color:#e8dfcc;font:14px/1.4 "Microsoft JhengHei","M
     return running;
   };
 
-  window.__d2zh = {
-    reboot,
-    toggle() {
-      const api = frame?.contentWindow?.__d2zhLang;
-      let now = null;
-      try { now = normalize(api ? api.get() : current()); } catch { /* 讀不到當成英文 */ }
-      const last = store.get(LAST_KEY);
-      const next = ids.includes(now) ? 'en' : ids.includes(last) ? last : first;
-      toast(next === 'en' ? 'Switching to English. Runs still are not sent to the leaderboard until you reload the page.' : (MESSAGES[next] ?? msg).to, next === 'en' ? 6000 : 3500);
-      // 遊戲自己存設定、再請書籤重新開（語言切換介面）；沒有的話自己寫 localStorage
-      if (api) return api.set(next);
-      store.set(LANG_KEY, next);
-      reboot();
-    },
-  };
+  // 再按一次書籤時 run() 看到這個就重新整理頁面
+  window.__d2zh = { reboot };
   show(firstPage);
   toast(msg.on, 8000);
+}
+
+// 換語言重開的 iframe：計算遊戲的畫面更新次數（寫在遊戲頁面的最前面，比遊戲的模組早跑），
+// 跑滿 10 次就換回原本的 requestAnimationFrame
+const FRAME_COUNTER = '<script>{const w=window,r=w.requestAnimationFrame;w.__d2zhFrames=0;'
+  + 'w.requestAnimationFrame=function(c){return r.call(w,t=>{if(++w.__d2zhFrames>=10&&w.requestAnimationFrame!==r)w.requestAnimationFrame=r;c(t)})}}</script>';
+// 頁面看得到的時間累計 20 秒，遊戲還沒開始畫（手機上開不起來）就提示重新整理再按書籤。
+// 遊戲已經存了新語言，重新整理（回原版）再按書籤就會直接用它開
+function watch(frame, limit = 20000) {
+  let seen = 0;
+  const timer = setInterval(() => {
+    let frames = 0;
+    try { frames = frame.contentWindow.__d2zhFrames; } catch { /* 已經換掉 */ }
+    if (!frame.isConnected || frames >= 10) { clearInterval(timer); return; }
+    if (document.visibilityState === 'visible' && (seen += 1000) >= limit) { clearInterval(timer); toast(msg.stuck, 0); }
+  }, 1000);
 }
 
 let statusEl = null;
