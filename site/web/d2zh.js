@@ -204,13 +204,19 @@ background:rgba(12,10,8,.92);color:#e8dfcc;font:14px/1.4 "Microsoft JhengHei","M
   let frame = null;
   let blobs = [];
   let boots = [];
-  let pending = null;
   const current = () => normalize(store.get(LANG_KEY));
-  const show = page => {
-    // 修改版自己一直重新載入（例如 Service Worker 沒接手）就停下來，不要無限迴圈
-    const now = Date.now();
-    boots = boots.filter(t => now - t < 15000).concat(now);
-    if (boots.length > 3) { toast(msg.loop, 0); return; }
+  const show = (page, auto) => {
+    // 修改版自己一直重新載入（例如 Service Worker 沒接手）就停下來，不要無限迴圈。
+    // 只算 iframe 自己換頁回到 /play/ 的那種；玩家自己換語言（遊戲的語言選單、按書籤）不算
+    if (auto) {
+      const now = Date.now();
+      boots = boots.filter(t => now - t < 15000).concat(now);
+      if (boots.length > 3) {
+        toast(msg.loop, 0);
+        for (const url of page.blobs) URL.revokeObjectURL(url);
+        return;
+      }
+    }
     const old = frame;
     const oldBlobs = blobs;
     const next = frame = document.createElement('iframe');
@@ -233,7 +239,7 @@ background:rgba(12,10,8,.92);color:#e8dfcc;font:14px/1.4 "Microsoft JhengHei","M
       next.addEventListener('load', () => {
         let d = null;
         try { d = next.contentDocument; } catch { /* 不同網域 */ }
-        if (next === frame && d && !d.querySelector('meta[name="d2zh"]') && gamePaths.includes(next.contentWindow.location.pathname)) reboot();
+        if (next === frame && d && !d.querySelector('meta[name="d2zh"]') && gamePaths.includes(next.contentWindow.location.pathname)) reboot(true);
       });
       next.focus();
     }, { once: true });
@@ -246,12 +252,36 @@ background:rgba(12,10,8,.92);color:#e8dfcc;font:14px/1.4 "Microsoft JhengHei","M
       document.body.append(next);
     }
   };
-  // 照目前的語言設定（遊戲剛寫進 localStorage）重新開一次修改版
-  const reboot = () => {
-    const id = current();
-    if (ids.includes(id)) { store.set(LAST_KEY, id); msg = MESSAGES[id] ?? msg; }
-    pending ??= build(id).then(show, e => { console.error(e); toast(`${msg.failed}${e.message || e}`, 0); }).finally(() => { pending = null; });
-    return pending;
+  // 照目前的語言設定（遊戲剛寫進 localStorage）重新開一次修改版。
+  // auto：iframe 自己換頁回到 /play/（算進上面的迴圈保護）；沒有＝玩家自己換語言。
+  // 建到一半又被叫（玩家連續切換）：建完的那份丟掉，照最新的設定再建一次，最後停在最後選的語言
+  let running = null;
+  let again = false;
+  let againAuto = true;
+  const reboot = (auto = false) => {
+    again = true;
+    againAuto &&= auto;
+    running ??= (async () => {
+      try {
+        while (again) {
+          const a = againAuto;
+          again = false;
+          againAuto = true;
+          const id = current();
+          if (ids.includes(id)) { store.set(LAST_KEY, id); msg = MESSAGES[id] ?? msg; }
+          try {
+            const page = await build(id);
+            if (again) { for (const url of page.blobs) URL.revokeObjectURL(url); continue; }
+            show(page, a);
+          } catch (e) {
+            if (!again) { console.error(e); toast(`${msg.failed}${e.message || e}`, 0); }
+          }
+        }
+      } finally {
+        running = null;
+      }
+    })();
+    return running;
   };
 
   window.__d2zh = {
