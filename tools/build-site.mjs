@@ -248,11 +248,11 @@ const platformPicker = (t, compact = false) => `<div class="platform-pick${compa
 const PLATFORM_BOOT = `<script>(function(){var P=['desktop','web'],q=new URLSearchParams(location.search).get('platform'),h={'#install':'desktop','#web':'web'}[location.hash],s;try{s=localStorage.getItem('d2s-site-platform')}catch(e){}document.body.dataset.platform=P.indexOf(q)>=0?q:h||(P.indexOf(s)>=0?s:/Windows/i.test(navigator.userAgent)?'desktop':'web')})()</script>`;
 
 // 文字裡的 {langs}（A、B 或 C）、{langsAnd}（A、B 和 C）：manifest 裡可用和測試中的語言，用這一頁的語言寫。
-// 加了新語言重新產生就好，不用改文字
+// 加了新語言重新產生就好，不用改文字。{lowpower} 是書籤「省電畫質」開關在遊戲裡的名稱（web.lowpower），改名只改那一個值
 function fillLangs(texts, lang) {
   const names = state.languages.filter(l => l.status === 'available' || l.status === 'beta').map(l => l.name[lang] || l.name.en || l.native);
   const list = type => new Intl.ListFormat(lang, { type }).format(names);
-  const fill = v => typeof v === 'string' ? v.replaceAll('{langs}', list('disjunction')).replaceAll('{langsAnd}', list('conjunction'))
+  const fill = v => typeof v === 'string' ? v.replaceAll('{langs}', list('disjunction')).replaceAll('{langsAnd}', list('conjunction')).replaceAll('{lowpower}', texts['web.lowpower'])
     : Array.isArray(v) ? v.map(fill)
     : v && typeof v === 'object' ? Object.fromEntries(Object.entries(v).map(([k, x]) => [k, fill(x)]))
     : v;
@@ -305,7 +305,7 @@ function shotsSection(sl, t) {
 // 下面是粗體短標題、一句說明、需要時一行小字補充（i18n 的 guide.<os>.steps：[標題, 說明, 補充]）。
 // 示意畫面只畫跟這一步有關的那一截（.crop-top／.crop-bottom 另一邊淡出），每個畫面只有一個要按的地方（.tap：金色光暈加點按漣漪）。
 // 畫面裡的瀏覽器按鈕文字是 i18n 的 guide.ui（照各語言的 Safari、Chrome 用語）；文字裡的 {name} 是建議的書籤名稱（web.bookmark.name），
-// {copy} 是複製按鈕的文字，{play} 是遊戲網址的連結，其他 {key} 換成那個系統的 guide.ui
+// {copy} 是複製按鈕的文字，{home} 是 d2survivors.lol 首頁的連結（書籤建議從首頁點），{play} 是遊戲頁面的連結，其他 {key} 換成那個系統的 guide.ui
 function mobileGuide(t) {
   const name = t['web.bookmark.name'];
   const host = new URL(BASE).host;
@@ -314,7 +314,7 @@ function mobileGuide(t) {
   const ph = w => `<span class="ph-ph"${w ? ` style="width:${w}%"` : ''}></span>`;
   const row = (icon, inner, cls = '') => `<div class="ph-row${cls ? ' ' + cls : ''}"><span class="ph-ico">${icon}</span>${inner}</div>`;
   const label = s => `<span class="ph-t">${esc(s)}</span>`;
-  // 第 1 步：我們網站的縮小版；最後一步：D2 Survivors 的標題畫面（只用文字和 CSS，不用遊戲美術）
+  // 第 1 步：我們網站的縮小版；最後一步：d2survivors.lol 首頁上的 D2 Survivors 標題（只用文字和 CSS，不用遊戲美術）
   const siteMini = `<div class="ph-site"><span class="ph-brand">D2S <i>Localization</i></span><b class="ph-title">${esc(page)}</b><span class="ph-btn tap">${esc(t['web.copy'])}</span><code class="ph-code">${code}</code></div>`;
   const title = `<div class="ph-gametitle"><b>D2</b><b>SURVIVORS</b>${ph(40)}${ph(40)}</div>`;
   const screens = {
@@ -326,7 +326,7 @@ function mobileGuide(t) {
         <div class="ph-foot"><span></span><span class="tap">${esc(ui.edit)}</span></div>`],
       ['crop-top', `<div class="ph-head"><span></span><b>${esc(ui.editBookmark)}</b><span class="tap">${esc(ui.done)}</span></div>
         <div class="ph-field glow">${esc(name)}</div><div class="ph-field glow mono">${code}</div>`],
-      ['crop-bottom', `<div class="ph-url">d2survivors.lol/play/</div>${title}
+      ['crop-bottom', `<div class="ph-url">d2survivors.lol</div>${title}
         <div class="ph-sheet"><div class="ph-head"><span></span><b>${esc(ui.bookmarks)}</b><span></span></div>${row('📖', label(name), 'tap')}</div>`],
     ],
     android: ui => [
@@ -341,8 +341,9 @@ function mobileGuide(t) {
         <div class="ph-suggest">${row('☆', `<span class="ph-t"><b>${esc(name)}</b><small>${code}</small></span>`, 'tap')}${row('⌕', ph(60), 'dim')}</div>`],
     ],
   };
+  const home = `<a href="${LINKS.d2sHome}" target="_blank" rel="noopener">d2survivors.lol</a>`;
   const play = `<a href="${LINKS.d2sPlay}" target="_blank" rel="noopener">d2survivors.lol/play/</a>`;
-  const fill = (s, ui) => s.replace(/\{(\w+)\}/g, (m, k) => (k === 'name' ? esc(name) : k === 'copy' ? esc(t['web.copy']) : k === 'play' ? play : ui[k] !== undefined ? esc(ui[k]) : m));
+  const fill = (s, ui) => s.replace(/\{(\w+)\}/g, (m, k) => (k === 'name' ? esc(name) : k === 'copy' ? esc(t['web.copy']) : k === 'home' ? home : k === 'play' ? play : ui[k] !== undefined ? esc(ui[k]) : m));
   const pane = os => {
     const ui = t['guide.ui'][os];
     const shots = screens[os](ui);
