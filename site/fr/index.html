@@ -264,8 +264,8 @@
           <a class="btn btn-ghost" href="https://d2survivors.lol/play/" target="_blank" rel="noopener">Ouvrir la page du jeu</a>
         </div>
         <div id="hero-meta">
-        <ul class="meta" data-only="desktop"><li>Version du jeu <strong>2026.1029.3</strong></li><li>Lanceur <strong>v1.0.3 · Windows</strong></li><li>Traduction mise à jour <strong>2026-10-29</strong></li></ul>
-        <ul class="meta" data-only="web"><li>Navigateurs <strong>Chrome · Edge · Firefox · Safari</strong></li><li>Appareils <strong>PC et mobile</strong></li><li>Traduction mise à jour <strong>2026-10-29</strong></li></ul>
+        <ul class="meta" data-only="desktop"><li>Version du jeu <strong>2026.1029.4</strong></li><li>Lanceur <strong>v1.0.3 · Windows</strong></li><li>Traduction mise à jour <strong>2026-10-30</strong></li></ul>
+        <ul class="meta" data-only="web"><li>Navigateurs <strong>Chrome · Edge · Firefox · Safari</strong></li><li>Appareils <strong>PC et mobile</strong></li><li>Traduction mise à jour <strong>2026-10-30</strong></li></ul>
         </div>
         <p class="hero-community"><a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">Rejoindre le Discord de la communauté de traduction</a></p>
       </div>
@@ -367,43 +367,43 @@
       <div class="lang-head"><span class="lang-name" lang="zh-TW">繁體中文</span><span class="lang-code">zh-TW</span></div>
       <span class="lang-sub">chinois (traditionnel)</span>
       <span class="status available">Disponible</span>
-      <span class="lang-sub">13 485 textes</span>
+      <span class="lang-sub">13 486 textes</span>
     </li>
 <li class="lang available">
       <div class="lang-head"><span class="lang-name" lang="zh-CN">简体中文</span><span class="lang-code">zh-CN</span></div>
       <span class="lang-sub">chinois (simplifié)</span>
       <span class="status available">Disponible</span>
-      <span class="lang-sub">13 484 textes</span>
+      <span class="lang-sub">13 485 textes</span>
     </li>
 <li class="lang available">
       <div class="lang-head"><span class="lang-name" lang="ja">日本語</span><span class="lang-code">ja</span></div>
       <span class="lang-sub">japonais</span>
       <span class="status available">Disponible</span>
-      <span class="lang-sub">13 490 textes</span>
+      <span class="lang-sub">13 491 textes</span>
     </li>
 <li class="lang available">
       <div class="lang-head"><span class="lang-name" lang="de">Deutsch</span><span class="lang-code">de</span></div>
       <span class="lang-sub">allemand</span>
       <span class="status available">Disponible</span>
-      <span class="lang-sub">13 524 textes</span>
+      <span class="lang-sub">13 525 textes</span>
     </li>
 <li class="lang available">
       <div class="lang-head"><span class="lang-name" lang="fr">Français</span><span class="lang-code">fr</span></div>
       <span class="lang-sub">français</span>
       <span class="status available">Disponible</span>
-      <span class="lang-sub">13 533 textes</span>
+      <span class="lang-sub">13 534 textes</span>
     </li>
 <li class="lang available">
       <div class="lang-head"><span class="lang-name" lang="ru">Русский</span><span class="lang-code">ru</span></div>
       <span class="lang-sub">russe</span>
       <span class="status available">Disponible</span>
-      <span class="lang-sub">13 572 textes</span>
+      <span class="lang-sub">13 573 textes</span>
     </li>
 <li class="lang available">
       <div class="lang-head"><span class="lang-name" lang="pl">Polski</span><span class="lang-code">pl</span></div>
       <span class="lang-sub">polonais</span>
       <span class="status available">Disponible</span>
-      <span class="lang-sub">13 562 textes</span>
+      <span class="lang-sub">13 563 textes</span>
     </li>
         </ul>
       </div>
@@ -414,6 +414,11 @@
         <h2>Journal des modifications</h2>
         <p class="section-lead">Mises à jour des traductions, des langues et du lanceur. Le lanceur et le favori récupèrent la dernière traduction à chaque fois, sans nouveau téléchargement.</p>
         <ol class="changelog" id="changelog-list">
+          <li>
+            <time datetime="2026-10-30">2026-10-30</time>
+            <span class="kind kind-game-fix">Mise à jour du jeu</span>
+            <span class="changelog-summary">Prise en charge du jeu 2026.1029.4 (1 nouveau texte : renvoi au classement Extrême)</span>
+          </li>
           <li>
             <time datetime="2026-10-29">2026-10-29</time>
             <span class="kind kind-game-fix">Mise à jour du jeu</span>
@@ -433,11 +438,6 @@
             <time datetime="2026-10-28">2026-10-28</time>
             <span class="kind kind-game-fix">Mise à jour du jeu</span>
             <span class="changelog-summary">Prise en charge de la version 2026.1028.2 du jeu</span>
-          </li>
-          <li>
-            <time datetime="2026-10-28">2026-10-28</time>
-            <span class="kind kind-game-fix">Mise à jour du jeu</span>
-            <span class="changelog-summary">Prise en charge du jeu 2026.1028.1 (110 nouveaux textes traduits)</span>
           </li>
         </ol>
       </div>
@@ -510,7 +510,7 @@
           <article class="card">
             <h3>PC (Chrome, Edge, Firefox)</h3>
             <p class="bookmarklet-row">
-              <a class="btn btn-primary bookmarklet" id="bookmarklet" href="javascript:import('https://cycleapple.github.io/d2survivors-localization/web/d2zh.js').then(m=&gt;m.default()).catch(e=&gt;alert('D2 Survivors Localization: '+e))" draggable="true">D2 Français</a>
+              <a class="btn btn-primary bookmarklet" id="bookmarklet" href="javascript:import('https://cycleapple.github.io/d2survivors-localization/web/d2zh.js').then(m=&gt;m.default('fr')).catch(e=&gt;alert('D2 Survivors Localization: '+e))" draggable="true">D2 Français</a>
               <span class="bookmarklet-hint" id="bookmarklet-hint">← glisser dans la barre de favoris</span>
             </p>
             <ol class="web-steps">
@@ -525,7 +525,7 @@
               <button type="button" class="btn btn-ghost" id="copy-bookmarklet">Copier le code du favori</button>
               <span class="bookmarklet-hint" id="copy-status" role="status"></span>
             </p>
-            <pre class="bookmarklet-code"><code id="bookmarklet-code">javascript:import('https://cycleapple.github.io/d2survivors-localization/web/d2zh.js').then(m=&gt;m.default()).catch(e=&gt;alert('D2 Survivors Localization: '+e))</code></pre>
+            <pre class="bookmarklet-code"><code id="bookmarklet-code">javascript:import('https://cycleapple.github.io/d2survivors-localization/web/d2zh.js').then(m=&gt;m.default('fr')).catch(e=&gt;alert('D2 Survivors Localization: '+e))</code></pre>
             <div class="os-tabs" role="group" aria-label="Mobile (Android Chrome, iPhone Safari)">
               <button type="button" data-os="ios" aria-pressed="true">iPhone (Safari)</button>
               <button type="button" data-os="android" aria-pressed="false">Android (Chrome)</button>
@@ -603,9 +603,9 @@
         <div class="card web-usage">
           <h3>Fonctionnement</h3>
           <ul>
-            <li>Le favori relance le jeu traduit en une ou deux secondes. Il sauvegarde d’abord, donc aucun souci en pleine partie. La première fois, il choisit la langue selon votre navigateur, puis retient la dernière utilisée.</li>
-            <li>Un nouveau clic bascule entre la langue actuelle et l’anglais. Le réglage de langue OPTIONS → GAME OPTIONS propose aussi chinois (traditionnel), chinois (simplifié), japonais, allemand, français, russe et polonais.</li>
-            <li>Recharger la page ramène le jeu d’origine ; il suffit de réutiliser le favori.</li>
+            <li>Le favori relance le jeu en français en une ou deux secondes. Il sauvegarde d’abord, donc aucun souci en pleine partie. Chaque favori ouvre toujours la langue de la page où vous l’avez installé : celui de cette page ouvre le français.</li>
+            <li>Un nouveau clic recharge la page et ramène le jeu d’origine en anglais. Recharger vous-même fait pareil ; réutilisez le favori pour rejouer traduit.</li>
+            <li>Pour changer de langue, installez le favori depuis la page de cette langue. Si vous aviez déjà installé le favori, réinstallez-le pour fixer la langue. Le réglage OPTIONS → GAME OPTIONS propose aussi chinois (traditionnel), chinois (simplifié), japonais, allemand, français, russe et polonais, mais sur mobile, mieux vaut changer de langue avec le favori.</li>
             <li>Les sauvegardes restent dans votre navigateur comme d’habitude. Le favori charge à chaque fois la dernière traduction depuis ce site : il faut une connexion.</li>
           </ul>
         </div>
@@ -649,7 +649,7 @@
     <div class="wrap">
       <p class="footer-community"><a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">Rejoindre le Discord de la communauté de traduction</a><span class="sep" aria-hidden="true">·</span><a href="https://github.com/cycleapple/d2survivors-localization" target="_blank" rel="noopener">Code source (GitHub)</a><span class="sep" aria-hidden="true">·</span><a href="https://paypal.me/DonateCYtw" target="_blank" rel="noopener">☕ M’offrir un café</a></p>
       <p>Traduction non officielle par des fans, sans lien avec <a href="https://d2survivors.lol/" target="_blank" rel="noopener">D2 Survivors</a> (framara) ni Blizzard Entertainment. Diablo® est une marque de Blizzard Entertainment, Inc.</p>
-      <p class="footer-small"><span data-only="desktop">Game 2026.1029.3 · Launcher v1.0.3</span><span data-only="web">Web · Translations 2026-10-29</span></p>
+      <p class="footer-small"><span data-only="desktop">Game 2026.1029.4 · Launcher v1.0.3</span><span data-only="web">Web · Translations 2026-10-30</span></p>
     </div>
   </footer>
 

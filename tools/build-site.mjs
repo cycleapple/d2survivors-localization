@@ -42,7 +42,8 @@ const REPO_LINKS = {
   actions: `${SITE.repoUrl}/actions/workflows/release-launcher.yml`,
 };
 const discordLink = (t, text) => `<a href="${esc(SITE.discordUrl)}" target="_blank" rel="noopener">${esc(text)}</a>`;
-const bookmarklet = `javascript:import('${new URL(SITE.bookmarkletPath, BASE).href}').then(m=>m.default()).catch(e=>alert('D2 Survivors Localization: '+e))`;
+// 書籤帶這一頁的語言（在哪個語言的頁面裝，就固定開那個語言）；英文頁不帶，照書籤自己的規則選
+const bookmarklet = sl => `javascript:import('${new URL(SITE.bookmarkletPath, BASE).href}').then(m=>m.default(${sl.id === 'en' ? '' : `'${sl.id}'`})).catch(e=>alert('D2 Survivors Localization: '+e))`;
 
 const pageUrl = l => (l ? new URL(`${l.path}/`, BASE).href : BASE);
 const alternates = () => [
@@ -529,7 +530,7 @@ function langPage(sl) {
           <article class="card">
             <h3>${esc(t['web.pc.title'])}</h3>
             <p class="bookmarklet-row">
-              <a class="btn btn-primary bookmarklet" id="bookmarklet" href="${esc(bookmarklet)}" draggable="true">${esc(t['web.bookmark.name'])}</a>
+              <a class="btn btn-primary bookmarklet" id="bookmarklet" href="${esc(bookmarklet(sl))}" draggable="true">${esc(t['web.bookmark.name'])}</a>
               <span class="bookmarklet-hint" id="bookmarklet-hint">${esc(t['web.pc.hint'])}</span>
             </p>
             <ol class="web-steps">
@@ -542,7 +543,7 @@ function langPage(sl) {
               <button type="button" class="btn btn-ghost" id="copy-bookmarklet">${esc(t['web.copy'])}</button>
               <span class="bookmarklet-hint" id="copy-status" role="status"></span>
             </p>
-            <pre class="bookmarklet-code"><code id="bookmarklet-code">${esc(bookmarklet)}</code></pre>
+            <pre class="bookmarklet-code"><code id="bookmarklet-code">${esc(bookmarklet(sl))}</code></pre>
             ${mobileGuide(t)}
           </article>
         </div>
