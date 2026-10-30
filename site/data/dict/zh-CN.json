@@ -13344,6 +13344,7 @@
  "Stand still in the portal a moment, or press interact, to go through": "在传送门中静止片刻，或按下交互键，即可通过",
  "Standing still anywhere in a red portal takes your hero through after a second, where only its very foot counted": "在红色传送门的任何位置静止不动，1秒后英雄就会通过，以前只有传送门最底部才算数",
  "Walking into a red portal and out again tells you once how to go through": "走进红色传送门又走出来时，会提示你一次通过的方法",
+ "A Hardcore run's start that can't reach the leaderboard is sent again once it can, and no longer leaves the hero unranked": "无法连接排行榜时，专家模式一局的开始记录会在能连接后重新发送，英雄不再因此不计入排名",
  "Physical Damage": "物理伤害",
  "Sold by the Amazon": "由亚马逊出售",
  "Back to the Amazon": "归还给亚马逊",

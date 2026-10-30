@@ -13635,6 +13635,7 @@
  "Stand still in the portal a moment, or press interact, to go through": "Bleib einen Moment still im Portal stehen oder drücke Interagieren, um hindurchzugehen",
  "Standing still anywhere in a red portal takes your hero through after a second, where only its very foot counted": "Wer irgendwo in einem roten Portal stillsteht, wird nach einer Sekunde hindurchgebracht; bisher zählte nur sein unterster Rand",
  "Walking into a red portal and out again tells you once how to go through": "Wenn du in ein rotes Portal hinein- und wieder hinausgehst, wird dir einmal erklärt, wie man hindurchgeht",
+ "A Hardcore run's start that can't reach the leaderboard is sent again once it can, and no longer leaves the hero unranked": "Der Start eines Hardcore-Durchgangs, der die Bestenliste nicht erreicht, wird erneut gesendet, sobald sie erreichbar ist, und lässt den Helden nicht mehr ungewertet",
  "Physical Damage": "Physischer Schaden",
  "Fires # bolts of holy light that pierce #, for # damage (double to the undead).": "Feuert {0} Geschosse aus heiligem Licht ab, die {1} Monster durchbohren, und verursacht {2} Schaden (doppelt gegen Untote).",
  "Evolves * into *:": "Entwickelt {0} zu {1}:",

@@ -13716,6 +13716,7 @@
  "Stand still in the portal a moment, or press interact, to go through": "Постойте немного в портале или нажмите кнопку взаимодействия, чтобы пройти",
  "Standing still anywhere in a red portal takes your hero through after a second, where only its very foot counted": "Если стоять на месте в любой точке красного портала, через секунду герой проходит через него, а раньше учитывался только самый его низ",
  "Walking into a red portal and out again tells you once how to go through": "Если войти в красный портал и выйти обратно, игра один раз подскажет, как через него пройти",
+ "A Hardcore run's start that can't reach the leaderboard is sent again once it can, and no longer leaves the hero unranked": "Начало забега героического режима, не дошедшее до таблицы рекордов, отправляется снова, когда связь появится, и больше не оставляет героя вне рейтинга",
  "Physical Damage": "Физический урон",
  "Fires # bolts of holy light that pierce #, for # damage (double to the undead).": "Выпускает снаряды священного света ({0}): они пронзают монстров (до {1}), урон: {2} (двойной против нежити).",
  "Evolves * into *:": "{0} – {1}:",

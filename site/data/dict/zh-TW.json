@@ -13303,6 +13303,7 @@
  "Stand still in the portal a moment, or press interact, to go through": "在傳送門中靜止片刻，或按下互動鍵，即可通過",
  "Standing still anywhere in a red portal takes your hero through after a second, where only its very foot counted": "在紅色傳送門的任何位置靜止不動，1秒後英雄就會通過，以前只有傳送門最底部才算數",
  "Walking into a red portal and out again tells you once how to go through": "走進紅色傳送門又走出來時，會提示你一次通過的方法",
+ "A Hardcore run's start that can't reach the leaderboard is sent again once it can, and no longer leaves the hero unranked": "無法連線至排行榜時，專家級一局的開始紀錄會在能連上後重新送出，英雄不再因此未列入排名",
  "Physical Damage": "物理傷害",
  "Sold by the Amazon": "由亞馬遜出售",
  "Back to the Amazon": "歸還給亞馬遜",

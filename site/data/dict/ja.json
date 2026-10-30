@@ -13344,6 +13344,7 @@
  "Stand still in the portal a moment, or press interact, to go through": "ポータルの中で少し立ち止まるか、インタラクトを押すと通過します",
  "Standing still anywhere in a red portal takes your hero through after a second, where only its very foot counted": "赤いポータルのどこに立ち止まっても1秒後に英雄が通過するようになりました。以前はポータルの一番下だけが判定されていました",
  "Walking into a red portal and out again tells you once how to go through": "赤いポータルに入ってまた出ると、通過する方法が1度だけ表示されるようになりました",
+ "A Hardcore run's start that can't reach the leaderboard is sent again once it can, and no longer leaves the hero unranked": "ランキングに届かなかったハードコアのラン開始の記録は、接続できるようになると再送信され、英雄がランキング対象外になることはなくなりました",
  "Physical Damage": "物理ダメージ",
  "Sold by the Amazon": "アマゾネスが売却",
  "Back to the Amazon": "アマゾネスに戻る",

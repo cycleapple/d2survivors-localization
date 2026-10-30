@@ -2,6 +2,84 @@
   "schema": 1,
   "entries": [
     {
+      "version": "20261030-0013",
+      "date": "2026-10-30",
+      "kind": "game-fix",
+      "announce": true,
+      "summary": {
+        "zh-TW": "已支援遊戲 2026.1029.4（新增 1 條字串：專家級排行榜紀錄重新送出）",
+        "zh-CN": "已支持游戏 2026.1029.4（新增 1 条字符串：专家模式排行榜记录重新发送）",
+        "en": "Supports game 2026.1029.4 (1 new string: Hardcore leaderboard resend)",
+        "ja": "ゲーム 2026.1029.4 に対応（新しい文字列 1 件：ハードコアのランキング再送信）",
+        "de": "Unterstützt Spielversion 2026.1029.4 (1 neuer Text: erneutes Senden an die Hardcore-Bestenliste)",
+        "fr": "Prise en charge du jeu 2026.1029.4 (1 nouveau texte : renvoi au classement Extrême)",
+        "ru": "Поддержка игры 2026.1029.4 (1 новая строка: повторная отправка в таблицу рекордов героического режима)",
+        "pl": "Obsługa gry 2026.1029.4 (1 nowy tekst: ponowne wysyłanie do rankingu trybu Hardkor)"
+      },
+      "game": {
+        "desktop": "2026.1029.4"
+      },
+      "launcher": "1.0.3",
+      "languages": [
+        {
+          "id": "zh-TW",
+          "status": "available",
+          "entries": 13486,
+          "added": 1,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "zh-CN",
+          "status": "available",
+          "entries": 13485,
+          "added": 1,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ja",
+          "status": "available",
+          "entries": 13491,
+          "added": 1,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "de",
+          "status": "available",
+          "entries": 13525,
+          "added": 1,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "fr",
+          "status": "available",
+          "entries": 13534,
+          "added": 1,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ru",
+          "status": "available",
+          "entries": 13573,
+          "added": 1,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "pl",
+          "status": "available",
+          "entries": 13563,
+          "added": 1,
+          "changed": 0,
+          "removed": 0
+        }
+      ]
+    },
+    {
       "version": "20261029-2215",
       "date": "2026-10-29",
       "kind": "game-fix",
