@@ -6,9 +6,9 @@
 // 1. 讀 manifest（../data/manifest.json），抓下遊戲頁面和所有模組，照目前的語言套用 manifest 的 web.rules
 //    （多幾個語言、載入字典、點陣字型認得中日文、斷行…）
 // 2. 修改過的模組做成 blob 網址，用 import map 換掉原本的模組
-// 3. 停掉頁面上正在跑的原版，換成一個同網域的 iframe，在裡面重新開一次修改版
+// 3. 停掉頁面上正在跑的原版（從首頁啟動時是首頁），換成一個同網域的 iframe，在裡面重新開一次修改版
 // 任何一步失敗都在第 3 步之前，原版遊戲不受影響。
-// 在遊戲裡換語言時，用新語言的規則重新開一次修改版。再按一次書籤＝重新整理頁面回到原版。
+// 在遊戲裡換語言時，用新語言的規則重新開一次修改版。再按一次書籤＝回到原版的遊戲頁面。
 
 import { loadGame, applyRules, rulesFor, ruleVars, relink, bootHtml } from './core.js';
 
@@ -23,43 +23,43 @@ const MESSAGES = {
   'zh-TW': {
     loading: '正在載入繁體中文…', on: '繁體中文已開啟。再按一次書籤會重新整理頁面，回到原版英文。翻譯模式下成績不會上傳到排行榜，要上榜請用原版。',
     stuck: '切換失敗。請重新整理頁面，再按一次書籤。',
-    failed: '中文化載入失敗：', outdated: '遊戲改版了，中文化需要更新', page: '請先打開 D2 Survivors 的遊戲頁面（https://d2survivors.lol/play/），再按這個書籤。',
+    failed: '中文化載入失敗：', outdated: '遊戲改版了，中文化需要更新', page: '請先打開 D2 Survivors 的首頁（https://d2survivors.lol/）或遊戲頁面（https://d2survivors.lol/play/），再按這個書籤。手機建議從首頁按，比較省記憶體。',
     old: '書籤需要更新：請到中文化網站重新安裝書籤。', loop: '中文化一直重新載入，已停止。請重新整理頁面。', frame: '中文化載入失敗：框架打不開。請重新整理頁面。',
   },
   'zh-CN': {
     loading: '正在加载简体中文…', on: '简体中文已开启。再按一次书签会刷新页面，回到原版英文。汉化模式下成绩不会上传到排行榜，要上榜请用原版。',
     stuck: '切换失败。请刷新页面，再按一次书签。',
-    failed: '汉化加载失败：', outdated: '游戏更新了，汉化需要更新', page: '请先打开 D2 Survivors 的游戏页面（https://d2survivors.lol/play/），再按这个书签。',
+    failed: '汉化加载失败：', outdated: '游戏更新了，汉化需要更新', page: '请先打开 D2 Survivors 的首页（https://d2survivors.lol/）或游戏页面（https://d2survivors.lol/play/），再按这个书签。手机建议从首页按，比较省内存。',
     old: '书签需要更新：请到汉化网站重新安装书签。', loop: '汉化一直重新加载，已停止。请刷新页面。', frame: '汉化加载失败：框架打不开。请刷新页面。',
   },
   ja: {
     loading: '日本語を読み込んでいます…', on: '日本語になりました。もう一度ブックマークを押すとページを再読み込みして、元の英語版に戻ります。翻訳中の記録はリーダーボードに送信されません。ランキングに載せるには元の版で遊んでください。',
     stuck: '切り替えに失敗しました。ページを再読み込みしてから、もう一度ブックマークを押してください。',
-    failed: '日本語化の読み込みに失敗しました：', outdated: 'ゲームが更新されたため、日本語化の更新が必要です', page: 'D2 Survivors のゲームページ（https://d2survivors.lol/play/）を開いてから、このブックマークを押してください。',
+    failed: '日本語化の読み込みに失敗しました：', outdated: 'ゲームが更新されたため、日本語化の更新が必要です', page: 'D2 Survivors のトップページ（https://d2survivors.lol/）かゲームページ（https://d2survivors.lol/play/）を開いてから、このブックマークを押してください。スマートフォンではトップページから押すとメモリの節約になります。',
     old: 'ブックマークの更新が必要です。日本語化サイトでブックマークを入れ直してください。', loop: '読み込みが繰り返されたため停止しました。ページを再読み込みしてください。', frame: '日本語化の読み込みに失敗しました：フレームを開けません。ページを再読み込みしてください。',
   },
   de: {
     loading: 'Deutsch wird geladen…', on: 'Deutsch ist aktiv. Ein erneuter Klick auf das Lesezeichen lädt die Seite neu und kehrt zum englischen Original zurück. Mit der Übersetzung werden keine Läufe an die Bestenliste gesendet; für die Bestenliste das Original spielen.',
     stuck: 'Wechsel fehlgeschlagen. Bitte die Seite neu laden und das Lesezeichen erneut anklicken.',
-    failed: 'Übersetzung konnte nicht geladen werden: ', outdated: 'Das Spiel wurde aktualisiert, die Übersetzung muss angepasst werden', page: 'Bitte zuerst die Spielseite von D2 Survivors öffnen (https://d2survivors.lol/play/) und dann das Lesezeichen anklicken.',
+    failed: 'Übersetzung konnte nicht geladen werden: ', outdated: 'Das Spiel wurde aktualisiert, die Übersetzung muss angepasst werden', page: 'Bitte zuerst die Startseite (https://d2survivors.lol/) oder die Spielseite (https://d2survivors.lol/play/) von D2 Survivors öffnen und dann das Lesezeichen anklicken. Auf dem Handy spart die Startseite Speicher.',
     old: 'Das Lesezeichen ist veraltet. Bitte auf der Übersetzungsseite neu installieren.', loop: 'Die Übersetzung lädt immer wieder neu und wurde gestoppt. Bitte die Seite neu laden.', frame: 'Übersetzung konnte nicht geladen werden: Rahmen lässt sich nicht öffnen. Bitte die Seite neu laden.',
   },
   fr: {
     loading: 'Chargement du français…', on: 'Le français est activé. Cliquer à nouveau sur le favori recharge la page et revient à la version originale en anglais. Avec la traduction, les parties ne sont pas envoyées au classement ; pour y figurer, jouez à la version originale.',
     stuck: 'Le changement a échoué. Rechargez la page, puis cliquez à nouveau sur le favori.',
-    failed: 'Échec du chargement de la traduction : ', outdated: 'Le jeu a été mis à jour, la traduction doit l’être aussi', page: 'Ouvrez d’abord la page de jeu de D2 Survivors (https://d2survivors.lol/play/), puis cliquez sur ce favori.',
+    failed: 'Échec du chargement de la traduction : ', outdated: 'Le jeu a été mis à jour, la traduction doit l’être aussi', page: 'Ouvrez d’abord la page d’accueil (https://d2survivors.lol/) ou la page de jeu (https://d2survivors.lol/play/) de D2 Survivors, puis cliquez sur ce favori. Sur téléphone, partir de la page d’accueil économise de la mémoire.',
     old: 'Le favori est obsolète. Réinstallez-le depuis le site de la traduction.', loop: 'La traduction se recharge en boucle et a été arrêtée. Rechargez la page.', frame: 'Échec du chargement de la traduction : impossible d’ouvrir le cadre. Rechargez la page.',
   },
   ru: {
     loading: 'Загрузка русского перевода…', on: 'Русский перевод включен. Повторное нажатие закладки перезагрузит страницу и вернет английский оригинал. С переводом забеги не отправляются в таблицу лидеров; чтобы попасть в нее, играйте в оригинал.',
     stuck: 'Не удалось переключить язык. Обновите страницу и снова нажмите закладку.',
-    failed: 'Не удалось загрузить перевод: ', outdated: 'Игра обновилась, перевод нужно обновить', page: 'Сначала откройте страницу игры D2 Survivors (https://d2survivors.lol/play/), затем нажмите эту закладку.',
+    failed: 'Не удалось загрузить перевод: ', outdated: 'Игра обновилась, перевод нужно обновить', page: 'Сначала откройте главную страницу (https://d2survivors.lol/) или страницу игры (https://d2survivors.lol/play/) D2 Survivors, затем нажмите эту закладку. На телефоне лучше нажимать с главной страницы: так нужно меньше памяти.',
     old: 'Закладка устарела. Установите ее заново на сайте перевода.', loop: 'Перевод постоянно перезагружается и был остановлен. Обновите страницу.', frame: 'Не удалось загрузить перевод: не открывается фрейм. Обновите страницу.',
   },
   pl: {
     loading: 'Wczytywanie polskiego tłumaczenia…', on: 'Polski jest włączony. Ponowne kliknięcie zakładki odświeży stronę i przywróci oryginalną wersję angielską. Z tłumaczeniem wyniki nie są wysyłane do rankingu; aby się w nim znaleźć, graj w oryginał.',
     stuck: 'Nie udało się przełączyć języka. Odśwież stronę i ponownie kliknij zakładkę.',
-    failed: 'Nie udało się wczytać tłumaczenia: ', outdated: 'Gra została zaktualizowana, tłumaczenie wymaga aktualizacji', page: 'Najpierw otwórz stronę gry D2 Survivors (https://d2survivors.lol/play/), a potem kliknij tę zakładkę.',
+    failed: 'Nie udało się wczytać tłumaczenia: ', outdated: 'Gra została zaktualizowana, tłumaczenie wymaga aktualizacji', page: 'Najpierw otwórz stronę główną (https://d2survivors.lol/) lub stronę gry (https://d2survivors.lol/play/) D2 Survivors, a potem kliknij tę zakładkę. Na telefonie lepiej klikać na stronie głównej: zużywa mniej pamięci.',
     old: 'Zakładka jest nieaktualna. Zainstaluj ją ponownie ze strony tłumaczenia.', loop: 'Tłumaczenie ciągle się przeładowuje i zostało zatrzymane. Odśwież stronę.', frame: 'Nie udało się wczytać tłumaczenia: nie można otworzyć ramki. Odśwież stronę.',
   },
 };
@@ -94,8 +94,8 @@ function wanted(ids) {
 let msg = MESSAGES[wanted(Object.keys(MESSAGES))];
 
 export default function run(lang) {
-  // 再按一次書籤：重新整理頁面回到原版英文（在頁面裡再開一份遊戲，手機上可能開不起來）
-  if (window.__d2zh) return location.reload();
+  // 再按一次書籤：回到原版英文的遊戲頁面（在頁面裡再開一份遊戲，手機上可能開不起來）
+  if (window.__d2zh) return window.__d2zh.original();
   lang = normalize(lang);
   msg = MESSAGES[lang] ?? msg;
   return start(lang).catch(e => {
@@ -112,11 +112,15 @@ async function get(url, cache = 'default') {
 }
 
 async function start(asked) {
-  if (!GAME_HOSTS.includes(location.hostname) || !document.getElementById('d2-files')) {
+  // 遊戲頁面（/play/）或首頁都可以啟動。從首頁啟動時沒有原版在跑，手機上只有一份遊戲（記憶體少一半）
+  // wiki 等其他頁面也有 #d2-files，所以還要看路徑（/play/、/play/setup.html）
+  const onPlay = !!document.getElementById('d2-files') && /^\/play\//.test(location.pathname);
+  const onHome = /^\/(index\.html)?$/.test(location.pathname);
+  if (!GAME_HOSTS.includes(location.hostname) || !(onPlay || onHome)) {
     alert(msg.page);
     return;
   }
-  const playUrl = new URL(location.pathname.replace(/[^/]*$/, ''), location.origin).href;
+  const playUrl = onPlay ? new URL(location.pathname.replace(/[^/]*$/, ''), location.origin).href : new URL('/play/', location.origin).href;
   const [manifest, game] = await Promise.all([
     get(MANIFEST, 'no-cache').then(JSON.parse),
     loadGame(playUrl, url => get(url, url.startsWith(location.origin) ? 'default' : 'no-cache')),
@@ -162,7 +166,14 @@ async function start(asked) {
   await stopPage();
   store.set(LANG_KEY, first);
   store.set(LAST_KEY, first);
-  openShell(page, { ids, build, playUrl });
+  // 從首頁啟動：網址列換成遊戲頁面，分頁標題用遊戲的。手機把分頁丟掉再重新載入、或再按一次書籤時，
+  // 回到的是原版遊戲（跟在 /play/ 啟動一樣），不是首頁
+  let title = document.title;
+  if (!onPlay) {
+    title = new DOMParser().parseFromString(game.html, 'text/html').title || title;
+    try { history.replaceState(null, '', playUrl); } catch { /* 換不了就留在首頁的網址 */ }
+  }
+  openShell(page, { ids, build, playUrl, title });
 }
 
 // 停掉一份遊戲：關掉它的聲音、畫面更新、計時器、WebGL。
@@ -193,9 +204,8 @@ async function stopPage(win = window) {
 }
 
 // 外層頁面只剩一個滿版的 iframe；document.open 會清掉原版的 DOM 和 window 上的事件
-function openShell(firstPage, { ids, build, playUrl }) {
+function openShell(firstPage, { ids, build, playUrl, title }) {
   const gamePaths = [new URL(playUrl).pathname, new URL('index.html', playUrl).pathname];
-  const title = document.title;
   document.open();
   document.write(`<!doctype html><html><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -247,7 +257,7 @@ background:rgba(12,10,8,.92);color:#e8dfcc;font:14px/1.4 "Microsoft JhengHei","M
       try { doc = next.contentDocument; } catch { /* 不同網域 */ }
       if (!doc) { toast(msg.frame, 0); return; }
       doc.open();
-      doc.write(page.html.replace('<head>', `<head>${FRAME_COUNTER}`));
+      doc.write(page.html.replace('<head>', `<head>${FRAME_COUNTER}${LOWRES}`));
       doc.close();
       if (old) watch(next);
       // 之後 iframe 自己換頁（遊戲的「重新載入」、選檔案的 setup.html 選完回來…）會載入原版：
@@ -298,8 +308,10 @@ background:rgba(12,10,8,.92);color:#e8dfcc;font:14px/1.4 "Microsoft JhengHei","M
     return running;
   };
 
-  // 再按一次書籤時 run() 看到這個就重新整理頁面
-  window.__d2zh = { reboot };
+  // 再按一次書籤時 run() 叫 original()：網址已經是遊戲頁面就重新整理（保留網址參數），
+  // 不是的話（從首頁啟動又換不了網址）換到遊戲頁面。首頁重新整理只會回到首頁
+  const original = () => gamePaths.includes(location.pathname) ? location.reload() : location.assign(playUrl);
+  window.__d2zh = { reboot, original };
   show(firstPage);
   toast(msg.on, 8000);
 }
@@ -308,6 +320,13 @@ background:rgba(12,10,8,.92);color:#e8dfcc;font:14px/1.4 "Microsoft JhengHei","M
 // 跑滿 10 次就換回原本的 requestAnimationFrame
 const FRAME_COUNTER = '<script>{const w=window,r=w.requestAnimationFrame;w.__d2zhFrames=0;'
   + 'w.requestAnimationFrame=function(c){return r.call(w,t=>{if(++w.__d2zhFrames>=10&&w.requestAnimationFrame!==r)w.requestAnimationFrame=r;c(t)})}}</script>';
+// 省電畫質：開啟時 devicePixelRatio 最多 1（手機螢幕 2～3 倍的話，畫的像素少 4～9 倍）。設定存在 localStorage d2zh:lowres，預設關。
+// 遊戲每格都讀 devicePixelRatio 決定解析度，切換馬上生效；開關在顯示設定（web-rules.mjs 的「省電畫質」規則）
+const LOWRES = '<script>{const w=window,k=`d2zh:lowres`;let o=w,d,on=!1;'
+  + 'while(o&&!(d=Object.getOwnPropertyDescriptor(o,`devicePixelRatio`)))o=Object.getPrototypeOf(o);'
+  + 'try{on=localStorage.getItem(k)===`1`}catch{}'
+  + 'if(d?.get){Object.defineProperty(w,`devicePixelRatio`,{configurable:!0,enumerable:d.enumerable,get(){let r=d.get.call(w);return on?Math.min(r,1):r},set:d.set&&(v=>d.set.call(w,v))});'
+  + 'w.__d2zhLowres={get:()=>on,set(v){on=!!v;try{localStorage.setItem(k,on?`1`:`0`)}catch{}}}}}</script>';
 // 頁面看得到的時間累計 20 秒，遊戲還沒開始畫（手機上開不起來）就提示重新整理再按書籤。
 // 遊戲已經存了新語言，重新整理（回原版）再按書籤就會直接用它開
 function watch(frame, limit = 20000) {

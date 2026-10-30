@@ -46,7 +46,7 @@ function pattern(src) {
 }
 
 export const WEB_PLAY_URL = 'https://d2survivors.lol/play/';
-export const WEB_CHECKED = '2026-10-30T00:12:00.404Z';
+export const WEB_CHECKED = '2026-10-30T08:34:45.265Z';
 
 export const WEB_LANGUAGES = [
   {
@@ -142,6 +142,23 @@ export const WEB_RULES = [
     label: '回報：不送出佇列', groups: ['base'], file: '^saveTransfer-.*\\.js$',
     find: pattern('async function <1>(<2>=Date.now()){if(!<3>){<3>=!0;try{let <4>=<5>().filter('),
     replace: 'async function $1($2=Date.now()){return;if(!$3){$3=!0;try{let $4=$5().filter(',
+  },
+  // 省電畫質（BATTERY SAVER）：顯示設定多一項開關。書籤在 iframe 最前面把 devicePixelRatio 蓋成 min(原本, 1)，
+  // 開關在 globalThis.__d2zhLowres（設定存在 localStorage d2zh:lowres）；遊戲每格都讀 devicePixelRatio 決定解析度，馬上生效
+  {
+    label: '省電畫質（顯示設定的一列）', groups: ['base'], optional: true, file: '^screens-.*\\.js$',
+    find: pattern('{label:`SHOW DAMAGE`,toggle:`damage`,hint:`Damage a second, by skill (L)`},'),
+    replace: '{label:`SHOW DAMAGE`,toggle:`damage`,hint:`Damage a second, by skill (L)`},...globalThis.__d2zhLowres?[{label:`BATTERY SAVER`,toggle:`d2zhLowres`,hint:`Lower resolution, for phones`}]:[],',
+  },
+  {
+    label: '省電畫質（顯示開或關）', groups: ['base'], optional: true, file: '^screens-.*\\.js$',
+    find: pattern('<1>.toggle===`items`?`SHOW ITEMS: ${<2>()?`ON`:`OFF`}`:'),
+    replace: '$1.toggle===`d2zhLowres`?`BATTERY SAVER: ${globalThis.__d2zhLowres?.get()?`ON`:`OFF`}`:$1.toggle===`items`?`SHOW ITEMS: ${$2()?`ON`:`OFF`}`:',
+  },
+  {
+    label: '省電畫質（切換）', groups: ['base'], optional: true, file: '^screens-.*\\.js$',
+    find: pattern('<1>.toggle===`items`&&<2>(!<3>()),'),
+    replace: '$1.toggle===`d2zhLowres`&&globalThis.__d2zhLowres?.set(!globalThis.__d2zhLowres.get()),$1.toggle===`items`&&$2(!$3()),',
   },
   // 這個語言時載入它的字典（書籤做的字典模組），<html lang> 設成這個語言；韓文照舊
   {

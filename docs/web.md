@@ -1,6 +1,6 @@
 # 網頁版書籤（site/web/）
 
-在 https://d2survivors.lol/play/ 用瀏覽器玩時，用書籤切換成繁體中文、简体中文或日本語（電腦、手機都可以）。網站「瀏覽器版」分頁的「安裝書籤」區塊有拖曳安裝的按鈕和手機用的程式碼；書籤是 `javascript:import('<網站>/web/d2zh.js').then(m=>m.default())`，網站部署在哪裡就指到哪裡（暫定 `https://cycleapple.github.io/d2survivors-localization/web/d2zh.js`）。
+在 https://d2survivors.lol/ （首頁）或 https://d2survivors.lol/play/ 用瀏覽器玩時，用書籤切換成繁體中文、简体中文或日本語（電腦、手機都可以）。網站「瀏覽器版」分頁的「安裝書籤」區塊有拖曳安裝的按鈕和手機用的程式碼；書籤是 `javascript:import('<網站>/web/d2zh.js').then(m=>m.default())`，網站部署在哪裡就指到哪裡（暫定 `https://cycleapple.github.io/d2survivors-localization/web/d2zh.js`）。
 
 > 書籤裡寫死了網站網址，玩家裝好之後網址就不能再換。公開宣傳前要先決定好網域。
 
@@ -24,14 +24,16 @@ node tools/serve.mjs site 8766      # 本機預覽（允許跨網域讀取）；
 
 - 跟桌面版一樣用遊戲內建的翻譯系統，不是蓋一層字上去：書籤讀 `../data/manifest.json`（相對於 `d2zh.js`），抓下遊戲頁面和全部模組（約 44 個），照**目前的語言**挑出 groups 符合的規則套用，模組做成 blob 網址，用 import map 換掉原本的模組，再在同網域的 iframe 裡重新開一次遊戲。字典照 manifest 的 `dict.url` 抓，做成 blob 模組
 - 原版遊戲（外層頁面）會先停掉：送 `pagehide` 讓它存檔、放掉防止開兩個分頁的 Web Lock；送一個 F24 按鍵讓它讀 AudioContext 再關掉（不然背景音樂會兩份）；停掉 rAF、計時器、WebGL
+- 可以在首頁（`/`）或遊戲頁面（`/play/`、`/play/setup.html`）啟動（2026-10-30 起）。手機建議從首頁：在 `/play/` 啟動時停掉的原版還佔著記憶體（模組、下載的遊戲資料），等於兩份遊戲；首頁只有 landing 的小腳本（約 33KB，2D 的火星動畫，一樣用 `stopPage` 停掉）。從首頁啟動時：遊戲頁面固定是 `/play/`；網址列用 `history.replaceState` 換成 `/play/`、分頁標題用遊戲頁面的，所以分頁被手機丟掉重新載入、或再按一次書籤時回到的是原版遊戲，不是首頁。其他頁面（wiki 等，它們也有 `#d2-files`，所以還要看路徑）提示要先打開首頁或遊戲頁面
 - iframe 先載入 `/robots.txt` 再把修改版寫進去：這樣才歸遊戲的 Service Worker（scope `/`）管，「USE MY OWN FILES」模式靠它從 OPFS 讀 D2 檔案
-- 還沒選檔案模式時，遊戲會把 iframe 換到 `setup.html`（原版英文）；選完回到 `/play/` 時書籤再換成修改版
+- 遊戲要選檔案模式時（選項 → 遊戲設定 → 遊戲檔案、自己的檔案過期）會把 iframe 換到 `setup.html`（原版英文）；選完回到 `/play/` 時書籤再換成修改版。現在的遊戲沒選過也直接用網站的檔案，不會先去 `setup.html`
 - 網頁版多幾個語言（localStorage `d2s:lang` = `zh-TW`／`zh-CN`／`ja`），不佔韓文的位置；原版遊戲讀到不認得的值會照瀏覽器語言回到英文，所以重新整理後不會卡在看不懂的語言。舊版書籤存的 `zh` 當成 `zh-TW`
 - manifest 的 `status`（見 [manifest-v2.md](manifest-v2.md)）：`beta` 在遊戲語言選單的名稱後面標「（測試中）」，`draft` 標「（草稿）」，用那個語言自己寫（「简体中文（测试中）」「Français (brouillon)」）；不認得的值當成 `draft`。`available` 不標
 - 第一次按書籤開哪個語言：安裝碼帶的語言（`m.default('zh-TW')`，網站各語言頁的安裝碼；是 manifest 裡有 `web` 的語言才算，並寫進 `d2s:lang`、`d2zh:last`）→ 遊戲設定裡的語言 → 上次用的（`d2zh:last`）→ 瀏覽器語言 → 繁中。沒帶參數的舊書籤照舊；舊版 `d2zh.js` 會忽略參數
-- 再按一次書籤＝`location.reload()` 回到原版英文（2026-10-30 起，所有書籤都一樣；原本是在頁面裡切英文，但 Android 實機在頁面裡再開一份遊戲會卡住）。`d2s:lang` 不動：原版讀到不認得的值會用英文，再按書籤就直接開回那個語言
+- 再按一次書籤＝回到原版英文的遊戲頁面（2026-10-30 起，所有書籤都一樣；原本是在頁面裡切英文，但 Android 實機在頁面裡再開一份遊戲會卡住）：網址已經是遊戲頁面就 `location.reload()`（保留網址參數），不是的話（從首頁啟動又換不了網址）`location.assign('/play/')`。`d2s:lang` 不動：原版讀到不認得的值會用英文，再按書籤就直接開回那個語言
 - 遊戲裡「選項 → 遊戲設定 → 語言」列出 English、한국어 和 manifest 裡有 `web` 欄位的語言；換語言時修改版會請外層用新語言的規則重新開一次（不然 `location.reload()` 會載入原版）。連續切換時，建到一半又換的話建好的那份丟掉、照最新的設定再建，最後停在最後選的語言
 - 換語言重開時先停掉舊的 iframe（跟停原版一樣：pagehide、AudioContext、rAF、計時器、每個 canvas 的 `WEBGL_lose_context`），再建新的：手機能同時開的 WebGL context 有限，一份遊戲就有好幾個 canvas。新的 iframe 最前面加一段計算 `requestAnimationFrame` 次數的程式（`__d2zhFrames`，滿 10 次換回原本的），頁面看得到的時間累計 20 秒還不到 10 次就提示「切換失敗，請重新整理頁面再按一次書籤」（遊戲已經存了新語言，重新整理再按書籤就會直接用它開）
+- 省電畫質（顯示設定的「BATTERY SAVER」，預設關）：書籤在 iframe 最前面把 `devicePixelRatio` 蓋成 min(原本, 1)，開關是 `__d2zhLowres`，設定存在 localStorage `d2zh:lowres`（`1`／`0`）。遊戲每格都讀 `devicePixelRatio` 算解析度（`saveTransfer` 的 render scale，key 含 dpr），所以馬上生效，不用重開。顯示設定的那一列是 `web-rules.mjs` 的三條 base 規則（optional，沒套上只是沒有那一列；`__d2zhLowres` 不在時也不顯示）。字典要加 `BATTERY SAVER`、`BATTERY SAVER: #`、`Lower resolution, for phones` 才會翻譯，沒加時顯示英文。不碰排行榜：遊戲的排行榜判斷（`tainted`、`page()`）只看網址參數和 `navigator.webdriver`；被換掉的 `devicePixelRatio`、`requestAnimationFrame` 只會出現在問題回報的診斷文字（`ui` 模組的 `page` 欄位），修改版本來就不送回報
 - 防無限重新載入：15 秒內超過 3 次就停下來提示「一直重新載入」。只算 iframe 自己換頁回到 `/play/` 被換成修改版的那種（`reboot(true)`）；玩家在遊戲選單換語言不算（2026-10-30，玩家在手機上快速切了一輪語言就撞到保護、畫面卡住）
 - 網頁版改版比桌面版頻繁、壓縮後的變數名稱會變，所以 `web-rules.mjs` 用 regex（變數名稱抓下來再放回去；`pattern()` 的 `<1>`、`<2>`… 要照第一次出現的順序編號，跟 `$1`、`$2`… 對得上），跟桌面版的 `patch-rules.mjs` 分開。必要的規則（語言選單、接受語言設定、載入字典、外文字判斷）沒套上就不啟動，提示「需要更新」；其他的標 `optional`，沒套上照樣啟動、在 console 警告
 - 規則的 groups 跟桌面版（`patch-rules.mjs`）一樣：`base`（每次都套用，包括英文）、`dict`、`cjk`、`magic-zh`、`magic-ja`（日文魔法物品名稱「前綴 後綴 物品」）、`fullwidth`（只有繁中用全形冒號）、`magic-de`／`magic-fr`／`magic-ru`、`unique-de`／`unique-fr`／`unique-ru`（有詞性的語言組魔法物品和獨特怪物的名字）、`cyrillic`（西里爾字母當外文字畫）、`font-ru`、`latin-ext`（波蘭文 U+0100–017F 當外文字畫）、`font-pl`、`size-pl`（外文字大小）、`magic-pl`、`unique-pl`、`caps`（德法俄波：英文原文沒有小寫字母時，譯文用 `toLocaleUpperCase` 轉成全大寫；字典查詢不分大小寫，SHIELDS／Shields 共用一個譯文）。斷行禁則、「暗色字不加描邊」（石頭按鈕的中日文、俄文畫成實心字）跟桌面版相同；網頁版的禁則多一個半形「:」（日文協同加成不在冒號前斷行）
@@ -82,6 +84,14 @@ status 標示：简中 beta 顯示「语言：简体中文（测试中）」、�
 - 讓新的 iframe 看起來沒在畫（測試時把 `__d2zhFrames` 固定成 0）、遊戲選單換成英文：21 秒時出現「切換失敗」提示，`d2s:lang` 已經是 en
 - 再按一次書籤：頁面重新整理成原版，`d2s:lang` 維持 zh-TW
 - 沒在 Android 實機上測
+
+首頁啟動、省電畫質（2026-10-30，正式 manifest 20261030-0013 的字典＋目前的 `web-rules.mjs`，內建瀏覽器）：
+- 首頁啟動：網址列變成 `/play/`、標題是遊戲的，iframe 歸 Service Worker 管，遊戲拿到 Web Lock（`d2-survivors/play`）。再按書籤：重新整理成原版 `/play/`
+- 首頁啟動後從 iframe 打開 `setup.html` 選 HOSTED FILES：回到 `/play/` 換回修改版（繁中），`d2s:files` 是 hosted。把 `d2s:files` 刪掉再從首頁啟動：遊戲直接用網站的檔案，沒有先去 `setup.html`
+- `/play/?class=sorceress&god` 啟動（`default('ja')`）、再按書籤：重新整理，網址參數還在
+- wiki 頁面：提示要先打開首頁或遊戲頁面（之前 wiki 也有 `#d2-files`，會去抓 wiki 的模組，提示「需要更新」）
+- 省電畫質（手機尺寸 375×812、dpr 2）：關 750×1624 → 開 375×812（1 秒內），再關回 750×1624；用顯示設定的那一列切換也一樣，`d2zh:lowres` 跟著變
+- JS heap（`performance.memory.usedJSHeapSize`，手機尺寸，遊戲開始畫之後）：首頁啟動 39～50 MB，`/play/` 啟動 58 MB（原版自己在標題畫面約 30 MB）。只算 JS，貼圖、解碼後的音效等不在裡面，實際差距應該更大
 
 還沒測：USE MY OWN FILES 實際讀檔、Safari／Firefox、手機、遊戲中的升級卡片和物品名稱（日文的魔法物品順序、禁則斷行只用 `build-web.mjs` 確認規則套得上；德法俄的名稱組合用 `compose-check.mjs` 對照過，沒有在遊戲畫面上看過）。
 
