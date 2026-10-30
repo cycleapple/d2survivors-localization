@@ -13710,6 +13710,7 @@
  "Stand still in the portal a moment, or press interact, to go through": "Restez immobile un instant dans le portail, ou appuyez sur Interagir, pour le traverser",
  "Standing still anywhere in a red portal takes your hero through after a second, where only its very foot counted": "Rester immobile n’importe où dans un portail rouge fait traverser votre héros au bout d’une seconde, alors que seul son bas comptait",
  "Walking into a red portal and out again tells you once how to go through": "Entrer dans un portail rouge puis en ressortir vous indique une fois comment le traverser",
+ "A Hardcore run's start that can't reach the leaderboard is sent again once it can, and no longer leaves the hero unranked": "Le début d’une partie Extrême qui ne parvient pas au classement est renvoyé dès que celui-ci est joignable, et ne laisse plus le héros hors du classement",
  "Physical Damage": "Dégâts physiques",
  "Fires # bolts of holy light that pierce #, for # damage (double to the undead).": "Lance {0} traits de lumière sacrée qui transpercent {1} monstre(s) et infligent {2} points de dégâts (doublés contre les morts-vivants).",
  "Evolves * into *:": "Fait évoluer {0} en {1} :",

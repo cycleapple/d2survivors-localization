@@ -13716,6 +13716,7 @@
  "Stand still in the portal a moment, or press interact, to go through": "Postój chwilę w portalu albo naciśnij interakcję, aby przejść",
  "Standing still anywhere in a red portal takes your hero through after a second, where only its very foot counted": "Stanie w dowolnym miejscu czerwonego portalu przenosi bohatera po sekundzie, a wcześniej liczył się tylko sam jego dół",
  "Walking into a red portal and out again tells you once how to go through": "Wejście do czerwonego portalu i wyjście z niego raz podpowiada, jak przez niego przejść",
+ "A Hardcore run's start that can't reach the leaderboard is sent again once it can, and no longer leaves the hero unranked": "Początek podejścia w trybie Hardkor, który nie dotarł do rankingu, jest wysyłany ponownie, gdy ranking będzie dostępny, i nie pozostawia już bohatera poza rankingiem",
  "Physical Damage": "Obrażenia fizyczne",
  "Fires # bolts of holy light that pierce #, for # damage (double to the undead).": "Wystrzeliwuje pociski świętego światła ({0}), które przebijają potwory (maks. {1}), zadając {2} pkt. obrażeń (podwójnie nieumarłym).",
  "Evolves * into *:": "Rozwój: {0} – {1}:",
