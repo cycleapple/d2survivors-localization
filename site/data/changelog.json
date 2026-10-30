@@ -2,6 +2,84 @@
   "schema": 1,
   "entries": [
     {
+      "version": "20261030-1318",
+      "date": "2026-10-30",
+      "kind": "game-fix",
+      "announce": true,
+      "summary": {
+        "zh-TW": "已支援遊戲 2026.1030.1（新增 29 條字串：裝備技能等級、擊退、咒符欄、恰西強化階等改版說明）",
+        "zh-CN": "已支持游戏 2026.1030.1（新增 29 条字符串：装备技能等级、击退、神符栏、恰西强化阶等更新说明）",
+        "en": "Supports game 2026.1030.1 (29 new strings: patch notes on gear skill levels, knockback, the Charms window, Charsi ranks and more)",
+        "ja": "ゲーム 2026.1030.1 に対応（新しい文字列 29 件：装備スキルのレベル、ノックバック、護符欄、チャルシのランクなどの更新内容）",
+        "de": "Unterstützt Spielversion 2026.1030.1 (29 neue Texte: Patchnotes zu Fertigkeitsstufen von Ausrüstung, Rückstoß, Zauberfenster, Charsis Rängen und mehr)",
+        "fr": "Prise en charge du jeu 2026.1030.1 (29 nouveaux textes : notes de mise à jour sur les niveaux de compétence de l’équipement, le renversement, la fenêtre des charmes, les rangs de Charsi et plus)",
+        "ru": "Поддержка игры 2026.1030.1 (29 новых строк: описание изменений уровней умений снаряжения, отбрасывания, окна оберегов, рангов Чарси и другого)",
+        "pl": "Obsługa gry 2026.1030.1 (29 nowych tekstów: opis zmian poziomów umiejętności z wyposażenia, odrzucania, okna talizmanów, rang Charsi i innych)"
+      },
+      "game": {
+        "desktop": "2026.1030.1"
+      },
+      "launcher": "1.0.3",
+      "languages": [
+        {
+          "id": "zh-TW",
+          "status": "available",
+          "entries": 13518,
+          "added": 29,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "zh-CN",
+          "status": "available",
+          "entries": 13517,
+          "added": 29,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ja",
+          "status": "available",
+          "entries": 13523,
+          "added": 29,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "de",
+          "status": "available",
+          "entries": 13557,
+          "added": 29,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "fr",
+          "status": "available",
+          "entries": 13566,
+          "added": 29,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ru",
+          "status": "available",
+          "entries": 13605,
+          "added": 29,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "pl",
+          "status": "available",
+          "entries": 13595,
+          "added": 29,
+          "changed": 0,
+          "removed": 0
+        }
+      ]
+    },
+    {
       "version": "20261030-0847",
       "date": "2026-10-30",
       "kind": "translation",
