@@ -13483,5 +13483,8 @@
  "*: +*% Lightning Damage per Level": "{0}: 每级闪电伤害 +{1}%",
  "*: +*% Poison Damage per Level": "{0}: 每级毒素伤害 +{1}%",
  "*: +*% Magic Damage per Level": "{0}: 每级魔法伤害 +{1}%",
- "*: +*% per Level": "{0}: 每级 +{1}%"
+ "*: +*% per Level": "{0}: 每级 +{1}%",
+ "BATTERY SAVER": "省电画质",
+ "BATTERY SAVER: #": "省电画质: {0}",
+ "Lower resolution, for phones": "降低分辨率，适合手机"
 }

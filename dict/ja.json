@@ -13489,5 +13489,8 @@
  "Level * to * (max)": "レベル{0}～{1}（最大）",
  "+# to Bow and Crossbow Skills (Amazon Only)": "〈弓/クロスボウ〉スキル向上（+{0}）（アマゾネス専用）",
  "+# to Passive and Magic Skills (Amazon Only)": "〈常時発動/魔法〉スキル向上（+{0}）（アマゾネス専用）",
- "+# to Javelin and Spear Skills (Amazon Only)": "〈ジャベリン/スピア〉スキル向上（+{0}）（アマゾネス専用）"
+ "+# to Javelin and Spear Skills (Amazon Only)": "〈ジャベリン/スピア〉スキル向上（+{0}）（アマゾネス専用）",
+ "BATTERY SAVER": "省電力画質",
+ "BATTERY SAVER: #": "省電力画質: {0}",
+ "Lower resolution, for phones": "解像度を下げる（スマホ向け）"
 }

@@ -14239,5 +14239,8 @@
  "# skeletal mage": "{0} mage squelette",
  "# skeletal mages": "{0} mages squelettes",
  "Fires # bolt of holy light that pierces #, for # damage (double to the undead).": "Lance {0} trait de lumière sacrée qui transperce {1} monstre(s) et inflige {2} points de dégâts (doublés contre les morts-vivants).",
- "Summoning Spells": "Sorts\nd’invocation"
+ "Summoning Spells": "Sorts\nd’invocation",
+ "BATTERY SAVER": "GRAPHISMES ÉCONOMES",
+ "BATTERY SAVER: #": "GRAPHISMES ÉCONOMES : {0}",
+ "Lower resolution, for phones": "Résolution réduite, pour téléphones"
 }

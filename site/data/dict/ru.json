@@ -13594,7 +13594,7 @@
  "Gold banked for Charsi, and in a run the gold found so far": "Золото на хранении у Чарси, а в забеге — и найденное до сих пор золото",
  "Runewords drop again when the game runs on Diablo II: Resurrected's files, and the Uniques tab pictures each on its own base": "Рунные слова снова выпадают, когда игра работает на файлах Diablo II: Resurrected, а вкладка \"Уникальные\" показывает каждое на своей базе",
  "Fortitude gives 1 to 1.5 Life per level and Leaf 2 Defense per level, where both gave none, and ones you've found are fixed": "Сила духа дает 1–1.5 здоровья за уровень, а Лист — 2 защиты за уровень, хотя раньше оба не давали ничего; уже найденные исправлены",
- "Griswold's Valor absorbs cold damage based on your level instead of none": "Доблесть Гризвольда поглощает урон от холода в зависимости от вашего уровня, а не нисколько",
+ "Griswold's Valor absorbs cold damage based on your level instead of none": "Доблесть Гризвольда поглощает урон от льда в зависимости от вашего уровня, а не нисколько",
  "Items in the stash and shops outside the camp read their per-level lines at your hero's level instead of level 1": "Предметы в тайнике и в лавках вне лагеря показывают свойства \"за уровень\" для уровня вашего героя, а не для уровня 1",
  "Famine's Enhanced Damage range reads 320-370% with stat ranges shown, where it left out Ohm's 50%": "Диапазон повышенного урона у Голода с показанными диапазонами — 320-370%, раньше в нем не учитывались 50% руны Ом",
  "Restores all Life and Mana": "Полностью восстанавливает здоровье и ману",
@@ -14284,5 +14284,8 @@
  "Slain by *'s *: * magic damage": "Причина гибели: {1} ({0}) — магический урон: {2}",
  "Fire Resist +#%": "+{0}% к сопротивлению огню",
  "Lightning Resist +#%": "+{0}% к сопротивлению молнии",
- "Attacker Takes Damage of #": "Атакующий получает урон: {0}"
+ "Attacker Takes Damage of #": "Атакующий получает урон: {0}",
+ "BATTERY SAVER": "ЭКОНОМИЧНАЯ ГРАФИКА",
+ "BATTERY SAVER: #": "ЭКОНОМИЧНАЯ ГРАФИКА: {0}",
+ "Lower resolution, for phones": "Пониженное разрешение, для телефонов"
 }

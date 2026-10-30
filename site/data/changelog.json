@@ -2,6 +2,84 @@
   "schema": 1,
   "entries": [
     {
+      "version": "20261030-0847",
+      "date": "2026-10-30",
+      "kind": "translation",
+      "announce": false,
+      "summary": {
+        "zh-TW": "瀏覽器版書籤：可從首頁啟動、再按一次回到原版，顯示設定新增省電畫質（降低解析度，適合手機）",
+        "zh-CN": "浏览器版书签：可从首页启动、再按一次回到原版，显示设置新增省电画质（降低分辨率，适合手机）",
+        "en": "Browser bookmark: start it from the home page, press again to return to the original, and a new Battery Saver video option (lower resolution, for phones)",
+        "ja": "ブラウザー版ブックマーク：ホームページから起動でき、もう一度押すと元に戻ります。表示設定に省電力画質（解像度を下げる、スマホ向け）を追加",
+        "de": "Browser-Lesezeichen: Start von der Startseite, erneutes Drücken kehrt zum Original zurück, neue Grafikoption Energiespar-Grafik (niedrigere Auflösung, für Handys)",
+        "fr": "Favori navigateur : lancement depuis la page d'accueil, un second appui revient à l'original, nouvelle option vidéo Graphismes économes (résolution réduite, pour téléphones)",
+        "ru": "Закладка для браузера: запуск с главной страницы, повторное нажатие возвращает оригинал, новая настройка графики «Экономичная графика» (пониженное разрешение, для телефонов)",
+        "pl": "Zakładka przeglądarki: uruchamianie ze strony głównej, ponowne naciśnięcie wraca do oryginału, nowa opcja grafiki Grafika oszczędna (niższa rozdzielczość, dla telefonów)"
+      },
+      "game": {
+        "desktop": "2026.1029.4"
+      },
+      "launcher": "1.0.3",
+      "languages": [
+        {
+          "id": "zh-TW",
+          "status": "available",
+          "entries": 13489,
+          "added": 3,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "zh-CN",
+          "status": "available",
+          "entries": 13488,
+          "added": 3,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ja",
+          "status": "available",
+          "entries": 13494,
+          "added": 3,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "de",
+          "status": "available",
+          "entries": 13528,
+          "added": 3,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "fr",
+          "status": "available",
+          "entries": 13537,
+          "added": 3,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ru",
+          "status": "available",
+          "entries": 13576,
+          "added": 3,
+          "changed": 1,
+          "removed": 0
+        },
+        {
+          "id": "pl",
+          "status": "available",
+          "entries": 13566,
+          "added": 3,
+          "changed": 0,
+          "removed": 0
+        }
+      ]
+    },
+    {
       "version": "20261030-0013",
       "date": "2026-10-30",
       "kind": "game-fix",

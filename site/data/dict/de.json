@@ -14155,5 +14155,8 @@
  "+#% Attack Damage": "+{0}% Angriffsschaden",
  "+# Average Damage": "+{0} Durchschnittsschaden",
  "+#% Enhanced Defense": "+{0}% verbesserte Verteidigung",
- "+#% Enhanced Damage": "+{0}% erhöhter Schaden"
+ "+#% Enhanced Damage": "+{0}% erhöhter Schaden",
+ "BATTERY SAVER": "ENERGIESPAR-GRAFIK",
+ "BATTERY SAVER: #": "ENERGIESPAR-GRAFIK: {0}",
+ "Lower resolution, for phones": "Niedrigere Auflösung, für Handys"
 }
