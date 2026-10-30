@@ -805,6 +805,8 @@
  "Slows monsters around him by half, chills them and strikes them with cold. It adds no cold to the hero's attacks": "Замедляет монстров вокруг него вдвое, охлаждает их и бьет льдом. К атакам героя лед не добавляет",
  "Armors him, not the hero. His melee attackers take cold and a chill, ranged ones an ice bolt, and some blows miss him": "Защищает доспехом его, а не героя. Атакующие его в ближнем бою получают урон от льда и охлаждение, стрелки — стрелу льда, а часть ударов проходит мимо него",
  "Griswold's Valor absorbs cold damage based on your level instead of none": "Доблесть Гризвольда поглощает урон от льда в зависимости от вашего уровня, а не нисколько",
+ "Flat fire, cold and lightning damage on charms and gear no longer lowers a critical-strike build's damage": "Фиксированный урон от огня, льда и молнии на оберегах и снаряжении больше не снижает урон билда на критических ударах",
+ "Monsters flash with the fire, cold or lightning of the blow that makes them flinch or kills them, as in Diablo II": "Монстры вспыхивают огнем, льдом или молнией удара, который заставляет их дрогнуть или убивает, как в Diablo II",
  "CREDITS": "СОЗДАТЕЛИ",
  "CONTROLLER": "КОНТРОЛЛЕР",
  "INTERACT": "ВЗАИМОДЕЙСТВИЕ",
