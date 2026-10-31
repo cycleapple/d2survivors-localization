@@ -90,6 +90,17 @@ pub struct Rule {
     pub find: Option<String>,
     #[serde(default)]
     pub replace: Option<String>,
+    /// assets 以外的檔案（1.0.4 起，例如 desktop/dist/main.cjs）：有的話只看這裡的 path、find、replace，不看上面的 file／from／to／find／replace
+    #[serde(default)]
+    pub app: Option<AppRule>,
+}
+
+#[derive(Clone, Serialize, Deserialize)]
+pub struct AppRule {
+    /// asar 裡的路徑
+    pub path: String,
+    pub find: String,
+    pub replace: String,
 }
 
 #[derive(Clone, Serialize, Deserialize)]

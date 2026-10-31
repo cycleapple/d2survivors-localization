@@ -52,6 +52,8 @@ pub struct App {
     notice: Option<String>,
     logs: Vec<String>,
     busy: bool,
+    /// 正在跑的工作（等遊戲內更新時，進度那行顯示「遊戲正在更新…」）
+    running: Option<Job>,
     page: Page,
     /// 精靈完成頁的「建立桌面捷徑」
     make_shortcut: bool,
@@ -63,7 +65,7 @@ pub struct App {
 }
 
 impl App {
-    fn new(cc: &eframe::CreationContext, play: bool) -> Self {
+    fn new(cc: &eframe::CreationContext, start: Option<Job>) -> Self {
         let config = Config::load();
         // 字型要先裝：樣式的標題用到 display 字型家族
         let font_lang = config.ui_language().to_string();
@@ -78,7 +80,8 @@ impl App {
             Ok("main") => Page::Main,
             Ok("settings") => Page::Settings,
             Ok("about") => Page::About,
-            _ if config.wizard_done => Page::Main,
+            // 遊戲內更新之後由遊戲開的：一定是從啟動器開過的遊戲，直接到主畫面
+            _ if config.wizard_done || start == Some(Job::AfterUpdate) => Page::Main,
             _ => Page::Language,
         };
         let icon = cc.egui_ctx.load_texture(
@@ -104,6 +107,7 @@ impl App {
             notice: None,
             logs: Vec::new(),
             busy: false,
+            running: None,
             make_shortcut: true,
             font_lang,
             icon: Some(icon),
@@ -116,9 +120,9 @@ impl App {
             app.detect_d2();
         }
         cc.egui_ctx.send_viewport_cmd(egui::ViewportCommand::Title(system::APP_NAME.into()));
-        if play && app.config.wizard_done {
+        if let Some(job) = start.filter(|j| app.config.wizard_done || *j == Job::AfterUpdate) {
             // 捷徑的 --play：開啟後直接啟動遊戲（裡面會先檢查更新）
-            app.start(Job::Launch, &cc.egui_ctx);
+            app.start(job, &cc.egui_ctx);
         } else if app.config.auto_update || !app.config.wizard_done {
             app.start(Job::Update, &cc.egui_ctx);
         }
@@ -143,6 +147,7 @@ impl App {
         }
         let _ = self.config.save();
         self.busy = true;
+        self.running = Some(job);
         self.error = None;
         let (config, manifest, tx, ctx) = (self.config.clone(), self.manifest.clone(), self.tx.clone(), ctx.clone());
         std::thread::spawn(move || {
@@ -223,12 +228,12 @@ impl App {
                             self.changelog_unseen = jobs::changelog_unseen(&c);
                             self.changelog = Some(c);
                         }
-                        if job == Job::Launch || job == Job::Install {
+                        if matches!(job, Job::Launch | Job::Install | Job::AfterUpdate) {
                             self.fallback = o.fallback;
                             self.game_lang_ko = system::stored_game_lang().as_deref() == Some("ko");
                             self.skipped = paths::State::load().installed.map_or(0, |i| i.skipped_for(&self.config.language));
                             // 遊戲視窗會蓋住啟動器：工作列閃一下，玩家回來時看得到黃色提示卡片
-                            if job == Job::Launch && o.fallback.is_some() {
+                            if job != Job::Install && o.fallback.is_some() {
                                 ctx.send_viewport_cmd(egui::ViewportCommand::RequestUserAttention(egui::UserAttentionType::Informational));
                             }
                         }
@@ -253,7 +258,7 @@ impl App {
                             }
                         }
                         // 改用原版開的話，留著視窗讓玩家看到原因
-                        None if job == Job::Launch && self.config.close_after_launch && self.fallback.is_none() => {
+                        None if matches!(job, Job::Launch | Job::AfterUpdate) && self.config.close_after_launch && self.fallback.is_none() => {
                             ctx.send_viewport_cmd(egui::ViewportCommand::Close);
                         }
                         None => {}
@@ -571,6 +576,7 @@ impl App {
                 if self.busy {
                     ui.spinner();
                     let text = match self.logs.last() {
+                        _ if self.running == Some(Job::AfterUpdate) => self.t("waiting_update").into(),
                         Some(l) if self.ui_lang() == "zh-TW" => l.clone(),
                         _ => self.t("working").into(),
                     };
@@ -896,6 +902,7 @@ impl App {
 
 const CLI_HELP: &str = "d2s-launcher --launch [--lang zh-TW|zh-CN|ja|de|fr|ru|pl|en|ko] [--no-update]
 d2s-launcher --play          (開視窗並直接啟動遊戲，桌面捷徑用這個)
+d2s-launcher --after-update  (遊戲內更新後由遊戲開的：等更新裝完、重新套用翻譯再開遊戲)
 d2s-launcher --install | --update | --restore | --self-update | --status
 d2s-launcher --manifest <網址或路徑> --save";
 
@@ -948,7 +955,7 @@ impl eframe::App for App {
     }
 }
 
-pub fn run(play: bool) -> eframe::Result {
+pub fn run(start: Option<Job>) -> eframe::Result {
     // 測試用的 D2S_UI_ZOOM 連視窗一起放大，跟 Windows 的 125%、150% 縮放一樣
     let zoom = std::env::var("D2S_UI_ZOOM").ok().and_then(|z| z.parse::<f32>().ok()).unwrap_or(1.0);
     let options = eframe::NativeOptions {
@@ -960,5 +967,5 @@ pub fn run(play: bool) -> eframe::Result {
             .with_icon(egui::IconData { rgba: include_bytes!("../assets/icon-64.rgba").to_vec(), width: 64, height: 64 }),
         ..Default::default()
     };
-    eframe::run_native(system::APP_NAME, options, Box::new(move |cc| Ok(Box::new(App::new(cc, play)))))
+    eframe::run_native(system::APP_NAME, options, Box::new(move |cc| Ok(Box::new(App::new(cc, start)))))
 }

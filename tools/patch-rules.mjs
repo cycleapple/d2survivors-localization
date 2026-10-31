@@ -338,6 +338,26 @@ RULES.splice(RULES.findIndex(r => r.label === '技能變體專用譯名'), 0, {
     'globalThis.__d2Mods=$t=>{for(let $l of Object.values($t))for(let $o of $l){let $n=$o.name;Object.defineProperty($o,`name`,{get:()=>‹4›?‹4›.translateAs(`modifier`,$n):$n,enumerable:!0,configurable:!0})}return $t};function ‹1›(‹2›,‹3›){return ‹4›?‹4›.translateAs(‹2›,‹3›):‹3›}'),
 });
 
+// 遊戲內的「更新」按鈕（desktop/dist/main.cjs 的 restartToUpdate）：electron-updater 靜默安裝、裝完自己開遊戲（install(true, true)），
+// 沒經過啟動器，新的 app.asar 是原版，翻譯就不見了。從啟動器開的遊戲有 D2S_LAUNCHER（啟動器的路徑，game.rs 的 launch 傳的）時，
+// 先在背景開啟動器（d2s-launcher --after-update：等安裝程式裝完、重新套用翻譯再開遊戲），安裝程式裝完不要自己開（install(true, false)）。
+// 沒有 D2S_LAUNCHER（直接開遊戲、舊版啟動器）或開不了啟動器時照原本的 install(true, true)。
+// main.cjs 不在 assets 裡，用 app（啟動器 1.0.4 起）：asar 裡的路徑 path 和 find／replace。main.cjs 沒有壓縮，名稱照原本的寫法。
+// 舊版啟動器不認得 app：from／to、find／replace 都是語言模組裡的 `d2s:lang`，套用等於不改（1.0.3 不會出現「略過」的提示）。
+// 原版（English／한국어）不套任何規則：遊戲自己更新後照原本開原版，結果一樣
+RULES.push({
+  label: '遊戲內更新後回到啟動器', groups: ['base'], optional: true, ...HELPER_LEGACY, find: rulePattern('`d2s:lang`'), replace: '`d2s:lang`',
+  app: {
+    path: 'desktop/dist/main.cjs',
+    ...T('return ‹1›(true, true);',
+      '{ const $l = process.env.D2S_LAUNCHER; if ($l) try { require("child_process").spawn($l, ["--after-update"], { detached: true, stdio: "ignore" }).unref(); return ‹1›(true, false); } catch {} }\n    return ‹1›(true, true);'),
+  },
+});
+
+// 規則改的檔案：asar 裡的路徑（app 的 path，或 assets 裡的檔名）、要用的 find／replace（或 from／to）。
+// 有 app 的規則只看 app（新版啟動器也是），其他照 file 在 assets 裡找
+export const ruleApp = rule => rule.app ? { ...rule.app, file: undefined, from: undefined, to: undefined } : null;
+
 // 套用一條規則：有 find 用 find／replace，沒有就逐字比對 from／to。傳回出現次數（要是 1 才算套上）和改好的文字。
 // 啟動器（launcher/src/patcher.rs）做的事一樣
 export function applyRule(text, rule, lang) {

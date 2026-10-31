@@ -14,6 +14,12 @@
 - 跟原本逐字比對的輸出比：規則加進去的變數名稱改成 `$` 開頭、上面那幾個不再依賴名稱的地方寫法不同，效果一樣
 - 遊戲改版後先跑 `node tools/check-rules.mjs <新版解開的資料夾>`；find 對不上的才要改樣板（`tools/find-anchors.mjs` 還能幫忙找舊寫法的位置）
 
+## assets 以外的檔案：app（啟動器 1.0.4 起）
+
+- 規則可以有 `app: { path, find, replace }`：`path` 是 asar 裡的路徑（例如 `desktop/dist/main.cjs`，Electron 的主程序），只看這裡的 find／replace。`patch-rules.mjs` 的 `ruleApp`，`patch.mjs`、`check-rules.mjs`、`verify.mjs` 和啟動器都支援
+- 舊版啟動器不認得 `app`：同一條規則的 from／to、find／replace 都是語言模組裡的 `` `d2s:lang` ``，套用等於不改（1.0.2、1.0.3 也不會因為對不上出現「略過」的提示）
+- 目前只有「遊戲內更新後回到啟動器」一條（`main.cjs` 的 `restartToUpdate`，見 [launcher.md](launcher.md) 的 1.0.4）。`main.cjs` 沒有壓縮，名稱照原本的寫法
+
 ## 必要和加分的規則（啟動器 1.0.2 起）
 
 - 規則標 `optional: true` 的是**加分**的：稱號、名稱組合、斷行、標點、大小寫、版面寬度、變體名稱、暗色字、日期等。對不上時略過那一條，照樣套用翻譯；啟動器主畫面一行提示「遊戲剛更新，部分細節修正中（略過 N 項修改）」，略過的清單記在 `state.json` 的 `installed.skipped`

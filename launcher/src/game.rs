@@ -159,9 +159,52 @@ impl Game {
             }
             cmd.env("D2S_QUERY", query);
         }
+        // 遊戲內按「更新」時（main.cjs 的 restartToUpdate，規則「遊戲內更新後回到啟動器」），用這個路徑開啟動器 --after-update，
+        // 裝完重新套用翻譯再開遊戲。原版不套規則，用不到，但一樣傳
+        if let Ok(exe) = std::env::current_exe() {
+            cmd.env("D2S_LAUNCHER", exe);
+        }
         cmd.spawn().context("無法啟動遊戲")?;
         Ok(())
     }
+
+    /// 遊戲正在執行（或安裝程式正在換掉它）：D2 Survivors.exe 沒辦法用寫入模式開啟
+    pub fn running(&self) -> bool {
+        fs::OpenOptions::new().write(true).open(self.dir.join(EXE)).is_err()
+    }
+
+    /// 等遊戲內的更新（electron-updater 的安裝程式）裝完：app.asar.sha256 換成新的值、app.asar 是那個原版、
+    /// 遊戲的 exe 沒被佔用，連續 3 秒都這樣才算裝完。更新前的原版是上次裝翻譯時記下的（state.json），沒有就用開始等的時候的 app.asar.sha256
+    pub fn wait_for_update(&self, timeout: std::time::Duration, log: &dyn Fn(String)) -> AfterUpdate {
+        let before = State::load().installed.and_then(|i| i.key.split(':').next().map(str::to_string)).filter(|s| s.len() == 64);
+        let before = before.or_else(|| self.expected_sha256().ok()).unwrap_or_default();
+        log("等遊戲更新裝完…".into());
+        let start = std::time::Instant::now();
+        let mut stable = 0;
+        loop {
+            std::thread::sleep(std::time::Duration::from_secs(1));
+            let done = self.expected_sha256().ok().filter(|now| *now != before).is_some_and(|now| {
+                fs::read(self.asar()).map(|b| sha256_hex(&b) == now).unwrap_or(false) && !self.running()
+            });
+            stable = if done { stable + 1 } else { 0 };
+            if stable >= 3 {
+                log(format!("遊戲更新裝好了（{}）", self.version().unwrap_or_default()));
+                return AfterUpdate::Updated;
+            }
+            if start.elapsed() >= timeout {
+                // 沒裝新版就自己重開了（安裝失敗時遊戲會 relaunch）：遊戲開著就不要再開一個
+                return if self.running() { AfterUpdate::GameRunning } else { AfterUpdate::TimedOut };
+            }
+        }
+    }
+}
+
+/// wait_for_update 的結果
+#[derive(Clone, Copy, PartialEq, Debug)]
+pub enum AfterUpdate {
+    Updated,
+    TimedOut,
+    GameRunning,
 }
 
 /// English、한국어原版：遊戲本來就有的語言，用真正的原版

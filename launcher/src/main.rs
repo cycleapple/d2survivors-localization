@@ -1,6 +1,7 @@
 // D2 Survivors 啟動器：切換遊戲語言、自動更新翻譯
 //   d2s-launcher                     開啟視窗（第一次開啟時是設定精靈）
 //   d2s-launcher --play              開啟視窗並直接啟動遊戲（桌面捷徑）
+//   d2s-launcher --after-update      遊戲內按「更新」後由遊戲開的：開啟視窗，等安裝程式裝完、重新套用翻譯再開遊戲
 //   d2s-launcher --launch [--lang zh-TW|zh-CN|ja|en|ko] [--no-update]   直接啟動（可以做成捷徑）
 //   d2s-launcher --install | --update | --restore | --self-update | --status   （--install 只裝上語言、不啟動）
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
@@ -24,9 +25,15 @@ fn main() {
     selfupdate::cleanup();
     let args: Vec<String> = std::env::args().skip(1).collect();
     // --play：桌面捷徑用，開視窗並直接啟動遊戲（出錯時視窗留著看得到原因）
-    let play = args == ["--play"];
-    if args.is_empty() || play {
-        if let Err(e) = gui::run(play) {
+    // --after-update：遊戲內按「更新」時由遊戲開的（main.cjs 的規則），開視窗等更新裝完、重新套用翻譯再開遊戲
+    let start = match args.as_slice() {
+        [] => Some(None),
+        [a] if a == "--play" => Some(Some(Job::Launch)),
+        [a] if a == "--after-update" => Some(Some(Job::AfterUpdate)),
+        _ => None,
+    };
+    if let Some(start) = start {
+        if let Err(e) = gui::run(start) {
             eprintln!("{e}");
         }
         return;

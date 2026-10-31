@@ -68,19 +68,27 @@ pub fn build(original: Vec<u8>, spec: &PatchSpec, target: &Target) -> Result<Bui
         let to = target.fill(&rule.to);
         // 先找到、確認只出現一次，最後才寫：加分的規則對不上時略過，這個檔案保持原樣。
         // 有 find 用 find／replace（不怕壓縮後的名稱改掉），沒有就逐字比對 from／to
-        let find = match &rule.find {
+        // app 的規則改 assets 以外、asar 裡指定路徑的檔案，只看 app 裡的 find／replace
+        let (find, replace) = match &rule.app {
+            Some(a) => (Some(a.find.as_str()), a.replace.as_str()),
+            None => (rule.find.as_deref(), rule.replace.as_deref().unwrap_or("")),
+        };
+        let find = match find {
             Some(f) => Some(Find::new(f).with_context(|| format!("「{}」的 find 有誤", rule.label))?),
             None => None,
         };
-        let replace = target.fill(rule.replace.as_deref().unwrap_or(""));
+        let replace = target.fill(replace);
         let found = (|| -> Result<(String, String)> {
-            let candidates: Vec<String> = match &rule.file {
-                Some(p) => vec![find_asset(&names, p)?],
-                None => names.iter().filter(|n| n.ends_with(".js")).cloned().collect(),
+            // asar 裡的完整路徑
+            let candidates: Vec<String> = match (&rule.app, &rule.file) {
+                (Some(a), _) => vec![a.path.clone()],
+                (None, Some(p)) => vec![path(&find_asset(&names, p)?)],
+                (None, None) => names.iter().filter(|n| n.ends_with(".js")).map(|n| path(n)).collect(),
             };
             let mut hits = Vec::new();
             for n in candidates {
-                let text = asar.read_string(&path(&n))?;
+                // app 的路徑在這個版本的遊戲裡沒有：當成對不上
+                let Ok(text) = asar.read_string(&n) else { continue };
                 let (count, out) = match &find {
                     Some(f) => f.apply(&text, &replace),
                     None => {
@@ -101,7 +109,7 @@ pub fn build(original: Vec<u8>, spec: &PatchSpec, target: &Target) -> Result<Bui
             }
         })();
         match found {
-            Ok((file, out)) => asar.write(&path(&file), out.into_bytes())?,
+            Ok((file, out)) => asar.write(&file, out.into_bytes())?,
             Err(e) if rule.optional && e.downcast_ref::<RuleMismatch>().is_some() => skipped.push(rule.label.clone()),
             Err(e) => return Err(e),
         }

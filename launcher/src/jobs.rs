@@ -1,5 +1,5 @@
 // 啟動器做的事：檢查更新、裝上語言並啟動遊戲、還原原版、更新啟動器本身。GUI 和命令列共用
-use crate::game::{Game, NoTranslation};
+use crate::game::{AfterUpdate, Game, NoTranslation};
 use crate::manifest::{self, ChangelogEntry, LauncherInfo, Manifest, Update};
 use crate::patcher::RuleMismatch;
 use crate::paths::{Config, State};
@@ -15,6 +15,8 @@ pub enum Job {
     Install,
     Restore,
     SelfUpdate,
+    /// 遊戲內更新之後（d2s-launcher --after-update）：等安裝程式裝完，再照 Launch 重新套用翻譯、開遊戲
+    AfterUpdate,
 }
 
 /// 翻譯套不上、改用英文原版開遊戲的原因
@@ -77,6 +79,32 @@ pub fn run(job: Job, config: &Config, manifest: Option<Manifest>, log: &dyn Fn(S
     let mut out = Outcome { launcher: manifest.as_ref().and_then(|m| m.launcher.clone()), manifest, ..Default::default() };
     match job {
         Job::Update => update(config, &mut out, log)?,
+        Job::AfterUpdate => {
+            let game = Game::new(config.game_dir())?;
+            // 最多等 5 分鐘（測試時用 D2S_AFTER_UPDATE_TIMEOUT 改秒數）
+            let timeout = std::env::var("D2S_AFTER_UPDATE_TIMEOUT").ok().and_then(|s| s.parse().ok()).unwrap_or(300);
+            match game.wait_for_update(std::time::Duration::from_secs(timeout), log) {
+                AfterUpdate::GameRunning => {
+                    log("遊戲已經開著（更新可能沒有裝），不再開一次".into());
+                    return Ok(out);
+                }
+                AfterUpdate::TimedOut => log("⚠ 等了 5 分鐘還沒裝好，照現在的遊戲開".into()),
+                AfterUpdate::Updated => {}
+            }
+            // 照一般的啟動：檢查更新、套用翻譯（規則對不上時改用原版開、提示「遊戲剛更新，翻譯修正中」）。
+            // 其他錯誤也至少把遊戲開起來，不要讓玩家什麼都沒有
+            match run(Job::Launch, config, out.manifest.clone(), log) {
+                Ok(o) => return Ok(o),
+                Err(e) => {
+                    log(format!("✖ {e:#}"));
+                    if !game.running() {
+                        game.launch(None)?;
+                        log("改用遊戲現在的 app.asar 開啟".into());
+                    }
+                    return Err(e);
+                }
+            }
+        }
         Job::Launch | Job::Install => {
             if config.auto_update {
                 if let Err(e) = update(config, &mut out, log) {

@@ -4,7 +4,7 @@
 import { extractAll, createPackage } from '@electron/asar';
 import fs from 'node:fs';
 import path from 'node:path';
-import { ASSETS_DIR, DICT_TARGET, RULES, LANGUAGES, applyRule } from './patch-rules.mjs';
+import { ASSETS_DIR, DICT_TARGET, RULES, LANGUAGES, applyRule, ruleApp } from './patch-rules.mjs';
 import { takeLang } from './langs.mjs';
 
 const { lang: target, args } = takeLang(process.argv.slice(2));
@@ -43,11 +43,14 @@ fs.writeFileSync(findAsset(new RegExp(DICT_TARGET.file)), DICT_TARGET.template.r
 const skipped = [];
 for (const rule of RULES.filter(r => r.groups.some(g => lang.groups.includes(g)))) {
   try {
-    // find／replace（沒有的話逐字比對 from／to），在 file 指定的檔案、或所有 .js 裡要剛好出現一次（patch-rules.mjs 的 applyRule）
-    const cands = fs.readdirSync(assets).filter(n => rule.file ? new RegExp(rule.file).test(n) : n.endsWith('.js'));
-    const hits = cands.map(n => [n, applyRule(fs.readFileSync(path.join(assets, n), 'utf8'), rule, lang)]).filter(([, r]) => r.count > 0);
+    // find／replace（沒有的話逐字比對 from／to），在 file 指定的檔案、或所有 .js 裡要剛好出現一次（patch-rules.mjs 的 applyRule）；
+    // app 的規則改 asar 裡指定路徑的檔案（assets 以外，例如 desktop/dist/main.cjs）
+    const app = ruleApp(rule);
+    const dir = app ? tmp : assets;
+    const cands = app ? [app.path].filter(n => fs.existsSync(path.join(tmp, n))) : fs.readdirSync(assets).filter(n => rule.file ? new RegExp(rule.file).test(n) : n.endsWith('.js'));
+    const hits = cands.map(n => [n, applyRule(fs.readFileSync(path.join(dir, n), 'utf8'), app ?? rule, lang)]).filter(([, r]) => r.count > 0);
     if (hits.length !== 1 || hits[0][1].count !== 1) throw new Error(`${rule.label}：預期在 1 個檔案裡出現 1 次，實際 ${hits.map(([n, r]) => `${n}×${r.count}`).join('、') || '0 次'}`);
-    fs.writeFileSync(path.join(assets, hits[0][0]), hits[0][1].out);
+    fs.writeFileSync(path.join(dir, hits[0][0]), hits[0][1].out);
   } catch (e) {
     if (!rule.optional) throw e;
     skipped.push(rule.label);

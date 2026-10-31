@@ -115,6 +115,22 @@ cargo test --release                        # 有 backup/2026.1026.4/app.asar �
 
 要進遊戲看：把整個遊戲資料夾複製一份，`D2S_USER_DATA` 指到另一個資料夾（遊戲本身支援，存檔和設定就不會動到平常的），裡面 `d2` 用 junction 指到平常的 `%APPDATA%\D2 Survivors\d2`（取出的 D2 素材，1.5 GB），`desktop.json` 的 `checkForUpdates` 設成 false。再用 `D2S_QUERY=d2slang=ko` 和 `--remote-debugging-port` 開複製的那份，用 `tools/cdp.mjs` 截圖
 
+## 1.0.4
+
+- 遊戲內按「更新」：原本 electron-updater 靜默安裝後自己開遊戲（`main.cjs` 的 `restartToUpdate` 呼叫 `install(true, true)`），沒經過啟動器，新的 app.asar 是原版，開出來就沒翻譯
+  - 啟動器開遊戲時傳 `D2S_LAUNCHER`（啟動器自己的完整路徑；翻譯版和原版都傳）
+  - 規則「遊戲內更新後回到啟動器」（`tools/patch-rules.mjs`，optional）：有 `D2S_LAUNCHER` 時先在背景開 `d2s-launcher --after-update`（detached、stdio ignore、unref），再 `install(true, false)`，安裝程式裝完不自己開遊戲；沒有就照原本。`main.cjs` 不在 assets 裡，用新的 `app` 欄位（asar 裡的路徑和 find／replace），見 [desktop-patch.md](desktop-patch.md)
+  - `--after-update`：開視窗、顯示「遊戲正在更新，裝好後會自動套用翻譯並開啟遊戲…」，等安裝程式裝完（`app.asar.sha256` 換成新的值、`app.asar` 是那個原版、`D2 Survivors.exe` 沒被佔用，連續 3 秒）。更新前的原版用 `state.json` 記的（沒有就用開始等時的 `app.asar.sha256`）。裝完照一般的啟動：檢查更新、套用翻譯，規則對不上時改用原版開、顯示黃色卡片
+  - 最多等 5 分鐘（測試用 `D2S_AFTER_UPDATE_TIMEOUT` 改秒數）。逾時時遊戲開著（安裝失敗、遊戲自己重開了）就不再開一個；沒開就照現在的遊戲開。啟動流程出錯時也至少用現在的 app.asar 開遊戲
+  - 設定精靈沒做完的設定檔也直接跑（是遊戲開的，一定從啟動器開過）
+  - 原版（English／한국어）不套任何規則：遊戲自己裝完開的就是原版，結果一樣
+  - 只關掉遊戲（沒按更新）時，electron-updater 在背景裝（`autoInstallOnAppQuit`），不會自己開遊戲，下次從啟動器開照常重新套用
+- 測試（2026-10-31，遊戲複本，不跑真正的安裝程式：遊戲複本的 electron-updater 會下載真的安裝程式、裝到真正的遊戲資料夾）：
+  - `work/launcher/rr/restart-test.mjs`：從 patch.mjs 做出來的 asar 取出 `restartToUpdate`，用假的 updater／child_process 跑：有 `D2S_LAUNCHER` 時 spawn 啟動器 `--after-update`（detached、ignore、unref）並 `install(true, false)`；沒有時 `install(true, true)`、不 spawn
+  - `work/launcher/rr/after-update-e2e.ps1`：遊戲複本換成 2026.1030.1 的原版、裝上繁中，開 `--after-update`，假的安裝程式 8 秒後佔住 exe 5 秒、換成 2026.1030.2 的原版。13 秒裝完，16 秒時啟動器已經套用好翻譯（跟 Node 的 `applyRule` 每個檔案都一樣，包括 main.cjs）、開了遊戲複本、自己關掉。逾時（20 秒、沒有安裝程式）時開遊戲；遊戲已經開著時不再開第二個
+- 規則版本：2026.1027.2、2026.1027.4、2026.1030.2 都對得上
+- 發布：推 tag `launcher-v1.0.4`
+
 ## 1.0.3
 
 - 規則支援 find／replace（manifest `desktop.rules[].find`／`replace`，見 [desktop-patch.md](desktop-patch.md)）：壓縮後的名稱用群組抓下來，遊戲小改版時照樣套得上。有 find 的規則只看 find／replace；`patcher.rs` 的 `Find` 把反向參照換成群組再比對，`expand` 做 `$1` 的代換（跟 `tools/patch-rules.mjs` 的 `expandReplace` 一樣，有單元測試）

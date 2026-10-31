@@ -5,7 +5,7 @@
 // 最後一行是給自動偵測讀的總結：RESULT required_failed=<n> optional_failed=<n>
 import fs from 'node:fs';
 import path from 'node:path';
-import { ASSETS_DIR, DICT_TARGET, RULES, LANGUAGES, applyRule, fillTemplate } from './patch-rules.mjs';
+import { ASSETS_DIR, DICT_TARGET, RULES, LANGUAGES, applyRule, fillTemplate, ruleApp } from './patch-rules.mjs';
 
 const [root] = process.argv.slice(2);
 if (!root) { console.error('用法：node tools/check-rules.mjs <app.asar 解開的資料夾>'); process.exit(1); }
@@ -18,12 +18,16 @@ const dictFiles = files.filter(n => new RegExp(DICT_TARGET.file).test(n));
 console.log(`${dictFiles.length === 1 ? 'OK  ' : '失敗（必要）'} 字典位置（${DICT_TARGET.file}）：${dictFiles.join('、') || '找不到'}`);
 if (dictFiles.length !== 1) failed.required.push('字典位置');
 
-// 新版啟動器（1.0.3 起）照 find／replace 套用，舊版只看逐字比對的 from；結果和 exit code 照新版算，舊版另外列一行
+// 新版啟動器照 find／replace（1.0.3 起）、app（1.0.4 起）套用，舊版只看逐字比對的 from；結果和 exit code 照新版算，舊版另外列一行
 const legacyBad = [];
 for (const rule of RULES) {
   const lang = LANGUAGES.find(l => rule.groups.some(g => l.groups.includes(g))) ?? LANGUAGES[0];
   const candidates = rule.file ? files.filter(n => new RegExp(rule.file).test(n)) : files;
-  const hits = candidates.map(n => [n, applyRule(read(n), rule, lang).count]).filter(([, c]) => c > 0);
+  // app（1.0.4 起）：assets 以外的檔案，用 asar 裡的路徑
+  const app = ruleApp(rule);
+  const hits = app
+    ? [[app.path, fs.existsSync(path.join(root, app.path)) ? applyRule(fs.readFileSync(path.join(root, app.path), 'utf8'), app, lang).count : 0]].filter(([, c]) => c > 0)
+    : candidates.map(n => [n, applyRule(read(n), rule, lang).count]).filter(([, c]) => c > 0);
   const total = hits.reduce((s, [, c]) => s + c, 0);
   const ok = total === 1;
   if (!ok) failed[rule.optional ? 'optional' : 'required'].push(rule.label);
