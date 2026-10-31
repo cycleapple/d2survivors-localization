@@ -82,6 +82,8 @@ site/data/dict/ja.json
     //   寫法和產生方式見 tools/patch-rules.mjs 的 rulePattern
     // from／to 照樣保留：舊版啟動器（1.0.0～1.0.2）不認得 find／replace，照逐字比對的 from／to 套用（只對得上寫規則時的遊戲版本）。
     //   只有新版才需要的規則（例如語言模組裡的查詢函式）from＝to＝語言模組裡的 `d2s:lang`，舊版套用等於不改。所以不用提高 launcher.minimum
+    // app（可省略，啟動器 1.0.4 起）：{ "path": "desktop/dist/main.cjs", "find": "…", "replace": "…" }，改 assets 以外、asar 裡 path 這個檔案，
+    //   只看 app 裡的 find／replace（寫法跟上面一樣），不看 file／from／to／find／replace。舊版不認得 app，這種規則的其他欄位都做成不改
   },
 
   "web": {
