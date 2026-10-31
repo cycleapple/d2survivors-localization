@@ -2,6 +2,84 @@
   "schema": 1,
   "entries": [
     {
+      "version": "20261031-0113",
+      "date": "2026-10-31",
+      "kind": "launcher",
+      "announce": true,
+      "summary": {
+        "zh-TW": "啟動器 1.0.4：在遊戲裡按「更新」後，裝好會自動套用翻譯再開遊戲（之前會變回英文）。啟動器會提示更新",
+        "zh-CN": "启动器 1.0.4：在游戏里点“更新”后，装好会自动套用翻译再打开游戏（之前会变回英文）。启动器会提示更新",
+        "en": "Launcher 1.0.4: after you press Update in the game, the translation is applied again before the game reopens (it used to come back in English). The launcher will offer the update",
+        "ja": "ランチャー 1.0.4：ゲーム内で「更新」を押すと、インストール後に翻訳を適用してからゲームが起動します（以前は英語に戻っていました）。ランチャーが更新を案内します",
+        "de": "Launcher 1.0.4: Nach einem Update im Spiel wird die Übersetzung wieder angewendet, bevor das Spiel startet (bisher kam es auf Englisch zurück). Der Launcher bietet das Update an",
+        "fr": "Lanceur 1.0.4 : après une mise à jour lancée depuis le jeu, la traduction est réappliquée avant que le jeu se rouvre (il revenait en anglais). Le lanceur propose la mise à jour",
+        "ru": "Лаунчер 1.0.4: после обновления из игры перевод снова применяется перед запуском игры (раньше она возвращалась на английский). Лаунчер предложит обновиться",
+        "pl": "Launcher 1.0.4: po aktualizacji z poziomu gry tłumaczenie jest ponownie nakładane przed uruchomieniem gry (wcześniej wracała po angielsku). Launcher zaproponuje aktualizację"
+      },
+      "game": {
+        "desktop": "2026.1030.2"
+      },
+      "launcher": "1.0.4",
+      "languages": [
+        {
+          "id": "zh-TW",
+          "status": "available",
+          "entries": 13562,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "zh-CN",
+          "status": "available",
+          "entries": 13561,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ja",
+          "status": "available",
+          "entries": 13567,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "de",
+          "status": "available",
+          "entries": 13601,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "fr",
+          "status": "available",
+          "entries": 13610,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ru",
+          "status": "available",
+          "entries": 13649,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "pl",
+          "status": "available",
+          "entries": 13639,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        }
+      ]
+    },
+    {
       "version": "20261030-2117",
       "date": "2026-10-30",
       "kind": "game-fix",

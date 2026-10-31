@@ -1,7 +1,7 @@
 {
   "schema": 2,
-  "updated": "2026-10-30T21:17:33.986Z",
-  "version": "20261030-2117",
+  "updated": "2026-10-31T01:13:24.776Z",
+  "version": "20261031-0113",
   "game": {
     "desktop": "2026.1030.2",
     "web_checked": "2026-10-30T21:16:53.501Z"
@@ -730,6 +730,23 @@
         "to": "]},Ts={raiseSkeleton:`Evolved: Revive's skeletons take this option`},Es={};for(let l of Object.values(ws))for(let o of l){let n=o.name;Object.defineProperty(o,`name`,{get:()=>h()?m(`modifier`,n):n,enumerable:!0,configurable:!0})}function Ds(e,t){",
         "find": ",([A-Za-z0-9_$]+)=\\{fireBolt:\\[\\{id:([\\s\\S]*?)\\]\\},([A-Za-z0-9_$]+)=\\{raiseSkeleton:",
         "replace": ",$1=(globalThis.__d2Mods||($$t=>$$t))({fireBolt:[{id:$2]}),$3={raiseSkeleton:"
+      },
+      {
+        "label": "遊戲內更新後回到啟動器",
+        "groups": [
+          "base"
+        ],
+        "optional": true,
+        "file": "^lang-.*\\.js$",
+        "from": "`d2s:lang`",
+        "to": "`d2s:lang`",
+        "find": "`d2s:lang`",
+        "replace": "`d2s:lang`",
+        "app": {
+          "path": "desktop/dist/main.cjs",
+          "find": "return ([A-Za-z0-9_$]+)\\(true, true\\);",
+          "replace": "{ const $$l = process.env.D2S_LAUNCHER; if ($$l) try { require(\"child_process\").spawn($$l, [\"--after-update\"], { detached: true, stdio: \"ignore\" }).unref(); return $1(true, false); } catch {} }\n    return $1(true, true);"
+        }
       }
     ]
   },
@@ -1140,13 +1157,13 @@
     ]
   },
   "launcher": {
-    "latest": "1.0.3",
+    "latest": "1.0.4",
     "minimum": "1.0.0",
     "download": "https://github.com/cycleapple/d2survivors-localization/releases/latest/download/d2s-launcher.exe",
     "sha256_url": "https://github.com/cycleapple/d2survivors-localization/releases/latest/download/d2s-launcher.exe.sha256"
   },
   "changelog": {
-    "url": "changelog.json?v=3dafa1c52d77",
-    "latest": "20261030-2117"
+    "url": "changelog.json?v=94e1bd0d9551",
+    "latest": "20261031-0113"
   }
 }
