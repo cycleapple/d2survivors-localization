@@ -46,7 +46,7 @@ function pattern(src) {
 }
 
 export const WEB_PLAY_URL = 'https://d2survivors.lol/play/';
-export const WEB_CHECKED = '2026-11-01T12:23:27.080Z';
+export const WEB_CHECKED = '2026-11-01T13:39:00.752Z';
 
 export const WEB_LANGUAGES = [
   {
@@ -113,26 +113,9 @@ export const WEB_RULES = [
     find: pattern('function <1>(<2>){if(<2>!==<3>()){'),
     replace: 'window.__d2zhLang={get:()=>$3(),set:e=>$1(e)};function $1($2){if($2!==$3()){',
   },
-  // 排行榜：網頁版的程式沒有完整性檢查（桌面版是啟動器外殼比對 app.asar.sha256），修改版送出的成績跟原版分不出來。
-  // 所以修改版（包括切回英文時）一律不上傳：成績不排進佇列、不送出佇列（佇列裡原版留下的成績原封不動，回原版時照常送出）、
-  // 死亡和專家級的報到都當成連不上排行榜（專家級英雄會變成不排名，跟離線玩一樣）。看排行榜（GET）照常。
-  // 這幾條是必要規則：套不上就不啟動，不會在不知情的情況下上傳
-  {
-    label: '排行榜：不送出成績', groups: ['base'], file: '^saveTransfer-.*\\.js$',
-    find: pattern('async function <1>(<2>,<3>,<4>,<5>=!1){let <6>=<7>();try{'),
-    replace: 'async function $1($2,$3,$4,$5=!1){if($2!==`GET`)return{status:null,body:null};let $6=$7();try{',
-  },
-  {
-    label: '排行榜：不排進佇列', groups: ['base'], file: '^saveTransfer-.*\\.js$',
-    find: pattern('function <1>(<2>,<3>=Date.now()){return <4>(<5>([...<6>().filter(<3>=><3>.id!==<2>.runId)'),
-    replace: 'function $1($2,$3=Date.now()){return!1;return $4($5([...$6().filter($3=>$3.id!==$2.runId)',
-  },
-  {
-    label: '排行榜：不送出佇列', groups: ['base'], file: '^saveTransfer-.*\\.js$',
-    find: pattern('function <1>(<2>=Date.now()){return <3>||(<3>=(async()=>{'),
-    replace: 'function $1($2=Date.now()){return Promise.resolve();return $3||($3=(async()=>{',
-  },
-  // 問題回報（REPORT）也不送：修改版的問題不該算到原作者頭上。佇列裡原版留下的回報原封不動
+  // 排行榜：照原版送（2026-11-01 起；之前一律不上傳）。書籤只改文字和版面、不改玩法；紀錄照實送，
+  // lang 是實際的語言（zh-TW…），不碰 tainted、webdriver 這類判斷。見 docs/web.md「排行榜和問題回報」
+  // 問題回報（REPORT）不送：翻譯版的錯誤不該送給原作者。佇列裡原版留下的回報原封不動
   {
     label: '回報：不送出', groups: ['base'], file: '^saveTransfer-.*\\.js$',
     find: pattern('async function <1>(<2>){let <3>=await <4>(JSON.stringify(<2>));return <3>!==null&&<3>>=200&&<3><300?`sent`:'),

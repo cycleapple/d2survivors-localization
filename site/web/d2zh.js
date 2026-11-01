@@ -21,43 +21,43 @@ const fetch0 = window.fetch.bind(window);
 
 const MESSAGES = {
   'zh-TW': {
-    loading: '正在載入繁體中文…', on: '繁體中文已開啟。再按一次書籤會重新整理頁面，回到原版英文。翻譯模式下成績不會上傳到排行榜，要上榜請用原版。',
+    loading: '正在載入繁體中文…', on: '繁體中文已開啟。再按一次書籤會重新整理頁面，回到原版英文。',
     stuck: '切換失敗。請重新整理頁面，再按一次書籤。',
     failed: '中文化載入失敗：', outdated: '遊戲改版了，中文化需要更新', page: '請先打開 D2 Survivors 的首頁（https://d2survivors.lol/）或遊戲頁面（https://d2survivors.lol/play/），再按這個書籤。手機建議從首頁按，比較省記憶體。',
     old: '書籤需要更新：請到中文化網站重新安裝書籤。', loop: '中文化一直重新載入，已停止。請重新整理頁面。', frame: '中文化載入失敗：框架打不開。請重新整理頁面。',
   },
   'zh-CN': {
-    loading: '正在加载简体中文…', on: '简体中文已开启。再按一次书签会刷新页面，回到原版英文。汉化模式下成绩不会上传到排行榜，要上榜请用原版。',
+    loading: '正在加载简体中文…', on: '简体中文已开启。再按一次书签会刷新页面，回到原版英文。',
     stuck: '切换失败。请刷新页面，再按一次书签。',
     failed: '汉化加载失败：', outdated: '游戏更新了，汉化需要更新', page: '请先打开 D2 Survivors 的首页（https://d2survivors.lol/）或游戏页面（https://d2survivors.lol/play/），再按这个书签。手机建议从首页按，比较省内存。',
     old: '书签需要更新：请到汉化网站重新安装书签。', loop: '汉化一直重新加载，已停止。请刷新页面。', frame: '汉化加载失败：框架打不开。请刷新页面。',
   },
   ja: {
-    loading: '日本語を読み込んでいます…', on: '日本語になりました。もう一度ブックマークを押すとページを再読み込みして、元の英語版に戻ります。翻訳中の記録はリーダーボードに送信されません。ランキングに載せるには元の版で遊んでください。',
+    loading: '日本語を読み込んでいます…', on: '日本語になりました。もう一度ブックマークを押すとページを再読み込みして、元の英語版に戻ります。',
     stuck: '切り替えに失敗しました。ページを再読み込みしてから、もう一度ブックマークを押してください。',
     failed: '日本語化の読み込みに失敗しました：', outdated: 'ゲームが更新されたため、日本語化の更新が必要です', page: 'D2 Survivors のトップページ（https://d2survivors.lol/）かゲームページ（https://d2survivors.lol/play/）を開いてから、このブックマークを押してください。スマートフォンではトップページから押すとメモリの節約になります。',
     old: 'ブックマークの更新が必要です。日本語化サイトでブックマークを入れ直してください。', loop: '読み込みが繰り返されたため停止しました。ページを再読み込みしてください。', frame: '日本語化の読み込みに失敗しました：フレームを開けません。ページを再読み込みしてください。',
   },
   de: {
-    loading: 'Deutsch wird geladen…', on: 'Deutsch ist aktiv. Ein erneuter Klick auf das Lesezeichen lädt die Seite neu und kehrt zum englischen Original zurück. Mit der Übersetzung werden keine Läufe an die Bestenliste gesendet; für die Bestenliste das Original spielen.',
+    loading: 'Deutsch wird geladen…', on: 'Deutsch ist aktiv. Ein erneuter Klick auf das Lesezeichen lädt die Seite neu und kehrt zum englischen Original zurück.',
     stuck: 'Wechsel fehlgeschlagen. Bitte die Seite neu laden und das Lesezeichen erneut anklicken.',
     failed: 'Übersetzung konnte nicht geladen werden: ', outdated: 'Das Spiel wurde aktualisiert, die Übersetzung muss angepasst werden', page: 'Bitte zuerst die Startseite (https://d2survivors.lol/) oder die Spielseite (https://d2survivors.lol/play/) von D2 Survivors öffnen und dann das Lesezeichen anklicken. Auf dem Handy spart die Startseite Speicher.',
     old: 'Das Lesezeichen ist veraltet. Bitte auf der Übersetzungsseite neu installieren.', loop: 'Die Übersetzung lädt immer wieder neu und wurde gestoppt. Bitte die Seite neu laden.', frame: 'Übersetzung konnte nicht geladen werden: Rahmen lässt sich nicht öffnen. Bitte die Seite neu laden.',
   },
   fr: {
-    loading: 'Chargement du français…', on: 'Le français est activé. Cliquer à nouveau sur le favori recharge la page et revient à la version originale en anglais. Avec la traduction, les parties ne sont pas envoyées au classement ; pour y figurer, jouez à la version originale.',
+    loading: 'Chargement du français…', on: 'Le français est activé. Cliquer à nouveau sur le favori recharge la page et revient à la version originale en anglais.',
     stuck: 'Le changement a échoué. Rechargez la page, puis cliquez à nouveau sur le favori.',
     failed: 'Échec du chargement de la traduction : ', outdated: 'Le jeu a été mis à jour, la traduction doit l’être aussi', page: 'Ouvrez d’abord la page d’accueil (https://d2survivors.lol/) ou la page de jeu (https://d2survivors.lol/play/) de D2 Survivors, puis cliquez sur ce favori. Sur téléphone, partir de la page d’accueil économise de la mémoire.',
     old: 'Le favori est obsolète. Réinstallez-le depuis le site de la traduction.', loop: 'La traduction se recharge en boucle et a été arrêtée. Rechargez la page.', frame: 'Échec du chargement de la traduction : impossible d’ouvrir le cadre. Rechargez la page.',
   },
   ru: {
-    loading: 'Загрузка русского перевода…', on: 'Русский перевод включен. Повторное нажатие закладки перезагрузит страницу и вернет английский оригинал. С переводом забеги не отправляются в таблицу лидеров; чтобы попасть в нее, играйте в оригинал.',
+    loading: 'Загрузка русского перевода…', on: 'Русский перевод включен. Повторное нажатие закладки перезагрузит страницу и вернет английский оригинал.',
     stuck: 'Не удалось переключить язык. Обновите страницу и снова нажмите закладку.',
     failed: 'Не удалось загрузить перевод: ', outdated: 'Игра обновилась, перевод нужно обновить', page: 'Сначала откройте главную страницу (https://d2survivors.lol/) или страницу игры (https://d2survivors.lol/play/) D2 Survivors, затем нажмите эту закладку. На телефоне лучше нажимать с главной страницы: так нужно меньше памяти.',
     old: 'Закладка устарела. Установите ее заново на сайте перевода.', loop: 'Перевод постоянно перезагружается и был остановлен. Обновите страницу.', frame: 'Не удалось загрузить перевод: не открывается фрейм. Обновите страницу.',
   },
   pl: {
-    loading: 'Wczytywanie polskiego tłumaczenia…', on: 'Polski jest włączony. Ponowne kliknięcie zakładki odświeży stronę i przywróci oryginalną wersję angielską. Z tłumaczeniem wyniki nie są wysyłane do rankingu; aby się w nim znaleźć, graj w oryginał.',
+    loading: 'Wczytywanie polskiego tłumaczenia…', on: 'Polski jest włączony. Ponowne kliknięcie zakładki odświeży stronę i przywróci oryginalną wersję angielską.',
     stuck: 'Nie udało się przełączyć języka. Odśwież stronę i ponownie kliknij zakładkę.',
     failed: 'Nie udało się wczytać tłumaczenia: ', outdated: 'Gra została zaktualizowana, tłumaczenie wymaga aktualizacji', page: 'Najpierw otwórz stronę główną (https://d2survivors.lol/) lub stronę gry (https://d2survivors.lol/play/) D2 Survivors, a potem kliknij tę zakładkę. Na telefonie lepiej klikać na stronie głównej: zużywa mniej pamięci.',
     old: 'Zakładka jest nieaktualna. Zainstaluj ją ponownie ze strony tłumaczenia.', loop: 'Tłumaczenie ciągle się przeładowuje i zostało zatrzymane. Odśwież stronę.', frame: 'Nie udało się wczytać tłumaczenia: nie można otworzyć ramki. Odśwież stronę.',
