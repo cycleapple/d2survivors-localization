@@ -101,6 +101,7 @@ node tools/serve.mjs site 8766     # 本機預覽（或 python -m http.server 87
 - repo 網址在 `SITE.repoUrl`。頁尾有「原始碼（GitHub）」連結（`footer.source`，在 Discord 和贊助中間）
 - 常見問題第二題「這是開源的嗎？」：程式（啟動器、書籤、網站、工具）是 MIT（`LICENSE`）；啟動器由 GitHub Actions 從公開原始碼編譯，Release 附 sha256；翻譯字典沒有開放授權、保留所有權利（`dict/LICENSE`），官方譯名屬於 Blizzard。不要寫成「全部開源」或「翻譯可以自由使用」
 - SmartScreen 那題補一句原始碼和編譯過程都公開；回報問題那題加 GitHub Issues
+- SmartScreen 前面一題「翻譯版的成績會上傳排行榜嗎？」（兩個版本都顯示）：瀏覽器版用書籤翻譯時成績照常上傳，普通和專家模式都一樣，紀錄標示實際使用的語言；電腦版選翻譯語言時遊戲把紀錄標成 patched，要正常上榜在啟動器選 English。作者的伺服器收不收 en／ko 以外的語言還沒確認，只寫「會上傳」，不要寫「一定會出現在排行榜上」。專家模式照字典裡 Hardcore 的譯名（專家級、专家模式、ハードコア、Hardcore、Extrême、героический режим、hardkor）
 - 常見問題的回答裡可以用 `{repo}`、`{license}`、`{dictLicense}`、`{issues}`、`{actions}`，建置時換成 repo 的網址（`REPO_LINKS`）
 - JSON-LD：SoftwareApplication（啟動器）加 `license`。WebApplication 不加（書籤會載入字典）；`codeRepository` 是 SoftwareSourceCode 的屬性，不放
 - 字典的授權定下來之後，要改這題和 `dict/LICENSE` 的說法
