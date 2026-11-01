@@ -13,7 +13,7 @@ Tłumaczenie nie nakłada tekstu na ekran, tylko korzysta z wbudowanego systemu 
 
 ## Ranking
 
-- Wersja przeglądarkowa nie wysyła wyników do rankingu, gdy tłumaczenie jest włączone.
+- Wersja przeglądarkowa wysyła wyniki do rankingu jak zwykle, także z włączonym tłumaczeniem; każdy wpis podaje faktycznie używany język (na przykład pl). Zgłoszenia problemów nie są wysyłane z przetłumaczonej wersji.
 - Gra oznacza przetłumaczoną wersję na komputer jako *patched*. Aby rywalizować w rankingu, wybierz w launcherze English — przywróci on nietkniętą, oryginalną grę.
 
 ## Zastrzeżenia

@@ -13,7 +13,7 @@ Statt Text über das Bild zu legen, nutzt die Übersetzung das eingebaute Übers
 
 ## Bestenliste
 
-- Die Browserversion lädt keine Ergebnisse in die Bestenliste hoch, solange eine Übersetzung aktiv ist.
+- Die Browserversion lädt Läufe auch mit aktiver Übersetzung wie gewohnt in die Bestenliste hoch; jeder Eintrag nennt die tatsächlich verwendete Sprache (zum Beispiel de). Fehlerberichte werden aus der übersetzten Version nicht gesendet.
 - Eine übersetzte Desktop-Installation markiert das Spiel als *patched*. Wer in der Bestenliste antreten will, wählt im Launcher English. Dann wird das unveränderte Originalspiel wiederhergestellt.
 
 ## Hinweis

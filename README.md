@@ -13,7 +13,7 @@ It plugs into the game's own translation system (it takes over the Korean dictio
 
 ## Leaderboards
 
-- The browser version does not upload leaderboard scores while a translation is active.
+- The browser version uploads leaderboard runs as usual while a translation is active; each record shows the language actually used (for example zh-TW). Problem reports are not sent from the translated game.
 - The game marks a translated desktop install as *patched*. To compete on the leaderboard, choose English in the launcher and it restores the untouched original game.
 
 ## Disclaimer

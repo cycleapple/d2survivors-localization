@@ -13,7 +13,7 @@ Au lieu de superposer du texte à l'écran, la traduction passe par le système 
 
 ## Classement
 
-- La version navigateur n'envoie pas de scores au classement tant qu'une traduction est active.
+- La version navigateur envoie normalement les parties au classement même avec une traduction active ; chaque entrée indique la langue réellement utilisée (par exemple fr). Les rapports de problème ne sont pas envoyés depuis la version traduite.
 - Le jeu marque une installation de bureau traduite comme *patched*. Pour jouer au classement, choisissez English dans le lanceur : il restaure le jeu original intact.
 
 ## Avertissement
