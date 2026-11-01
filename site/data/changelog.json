@@ -2,6 +2,84 @@
   "schema": 1,
   "entries": [
     {
+      "version": "20261101-1340",
+      "date": "2026-11-01",
+      "kind": "translation",
+      "announce": false,
+      "summary": {
+        "zh-TW": "瀏覽器版書籤：翻譯模式也會上傳排行榜成績，專家級英雄不再被標成不排名",
+        "zh-CN": "浏览器版书签：翻译模式也会上传排行榜成绩，专家模式英雄不再被标为不排名",
+        "en": "Browser bookmark: translated games now send runs to the leaderboards too, and Hardcore heroes are no longer marked unranked",
+        "ja": "ブラウザー版ブックマーク：翻訳モードでもランキングに記録が送られ、ハードコアの英雄がランキング対象外にならなくなりました",
+        "de": "Browser-Lesezeichen: Auch übersetzte Spiele senden Runs an die Bestenlisten, und Hardcore-Helden werden nicht mehr als ungewertet markiert",
+        "fr": "Favori navigateur : les parties traduites envoient aussi leurs runs aux classements, et les héros en mode Extrême ne sont plus marqués non classés",
+        "ru": "Закладка для браузера: переведенная игра тоже отправляет забеги в таблицы лидеров, а герои героического режима больше не помечаются как вне рейтинга",
+        "pl": "Zakładka przeglądarki: przetłumaczona gra też wysyła wyniki do rankingów, a bohaterowie trybu Hardkor nie są już oznaczani jako poza rankingiem"
+      },
+      "game": {
+        "desktop": "2026.1101.1"
+      },
+      "launcher": "1.0.4",
+      "languages": [
+        {
+          "id": "zh-TW",
+          "status": "available",
+          "entries": 13712,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "zh-CN",
+          "status": "available",
+          "entries": 13711,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ja",
+          "status": "available",
+          "entries": 13717,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "de",
+          "status": "available",
+          "entries": 13751,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "fr",
+          "status": "available",
+          "entries": 13760,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ru",
+          "status": "available",
+          "entries": 13799,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "pl",
+          "status": "available",
+          "entries": 13789,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        }
+      ]
+    },
+    {
       "version": "20261101-1223",
       "date": "2026-11-01",
       "kind": "game-fix",

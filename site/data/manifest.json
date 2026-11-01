@@ -1,10 +1,10 @@
 {
   "schema": 2,
-  "updated": "2026-11-01T12:23:59.684Z",
-  "version": "20261101-1223",
+  "updated": "2026-11-01T13:40:26.744Z",
+  "version": "20261101-1340",
   "game": {
     "desktop": "2026.1101.1",
-    "web_checked": "2026-11-01T12:23:27.080Z"
+    "web_checked": "2026-11-01T13:39:00.752Z"
   },
   "languages": [
     {
@@ -792,33 +792,6 @@
         "replace": "window.__d2zhLang={get:()=>$3(),set:e=>$1(e)};function $1($2){if($2!==$3()){"
       },
       {
-        "label": "排行榜：不送出成績",
-        "groups": [
-          "base"
-        ],
-        "file": "^saveTransfer-.*\\.js$",
-        "find": "async function ([\\w$]+)\\(([\\w$]+),([\\w$]+),([\\w$]+),([\\w$]+)=!1\\)\\{let ([\\w$]+)=([\\w$]+)\\(\\);try\\{",
-        "replace": "async function $1($2,$3,$4,$5=!1){if($2!==`GET`)return{status:null,body:null};let $6=$7();try{"
-      },
-      {
-        "label": "排行榜：不排進佇列",
-        "groups": [
-          "base"
-        ],
-        "file": "^saveTransfer-.*\\.js$",
-        "find": "function ([\\w$]+)\\(([\\w$]+),([\\w$]+)=Date\\.now\\(\\)\\)\\{return ([\\w$]+)\\(([\\w$]+)\\(\\[\\.\\.\\.([\\w$]+)\\(\\)\\.filter\\(\\3=>\\3\\.id!==\\2\\.runId\\)",
-        "replace": "function $1($2,$3=Date.now()){return!1;return $4($5([...$6().filter($3=>$3.id!==$2.runId)"
-      },
-      {
-        "label": "排行榜：不送出佇列",
-        "groups": [
-          "base"
-        ],
-        "file": "^saveTransfer-.*\\.js$",
-        "find": "function ([\\w$]+)\\(([\\w$]+)=Date\\.now\\(\\)\\)\\{return ([\\w$]+)\\|\\|\\(\\3=\\(async\\(\\)=>\\{",
-        "replace": "function $1($2=Date.now()){return Promise.resolve();return $3||($3=(async()=>{"
-      },
-      {
         "label": "回報：不送出",
         "groups": [
           "base"
@@ -1163,7 +1136,7 @@
     "sha256_url": "https://github.com/cycleapple/d2survivors-localization/releases/latest/download/d2s-launcher.exe.sha256"
   },
   "changelog": {
-    "url": "changelog.json?v=6e41cf9fb418",
-    "latest": "20261101-1223"
+    "url": "changelog.json?v=7878aefa4bbb",
+    "latest": "20261101-1340"
   }
 }
