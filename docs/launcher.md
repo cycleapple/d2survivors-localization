@@ -26,7 +26,7 @@ cargo test --release                        # 有 backup/2026.1026.4/app.asar �
   - 視窗 580×620（邏輯像素，Windows 縮放時跟著放大）。100%、125% 實際截圖檢查過；150% 時是 870×930 實體像素，1080p 螢幕的工作區放得下
 - 測試、截圖用的環境變數：`D2S_UI_PAGE=language`／`wizard1`～`wizard3`／`main`／`settings` 直接開那一頁；`D2S_UI_ZOOM=1.25` 連視窗一起放大，模擬 Windows 的縮放
 - 程式名稱是 `system.rs` 的 `APP_NAME`「D2 Survivors Localization」：每種介面語言都一樣、不翻譯（啟動器支援很多語言，不叫「中文化」）。視窗標題、標題列、exe 的 FileDescription／ProductName（`build.rs`）、桌面捷徑名稱都用它；exe 檔名照舊是 `d2s-launcher.exe`
-- 網址集中在 `system.rs`：`SITE_URL`（網站，暫定 GitHub Pages 網址，換網域只改這裡）、`DISCORD_URL`（永久邀請連結）、`DONATE_URL`（贊助，只是一個小連結：不跳出、不提醒、不影響功能）、`GAME_URL`、`D2R_URL`
+- 網址集中在 `system.rs`：`SITE_URL`（網站，暫定 GitHub Pages 網址，換網域只改這裡）、`DISCORD_URL`（永久邀請連結）、`support_url()`（贊助：從 `SITE_URL` 組出網站的贊助段落 `<語言>/#support`，用介面語言，PayPal、Portaly 在網站上並列；只是一個小連結：不跳出、不提醒、不影響功能）、`GAME_URL`、`D2R_URL`
 - 介面文字在 `launcher/src/i18n.rs` 的 `TABLE`：一行一個 key，8 欄依序是繁中、簡中、英文、日、德、法、俄、波蘭文（韓文和其他語言用英文）。日、德、法、俄、波蘭文是翻譯聊天室翻的（`dict/launcher-i18n.json`），`node launcher/merge-i18n.mjs --write` 併進 TABLE（不加 `--write` 只列出差異）；新增或修改 key 時要通知翻譯聊天室補翻（來源清單 `dict/launcher-i18n-src.json`）。`{}` 是代入的值，各語言數量要一樣（`cargo test` 會檢查）。介面語言跟著選的遊戲語言（選英文、韓文原版時用英文）。處理中的紀錄是繁中寫的，其他介面語言只顯示「處理中」
 - 畫面上的路徑把使用者資料夾換成 `%LOCALAPPDATA%` 之類（`system::display_path`），截圖不會露出帳號
 - 桌面捷徑用 PowerShell 的 `WScript.Shell` 建立，指到啟動器本身、參數 `--play`（開視窗並直接啟動遊戲；出錯或退回原版時視窗留著）。捷徑指到啟動器現在的位置，所以啟動器要先放在固定的地方再建捷徑。捷徑名稱是「D2 Survivors Localization」；建的時候把舊版的「D2 Survivors 啟動器／启动器／Launcher」捷徑刪掉（只刪指向 d2s-launcher 的），桌面上不會同時有兩個
@@ -114,6 +114,12 @@ cargo test --release                        # 有 backup/2026.1026.4/app.asar �
 3. `d2s-launcher --install --manifest site/data/manifest.json --lang ja`，再比對輸出
 
 要進遊戲看：把整個遊戲資料夾複製一份，`D2S_USER_DATA` 指到另一個資料夾（遊戲本身支援，存檔和設定就不會動到平常的），裡面 `d2` 用 junction 指到平常的 `%APPDATA%\D2 Survivors\d2`（取出的 D2 素材，1.5 GB），`desktop.json` 的 `checkForUpdates` 設成 false。再用 `D2S_QUERY=d2slang=ko` 和 `--remote-debugging-port` 開複製的那份，用 `tools/cdp.mjs` 截圖
+
+## 1.0.5
+
+- 贊助連結（主畫面底部、「關於」）不再直接開 PayPal，改開網站的贊助段落：`SITE_URL` + 介面語言（zh-tw、zh-cn、en、ja、de、fr、ru、pl，其他用 en）+ `/#support`，PayPal 和 Portaly 在網站上並列。贊助方式以後再換只改網站，不用再發啟動器；底部連結列也不用多一個連結。連結文字「☕ 請我喝杯咖啡」不變
+- `system.rs` 的 `support_url()` 有單元測試（八種語言和沒有的語言）
+- 發布：推 tag `launcher-v1.0.5`
 
 ## 1.0.4
 

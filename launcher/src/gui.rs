@@ -366,8 +366,8 @@ impl App {
             if !system::DISCORD_URL.is_empty() && link(ui, "💬", self.t("link_translation_discord"), GOLD).clicked() {
                 system::open_url(system::DISCORD_URL);
             }
-            if !system::DONATE_URL.is_empty() && link(ui, "", self.t("donate"), MUTED).clicked() {
-                system::open_url(system::DONATE_URL);
+            if link(ui, "", self.t("donate"), MUTED).clicked() {
+                system::open_url(&system::support_url(&self.ui_lang()));
             }
         });
     }
@@ -657,9 +657,7 @@ impl App {
             if !system::DISCORD_URL.is_empty() {
                 link(ui, self.t("link_translation_discord"), system::DISCORD_URL);
             }
-            if !system::DONATE_URL.is_empty() {
-                link(ui, self.t("donate"), system::DONATE_URL);
-            }
+            link(ui, self.t("donate"), &system::support_url(&self.ui_lang()));
             ui.label(RichText::new(format!("{} v{}", system::APP_NAME, selfupdate::VERSION)).small().color(IDLE));
         });
     }

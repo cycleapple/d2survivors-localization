@@ -7,8 +7,16 @@ pub const APP_NAME: &str = "D2 Survivors Localization";
 pub const SITE_URL: &str = "https://cycleapple.github.io/d2survivors-localization/";
 /// 社群 Discord 的邀請連結（永久；空的就不顯示）
 pub const DISCORD_URL: &str = "https://discord.gg/QMBbTHSsaK";
-/// 贊助連結（只放在完成頁和設定的連結區，不跳出、不提醒；贊助與否不影響任何功能）
-pub const DONATE_URL: &str = "https://paypal.me/DonateCYtw";
+/// 贊助連結：開網站的贊助段落（#support，裡面 PayPal、Portaly 等贊助方式並列），用啟動器的介面語言。
+/// 贊助方式換了只改網站，不用再發新版啟動器。只放在主畫面底部和「關於」的連結區，不跳出、不提醒；贊助與否不影響任何功能
+pub fn support_url(ui_lang: &str) -> String {
+    // 網站的語言路徑是小寫（zh-tw、zh-cn…），沒有的語言用英文
+    let lang = match ui_lang {
+        "zh-TW" | "zh-CN" | "en" | "ja" | "de" | "fr" | "ru" | "pl" => ui_lang.to_lowercase(),
+        _ => "en".to_string(),
+    };
+    format!("{SITE_URL}{lang}/#support")
+}
 /// D2 Survivors 官方網站（下載遊戲）。跟網站 site/src/config.mjs 的 LINKS 一樣
 pub const GAME_URL: &str = "https://d2survivors.lol/";
 /// D2 Survivors 的瀏覽器版
@@ -234,4 +242,19 @@ pub fn display_path(p: &Path) -> String {
         }
     }
     s
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn support_url_per_language() {
+        assert_eq!(support_url("zh-TW"), "https://cycleapple.github.io/d2survivors-localization/zh-tw/#support");
+        assert_eq!(support_url("zh-CN"), "https://cycleapple.github.io/d2survivors-localization/zh-cn/#support");
+        for l in ["en", "ja", "de", "fr", "ru", "pl"] {
+            assert_eq!(support_url(l), format!("https://cycleapple.github.io/d2survivors-localization/{l}/#support"));
+        }
+        assert_eq!(support_url("ko"), "https://cycleapple.github.io/d2survivors-localization/en/#support");
+    }
 }
