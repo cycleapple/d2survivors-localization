@@ -1136,7 +1136,7 @@
     "sha256_url": "https://github.com/cycleapple/d2survivors-localization/releases/latest/download/d2s-launcher.exe.sha256"
   },
   "changelog": {
-    "url": "changelog.json?v=ed33bace391b",
+    "url": "changelog.json?v=7a518c4ab179",
     "latest": "20261102-1038"
   }
 }
