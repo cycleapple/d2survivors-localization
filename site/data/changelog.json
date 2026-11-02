@@ -2,6 +2,84 @@
   "schema": 1,
   "entries": [
     {
+      "version": "20261102-1007",
+      "date": "2026-11-02",
+      "kind": "translation",
+      "announce": false,
+      "summary": {
+        "zh-TW": "翻譯遊戲 2026.1102.1 的新字串：鍵盤設定頁、第二組武器、更新說明",
+        "zh-CN": "翻译游戏 2026.1102.1 的新字符串：键盘设置页、第二套武器、更新说明",
+        "en": "Translated the new strings of game version 2026.1102.1: the keyboard page, the second weapon set and the patch notes",
+        "ja": "ゲーム 2026.1102.1 の新しい文字列を翻訳しました：キーボード設定ページ、2つ目の武器セット、更新内容",
+        "de": "Neue Texte der Spielversion 2026.1102.1 übersetzt: Tastaturseite, zweites Waffenset und Patchnotes",
+        "fr": "Traduction des nouveaux textes de la version 2026.1102.1 : page Clavier, second jeu d’armes et notes de mise à jour",
+        "ru": "Переведены новые строки версии игры 2026.1102.1: страница клавиатуры, второй набор оружия и список изменений",
+        "pl": "Przetłumaczono nowe teksty wersji gry 2026.1102.1: strona klawiatury, drugi zestaw broni i lista zmian"
+      },
+      "game": {
+        "desktop": "2026.1102.1"
+      },
+      "launcher": "1.0.4",
+      "languages": [
+        {
+          "id": "zh-TW",
+          "status": "available",
+          "entries": 13847,
+          "added": 121,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "zh-CN",
+          "status": "available",
+          "entries": 13846,
+          "added": 121,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ja",
+          "status": "available",
+          "entries": 13852,
+          "added": 125,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "de",
+          "status": "available",
+          "entries": 13886,
+          "added": 121,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "fr",
+          "status": "available",
+          "entries": 13895,
+          "added": 121,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ru",
+          "status": "available",
+          "entries": 13934,
+          "added": 121,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "pl",
+          "status": "available",
+          "entries": 13924,
+          "added": 122,
+          "changed": 0,
+          "removed": 0
+        }
+      ]
+    },
+    {
       "version": "20261102-0957",
       "date": "2026-11-02",
       "kind": "game-fix",
