@@ -1,21 +1,21 @@
 {
   "schema": 2,
-  "updated": "2026-11-01T13:40:26.744Z",
-  "version": "20261101-1340",
+  "updated": "2026-11-02T09:57:45.521Z",
+  "version": "20261102-0957",
   "game": {
-    "desktop": "2026.1101.1",
-    "web_checked": "2026-11-01T13:39:00.752Z"
+    "desktop": "2026.1102.1",
+    "web_checked": "2026-11-02T09:55:11.909Z"
   },
   "languages": [
     {
       "id": "zh-TW",
       "name": "繁體中文",
       "status": "available",
-      "entries": 13712,
+      "entries": 13726,
       "dict": {
-        "url": "dict/zh-TW.json?v=a39801e375d0",
-        "sha256": "a39801e375d02fc22957e6c54b070f93e2c56bdf21dfce63f13f3c19a9ad6264",
-        "size": 917879
+        "url": "dict/zh-TW.json?v=abe48ed35063",
+        "sha256": "abe48ed35063e159a7648fe5864bc07536cf6118543894f0260ce447b89f9b2e",
+        "size": 918279
       },
       "desktop": {
         "menu_name": "繁體中文",
@@ -55,11 +55,11 @@
       "id": "zh-CN",
       "name": "简体中文",
       "status": "available",
-      "entries": 13711,
+      "entries": 13725,
       "dict": {
-        "url": "dict/zh-CN.json?v=3c5a15354be2",
-        "sha256": "3c5a15354be2ae93c4cd35b67ef359ed758ce3a6964c0e1634db94238f03e9db",
-        "size": 917385
+        "url": "dict/zh-CN.json?v=0d8ca444f953",
+        "sha256": "0d8ca444f95316a667d916a9ea813426c4e201f8302d22e457a34a72012eb75f",
+        "size": 917761
       },
       "desktop": {
         "menu_name": "简体中文",
@@ -97,11 +97,11 @@
       "id": "ja",
       "name": "日本語",
       "status": "available",
-      "entries": 13717,
+      "entries": 13727,
       "dict": {
-        "url": "dict/ja.json?v=a5acd143cc74",
-        "sha256": "a5acd143cc74df991e20c39004386c0ef1f70ab14ae5710cadb990bae104e37a",
-        "size": 1107828
+        "url": "dict/ja.json?v=68b9a8cc905f",
+        "sha256": "68b9a8cc905f8cb6413d192f0d7c1099ea7304236fd4346ecc52c7bf39610fe9",
+        "size": 1108180
       },
       "desktop": {
         "menu_name": "日本語",
@@ -145,11 +145,11 @@
       "id": "de",
       "name": "Deutsch",
       "status": "available",
-      "entries": 13751,
+      "entries": 13765,
       "dict": {
-        "url": "dict/de.json?v=90c66a9ecda6",
-        "sha256": "90c66a9ecda62148e06eec837811f674666ec764b052aa8567ab5c9fabac0291",
-        "size": 1013995
+        "url": "dict/de.json?v=ff20b016acc6",
+        "sha256": "ff20b016acc6386294957feb43df07a25aadf93b9e56c29a672a2ae18e5ef516",
+        "size": 1014447
       },
       "desktop": {
         "menu_name": "Deutsch",
@@ -180,11 +180,11 @@
       "id": "fr",
       "name": "Français",
       "status": "available",
-      "entries": 13760,
+      "entries": 13774,
       "dict": {
-        "url": "dict/fr.json?v=ce53179e3421",
-        "sha256": "ce53179e3421eedfe8fcbe0ac0f6012ebe52667f4a286f53c8dcc8dac96d2cf9",
-        "size": 1062172
+        "url": "dict/fr.json?v=5cbd082d6af2",
+        "sha256": "5cbd082d6af22033719fe42a69e9e41356054815fec87018c07968d23b19de1b",
+        "size": 1062655
       },
       "desktop": {
         "menu_name": "Français",
@@ -215,11 +215,11 @@
       "id": "ru",
       "name": "Русский",
       "status": "available",
-      "entries": 13799,
+      "entries": 13813,
       "dict": {
-        "url": "dict/ru.json?v=79f9cd993ed1",
-        "sha256": "79f9cd993ed1766aa45f7ab33053311fffa369554d53cb1e2d594e9acff72c33",
-        "size": 1382086
+        "url": "dict/ru.json?v=d573777a1c31",
+        "sha256": "d573777a1c31ad94d079e95196c3ea7f97bb3cbb4946fbbf902d7f18872bab95",
+        "size": 1382604
       },
       "desktop": {
         "menu_name": "Русский",
@@ -263,11 +263,11 @@
       "id": "pl",
       "name": "Polski",
       "status": "available",
-      "entries": 13789,
+      "entries": 13802,
       "dict": {
-        "url": "dict/pl.json?v=51bbfd5f4459",
-        "sha256": "51bbfd5f445928e5a2be37fcee7a9c41a16020dfcccf21e352ad8abab64b6f47",
-        "size": 1023407
+        "url": "dict/pl.json?v=adddc424f8e8",
+        "sha256": "adddc424f8e8cd896e0dd289bb12599ec7343ede2cfd9347df05af58bfa505a8",
+        "size": 1023789
       },
       "desktop": {
         "menu_name": "Polski",
@@ -796,7 +796,7 @@
         "groups": [
           "base"
         ],
-        "file": "^saveTransfer-.*\\.js$",
+        "file": "^(saveTransfer|leaderboardSend)-.*\\.js$",
         "find": "async function ([\\w$]+)\\(([\\w$]+)\\)\\{let ([\\w$]+)=await ([\\w$]+)\\(JSON\\.stringify\\(\\2\\)\\);return \\3!==null&&\\3>=200&&\\3<300\\?`sent`:",
         "replace": "async function $1($2){return`refused`;let $3=await $4(JSON.stringify($2));return $3!==null&&$3>=200&&$3<300?`sent`:"
       },
@@ -805,7 +805,7 @@
         "groups": [
           "base"
         ],
-        "file": "^saveTransfer-.*\\.js$",
+        "file": "^(saveTransfer|leaderboardSend)-.*\\.js$",
         "find": "async function ([\\w$]+)\\(([\\w$]+)=Date\\.now\\(\\)\\)\\{if\\(!([\\w$]+)\\)\\{\\3=!0;try\\{let ([\\w$]+)=([\\w$]+)\\(\\)\\.filter\\(",
         "replace": "async function $1($2=Date.now()){return;if(!$3){$3=!0;try{let $4=$5().filter("
       },
@@ -816,8 +816,8 @@
         ],
         "optional": true,
         "file": "^screens-.*\\.js$",
-        "find": "\\{label:`SHOW DAMAGE`,toggle:`damage`,hint:`Damage a second, by skill \\(L\\)`\\},",
-        "replace": "{label:`SHOW DAMAGE`,toggle:`damage`,hint:`Damage a second, by skill (L)`},...globalThis.__d2zhLowres?[{label:`BATTERY SAVER`,toggle:`d2zhLowres`,hint:`Lower resolution, for phones`}]:[],"
+        "find": "\\{label:`SHOW DAMAGE`,toggle:`damage`,",
+        "replace": "...globalThis.__d2zhLowres?[{label:`BATTERY SAVER`,toggle:`d2zhLowres`,hint:`Lower resolution, for phones`}]:[],{label:`SHOW DAMAGE`,toggle:`damage`,"
       },
       {
         "label": "省電畫質（顯示開或關）",
@@ -1136,7 +1136,7 @@
     "sha256_url": "https://github.com/cycleapple/d2survivors-localization/releases/latest/download/d2s-launcher.exe.sha256"
   },
   "changelog": {
-    "url": "changelog.json?v=7878aefa4bbb",
-    "latest": "20261101-1340"
+    "url": "changelog.json?v=aced63f5b020",
+    "latest": "20261102-0957"
   }
 }
