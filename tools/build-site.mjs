@@ -221,7 +221,7 @@ const footer = t => `<footer class="footer">
         SITE.discordUrl && discordLink(t, t['community.join']),
         `<a href="${esc(SITE.repoUrl)}" target="_blank" rel="noopener">${esc(t['footer.source'])}</a>`,
         SITE.donateUrl && `<a href="${esc(SITE.donateUrl)}" target="_blank" rel="noopener">${esc(t['donate.short'])}</a>`,
-        SITE.ecpayUrl && `<a href="${esc(SITE.ecpayUrl)}" target="_blank" rel="noopener">${esc(t['donate.ecpay.short'])}</a>`,
+        SITE.portalyUrl && `<a href="${esc(SITE.portalyUrl)}" target="_blank" rel="noopener">${esc(t['donate.portaly'])}</a>`,
       ].filter(Boolean).join('<span class="sep" aria-hidden="true">·</span>')}</p>
       <p>${t['footer.disclaimer']}</p>
       <p class="footer-small"><span data-only="desktop">Game ${esc(state.gameVersion)} · Launcher ${state.launcherReleased ? 'v' + esc(state.launcherVersion) : '—'}</span><span data-only="web">Web · Translations ${esc(state.updated || '')}</span></p>
@@ -564,13 +564,13 @@ function langPage(sl) {
         <div class="faq">
           ${faq.map(([q, a, p]) => `<details${only(p)}><summary>${esc(q)}</summary><div class="answer">${a}</div></details>`).join('\n          ')}
         </div>
-        ${SITE.donateUrl || SITE.ecpayUrl ? `<!-- 贊助：低調放在常見問題後面，不跳視窗 -->
+        ${SITE.donateUrl || SITE.portalyUrl ? `<!-- 贊助：低調放在常見問題後面，不跳視窗 -->
         <aside class="support" id="support">
           <h3>${esc(t['donate.title'])}</h3>
           <p>${esc(t['donate.body'])}</p>
           <p class="support-buttons">${[
             SITE.donateUrl && `<a class="btn btn-ghost btn-small" href="${esc(SITE.donateUrl)}" target="_blank" rel="noopener">${esc(t['donate.button'])}</a>`,
-            SITE.ecpayUrl && `<a class="btn btn-ghost btn-small" href="${esc(SITE.ecpayUrl)}" target="_blank" rel="noopener">${esc(t['donate.ecpay'])}</a>`,
+            SITE.portalyUrl && `<a class="btn btn-ghost btn-small" href="${esc(SITE.portalyUrl)}" target="_blank" rel="noopener">${esc(t['donate.portaly'])}</a>`,
           ].filter(Boolean).join(' ')}</p>
           <p class="support-note">${esc(t['donate.statement'])}</p>
         </aside>` : ''}
