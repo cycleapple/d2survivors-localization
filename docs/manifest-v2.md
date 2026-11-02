@@ -196,6 +196,7 @@ site/data/dict/ja.json
       "game": { "desktop": "2026.1027.1" },
       "gameNotes": {              // 選填：遊戲這次改版自己的更新說明（原作者寫的），工具從字典自動帶入，不另外翻
         "version": "2026.1102.1", // 這些更新說明屬於哪個遊戲版本
+        "at": "2026-11-02T08:31:41.822Z", // 官方發布這個版本的時間（遊戲 changelog.json 的 at，UTC）；顯示時換成讀者的當地時間
         "source": "https://…",    // 選填：原文在哪裡看得到
         "lines": {                // 照遊戲裡的順序；每種介面語言（zh-TW、zh-CN、en、ja、de、fr、ru、pl）一份，en 是原文。缺譯的那條用 en
           "en": ["On phones and tablets the game holds its art in about a third less memory, …"],
@@ -214,6 +215,7 @@ site/data/dict/ja.json
 - 只有字典、規則、語言狀態、啟動器版本有變動才會多一筆（跟 `publish` 判斷要不要發布的條件一樣）
 - 沒有寫 `changelog-next.json` 時，`summary` 由工具依統計自動產生（例如「繁中修正 30 條、新增 12 條」），`kind` 是 `translation`、`announce` 是 `false`
 - `gameNotes` 只放在遊戲改版後第一筆有這些更新說明的紀錄（通常是 `game-fix` 那筆），同一個遊戲版本不重複放。顯示時標明是 D2 Survivors 作者的更新說明、我們只做翻譯
+- 要另外公告某個遊戲版本的更新說明（例如那個版本的 `game-fix` 已經公告過）：發一筆新的 `announce: true`，把 `gameNotes` 從舊的那筆搬過來，舊的那筆不留
 
 ### 誰讀
 
