@@ -1,0 +1,14 @@
+{
+ "1 run refused by the leaderboard": "Podejścia odrzucone przez ranking: 1",
+ "* runs refused by the leaderboard": "Podejścia odrzucone przez ranking: {0}",
+ "Tried again for two days, then dropped": "Ponawiane przez dwa dni, potem usuwane",
+ "COPY DIAGNOSTICS in Options says why": "Powód podaje KOPIUJ DIAGNOSTYKĘ w Opcjach",
+ "Runs the leaderboard refused no longer hold up your new runs, which are now sent first": "Podejścia odrzucone przez ranking nie blokują już nowych podejść, które są teraz wysyłane jako pierwsze",
+ "Normal, Nightmare and Hell clears by a strong hero, one Akara restarted at 99 among them, reach the leaderboard again": "Ukończenia poziomów Normalny, Koszmar i Piekło przez silnego bohatera, w tym takiego, który zaczął od nowa u Akary na 99. poziomie, znów trafiają do rankingu",
+ "Runs from before a Terror reset are dropped at once instead of waiting for days": "Podejścia sprzed resetu Grozy są od razu usuwane, zamiast czekać całymi dniami",
+ "The leaderboard's You tab counts the runs it refused apart from those waiting to be sent": "Zakładka Ty w rankingu liczy odrzucone podejścia osobno od czekających na wysłanie",
+ "Wisp Projector gives all three of its spirits at once, Oak Sage's life too, where only its Spirit of Barbs stayed": "Ognikowiec daje wszystkie trzy duchy naraz, także zdrowie Dębowego Mędrca, a wcześniej zostawał tylko Duch Kolców",
+ "A Druid's own spirit and those his items raise now count together, the stronger where both give the same bonus": "Własny duch druida i duchy przywołane przez jego przedmioty działają teraz razem; przy tym samym bonusie liczy się silniejszy",
+ "Nature's Peace's Oak Sage life now counts beside Wisp Projector or a weaker Oak Sage of your own": "Zdrowie Dębowego Mędrca ze Spokoju Natury liczy się teraz obok Ognikowca lub twojego własnego, słabszego Dębowego Mędrca",
+ "Item charges show the level their item names, so Nature's Peace's Oak Sage reads Level 5 with its +50% life, not Level 2": "Ładunki przedmiotów pokazują poziom podany na przedmiocie, więc Dębowy Mędrzec ze Spokoju Natury ma Poziom 5 i +50% zdrowia, a nie Poziom 2"
+}

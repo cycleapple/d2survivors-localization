@@ -1,0 +1,14 @@
+{
+ "1 run refused by the leaderboard": "1 partie refusée par le classement",
+ "* runs refused by the leaderboard": "{0} parties refusées par le classement",
+ "Tried again for two days, then dropped": "Nouvel essai pendant deux jours, puis abandon",
+ "COPY DIAGNOSTICS in Options says why": "COPIER DIAGNOSTIC dans les Options indique pourquoi",
+ "Runs the leaderboard refused no longer hold up your new runs, which are now sent first": "Les parties refusées par le classement ne bloquent plus vos nouvelles parties, qui sont désormais envoyées en premier",
+ "Normal, Nightmare and Hell clears by a strong hero, one Akara restarted at 99 among them, reach the leaderboard again": "Les parties terminées en Normal, Cauchemar et Enfer par un héros puissant, dont un recommencé au niveau 99 avec Akara, figurent de nouveau au classement",
+ "Runs from before a Terror reset are dropped at once instead of waiting for days": "Les parties antérieures à une réinitialisation de Terreur sont abandonnées aussitôt au lieu d’attendre des jours",
+ "The leaderboard's You tab counts the runs it refused apart from those waiting to be sent": "L’onglet Vous du classement compte les parties refusées à part de celles en attente d’envoi",
+ "Wisp Projector gives all three of its spirits at once, Oak Sage's life too, where only its Spirit of Barbs stayed": "Feu follet donne ses trois esprits à la fois, y compris la vie du Sage du Chêne, alors que seul son Esprit vengeur restait",
+ "A Druid's own spirit and those his items raise now count together, the stronger where both give the same bonus": "L’esprit propre d’un Druide et ceux invoqués par ses objets s’additionnent désormais, le plus fort l’emportant quand les deux donnent le même bonus",
+ "Nature's Peace's Oak Sage life now counts beside Wisp Projector or a weaker Oak Sage of your own": "La vie du Sage du Chêne de Paix de la nature compte désormais à côté de Feu follet ou de votre propre Sage du Chêne plus faible",
+ "Item charges show the level their item names, so Nature's Peace's Oak Sage reads Level 5 with its +50% life, not Level 2": "Les charges d’objet affichent le niveau indiqué par leur objet : le Sage du Chêne de Paix de la nature indique donc Niveau 5 avec +50% de vie, et non Niveau 2"
+}

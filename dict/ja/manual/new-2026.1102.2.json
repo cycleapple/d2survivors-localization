@@ -1,0 +1,14 @@
+{
+ "1 run refused by the leaderboard": "ランキングに拒否されたラン: 1件",
+ "* runs refused by the leaderboard": "ランキングに拒否されたラン: {0}件",
+ "Tried again for two days, then dropped": "2日間再送信した後、破棄します",
+ "COPY DIAGNOSTICS in Options says why": "理由はオプションの「診断情報をコピー」で確認できます",
+ "Runs the leaderboard refused no longer hold up your new runs, which are now sent first": "ランキングに拒否されたランが新しいランの送信を妨げなくなり、新しいランが先に送信されるようになりました",
+ "Normal, Nightmare and Hell clears by a strong hero, one Akara restarted at 99 among them, reach the leaderboard again": "強い英雄のノーマル、ナイトメア、ヘルのクリア記録が再びランキングに載るようになりました。レベル99でアカラからやり直した英雄も含まれます",
+ "Runs from before a Terror reset are dropped at once instead of waiting for days": "恐怖のリセット前のランは、数日待たずにすぐ破棄されるようになりました",
+ "The leaderboard's You tab counts the runs it refused apart from those waiting to be sent": "ランキングの「自分」タブで、拒否されたランを送信待ちのランと分けて数えるようになりました",
+ "Wisp Projector gives all three of its spirits at once, Oak Sage's life too, where only its Spirit of Barbs stayed": "ウィスプ・プロジェクターが3体の精霊をすべて同時に与え、老楢の護りのライフも得られるようになりました（以前は荊棘の精霊しか残りませんでした）",
+ "A Druid's own spirit and those his items raise now count together, the stronger where both give the same bonus": "ドルイド自身の精霊とアイテムが呼び出した精霊が同時に効果を持つようになり、同じボーナスを与える場合は強い方が適用されます",
+ "Nature's Peace's Oak Sage life now counts beside Wisp Projector or a weaker Oak Sage of your own": "ネイチャーズ・ピースの老楢の護りのライフが、ウィスプ・プロジェクターや自分のより弱い老楢の護りと一緒でも適用されるようになりました",
+ "Item charges show the level their item names, so Nature's Peace's Oak Sage reads Level 5 with its +50% life, not Level 2": "アイテムのチャージスキルがアイテムに記載されたレベルで表示されるようになり、ネイチャーズ・ピースの老楢の護りはレベル2ではなくレベル5、ライフ+50%と表示されます"
+}

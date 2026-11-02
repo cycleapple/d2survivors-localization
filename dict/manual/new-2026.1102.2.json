@@ -1,0 +1,14 @@
+{
+ "1 run refused by the leaderboard": "1筆紀錄遭排行榜拒絕",
+ "* runs refused by the leaderboard": "{0}筆紀錄遭排行榜拒絕",
+ "Tried again for two days, then dropped": "已重試兩天，之後捨棄",
+ "COPY DIAGNOSTICS in Options says why": "選項中的「複製診斷資訊」會說明原因",
+ "Runs the leaderboard refused no longer hold up your new runs, which are now sent first": "遭排行榜拒絕的紀錄不再卡住你的新紀錄，新紀錄現在會優先送出",
+ "Normal, Nightmare and Hell clears by a strong hero, one Akara restarted at 99 among them, reach the leaderboard again": "強力英雄的普通、惡夢與地獄通關紀錄再度登上排行榜，其中也包括在99級時透過阿卡拉重新開始的英雄",
+ "Runs from before a Terror reset are dropped at once instead of waiting for days": "恐懼重置前的紀錄會立即捨棄，不再等待數天",
+ "The leaderboard's You tab counts the runs it refused apart from those waiting to be sent": "排行榜的「你」分頁會將遭拒絕的紀錄與等待上傳的紀錄分開計算",
+ "Wisp Projector gives all three of its spirits at once, Oak Sage's life too, where only its Spirit of Barbs stayed": "鬼火投射者會一次給予全部三種靈體，包括橡木智者的生命加成；以前只會留下荊棘之靈",
+ "A Druid's own spirit and those his items raise now count together, the stronger where both give the same bonus": "德魯伊親自召喚的靈體與物品喚出的靈體現在會一同生效，若兩者提供相同加成則取較強者",
+ "Nature's Peace's Oak Sage life now counts beside Wisp Projector or a weaker Oak Sage of your own": "自然祥和的橡木智者生命加成現在與鬼火投射者或你自己較弱的橡木智者並存時也會生效",
+ "Item charges show the level their item names, so Nature's Peace's Oak Sage reads Level 5 with its +50% life, not Level 2": "物品充能技能會顯示物品上標示的等級，因此自然祥和的橡木智者會顯示等級5與+50%生命，而非等級2"
+}

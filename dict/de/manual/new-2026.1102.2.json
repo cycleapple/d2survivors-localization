@@ -1,0 +1,14 @@
+{
+ "1 run refused by the leaderboard": "1 Durchgang von der Bestenliste abgelehnt",
+ "* runs refused by the leaderboard": "{0} Durchgänge von der Bestenliste abgelehnt",
+ "Tried again for two days, then dropped": "Zwei Tage lang erneut versucht, dann verworfen",
+ "COPY DIAGNOSTICS in Options says why": "DIAGNOSE KOPIEREN in den Optionen nennt den Grund",
+ "Runs the leaderboard refused no longer hold up your new runs, which are now sent first": "Von der Bestenliste abgelehnte Durchgänge halten deine neuen Durchgänge nicht mehr auf, die jetzt zuerst gesendet werden",
+ "Normal, Nightmare and Hell clears by a strong hero, one Akara restarted at 99 among them, reach the leaderboard again": "Abschlüsse von Normal, Alptraum und Hölle durch einen starken Helden, darunter einer, der bei Akara auf Stufe 99 neu begonnen hat, kommen wieder in die Bestenliste",
+ "Runs from before a Terror reset are dropped at once instead of waiting for days": "Durchgänge von vor einem Schrecken-Reset werden sofort verworfen, statt tagelang zu warten",
+ "The leaderboard's You tab counts the runs it refused apart from those waiting to be sent": "Der Du-Reiter der Bestenliste zählt abgelehnte Durchgänge getrennt von denen, die auf das Senden warten",
+ "Wisp Projector gives all three of its spirits at once, Oak Sage's life too, where only its Spirit of Barbs stayed": "Irrlichtprojektor gibt alle drei seiner Geister auf einmal, auch das Leben des Eichbaumweisen, wo bisher nur sein Dornengeist blieb",
+ "A Druid's own spirit and those his items raise now count together, the stronger where both give the same bonus": "Der eigene Geist eines Druiden und die von seinen Gegenständen beschworenen zählen jetzt zusammen, bei gleichem Bonus der stärkere",
+ "Nature's Peace's Oak Sage life now counts beside Wisp Projector or a weaker Oak Sage of your own": "Das Leben des Eichbaumweisen von Friede der Natur zählt jetzt auch neben Irrlichtprojektor oder einem schwächeren eigenen Eichbaumweisen",
+ "Item charges show the level their item names, so Nature's Peace's Oak Sage reads Level 5 with its +50% life, not Level 2": "Gegenstandsladungen zeigen die Stufe, die ihr Gegenstand nennt, daher zeigt der Eichbaumweiser von Friede der Natur Stufe 5 mit +50% Leben statt Stufe 2"
+}
