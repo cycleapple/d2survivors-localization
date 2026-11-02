@@ -89,7 +89,15 @@ jobs:
             const g = e.gameNotes;
             const items = g?.lines?.['zh-TW']?.length ? g.lines['zh-TW'] : g?.lines?.en ?? [];
             if (!items.length) return null;
-            const head = ['D2 Survivors 作者的更新說明，我們只做翻譯。', '*Patch notes by the D2 Survivors developer, translated by us.*', ''];
+            // 官方發布時間用 Discord 的時間戳記，讀者看到的是自己的當地時間
+            const unix = g.at ? Math.floor(Date.parse(g.at) / 1000) : NaN;
+            const released = Number.isFinite(unix) ? `<t:${unix}:f>（<t:${unix}:R>）` : '';
+            const head = [
+              ...(released ? [`官方更新時間：${released}`] : []),
+              'D2 Survivors 作者的更新說明，我們只做翻譯。',
+              `*Patch notes by the D2 Survivors developer${released ? `, released <t:${unix}:f>` : ''}, translated by us.*`,
+              '',
+            ];
             const more = (n) => ['', `…還有 ${n} 條，完整內容見網站的[更新紀錄](${SITE.base}zh-tw/#changelog)`];
             const shown = [];
             for (const line of items.slice(0, GAME_NOTES_ITEMS)) {
