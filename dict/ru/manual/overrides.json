@@ -807,6 +807,7 @@
  "Griswold's Valor absorbs cold damage based on your level instead of none": "Доблесть Гризвольда поглощает урон от льда в зависимости от вашего уровня, а не нисколько",
  "Flat fire, cold and lightning damage on charms and gear no longer lowers a critical-strike build's damage": "Фиксированный урон от огня, льда и молнии на оберегах и снаряжении больше не снижает урон билда на критических ударах",
  "Monsters flash with the fire, cold or lightning of the blow that makes them flinch or kills them, as in Diablo II": "Монстры вспыхивают огнем, льдом или молнией удара, который заставляет их дрогнуть или убивает, как в Diablo II",
+ "Fire, cold and lightning damage charms no longer lower your weapon skills' damage on monsters that resist those elements": "Обереги урона от огня, льда и молнии больше не снижают урон ваших умений с оружием по монстрам, сопротивляющимся этим стихиям",
  "CREDITS": "СОЗДАТЕЛИ",
  "CONTROLLER": "КОНТРОЛЛЕР",
  "INTERACT": "ВЗАИМОДЕЙСТВИЕ",
@@ -826,14 +827,9 @@
  "MAGIC ITEMS": "МАГИЧЕСКИЕ ПРЕДМЕТЫ",
  "RARE ITEMS": "РЕДКИЕ ПРЕДМЕТЫ",
  "CHARMS": "ОБЕРЕГИ",
- "KEYBOARD": "КЛАВИАТУРА",
- "MOVE UP": "ВВЕРХ",
- "MOVE DOWN": "ВНИЗ",
- "MOVE LEFT": "ВЛЕВО",
- "MOVE RIGHT": "ВПРАВО",
- "CHARACTER SCREEN": "МЕНЮ ПЕРСОНАЖА",
- "CLEAR SCREEN": "ОЧИСТИТЬ ЭКРАН",
  "SKILL TREE": "Умения",
  "Spiral": "спираль",
- "TERROR #": "Ужас {0}"
+ "SWAP WEAPONS": "Сменить оружие",
+ "TERROR #": "Ужас {0}",
+ "USE MY OWN FILES…": "Использовать свои файлы…"
 }
