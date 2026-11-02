@@ -1,11 +1,11 @@
 // 產生更新來源 manifest v2（格式見 docs/manifest-v2.md）：<輸出資料夾>/manifest.json 和 <輸出資料夾>/dict/<id>.json
-//   node tools/make-manifest.mjs [輸出資料夾，預設 site/data]
+//   node tools/make-manifest.mjs [輸出資料夾，預設 site/data] [--force]
 // 啟動器、網頁版書籤、網站讀同一份。字典網址相對於 manifest.json，帶內容雜湊（Pages 的 CDN 會快取）。
 //   共用欄位（最上層、languages[] 的 id／name／status／entries／dict、game）：這裡產生，語言清單和狀態來自 tools/langs.mjs（draft 的不放）
 //   桌面版（languages[].desktop、desktop）：tools/patch-rules.mjs 的 LANGUAGES／RULES／ASSETS_DIR／DICT_TARGET
 //   網頁版（languages[].web、web）：tools/web-rules.mjs 的 WEB_LANGUAGES／WEB_RULES（還沒匯出 WEB_LANGUAGES 時不輸出）
 //   launcher：tools/launcher-release.json（發 Release 時改 latest；規則格式改了、舊版不能用時才調高 minimum）
-// 字典和規則都沒變時不改寫 manifest.json（updated／version 才不會每次都變）
+// 字典和規則都沒變時不改寫 manifest.json（updated／version 才不會每次都變）；--force 照樣換新的 version（只發公告的更新紀錄用）
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
@@ -73,7 +73,7 @@ const file = path.join(outDir, 'manifest.json');
 const strip = m => JSON.stringify({ ...m, updated: undefined, version: undefined, changelog: undefined });
 const old = fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, 'utf8')) : null;
 if (old?.changelog) manifest.changelog = old.changelog;
-if (old && strip(old) === strip(manifest)) {
+if (old && strip(old) === strip(manifest) && !process.argv.includes('--force')) {
   console.log(`沒有變動，${file} 不改寫（${old.version}）`);
 } else {
   fs.writeFileSync(file, JSON.stringify(manifest, null, 2) + '\n');

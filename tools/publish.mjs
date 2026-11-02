@@ -46,7 +46,10 @@ for (const id of ids) {
 }
 
 // 2. manifest 和字典
-process.stdout.write(node('tools/make-manifest.mjs', OUT));
+// 有人寫了這次的說明（changelog-next.json）就一定記一筆；字典和規則都沒變時（只發公告）manifest 也要換新的 version
+const next = readJson(NEXT, {});
+const hasNext = Object.keys(next).length > 0;
+process.stdout.write(node('tools/make-manifest.mjs', OUT, ...(hasNext ? ['--force'] : [])));
 const manifest = readJson(`${OUT}/manifest.json`);
 
 // 3. 更新紀錄
@@ -67,12 +70,10 @@ const rulesChanged = JSON.stringify([before?.desktop, before?.web]) !== JSON.str
 const launcherChanged = before?.launcher?.latest !== manifest.launcher?.latest;
 const dictChanged = stats.some(s => s.new || s.added || s.changed || s.removed || s.statusFrom) || (before?.languages.length ?? 0) !== manifest.languages.length;
 const changelog = readJson(CHANGELOG, { schema: 1, entries: [] });
-const next = readJson(NEXT, {});
-const hasNext = Object.keys(next).length > 0;
 if (hasNext && !(next.summary?.['zh-TW'] && next.summary?.en)) fail(`${NEXT} 至少要有 summary 的 zh-TW 和 en`);
 if (hasNext) { const missing = UI_LANGUAGES.filter(ui => !next.summary[ui]); if (missing.length) console.log(`注意：${NEXT} 的 summary 少了 ${missing.join('、')}（網站會顯示 en）`); }
-// 第一次（還沒有 changelog.json）也記一筆，讓網站和啟動器有東西可以讀
-const needEntry = dictChanged || rulesChanged || launcherChanged || !changelog.entries.length;
+// 第一次（還沒有 changelog.json）也記一筆，讓網站和啟動器有東西可以讀；有寫說明的也記
+const needEntry = dictChanged || rulesChanged || launcherChanged || hasNext || !changelog.entries.length;
 
 if (needEntry && changelog.entries[0]?.version !== manifest.version) {
   const entry = {
