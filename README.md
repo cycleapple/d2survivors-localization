@@ -41,7 +41,7 @@ What is open source, what stays out of the repo, and how releases work: [docs/re
 
 ## Donate
 
-If you enjoy it, you can buy me a coffee: [PayPal](https://paypal.me/DonateCYtw)
+If you enjoy it, you can buy me a coffee: [PayPal](https://paypal.me/DonateCYtw) or [ECPay](https://p.ecpay.com.tw/5630EBB) (Taiwan: credit card, ATM, convenience store)
 
 ## Development
 
