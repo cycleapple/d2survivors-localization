@@ -2,6 +2,84 @@
   "schema": 1,
   "entries": [
     {
+      "version": "20261102-1558",
+      "date": "2026-11-02",
+      "kind": "launcher",
+      "announce": false,
+      "summary": {
+        "zh-TW": "啟動器 1.0.5：贊助連結改成開網站的贊助段落，PayPal 和 Portaly 都在那裡。啟動器會提示更新",
+        "zh-CN": "启动器 1.0.5：赞助链接改为打开网站的赞助部分，PayPal 和 Portaly 都在那里。启动器会提示更新",
+        "en": "Launcher 1.0.5: the support link now opens the support section of the website, where both PayPal and Portaly are listed. The launcher will offer the update",
+        "ja": "ランチャー 1.0.5：支援リンクがサイトの支援セクションを開くようになりました。PayPal と Portaly はそこにあります。ランチャーが更新を案内します",
+        "de": "Launcher 1.0.5: Der Unterstützen-Link öffnet jetzt den Unterstützen-Bereich der Website, wo PayPal und Portaly zu finden sind. Der Launcher bietet das Update an",
+        "fr": "Lanceur 1.0.5 : le lien de soutien ouvre désormais la section Soutien du site, où se trouvent PayPal et Portaly. Le lanceur propose la mise à jour",
+        "ru": "Лаунчер 1.0.5: ссылка «Поддержать» теперь открывает раздел поддержки на сайте, где есть PayPal и Portaly. Лаунчер предложит обновиться",
+        "pl": "Launcher 1.0.5: link „Wesprzyj” otwiera teraz sekcję wsparcia na stronie, gdzie są PayPal i Portaly. Launcher zaproponuje aktualizację"
+      },
+      "game": {
+        "desktop": "2026.1102.2"
+      },
+      "launcher": "1.0.5",
+      "languages": [
+        {
+          "id": "zh-TW",
+          "status": "available",
+          "entries": 13859,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "zh-CN",
+          "status": "available",
+          "entries": 13858,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ja",
+          "status": "available",
+          "entries": 13864,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "de",
+          "status": "available",
+          "entries": 13898,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "fr",
+          "status": "available",
+          "entries": 13907,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ru",
+          "status": "available",
+          "entries": 13946,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "pl",
+          "status": "available",
+          "entries": 13936,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        }
+      ]
+    },
+    {
       "version": "20261102-1319",
       "date": "2026-11-02",
       "kind": "game-fix",
