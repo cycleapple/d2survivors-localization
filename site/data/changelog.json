@@ -2,19 +2,19 @@
   "schema": 1,
   "entries": [
     {
-      "version": "20261102-1038",
+      "version": "20261102-1106",
       "date": "2026-11-02",
       "kind": "game-fix",
       "announce": true,
       "summary": {
-        "zh-TW": "已支援遊戲 2026.1102.1（網頁版、桌面版）。今天改版後，網頁書籤一度顯示「遊戲改版了，中文化需要更新」，現在已修好：重新整理頁面、再按一次書籤即可，不用重新加書籤。這一版的 135 條新字串（按鍵設定頁、第二組武器、物品施放的技能、更新說明）七種語言都已翻好。桌面版不用更新啟動器，照常從啟動器開遊戲就會套用新翻譯",
-        "zh-CN": "已支持游戏 2026.1102.1（网页版、桌面版）。今天更新后，网页书签一度显示“游戏更新了，汉化需要更新”，现在已修复：刷新页面、再点一次书签即可，不用重新添加书签。这一版的 135 条新字符串（按键设置页、第二套武器、物品施放的技能、更新说明）七种语言都已翻译。桌面版不用更新启动器，照常从启动器打开游戏就会应用新翻译",
-        "en": "Supports game 2026.1102.1 (browser and desktop). After today's game update the bookmarklet showed an error that the game was updated and the translation needed an update. It works again: reload the page and click the bookmarklet once more, no need to add it again. The 135 new strings of this version (key bindings page, second weapon set, skills cast by items, patch notes) are translated in all seven languages. On desktop, the launcher needs no update: start the game from the launcher as usual to get the new translation",
-        "ja": "ゲーム 2026.1102.1（ブラウザ版・デスクトップ版）に対応しました。本日の更新後、ブックマークレットで「ゲームが更新されたため、日本語化の更新が必要です」と表示されていましたが、修正済みです。ページを再読み込みしてもう一度ブックマークレットを押してください（登録し直す必要はありません）。このバージョンの新しい文字列 135 件（キー設定ページ、2つ目の武器セット、アイテムが発動するスキル、更新内容）は 7 言語すべて翻訳済みです。デスクトップ版はランチャーの更新不要で、いつも通りランチャーから起動すれば新しい翻訳が適用されます",
-        "de": "Spielversion 2026.1102.1 wird unterstützt (Browser und Desktop). Nach dem heutigen Update meldete das Lesezeichen „Das Spiel wurde aktualisiert, die Übersetzung muss angepasst werden“. Das ist behoben: Seite neu laden und das Lesezeichen noch einmal anklicken, ein neues Lesezeichen ist nicht nötig. Die 135 neuen Texte dieser Version (Tastenbelegung, zweites Waffenset, von Gegenständen gewirkte Fertigkeiten, Patchnotes) sind in allen sieben Sprachen übersetzt. Auf dem Desktop braucht der Launcher kein Update: Spiel wie gewohnt über den Launcher starten, dann ist die neue Übersetzung aktiv",
-        "fr": "Prise en charge du jeu 2026.1102.1 (navigateur et bureau). Après la mise à jour d’aujourd’hui, le favori affichait « Le jeu a été mis à jour, la traduction doit l’être aussi ». C’est corrigé : rechargez la page et cliquez de nouveau sur le favori, inutile de le réinstaller. Les 135 nouveaux textes de cette version (page des touches, second jeu d’armes, compétences lancées par les objets, notes de mise à jour) sont traduits dans les sept langues. Sur bureau, le lanceur n’a pas besoin de mise à jour : lancez le jeu depuis le lanceur comme d’habitude pour avoir la nouvelle traduction",
-        "ru": "Поддерживается версия игры 2026.1102.1 (браузер и ПК). После сегодняшнего обновления закладка показывала «Игра обновилась, перевод нужно обновить». Это исправлено: обновите страницу и нажмите закладку ещё раз, добавлять её заново не нужно. 135 новых строк этой версии (страница клавиш, второй набор оружия, умения, применяемые предметами, список изменений) переведены на все семь языков. На ПК лаунчер обновлять не нужно: запустите игру из лаунчера как обычно, и новый перевод применится",
-        "pl": "Obsługiwana jest wersja gry 2026.1102.1 (przeglądarka i komputer). Po dzisiejszej aktualizacji zakładka pokazywała komunikat „Gra została zaktualizowana, tłumaczenie wymaga aktualizacji”. Już działa: odśwież stronę i kliknij zakładkę jeszcze raz, nie trzeba dodawać jej od nowa. 135 nowych tekstów tej wersji (strona klawiszy, drugi zestaw broni, umiejętności rzucane przez przedmioty, lista zmian) jest przetłumaczonych na wszystkie siedem języków. Na komputerze launcher nie wymaga aktualizacji: uruchom grę z launchera jak zwykle, a nowe tłumaczenie zostanie zastosowane"
+        "zh-TW": "D2 Survivors 2026.1102.1 官方更新說明的翻譯（共 62 條），完整內容見網站的更新紀錄",
+        "zh-CN": "D2 Survivors 2026.1102.1 官方更新说明的翻译（共 62 条），完整内容见网站的更新记录",
+        "en": "Translation of the official D2 Survivors 2026.1102.1 patch notes (62 lines); see the changelog on the website for all of them",
+        "ja": "D2 Survivors 2026.1102.1 公式更新内容の翻訳（全 62 件）。全文はサイトの更新履歴をご覧ください",
+        "de": "Übersetzung der offiziellen Patchnotes zu D2 Survivors 2026.1102.1 (62 Punkte); alle Punkte im Änderungsprotokoll auf der Website",
+        "fr": "Traduction des notes de mise à jour officielles de D2 Survivors 2026.1102.1 (62 points) ; la liste complète est dans l’historique du site",
+        "ru": "Перевод официального списка изменений D2 Survivors 2026.1102.1 (62 пункта); полностью — в истории обновлений на сайте",
+        "pl": "Tłumaczenie oficjalnej listy zmian D2 Survivors 2026.1102.1 (62 punkty); pełna lista w historii zmian na stronie"
       },
       "game": {
         "desktop": "2026.1102.1"
@@ -80,6 +80,7 @@
       ],
       "gameNotes": {
         "version": "2026.1102.1",
+        "at": "2026-11-02T08:31:41.822Z",
         "lines": {
           "zh-TW": [
             "超過第40階的恐懼階，每階提供魔寶尋獲率 +1%，原本為 +2%",
@@ -595,6 +596,84 @@
           ]
         }
       }
+    },
+    {
+      "version": "20261102-1038",
+      "date": "2026-11-02",
+      "kind": "game-fix",
+      "announce": true,
+      "summary": {
+        "zh-TW": "已支援遊戲 2026.1102.1（網頁版、桌面版）。今天改版後，網頁書籤一度顯示「遊戲改版了，中文化需要更新」，現在已修好：重新整理頁面、再按一次書籤即可，不用重新加書籤。這一版的 135 條新字串（按鍵設定頁、第二組武器、物品施放的技能、更新說明）七種語言都已翻好。桌面版不用更新啟動器，照常從啟動器開遊戲就會套用新翻譯",
+        "zh-CN": "已支持游戏 2026.1102.1（网页版、桌面版）。今天更新后，网页书签一度显示“游戏更新了，汉化需要更新”，现在已修复：刷新页面、再点一次书签即可，不用重新添加书签。这一版的 135 条新字符串（按键设置页、第二套武器、物品施放的技能、更新说明）七种语言都已翻译。桌面版不用更新启动器，照常从启动器打开游戏就会应用新翻译",
+        "en": "Supports game 2026.1102.1 (browser and desktop). After today's game update the bookmarklet showed an error that the game was updated and the translation needed an update. It works again: reload the page and click the bookmarklet once more, no need to add it again. The 135 new strings of this version (key bindings page, second weapon set, skills cast by items, patch notes) are translated in all seven languages. On desktop, the launcher needs no update: start the game from the launcher as usual to get the new translation",
+        "ja": "ゲーム 2026.1102.1（ブラウザ版・デスクトップ版）に対応しました。本日の更新後、ブックマークレットで「ゲームが更新されたため、日本語化の更新が必要です」と表示されていましたが、修正済みです。ページを再読み込みしてもう一度ブックマークレットを押してください（登録し直す必要はありません）。このバージョンの新しい文字列 135 件（キー設定ページ、2つ目の武器セット、アイテムが発動するスキル、更新内容）は 7 言語すべて翻訳済みです。デスクトップ版はランチャーの更新不要で、いつも通りランチャーから起動すれば新しい翻訳が適用されます",
+        "de": "Spielversion 2026.1102.1 wird unterstützt (Browser und Desktop). Nach dem heutigen Update meldete das Lesezeichen „Das Spiel wurde aktualisiert, die Übersetzung muss angepasst werden“. Das ist behoben: Seite neu laden und das Lesezeichen noch einmal anklicken, ein neues Lesezeichen ist nicht nötig. Die 135 neuen Texte dieser Version (Tastenbelegung, zweites Waffenset, von Gegenständen gewirkte Fertigkeiten, Patchnotes) sind in allen sieben Sprachen übersetzt. Auf dem Desktop braucht der Launcher kein Update: Spiel wie gewohnt über den Launcher starten, dann ist die neue Übersetzung aktiv",
+        "fr": "Prise en charge du jeu 2026.1102.1 (navigateur et bureau). Après la mise à jour d’aujourd’hui, le favori affichait « Le jeu a été mis à jour, la traduction doit l’être aussi ». C’est corrigé : rechargez la page et cliquez de nouveau sur le favori, inutile de le réinstaller. Les 135 nouveaux textes de cette version (page des touches, second jeu d’armes, compétences lancées par les objets, notes de mise à jour) sont traduits dans les sept langues. Sur bureau, le lanceur n’a pas besoin de mise à jour : lancez le jeu depuis le lanceur comme d’habitude pour avoir la nouvelle traduction",
+        "ru": "Поддерживается версия игры 2026.1102.1 (браузер и ПК). После сегодняшнего обновления закладка показывала «Игра обновилась, перевод нужно обновить». Это исправлено: обновите страницу и нажмите закладку ещё раз, добавлять её заново не нужно. 135 новых строк этой версии (страница клавиш, второй набор оружия, умения, применяемые предметами, список изменений) переведены на все семь языков. На ПК лаунчер обновлять не нужно: запустите игру из лаунчера как обычно, и новый перевод применится",
+        "pl": "Obsługiwana jest wersja gry 2026.1102.1 (przeglądarka i komputer). Po dzisiejszej aktualizacji zakładka pokazywała komunikat „Gra została zaktualizowana, tłumaczenie wymaga aktualizacji”. Już działa: odśwież stronę i kliknij zakładkę jeszcze raz, nie trzeba dodawać jej od nowa. 135 nowych tekstów tej wersji (strona klawiszy, drugi zestaw broni, umiejętności rzucane przez przedmioty, lista zmian) jest przetłumaczonych na wszystkie siedem języków. Na komputerze launcher nie wymaga aktualizacji: uruchom grę z launchera jak zwykle, a nowe tłumaczenie zostanie zastosowane"
+      },
+      "game": {
+        "desktop": "2026.1102.1"
+      },
+      "launcher": "1.0.4",
+      "languages": [
+        {
+          "id": "zh-TW",
+          "status": "available",
+          "entries": 13847,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "zh-CN",
+          "status": "available",
+          "entries": 13846,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ja",
+          "status": "available",
+          "entries": 13852,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "de",
+          "status": "available",
+          "entries": 13886,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "fr",
+          "status": "available",
+          "entries": 13895,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ru",
+          "status": "available",
+          "entries": 13934,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "pl",
+          "status": "available",
+          "entries": 13924,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        }
+      ]
     },
     {
       "version": "20261102-1007",
