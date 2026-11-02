@@ -80,6 +80,31 @@ jobs:
 
           const TITLE = { translation: '翻譯更新', language: '新語言', 'game-fix': '遊戲改版修正', launcher: '啟動器新版' };
           const role = process.env.PING_ROLE?.trim();
+          const FOOTER = { text: '非官方玩家翻譯，與 D2 Survivors 開發者及 Blizzard Entertainment 無關 · Unofficial fan translation' };
+          // 遊戲本身的更新說明放第二個 embed。一則訊息的 embed 加起來上限 6000 字，這段最多 3000 字、20 條，太長就只列前幾條、其餘連到網站
+          const GAME_NOTES_MAX = 3000;
+          const GAME_NOTES_ITEMS = 20;
+
+          function gameNotesEmbed(e) {
+            const g = e.gameNotes;
+            const items = g?.lines?.['zh-TW']?.length ? g.lines['zh-TW'] : g?.lines?.en ?? [];
+            if (!items.length) return null;
+            const head = ['D2 Survivors 作者的更新說明，我們只做翻譯。', '*Patch notes by the D2 Survivors developer, translated by us.*', ''];
+            const more = (n) => ['', `…還有 ${n} 條，完整內容見網站的[更新紀錄](${SITE.base}zh-tw/#changelog)`];
+            const shown = [];
+            for (const line of items.slice(0, GAME_NOTES_ITEMS)) {
+              const next = [...head, ...shown, `• ${line}`, ...more(items.length)].join('\n');
+              if (next.length > GAME_NOTES_MAX) break;
+              shown.push(`• ${line}`);
+            }
+            const rest = items.length - shown.length;
+            return {
+              title: `遊戲本身的更新 · ${g.version}`,
+              ...(g.source ? { url: g.source } : {}),
+              description: [...head, ...shown, ...(rest ? more(rest) : [])].join('\n'),
+              color: 0xc7a15a,
+            };
+          }
 
           for (const e of todo) {
             const summary = e.summary?.['zh-TW'] ?? e.summary?.en ?? '';
@@ -91,18 +116,26 @@ jobs:
               '',
               `🌐 ${SITE.base}`,
             ];
+            const game = gameNotesEmbed(e);
+            const main = {
+              title: `${TITLE[e.kind] ?? '更新'} · ${e.version}`,
+              url: `${SITE.base}zh-tw/`,
+              description: lines.join('\n').slice(0, game ? 2500 : 4000),
+              color: 0xc7a15a,
+            };
+            // footer 和日期放在最後一個 embed
+            const embeds = [main, ...(game ? [game] : [])];
+            Object.assign(embeds.at(-1), { footer: FOOTER, ...(e.date ? { timestamp: `${e.date}T00:00:00Z` } : {}) });
             const body = {
               content: role ? `<@&${role}>` : '',
               allowed_mentions: { parse: [], roles: role ? [role] : [] },
-              embeds: [{
-                title: `${TITLE[e.kind] ?? '更新'} · ${e.version}`,
-                url: `${SITE.base}zh-tw/`,
-                description: lines.join('\n').slice(0, 4000),
-                color: 0xc7a15a,
-                footer: { text: '非官方玩家翻譯，與 D2 Survivors 開發者及 Blizzard Entertainment 無關 · Unofficial fan translation' },
-                ...(e.date ? { timestamp: `${e.date}T00:00:00Z` } : {}),
-              }],
+              embeds,
             };
+            // 本機測試：DRY_RUN=1 只印出要送的內容，不打 webhook
+            if (process.env.DRY_RUN) {
+              console.log(JSON.stringify(body, null, 2));
+              continue;
+            }
             const res = await fetch(process.env.DISCORD_WEBHOOK, {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
