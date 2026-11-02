@@ -8748,5 +8748,15 @@
  "Ethereal (Cannot be Repaired)": "イシリアル（修理不可能）",
  "Ethereal (Cannot be Repaired), Socketed (#)": "イシリアル（修理不可能）、ソケット（{0}）",
  "Runewords": "ルーンワード",
- "Inventory": "所持品"
+ "Inventory": "所持品",
+ "Indestructible": "壊れない",
+ "KEYBOARD": "キーボード",
+ "MOVE UP": "上に移動",
+ "MOVE DOWN": "下に移動",
+ "MOVE LEFT": "左に移動",
+ "MOVE RIGHT": "右に移動",
+ "CHARACTER SCREEN": "キャラクター画面",
+ "CLEAR SCREEN": "表示画面を閉じる",
+ "SWAP WEAPONS": "武器の切替",
+ "Swap weapons": "武器の切替"
 }

@@ -826,6 +826,13 @@
  "MAGIC ITEMS": "МАГИЧЕСКИЕ ПРЕДМЕТЫ",
  "RARE ITEMS": "РЕДКИЕ ПРЕДМЕТЫ",
  "CHARMS": "ОБЕРЕГИ",
+ "KEYBOARD": "КЛАВИАТУРА",
+ "MOVE UP": "ВВЕРХ",
+ "MOVE DOWN": "ВНИЗ",
+ "MOVE LEFT": "ВЛЕВО",
+ "MOVE RIGHT": "ВПРАВО",
+ "CHARACTER SCREEN": "МЕНЮ ПЕРСОНАЖА",
+ "CLEAR SCREEN": "ОЧИСТИТЬ ЭКРАН",
  "SKILL TREE": "Умения",
  "Spiral": "спираль",
  "TERROR #": "Ужас {0}"

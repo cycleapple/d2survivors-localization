@@ -9005,5 +9005,19 @@
  "Ethereal (Cannot be Repaired)": "無形（無法修復）",
  "Ethereal (Cannot be Repaired), Socketed (#)": "無形（無法修復），鑲孔（{0}）",
  "Runewords": "符文之語",
- "Inventory": "物品"
+ "Inventory": "物品",
+ "Indestructible": "永不毀損",
+ "KEYBOARD": "鍵盤",
+ "MOVE UP": "向上移動",
+ "MOVE DOWN": "向下移動",
+ "MOVE LEFT": "向左移動",
+ "MOVE RIGHT": "向右移動",
+ "CHARACTER SCREEN": "角色畫面",
+ "CLEAR SCREEN": "清除畫面",
+ "Up Arrow": "上",
+ "Down Arrow": "下",
+ "Left Arrow": "左",
+ "Right Arrow": "右",
+ "SWAP WEAPONS": "更換武器",
+ "Swap weapons": "更換武器"
 }
