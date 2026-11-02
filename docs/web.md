@@ -59,6 +59,7 @@ node tools/serve.mjs site 8766      # 本機預覽（允許跨網域讀取）；
 - 伺服器拒收時用戶端的處理（`saveTransfer` 的佇列）：400／422 標成 refused，6 小時後再試，最多 8 次就放棄（記一行 warn）；其他 4xx 直接丟掉；只有連不上、429、5xx 會退避、擋住後面的。所以拒收不會卡住佇列，佇列最多 40 筆、先丟被拒的。回應裡的 `unverified`（會把專家級英雄標成不排名）只在 200／201 時才讀，拒收不會標
 - 專家級報到（`/hc/checkin`）的內容是 player、name、build（和已經有的 mark），沒有 `lang`
 - 驗證：用 `site/web/core.js` 對抓下來的遊戲模組套 zh-TW 的規則，`saveTransfer` 的送出函式、排進佇列、送出佇列、死亡回報都跟原版一字不差；問題回報的兩處有改。`build-web.mjs` 八種語言全部 ✓。沒有在遊戲裡實際打一局（會送到正式的排行榜）
+- 2026-11-02 的遊戲版本把排行榜佇列、死亡回報和問題回報（`/api/report`、`d2s:report-queue`）原封不動搬到新模組 `leaderboardSend`，`saveTransfer` 裡已經沒有。舊規則只對 `saveTransfer`，所以兩條回報規則對不上、書籤載入失敗；改成兩個檔名都接受。同一版的顯示設定在 SHOW DAMAGE 後面多了 WEATHER、SHOW DAMAGE 的說明也改了，省電畫質那一列改成接在 SHOW DAMAGE 前面，只對 `label`、`toggle`，說明再改也對得上。重驗：39 條規則七種語言全部套得上，`leaderboardSend` 的送出、排進佇列、送出佇列、死亡回報跟原版一字不差
 
 ### 2026-10-27 的舊決定（已經不適用）
 
