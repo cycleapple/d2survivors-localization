@@ -20,6 +20,8 @@ export const SITE = {
   repoUrl: 'https://github.com/cycleapple/d2survivors-localization',
   // 贊助連結（使用者的 PayPal）。放在常見問題下面的小段落和頁尾，留空就不顯示
   donateUrl: 'https://paypal.me/DonateCYtw',
+  // 綠界（ECPay）贊助：給台灣的付款方式（信用卡、ATM、超商代碼），跟 PayPal 並列。留空就不顯示
+  ecpayUrl: 'https://p.ecpay.com.tw/5630EBB',
   // 回報問題的其他網址（GitHub Issues…），沒有 discordUrl 時才用。留空就不顯示
   feedbackUrl: '',
   // 更新紀錄顯示幾筆（site/data/changelog.json，manifest 的 changelog.url）

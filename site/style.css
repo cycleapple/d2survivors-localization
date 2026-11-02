@@ -468,6 +468,7 @@ h3 { font-size: 1.15rem; margin: 0 0 10px; }
 .support { margin-top: 40px; padding: 20px; border: 1px solid var(--line-soft); border-radius: var(--radius); background: var(--panel); }
 .support h3 { font-size: 1.05rem; margin-bottom: 6px; }
 .support p { margin: 0 0 10px; }
+.support-buttons { display: flex; flex-wrap: wrap; gap: 8px; }
 .support-note { color: var(--muted); font-size: 0.85rem; margin-bottom: 0 !important; }
 .btn-small { min-height: 38px; padding: 0 16px; font-size: 0.92rem; }
 .footer-community .sep { margin: 0 10px; color: var(--muted); }

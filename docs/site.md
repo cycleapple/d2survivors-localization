@@ -111,6 +111,7 @@ node tools/serve.mjs site 8766     # 本機預覽（或 python -m http.server 87
 ## 贊助
 
 - 連結在 `SITE.donateUrl`（使用者的 PayPal），留空就不顯示
+- 綠界（ECPay）贊助連結在 `SITE.ecpayUrl`，留空就不顯示。給台灣的付款方式（信用卡、ATM、超商代碼），按鈕跟 PayPal 並排（`donate.ecpay`），頁尾也有一個（`donate.ecpay.short`）；中文頁寫「綠界」，其他語言寫 ECPay 加上「台灣」，讓外國讀者知道是台灣的付款方式
 - 放在常見問題後面的小段落（標題、「覺得好用的話，可以請我喝杯咖啡」、PayPal 按鈕）和頁尾（跟 Discord 連結並排）。不跳視窗、不放在下載按鈕旁邊
 - 段落裡附上聲明（`donate.statement`）：免費使用，所有功能都不收費，也不販售任何遊戲內容；贊助是自願的，用來支持翻譯和維護的時間，贊助與否不影響任何功能。跟 README 同一個意思，不寫「不營利」
 - 贊助的文字不提 Blizzard 或官方譯名
