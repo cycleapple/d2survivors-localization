@@ -2,6 +2,170 @@
   "schema": 1,
   "entries": [
     {
+      "version": "20261102-1319",
+      "date": "2026-11-02",
+      "kind": "game-fix",
+      "announce": true,
+      "summary": {
+        "zh-TW": "已支援遊戲 2026.1102.2（新增 12 條譯文）",
+        "zh-CN": "已支持游戏 2026.1102.2（新增 12 条译文）",
+        "en": "Supports game version 2026.1102.2 (12 new strings translated)",
+        "ja": "ゲーム 2026.1102.2 に対応しました（新しい訳文 12 件）",
+        "de": "Unterstützt Spielversion 2026.1102.2 (12 neue Texte übersetzt)",
+        "fr": "Prise en charge de la version 2026.1102.2 du jeu (12 nouveaux textes traduits)",
+        "ru": "Поддержка версии игры 2026.1102.2 (переведено 12 новых строк)",
+        "pl": "Obsługa wersji gry 2026.1102.2 (przetłumaczono 12 nowych tekstów)"
+      },
+      "game": {
+        "desktop": "2026.1102.2"
+      },
+      "launcher": "1.0.4",
+      "languages": [
+        {
+          "id": "zh-TW",
+          "status": "available",
+          "entries": 13859,
+          "added": 12,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "zh-CN",
+          "status": "available",
+          "entries": 13858,
+          "added": 12,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ja",
+          "status": "available",
+          "entries": 13864,
+          "added": 12,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "de",
+          "status": "available",
+          "entries": 13898,
+          "added": 12,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "fr",
+          "status": "available",
+          "entries": 13907,
+          "added": 12,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ru",
+          "status": "available",
+          "entries": 13946,
+          "added": 12,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "pl",
+          "status": "available",
+          "entries": 13936,
+          "added": 12,
+          "changed": 0,
+          "removed": 0
+        }
+      ],
+      "gameNotes": {
+        "version": "2026.1102.2",
+        "at": "2026-11-02T12:28:03.508Z",
+        "lines": {
+          "zh-TW": [
+            "遭排行榜拒絕的紀錄不再卡住你的新紀錄，新紀錄現在會優先送出",
+            "恐懼重置前的紀錄會立即捨棄，不再等待數天",
+            "排行榜的「你」分頁會將遭拒絕的紀錄與等待上傳的紀錄分開計算",
+            "鬼火投射者會一次給予全部三種靈體，包括橡木智者的生命加成；以前只會留下荊棘之靈",
+            "自然祥和的橡木智者生命加成現在與鬼火投射者或你自己較弱的橡木智者並存時也會生效",
+            "德魯伊親自召喚的靈體與物品喚出的靈體現在會一同生效，若兩者提供相同加成則取較強者",
+            "物品充能技能會顯示物品上標示的等級，因此自然祥和的橡木智者會顯示等級5與+50%生命，而非等級2",
+            "強力英雄的普通、惡夢與地獄通關紀錄再度登上排行榜，其中也包括在99級時透過阿卡拉重新開始的英雄"
+          ],
+          "zh-CN": [
+            "被排行榜拒绝的记录不再阻挡你的新记录，新记录现在会优先发送",
+            "恐惧重置前的记录会立即丢弃，不再等待数天",
+            "排行榜的“你”分页会将被拒绝的记录与等待发送的记录分开计算",
+            "鬼火投影会一次给予全部三种灵体，包括橡木智灵的生命加成；以前只会保留棘灵",
+            "大自然的安宁的橡木智灵生命加成现在与鬼火投影或你自己较弱的橡木智灵并存时也会生效",
+            "德鲁伊亲自召唤的灵体与物品召唤的灵体现在会同时生效，若两者提供相同加成则取较强者",
+            "物品充能技能会显示物品上标注的等级，因此大自然的安宁的橡木智灵会显示等级5与+50%生命，而不是等级2",
+            "强力英雄的普通、噩梦与地狱通关记录重新登上排行榜，其中也包括在99级时通过阿卡拉重新开始的英雄"
+          ],
+          "en": [
+            "Runs the leaderboard refused no longer hold up your new runs, which are now sent first",
+            "Runs from before a Terror reset are dropped at once instead of waiting for days",
+            "The leaderboard's You tab counts the runs it refused apart from those waiting to be sent",
+            "Wisp Projector gives all three of its spirits at once, Oak Sage's life too, where only its Spirit of Barbs stayed",
+            "Nature's Peace's Oak Sage life now counts beside Wisp Projector or a weaker Oak Sage of your own",
+            "A Druid's own spirit and those his items raise now count together, the stronger where both give the same bonus",
+            "Item charges show the level their item names, so Nature's Peace's Oak Sage reads Level 5 with its +50% life, not Level 2",
+            "Normal, Nightmare and Hell clears by a strong hero, one Akara restarted at 99 among them, reach the leaderboard again"
+          ],
+          "ja": [
+            "ランキングに拒否されたランが新しいランの送信を妨げなくなり、新しいランが先に送信されるようになりました",
+            "恐怖のリセット前のランは、数日待たずにすぐ破棄されるようになりました",
+            "ランキングの「自分」タブで、拒否されたランを送信待ちのランと分けて数えるようになりました",
+            "ウィスプ・プロジェクターが3体の精霊をすべて同時に与え、老楢の護りのライフも得られるようになりました（以前は荊棘の精霊しか残りませんでした）",
+            "ネイチャーズ・ピースの老楢の護りのライフが、ウィスプ・プロジェクターや自分のより弱い老楢の護りと一緒でも適用されるようになりました",
+            "ドルイド自身の精霊とアイテムが呼び出した精霊が同時に効果を持つようになり、同じボーナスを与える場合は強い方が適用されます",
+            "アイテムのチャージスキルがアイテムに記載されたレベルで表示されるようになり、ネイチャーズ・ピースの老楢の護りはレベル2ではなくレベル5、ライフ+50%と表示されます",
+            "強い英雄のノーマル、ナイトメア、ヘルのクリア記録が再びランキングに載るようになりました。レベル99でアカラからやり直した英雄も含まれます"
+          ],
+          "de": [
+            "Von der Bestenliste abgelehnte Durchgänge halten deine neuen Durchgänge nicht mehr auf, die jetzt zuerst gesendet werden",
+            "Durchgänge von vor einem Schrecken-Reset werden sofort verworfen, statt tagelang zu warten",
+            "Der Du-Reiter der Bestenliste zählt abgelehnte Durchgänge getrennt von denen, die auf das Senden warten",
+            "Irrlichtprojektor gibt alle drei seiner Geister auf einmal, auch das Leben des Eichbaumweisen, wo bisher nur sein Dornengeist blieb",
+            "Das Leben des Eichbaumweisen von Friede der Natur zählt jetzt auch neben Irrlichtprojektor oder einem schwächeren eigenen Eichbaumweisen",
+            "Der eigene Geist eines Druiden und die von seinen Gegenständen beschworenen zählen jetzt zusammen, bei gleichem Bonus der stärkere",
+            "Gegenstandsladungen zeigen die Stufe, die ihr Gegenstand nennt, daher zeigt der Eichbaumweiser von Friede der Natur Stufe 5 mit +50% Leben statt Stufe 2",
+            "Abschlüsse von Normal, Alptraum und Hölle durch einen starken Helden, darunter einer, der bei Akara auf Stufe 99 neu begonnen hat, kommen wieder in die Bestenliste"
+          ],
+          "fr": [
+            "Les parties refusées par le classement ne bloquent plus vos nouvelles parties, qui sont désormais envoyées en premier",
+            "Les parties antérieures à une réinitialisation de Terreur sont abandonnées aussitôt au lieu d’attendre des jours",
+            "L’onglet Vous du classement compte les parties refusées à part de celles en attente d’envoi",
+            "Feu follet donne ses trois esprits à la fois, y compris la vie du Sage du Chêne, alors que seul son Esprit vengeur restait",
+            "La vie du Sage du Chêne de Paix de la nature compte désormais à côté de Feu follet ou de votre propre Sage du Chêne plus faible",
+            "L’esprit propre d’un Druide et ceux invoqués par ses objets s’additionnent désormais, le plus fort l’emportant quand les deux donnent le même bonus",
+            "Les charges d’objet affichent le niveau indiqué par leur objet : le Sage du Chêne de Paix de la nature indique donc Niveau 5 avec +50% de vie, et non Niveau 2",
+            "Les parties terminées en Normal, Cauchemar et Enfer par un héros puissant, dont un recommencé au niveau 99 avec Akara, figurent de nouveau au classement"
+          ],
+          "ru": [
+            "Забеги, отклоненные таблицей рекордов, больше не задерживают новые забеги, которые теперь отправляются первыми",
+            "Забеги, сделанные до сброса Ужаса, удаляются сразу, а не ждут несколько дней",
+            "Вкладка \"Вы\" в таблице рекордов считает отклоненные забеги отдельно от ожидающих отправки",
+            "Повелитель тумана дает сразу всех трех духов, включая здоровье Древесного духа, тогда как раньше оставался только Терновый дух",
+            "Здоровье Древесного духа от Покоя природы теперь учитывается рядом с Повелителем тумана или вашим более слабым Древесным духом",
+            "Собственный дух друида и духи, вызванные его предметами, теперь действуют вместе; при одинаковом бонусе действует более сильный",
+            "Заряды предметов показывают уровень, указанный на предмете, поэтому Древесный дух от Покоя природы показывает уровень 5 и +50% к здоровью, а не уровень 2",
+            "Прохождения обычной сложности, Кошмара и Ада сильным героем, в том числе начавшим заново у Акары на 99-м уровне, снова попадают в таблицу рекордов"
+          ],
+          "pl": [
+            "Podejścia odrzucone przez ranking nie blokują już nowych podejść, które są teraz wysyłane jako pierwsze",
+            "Podejścia sprzed resetu Grozy są od razu usuwane, zamiast czekać całymi dniami",
+            "Zakładka Ty w rankingu liczy odrzucone podejścia osobno od czekających na wysłanie",
+            "Ognikowiec daje wszystkie trzy duchy naraz, także zdrowie Dębowego Mędrca, a wcześniej zostawał tylko Duch Kolców",
+            "Zdrowie Dębowego Mędrca ze Spokoju Natury liczy się teraz obok Ognikowca lub twojego własnego, słabszego Dębowego Mędrca",
+            "Własny duch druida i duchy przywołane przez jego przedmioty działają teraz razem; przy tym samym bonusie liczy się silniejszy",
+            "Ładunki przedmiotów pokazują poziom podany na przedmiocie, więc Dębowy Mędrzec ze Spokoju Natury ma Poziom 5 i +50% zdrowia, a nie Poziom 2",
+            "Ukończenia poziomów Normalny, Koszmar i Piekło przez silnego bohatera, w tym takiego, który zaczął od nowa u Akary na 99. poziomie, znów trafiają do rankingu"
+          ]
+        }
+      }
+    },
+    {
       "version": "20261102-1106",
       "date": "2026-11-02",
       "kind": "game-fix",
