@@ -83,6 +83,8 @@ node tools/serve.mjs site 8766     # 本機預覽（或 python -m http.server 87
 - 讀 `site/data/changelog.json`（`tools/publish.mjs` 產生，格式見 [manifest-v2.md](manifest-v2.md) 的「更新紀錄」），顯示最近 `SITE.changelogCount`（5）筆的日期、種類（翻譯／語言／遊戲改版／啟動器）、`summary`
 - `summary` 用頁面語言；沒有的話中文頁用繁中、英文頁用英文，再沒有就用有的那個
 - 建置時寫進 HTML；網頁開啟後讀 manifest 的 `changelog.url` 再畫一次。兩邊都沒有就不顯示這個區塊（HTML 裡留著隱藏的區塊，讀到才打開）
+- 有 `gameNotes` 的那筆多一段收合的「遊戲本身的更新（遊戲版本 x）」（`changelog.game.*`）：用頁面語言那份 `lines`，沒有就用 `en` 原文；註明是 D2 Survivors 作者寫的、我們只翻譯；有 `at` 就顯示官方發布時間（讀者當地時間，建置時先用建置機時區，網頁重畫時換掉），有 `source`（http/https）就附「原文」連結。整段 `overflow-wrap: anywhere`，手機 320px 不橫向捲動
+- 錨點：`<語言頁>/#changelog`（例如 `https://cycleapple.github.io/d2survivors-localization/zh-tw/#changelog`），Discord 公告太長時連到這裡。區塊 id 不要改
 
 ## 「遊戲剛更新，翻譯修正中」
 

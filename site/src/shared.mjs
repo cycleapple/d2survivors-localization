@@ -75,8 +75,23 @@ export function changelogHtml(entries, t, lang, count) {
   return entries.slice(0, count).map(e => `<li>
             <time datetime="${esc(e.date)}">${esc(e.date)}</time>
             <span class="kind kind-${esc(e.kind)}">${esc(t['changelog.kind.' + e.kind] || e.kind)}</span>
-            <span class="changelog-summary">${esc(pickText(e.summary, lang))}</span>
+            <span class="changelog-summary">${esc(pickText(e.summary, lang))}</span>${gameNotesHtml(e.gameNotes, t, lang)}
           </li>`).join('\n          ');
+}
+
+// 遊戲本身的更新說明（原作者寫的，我們只翻譯）：可收合；用頁面語言那份，沒有就用 en 原文
+function gameNotesHtml(g, t, lang) {
+  const lines = g?.lines?.[lang]?.length ? g.lines[lang] : g?.lines?.en;
+  if (!lines?.length) return '';
+  const source = /^https?:\/\//.test(g.source || '') ? ` <a href="${esc(g.source)}" target="_blank" rel="noopener">${esc(t['changelog.game.source'])}</a>` : '';
+  // 官方發布時間（UTC）換成讀者的當地時間；建置時先用建置機的時區，網頁讀到 changelog 會重畫
+  const at = g.at && !isNaN(new Date(g.at)) ? ` <time datetime="${esc(g.at)}">${esc(fmt(t['changelog.game.at'], new Date(g.at).toLocaleString(lang, { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', timeZoneName: 'short' })))}</time>` : '';
+  return `
+            <details class="game-notes">
+              <summary>${esc(fmt(t['changelog.game.title'], g.version || ''))}</summary>
+              <p class="game-notes-credit">${esc(t['changelog.game.credit'])}${at}${source}</p>
+              <ul>${lines.map(l => `<li>${esc(l)}</li>`).join('')}</ul>
+            </details>`;
 }
 
 // 查「遊戲剛更新」issue 的 GitHub API 網址（只要一筆，有就代表網頁版的規則對不上）
@@ -88,6 +103,7 @@ export function gameUpdateApi(site) {
 // 網頁讀 manifest 後要用到的文字（建置時嵌進頁面）
 export const RUNTIME_KEYS = [
   'changelog.kind.translation', 'changelog.kind.language', 'changelog.kind.game-fix', 'changelog.kind.launcher',
+  'changelog.game.title', 'changelog.game.credit', 'changelog.game.at', 'changelog.game.source',
   'lang.coverage', 'status.available', 'status.beta', 'status.planned',
   'meta.updated', 'meta.game', 'meta.launcher', 'meta.platform', 'meta.browsers', 'meta.devices', 'meta.devices.value',
   'hero.download', 'hero.soon', 'web.copied', 'web.copyfail', 'web.pc.drag',
