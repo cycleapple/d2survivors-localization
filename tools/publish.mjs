@@ -24,13 +24,14 @@ const git = (...args) => execFileSync('git', args, { encoding: 'utf8' }).trim();
 const fail = msg => { console.error(`發布失敗：${msg}`); process.exit(1); };
 const readJson = (file, fallback) => fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, 'utf8')) : fallback;
 const writeJson = (file, data) => fs.writeFileSync(file, JSON.stringify(data, null, 2) + '\n');
-// 遊戲版本 2026.1102.1 的更新說明是 build "20261102.1" 那一項的 lines；沒有存檔或找不到這個 build 就是 null
+// 遊戲版本 2026.1102.1 的更新說明是 build "20261102.1" 那一項的 lines（at 是官方發布時間）；沒有存檔或找不到這個 build 就是 null
 function makeGameNotes(version) {
   const builds = readJson(`versions/${version}/changelog.json`, []);
-  const en = builds.find(b => b.build === version.replace('.', ''))?.lines?.map(l => l.text) ?? [];
+  const build = builds.find(b => b.build === version.replace('.', ''));
+  const en = build?.lines?.map(l => l.text) ?? [];
   if (!en.length) return null;
   const dicts = Object.fromEntries(ids.map(id => [id, readJson(target(id).out, {})]));
-  return { version, lines: Object.fromEntries(UI_LANGUAGES.map(ui => [ui, en.map(t => (ui !== 'en' && dicts[ui]?.[t]) || t)])) };
+  return { version, ...(build.at && { at: build.at }), lines: Object.fromEntries(UI_LANGUAGES.map(ui => [ui, en.map(t => (ui !== 'en' && dicts[ui]?.[t]) || t)])) };
 }
 
 // manifest 會讀到別的聊天室的檔案（修改規則）：工作目錄裡有還沒 commit 的改動就停下來，免得把做到一半的規則發布出去
@@ -80,6 +81,9 @@ const dictChanged = stats.some(s => s.new || s.added || s.changed || s.removed |
 const changelog = readJson(CHANGELOG, { schema: 1, entries: [] });
 if (hasNext && !(next.summary?.['zh-TW'] && next.summary?.en)) fail(`${NEXT} 至少要有 summary 的 zh-TW 和 en`);
 if (hasNext) { const missing = UI_LANGUAGES.filter(ui => !next.summary[ui]); if (missing.length) console.log(`注意：${NEXT} 的 summary 少了 ${missing.join('、')}（網站會顯示 en）`); }
+// changelog-next 的 gameNotes: "<遊戲版本>"：把那個版本的更新說明搬到這次新增的那筆（另外公告用），舊的那筆拿掉
+const takeOver = hasNext && next.gameNotes ? String(next.gameNotes) : null;
+if (takeOver && !makeGameNotes(takeOver)) fail(`${NEXT} 的 gameNotes：versions/${takeOver}/changelog.json 沒有這個版本的更新說明`);
 // 第一次（還沒有 changelog.json）也記一筆，讓網站和啟動器有東西可以讀；有寫說明的也記
 const needEntry = dictChanged || rulesChanged || launcherChanged || hasNext || !changelog.entries.length;
 
@@ -102,6 +106,12 @@ if (needEntry && changelog.entries[0]?.version !== manifest.version) {
 }
 // 遊戲自己的更新說明（extract-keys 存的 versions/<版本>/changelog.json，按 build 分）：這個遊戲版本還沒有 gameNotes 的話，
 // 放進最新一筆（這次新增的那筆；沒有新增就是上一筆，同一個遊戲版本才放）。原文照遊戲順序，各語言用字典的譯文，缺的用 en，不另外翻
+if (takeOver) {
+  for (const e of changelog.entries) if (e.gameNotes?.version === takeOver) { delete e.gameNotes; console.log(`遊戲更新說明：從 ${e.version} 拿掉 ${takeOver}`); }
+  changelog.entries[0].gameNotes = makeGameNotes(takeOver);
+  writeJson(CHANGELOG, changelog);
+  console.log(`遊戲更新說明：${takeOver} 共 ${changelog.entries[0].gameNotes.lines.en.length} 條 → ${changelog.entries[0].version}`);
+}
 const gameNotes = makeGameNotes(version);
 if (gameNotes && !changelog.entries.some(e => e.gameNotes?.version === version) && changelog.entries[0]?.game?.desktop === version) {
   changelog.entries[0].gameNotes = gameNotes;

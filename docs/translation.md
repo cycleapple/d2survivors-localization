@@ -180,7 +180,8 @@ manifest 各部分從哪裡來：
 - `summary` 至少要有 `zh-TW` 和 `en`（沒有的話 publish 會停下來）；網站每種介面語言（zh-TW、zh-CN、en、ja、de、fr、ru、pl）都要寫，少了的 publish 會列出來，網站顯示 en。`notes` 選填
 - 沒有這個檔或是 `{}`：依統計自動寫每種介面語言（`tools/changelog-summary.mjs`：「繁中修正 30 條、新增 12 條；新增日文（測試中）」「Russisch: 562 korrigiert」），`kind` 是 `translation`、`announce` 是 `false`
 - 寫了這個檔（不是 `{}`）就一定新增一筆、manifest 換新的 version，字典和規則都沒變也一樣（只發公告用）
-- 遊戲本身的更新說明（`gameNotes`，格式見 [manifest-v2.md](manifest-v2.md)）：publish 自動帶入。來源是 `versions/<版本>/changelog.json`（遊戲的 `web/changelog.json`，按 build 分的清單，`extract-keys` 會一起存；網頁版先改版、還沒有 app.asar 時用 `curl -s https://d2survivors.lol/changelog.json -o versions/<版本>/changelog.json`）。遊戲版本 2026.1102.1 取 `build` 是 `20261102.1` 那一項，原文照遊戲順序，各語言用合併後字典的譯文，缺的用 en，不另外翻。這個遊戲版本還沒有 `gameNotes` 時放進最新一筆（這次新增的，沒有新增就是上一筆；只放在 `game.desktop` 是這個版本的那筆）。改舊的項目不會再發 Discord 公告（announce.yml 只發新增的 version）
+- 遊戲本身的更新說明（`gameNotes`，格式見 [manifest-v2.md](manifest-v2.md)）：publish 自動帶入。來源是 `versions/<版本>/changelog.json`（遊戲的 `web/changelog.json`，按 build 分的清單，`extract-keys` 會一起存；網頁版先改版、還沒有 app.asar 時用 `curl -s https://d2survivors.lol/changelog.json -o versions/<版本>/changelog.json`）。遊戲版本 2026.1102.1 取 `build` 是 `20261102.1` 那一項，原文照遊戲順序，各語言用合併後字典的譯文，缺的用 en，不另外翻。這個遊戲版本還沒有 `gameNotes` 時放進最新一筆（這次新增的，沒有新增就是上一筆；只放在 `game.desktop` 是這個版本的那筆）。改舊的項目不會再發 Discord 公告（announce.yml 只發新增的 version）。`at` 是那個 build 的官方發布時間（遊戲 changelog.json 的 `at`，UTC）
+- 要另外公告某個遊戲版本的更新說明：changelog-next.json 加 `"gameNotes": "2026.1102.1"`（再加 `announce: true` 和 summary），publish 會把那個版本的 `gameNotes` 從舊的那筆搬到這次新增的那筆，舊的不留
 - 先看結果再發：`node tools/publish.mjs --dry-run` 在 `work/translation/publish-dry/` 的複本上跑，不清空 changelog-next、不 commit
 
 德、法、俄文改成 beta 發布的那次：`kind: "language"`、`announce: true`，三種介面語言都寫 summary。
