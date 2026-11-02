@@ -31,7 +31,7 @@ Struktura repozytorium i sposób pracy: zobacz [README po angielsku](../../READM
 
 ## Wsparcie
 
-Jeśli ci się podoba, możesz postawić mi kawę: [PayPal](https://paypal.me/DonateCYtw)
+Jeśli ci się podoba, możesz postawić mi kawę: [PayPal](https://paypal.me/DonateCYtw) · [Portaly](https://portaly.cc/thecy)
 
 ## Licencja
 

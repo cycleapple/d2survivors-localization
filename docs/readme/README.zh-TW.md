@@ -31,7 +31,7 @@ repo 的目錄、開發方式見[英文版 README](../../README.md#repository-la
 
 ## 贊助
 
-覺得好用的話，可以請我喝杯咖啡：[PayPal](https://paypal.me/DonateCYtw)
+覺得好用的話，可以請我喝杯咖啡：[PayPal](https://paypal.me/DonateCYtw) · [Portaly](https://portaly.cc/thecy)
 
 ## 授權
 

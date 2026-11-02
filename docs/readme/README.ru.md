@@ -31,7 +31,7 @@
 
 ## Поддержать
 
-Если понравилось, можете угостить меня кофе: [PayPal](https://paypal.me/DonateCYtw)
+Если понравилось, можете угостить меня кофе: [PayPal](https://paypal.me/DonateCYtw) · [Portaly](https://portaly.cc/thecy)
 
 ## Лицензия
 

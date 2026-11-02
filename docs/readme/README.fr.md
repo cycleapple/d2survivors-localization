@@ -31,7 +31,7 @@ Organisation du dépôt et développement : voir le [README en anglais](../../RE
 
 ## Faire un don
 
-Si ça vous plaît, vous pouvez m'offrir un café : [PayPal](https://paypal.me/DonateCYtw)
+Si ça vous plaît, vous pouvez m'offrir un café : [PayPal](https://paypal.me/DonateCYtw) · [Portaly](https://portaly.cc/thecy)
 
 ## Licence
 

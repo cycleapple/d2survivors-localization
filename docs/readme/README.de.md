@@ -31,7 +31,7 @@ Aufbau des Repositorys und Entwicklung: siehe [englische README](../../README.md
 
 ## Spenden
 
-Wenn es Ihnen gefällt, können Sie mir einen Kaffee spendieren: [PayPal](https://paypal.me/DonateCYtw)
+Wenn es Ihnen gefällt, können Sie mir einen Kaffee spendieren: [PayPal](https://paypal.me/DonateCYtw) · [Portaly](https://portaly.cc/thecy)
 
 ## Lizenz
 

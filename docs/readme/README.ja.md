@@ -31,7 +31,7 @@
 
 ## 寄付
 
-気に入ったら、コーヒー1杯分の支援をいただけると嬉しいです：[PayPal](https://paypal.me/DonateCYtw)
+気に入ったら、コーヒー1杯分の支援をいただけると嬉しいです：[PayPal](https://paypal.me/DonateCYtw) · [Portaly](https://portaly.cc/thecy)
 
 ## ライセンス
 

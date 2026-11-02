@@ -31,7 +31,7 @@ repo 的目录结构和开发方式见[英文版 README](../../README.md#reposit
 
 ## 赞助
 
-觉得好用的话，可以请我喝杯咖啡：[PayPal](https://paypal.me/DonateCYtw)
+觉得好用的话，可以请我喝杯咖啡：[PayPal](https://paypal.me/DonateCYtw) · [Portaly](https://portaly.cc/thecy)
 
 ## 授权
 
