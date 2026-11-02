@@ -84,8 +84,8 @@ function gameNotesHtml(g, t, lang) {
   const lines = g?.lines?.[lang]?.length ? g.lines[lang] : g?.lines?.en;
   if (!lines?.length) return '';
   const source = /^https?:\/\//.test(g.source || '') ? ` <a href="${esc(g.source)}" target="_blank" rel="noopener">${esc(t['changelog.game.source'])}</a>` : '';
-  // 官方發布時間（UTC）換成讀者的當地時間；建置時先用建置機的時區，網頁讀到 changelog 會重畫
-  const at = g.at && !isNaN(new Date(g.at)) ? ` <time datetime="${esc(g.at)}">${esc(fmt(t['changelog.game.at'], new Date(g.at).toLocaleString(lang, { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', timeZoneName: 'short' })))}</time>` : '';
+  // 官方更新時間：網頁裡用讀者的當地時間；建置時（沒有 JS 也看得到的那份）用 UTC，網頁讀到 changelog 會重畫
+  const at = g.at && !isNaN(new Date(g.at)) ? ` <time datetime="${esc(g.at)}">${esc(fmt(t['changelog.game.at'], new Date(g.at).toLocaleString(lang, { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', timeZoneName: 'short', timeZone: typeof window === 'undefined' ? 'UTC' : undefined })))}</time>` : '';
   return `
             <details class="game-notes">
               <summary>${esc(fmt(t['changelog.game.title'], g.version || ''))}</summary>
