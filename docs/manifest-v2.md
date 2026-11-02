@@ -194,6 +194,14 @@ site/data/dict/ja.json
       "summary": { "zh-TW": "…", "zh-CN": "…", "en": "…" },
       "notes": { "zh-TW": ["…"] },
       "game": { "desktop": "2026.1027.1" },
+      "gameNotes": {              // 選填：遊戲這次改版自己的更新說明（原作者寫的），工具從字典自動帶入，不另外翻
+        "version": "2026.1102.1", // 這些更新說明屬於哪個遊戲版本
+        "source": "https://…",    // 選填：原文在哪裡看得到
+        "lines": {                // 照遊戲裡的順序；每種介面語言（zh-TW、zh-CN、en、ja、de、fr、ru、pl）一份，en 是原文。缺譯的那條用 en
+          "en": ["On phones and tablets the game holds its art in about a third less memory, …"],
+          "zh-TW": ["在手機與平板上，遊戲圖像佔用的記憶體減少約三分之一，…"]
+        }
+      },
       "launcher": "0.3.0",        // 這次發布時的 launcher.latest（沒有就省略）
       "languages": [              // 自動統計：跟上一次發布比
         { "id": "zh-TW", "status": "available", "entries": 12758, "added": 12, "changed": 30, "removed": 0 }
@@ -205,14 +213,15 @@ site/data/dict/ja.json
 
 - 只有字典、規則、語言狀態、啟動器版本有變動才會多一筆（跟 `publish` 判斷要不要發布的條件一樣）
 - 沒有寫 `changelog-next.json` 時，`summary` 由工具依統計自動產生（例如「繁中修正 30 條、新增 12 條」），`kind` 是 `translation`、`announce` 是 `false`
+- `gameNotes` 只放在遊戲改版後第一筆有這些更新說明的紀錄（通常是 `game-fix` 那筆），同一個遊戲版本不重複放。顯示時標明是 D2 Survivors 作者的更新說明、我們只做翻譯
 
 ### 誰讀
 
 | | 讀什麼 | 做什麼 |
 |---|---|---|
-| 網站 | 最近幾筆的 `summary`、`date` | 「更新紀錄」區塊；manifest 的 `game.web_checked` 太舊或 Web check 失敗時顯示「遊戲剛更新，翻譯修正中」 |
+| 網站 | 最近幾筆的 `summary`、`date`、`gameNotes` | 「更新紀錄」區塊，有 `gameNotes` 的那筆多一段「遊戲本身的更新」（可收合）；manifest 的 `game.web_checked` 太舊或 Web check 失敗時顯示「遊戲剛更新，翻譯修正中」 |
 | 啟動器 | `changelog.latest` 跟本機上次看過的比 | 有新的就在視窗上顯示最新一筆的 `summary`（介面語言對應的那個） |
-| Discord 公告 | `announce: true` 而且還沒發過的 | 發到 #announcements（見 [release.md](release.md)） |
+| Discord 公告 | `announce: true` 而且還沒發過的，含 `gameNotes` | 發到 #announcements（見 [release.md](release.md)）；`gameNotes` 接在 summary 後面，超過 Discord 長度就只列前幾條、其餘連到網站 |
 
 ## 遊戲改版的應對
 
