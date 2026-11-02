@@ -179,6 +179,8 @@ manifest 各部分從哪裡來：
 - `announce: true` 才會發 Discord 公告。平常修譯文用 `false`；新語言、遊戲改版修好用 `true`
 - `summary` 至少要有 `zh-TW` 和 `en`（沒有的話 publish 會停下來）；網站每種介面語言（zh-TW、zh-CN、en、ja、de、fr、ru、pl）都要寫，少了的 publish 會列出來，網站顯示 en。`notes` 選填
 - 沒有這個檔或是 `{}`：依統計自動寫每種介面語言（`tools/changelog-summary.mjs`：「繁中修正 30 條、新增 12 條；新增日文（測試中）」「Russisch: 562 korrigiert」），`kind` 是 `translation`、`announce` 是 `false`
+- 寫了這個檔（不是 `{}`）就一定新增一筆、manifest 換新的 version，字典和規則都沒變也一樣（只發公告用）
+- 遊戲本身的更新說明（`gameNotes`，格式見 [manifest-v2.md](manifest-v2.md)）：publish 自動帶入。來源是 `versions/<版本>/changelog.json`（遊戲的 `web/changelog.json`，按 build 分的清單，`extract-keys` 會一起存；網頁版先改版、還沒有 app.asar 時用 `curl -s https://d2survivors.lol/changelog.json -o versions/<版本>/changelog.json`）。遊戲版本 2026.1102.1 取 `build` 是 `20261102.1` 那一項，原文照遊戲順序，各語言用合併後字典的譯文，缺的用 en，不另外翻。這個遊戲版本還沒有 `gameNotes` 時放進最新一筆（這次新增的，沒有新增就是上一筆；只放在 `game.desktop` 是這個版本的那筆）。改舊的項目不會再發 Discord 公告（announce.yml 只發新增的 version）
 - 先看結果再發：`node tools/publish.mjs --dry-run` 在 `work/translation/publish-dry/` 的複本上跑，不清空 changelog-next、不 commit
 
 德、法、俄文改成 beta 發布的那次：`kind: "language"`、`announce: true`，三種介面語言都寫 summary。
@@ -197,7 +199,7 @@ v1 的更新來源（`dist/`，`cycleapple/d2survivors-zh-tw-dist`）停在最�
 mkdir -p backup/<新版本> && cp "%LOCALAPPDATA%/Programs/D2 Survivors/resources/app.asar"* backup/<新版本>/
 rm -rf work/app && npx asar extract backup/<新版本>/app.asar work/app
 # 3. 抽新的 key，跟上一版比對（新增、刪除、韓文改了）
-node tools/extract-keys.mjs backup/<新版本>/app.asar versions/<新版本>/ko.json
+node tools/extract-keys.mjs backup/<新版本>/app.asar versions/<新版本>/ko.json   # 也存遊戲的更新說明 versions/<新版本>/changelog.json
 node tools/diff-keys.mjs versions/<舊版本>/ko.json versions/<新版本>/ko.json work/diff.json
 # 4. 重新自動配對、合併，看還缺哪些（缺的就是要補翻的）
 node tools/build-glossary.mjs versions/<新版本>/ko.json data/d2r-strings dict/d2r-auto.json work/glossary-report.json

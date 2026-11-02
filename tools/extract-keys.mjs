@@ -1,4 +1,5 @@
 // 從遊戲的 app.asar 抽出韓文字典的全部英文 key（連同韓文譯文，之後配對官方字串用）
+// 遊戲自己的更新說明（web/changelog.json，按 build 分的清單）也一起存到同一個資料夾的 changelog.json，publish 帶入 gameNotes 用
 //   node tools/extract-keys.mjs <app.asar> <輸出 .json>
 import { extractFile, listPackage } from '@electron/asar';
 import fs from 'node:fs';
@@ -15,3 +16,9 @@ const dict = readDict(tmp);
 fs.mkdirSync(path.dirname(out), { recursive: true });
 fs.writeFileSync(out, JSON.stringify(dict, null, 1));
 console.log(`${Object.keys(dict).length} 條 → ${out}`);
+const notesPath = listPackage(asar).find(p => /[/\\]web[/\\]changelog\.json$/.test(p));
+if (notesPath) {
+  const notesOut = path.join(path.dirname(out), 'changelog.json');
+  fs.writeFileSync(notesOut, extractFile(asar, notesPath.replace(/^[/\\]/, '')));
+  console.log(`更新說明 → ${notesOut}`);
+}

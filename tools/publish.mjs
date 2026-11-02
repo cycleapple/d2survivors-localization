@@ -24,6 +24,14 @@ const git = (...args) => execFileSync('git', args, { encoding: 'utf8' }).trim();
 const fail = msg => { console.error(`發布失敗：${msg}`); process.exit(1); };
 const readJson = (file, fallback) => fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, 'utf8')) : fallback;
 const writeJson = (file, data) => fs.writeFileSync(file, JSON.stringify(data, null, 2) + '\n');
+// 遊戲版本 2026.1102.1 的更新說明是 build "20261102.1" 那一項的 lines；沒有存檔或找不到這個 build 就是 null
+function makeGameNotes(version) {
+  const builds = readJson(`versions/${version}/changelog.json`, []);
+  const en = builds.find(b => b.build === version.replace('.', ''))?.lines?.map(l => l.text) ?? [];
+  if (!en.length) return null;
+  const dicts = Object.fromEntries(ids.map(id => [id, readJson(target(id).out, {})]));
+  return { version, lines: Object.fromEntries(UI_LANGUAGES.map(ui => [ui, en.map(t => (ui !== 'en' && dicts[ui]?.[t]) || t)])) };
+}
 
 // manifest 會讀到別的聊天室的檔案（修改規則）：工作目錄裡有還沒 commit 的改動就停下來，免得把做到一半的規則發布出去
 const FOREIGN = ['tools/patch-rules.mjs', 'tools/web-rules.mjs'];
@@ -91,6 +99,14 @@ if (needEntry && changelog.entries[0]?.version !== manifest.version) {
   writeJson(CHANGELOG, changelog);
   if (hasNext) writeJson(NEXT, {});
   console.log(`更新紀錄：${entry.version}（${entry.kind}${entry.announce ? '，要發公告' : ''}）${entry.summary['zh-TW']}`);
+}
+// 遊戲自己的更新說明（extract-keys 存的 versions/<版本>/changelog.json，按 build 分）：這個遊戲版本還沒有 gameNotes 的話，
+// 放進最新一筆（這次新增的那筆；沒有新增就是上一筆，同一個遊戲版本才放）。原文照遊戲順序，各語言用字典的譯文，缺的用 en，不另外翻
+const gameNotes = makeGameNotes(version);
+if (gameNotes && !changelog.entries.some(e => e.gameNotes?.version === version) && changelog.entries[0]?.game?.desktop === version) {
+  changelog.entries[0].gameNotes = gameNotes;
+  writeJson(CHANGELOG, changelog);
+  console.log(`遊戲更新說明：${version} 共 ${gameNotes.lines.en.length} 條 → ${changelog.entries[0].version}`);
 }
 // manifest 指到更新紀錄：網址帶雜湊（CDN 快取），latest 給啟動器、網站比對有沒有新的
 if (fs.existsSync(CHANGELOG)) {
