@@ -2,6 +2,178 @@
   "schema": 1,
   "entries": [
     {
+      "version": "20261103-1513",
+      "date": "2026-11-03",
+      "kind": "game-fix",
+      "announce": true,
+      "summary": {
+        "zh-TW": "已支援遊戲 2026.1103.2（新增 9 條譯文）",
+        "zh-CN": "已支持游戏 2026.1103.2（新增 9 条译文）",
+        "en": "Supports game version 2026.1103.2 (9 new strings translated)",
+        "ja": "ゲーム 2026.1103.2 に対応しました（新しい訳文 9 件）",
+        "de": "Unterstützt Spielversion 2026.1103.2 (9 neue Texte übersetzt)",
+        "fr": "Prise en charge de la version 2026.1103.2 du jeu (9 nouveaux textes traduits)",
+        "ru": "Поддержка версии игры 2026.1103.2 (переведено 9 новых строк)",
+        "pl": "Obsługa wersji gry 2026.1103.2 (przetłumaczono 9 nowych tekstów)"
+      },
+      "game": {
+        "desktop": "2026.1103.2"
+      },
+      "launcher": "1.0.5",
+      "languages": [
+        {
+          "id": "zh-TW",
+          "status": "available",
+          "entries": 14018,
+          "added": 9,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "zh-CN",
+          "status": "available",
+          "entries": 14017,
+          "added": 9,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ja",
+          "status": "available",
+          "entries": 14023,
+          "added": 9,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "de",
+          "status": "available",
+          "entries": 14057,
+          "added": 9,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "fr",
+          "status": "available",
+          "entries": 14066,
+          "added": 9,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ru",
+          "status": "available",
+          "entries": 14105,
+          "added": 9,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "pl",
+          "status": "available",
+          "entries": 14095,
+          "added": 9,
+          "changed": 0,
+          "removed": 0
+        }
+      ],
+      "gameNotes": {
+        "version": "2026.1103.2",
+        "at": "2026-11-03T14:21:06.468Z",
+        "lines": {
+          "zh-TW": [
+            "維基的「物品」頁面列出所有珠寶詞綴，以及每個詞綴的數值範圍與開始出現的物品等級",
+            "把珠寶放到已鑲嵌的鑲孔上，就會替換那裡的珠寶，原本的珠寶會回到你手上",
+            "充能強擊、聚能強擊與閃電強擊現在能傷害電擊免疫的怪物：刺擊會像《暗黑破壞神 II》一樣加上武器傷害",
+            "《暗黑破壞神 II》的怪物資料表損壞時，桌面版的設定會請你更新或修復《暗黑破壞神 II》，不再把怪物畫成圓圈",
+            "桌面版的設定不再因為剛寫入的某個檔案不見了而卡在「音效與音樂」步驟",
+            "其他視窗在前景時，控制器不再操作遊戲，因此開著桌面版時也能在其他遊戲中使用控制器",
+            "聚能強擊的技能框現在顯示每次施放命中8次（刺擊加上全部7道閃電），原本顯示2次",
+            "兩件帶有相同靈氣的物品（例如兩件鳳凰）現在會像《暗黑破壞神 II》一樣，等級相加可超過20",
+            "右鍵點擊珠寶不再把它裝備到隱藏的欄位，之前因此消失的珠寶會回到你的個人儲物箱分頁"
+          ],
+          "zh-CN": [
+            "维基的“物品”页面列出所有珠宝词缀，以及每个词缀的数值范围和开始出现的物品等级",
+            "把珠宝放到已镶嵌的镶孔上，就会替换那里的珠宝，原本的珠宝会回到你手上",
+            "电荷攻击、充能一击和闪电攻击现在能伤害闪电免疫的怪物：刺击会像《暗黑破坏神 II》一样加上武器伤害",
+            "《暗黑破坏神 II》的怪物数据表损坏时，桌面版的设置会请你更新或修复《暗黑破坏神 II》，不再把怪物画成圆圈",
+            "桌面版的设置不再因为刚写入的某个文件不见了而卡在“音效与音乐”步骤",
+            "其他窗口在前台时，手柄不再操作游戏，因此开着桌面版时也能在其他游戏中使用手柄",
+            "充能一击的技能提示框现在显示每次施放命中8次（刺击加上全部7道闪电），原本显示2次",
+            "两件带有相同光环的物品（例如两件凤凰）现在会像《暗黑破坏神 II》一样，等级相加可超过20",
+            "右键点击珠宝不再把它装备到隐藏的栏位，之前因此消失的珠宝会回到你的个人储藏箱分页"
+          ],
+          "en": [
+            "The wiki's Items page lists every jewel affix, with what each can roll and the item level it starts from",
+            "Put a jewel down on a filled socket to replace the jewel there, which comes back to your hand",
+            "Power Strike, Charged Strike and Lightning Strike now hurt lightning immunes, their thrust adding your weapon's damage as in Diablo II",
+            "The desktop app's setup asks you to update or repair Diablo II when its monster tables are broken, rather than draw monsters as circles",
+            "The desktop app's setup no longer stops at Sounds and music when one of the files it just wrote has gone missing",
+            "A controller no longer drives the game while another window has the focus, so it can be used in another game with the desktop app open",
+            "Charged Strike's skill box says 8 hits a cast, its thrust and all 7 bolts, where it said 2",
+            "Two items with the same aura, such as two Phoenixes, now add their levels past 20 as in Diablo II",
+            "Right-clicking a jewel no longer wears it in a hidden slot, and a jewel lost that way comes back in your personal stash tab"
+          ],
+          "ja": [
+            "Wiki の「アイテム」ページに、すべての宝玉の付与効果と、それぞれの値の範囲と付き始めるアイテムレベルが載るようになりました",
+            "宝玉を埋まっているソケットに置くと、そこにある宝玉と入れ替わり、元の宝玉は手元に戻ります",
+            "パワーストライク、チャージドストライク、ライトニングストライクの突きが『ディアブロ II』と同じく武器のダメージを加えるようになり、電撃無効の敵にもダメージを与えるようになりました",
+            "デスクトップ版のセットアップは、『ディアブロ II』のモンスターの表が壊れているとき、モンスターを円で描く代わりに『ディアブロ II』の更新または修復を案内するようになりました",
+            "デスクトップ版のセットアップが、書き込んだばかりのファイルが1つ消えても「効果音と音楽」で止まらなくなりました",
+            "別のウィンドウにフォーカスがあるときはコントローラーでゲームを操作しなくなりました。デスクトップ版を開いたまま、別のゲームでコントローラーを使えます",
+            "チャージドストライクのスキル説明で、1回の発動のヒット数が2回ではなく、突きと7本の稲妻すべてを数えた8回と表示されるようになりました",
+            "不死鳥2つのように同じオーラを持つアイテム2つで、『ディアブロ II』と同じくレベルが20を超えても合算されるようになりました",
+            "宝玉を右クリックしても隠れた枠に装備されなくなりました。それによって消えた宝玉は保管箱の個人タブに戻ります"
+          ],
+          "de": [
+            "Die Seite Gegenstände im Wiki listet jedes Juwel-Affix auf, mit seinen möglichen Werten und der Gegenstandsstufe, ab der es vorkommt",
+            "Lege ein Juwel auf einen belegten Sockel, um das Juwel dort zu ersetzen; es kommt zurück in deine Hand",
+            "Energieschlag, Geladener Schlag und Kettenblitzschlag verletzen jetzt blitzimmune Monster, da ihr Stoß wie in Diablo II den Schaden deiner Waffe hinzufügt",
+            "Die Einrichtung der Desktop-App fordert dich auf, Diablo II zu aktualisieren oder zu reparieren, wenn dessen Monstertabellen beschädigt sind, statt Monster als Kreise zu zeichnen",
+            "Die Einrichtung der Desktop-App bleibt nicht mehr bei Sounds und Musik stehen, wenn eine gerade geschriebene Datei verschwunden ist",
+            "Ein Controller steuert das Spiel nicht mehr, während ein anderes Fenster den Fokus hat, sodass er bei geöffneter Desktop-App in einem anderen Spiel genutzt werden kann",
+            "Der Tooltip von Geladener Schlag nennt jetzt 8 Treffer pro Einsatz, den Stoß und alle 7 Blitze, statt bisher 2",
+            "Zwei Gegenstände mit derselben Aura, etwa zwei Phönix, addieren ihre Stufen jetzt wie in Diablo II auch über 20 hinaus",
+            "Ein Rechtsklick auf ein Juwel legt es nicht mehr in einem versteckten Platz an, und ein so verlorenes Juwel kommt in deinem persönlichen Schatz-Reiter zurück"
+          ],
+          "fr": [
+            "La page Objets du wiki liste chaque affixe de joyau, avec ses valeurs possibles et le niveau d’objet à partir duquel il apparaît",
+            "Posez un joyau sur une châsse occupée pour remplacer le joyau qui s’y trouve, qui revient dans votre main",
+            "Coup foudroyant, Boule de Foudre et Frappe de foudre blessent désormais les monstres insensibles à la foudre, leur estoc ajoutant les dégâts de votre arme comme dans Diablo II",
+            "L’installation de l’appli de bureau vous demande de mettre à jour ou de réparer Diablo II quand ses tables de monstres sont endommagées, au lieu de dessiner les monstres en cercles",
+            "L’installation de l’appli de bureau ne s’arrête plus à Sons et musique quand l’un des fichiers qu’elle vient d’écrire a disparu",
+            "Une manette ne contrôle plus le jeu quand une autre fenêtre a le focus, ce qui permet de l’utiliser dans un autre jeu avec l’appli de bureau ouverte",
+            "L’infobulle de Boule de Foudre indique désormais 8 coups par utilisation, l’estoc et les 7 éclairs, au lieu de 2",
+            "Deux objets ayant la même aura, comme deux Phénix, additionnent désormais leurs niveaux au-delà de 20, comme dans Diablo II",
+            "Un clic droit sur un joyau ne l’équipe plus dans un emplacement caché, et un joyau perdu ainsi revient dans l’onglet personnel de la réserve"
+          ],
+          "ru": [
+            "Страница \"Предметы\" в вики перечисляет все свойства самоцветов: возможные значения каждого и уровень предмета, с которого оно появляется",
+            "Положите самоцвет на занятое гнездо, чтобы заменить находящийся там самоцвет; тот вернется вам в руку",
+            "Мощный удар, Заряженный удар и Удар молнии теперь ранят монстров, невосприимчивых к молнии: их выпад добавляет урон вашего оружия, как в Diablo II",
+            "Если таблицы монстров Diablo II повреждены, установка приложения для ПК предлагает обновить или восстановить Diablo II, а не рисует монстров кругами",
+            "Установка приложения для ПК больше не останавливается на шаге \"Звуки и музыка\", если один из только что записанных файлов пропал",
+            "Контроллер больше не управляет игрой, когда фокус у другого окна, поэтому им можно пользоваться в другой игре при открытом приложении для ПК",
+            "Подсказка Заряженного удара теперь указывает 8 попаданий за применение — выпад и все 7 молний — вместо 2",
+            "Два предмета с одной и той же аурой, например два Феникса, теперь складывают уровни и выше 20, как в Diablo II",
+            "Щелчок правой кнопкой по самоцвету больше не надевает его в скрытую ячейку, а потерянный так самоцвет возвращается во вкладку личного тайника"
+          ],
+          "pl": [
+            "Strona Przedmioty na wiki wymienia wszystkie właściwości klejnotów, z możliwymi wartościami i poziomem przedmiotu, od którego się pojawiają",
+            "Połóż klejnot na zajętym gnieździe, by zastąpić znajdujący się w nim klejnot, który wraca do twojej ręki",
+            "Uderzenie Mocy, Elektryczny Cios i Uderzenie Błyskawicy ranią teraz potwory niewrażliwe na błyskawice, bo ich pchnięcie dodaje obrażenia broni, jak w Diablo II",
+            "Instalacja aplikacji na komputer prosi o aktualizację lub naprawę Diablo II, gdy jego tabele potworów są uszkodzone, zamiast rysować potwory jako koła",
+            "Instalacja aplikacji na komputer nie zatrzymuje się już na kroku Dźwięki i muzyka, gdy jeden z właśnie zapisanych plików zniknął",
+            "Kontroler nie steruje już grą, gdy inne okno ma fokus, więc można go używać w innej grze przy otwartej aplikacji na komputer",
+            "Podpowiedź Elektrycznego Ciosu pokazuje teraz 8 trafień na użycie, pchnięcie i wszystkie 7 błyskawic, zamiast 2",
+            "Dwa przedmioty z tą samą aurą, np. dwa Feniksy, sumują teraz poziomy także powyżej 20, jak w Diablo II",
+            "Kliknięcie prawym przyciskiem na klejnot nie zakłada go już w ukrytym miejscu, a utracony w ten sposób klejnot wraca do osobistej zakładki skrytki"
+          ]
+        }
+      }
+    },
+    {
       "version": "20261103-1237",
       "date": "2026-11-03",
       "kind": "game-fix",
