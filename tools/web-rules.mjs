@@ -46,7 +46,7 @@ function pattern(src) {
 }
 
 export const WEB_PLAY_URL = 'https://d2survivors.lol/play/';
-export const WEB_CHECKED = '2026-11-03T12:24:58.385Z';
+export const WEB_CHECKED = '2026-11-03T15:12:21.035Z';
 
 export const WEB_LANGUAGES = [
   {

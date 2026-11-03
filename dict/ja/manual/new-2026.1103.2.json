@@ -1,0 +1,11 @@
+{
+ "Charged Strike's skill box says 8 hits a cast, its thrust and all 7 bolts, where it said 2": "チャージドストライクのスキル説明で、1回の発動のヒット数が2回ではなく、突きと7本の稲妻すべてを数えた8回と表示されるようになりました",
+ "Power Strike, Charged Strike and Lightning Strike now hurt lightning immunes, their thrust adding your weapon's damage as in Diablo II": "パワーストライク、チャージドストライク、ライトニングストライクの突きが『ディアブロ II』と同じく武器のダメージを加えるようになり、電撃無効の敵にもダメージを与えるようになりました",
+ "The desktop app's setup no longer stops at Sounds and music when one of the files it just wrote has gone missing": "デスクトップ版のセットアップが、書き込んだばかりのファイルが1つ消えても「効果音と音楽」で止まらなくなりました",
+ "A controller no longer drives the game while another window has the focus, so it can be used in another game with the desktop app open": "別のウィンドウにフォーカスがあるときはコントローラーでゲームを操作しなくなりました。デスクトップ版を開いたまま、別のゲームでコントローラーを使えます",
+ "The desktop app's setup asks you to update or repair Diablo II when its monster tables are broken, rather than draw monsters as circles": "デスクトップ版のセットアップは、『ディアブロ II』のモンスターの表が壊れているとき、モンスターを円で描く代わりに『ディアブロ II』の更新または修復を案内するようになりました",
+ "The wiki's Items page lists every jewel affix, with what each can roll and the item level it starts from": "Wiki の「アイテム」ページに、すべての宝玉の付与効果と、それぞれの値の範囲と付き始めるアイテムレベルが載るようになりました",
+ "Two items with the same aura, such as two Phoenixes, now add their levels past 20 as in Diablo II": "不死鳥2つのように同じオーラを持つアイテム2つで、『ディアブロ II』と同じくレベルが20を超えても合算されるようになりました",
+ "Put a jewel down on a filled socket to replace the jewel there, which comes back to your hand": "宝玉を埋まっているソケットに置くと、そこにある宝玉と入れ替わり、元の宝玉は手元に戻ります",
+ "Right-clicking a jewel no longer wears it in a hidden slot, and a jewel lost that way comes back in your personal stash tab": "宝玉を右クリックしても隠れた枠に装備されなくなりました。それによって消えた宝玉は保管箱の個人タブに戻ります"
+}

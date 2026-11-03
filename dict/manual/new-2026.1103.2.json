@@ -1,0 +1,11 @@
+{
+ "Charged Strike's skill box says 8 hits a cast, its thrust and all 7 bolts, where it said 2": "聚能強擊的技能框現在顯示每次施放命中8次（刺擊加上全部7道閃電），原本顯示2次",
+ "Power Strike, Charged Strike and Lightning Strike now hurt lightning immunes, their thrust adding your weapon's damage as in Diablo II": "充能強擊、聚能強擊與閃電強擊現在能傷害電擊免疫的怪物：刺擊會像《暗黑破壞神 II》一樣加上武器傷害",
+ "The desktop app's setup no longer stops at Sounds and music when one of the files it just wrote has gone missing": "桌面版的設定不再因為剛寫入的某個檔案不見了而卡在「音效與音樂」步驟",
+ "A controller no longer drives the game while another window has the focus, so it can be used in another game with the desktop app open": "其他視窗在前景時，控制器不再操作遊戲，因此開著桌面版時也能在其他遊戲中使用控制器",
+ "The desktop app's setup asks you to update or repair Diablo II when its monster tables are broken, rather than draw monsters as circles": "《暗黑破壞神 II》的怪物資料表損壞時，桌面版的設定會請你更新或修復《暗黑破壞神 II》，不再把怪物畫成圓圈",
+ "The wiki's Items page lists every jewel affix, with what each can roll and the item level it starts from": "維基的「物品」頁面列出所有珠寶詞綴，以及每個詞綴的數值範圍與開始出現的物品等級",
+ "Two items with the same aura, such as two Phoenixes, now add their levels past 20 as in Diablo II": "兩件帶有相同靈氣的物品（例如兩件鳳凰）現在會像《暗黑破壞神 II》一樣，等級相加可超過20",
+ "Put a jewel down on a filled socket to replace the jewel there, which comes back to your hand": "把珠寶放到已鑲嵌的鑲孔上，就會替換那裡的珠寶，原本的珠寶會回到你手上",
+ "Right-clicking a jewel no longer wears it in a hidden slot, and a jewel lost that way comes back in your personal stash tab": "右鍵點擊珠寶不再把它裝備到隱藏的欄位，之前因此消失的珠寶會回到你的個人儲物箱分頁"
+}
