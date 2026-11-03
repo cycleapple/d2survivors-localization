@@ -46,7 +46,7 @@ function pattern(src) {
 }
 
 export const WEB_PLAY_URL = 'https://d2survivors.lol/play/';
-export const WEB_CHECKED = '2026-11-02T13:18:40.423Z';
+export const WEB_CHECKED = '2026-11-03T12:24:58.385Z';
 
 export const WEB_LANGUAGES = [
   {
@@ -116,14 +116,14 @@ export const WEB_RULES = [
   // 排行榜：照原版送（2026-11-01 起；之前一律不上傳）。書籤只改文字和版面、不改玩法；紀錄照實送，
   // lang 是實際的語言（zh-TW…），不碰 tainted、webdriver 這類判斷。見 docs/web.md「排行榜和問題回報」
   // 問題回報（REPORT）不送：翻譯版的錯誤不該送給原作者。佇列裡原版留下的回報原封不動
-  // 遊戲 20261102 起回報的程式從 saveTransfer 搬到 leaderboardSend，兩個檔名都接受
+  // 遊戲 20261102 起回報的程式從 saveTransfer 搬到 leaderboardSend，20261103 起又搬到 report，三個檔名都接受
   {
-    label: '回報：不送出', groups: ['base'], file: '^(saveTransfer|leaderboardSend)-.*\\.js$',
+    label: '回報：不送出', groups: ['base'], file: '^(saveTransfer|leaderboardSend|report)-.*\\.js$',
     find: pattern('async function <1>(<2>){let <3>=await <4>(JSON.stringify(<2>));return <3>!==null&&<3>>=200&&<3><300?`sent`:'),
     replace: 'async function $1($2){return`refused`;let $3=await $4(JSON.stringify($2));return $3!==null&&$3>=200&&$3<300?`sent`:',
   },
   {
-    label: '回報：不送出佇列', groups: ['base'], file: '^(saveTransfer|leaderboardSend)-.*\\.js$',
+    label: '回報：不送出佇列', groups: ['base'], file: '^(saveTransfer|leaderboardSend|report)-.*\\.js$',
     find: pattern('async function <1>(<2>=Date.now()){if(!<3>){<3>=!0;try{let <4>=<5>().filter('),
     replace: 'async function $1($2=Date.now()){return;if(!$3){$3=!0;try{let $4=$5().filter(',
   },
