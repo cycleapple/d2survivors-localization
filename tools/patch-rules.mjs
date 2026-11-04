@@ -6,9 +6,17 @@
 // groups：base 每種翻譯語言都套用（English／한국어原版是真正的原版，不套任何規則）；dict 換掉韓文字典的語言才套用；cjk 中日文才套用；
 //   magic-zh／magic-ja 魔法物品名稱的組合順序（照 D2R 各語言的 MagicFormat）；fullwidth 冒號用全形（只有繁中）；
 //   magic-de／magic-fr／magic-ru、unique-de／unique-fr／unique-ru 有詞性的語言組名稱；cyrillic、font-ru 俄文的字；
-//   gender 女性職業用陰性稱號、caps 原文全大寫時譯文也全大寫（德、法、俄、波蘭文）。
+//   gender 女性職業用陰性稱號、caps 原文全大寫時譯文也全大寫（德、法、俄、波蘭文）；digit5 數字「5」開口（七種翻譯語言）。
+
+import fs from 'node:fs';
 
 export const ASSETS_DIR = 'desktop/dist/web/assets';
+
+// 俄文字型：Philosopher Bold 的西里爾字母子集（SIL OFL 1.1），跟網頁書籤用同一個檔（site/web/fonts/，產生方式見 docs/web.md）。
+// 整個字型用 base64 data: URL 寫進規則（manifest 格式不用改，從啟動器套用也有字型），OFL 全文用註解放在字型旁邊（OFL 要求授權跟著字型）
+const RU_FONT = fs.readFileSync(new URL('../site/web/fonts/philosopher-bold-cyrillic.woff2', import.meta.url)).toString('base64');
+const RU_OFL = fs.readFileSync(new URL('../site/web/fonts/OFL.txt', import.meta.url), 'utf8').replace(/\r\n/g, '\n').trim();
+if (RU_OFL.includes('*/')) throw new Error('OFL.txt 裡有 */，不能放進註解');
 
 // 換掉韓文字典的位置（ko 槽位）
 export const DICT_TARGET = { file: '^ko-.*\\.js$', template: 'var e={{dict}};export{e as default};' };
@@ -195,12 +203,12 @@ export const RULES = [
     from: 'if(typeof FontFace>`u`)return;',
     to: 'if(typeof FontFace>`u`)return;{let $r=`U+3000-30FF, U+3400-4DBF, U+4E00-9FFF, U+FF00-FFEF`,$a=async(f,s)=>{try{document.fonts.add(await new FontFace(f,s,{unicodeRange:$r}).load())}catch{}},$n=[`D2R Kodia`,`D2R Iris`,`D2 Hangul`,`D2 Hangul 14`],$s=({[`zh-Hans`]:[`Microsoft YaHei`,`MicrosoftYaHei`,`Microsoft YaHei UI`,`DengXian`,`SimSun`],ja:[`Yu Gothic Medium`,`YuGothic-Medium`,`Yu Gothic Regular`,`YuGothic-Regular`,`Meiryo`,`MS Gothic`]})[`{{html_lang}}`]??[`Microsoft JhengHei`,`MicrosoftJhengHeiRegular`,`Microsoft JhengHei UI`,`PMingLiU`];await Promise.all($n.map(f=>$a(f,$s.map(n=>`local("${n}")`).join(`,`))));await Promise.all($n.map(f=>$a(f,`url(${new URL(`../fonts-zh/body.woff2`,document.baseURI).href})`)))}',
   },
-  // 俄文字型：同樣的做法，標題字型（D2R Kodia）用 title.woff2（D2R 的 Exocet），其他用 body.woff2（Philosopher），範圍限定西里爾字母。
-  // 字型檔是 zh-fonts.mjs --lang ru 取出的，跟中文一樣放在 fonts-zh/；沒有時用系統字型
+  // 俄文字型（2026-11-04 起）：按鈕（D2R Kodia）和內文（D2R Iris、D2 Hangul…）四個家族都用 Philosopher Bold（上面的 RU_FONT），
+  // 範圍限定西里爾字母。字型直接寫在規則裡，從啟動器套用、本機打包都一樣（原本的 D2R 字型只有本機打包才有，從啟動器套用時是系統字型）
   {
     label: '俄文字型', groups: ['font-ru'], file: '^lang-.*\\.js$',
     from: 'if(typeof FontFace>`u`)return;',
-    to: 'if(typeof FontFace>`u`)return;await Promise.all([[`D2R Kodia`,`title.woff2`],[`D2R Iris`,`body.woff2`],[`D2 Hangul`,`body.woff2`],[`D2 Hangul 14`,`body.woff2`]].map(async([f,n])=>{try{document.fonts.add(await new FontFace(f,`url(${new URL(`../fonts-zh/${n}`,document.baseURI).href})`,{unicodeRange:`U+0400-04FF`}).load())}catch{}}));',
+    to: `if(typeof FontFace>\`u\`)return;/*Philosopher Bold (Cyrillic subset)\n${RU_OFL}\n*/{let $u=\`url(data:font/woff2;base64,${RU_FONT})\`;await Promise.all([\`D2R Kodia\`,\`D2R Iris\`,\`D2 Hangul\`,\`D2 Hangul 14\`].map(async f=>{try{document.fonts.add(await new FontFace(f,$u,{unicodeRange:\`U+0400-04FF\`}).load())}catch{}}))}`,
   },
   // 波蘭文字型：標題字型（D2R Kodia）用 title.woff2（D2R 的 Exocet），其他用 body.woff2（Formal436，D2R 拉丁字母的內文字型），
   // 範圍限定拉丁擴充 A。字型檔是 zh-fonts.mjs --lang pl 取出的，放在 fonts-zh/；沒有時用系統字型
@@ -354,6 +362,33 @@ RULES.push({
   },
 });
 
+// 數字「5」開口（digit5，2026-11-04 起）：font16、font24、font30、font42、fontexocet10 的「5」碗是封閉的，看起來像頂端平的「6」
+// （營地的「法力 35 / 35」原版看起來像 36）。點陣字型的 constructor 拿到圖集時先改「5」那一格：中線以下、最底兩列墨以上，
+// 墨（亮度 >= peak×0.2）分成兩段以上的列，最後一段（碗的右邊）之前的像素全部清掉（含暗的描邊）。先算那一格的墨的 FNV-1a，
+// 是五種已知的形狀才改（自己的 D2R 檔案、替代字型等形狀不一樣的不改）。只有翻譯語言（英文、韓文照原版）。
+// FIVE／FIVE_SHAPES 照網頁書籤的 tools/web-rules.mjs 複製（同一份遊戲程式碼和點陣字型），那邊改了這裡要跟著改。
+// 點陣字型的類別在桌面版的 saveTransfer-*.js（網頁版在 ui-*.js），不指定 file，找唯一符合的 .js
+const FIVE_SHAPES = [209616337, 2051203955, 1072978108, 3695317340, 770335231];
+const FIVE = '(d2i,d2a)=>{let{cellWidth:d2w,cellHeight:d2c,top:d2t,height:d2h,peak:d2p}=d2i,d2d=d2a?.data;if(!d2d||!d2w)return;'
+  + 'let d2X=53%16*d2w,d2Y=Math.floor(53/16)*d2c+d2t,d2o=(x,y)=>((d2Y+y)*d2a.width+d2X+x)*4,'
+  + 'd2k=(x,y)=>{let o=d2o(x,y);return d2d[o+3]>0&&Math.max(d2d[o],d2d[o+1],d2d[o+2])>=d2p*.2},d2s=2166136261,d2r=[];'
+  + 'if((d2Y+d2h)*d2a.width*4>d2d.length)return;'
+  + 'for(let y=0;y<d2h;y++)for(let x=0;x<d2w;x++)d2s=Math.imul(d2s^(d2k(x,y)?1:0),16777619);'
+  + `if(!${JSON.stringify(FIVE_SHAPES)}.includes(d2s>>>0))return;`
+  + 'for(let y=0;y<d2h;y++)for(let x=0;x<d2w;x++)if(d2k(x,y)){d2r.push(y);break}'
+  + 'let d2b=d2r.at(-1),d2m=(d2r[0]+d2b)/2;'
+  + 'for(let y=0;y<d2h;y++){if(!(y>d2m&&y<d2b-1))continue;let d2u=[];'
+  + 'for(let x=0;x<d2w;x++)if(d2k(x,y)){let s=x;while(x<d2w&&d2k(x,y))x++;d2u.push([s,x-1])}'
+  + 'if(d2u.length<2)continue;let[d2L]=d2u.at(-1),d2E=d2u.at(-2)[1],d2z=d2L-1>d2E?d2L-1:d2L;'
+  + 'for(let x=0;x<d2z;x++)d2d.fill(0,d2o(x,y),d2o(x,y)+4)}}';
+RULES.push({
+  label: '數字 5 開口', groups: ['digit5'], optional: true,
+  from: 'constructor(e,t){this.info=e,this.atlas=t,this.lineHeight=e.height+Math.max(2,Math.round(e.height/4))}',
+  to: `constructor(e,t){(${FIVE})(e,t),this.info=e,this.atlas=t,this.lineHeight=e.height+Math.max(2,Math.round(e.height/4))}`,
+  ...T('constructor(‹1›,‹2›){this.info=‹1›,this.atlas=‹2›,this.lineHeight=‹1›.height+Math.max(2,Math.round(‹1›.height/4))}',
+    `constructor(‹1›,‹2›){(${FIVE})(‹1›,‹2›),this.info=‹1›,this.atlas=‹2›,this.lineHeight=‹1›.height+Math.max(2,Math.round(‹1›.height/4))}`),
+});
+
 // 規則改的檔案：asar 裡的路徑（app 的 path，或 assets 裡的檔名）、要用的 find／replace（或 from／to）。
 // 有 app 的規則只看 app（新版啟動器也是），其他照 file 在 assets 裡找
 export const ruleApp = rule => rule.app ? { ...rule.app, file: undefined, from: undefined, to: undefined } : null;
@@ -390,13 +425,13 @@ export function expandReplace(rep, m) {
 
 // 啟動器能選的翻譯語言（en、ko 原版是啟動器內建的）
 export const LANGUAGES = [
-  { id: 'zh-TW', name: '繁體中文', menu_name: '繁體中文', html_lang: 'zh-Hant', groups: ['base', 'dict', 'cjk', 'magic-zh', 'fullwidth'], dict: 'dict/zh-TW.json' },
-  { id: 'zh-CN', name: '简体中文', menu_name: '简体中文', html_lang: 'zh-Hans', groups: ['base', 'dict', 'cjk', 'magic-zh'], dict: 'dict/zh-CN.json' },
-  { id: 'ja', name: '日本語', menu_name: '日本語', html_lang: 'ja', groups: ['base', 'dict', 'cjk', 'magic-ja'], dict: 'dict/ja.json' },
-  { id: 'de', name: 'Deutsch', menu_name: 'Deutsch', html_lang: 'de', groups: ['base', 'dict', 'gender', 'caps', 'magic-de', 'unique-de'], dict: 'dict/de.json' },
-  { id: 'fr', name: 'Français', menu_name: 'Français', html_lang: 'fr', groups: ['base', 'dict', 'gender', 'caps', 'magic-fr', 'unique-fr'], dict: 'dict/fr.json' },
-  { id: 'ru', name: 'Русский', menu_name: 'Русский', html_lang: 'ru', groups: ['base', 'dict', 'gender', 'caps', 'cyrillic', 'font-ru', 'magic-ru', 'unique-ru'], dict: 'dict/ru.json' },
-  { id: 'pl', name: 'Polski', menu_name: 'Polski', html_lang: 'pl', groups: ['base', 'dict', 'gender', 'caps', 'latin-ext', 'font-pl', 'size-pl', 'magic-pl', 'unique-pl'], dict: 'dict/pl.json' },
+  { id: 'zh-TW', name: '繁體中文', menu_name: '繁體中文', html_lang: 'zh-Hant', groups: ['base', 'dict', 'cjk', 'magic-zh', 'fullwidth', 'digit5'], dict: 'dict/zh-TW.json' },
+  { id: 'zh-CN', name: '简体中文', menu_name: '简体中文', html_lang: 'zh-Hans', groups: ['base', 'dict', 'cjk', 'magic-zh', 'digit5'], dict: 'dict/zh-CN.json' },
+  { id: 'ja', name: '日本語', menu_name: '日本語', html_lang: 'ja', groups: ['base', 'dict', 'cjk', 'magic-ja', 'digit5'], dict: 'dict/ja.json' },
+  { id: 'de', name: 'Deutsch', menu_name: 'Deutsch', html_lang: 'de', groups: ['base', 'dict', 'gender', 'caps', 'magic-de', 'unique-de', 'digit5'], dict: 'dict/de.json' },
+  { id: 'fr', name: 'Français', menu_name: 'Français', html_lang: 'fr', groups: ['base', 'dict', 'gender', 'caps', 'magic-fr', 'unique-fr', 'digit5'], dict: 'dict/fr.json' },
+  { id: 'ru', name: 'Русский', menu_name: 'Русский', html_lang: 'ru', groups: ['base', 'dict', 'gender', 'caps', 'cyrillic', 'font-ru', 'magic-ru', 'unique-ru', 'digit5'], dict: 'dict/ru.json' },
+  { id: 'pl', name: 'Polski', menu_name: 'Polski', html_lang: 'pl', groups: ['base', 'dict', 'gender', 'caps', 'latin-ext', 'font-pl', 'size-pl', 'magic-pl', 'unique-pl', 'digit5'], dict: 'dict/pl.json' },
 ];
 
 export function fillTemplate(s, lang) {
