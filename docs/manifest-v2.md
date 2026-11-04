@@ -60,6 +60,8 @@ site/data/dict/ja.json
         "html_lang": "zh-Hant",
         "groups": ["…"],
         "fonts": ["Microsoft JhengHei", "PingFang TC", "Noto Sans TC"]
+        // 每一項是系統字型名稱，或 { "url": "../web/fonts/….woff2" }（相對於 manifest.json，網頁書籤 2026-11-04 起）。
+        // 照順序當備用；舊版 core.js 讀到 { url } 會找不到、改用下一項，所以 url 後面要接系統字型
       },
       "wiki": {                            // 沒有這一欄＝官方 wiki（d2survivors.lol/wiki/）不翻；見下面「wiki 字典」
         "url": "wiki/zh-TW.json?v=…",      // 相對於 manifest.json
