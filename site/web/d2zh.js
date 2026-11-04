@@ -140,7 +140,9 @@ async function start(asked) {
   const langs = manifest.languages.filter(l => l.web).map(l => {
     const status = ['available', 'beta', 'draft'].includes(l.status) ? l.status : 'draft';
     const label = status === 'available' ? '' : (STATUS[l.id] ?? STATUS.en)[status];
-    return { ...l, ...l.web, status, menu_name: label ? `${l.web.menu_name}${label.startsWith('（') ? '' : ' '}${label}` : l.web.menu_name, dict: new URL(l.dict.url, MANIFEST).href };
+    // 字型檔（{ url }）跟字典一樣相對於 manifest
+    const fonts = (l.web.fonts ?? []).map(f => typeof f === 'string' ? f : { ...f, url: new URL(f.url, MANIFEST).href });
+    return { ...l, ...l.web, status, fonts, menu_name: label ? `${l.web.menu_name}${label.startsWith('（') ? '' : ' '}${label}` : l.web.menu_name, dict: new URL(l.dict.url, MANIFEST).href };
   });
   const ids = langs.map(l => l.id);
   if (!ids.length) throw new Error(msg.old);

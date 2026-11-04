@@ -55,14 +55,15 @@ export function rulesFor(rules, lang) {
 }
 
 // 規則 replace 裡的 {{…}}（格式見 tools/web-rules.mjs）。langs：所有網頁版語言 [{ id, menu_name, html_lang, fonts }]；
-// lang：目前的語言（英文、韓文時是 null）；dict：目前語言的字典模組網址
+// lang：目前的語言（英文、韓文時是 null）；dict：目前語言的字典模組網址。
+// fonts 每一項是系統字型的名稱（→ local()），或 { url }（字型檔 → url()，網址由呼叫的一方先換成絕對網址）
 export function ruleVars(langs, lang, dict) {
   return {
     menu: langs.map(l => `,${JSON.stringify(l.id)}:\`${l.menu_name}\``).join(''),
     ids: JSON.stringify(langs.map(l => l.id)),
     ...lang && {
       id: lang.id, menu_name: lang.menu_name, html_lang: lang.html_lang, dict,
-      fonts: (lang.fonts ?? []).map(f => `local("${f}")`).join(', '),
+      fonts: (lang.fonts ?? []).map(f => typeof f === 'string' ? `local("${f}")` : `url(${JSON.stringify(f.url)}) format("woff2")`).join(', '),
     },
   };
 }

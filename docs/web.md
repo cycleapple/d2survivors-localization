@@ -15,6 +15,7 @@ node tools/serve.mjs site 8766      # 本機預覽（允許跨網域讀取）；
 |---|---|
 | `site/web/d2zh.js` | 書籤本體：讀 manifest、停掉原版、在 iframe 裡開修改版、語言切換 |
 | `site/web/core.js` | 抓模組、套規則、產生頁面（書籤和 `build-web.mjs` 共用） |
+| `site/web/fonts/` | 俄文用的 Philosopher Bold 西里爾字母子集（`philosopher-bold-cyrillic.woff2`）和它的授權 `OFL.txt` |
 | `tools/web-rules.mjs` | 修改規則 `WEB_RULES`、語言設定 `WEB_LANGUAGES`、`WEB_PLAY_URL`、`WEB_CHECKED`。格式寫在檔案開頭的註解 |
 | `tools/build-web.mjs` | 檢查規則還對得上線上的遊戲；全部通過時改寫 `WEB_CHECKED` |
 
@@ -36,11 +37,13 @@ node tools/serve.mjs site 8766      # 本機預覽（允許跨網域讀取）；
 - 省電畫質（顯示設定的「BATTERY SAVER」，預設關）：書籤在 iframe 最前面把 `devicePixelRatio` 蓋成 min(原本, 1)，開關是 `__d2zhLowres`，設定存在 localStorage `d2zh:lowres`（`1`／`0`）。遊戲每格都讀 `devicePixelRatio` 算解析度（`saveTransfer` 的 render scale，key 含 dpr），所以馬上生效，不用重開。顯示設定的那一列是 `web-rules.mjs` 的三條 base 規則（optional，沒套上只是沒有那一列；`__d2zhLowres` 不在時也不顯示）。字典要加 `BATTERY SAVER`、`BATTERY SAVER: #`、`Lower resolution, for phones` 才會翻譯，沒加時顯示英文。不碰排行榜：遊戲的排行榜判斷（`tainted`、`page()`）只看網址參數和 `navigator.webdriver`；被換掉的 `devicePixelRatio`、`requestAnimationFrame` 只會出現在問題回報的診斷文字（`ui` 模組的 `page` 欄位），修改版本來就不送回報
 - 防無限重新載入：15 秒內超過 3 次就停下來提示「一直重新載入」。只算 iframe 自己換頁回到 `/play/` 被換成修改版的那種（`reboot(true)`）；玩家在遊戲選單換語言不算（2026-10-30，玩家在手機上快速切了一輪語言就撞到保護、畫面卡住）
 - 網頁版改版比桌面版頻繁、壓縮後的變數名稱會變，所以 `web-rules.mjs` 用 regex（變數名稱抓下來再放回去；`pattern()` 的 `<1>`、`<2>`… 要照第一次出現的順序編號，跟 `$1`、`$2`… 對得上），跟桌面版的 `patch-rules.mjs` 分開。必要的規則（語言選單、接受語言設定、載入字典、外文字判斷）沒套上就不啟動，提示「需要更新」；其他的標 `optional`，沒套上照樣啟動、在 console 警告
-- 規則的 groups 跟桌面版（`patch-rules.mjs`）一樣：`base`（每次都套用，包括英文）、`dict`、`cjk`、`magic-zh`、`magic-ja`（日文魔法物品名稱「前綴 後綴 物品」）、`fullwidth`（只有繁中用全形冒號）、`magic-de`／`magic-fr`／`magic-ru`、`unique-de`／`unique-fr`／`unique-ru`（有詞性的語言組魔法物品和獨特怪物的名字）、`cyrillic`（西里爾字母當外文字畫）、`font-ru`、`latin-ext`（波蘭文 U+0100–017F 當外文字畫）、`font-pl`、`size-pl`（外文字大小）、`magic-pl`、`unique-pl`、`caps`（德法俄波：英文原文沒有小寫字母時，譯文用 `toLocaleUpperCase` 轉成全大寫；字典查詢不分大小寫，SHIELDS／Shields 共用一個譯文）。斷行禁則、「暗色字不加描邊」（石頭按鈕的中日文、俄文畫成實心字）跟桌面版相同；網頁版的禁則多一個半形「:」（日文協同加成不在冒號前斷行）
+- 規則的 groups 跟桌面版（`patch-rules.mjs`）一樣：`base`（每次都套用，包括英文）、`dict`、`cjk`、`magic-zh`、`magic-ja`（日文魔法物品名稱「前綴 後綴 物品」）、`fullwidth`（只有繁中用全形冒號）、`magic-de`／`magic-fr`／`magic-ru`、`unique-de`／`unique-fr`／`unique-ru`（有詞性的語言組魔法物品和獨特怪物的名字）、`cyrillic`（西里爾字母當外文字畫）、`font-ru`、`latin-ext`（波蘭文 U+0100–017F 當外文字畫）、`font-pl`、`size-pl`（外文字大小）、`magic-pl`、`unique-pl`、`digit5`（七種翻譯語言都有：數字「5」開口）、`caps`（德法俄波：英文原文沒有小寫字母時，譯文用 `toLocaleUpperCase` 轉成全大寫；字典查詢不分大小寫，SHIELDS／Shields 共用一個譯文）。斷行禁則、「暗色字不加描邊」（石頭按鈕的中日文、俄文畫成實心字）跟桌面版相同；網頁版的禁則多一個半形「:」（日文協同加成不在冒號前斷行）
 - 只有網頁版有的（2026-10-28，桌面版還沒做）：角色畫面的「Survivor」女性職業查 `title:Survivor:f`（Выжившая、Ocalała；這個字是角色畫面直接寫的，不經過稱號函式）；升級卡片的進化條件在中日文用「、」接（程式在英文後面接半形「,」）；`caps`
 - 德、法、俄文的名稱組合：字典的 `affix:`、`unique:` 有每種詞性的形式（「[ms]…[fs]…」），照 `gender:<名詞>` 挑。順序：德文「前綴 物品 後綴」、獨特怪物「前段-後段 稱號」；法文「物品 前綴 後綴」、「後段 前段 稱號」；俄文「前綴 物品 後綴」、「稱號, 前段 後段」；波蘭文「前綴 物品 後綴」、「稱號, 前段 後段」（不改大小寫，複數的詞性是 nl）。輸出要跟桌面版一樣，參考實作是 `work/translation/compose-proto.mjs`；`work/web/compose-check.mjs` 用套好規則的遊戲模組跑同一組例子跟它對照（德法俄波 44 個全部一樣）。規則裡新加的變數都用 `d2` 開頭，免得跟遊戲壓縮後的名稱撞到
 - 跟桌面版同名、一起維護的規則：技能變體專用譯名（`modifier:<名稱>`，例如繁中荊棘之靈的 Vengeance 是「復仇」不是聖騎士的「復仇打擊」）、女性職業的稱號（`title:<稱號>:f`，Zerstörerin）、德文多字物品名稱在前綴後面小寫（Robuste schwere Handschuhe）。驗證：`node work/web/new-rules-check.mjs`
-- 字型：網頁版沒有 D2R 的字型，改用系統字型（`local()`）註冊成遊戲的外文字字型家族。繁中：微軟正黑體、蘋方 TC、Noto Sans TC；簡中：微軟雅黑、蘋方 SC、Noto Sans SC；日文：遊ゴシック、Meiryo、Hiragino、Noto Sans JP、最後是 MS ゴシック（非日文版的 Windows 常常沒有 Meiryo，`local()` 全部找不到時中日文會退回系統語言的字型，繁中 Windows 上是正黑體，一行裡混兩種字型；遊ゴシック Windows 10／11 都有）；俄文（只註冊 U+0400–04FF）：Segoe UI、Arial、Roboto、Noto Sans。德、法文的字點陣字型本來就有（Latin-1），不用另外的字型；波蘭文（只註冊 U+0100–017F）跟俄文一樣用系統字型。波蘭文只有幾個字母走外文字、夾在點陣字母中間，照韓文的放大比例會大一號，所以標題 ×1.2、內文 ×1.0 不加粗（`size-pl`，有沒有 D2R 韓文字型的兩個分支都改）。桌面版的小按鈕字用 ×1.5、Exocet 先畫 4 倍大再縮小，是 Exocet 的問題；網頁版用系統字型，×1.5 的 Ś 會比點陣大寫高一截，×1.2 剛好，小字的尖音符號也都在（2026-10-27 用最終版 `dict/pl.json` 放大看「NOWOŚCI」「WYJŚCIE」）
+- 字型：網頁版沒有 D2R 的字型，改用系統字型（`local()`）註冊成遊戲的外文字字型家族。繁中：微軟正黑體、蘋方 TC、Noto Sans TC；簡中：微軟雅黑、蘋方 SC、Noto Sans SC；日文：遊ゴシック、Meiryo、Hiragino、Noto Sans JP、最後是 MS ゴシック（非日文版的 Windows 常常沒有 Meiryo，`local()` 全部找不到時中日文會退回系統語言的字型，繁中 Windows 上是正黑體，一行裡混兩種字型；遊ゴシック Windows 10／11 都有）；俄文（只註冊 U+0400–04FF）：Philosopher Bold，抓不到時 Segoe UI、Arial、Roboto、Noto Sans（見下一點）。德、法文的字點陣字型本來就有（Latin-1），不用另外的字型；波蘭文（只註冊 U+0100–017F）跟俄文一樣用系統字型。波蘭文只有幾個字母走外文字、夾在點陣字母中間，照韓文的放大比例會大一號，所以標題 ×1.2、內文 ×1.0 不加粗（`size-pl`，有沒有 D2R 韓文字型的兩個分支都改）。桌面版的小按鈕字用 ×1.5、Exocet 先畫 4 倍大再縮小，是 Exocet 的問題；網頁版用系統字型，×1.5 的 Ś 會比點陣大寫高一截，×1.2 剛好，小字的尖音符號也都在（2026-10-27 用最終版 `dict/pl.json` 放大看「NOWOŚCI」「WYJŚCIE」）
+- 俄文字型（2026-11-04 起）：系統字型（Segoe UI 等）跟遊戲的風格差很多，改用開放授權的 Philosopher Bold（SIL OFL 1.1，github.com/google/fonts 的 `ofl/philosopher`；沒有保留字型名稱，子集可以照原名）。按鈕（D2R Kodia）和內文（D2R Iris、D2 Hangul…）四個家族共用一個檔：`site/web/fonts/philosopher-bold-cyrillic.woff2`，只留 U+0400–04FF（176 字、16 KB），旁邊放 `OFL.txt`。`WEB_LANGUAGES` 的 `fonts` 可以寫 `{ url }`（相對於 manifest.json，跟字典一樣），書籤換成絕對網址、`core.js` 產生 `url("…") format("woff2")`，後面接原本的系統字型當備用（字型檔抓不到時用）。舊版的 `core.js` 讀到 `{ url }` 會變成 `local("[object Object]")`，找不到就照下一項，一樣能用。子集用 `fontTools.subset --unicodes=U+0400-04FF --flavor=woff2 --layout-features=* --name-IDs=*` 產生（原檔、候選字型的比較在 `work/網頁書籤版本/ru-font-digits.md`）；之後翻譯那邊的 `zh-fonts.mjs` 支援從檔案路徑讀時可以改用它產生
+- 數字「5」開口（2026-11-04 起，`digit5`，optional）：font16、font24、font30、font42、fontexocet10 的「5」碗是封閉的，看起來像頂端平的「6」（營地的「法力 35 / 35」原版看起來像 36）。點陣字型的 constructor 拿到圖集時先改「5」那一格：中線以下、最底兩列墨以上，墨（亮度 ≥ peak×0.2）分成兩段以上的列，最後一段（碗的右邊）之前的像素全部清掉，暗的描邊一起清。改之前先算那一格的墨的 FNV-1a，是五種已知的形狀才改（`web-rules.mjs` 的 `FIVE_SHAPES`；自己的 D2R 檔案、替代字型等形狀不一樣的不改，同一份圖集改過之後形狀也不一樣，不會再改一次）。只改一次圖集，之後畫字跟原本一樣，沒有額外成本；只改畫面，不碰排行榜。英文、韓文不套。font42 也是遊戲「D2 Exocet」向量字型的來源，那個字型的 5 也會跟著開口。原型（Python）和規則的函式對 8 個圖集的結果逐像素一樣（`work/網頁書籤版本/five/`）
 
 ## 選檔案（setup.html）和 hosted 檔案拿掉之後
 
@@ -154,6 +157,12 @@ status 標示：简中 beta 顯示「语言：简体中文（测试中）」、�
 - 不是實機：headless Chrome 在電腦上跑，絕對值跟 Android 不一樣，只看各情況的差
 
 setup.html 的提示（2026-11-04，遊戲 20261103.2，正式 manifest 20261103-1513，本機的 `site/`；自己開的 headless Chrome，1000×750、dpr 2）：清掉網站資料 → 首頁按書籤（繁中、俄文）→ iframe 換到 `setup.html`，下方顯示提示 → 點 HOSTED FILES → 回到 `/play/` 的修改版（標題畫面是翻譯版），提示收起來，`d2s:files` 是 hosted。`/api/` 只放行 GET，沒有任何 POST。截圖在 `work/網頁書籤版本/shots/hint-*.png`
+
+俄文字型、數字 5（2026-11-04，遊戲 20261103.2；測試站 `work/網頁書籤版本/site-test2/` 是 `site/web` 加上正式 manifest 20261103-1513 的字典、目前的 `web-rules.mjs` 規則，另外多一條只在測試站的規則把點陣字型放進 `__d2zhFonts`，用遊戲自己的字型畫數字；自己開的 headless Chrome，1000×750、dpr 2）：
+- 七種語言都從首頁按書籤：主選單、新聞、設定正常（`work/網頁書籤版本/shots/five/<語言>-*.png`、`shots/five/menus.png`）
+- 俄文：四個字型家族都是 loaded，`philosopher-bold-cyrillic.woff2` 只在俄文時抓；主選單按鈕跟之前比較圖的 Philosopher Bold 一樣
+- 數字：七種語言 font16、font24、font30、font42、fontexocet10 的 5 都開口，font6、font8、fontformal12 不變；在遊戲裡換成英文時是原版的 5（`work/網頁書籤版本/shots/five/digits-*.png`）。營地的 HUD：英文「MANA: 35 / 35」看起來像 36，繁中「法力：35 / 35」是開口的 5（`work/網頁書籤版本/shots/five/hud-en-vs-zh-TW.png`，同一個英雄）
+- `/api/` 只放行 GET，沒有任何 POST
 
 還沒測：USE MY OWN FILES 實際讀檔、Safari／Firefox、手機、遊戲中的升級卡片和物品名稱（日文的魔法物品順序、禁則斷行只用 `build-web.mjs` 確認規則套得上；德法俄的名稱組合用 `compose-check.mjs` 對照過，沒有在遊戲畫面上看過）。
 

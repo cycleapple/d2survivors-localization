@@ -7,7 +7,8 @@
 //     groups：語言的 groups 有其中一個就套用（base＝每次都套用，包括英文、韓文）
 //     optional：沒套上也能玩（只是那部分不完美）；其他的沒套上就不啟動，請玩家等更新
 //   WEB_LANGUAGES  → manifest.languages[].web（不含 id）。每筆 { id, menu_name, html_lang, groups, fonts }
-//     fonts：系統字型的完整名稱（給 CSS local() 用），照優先順序；粗體放前面，遊戲的字都是粗的
+//     fonts：照優先順序；粗體放前面，遊戲的字都是粗的。每一項是系統字型的完整名稱（給 CSS local() 用），
+//       或 { url }：放在 site/web/fonts/ 的 woff2，網址相對於 manifest.json（跟字典一樣）。字型檔載入失敗時照下一項
 //   WEB_PLAY_URL   → manifest.web.play_url
 //   WEB_CHECKED    → manifest.game.web_checked（node tools/build-web.mjs 全部套得上時自動改寫這一行）
 //
@@ -16,14 +17,14 @@
 //   {{ids}}        所有網頁版語言的 id，JSON 陣列
 //   {{id}}、{{html_lang}}、{{menu_name}}  目前這個語言的設定
 //   {{dict}}       目前這個語言的字典模組（書籤做的 blob 網址）
-//   {{fonts}}      目前這個語言的字型：local("…"), local("…")…
+//   {{fonts}}      目前這個語言的字型：url("…") format("woff2"), local("…")…
 //
 // 書籤每次只照「目前的語言」套用規則（跟桌面版一樣）；在遊戲裡換語言時，書籤用新語言的規則重新開一次修改版。
 // 跟桌面版（patch-rules.mjs）不同的地方：
 // - 網頁版不佔用韓文的位置，而是多幾個語言（localStorage d2s:lang = zh-TW／zh-CN／ja），
 //   原版遊戲重新整理後不認得，會自動回到英文
 // - 網頁版改版比桌面版頻繁、壓縮後的變數名稱常常不一樣，所以用 regex：變數名稱用 ([\w$]+) 抓下來再放回去
-// - 字型用系統字型（網頁版拿不到 D2R 的字型檔）
+// - 字型用系統字型（網頁版拿不到 D2R 的字型檔）；俄文用開放授權的 Philosopher Bold（site/web/fonts/，SIL OFL 1.1）
 
 const CJK = '\\u3000-\\u9fff\\uff00-\\uffef';
 // 不放在行首的字：句末標點、右括號，加上日文的長音、中點和小寫假名（禁則）。跟 patch-rules.mjs 一樣，
@@ -46,34 +47,35 @@ function pattern(src) {
 }
 
 export const WEB_PLAY_URL = 'https://d2survivors.lol/play/';
-export const WEB_CHECKED = '2026-11-04T04:51:57.814Z';
+export const WEB_CHECKED = '2026-11-04T05:11:04.994Z';
 
 export const WEB_LANGUAGES = [
   {
-    id: 'zh-TW', menu_name: '繁體中文', html_lang: 'zh-Hant', groups: ['base', 'dict', 'cjk', 'magic-zh', 'fullwidth'],
+    id: 'zh-TW', menu_name: '繁體中文', html_lang: 'zh-Hant', groups: ['base', 'dict', 'cjk', 'magic-zh', 'fullwidth', 'digit5'],
     fonts: ['Microsoft JhengHei UI Bold', 'Microsoft JhengHei Bold', 'PingFang TC Semibold', 'Noto Sans TC Bold', 'Noto Sans CJK TC Bold', 'Microsoft JhengHei', 'PingFang TC', 'Noto Sans TC', 'Noto Sans CJK TC'],
   },
   {
-    id: 'zh-CN', menu_name: '简体中文', html_lang: 'zh-Hans', groups: ['base', 'dict', 'cjk', 'magic-zh'],
+    id: 'zh-CN', menu_name: '简体中文', html_lang: 'zh-Hans', groups: ['base', 'dict', 'cjk', 'magic-zh', 'digit5'],
     fonts: ['Microsoft YaHei UI Bold', 'Microsoft YaHei Bold', 'PingFang SC Semibold', 'Noto Sans SC Bold', 'Noto Sans CJK SC Bold', 'Microsoft YaHei', 'PingFang SC', 'Noto Sans SC', 'Noto Sans CJK SC'],
   },
   {
-    id: 'ja', menu_name: '日本語', html_lang: 'ja', groups: ['base', 'dict', 'cjk', 'magic-ja'],
+    id: 'ja', menu_name: '日本語', html_lang: 'ja', groups: ['base', 'dict', 'cjk', 'magic-ja', 'digit5'],
     // Windows 10／11 一定有遊ゴシック；メイリオ在非日文版的 Windows 常常沒裝，全部找不到時中日文會退回系統語言的字型（繁中的正黑體）
     fonts: ['Yu Gothic UI Bold', 'Yu Gothic Bold', 'Meiryo UI Bold', 'Meiryo Bold', 'Hiragino Sans W6', 'Hiragino Kaku Gothic ProN W6', 'Noto Sans JP Bold', 'Noto Sans CJK JP Bold', 'Yu Gothic UI', 'Yu Gothic', 'Meiryo', 'Hiragino Sans', 'Noto Sans JP', 'Noto Sans CJK JP', 'MS Gothic'],
   },
   {
-    id: 'de', menu_name: 'Deutsch', html_lang: 'de', groups: ['base', 'dict', 'caps', 'magic-de', 'unique-de'], fonts: [],
+    id: 'de', menu_name: 'Deutsch', html_lang: 'de', groups: ['base', 'dict', 'caps', 'magic-de', 'unique-de', 'digit5'], fonts: [],
   },
   {
-    id: 'fr', menu_name: 'Français', html_lang: 'fr', groups: ['base', 'dict', 'caps', 'magic-fr', 'unique-fr'], fonts: [],
+    id: 'fr', menu_name: 'Français', html_lang: 'fr', groups: ['base', 'dict', 'caps', 'magic-fr', 'unique-fr', 'digit5'], fonts: [],
   },
   {
-    id: 'ru', menu_name: 'Русский', html_lang: 'ru', groups: ['base', 'dict', 'caps', 'cyrillic', 'font-ru', 'magic-ru', 'unique-ru'],
-    fonts: ['Segoe UI Bold', 'Arial Bold', 'Roboto Bold', 'Noto Sans Bold', 'Segoe UI', 'Arial', 'Roboto', 'Noto Sans'],
+    id: 'ru', menu_name: 'Русский', html_lang: 'ru', groups: ['base', 'dict', 'caps', 'cyrillic', 'font-ru', 'magic-ru', 'unique-ru', 'digit5'],
+    // Philosopher Bold 的西里爾字母子集（U+0400–04FF，16 KB），按鈕（D2R Kodia）和內文共用；抓不到時用系統字型
+    fonts: [{ url: '../web/fonts/philosopher-bold-cyrillic.woff2' }, 'Segoe UI Bold', 'Arial Bold', 'Roboto Bold', 'Noto Sans Bold', 'Segoe UI', 'Arial', 'Roboto', 'Noto Sans'],
   },
   {
-    id: 'pl', menu_name: 'Polski', html_lang: 'pl', groups: ['base', 'dict', 'caps', 'latin-ext', 'font-pl', 'size-pl', 'magic-pl', 'unique-pl'],
+    id: 'pl', menu_name: 'Polski', html_lang: 'pl', groups: ['base', 'dict', 'caps', 'latin-ext', 'font-pl', 'size-pl', 'magic-pl', 'unique-pl', 'digit5'],
     fonts: ['Segoe UI Bold', 'Arial Bold', 'Roboto Bold', 'Noto Sans Bold', 'Segoe UI', 'Arial', 'Roboto', 'Noto Sans'],
   },
 ];
@@ -95,6 +97,25 @@ const magic = expr => `let d2g=this.exact.get(\`gender:\${$4.trim()}\`.replace(/
 // $6(`gender`,…) 查不到時會退回一般翻譯，所以要確認拿到的是詞性代碼
 const UNIQUE = pattern('let[<1>,<2>,<3>]=<4>.map(<5>=><6>(`unique`,<5>));return`${<3>} ${<1>} ${<2>}`');
 const unique = expr => `let[$1,$2,$3]=$4.map($5=>$6(\`unique\`,$5)),d2G=$6(\`gender\`,$4[1]);d2G=/^(ms|fs|ns|pl|mp|fp|nl)$/.test(d2G)?d2G:\`ms\`;let ${PICK('d2G')},${CASE};return${expr}`;
+
+// 數字「5」開口：font16、font24、font30、font42、fontexocet10 的「5」碗是封閉的，看起來像頂端平的「6」。
+// 點陣字型建好之前改圖集裡「5」那一格：中線以下、最底兩列墨以上，墨（亮度 >= peak×0.2）分成兩段以上的列，
+// 最後一段（碗的右邊）之前的像素全部清掉（含暗的描邊）。先算那一格的墨的 FNV-1a，是下面五種已知的形狀才改
+// （自己的 D2R 檔案、替代字型等形狀不一樣的不改；font6、font8、fontformal12 的 5 本來就是開的）。
+// font42 也是遊戲「D2 Exocet」向量字型的來源，所以那個字型的 5 也會跟著開口。原型和截圖在 work/網頁書籤版本/five/
+const FIVE_SHAPES = [209616337, 2051203955, 1072978108, 3695317340, 770335231];
+const FIVE = '(d2i,d2a)=>{let{cellWidth:d2w,cellHeight:d2c,top:d2t,height:d2h,peak:d2p}=d2i,d2d=d2a?.data;if(!d2d||!d2w)return;'
+  + 'let d2X=53%16*d2w,d2Y=Math.floor(53/16)*d2c+d2t,d2o=(x,y)=>((d2Y+y)*d2a.width+d2X+x)*4,'
+  + 'd2k=(x,y)=>{let o=d2o(x,y);return d2d[o+3]>0&&Math.max(d2d[o],d2d[o+1],d2d[o+2])>=d2p*.2},d2s=2166136261,d2r=[];'
+  + 'if((d2Y+d2h)*d2a.width*4>d2d.length)return;'
+  + 'for(let y=0;y<d2h;y++)for(let x=0;x<d2w;x++)d2s=Math.imul(d2s^(d2k(x,y)?1:0),16777619);'
+  + `if(!${JSON.stringify(FIVE_SHAPES)}.includes(d2s>>>0))return;`
+  + 'for(let y=0;y<d2h;y++)for(let x=0;x<d2w;x++)if(d2k(x,y)){d2r.push(y);break}'
+  + 'let d2b=d2r.at(-1),d2m=(d2r[0]+d2b)/2;'
+  + 'for(let y=0;y<d2h;y++){if(!(y>d2m&&y<d2b-1))continue;let d2u=[];'
+  + 'for(let x=0;x<d2w;x++)if(d2k(x,y)){let s=x;while(x<d2w&&d2k(x,y))x++;d2u.push([s,x-1])}'
+  + 'if(d2u.length<2)continue;let[d2L]=d2u.at(-1),d2E=d2u.at(-2)[1],d2z=d2L-1>d2E?d2L-1:d2L;'
+  + 'for(let x=0;x<d2z;x++)d2d.fill(0,d2o(x,y),d2o(x,y)+4)}}';
 
 export const WEB_RULES = [
   // 語言選單多幾個語言（選單直接用這個物件的 key 排列）
@@ -236,7 +257,7 @@ export const WEB_RULES = [
     find: pattern('return <1>>=44032&&<1><=55203||<1>>=12592&&<1><=12687||<1>>=4352&&<1><=4607}'),
     replace: 'return $1>=44032&&$1<=55203||$1>=12592&&$1<=12687||$1>=4352&&$1<=4607||$1>=1024&&$1<=1279}',
   },
-  // 俄文字型：外文字的字型家族在西里爾字母的範圍改用系統字型
+  // 俄文字型：外文字的字型家族在西里爾字母的範圍改用 Philosopher Bold（抓不到時系統字型）
   {
     label: '俄文字型', groups: ['font-ru'], optional: true, file: '^lang-.*\\.js$',
     find: pattern('if(typeof FontFace>`u`)return;'),
@@ -288,6 +309,12 @@ export const WEB_RULES = [
     label: '暗色字不加描邊', groups: ['cjk', 'cyrillic', 'latin-ext'], optional: true, file: '^ui-.*\\.js$',
     find: pattern('<1>=[];if(<2>.outline){let <3>=`rgb(${<4>(<2>.outline.level,<2>.outline.own)})`;for(let[<5>,<6>]of[[-1,0],[1,0],[0,-1],[0,1],[-1,-1],[1,-1],[-1,1],[1,1]])<1>.push([<3>,<5>*<7>,<6>*<7>])}<1>.push([`rgb(${<4>(<2>.level,<2>.own)})`,0,0]);'),
     replace: '$1=[];let d2F=$4($2.level,$2.own),d2U=$2.outline&&$4($2.outline.level,$2.outline.own),d2M=e=>Math.max(...e.split(`,`).map(Number)),d2D=d2U&&d2M(d2F)<75&&d2M(d2U)<d2M(d2F);if($2.outline&&!d2D){let $3=`rgb(${d2U})`;for(let[$5,$6]of[[-1,0],[1,0],[0,-1],[0,1],[-1,-1],[1,-1],[-1,1],[1,1]])$1.push([$3,$5*$7,$6*$7])}$1.push([`rgb(${d2D?d2U:d2F})`,0,0]);d2D&&$1.push([`rgb(${d2U})`,1,0]);',
+  },
+  // 數字「5」開口（見上面的 FIVE）：點陣字型的 constructor 拿到圖集時先改。只有翻譯語言（英文、韓文照原版）
+  {
+    label: '數字 5 開口', groups: ['digit5'], optional: true, file: '^ui-.*\\.js$',
+    find: pattern('constructor(<1>,<2>){this.info=<1>,this.atlas=<2>,this.lineHeight=<1>.height+Math.max(2,Math.round(<1>.height/4))}'),
+    replace: `constructor($1,$2){(${FIVE})($1,$2),this.info=$1,this.atlas=$2,this.lineHeight=$1.height+Math.max(2,Math.round($1.height/4))}`,
   },
   // 標題畫面、主選單底部的版權聲明：第一段寬度上限縮成 360，在句號處折成兩行，不蓋到版本號
   {
