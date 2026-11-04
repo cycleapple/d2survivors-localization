@@ -25,44 +25,53 @@ const MESSAGES = {
     stuck: '切換失敗。請重新整理頁面，再按一次書籤。',
     failed: '中文化載入失敗：', outdated: '遊戲改版了，中文化需要更新', page: '請先打開 D2 Survivors 的首頁（https://d2survivors.lol/）或遊戲頁面（https://d2survivors.lol/play/），再按這個書籤。手機建議從首頁按，比較省記憶體。',
     old: '書籤需要更新：請到中文化網站重新安裝書籤。', loop: '中文化一直重新載入，已停止。請重新整理頁面。', frame: '中文化載入失敗：框架打不開。請重新整理頁面。',
+    setup: '請先選擇遊戲檔案，選完會自動切回繁體中文。',
   },
   'zh-CN': {
     loading: '正在加载简体中文…', on: '简体中文已开启。再按一次书签会刷新页面，回到原版英文。',
     stuck: '切换失败。请刷新页面，再按一次书签。',
     failed: '汉化加载失败：', outdated: '游戏更新了，汉化需要更新', page: '请先打开 D2 Survivors 的首页（https://d2survivors.lol/）或游戏页面（https://d2survivors.lol/play/），再按这个书签。手机建议从首页按，比较省内存。',
     old: '书签需要更新：请到汉化网站重新安装书签。', loop: '汉化一直重新加载，已停止。请刷新页面。', frame: '汉化加载失败：框架打不开。请刷新页面。',
+    setup: '请先选择游戏文件，选完会自动切回简体中文。',
   },
   ja: {
     loading: '日本語を読み込んでいます…', on: '日本語になりました。もう一度ブックマークを押すとページを再読み込みして、元の英語版に戻ります。',
     stuck: '切り替えに失敗しました。ページを再読み込みしてから、もう一度ブックマークを押してください。',
     failed: '日本語化の読み込みに失敗しました：', outdated: 'ゲームが更新されたため、日本語化の更新が必要です', page: 'D2 Survivors のトップページ（https://d2survivors.lol/）かゲームページ（https://d2survivors.lol/play/）を開いてから、このブックマークを押してください。スマートフォンではトップページから押すとメモリの節約になります。',
     old: 'ブックマークの更新が必要です。日本語化サイトでブックマークを入れ直してください。', loop: '読み込みが繰り返されたため停止しました。ページを再読み込みしてください。', frame: '日本語化の読み込みに失敗しました：フレームを開けません。ページを再読み込みしてください。',
+    setup: 'まずゲームファイルを選んでください。選ぶと自動で日本語版に戻ります。',
   },
   de: {
     loading: 'Deutsch wird geladen…', on: 'Deutsch ist aktiv. Ein erneuter Klick auf das Lesezeichen lädt die Seite neu und kehrt zum englischen Original zurück.',
     stuck: 'Wechsel fehlgeschlagen. Bitte die Seite neu laden und das Lesezeichen erneut anklicken.',
     failed: 'Übersetzung konnte nicht geladen werden: ', outdated: 'Das Spiel wurde aktualisiert, die Übersetzung muss angepasst werden', page: 'Bitte zuerst die Startseite (https://d2survivors.lol/) oder die Spielseite (https://d2survivors.lol/play/) von D2 Survivors öffnen und dann das Lesezeichen anklicken. Auf dem Handy spart die Startseite Speicher.',
     old: 'Das Lesezeichen ist veraltet. Bitte auf der Übersetzungsseite neu installieren.', loop: 'Die Übersetzung lädt immer wieder neu und wurde gestoppt. Bitte die Seite neu laden.', frame: 'Übersetzung konnte nicht geladen werden: Rahmen lässt sich nicht öffnen. Bitte die Seite neu laden.',
+    setup: 'Bitte zuerst die Spieldateien wählen. Danach wechselt das Spiel automatisch zurück auf Deutsch.',
   },
   fr: {
     loading: 'Chargement du français…', on: 'Le français est activé. Cliquer à nouveau sur le favori recharge la page et revient à la version originale en anglais.',
     stuck: 'Le changement a échoué. Rechargez la page, puis cliquez à nouveau sur le favori.',
     failed: 'Échec du chargement de la traduction : ', outdated: 'Le jeu a été mis à jour, la traduction doit l’être aussi', page: 'Ouvrez d’abord la page d’accueil (https://d2survivors.lol/) ou la page de jeu (https://d2survivors.lol/play/) de D2 Survivors, puis cliquez sur ce favori. Sur téléphone, partir de la page d’accueil économise de la mémoire.',
     old: 'Le favori est obsolète. Réinstallez-le depuis le site de la traduction.', loop: 'La traduction se recharge en boucle et a été arrêtée. Rechargez la page.', frame: 'Échec du chargement de la traduction : impossible d’ouvrir le cadre. Rechargez la page.',
+    setup: 'Choisissez d’abord les fichiers du jeu. Le jeu repassera ensuite automatiquement en français.',
   },
   ru: {
     loading: 'Загрузка русского перевода…', on: 'Русский перевод включен. Повторное нажатие закладки перезагрузит страницу и вернет английский оригинал.',
     stuck: 'Не удалось переключить язык. Обновите страницу и снова нажмите закладку.',
     failed: 'Не удалось загрузить перевод: ', outdated: 'Игра обновилась, перевод нужно обновить', page: 'Сначала откройте главную страницу (https://d2survivors.lol/) или страницу игры (https://d2survivors.lol/play/) D2 Survivors, затем нажмите эту закладку. На телефоне лучше нажимать с главной страницы: так нужно меньше памяти.',
     old: 'Закладка устарела. Установите ее заново на сайте перевода.', loop: 'Перевод постоянно перезагружается и был остановлен. Обновите страницу.', frame: 'Не удалось загрузить перевод: не открывается фрейм. Обновите страницу.',
+    setup: 'Сначала выберите файлы игры. После этого игра сама вернется на русский.',
   },
   pl: {
     loading: 'Wczytywanie polskiego tłumaczenia…', on: 'Polski jest włączony. Ponowne kliknięcie zakładki odświeży stronę i przywróci oryginalną wersję angielską.',
     stuck: 'Nie udało się przełączyć języka. Odśwież stronę i ponownie kliknij zakładkę.',
     failed: 'Nie udało się wczytać tłumaczenia: ', outdated: 'Gra została zaktualizowana, tłumaczenie wymaga aktualizacji', page: 'Najpierw otwórz stronę główną (https://d2survivors.lol/) lub stronę gry (https://d2survivors.lol/play/) D2 Survivors, a potem kliknij tę zakładkę. Na telefonie lepiej klikać na stronie głównej: zużywa mniej pamięci.',
     old: 'Zakładka jest nieaktualna. Zainstaluj ją ponownie ze strony tłumaczenia.', loop: 'Tłumaczenie ciągle się przeładowuje i zostało zatrzymane. Odśwież stronę.', frame: 'Nie udało się wczytać tłumaczenia: nie można otworzyć ramki. Odśwież stronę.',
+    setup: 'Najpierw wybierz pliki gry. Potem gra sama wróci do polskiej wersji.',
   },
 };
+// 遊戲語言是英文、韓文時（書籤開的是只有 base 規則的原版）
+const SETUP_EN = 'Choose your game files first. The bookmark takes over again by itself afterwards.';
 
 // manifest 的 status：beta＝測試中、draft＝草稿（用那個語言自己寫）
 const STATUS = {
@@ -206,6 +215,9 @@ async function stopPage(win = window) {
 // 外層頁面只剩一個滿版的 iframe；document.open 會清掉原版的 DOM 和 window 上的事件
 function openShell(firstPage, { ids, build, playUrl, title }) {
   const gamePaths = [new URL(playUrl).pathname, new URL('index.html', playUrl).pathname];
+  // 遊戲沒選過檔案模式（第一次玩）、自己的檔案有問題時會換到這頁
+  const setupPath = new URL('setup.html', playUrl).pathname;
+  let onSetup = false;
   document.open();
   document.write(`<!doctype html><html><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -216,6 +228,7 @@ iframe{display:block;border:0;width:100%;height:100%}
 body>:not(iframe):not(#d2zh-toast){display:none!important}
 #d2zh-toast{position:fixed;left:50%;top:12px;transform:translateX(-50%);z-index:1;padding:8px 14px;border:1px solid #6b5326;border-radius:6px;
 background:rgba(12,10,8,.92);color:#e8dfcc;font:14px/1.4 "Microsoft JhengHei","Microsoft YaHei","Meiryo","PingFang TC","Hiragino Sans","Noto Sans CJK TC",sans-serif;pointer-events:none;transition:opacity .4s}
+#d2zh-toast[data-at=bottom]{top:auto;bottom:12px}
 </style></head><body></body></html>`);
   document.close();
   document.title = title;
@@ -261,11 +274,15 @@ background:rgba(12,10,8,.92);color:#e8dfcc;font:14px/1.4 "Microsoft JhengHei","M
       doc.close();
       if (old) watch(next);
       // 之後 iframe 自己換頁（遊戲的「重新載入」、選檔案的 setup.html 選完回來…）會載入原版：
-      // 回到遊戲頁面（/play/）時再換成修改版。setup.html 照原版
+      // 回到遊戲頁面（/play/）時再換成修改版。setup.html 照原版（英文），只在上面一直顯示「選完會自動切回」
       next.addEventListener('load', () => {
         let d = null;
         try { d = next.contentDocument; } catch { /* 不同網域 */ }
-        if (next === frame && d && !d.querySelector('meta[name="d2zh"]') && gamePaths.includes(next.contentWindow.location.pathname)) reboot(true);
+        if (next !== frame || !d) return;
+        const path = next.contentWindow.location.pathname;
+        if (path === setupPath) { onSetup = true; toast(MESSAGES[current()]?.setup ?? SETUP_EN, 0, 'bottom'); return; }
+        if (onSetup) { onSetup = false; hideToast(); }
+        if (!d.querySelector('meta[name="d2zh"]') && gamePaths.includes(path)) reboot(true);
       });
       next.focus();
     }, { once: true });
@@ -348,10 +365,17 @@ function showStatus(text) {
 }
 function hideStatus() { statusEl?.remove(); }
 
-function toast(text, ms = 3500) {
+function hideToast() {
+  const el = document.getElementById('d2zh-toast');
+  if (el) el.style.opacity = '0';
+}
+
+// at：bottom＝放在畫面下方（setup.html 上方是網站的選單列）
+function toast(text, ms = 3500, at = '') {
   let el = document.getElementById('d2zh-toast');
   if (!el) { el = Object.assign(document.createElement('div'), { id: 'd2zh-toast' }); document.body.append(el); }
   el.textContent = text;
+  el.dataset.at = at;
   el.style.opacity = '1';
   clearTimeout(toast.timer);
   if (ms) toast.timer = setTimeout(() => { el.style.opacity = '0'; }, ms);

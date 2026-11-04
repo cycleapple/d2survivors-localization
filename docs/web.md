@@ -26,7 +26,7 @@ node tools/serve.mjs site 8766      # 本機預覽（允許跨網域讀取）；
 - 原版遊戲（外層頁面）會先停掉：送 `pagehide` 讓它存檔、放掉防止開兩個分頁的 Web Lock；送一個 F24 按鍵讓它讀 AudioContext 再關掉（不然背景音樂會兩份）；停掉 rAF、計時器、WebGL
 - 可以在首頁（`/`）或遊戲頁面（`/play/`、`/play/setup.html`）啟動（2026-10-30 起）。手機建議從首頁：在 `/play/` 啟動時停掉的原版還佔著記憶體（模組、下載的遊戲資料），等於兩份遊戲；首頁只有 landing 的小腳本（約 33KB，2D 的火星動畫，一樣用 `stopPage` 停掉）。從首頁啟動時：遊戲頁面固定是 `/play/`；網址列用 `history.replaceState` 換成 `/play/`、分頁標題用遊戲頁面的，所以分頁被手機丟掉重新載入、或再按一次書籤時回到的是原版遊戲，不是首頁。其他頁面（wiki 等，它們也有 `#d2-files`，所以還要看路徑）提示要先打開首頁或遊戲頁面
 - iframe 先載入 `/robots.txt` 再把修改版寫進去：這樣才歸遊戲的 Service Worker（scope `/`）管，「USE MY OWN FILES」模式靠它從 OPFS 讀 D2 檔案
-- 遊戲要選檔案模式時（選項 → 遊戲設定 → 遊戲檔案、自己的檔案過期）會把 iframe 換到 `setup.html`（原版英文）；選完回到 `/play/` 時書籤再換成修改版。現在的遊戲沒選過也直接用網站的檔案，不會先去 `setup.html`
+- 遊戲要選檔案模式時會把 iframe 換到 `setup.html`（原版英文）；選完回到 `/play/` 時書籤再換成修改版。iframe 停在 `setup.html` 的時候，畫面下方一直顯示「請先選擇遊戲檔案，選完會自動切回〇〇」（七種語言；遊戲語言是英文、韓文時用英文），離開就收起來。見下面「選檔案（setup.html）和 hosted 檔案拿掉之後」
 - 網頁版多幾個語言（localStorage `d2s:lang` = `zh-TW`／`zh-CN`／`ja`），不佔韓文的位置；原版遊戲讀到不認得的值會照瀏覽器語言回到英文，所以重新整理後不會卡在看不懂的語言。舊版書籤存的 `zh` 當成 `zh-TW`
 - manifest 的 `status`（見 [manifest-v2.md](manifest-v2.md)）：`beta` 在遊戲語言選單的名稱後面標「（測試中）」，`draft` 標「（草稿）」，用那個語言自己寫（「简体中文（测试中）」「Français (brouillon)」）；不認得的值當成 `draft`。`available` 不標
 - 第一次按書籤開哪個語言：安裝碼帶的語言（`m.default('zh-TW')`，網站各語言頁的安裝碼；是 manifest 裡有 `web` 的語言才算，並寫進 `d2s:lang`、`d2zh:last`）→ 遊戲設定裡的語言 → 上次用的（`d2zh:last`）→ 瀏覽器語言 → 繁中。沒帶參數的舊書籤照舊；舊版 `d2zh.js` 會忽略參數
@@ -41,6 +41,30 @@ node tools/serve.mjs site 8766      # 本機預覽（允許跨網域讀取）；
 - 德、法、俄文的名稱組合：字典的 `affix:`、`unique:` 有每種詞性的形式（「[ms]…[fs]…」），照 `gender:<名詞>` 挑。順序：德文「前綴 物品 後綴」、獨特怪物「前段-後段 稱號」；法文「物品 前綴 後綴」、「後段 前段 稱號」；俄文「前綴 物品 後綴」、「稱號, 前段 後段」；波蘭文「前綴 物品 後綴」、「稱號, 前段 後段」（不改大小寫，複數的詞性是 nl）。輸出要跟桌面版一樣，參考實作是 `work/translation/compose-proto.mjs`；`work/web/compose-check.mjs` 用套好規則的遊戲模組跑同一組例子跟它對照（德法俄波 44 個全部一樣）。規則裡新加的變數都用 `d2` 開頭，免得跟遊戲壓縮後的名稱撞到
 - 跟桌面版同名、一起維護的規則：技能變體專用譯名（`modifier:<名稱>`，例如繁中荊棘之靈的 Vengeance 是「復仇」不是聖騎士的「復仇打擊」）、女性職業的稱號（`title:<稱號>:f`，Zerstörerin）、德文多字物品名稱在前綴後面小寫（Robuste schwere Handschuhe）。驗證：`node work/web/new-rules-check.mjs`
 - 字型：網頁版沒有 D2R 的字型，改用系統字型（`local()`）註冊成遊戲的外文字字型家族。繁中：微軟正黑體、蘋方 TC、Noto Sans TC；簡中：微軟雅黑、蘋方 SC、Noto Sans SC；日文：遊ゴシック、Meiryo、Hiragino、Noto Sans JP、最後是 MS ゴシック（非日文版的 Windows 常常沒有 Meiryo，`local()` 全部找不到時中日文會退回系統語言的字型，繁中 Windows 上是正黑體，一行裡混兩種字型；遊ゴシック Windows 10／11 都有）；俄文（只註冊 U+0400–04FF）：Segoe UI、Arial、Roboto、Noto Sans。德、法文的字點陣字型本來就有（Latin-1），不用另外的字型；波蘭文（只註冊 U+0100–017F）跟俄文一樣用系統字型。波蘭文只有幾個字母走外文字、夾在點陣字母中間，照韓文的放大比例會大一號，所以標題 ×1.2、內文 ×1.0 不加粗（`size-pl`，有沒有 D2R 韓文字型的兩個分支都改）。桌面版的小按鈕字用 ×1.5、Exocet 先畫 4 倍大再縮小，是 Exocet 的問題；網頁版用系統字型，×1.5 的 Ś 會比點陣大寫高一截，×1.2 剛好，小字的尖音符號也都在（2026-10-27 用最終版 `dict/pl.json` 放大看「NOWOŚCI」「WYJŚCIE」）
+
+## 選檔案（setup.html）和 hosted 檔案拿掉之後
+
+2026-11-04 查的（遊戲 20261103.2，研究筆記在 `work/網頁書籤版本/setup-flow.md`）。
+
+遊戲現在有兩種檔案模式，選擇存在 localStorage `d2s:files`（`own`／`hosted`，沒選過是空的；遊戲裡也能改：選項 → 遊戲設定 → GAME FILES）：
+- HOSTED FILES：跟以前一樣從網站下載 `/d2/…` 的圖和音效
+- USE MY OWN FILES…：選 D2 經典版 1.14（`.mpq`）或 D2R（CASC）的安裝資料夾，`/import/worker.js` 把遊戲要的部分轉成跟 hosted 一樣的 `d2/…` 檔案，寫進瀏覽器的 OPFS（第一次幾分鐘）。之後 Service Worker（`/sw.js`，scope `/`）從 OPFS 回應同網域 `/d2/…` 的 GET。網址、檔名都不變，只是回應的來源換了，所以 `web-rules.mjs` 不受影響
+
+遊戲啟動時怎麼走：
+- 電腦、沒選過、網址沒有參數 → 先換到 `setup.html`（新玩家第一次一定會到這頁）
+- 選了 own → 檢查抽好的檔案、等 Service Worker 接手（第一次可能自己重新載入一次），有問題就換到 `setup.html?reason=…`
+- 觸控手機（`pointer: coarse`）不能用自己的檔案（setup 頁寫「A phone can't read an install」）：hosted 還在時一律用 hosted
+- hosted 拿掉 → 遊戲顯示「已停止提供」的頁面（USE MY OWN FILES… ／下載桌面版），不能玩。這頁是遊戲畫的，書籤會翻
+- desktop app（`app:`）不受影響：第一行就直接玩，不會到 `setup.html`
+
+書籤怎麼接：
+- iframe 先載入 `/robots.txt` 再寫入修改版，所以歸 Service Worker 管（實測 iframe 裡 `navigator.serviceWorker.controller` 有值），用自己的檔案時一樣從 OPFS 讀
+- 新玩家按書籤：修改版一開就被換到 `setup.html`，書籤在下方顯示提示；選 HOSTED FILES 後 setup 把 iframe 帶回 `/play/`，書籤自動重開修改版（實測繁中、俄文都直接回到翻譯版的標題畫面）。選自己的檔案抽完也會回 `/play/`，應該一樣接得上（還沒實測，要真的瀏覽器選資料夾）
+- 遊戲第一次用自己的檔案自己重新載入時，iframe 會載入原版 `/play/`，書籤一樣換回修改版（算進防無限重新載入的次數）
+
+**hosted 檔案拿掉之後，手機（觸控）不能玩**：手機讀不到安裝資料夾，只會看到「已停止提供」頁（書籤會翻）。電腦要改用「自己的檔案」（D2 1.14 或 D2R）。到時候書籤的手機省電、省記憶體只對有滑鼠的平板和電腦有用。
+- 拿掉的時間沒有公布：頁面、FAQ、新聞都只寫「very soon」。開關是網站的 `/site.json`（現在 `{ "hostedFiles": true }`，Last-Modified 2026-10-18），改成 false 立刻生效，不用發新版。網址加 `?hosted=0` 可以模擬拿掉之後的樣子
+- 網站上的預告由宣傳網站那邊加
 
 ## 排行榜和問題回報：成績照原版上傳，問題回報不送
 
@@ -129,8 +153,11 @@ status 標示：简中 beta 顯示「语言：简体中文（测试中）」、�
 - 書籤能省的：從 `/play/` 啟動最多（約 20 MB JS、100 MB 以上程序記憶體），可以在手機上改成提示「改從首頁開」或自動回首頁；原版模組原始碼不留、換語言時再從快取抓，約 4 MB；字典改用 JSON 讀，約 1 MB。遊戲自己的圖、聲音、資料不是書籤能動的
 - 不是實機：headless Chrome 在電腦上跑，絕對值跟 Android 不一樣，只看各情況的差
 
+setup.html 的提示（2026-11-04，遊戲 20261103.2，正式 manifest 20261103-1513，本機的 `site/`；自己開的 headless Chrome，1000×750、dpr 2）：清掉網站資料 → 首頁按書籤（繁中、俄文）→ iframe 換到 `setup.html`，下方顯示提示 → 點 HOSTED FILES → 回到 `/play/` 的修改版（標題畫面是翻譯版），提示收起來，`d2s:files` 是 hosted。`/api/` 只放行 GET，沒有任何 POST。截圖在 `work/網頁書籤版本/shots/hint-*.png`
+
 還沒測：USE MY OWN FILES 實際讀檔、Safari／Firefox、手機、遊戲中的升級卡片和物品名稱（日文的魔法物品順序、禁則斷行只用 `build-web.mjs` 確認規則套得上；德法俄的名稱組合用 `compose-check.mjs` 對照過，沒有在遊戲畫面上看過）。
 
 ## 待辦
 
-- 選檔案的 `setup.html` 是原版英文頁面
+- 選檔案的 `setup.html` 是原版英文頁面（決定不翻，只顯示提示）
+- USE MY OWN FILES 在真的瀏覽器裡實測（選資料夾、抽完、按書籤看翻譯和讀檔）：聊天室管理那邊做
