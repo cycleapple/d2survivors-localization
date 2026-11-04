@@ -334,6 +334,9 @@ h3 { font-size: 1.15rem; margin: 0 0 10px; }
 .web-steps { margin: 12px 0 0; padding-left: 1.4em; }
 .web-steps li { margin-bottom: 8px; }
 .web-usage { margin-top: 16px; }
+.web-hosted { margin: 0 0 20px; padding: 12px 16px; border: 1px solid rgba(217, 162, 63, 0.45); border-radius: var(--radius); background: rgba(217, 162, 63, 0.12); font-size: 0.92rem; overflow-wrap: anywhere; }
+.web-hosted strong { color: var(--warn); }
+.web-hosted-mobile { margin: -4px 0 12px; color: var(--warn); font-size: 0.88rem; }
 
 /* 手機書籤教學：iPhone／Android 分頁，每步一個 HTML/CSS 畫的深色示意畫面（.phone）＋短標題＋說明。
    手機上一次一張（置中、下面圓點和上一張／下一張），寬螢幕直接排成格子 */

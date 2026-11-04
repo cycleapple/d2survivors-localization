@@ -527,6 +527,8 @@ function langPage(sl) {
       <div class="wrap">
         <h2>${esc(t['web.title'])}</h2>
         <p class="section-lead">${t['web.lead']}</p>
+        <!-- 預告：官方之後停止提供 Hosted files，手機就不能玩 -->
+        <p class="web-hosted" role="note">${t['web.hosted']}</p>
         ${platformPicker(t, true)}
         <div class="cards">
           <article class="card">
@@ -541,6 +543,7 @@ function langPage(sl) {
           </article>
           <article class="card guide" data-os="ios">
             <h3>${esc(t['web.mobile.title'])}</h3>
+            <p class="web-hosted-mobile">${esc(t['web.mobile.hosted'])}</p>
             <p class="bookmarklet-row">
               <button type="button" class="btn btn-ghost" id="copy-bookmarklet">${esc(t['web.copy'])}</button>
               <span class="bookmarklet-hint" id="copy-status" role="status"></span>

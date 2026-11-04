@@ -146,6 +146,17 @@ node tools/serve.mjs site 8766     # 本機預覽（或 python -m http.server 87
 
 書籤的「省電畫質」開關（遊戲的「選項 → 顯示設定」，解析度降低、比較順、比較不燙）：名稱放在 i18n 的 `web.lowpower`，文字裡寫 `{lowpower}`，建置時換掉（`fillLangs`）。書籤聊天室定了正式名稱只改 `web.lowpower`。選單路徑寫遊戲翻譯後的名稱（字典的 Options、VIDEO OPTIONS、GAME OPTIONS）。「使用方式」第 4 項和常見問題「手機玩到一半自動重新整理？」用到它。
 
+### Hosted files 停止提供的預告
+
+- 2026-11 遊戲新增 /play/setup.html，要玩家選自己的檔案（電腦上的 D2 1.14 或 D2R 安裝資料夾）或 Hosted files；官方說 Hosted files 很快會拿掉，沒有日期。拿掉後觸控手機讀不了安裝資料夾，只會看到「已停止提供」頁；電腦要選「USE MY OWN FILES…」，書籤照樣能用；桌面版不受影響
+- 網站上的預告：
+  - 書籤區塊開頭的黃框 `web.hosted`（`.web-hosted`）
+  - 手機卡片標題下一行 `web.mobile.hosted`
+  - 常見問題「可以在 Mac、Linux 或手機上玩嗎？」最後加一段
+  - 新的瀏覽器版題目「官方說要停止提供遊戲檔案，會怎樣？」
+- 語氣中性，寫成遊戲本身的改變、書籤沒辦法改變，不寫成我們能解決。按鈕名稱寫英文原文「USE MY OWN FILES…」，括號附翻譯，因為設定頁不一定有翻譯
+- 官方真的拿掉之後，把「預告／很快」改成現況，手機的說明和教學也要重新檢討
+
 ### 手機書籤教學
 
 - 瀏覽器版的「手機」卡片：複製程式碼的按鈕下面，iPhone（Safari）／Android（Chrome）兩個分頁，各五步：複製 → 加入書籤 → 打開書籤編輯 → 名稱改成建議名稱、網址換成程式碼 → 到 d2survivors.lol 首頁執行（iPhone 從書籤清單點，Android 在網址列打名稱再點有 ☆ 的建議；補充寫首頁比較省記憶體，在遊戲頁也可以）
