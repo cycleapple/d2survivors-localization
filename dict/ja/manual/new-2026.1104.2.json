@@ -1,0 +1,5 @@
+{
+ "Terror * stays open.": "恐怖 {0}は開放されたままです。",
+ "A Hardcore hero who clears many tiers in a row is no longer marked as played from an older copy of the save": "多くの段階を連続でクリアしたハードコアの英雄が、古いセーブデータのコピーでプレイしたと表示されなくなりました",
+ "The ubers are fought at your open Terror tier up to Terror 100, so a hero past it fights them at 100": "ウーバーボスとは開放中の恐怖の段階で戦います（最大で恐怖 100）。それを超えた英雄は100で戦います"
+}
