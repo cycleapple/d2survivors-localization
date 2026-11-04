@@ -2,6 +2,122 @@
   "schema": 1,
   "entries": [
     {
+      "version": "20261104-2212",
+      "date": "2026-11-04",
+      "kind": "game-fix",
+      "announce": true,
+      "summary": {
+        "zh-TW": "已支援遊戲 2026.1104.2（新增 3 條譯文）",
+        "zh-CN": "已支持游戏 2026.1104.2（新增 3 条译文）",
+        "en": "Supports game version 2026.1104.2 (3 new strings translated)",
+        "ja": "ゲーム 2026.1104.2 に対応しました（新しい訳文 3 件）",
+        "de": "Unterstützt Spielversion 2026.1104.2 (3 neue Texte übersetzt)",
+        "fr": "Prise en charge de la version 2026.1104.2 du jeu (3 nouveaux textes traduits)",
+        "ru": "Поддержка версии игры 2026.1104.2 (переведено 3 новых строки)",
+        "pl": "Obsługa wersji gry 2026.1104.2 (przetłumaczono 3 nowe teksty)"
+      },
+      "game": {
+        "desktop": "2026.1104.2"
+      },
+      "launcher": "1.0.5",
+      "languages": [
+        {
+          "id": "zh-TW",
+          "status": "available",
+          "entries": 14088,
+          "added": 3,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "zh-CN",
+          "status": "available",
+          "entries": 14087,
+          "added": 3,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ja",
+          "status": "available",
+          "entries": 14093,
+          "added": 3,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "de",
+          "status": "available",
+          "entries": 14127,
+          "added": 3,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "fr",
+          "status": "available",
+          "entries": 14136,
+          "added": 3,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ru",
+          "status": "available",
+          "entries": 14175,
+          "added": 3,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "pl",
+          "status": "available",
+          "entries": 14165,
+          "added": 3,
+          "changed": 0,
+          "removed": 0
+        }
+      ],
+      "gameNotes": {
+        "version": "2026.1104.2",
+        "at": "2026-11-04T20:07:10.861Z",
+        "lines": {
+          "zh-TW": [
+            "連續完成多個階的專家級英雄，不會再被標記為使用舊的存檔副本遊玩",
+            "超級首領會在你已開啟的恐懼階對戰，最高到恐懼100，因此超過的英雄會在恐懼100與它們對戰"
+          ],
+          "zh-CN": [
+            "连续完成多个阶的专家模式英雄，不会再被标记为使用旧的存档副本游玩",
+            "超级首领会在你已开启的恐惧阶对战，最高到恐惧100，因此超过的英雄会在恐惧100与它们对战"
+          ],
+          "en": [
+            "A Hardcore hero who clears many tiers in a row is no longer marked as played from an older copy of the save",
+            "The ubers are fought at your open Terror tier up to Terror 100, so a hero past it fights them at 100"
+          ],
+          "ja": [
+            "多くの段階を連続でクリアしたハードコアの英雄が、古いセーブデータのコピーでプレイしたと表示されなくなりました",
+            "ウーバーボスとは開放中の恐怖の段階で戦います（最大で恐怖 100）。それを超えた英雄は100で戦います"
+          ],
+          "de": [
+            "Ein Hardcore-Held, der viele Stufen in Folge abschließt, wird nicht mehr als mit einer älteren Kopie des Spielstands gespielt markiert",
+            "Die Über-Bosse werden auf deiner offenen Schreckensstufe bekämpft, höchstens auf Schrecken 100, ein Held darüber bekämpft sie also auf 100"
+          ],
+          "fr": [
+            "Un héros Extrême qui termine de nombreux paliers d’affilée n’est plus signalé comme ayant joué depuis une ancienne copie de la sauvegarde",
+            "Les Über sont affrontés à votre palier de Terreur ouvert, jusqu’à Terreur 100, donc un héros au-delà les affronte à 100"
+          ],
+          "ru": [
+            "Герой героического режима, прошедший много ступеней подряд, больше не отмечается как игравший со старой копии сохранения",
+            "С супер-боссами сражаются на открытой ступени Ужаса, но не выше Ужаса 100, поэтому герой выше нее сражается с ними на 100"
+          ],
+          "pl": [
+            "Bohater trybu Hardkor, który ukończy wiele stopni z rzędu, nie jest już oznaczany jako grający ze starszej kopii zapisu",
+            "Z uber-bossami walczy się na otwartym stopniu Grozy, maksymalnie na Grozie 100, więc bohater powyżej walczy z nimi na 100"
+          ]
+        }
+      }
+    },
+    {
       "version": "20261104-1421",
       "date": "2026-11-04",
       "kind": "game-fix",
