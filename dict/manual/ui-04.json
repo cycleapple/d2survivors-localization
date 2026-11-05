@@ -31,7 +31,7 @@
  "Update ready: click to restart": "更新已就緒：點擊以重新啟動",
  "A new build is ready: click to reload": "新版本已就緒：點擊以重新載入",
  "A new build is ready: tap to reload": "新版本已就緒：輕觸以重新載入",
- "Updating: the game opens again by itself": "更新中：遊戲會自動重新開啟",
+ "Updating: the game opens again by itself": "更新中：遊戲會自動重新開啟。如果開啟後沒有翻譯，請從啟動器重新開啟遊戲",
  "UPDATES": "更新",
  "Upgrades": "升級項目",
  "Vengeance Aegis": "復仇之禦",

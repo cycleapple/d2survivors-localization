@@ -407,7 +407,7 @@
   "Update ready: click to restart": "Mise à jour prête : cliquez pour redémarrer",
   "A new build is ready: click to reload": "Nouvelle version prête : cliquez pour recharger",
   "A new build is ready: tap to reload": "Nouvelle version prête : touchez pour recharger",
-  "Updating: the game opens again by itself": "Mise à jour : le jeu se rouvre tout seul",
+  "Updating: the game opens again by itself": "Mise à jour : le jeu se rouvre tout seul. S’il n’est plus traduit ensuite, relancez-le depuis le lanceur",
   "UPDATES": "MISES À JOUR",
   "Upgrades": "Améliorations",
   "Valkyrie's": "de la valkyrie",

@@ -135,7 +135,7 @@
   "Update ready: click to restart": "Обновление готово: щелкните, чтобы перезапустить",
   "A new build is ready: click to reload": "Новая сборка готова: щелкните, чтобы перезагрузить",
   "A new build is ready: tap to reload": "Новая сборка готова: коснитесь, чтобы перезагрузить",
-  "Updating: the game opens again by itself": "Обновление: игра откроется заново сама",
+  "Updating: the game opens again by itself": "Обновление: игра откроется заново сама. Если перевода не будет, запустите игру через лаунчер",
   "UPDATES": "ОБНОВЛЕНИЯ",
   "Upgrades": "Улучшения",
   "Valkyrie's": "Валькирианский",

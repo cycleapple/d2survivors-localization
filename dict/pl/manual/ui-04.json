@@ -67,7 +67,7 @@
   "Update ready: click to restart": "Aktualizacja gotowa: kliknij, aby uruchomić ponownie",
   "A new build is ready: click to reload": "Nowa wersja jest gotowa: kliknij, aby odświeżyć",
   "A new build is ready: tap to reload": "Nowa wersja jest gotowa: dotknij, aby odświeżyć",
-  "Updating: the game opens again by itself": "Aktualizacja: gra sama uruchomi się ponownie",
+  "Updating: the game opens again by itself": "Aktualizacja: gra sama uruchomi się ponownie. Jeśli zniknie tłumaczenie, uruchom ją ponownie z launchera",
   "UPDATES": "AKTUALIZACJE",
   "Upgrades": "Ulepszenia",
   "Valkyrie's": "Walkiryczny",
