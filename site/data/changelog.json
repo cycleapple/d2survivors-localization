@@ -2,6 +2,226 @@
   "schema": 1,
   "entries": [
     {
+      "version": "20261105-2121",
+      "date": "2026-11-05",
+      "kind": "game-fix",
+      "announce": true,
+      "summary": {
+        "zh-TW": "已支援遊戲 2026.1105.3（新增 81 條譯文）",
+        "zh-CN": "已支持游戏 2026.1105.3（新增 81 条译文）",
+        "en": "Supports game version 2026.1105.3 (81 new strings translated)",
+        "ja": "ゲーム 2026.1105.3 に対応しました（新しい訳文 81 件）",
+        "de": "Unterstützt Spielversion 2026.1105.3 (81 neue Texte übersetzt)",
+        "fr": "Prise en charge de la version 2026.1105.3 du jeu (81 nouveaux textes traduits)",
+        "ru": "Поддержка версии игры 2026.1105.3 (переведена 81 новая строка)",
+        "pl": "Obsługa wersji gry 2026.1105.3 (przetłumaczono 81 nowych tekstów)"
+      },
+      "game": {
+        "desktop": "2026.1105.3"
+      },
+      "launcher": "1.0.7",
+      "languages": [
+        {
+          "id": "zh-TW",
+          "status": "available",
+          "entries": 14344,
+          "added": 81,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "zh-CN",
+          "status": "available",
+          "entries": 14343,
+          "added": 81,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ja",
+          "status": "available",
+          "entries": 14349,
+          "added": 81,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "de",
+          "status": "available",
+          "entries": 14383,
+          "added": 81,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "fr",
+          "status": "available",
+          "entries": 14392,
+          "added": 81,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ru",
+          "status": "available",
+          "entries": 14431,
+          "added": 81,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "pl",
+          "status": "available",
+          "entries": 14421,
+          "added": 81,
+          "changed": 0,
+          "removed": 0
+        }
+      ],
+      "gameNotes": {
+        "version": "2026.1105.3",
+        "at": "2026-11-05T19:33:02.640Z",
+        "lines": {
+          "zh-TW": [
+            "帶有弓類詞綴的魔法與稀有箭袋現在會掉落：弓矢與弓搭配，弩箭與弩搭配",
+            "恐懼的結束畫面可以一鍵重玩同一階（R），而階的傳送門會等你，不再讓你錯過地上的戰利品",
+            "角色畫面左下角的箭頭後面還有三頁屬性，包括幀數門檻與超過上限前的抗性",
+            "「獨特」分頁會依符文之語可出現的每種底材各存放一件，例如劍上的魂靈與盾牌上的魂靈都會收藏",
+            "拉蘇克的訓練場新增物理免疫的假人「死亡狂戰士」，讓物理角色也能測量傷害",
+            "拾取篩選器新增「隱藏並出售」設定：走過或點擊時直接出售，不會顯示在地上",
+            "拾取篩選器新增「拾取無形」開關：即使該列會隱藏或出售其餘物品，無形的獨特物品與符文之語仍會拾取",
+            "裝備、咒符、珠寶與精華的拾取距離增加了幾碼，走到旁邊就能撿起",
+            "寶石聖壇除了經驗值之外，也會掉落一顆可鑲嵌的珠寶，每四次有一次是稀有珠寶",
+            "魔法物品現在無法淬鍊。已淬鍊的魔法物品會恢復成掉落時的狀態，用掉的精華會退回物品欄",
+            "對一件物品在熔爐嘗試三次以上後再載入較舊的存檔，該物品現在會被鎖定，無法再嘗試",
+            "物品欄中的物品說明框不再遮住角色畫面的屬性，滑鼠停在物品上時就能看到它會改變什麼",
+            "修正最高議會成員在被擊殺前離開，導致最高議會任務少一名成員的問題",
+            "秘密乳牛關的牛叫聲現在會在牛群消失後停止，不再於牛王倒下後持續重疊",
+            "在其他裝置或存檔副本上變更過的熔爐物品，現在會在每局開始時同步為最新狀態，讓那一局能登上天梯"
+          ],
+          "zh-CN": [
+            "带有弓类词缀的魔法与稀有箭袋现在会掉落：箭矢与弓搭配，弩矢与弩搭配",
+            "恐惧的结束画面可以一键重玩同一阶（R），而阶的传送门会等你，不再让你错过地上的战利品",
+            "角色界面左下角的箭头后面还有三页属性，包括帧数档位与超过上限前的抗性",
+            "“暗金”分页会按符文之语可出现的每种底材各存放一件，例如剑上的精神与盾牌上的精神都会收藏",
+            "拉苏克的训练场新增物理免疫的假人“死亡狂战士”，让物理角色也能测量伤害",
+            "拾取过滤器新增“隐藏并出售”设置：走过或点击时直接出售，不会显示在地上",
+            "拾取过滤器新增“拾取无形”开关：即使该行会隐藏或出售其余物品，无形的暗金物品与符文之语仍会拾取",
+            "装备、神符、珠宝与精华的拾取距离增加了几码，走到旁边就能捡起",
+            "宝石魔坛除了经验值之外，也会掉落一颗可镶嵌的珠宝，每四次有一次是稀有珠宝",
+            "魔法物品现在无法淬火。已淬火的魔法物品会恢复成掉落时的状态，用掉的精华会退回物品栏",
+            "对一件物品在熔炉尝试三次以上后再载入较旧的存档，该物品现在会被锁定，无法再尝试",
+            "物品栏中的物品说明框不再遮住角色界面的属性，鼠标停在物品上时就能看到它会改变什么",
+            "修复了高庭理事会成员在被击杀前离开，导致高庭理事会任务少一名成员的问题",
+            "神秘的奶牛关的牛叫声现在会在牛群消失后停止，不再于母牛之王倒下后持续叠加",
+            "在其他设备或存档副本上更改过的熔炉物品，现在会在每局开始时同步为最新状态，让那一局能登上天梯"
+          ],
+          "en": [
+            "Magic and rare quivers drop with a bow's affixes, Arrows to wear beside a bow and Bolts beside a crossbow",
+            "Terror's end screens replay the same tier in one press (R), and a tier's portal waits for you rather than taking you past its loot",
+            "The character screen has three more pages of stats behind arrows at its bottom left, breakpoints and resistances before the cap among them",
+            "The Uniques tab keeps a runeword once on each kind of base it comes on, so Spirit on a sword and Spirit on a shield are both kept",
+            "Larzuk's training ground adds a physical-immune dummy, the Death Berserker, for physical builds to measure against",
+            "A new loot filter action, HIDE AND SELL, sells what you walk onto or click without ever showing it on the floor",
+            "The loot filter's new ETHEREAL ONLY switch picks up ethereal uniques and runewords while their line hides or sells the rest",
+            "Gear, charms, jewels and essences are picked up from a few yards farther, so walking up beside one takes it",
+            "Gem shrines also drop a jewel for your sockets, rare one time in four, beside their experience",
+            "Magic items can no longer be tempered, and a tempered one goes back to how it rolled, its essences returned to your inventory",
+            "Loading an older save after three or more Forge tries on an item now locks that item against further tries",
+            "An item's box in the inventory no longer covers the character sheet's stats, so you can read what the item would change while you hover it",
+            "The High Council's members no longer walk off before they're slain, which left The High Council quest one member short",
+            "The Secret Cow Level's moos stop once the herd is gone, where they went on and piled up after the Cow King fell",
+            "A Forge item changed on another device or copy of your save is brought up to date as each run starts, so its runs reach the Ladder"
+          ],
+          "ja": [
+            "弓の接辞が付いたマジックとレアの矢筒がドロップするようになりました。矢は弓と、ボルトはクロスボウと一緒に装備します",
+            "恐怖の終了画面で同じ段階をワンボタンでやり直せるようになり（R）、段階のポータルは戦利品を置き去りにせずあなたを待つようになりました",
+            "キャラクター画面の左下の矢印の先に、ステータスがさらに3ページあり、フレーム境界や上限前の耐性も確認できます",
+            "「ユニーク」タブはルーンワードを出現するベースアイテムの種類ごとに1つずつ保管します。剣の精霊と盾の精霊はどちらも保管されます",
+            "ラルザックの訓練場に物理無効のカカシ「デス・バーサーカー」が追加され、物理ビルドもダメージを測定できます",
+            "拾得フィルターに新しい設定「非表示で売却」が追加されました。床に表示されず、上を歩くかクリックすると売却します",
+            "拾得フィルターに新しいスイッチ「イシリアルは拾う」が追加されました。行の設定で他を非表示や売却にしても、イシリアルのユニークとルーンワードは拾います",
+            "装備、護符、宝玉、エッセンスを少し離れた場所から拾うようになり、横まで歩けば拾えます",
+            "宝石の祭壇が経験値と一緒にソケット用の宝玉も落とすようになり、4回に1回はレアの宝玉です",
+            "マジックアイテムを鍛錬できなくなりました。鍛錬したマジックアイテムはドロップ時の状態に戻り、使ったエッセンスはインベントリに戻ります",
+            "アイテムに炉を3回以上試した後に古い保存データを読み込むと、そのアイテムはそれ以上試せないようにロックされるようになりました",
+            "インベントリのアイテムの説明枠がキャラクター画面のステータスを隠さなくなり、アイテムにカーソルを合わせたまま何が変わるかを確認できます",
+            "高等評議会のメンバーが倒される前に立ち去り、高等評議会のクエストが1人足りなくなる問題を修正しました",
+            "秘密のモーモー牧場の牛の鳴き声が、牛王が倒れた後も重なって鳴り続けていましたが、群れがいなくなると止まるようになりました",
+            "他のデバイスや保存データのコピーで変更された炉のアイテムが、ランを始めるたびに最新の状態に更新され、そのランがラダーに載るようになりました"
+          ],
+          "de": [
+            "Magische und seltene Köcher erscheinen mit den Affixen eines Bogens: Pfeile trägt man neben einem Bogen, Bolzen neben einer Armbrust",
+            "Auf den Endbildschirmen des Schreckens lässt sich dieselbe Stufe mit einem Tastendruck (R) wiederholen, und das Portal einer Stufe wartet auf dich, statt dich an ihrer Beute vorbeizuführen",
+            "Das Charakterfenster hat hinter den Pfeilen unten links drei weitere Seiten mit Werten, darunter Breakpoints und Widerstände vor der Obergrenze",
+            "Der Reiter \"Einzigartige\" bewahrt ein Runenwort einmal pro Basisart auf, auf der es vorkommt, sodass Geist auf einem Schwert und Geist auf einem Schild beide aufbewahrt werden",
+            "Larzuks Trainingsplatz hat eine physisch immune Übungspuppe, den Todesberserker, damit auch physische Builds ihren Schaden messen können",
+            "Eine neue Beutefilter-Aktion, AUSBLENDEN UND VERKAUFEN, verkauft, worüber du läufst oder was du anklickst, ohne es je auf dem Boden zu zeigen",
+            "Der neue Schalter ÄTHERISCHE AUFHEBEN des Beutefilters hebt ätherische Einzigartige und Runenworte auf, während ihre Zeile den Rest ausblendet oder verkauft",
+            "Ausrüstung, Zauber, Juwelen und Essenzen werden aus ein paar Metern mehr Entfernung aufgehoben, sodass es reicht, daneben zu laufen",
+            "Edelsteinschreine lassen neben ihrer Erfahrung auch ein Juwel für deine Sockel fallen, in einem von vier Fällen ein seltenes",
+            "Magische Gegenstände lassen sich nicht mehr härten, und ein gehärteter wird auf seine ursprünglichen Werte zurückgesetzt, wobei seine Essenzen in dein Inventar zurückkehren",
+            "Wird nach drei oder mehr Schmiede-Versuchen an einem Gegenstand ein älterer Spielstand geladen, wird dieser Gegenstand jetzt für weitere Versuche gesperrt",
+            "Das Infofenster eines Gegenstands im Inventar verdeckt nicht mehr die Werte des Charakterfensters, sodass du beim Darüberfahren lesen kannst, was der Gegenstand ändern würde",
+            "Die Mitglieder des Hohen Rats gehen nicht mehr weg, bevor sie getötet werden, wodurch der Quest \"Der Hohe Rat\" ein Mitglied fehlte",
+            "Das Muhen im Geheimen Kuhlevel hört auf, sobald die Herde weg ist, statt nach dem Fall des Kuhkönigs weiterzugehen und sich zu stapeln",
+            "Ein Schmiede-Gegenstand, der auf einem anderen Gerät oder einer Kopie deines Spielstands geändert wurde, wird zu Beginn jedes Durchgangs aktualisiert, sodass seine Durchgänge in die Rangliste kommen"
+          ],
+          "fr": [
+            "Des carquois magiques et rares tombent avec les affixes d’un arc : les Flèches se portent avec un arc et les Traits avec une arbalète",
+            "Les écrans de fin de Terreur rejouent le même palier d’une seule touche (R), et le portail d’un palier vous attend au lieu de vous emmener loin de son butin",
+            "L’écran de personnage a trois pages de statistiques de plus derrière les flèches en bas à gauche, dont les paliers d’images et les résistances avant plafond",
+            "L’onglet Uniques conserve un mot runique une fois pour chaque type de base sur laquelle il apparaît : Esprit sur une épée et Esprit sur un bouclier sont tous deux conservés",
+            "Le terrain d’entraînement de Larzuk ajoute un mannequin insensible au physique, le Berserker de la mort, pour que les builds physiques puissent se mesurer",
+            "Une nouvelle action du filtre de butin, MASQUER ET VENDRE, vend ce sur quoi vous marchez ou cliquez sans jamais l’afficher au sol",
+            "Le nouvel interrupteur RAMASSER ÉTHÉRÉS du filtre de butin ramasse les uniques et mots runiques éthérés pendant que leur ligne masque ou vend le reste",
+            "L’équipement, les charmes, les joyaux et les essences se ramassent de quelques mètres plus loin : il suffit de passer à côté pour les prendre",
+            "Les sanctuaires de gemme font aussi tomber un joyau pour vos châsses, rare une fois sur quatre, en plus de leur expérience",
+            "Les objets magiques ne peuvent plus être trempés, et un objet magique trempé revient à son état d’origine, ses essences étant rendues à votre inventaire",
+            "Charger une ancienne sauvegarde après trois essais ou plus à la Forge sur un objet verrouille désormais cet objet contre tout nouvel essai",
+            "La fenêtre d’un objet dans l’inventaire ne couvre plus les statistiques de la fiche de personnage : vous pouvez lire ce que l’objet changerait en le survolant",
+            "Les membres du Grand Conseil ne s’en vont plus avant d’être tués, ce qui laissait la quête Le Grand Conseil à un membre près",
+            "Les meuglements du niveau secret des vaches s’arrêtent quand le troupeau a disparu, alors qu’ils continuaient et s’empilaient après la chute du roi des vaches",
+            "Un objet de la Forge modifié sur un autre appareil ou une autre copie de votre sauvegarde est mis à jour au début de chaque partie, pour que ses parties figurent au Tournoi"
+          ],
+          "ru": [
+            "Выпадают магические и редкие колчаны со свойствами луков: стрелы носят вместе с луком, а болты — с арбалетом",
+            "На экранах завершения Ужаса ту же ступень можно повторить одним нажатием (R), а портал ступени ждет вас, а не уводит мимо ее добычи",
+            "В меню персонажа за стрелками в левом нижнем углу есть еще три страницы характеристик, в том числе пороги и сопротивления до предела",
+            "Вкладка \"Уникальные\" хранит рунное слово по одному разу на каждом виде основы, на котором оно встречается, так что Дух на мече и Дух на щите хранятся оба",
+            "На тренировочной площадке Ларзука появился манекен с невосприимчивостью к физическому урону — Берсерк смерти, чтобы физические сборки тоже могли измерить урон",
+            "Новое действие фильтра добычи \"СКРЫТЬ И ПРОДАТЬ\" продает то, на что вы наступаете или нажимаете, никогда не показывая это на земле",
+            "Новый переключатель фильтра добычи \"ПОДБИРАТЬ БЕСПЛОТНЫЕ\" подбирает бесплотные уникальные предметы и рунные слова, пока их строка скрывает или продает остальное",
+            "Снаряжение, обереги, самоцветы и сущности подбираются на несколько метров дальше, так что достаточно пройти рядом",
+            "Святилища самоцветов вместе с опытом роняют и самоцвет для гнезд, в одном случае из четырех — редкий",
+            "Магические предметы больше нельзя закалять, а закаленный магический предмет возвращается к исходным свойствам, и его сущности возвращаются в инвентарь",
+            "Если загрузить более старое сохранение после трех и более попыток Горна над предметом, этот предмет теперь блокируется для новых попыток",
+            "Окно предмета в инвентаре больше не закрывает характеристики в меню персонажа, так что, наведя на предмет, можно прочесть, что он изменит",
+            "Члены Верховного совета больше не уходят, пока их не убили, из-за чего в задании \"Верховный совет\" не хватало одного члена",
+            "Мычание на секретном коровьем уровне прекращается, когда стадо исчезает, а раньше продолжалось и накладывалось после гибели Коровьего короля",
+            "Предмет Горна, измененный на другом устройстве или в копии вашего сохранения, теперь обновляется в начале каждого забега, так что его забеги попадают в рейтинги"
+          ],
+          "pl": [
+            "Wypadają magiczne i rzadkie kołczany z afiksami łuków: Strzały nosi się obok łuku, a Bełty obok kuszy",
+            "Ekrany końcowe Grozy pozwalają powtórzyć ten sam stopień jednym naciśnięciem (R), a portal stopnia czeka na ciebie, zamiast zabierać cię obok jego łupów",
+            "Ekran postaci ma za strzałkami w lewym dolnym rogu jeszcze trzy strony atrybutów, w tym progi i odporności przed limitem",
+            "Zakładka Unikaty przechowuje słowo runiczne raz na każdym rodzaju bazy, na którym występuje, więc Bezcielesny na mieczu i Bezcielesny na tarczy są przechowywane oba",
+            "Plac Treningowy Larzuka ma manekina niewrażliwego na obrażenia fizyczne, Berserkera Śmierci, by buildy fizyczne też mogły się zmierzyć",
+            "Nowa akcja filtra łupów, UKRYJ I SPRZEDAJ, sprzedaje to, na co wejdziesz lub klikniesz, nigdy nie pokazując tego na ziemi",
+            "Nowy przełącznik PODNOŚ ETERYCZNE w filtrze łupów podnosi eteryczne unikaty i słowa runiczne, gdy ich wiersz ukrywa lub sprzedaje resztę",
+            "Wyposażenie, talizmany, klejnoty i esencje są podnoszone z kilku metrów dalej, więc wystarczy przejść obok",
+            "Kapliczki klejnotów oprócz doświadczenia upuszczają też klejnot do gniazd, rzadki raz na cztery",
+            "Przedmiotów magicznych nie można już hartować, a zahartowany przedmiot magiczny wraca do swoich pierwotnych właściwości, a jego esencje wracają do ekwipunku",
+            "Wczytanie starszego zapisu po trzech lub więcej próbach w Kuźni na przedmiocie blokuje teraz ten przedmiot przed kolejnymi próbami",
+            "Okno przedmiotu w ekwipunku nie zasłania już atrybutów na ekranie postaci, więc najeżdżając na przedmiot, możesz przeczytać, co by zmienił",
+            "Członkowie Wysokiej Rady nie odchodzą już, zanim zostaną zabici, przez co w zadaniu Wysoka Rada brakowało jednego członka",
+            "Muczenie na Sekretnym krowim poziomie cichnie, gdy stado zniknie, a wcześniej trwało i nakładało się po upadku Krowiego Króla",
+            "Przedmiot z Kuźni zmieniony na innym urządzeniu lub w kopii twojego zapisu jest aktualizowany na początku każdego podejścia, więc jego podejścia trafiają do Rankingu"
+          ]
+        }
+      }
+    },
+    {
       "version": "20261105-1417",
       "date": "2026-11-05",
       "kind": "game-fix",
