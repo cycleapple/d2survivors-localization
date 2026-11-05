@@ -2,6 +2,134 @@
   "schema": 1,
   "entries": [
     {
+      "version": "20261105-0114",
+      "date": "2026-11-05",
+      "kind": "launcher",
+      "announce": true,
+      "summary": {
+        "zh-TW": "啟動器 1.0.6：修好「在遊戲裡按更新後，重開變回英文」。請更新到 1.0.6",
+        "zh-CN": "启动器 1.0.6：修复了“在游戏里点更新后，重新打开变回英文”。请更新到 1.0.6",
+        "en": "Launcher 1.0.6: fixes the game coming back in English after you update it from inside the game. Please update to 1.0.6",
+        "ja": "ランチャー 1.0.6：ゲーム内で更新したあと、英語に戻ってしまう問題を修正しました。1.0.6 に更新してください",
+        "de": "Launcher 1.0.6: Nach einem Update im Spiel kommt das Spiel nicht mehr auf Englisch zurück. Bitte auf 1.0.6 aktualisieren",
+        "fr": "Lanceur 1.0.6 : après une mise à jour lancée depuis le jeu, il ne revient plus en anglais. Mettez à jour vers la 1.0.6",
+        "ru": "Лаунчер 1.0.6: после обновления из игры она больше не возвращается на английский. Обновитесь до 1.0.6",
+        "pl": "Launcher 1.0.6: po aktualizacji z poziomu gry nie wraca ona już po angielsku. Zaktualizuj do 1.0.6"
+      },
+      "notes": {
+        "zh-TW": [
+          "更新方式：按啟動器主畫面的「更新啟動器」，或到網站重新下載",
+          "1.0.3 以前的啟動器不會自己提示更新，請到網站重新下載",
+          "啟動器不要放在遊戲資料夾裡",
+          "遊戲更新時的提示也加了一句：更新後如果沒有翻譯，請從啟動器重新開啟遊戲"
+        ],
+        "zh-CN": [
+          "更新方式：点击启动器主界面的“更新启动器”，或到网站重新下载",
+          "1.0.3 及更早的启动器不会自己提示更新，请到网站重新下载",
+          "启动器不要放在游戏文件夹里",
+          "游戏更新时的提示也加了一句：更新后如果没有翻译，请从启动器重新打开游戏"
+        ],
+        "en": [
+          "To update: press Update launcher on the launcher's main screen, or download it again from the website",
+          "Launchers 1.0.3 and older don't offer the update themselves: please download it again from the website",
+          "Don't put the launcher inside the game folder",
+          "The game's updating notice now also says: if the translation is missing afterwards, reopen the game from the launcher"
+        ],
+        "ja": [
+          "更新方法：ランチャーのメイン画面で「ランチャーを更新」を押すか、サイトからダウンロードし直してください",
+          "1.0.3 以前のランチャーは更新を案内しません。サイトからダウンロードし直してください",
+          "ランチャーはゲームのフォルダーの中に置かないでください",
+          "ゲームの更新中の表示にも「翻訳が表示されない場合は、ランチャーから起動し直してください」と追加しました"
+        ],
+        "de": [
+          "So aktualisierst du: Im Launcher auf dem Hauptbildschirm „Launcher aktualisieren“ drücken oder ihn neu von der Website laden",
+          "Launcher 1.0.3 und älter bieten das Update nicht selbst an: bitte neu von der Website laden",
+          "Den Launcher nicht in den Spielordner legen",
+          "Die Update-Meldung im Spiel sagt jetzt auch: Fehlt danach die Übersetzung, das Spiel über den Launcher neu starten"
+        ],
+        "fr": [
+          "Pour mettre à jour : appuyez sur « Mettre à jour le lanceur » sur l’écran principal du lanceur, ou retéléchargez-le depuis le site",
+          "Les lanceurs 1.0.3 et plus anciens ne proposent pas la mise à jour : retéléchargez-le depuis le site",
+          "Ne placez pas le lanceur dans le dossier du jeu",
+          "Le message de mise à jour du jeu indique aussi : si la traduction a disparu ensuite, relancez le jeu depuis le lanceur"
+        ],
+        "ru": [
+          "Как обновить: нажмите «Обновить лаунчер» на главном экране лаунчера или скачайте его заново с сайта",
+          "Лаунчеры 1.0.3 и старше сами не предлагают обновиться: скачайте лаунчер заново с сайта",
+          "Не кладите лаунчер в папку игры",
+          "В сообщении игры об обновлении теперь сказано: если перевода не будет, запустите игру через лаунчер"
+        ],
+        "pl": [
+          "Jak zaktualizować: na głównym ekranie launchera naciśnij „Zaktualizuj launcher” albo pobierz go ponownie ze strony",
+          "Launchery 1.0.3 i starsze same nie proponują aktualizacji: pobierz go ponownie ze strony",
+          "Nie umieszczaj launchera w folderze gry",
+          "Komunikat gry o aktualizacji mówi teraz też: jeśli zniknie tłumaczenie, uruchom grę ponownie z launchera"
+        ]
+      },
+      "game": {
+        "desktop": "2026.1104.2"
+      },
+      "launcher": "1.0.6",
+      "languages": [
+        {
+          "id": "zh-TW",
+          "status": "available",
+          "entries": 14088,
+          "added": 0,
+          "changed": 1,
+          "removed": 0
+        },
+        {
+          "id": "zh-CN",
+          "status": "available",
+          "entries": 14087,
+          "added": 0,
+          "changed": 1,
+          "removed": 0
+        },
+        {
+          "id": "ja",
+          "status": "available",
+          "entries": 14093,
+          "added": 0,
+          "changed": 1,
+          "removed": 0
+        },
+        {
+          "id": "de",
+          "status": "available",
+          "entries": 14127,
+          "added": 0,
+          "changed": 2,
+          "removed": 0
+        },
+        {
+          "id": "fr",
+          "status": "available",
+          "entries": 14136,
+          "added": 0,
+          "changed": 2,
+          "removed": 0
+        },
+        {
+          "id": "ru",
+          "status": "available",
+          "entries": 14175,
+          "added": 0,
+          "changed": 4,
+          "removed": 0
+        },
+        {
+          "id": "pl",
+          "status": "available",
+          "entries": 14165,
+          "added": 0,
+          "changed": 2,
+          "removed": 0
+        }
+      ]
+    },
+    {
       "version": "20261104-2212",
       "date": "2026-11-04",
       "kind": "game-fix",

@@ -10443,7 +10443,7 @@
  "Update ready: click to restart": "更新已就绪：点击以重启",
  "A new build is ready: click to reload": "新版本已就绪：点击以重新加载",
  "A new build is ready: tap to reload": "新版本已就绪：轻点以重新加载",
- "Updating: the game opens again by itself": "正在更新：游戏会自动重新打开",
+ "Updating: the game opens again by itself": "正在更新：游戏会自动重新打开。如果打开后没有翻译，请从启动器重新打开游戏",
  "UPDATES": "更新",
  "Upgrades": "强化",
  "Vengeance Aegis": "复仇壁垒",

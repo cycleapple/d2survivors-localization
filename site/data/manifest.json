@@ -1,7 +1,7 @@
 {
   "schema": 2,
-  "updated": "2026-11-04T22:12:45.247Z",
-  "version": "20261104-2212",
+  "updated": "2026-11-05T01:14:36.443Z",
+  "version": "20261105-0114",
   "game": {
     "desktop": "2026.1104.2",
     "web_checked": "2026-11-04T22:11:24.631Z"
@@ -13,9 +13,9 @@
       "status": "available",
       "entries": 14088,
       "dict": {
-        "url": "dict/zh-TW.json?v=f1343ee480eb",
-        "sha256": "f1343ee480eb2587d7ff2bdb36999d8fc40c0819efc6c6964707ac6b9fb9e035",
-        "size": 968119
+        "url": "dict/zh-TW.json?v=48d5bb8d059a",
+        "sha256": "48d5bb8d059a36a6a8ce13a388d975e89f080a4a3aa960a84c580da8583a887f",
+        "size": 968185
       },
       "desktop": {
         "menu_name": "繁體中文",
@@ -59,9 +59,9 @@
       "status": "available",
       "entries": 14087,
       "dict": {
-        "url": "dict/zh-CN.json?v=13aa531e604d",
-        "sha256": "13aa531e604d97995fccc4786632ffc210b22dbb364522145a722239c472364d",
-        "size": 967538
+        "url": "dict/zh-CN.json?v=8541ea769f2e",
+        "sha256": "8541ea769f2e90868a85dfd4512f0a40cbfcfefc8cbdc7db905392eecab3ef88",
+        "size": 967604
       },
       "desktop": {
         "menu_name": "简体中文",
@@ -103,9 +103,9 @@
       "status": "available",
       "entries": 14093,
       "dict": {
-        "url": "dict/ja.json?v=ef947dc9b420",
-        "sha256": "ef947dc9b4201efde5d5302b9104e255fd4ade5dc67cd1b68d7c1ceeda8a15f7",
-        "size": 1169773
+        "url": "dict/ja.json?v=98a1c1e3f873",
+        "sha256": "98a1c1e3f8730ee344ad130a5da17c79f57d3921faa45b32656b5f9073fe89cf",
+        "size": 1169866
       },
       "desktop": {
         "menu_name": "日本語",
@@ -153,9 +153,9 @@
       "status": "available",
       "entries": 14127,
       "dict": {
-        "url": "dict/de.json?v=3196f60ea322",
-        "sha256": "3196f60ea322c33c4a123b0ac847497c8531c253a47f74bf6fd29ec8b816cda4",
-        "size": 1069751
+        "url": "dict/de.json?v=1b412bdefe32",
+        "sha256": "1b412bdefe32a1faa30f9b6d1a526185a5e60f49c637bf67b86669b54012d410",
+        "size": 1069816
       },
       "desktop": {
         "menu_name": "Deutsch",
@@ -190,9 +190,9 @@
       "status": "available",
       "entries": 14136,
       "dict": {
-        "url": "dict/fr.json?v=1b6460236151",
-        "sha256": "1b64602361513c3eec17bd01bde2955580458a2533d3a4940ff56b32fd9d0ac8",
-        "size": 1119245
+        "url": "dict/fr.json?v=711a0b977145",
+        "sha256": "711a0b977145515743f4f7924728d9d2fb040ac3ba131c5e524416ec3b431bcb",
+        "size": 1119313
       },
       "desktop": {
         "menu_name": "Français",
@@ -227,9 +227,9 @@
       "status": "available",
       "entries": 14175,
       "dict": {
-        "url": "dict/ru.json?v=ab48f5e00d31",
-        "sha256": "ab48f5e00d314c0bd78755a89deda37376054abc4fcdcf1da1b309750e3c9b38",
-        "size": 1456290
+        "url": "dict/ru.json?v=8cd545f17ee9",
+        "sha256": "8cd545f17ee983bf4a0c5d7387a64b924990665b7cc10dd97a0ee770526886d3",
+        "size": 1456380
       },
       "desktop": {
         "menu_name": "Русский",
@@ -280,9 +280,9 @@
       "status": "available",
       "entries": 14165,
       "dict": {
-        "url": "dict/pl.json?v=356cf4a858df",
-        "sha256": "356cf4a858dff86061b74fb1a9f54c7414c07f97a33d36747f92db9c1e9e7002",
-        "size": 1077663
+        "url": "dict/pl.json?v=c4b56bb92449",
+        "sha256": "c4b56bb924493fe3c07696b5908b0d2b0a82b5ec68fa0a3f082d7f63a422a01e",
+        "size": 1077749
       },
       "desktop": {
         "menu_name": "Polski",
@@ -762,7 +762,7 @@
         "app": {
           "path": "desktop/dist/main.cjs",
           "find": "return ([A-Za-z0-9_$]+)\\(true, true\\);",
-          "replace": "{ const $$l = process.env.D2S_LAUNCHER; if ($$l) try { require(\"child_process\").spawn($$l, [\"--after-update\"], { detached: true, stdio: \"ignore\" }).unref(); return $1(true, false); } catch {} }\n    return $1(true, true);"
+          "replace": "{ let $$l = process.env.D2S_LAUNCHER; const $$fs = require(\"fs\"), $$p = require(\"path\"); if (!$$l) try { $$l = $$fs.readFileSync($$p.join(process.env.D2S_LAUNCHER_DIR || $$p.join(process.env.LOCALAPPDATA || \"\", \"D2SurvivorsLauncher\"), \"launcher-path.txt\"), \"utf8\").trim(); } catch {} if ($$l && $$fs.existsSync($$l)) try { require(\"child_process\").spawn($$l, [\"--after-update\"], { detached: true, stdio: \"ignore\" }).on(\"error\", () => {}).unref(); return $1(true, false); } catch {} }\n    return $1(true, true);"
         }
       },
       {
@@ -1168,13 +1168,13 @@
     ]
   },
   "launcher": {
-    "latest": "1.0.5",
+    "latest": "1.0.6",
     "minimum": "1.0.0",
     "download": "https://github.com/cycleapple/d2survivors-localization/releases/latest/download/d2s-launcher.exe",
     "sha256_url": "https://github.com/cycleapple/d2survivors-localization/releases/latest/download/d2s-launcher.exe.sha256"
   },
   "changelog": {
-    "url": "changelog.json?v=6484e3438ea6",
-    "latest": "20261104-2212"
+    "url": "changelog.json?v=ebf3f68d6a88",
+    "latest": "20261105-0114"
   }
 }

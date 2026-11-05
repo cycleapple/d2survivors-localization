@@ -10290,7 +10290,7 @@
  "Update ready: click to restart": "アップデートの準備完了: クリックして再起動",
  "A new build is ready: click to reload": "新しいビルドの準備完了: クリックして再読み込み",
  "A new build is ready: tap to reload": "新しいビルドの準備完了: タップして再読み込み",
- "Updating: the game opens again by itself": "アップデート中: ゲームは自動で再び起動します",
+ "Updating: the game opens again by itself": "アップデート中: ゲームは自動で再び起動します。翻訳が表示されない場合は、ランチャーから起動し直してください",
  "UPDATES": "アップデート",
  "Upgrades": "強化",
  "Vengeance Aegis": "報復のアイギス",
