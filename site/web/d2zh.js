@@ -190,7 +190,17 @@ async function start(asked) {
 // 停掉一份遊戲：關掉它的聲音、畫面更新、計時器、WebGL。
 // 外層的原版（win＝window），還有換語言時要換掉的舊 iframe（手機能同時開的 WebGL context 有限，不能等回收）
 async function stopPage(win = window) {
-  // 遊戲用 Web Lock 防止開兩個分頁，要等 pagehide（persisted）才放掉；遊戲也會在 pagehide 時存檔
+  // 遊戲用 Web Lock 防止開兩個分頁，拿到之後要等 pagehide（persisted）才放掉；遊戲也會在 pagehide 時存檔。
+  // 原版可能還沒去搶（還在等 site.json…，手機上常見）：先讓這一份之後再也搶不到，不然它停住以後才拿到鎖，
+  // iframe 裡的修改版就一直卡在「open in another tab」。LockManager.prototype 每個 realm 各一份，iframe 不受影響
+  try { win.LockManager.prototype.request = () => new Promise(() => {}); } catch { /* 沒有 Web Locks */ }
+  // 已經在排隊的（另一個分頁開著遊戲時排在它後面、或送 pagehide 時正拿到一半）：拿到鎖時遊戲才登記 pagehide，
+  // 之後登記的一律馬上呼叫，拿到就放掉，輪到 iframe 裡的修改版
+  const add = win.addEventListener;
+  win.addEventListener = function (type, fn, ...rest) {
+    if (type === 'pagehide' && typeof fn === 'function') Promise.resolve().then(() => fn.call(win, new win.PageTransitionEvent('pagehide', { persisted: true })));
+    return add.call(this, type, fn, ...rest);
+  };
   try { win.dispatchEvent(new PageTransitionEvent('pagehide', { persisted: true })); } catch { /* 舊瀏覽器 */ }
   // AudioContext 沒辦法從外面找到：攔截 state、currentTime 一小段時間，遊戲讀到的那個就是。
   // 遊戲每次按鍵都會檢查 state（被瀏覽器暫停就恢復），所以送一個沒有作用的按鍵（F24）讓它讀一次

@@ -25,6 +25,7 @@ node tools/serve.mjs site 8766      # 本機預覽（允許跨網域讀取）；
 
 - 跟桌面版一樣用遊戲內建的翻譯系統，不是蓋一層字上去：書籤讀 `../data/manifest.json`（相對於 `d2zh.js`），抓下遊戲頁面和全部模組（約 44 個），照**目前的語言**挑出 groups 符合的規則套用，模組做成 blob 網址，用 import map 換掉原本的模組，再在同網域的 iframe 裡重新開一次遊戲。字典照 manifest 的 `dict.url` 抓，做成 blob 模組
 - 原版遊戲（外層頁面）會先停掉：送 `pagehide` 讓它存檔、放掉防止開兩個分頁的 Web Lock；送一個 F24 按鍵讓它讀 AudioContext 再關掉（不然背景音樂會兩份）；停掉 rAF、計時器、WebGL
+- 停掉的那一份不能再拿 Web Lock（`d2-survivors/play`，2026-11-05 起）：原版在拿到 `/site.json` 之後才去搶鎖，按書籤時它可能還在等（手機、網路慢），停掉之後才拿到，iframe 裡的修改版就一直顯示「D2 Survivors is open in another tab」。`stopPage` 先把那個 realm 的 `LockManager.prototype.request` 換成永遠不回應（每個 realm 各一份，iframe 不受影響），再送 `pagehide`。已經在排隊的（另一個分頁開著遊戲時排在它後面、送 `pagehide` 時正拿到一半）：遊戲拿到鎖時才登記 `pagehide` 的 listener，所以停掉之後登記的 `pagehide` listener 一律馬上呼叫，拿到就放掉。換語言時停掉的舊 iframe 也一樣。真的有另一個分頁開著遊戲時照原版顯示「open in another tab」，那個分頁關掉後修改版接手
 - 可以在首頁（`/`）或遊戲頁面（`/play/`、`/play/setup.html`）啟動（2026-10-30 起）。手機建議從首頁：在 `/play/` 啟動時停掉的原版還佔著記憶體（模組、下載的遊戲資料），等於兩份遊戲；首頁只有 landing 的小腳本（約 33KB，2D 的火星動畫，一樣用 `stopPage` 停掉）。從首頁啟動時：遊戲頁面固定是 `/play/`；網址列用 `history.replaceState` 換成 `/play/`、分頁標題用遊戲頁面的，所以分頁被手機丟掉重新載入、或再按一次書籤時回到的是原版遊戲，不是首頁。其他頁面（wiki 等，它們也有 `#d2-files`，所以還要看路徑）提示要先打開首頁或遊戲頁面
 - iframe 先載入 `/robots.txt` 再把修改版寫進去：這樣才歸遊戲的 Service Worker（scope `/`）管，「USE MY OWN FILES」模式靠它從 OPFS 讀 D2 檔案
 - 遊戲要選檔案模式時會把 iframe 換到 `setup.html`（原版英文）；選完回到 `/play/` 時書籤再換成修改版。iframe 停在 `setup.html` 的時候，畫面下方一直顯示「請先選擇遊戲檔案，選完會自動切回〇〇」（七種語言；遊戲語言是英文、韓文時用英文），離開就收起來。見下面「選檔案（setup.html）和 hosted 檔案拿掉之後」
@@ -163,6 +164,14 @@ setup.html 的提示（2026-11-04，遊戲 20261103.2，正式 manifest 20261103
 - 俄文：四個字型家族都是 loaded，`philosopher-bold-cyrillic.woff2` 只在俄文時抓；主選單按鈕跟之前比較圖的 Philosopher Bold 一樣
 - 數字：七種語言 font16、font24、font30、font42、fontexocet10 的 5 都開口，font6、font8、fontformal12 不變；在遊戲裡換成英文時是原版的 5（`work/網頁書籤版本/shots/five/digits-*.png`）。營地的 HUD：英文「MANA: 35 / 35」看起來像 36，繁中「法力：35 / 35」是開口的 5（`work/網頁書籤版本/shots/five/hud-en-vs-zh-TW.png`，同一個英雄）
 - `/api/` 只放行 GET，沒有任何 POST
+
+Web Lock（2026-11-05，遊戲 game-DLW6qfcM.js，正式 manifest 20261105-1104，本機的 `site/`；自己開的 headless Chrome，1000×750，`d2s:files`＝hosted，`/api/` 只放行 GET，沒有任何 POST）：
+- 重現（改之前）：用 CDP 把原版的 `/site.json` 延遲 1.5 秒、iframe 的延遲 4 秒，`/play/` 一開就按書籤 → 原版停掉之後才拿到鎖，iframe 一直是「open in another tab」。原版延遲 6 秒（iframe 先拿到）→ 原版排在 iframe 後面，換成日文時原版拿到鎖，新的 iframe 一樣卡住
+- 只用 CPU 降速（6 倍）沒有重現：原版還沒送出 `/site.json`，被停掉的 `fetch` 擋住
+- 改之後：上面兩種都正常進到繁中、換日文正常，鎖只在 iframe 手上、沒有排隊的請求。首頁一開就按（`/site.json` 延遲 8 秒）也正常
+- 正常時機按、再按一次（重新整理成原版）、重新整理後再按、換日文、換俄文：都正常，每次鎖都在目前的 iframe
+- 另一個分頁先開著原版：按書籤後 iframe 照原版顯示「open in another tab」；把那個分頁關掉，3 秒內 iframe 拿到鎖、進到繁中（改之前會被停掉的原版拿走，一直卡住）
+- 沒在手機實機上測
 
 還沒測：USE MY OWN FILES 實際讀檔、Safari／Firefox、手機、遊戲中的升級卡片和物品名稱（日文的魔法物品順序、禁則斷行只用 `build-web.mjs` 確認規則套得上；德法俄的名稱組合用 `compose-check.mjs` 對照過，沒有在遊戲畫面上看過）。
 
