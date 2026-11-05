@@ -69,7 +69,11 @@
 
 - **更新紀錄**：每次發布自動寫進 `site/data/changelog.json`，網站和啟動器會顯示（格式見 [manifest-v2.md](manifest-v2.md) 的「更新紀錄」）
 - **Discord**：
-  - #announcements（更新公告）：`.github/workflows/announce.yml` 在 push 到 main、`changelog.json` 有新的 `announce: true` 項目時發文。webhook 網址存在 repo 的 secret `DISCORD_WEBHOOK_UPDATES`
+  - 更新公告（2026-11-05 起每個語言各自的頻道）：`.github/workflows/announce.yml` 在 push 到 main、`changelog.json` 有新的 `announce: true` 項目時發文
+    - 公告頻道（英文是 #announcements，其他語言在各自的「🌐 語言」分類）：該語言的 summary 和完整 notes，@ 該語言的「Update Ping · 語言」
+    - 遊戲更新說明頻道（英文 #patch-notes）：`gameNotes` 該語言的每一條，不截斷，太長就拆成多個 embed／多則訊息，不 @
+    - 各頻道的 webhook 存在 repo 的 secret `DISCORD_WEBHOOKS`（JSON）；舊的 `DISCORD_WEBHOOK_UPDATES` 只在沒有它時用、只發英文
+    - 玩家在新手引導選語言，只看到自己選的語言；沒選就全部看得到
   - #alerts（STAFF，只有 Moderator 看得到）：Web check 失敗時通知，secret `DISCORD_WEBHOOK_ALERTS`
   - webhook 網址等於發文權限，不進 repo、不貼在對話裡
 - **哪些要公告**：平常修譯文只進更新紀錄。新語言、語言升級成 beta／available、遊戲改版修好、啟動器新版才發 Discord
