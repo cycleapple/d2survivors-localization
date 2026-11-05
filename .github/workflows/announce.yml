@@ -1,8 +1,13 @@
-# 更新公告：push 到 main、site/data/changelog.json 有變動時，把這次新增、而且 announce: true 的項目發到 Discord 的 #announcements。
+# 更新公告：push 到 main、site/data/changelog.json 有變動時，把這次新增、而且 announce: true 的項目發到 Discord。
+# 每種語言有自己的公告頻道和遊戲更新說明頻道：公告發 summary＋notes，更新說明發 gameNotes 那個語言的每一條（不截斷）。
 # 格式見 docs/manifest-v2.md 的「更新紀錄」，哪些要公告見 docs/release.md 的「公告」。
 # repo 的 Settings → Secrets and variables → Actions：
-#   secret   DISCORD_WEBHOOK_UPDATES     #announcements 的 webhook 網址。沒設就跳過，不算失敗
-#   variable DISCORD_UPDATE_PING_ROLE    選填，「Update Ping」身分組的 ID，有設就在公告裡 @ 它
+#   secret   DISCORD_WEBHOOKS            各語言頻道的 webhook，JSON：
+#                                        {"zh-TW": {"announce": "<網址>", "patch": "<網址>", "patchChannel": "<頻道 id>", "ping": "<身分組 id>"}, …}
+#                                        ping 是「Update Ping · <語言>」，只在那個語言的公告頻道 @。由 discord/setup_server.py 產生
+#   secret   DISCORD_WEBHOOK_UPDATES     舊的：只有 #announcements 一個頻道。沒有 DISCORD_WEBHOOKS 時才用，只發英文
+#   variable DISCORD_UPDATE_PING_ROLE    舊的，跟 DISCORD_WEBHOOK_UPDATES 一起用
+# 兩個 secret 都沒設就跳過，不算失敗。本機測試：DRY_RUN=1 只印出每個頻道要送的內容，不打 webhook
 name: Announce
 
 on:
@@ -22,25 +27,26 @@ jobs:
   announce:
     runs-on: ubuntu-latest
     env:
+      DISCORD_WEBHOOKS: ${{ secrets.DISCORD_WEBHOOKS }}
       DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_UPDATES }}
     steps:
       - name: Skip without webhook
-        if: env.DISCORD_WEBHOOK == ''
-        run: echo "沒有設定 DISCORD_WEBHOOK_UPDATES，跳過"
+        if: env.DISCORD_WEBHOOKS == '' && env.DISCORD_WEBHOOK == ''
+        run: echo "沒有設定 DISCORD_WEBHOOKS，跳過"
 
       - uses: actions/checkout@v4
-        if: env.DISCORD_WEBHOOK != ''
+        if: env.DISCORD_WEBHOOKS != '' || env.DISCORD_WEBHOOK != ''
         with:
           # 要拿 push 之前的 changelog.json 來比
           fetch-depth: 0
 
       - uses: actions/setup-node@v4
-        if: env.DISCORD_WEBHOOK != ''
+        if: env.DISCORD_WEBHOOKS != '' || env.DISCORD_WEBHOOK != ''
         with:
           node-version: 22
 
       - name: Post new announcements
-        if: env.DISCORD_WEBHOOK != ''
+        if: env.DISCORD_WEBHOOKS != '' || env.DISCORD_WEBHOOK != ''
         env:
           BEFORE: ${{ github.event.before }}
           PING_ROLE: ${{ vars.DISCORD_UPDATE_PING_ROLE }}
@@ -52,6 +58,7 @@ jobs:
 
           const FILE = 'site/data/changelog.json';
           const { SITE } = await import(pathToFileURL(`${process.cwd()}/site/src/config.mjs`).href);
+          const DRY = !!process.env.DRY_RUN;
 
           const before = process.env.BEFORE ?? '';
           const previous = (() => {
@@ -78,81 +85,178 @@ jobs:
             process.exit(0);
           }
 
-          const TITLE = { translation: '翻譯更新', language: '新語言', 'game-fix': '遊戲改版修正', launcher: '啟動器新版' };
-          const role = process.env.PING_ROLE?.trim();
-          const FOOTER = { text: '非官方玩家翻譯，與 D2 Survivors 開發者及 Blizzard Entertainment 無關 · Unofficial fan translation' };
-          // 遊戲本身的更新說明放第二個 embed。一則訊息的 embed 加起來上限 6000 字，這段最多 3000 字、20 條，太長就只列前幾條、其餘連到網站
-          const GAME_NOTES_MAX = 3000;
-          const GAME_NOTES_ITEMS = 20;
+          // 各語言的頻道。舊設定（只有一個 webhook）只發英文到 #announcements；DRY_RUN 沒有設定時假裝每種語言都有
+          const LANGS = ['en', 'zh-TW', 'zh-CN', 'ja', 'de', 'fr', 'ru', 'pl'];
+          const HOOKS = process.env.DISCORD_WEBHOOKS
+            ? JSON.parse(process.env.DISCORD_WEBHOOKS)
+            : process.env.DISCORD_WEBHOOK
+              ? { en: { announce: process.env.DISCORD_WEBHOOK, ping: process.env.PING_ROLE?.trim() } }
+              : DRY ? Object.fromEntries(LANGS.map((l) => [l, { announce: 'dry', patch: 'dry', patchChannel: '0', ping: '0' }])) : {};
 
-          function gameNotesEmbed(e) {
-            const g = e.gameNotes;
-            const items = g?.lines?.['zh-TW']?.length ? g.lines['zh-TW'] : g?.lines?.en ?? [];
-            if (!items.length) return null;
-            // 官方發布時間用 Discord 的時間戳記，讀者看到的是自己的當地時間
-            const unix = g.at ? Math.floor(Date.parse(g.at) / 1000) : NaN;
-            const released = Number.isFinite(unix) ? `<t:${unix}:f>（<t:${unix}:R>）` : '';
-            const head = [
-              ...(released ? [`官方更新時間：${released}`] : []),
-              'D2 Survivors 作者的更新說明，我們只做翻譯。',
-              `*Patch notes by the D2 Survivors developer${released ? `, released <t:${unix}:f>` : ''}, translated by us.*`,
-              '',
-            ];
-            const more = (n) => ['', `…還有 ${n} 條，完整內容見網站的[更新紀錄](${SITE.base}zh-tw/#changelog)`];
-            const shown = [];
-            for (const line of items.slice(0, GAME_NOTES_ITEMS)) {
-              const next = [...head, ...shown, `• ${line}`, ...more(items.length)].join('\n');
-              if (next.length > GAME_NOTES_MAX) break;
-              shown.push(`• ${line}`);
+          const T = {
+            en: { kind: { translation: 'Translation update', language: 'New language', 'game-fix': 'Fixed for the game update', launcher: 'New launcher' }, update: 'Update',
+              footer: 'Unofficial fan translation. Not affiliated with the developers of D2 Survivors or Blizzard Entertainment.',
+              patchTitle: 'D2 Survivors patch notes', patchIntro: 'Patch notes by the D2 Survivors developer, as published.', released: 'Released', patchLink: 'Patch notes' },
+            'zh-TW': { kind: { translation: '翻譯更新', language: '新語言', 'game-fix': '遊戲改版修正', launcher: '啟動器新版' }, update: '更新',
+              footer: '非官方玩家翻譯，與 D2 Survivors 開發者及 Blizzard Entertainment 無關',
+              patchTitle: 'D2 Survivors 遊戲更新說明', patchIntro: 'D2 Survivors 作者的更新說明，我們只做翻譯。', released: '官方更新時間', patchLink: '遊戲更新說明' },
+            'zh-CN': { kind: { translation: '翻译更新', language: '新语言', 'game-fix': '游戏更新修正', launcher: '启动器新版' }, update: '更新',
+              footer: '非官方玩家翻译，与 D2 Survivors 开发者及 Blizzard Entertainment 无关',
+              patchTitle: 'D2 Survivors 游戏更新说明', patchIntro: 'D2 Survivors 作者的更新说明，我们只负责翻译。', released: '官方更新时间', patchLink: '游戏更新说明' },
+            ja: { kind: { translation: '翻訳の更新', language: '新しい言語', 'game-fix': 'ゲーム更新への対応', launcher: 'ランチャーの新バージョン' }, update: '更新',
+              footer: '非公式のファン翻訳です。D2 Survivors の開発者および Blizzard Entertainment とは関係ありません',
+              patchTitle: 'D2 Survivors パッチノート', patchIntro: 'D2 Survivors 作者による更新内容です。当方は翻訳のみ行っています。', released: '公式の更新日時', patchLink: 'パッチノート' },
+            de: { kind: { translation: 'Übersetzungs-Update', language: 'Neue Sprache', 'game-fix': 'Anpassung an das Spiel-Update', launcher: 'Neuer Launcher' }, update: 'Update',
+              footer: 'Inoffizielle Fan-Übersetzung. Ohne Verbindung zu den Entwicklern von D2 Survivors oder zu Blizzard Entertainment.',
+              patchTitle: 'D2 Survivors Patch-Notes', patchIntro: 'Patch-Notes des D2-Survivors-Entwicklers – wir übersetzen sie nur.', released: 'Veröffentlicht', patchLink: 'Patch-Notes' },
+            fr: { kind: { translation: 'Mise à jour de la traduction', language: 'Nouvelle langue', 'game-fix': 'Adaptation à la mise à jour du jeu', launcher: 'Nouveau lanceur' }, update: 'Mise à jour',
+              footer: 'Traduction non officielle par des fans. Sans lien avec les développeurs de D2 Survivors ni avec Blizzard Entertainment.',
+              patchTitle: 'Notes de mise à jour de D2 Survivors', patchIntro: 'Notes de mise à jour du développeur de D2 Survivors – nous ne faisons que les traduire.', released: 'Publiée', patchLink: 'Notes de mise à jour' },
+            ru: { kind: { translation: 'Обновление перевода', language: 'Новый язык', 'game-fix': 'Исправление после обновления игры', launcher: 'Новая версия лаунчера' }, update: 'Обновление',
+              footer: 'Неофициальный фанатский перевод. Не связан с разработчиками D2 Survivors и Blizzard Entertainment.',
+              patchTitle: 'Список изменений D2 Survivors', patchIntro: 'Список изменений от разработчика D2 Survivors — мы только переводим его.', released: 'Опубликовано', patchLink: 'Список изменений' },
+            pl: { kind: { translation: 'Aktualizacja tłumaczenia', language: 'Nowy język', 'game-fix': 'Poprawki po aktualizacji gry', launcher: 'Nowa wersja launchera' }, update: 'Aktualizacja',
+              footer: 'Nieoficjalne tłumaczenie fanów. Bez związku z twórcami D2 Survivors ani z Blizzard Entertainment.',
+              patchTitle: 'Lista zmian D2 Survivors', patchIntro: 'Lista zmian od twórcy D2 Survivors – my ją tylko tłumaczymy.', released: 'Opublikowano', patchLink: 'Lista zmian' },
+          };
+          const COLOR = 0xc7a15a;
+          const page = (lang) => `${SITE.base}${lang.toLowerCase()}/`;
+
+          // Discord 的上限：每個 embed 的 description 4096 字，每則訊息的 embed 加起來 6000 字、最多 10 個
+          const DESC_MAX = 4000;
+          const MESSAGE_MAX = 5800;
+
+          // 把幾行字切成幾段 description，每段不超過 DESC_MAX；只在行和行之間切（單獨一行太長才硬切）
+          function chunks(lines) {
+            const out = [];
+            let cur = '';
+            for (let line of lines) {
+              while (line.length > DESC_MAX) {
+                if (cur) out.push(cur), (cur = '');
+                out.push(line.slice(0, DESC_MAX));
+                line = line.slice(DESC_MAX);
+              }
+              const next = cur ? `${cur}\n${line}` : line;
+              if (next.length > DESC_MAX) out.push(cur), (cur = line);
+              else cur = next;
             }
-            const rest = items.length - shown.length;
-            return {
-              title: `遊戲本身的更新 · ${g.version}`,
-              ...(g.source ? { url: g.source } : {}),
-              description: [...head, ...shown, ...(rest ? more(rest) : [])].join('\n'),
-              color: 0xc7a15a,
-            };
+            if (cur) out.push(cur);
+            return out;
           }
 
-          for (const e of todo) {
-            const summary = e.summary?.['zh-TW'] ?? e.summary?.en ?? '';
-            const notes = e.notes?.['zh-TW'] ?? [];
+          // 一段內容 → 幾則訊息（順序不變）。第一個 embed 有標題，最後一個有 footer 和日期，content 只在第一則
+          function messages(lang, { title, url, lines, date, content, mentions }) {
+            const embeds = chunks(lines).map((description, i) => ({
+              ...(i === 0 ? { title, url } : {}),
+              description,
+              color: COLOR,
+            }));
+            Object.assign(embeds.at(-1), { footer: { text: T[lang].footer }, ...(date ? { timestamp: `${date}T00:00:00Z` } : {}) });
+            const size = (e) => (e.title?.length ?? 0) + e.description.length + (e.footer?.text.length ?? 0);
+            const groups = [];
+            for (const e of embeds) {
+              const g = groups.at(-1);
+              if (g && g.length < 10 && g.reduce((s, x) => s + size(x), 0) + size(e) <= MESSAGE_MAX) g.push(e);
+              else groups.push([e]);
+            }
+            return groups.map((embeds, i) => ({
+              content: i === 0 ? content : '',
+              allowed_mentions: { parse: [], roles: i === 0 ? mentions : [] },
+              embeds,
+            }));
+          }
+
+          function announcement(e, lang, hook) {
+            const t = T[lang];
+            const summary = e.summary?.[lang] ?? e.summary?.en ?? '';
+            const notes = e.notes?.[lang] ?? e.notes?.en ?? [];
+            const hasPatch = !!(e.gameNotes?.lines?.[lang] ?? e.gameNotes?.lines?.en)?.length;
             const lines = [
               summary,
-              ...(e.summary?.en && e.summary.en !== summary ? [`*${e.summary.en}*`] : []),
               ...(notes.length ? ['', ...notes.map((n) => `• ${n}`)] : []),
+              ...(hasPatch && hook.patchChannel ? ['', `📜 ${t.patchLink} → <#${hook.patchChannel}>`] : []),
               '',
-              `🌐 ${SITE.base}`,
+              `🌐 ${page(lang)}`,
             ];
-            const game = gameNotesEmbed(e);
-            const main = {
-              title: `${TITLE[e.kind] ?? '更新'} · ${e.version}`,
-              url: `${SITE.base}zh-tw/`,
-              description: lines.join('\n').slice(0, game ? 2500 : 4000),
-              color: 0xc7a15a,
-            };
-            // footer 和日期放在最後一個 embed
-            const embeds = [main, ...(game ? [game] : [])];
-            Object.assign(embeds.at(-1), { footer: FOOTER, ...(e.date ? { timestamp: `${e.date}T00:00:00Z` } : {}) });
-            const body = {
-              content: role ? `<@&${role}>` : '',
-              allowed_mentions: { parse: [], roles: role ? [role] : [] },
-              embeds,
-            };
-            // 本機測試：DRY_RUN=1 只印出要送的內容，不打 webhook
-            if (process.env.DRY_RUN) {
-              console.log(JSON.stringify(body, null, 2));
-              continue;
-            }
-            const res = await fetch(process.env.DISCORD_WEBHOOK, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(body),
+            return messages(lang, {
+              title: `${t.kind[e.kind] ?? t.update} · ${e.version}`,
+              url: page(lang),
+              lines,
+              date: e.date,
+              content: hook.ping ? `<@&${hook.ping}>` : '',
+              mentions: hook.ping ? [hook.ping] : [],
             });
-            if (!res.ok) {
-              console.error(`Discord 回應 ${res.status}：${await res.text()}`);
-              process.exit(1);
+          }
+
+          function patchNotes(e, lang) {
+            const g = e.gameNotes;
+            const items = g?.lines?.[lang]?.length ? g.lines[lang] : g?.lines?.en ?? [];
+            if (!items.length) return [];
+            const t = T[lang];
+            // 官方發布時間用 Discord 的時間戳記，讀者看到的是自己的當地時間
+            const unix = g.at ? Math.floor(Date.parse(g.at) / 1000) : NaN;
+            return messages(lang, {
+              title: `${t.patchTitle} · ${g.version}`,
+              url: g.source ?? `${page(lang)}#changelog`,
+              lines: [
+                ...(Number.isFinite(unix) ? [`${t.released}: <t:${unix}:f> (<t:${unix}:R>)`] : []),
+                t.patchIntro,
+                '',
+                ...items.map((n) => `• ${n}`),
+              ],
+              date: e.date,
+              content: '',
+              mentions: [],
+            });
+          }
+
+          const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+          async function send(url, body) {
+            for (let attempt = 0; attempt < 5; attempt++) {
+              const res = await fetch(`${url}?wait=true`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(body),
+              });
+              if (res.status === 429) {
+                await sleep(((await res.json().catch(() => ({}))).retry_after ?? 1) * 1000 + 200);
+                continue;
+              }
+              if (!res.ok) throw new Error(`Discord 回應 ${res.status}：${(await res.text()).slice(0, 300)}`);
+              return;
             }
-            console.log(`已公告 ${e.version}`);
+            throw new Error('一直被限速（429）');
+          }
+
+          // 一個頻道失敗不影響其他頻道；同一個頻道的訊息有一則失敗就停，免得順序亂掉。最後列出沒發成的
+          const failed = [];
+          for (const e of todo) {
+            for (const lang of LANGS) {
+              const hook = HOOKS[lang];
+              if (!hook) continue;
+              for (const [channel, url, bodies] of [['announce', hook.announce, announcement(e, lang, hook)], ['patch', hook.patch, patchNotes(e, lang)]]) {
+                if (!url || !bodies.length) continue;
+                const label = `${e.version} ${lang} ${channel}`;
+                if (DRY) {
+                  console.log(`\n===== ${label}：${bodies.length} 則訊息`);
+                  console.log(JSON.stringify(bodies, null, 2));
+                  continue;
+                }
+                try {
+                  for (const body of bodies) {
+                    await send(url, body);
+                    await sleep(300);
+                  }
+                  console.log(`已公告 ${label}（${bodies.length} 則）`);
+                } catch (err) {
+                  console.error(`沒發成 ${label}：${err.message}`);
+                  failed.push(label);
+                }
+              }
+            }
+          }
+          if (failed.length) {
+            console.error(`\n這些沒發成：\n${failed.join('\n')}`);
+            process.exit(1);
           }
           EOF
