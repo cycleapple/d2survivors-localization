@@ -349,7 +349,9 @@ RULES.splice(RULES.findIndex(r => r.label === '技能變體專用譯名'), 0, {
 // 遊戲內的「更新」按鈕（desktop/dist/main.cjs 的 restartToUpdate）：electron-updater 靜默安裝、裝完自己開遊戲（install(true, true)），
 // 沒經過啟動器，新的 app.asar 是原版，翻譯就不見了。從啟動器開的遊戲有 D2S_LAUNCHER（啟動器的路徑，game.rs 的 launch 傳的）時，
 // 先在背景開啟動器（d2s-launcher --after-update：等安裝程式裝完、重新套用翻譯再開遊戲），安裝程式裝完不要自己開（install(true, false)）。
-// 沒有 D2S_LAUNCHER（直接開遊戲、舊版啟動器）或開不了啟動器時照原本的 install(true, true)。
+// 沒有 D2S_LAUNCHER（玩家從遊戲自己的捷徑開、或遊戲被安裝程式重開過）時，改讀啟動器資料夾的 launcher-path.txt
+// （啟動器 1.0.6 起套用翻譯、開遊戲時寫的，D2S_LAUNCHER_DIR 跟啟動器一樣可以換地方）。兩個都沒有、或那個路徑已經沒有檔案時照原本的 install(true, true)。
+// 遊戲的安裝程式（自訂的 NSIS）只有 --force-run 才會在裝完後開遊戲，install(true, false) 不帶，不會跟啟動器各開一個。
 // main.cjs 不在 assets 裡，用 app（啟動器 1.0.4 起）：asar 裡的路徑 path 和 find／replace。main.cjs 沒有壓縮，名稱照原本的寫法。
 // 舊版啟動器不認得 app：from／to、find／replace 都是語言模組裡的 `d2s:lang`，套用等於不改（1.0.3 不會出現「略過」的提示）。
 // 原版（English／한국어）不套任何規則：遊戲自己更新後照原本開原版，結果一樣
@@ -358,7 +360,7 @@ RULES.push({
   app: {
     path: 'desktop/dist/main.cjs',
     ...T('return ‹1›(true, true);',
-      '{ const $l = process.env.D2S_LAUNCHER; if ($l) try { require("child_process").spawn($l, ["--after-update"], { detached: true, stdio: "ignore" }).unref(); return ‹1›(true, false); } catch {} }\n    return ‹1›(true, true);'),
+      '{ let $l = process.env.D2S_LAUNCHER; const $fs = require("fs"), $p = require("path"); if (!$l) try { $l = $fs.readFileSync($p.join(process.env.D2S_LAUNCHER_DIR || $p.join(process.env.LOCALAPPDATA || "", "D2SurvivorsLauncher"), "launcher-path.txt"), "utf8").trim(); } catch {} if ($l && $fs.existsSync($l)) try { require("child_process").spawn($l, ["--after-update"], { detached: true, stdio: "ignore" }).on("error", () => {}).unref(); return ‹1›(true, false); } catch {} }\n    return ‹1›(true, true);'),
   },
 });
 

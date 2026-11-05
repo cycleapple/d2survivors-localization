@@ -113,7 +113,31 @@ cargo test --release                        # 有 backup/2026.1026.4/app.asar �
 2. `D2S_LAUNCHER_DIR` 指到另一個資料夾，裡面的 `config.json` 把 `game_dir` 設成上面的資料夾
 3. `d2s-launcher --install --manifest site/data/manifest.json --lang ja`，再比對輸出
 
-要進遊戲看：把整個遊戲資料夾複製一份，`D2S_USER_DATA` 指到另一個資料夾（遊戲本身支援，存檔和設定就不會動到平常的），裡面 `d2` 用 junction 指到平常的 `%APPDATA%\D2 Survivors\d2`（取出的 D2 素材，1.5 GB），`desktop.json` 的 `checkForUpdates` 設成 false。再用 `D2S_QUERY=d2slang=ko` 和 `--remote-debugging-port` 開複製的那份，用 `tools/cdp.mjs` 截圖
+要進遊戲看：把整個遊戲資料夾複製一份，`D2S_USER_DATA` 指到另一個資料夾（遊戲本身支援，存檔和設定就不會動到平常的），裡面 `d2` 複製一份平常的 `%APPDATA%\D2 Survivors\d2`（取出的 D2 素材，1.5 GB；不要用 junction：2026.1103.2 起遊戲版本變了會重新取出，會寫進平常的那份），`desktop.json` 的 `checkForUpdates` 設成 false。再用 `D2S_QUERY=d2slang=ko` 和 `--remote-debugging-port` 開複製的那份，用 `tools/cdp.mjs` 截圖
+
+## 1.0.6
+
+- 使用者回報（2026-11-05）：桌面版在遊戲裡按左下角「更新」，遊戲關掉、出現安裝程式，重新開起來的遊戲沒有翻譯，要再從啟動器開一次
+- 原因：1.0.4 的「遊戲內更新後回到啟動器」只在遊戲是 1.0.4 以後的啟動器開的時候有作用（`D2S_LAUNCHER`），兩種情況沒有：
+  - 啟動器是 1.0.3 以前的版本：不認得 `app` 規則（main.cjs 沒改），也不傳 `D2S_LAUNCHER`。從捷徑 `--play` 開、開完自己關掉的話，底部狀態列的「有新版」從來看不到，就一直用舊版（回報的這台電腦就是 1.0.3）
+  - 遊戲不是啟動器開的（遊戲自己的捷徑、開始功能表）：app.asar 是翻譯版，但沒有 `D2S_LAUNCHER`
+  - 這兩種情況遊戲照原本 `install(true, true)`：安裝程式帶 `--force-run`，裝完自己開遊戲，新的 app.asar 是原版
+- 遊戲的安裝程式（自訂的 NSIS，2026.1103.2、2026.1104.2 的 `setup.exe` 解開 header 反組譯確認）：
+  - 有 `--updated` 時顯示小視窗「Updating D2 Survivors...」（玩家看到的「安裝器」）。有 `--force-run` 時文字是「It opens again by itself.」，沒有時是「Please wait a moment.」
+  - 先關掉從遊戲資料夾執行的所有程式（啟動器不要放在遊戲資料夾裡），用舊的解除安裝程式移除舊版，再解開 `app-64.7z`
+  - 裝完只有 `--force-run` 而且是靜默安裝時才開遊戲（`$INSTDIR\D2 Survivors.exe --updated`）；裝不上時也只有 `--force-run` 才用 `--update-failed` 開。`install(true, false)` 不帶 `--force-run`，不會跟啟動器各開一個
+- 修正：
+  - 啟動器套用翻譯、開遊戲時，把自己的路徑寫進 `launcher-path.txt`（`%LOCALAPPDATA%\D2SurvivorsLauncher\`，`D2S_LAUNCHER_DIR` 可以換）
+  - 規則改成：沒有 `D2S_LAUNCHER` 時讀 `launcher-path.txt`；路徑上沒有檔案（啟動器被移走、刪掉）時照原本 `install(true, true)`。spawn 加上 `error` 的處理，非同步的錯誤不會變成主程序的例外。規則改在 manifest，1.0.4、1.0.5 也會套到（它們不寫這個檔，讀不到就照 `D2S_LAUNCHER`）
+  - 有新版啟動器時：主畫面最上面放卡片（「有新版啟動器 X，建議更新」和「更新啟動器」按鈕），開遊戲後不自己關掉視窗、工作列閃一下。低於 manifest 的 `launcher.minimum` 時原本就有的卡片不變
+- 1.0.3 以前的啟動器沒辦法從這邊改：只能請玩家更新啟動器（網站、Discord），或把 manifest 的 `launcher.minimum` 調高（舊版會顯示「新的翻譯需要啟動器 X」，但從 `--play` 開的會在開遊戲後馬上關掉，而且收不到新的翻譯）
+- 測試（2026-11-05，遊戲複本，不跑真正的安裝程式）：
+  - `work/launcher/rr/restart-test2.mjs`：規則套到 2026.1103.2、2026.1104.1、2026.1104.2 的原版 main.cjs，取出 `restartToUpdate` 用假的 updater／child_process 跑五種情況：有 `D2S_LAUNCHER`、只有 `launcher-path.txt`（`
+` 結尾）時 spawn `--after-update`、`install(true, false)`；兩個都沒有、路徑上沒有檔案時 `install(true, true)`、不 spawn
+  - 1.0.6 對遊戲複本 `--install`：寫了 `launcher-path.txt`，app.asar 裡的 main.cjs 跟 Node 的 `applyRule` 一樣（`work/launcher/rr/main-cmp.mjs`）
+  - `work/launcher/rr/newer-banner.ps1`：測試 manifest 的 `launcher.latest` 改成 1.0.7、`close_after_launch` 開著，`--play` 開了遊戲複本後視窗還在、卡片正常（繁中、德文截圖 `work/launcher/newer-banner-*.png`）
+- 規則版本：2026.1103.2、2026.1104.2 都對得上（`check-rules` 0／0）
+- 發布：推 tag `launcher-v1.0.6`
 
 ## 1.0.5
 

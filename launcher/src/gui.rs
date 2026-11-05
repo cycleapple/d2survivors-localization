@@ -257,9 +257,14 @@ impl App {
                                 self.error = Some(e);
                             }
                         }
-                        // 改用原版開的話，留著視窗讓玩家看到原因
+                        // 改用原版開的話，留著視窗讓玩家看到原因；有新版啟動器時也留著（工作列閃一下），不然從捷徑 --play 開的玩家永遠看不到
+                        // （1.0.3 以前的玩家就是這樣一直用舊版，遊戲內更新後回到啟動器要 1.0.4 起才有）
                         None if matches!(job, Job::Launch | Job::AfterUpdate) && self.config.close_after_launch && self.fallback.is_none() => {
-                            ctx.send_viewport_cmd(egui::ViewportCommand::Close);
+                            if self.launcher.as_ref().is_some_and(|l| selfupdate::newer(&l.latest)) {
+                                ctx.send_viewport_cmd(egui::ViewportCommand::RequestUserAttention(egui::UserAttentionType::Informational));
+                            } else {
+                                ctx.send_viewport_cmd(egui::ViewportCommand::Close);
+                            }
                         }
                         None => {}
                     }
@@ -721,6 +726,19 @@ impl App {
         }
         if let Some(info) = self.launcher.clone().filter(|l| selfupdate::newer(&l.minimum)) {
             let (text, label, busy) = (self.tf("launcher_required", &[&info.minimum]), self.t("update_launcher"), self.busy);
+            let mut go = false;
+            theme::banner(ui, Tone::Warn, |ui| {
+                ui.horizontal_wrapped(|ui| {
+                    ui.label(RichText::new(text).color(TEXT));
+                    go = ui.add_enabled(!busy, egui::Button::new(RichText::new(label).color(GOLD_HI))).clicked();
+                });
+            });
+            if go {
+                self.start(Job::SelfUpdate, ctx);
+            }
+        } else if let Some(info) = self.launcher.clone().filter(|l| selfupdate::newer(&l.latest)) {
+            // 有新版但還能用：一樣放卡片（底部狀態列的小按鈕很容易沒看到）
+            let (text, label, busy) = (self.tf("launcher_new_banner", &[&info.latest]), self.t("update_launcher"), self.busy);
             let mut go = false;
             theme::banner(ui, Tone::Warn, |ui| {
                 ui.horizontal_wrapped(|ui| {

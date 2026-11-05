@@ -133,6 +133,7 @@ impl Game {
             paths::write_atomic(&self.asar(), bytes).context("無法寫入 app.asar，請先關掉遊戲")?;
             log(format!("已裝進遊戲：{}", self.asar().display()));
         }
+        paths::remember_exe();
         State { installed: Some(Installed { key, sha256: sha, skipped }), ..State::load() }.save()
     }
 
@@ -164,6 +165,7 @@ impl Game {
         if let Ok(exe) = std::env::current_exe() {
             cmd.env("D2S_LAUNCHER", exe);
         }
+        paths::remember_exe();
         cmd.spawn().context("無法啟動遊戲")?;
         Ok(())
     }

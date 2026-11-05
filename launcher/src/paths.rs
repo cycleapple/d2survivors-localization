@@ -22,6 +22,14 @@ pub fn data_dir() -> PathBuf {
     base.join("D2SurvivorsLauncher")
 }
 
+/// 記下啟動器自己的路徑（data_dir 的 launcher-path.txt）。遊戲內按「更新」時，main.cjs（規則「遊戲內更新後回到啟動器」）
+/// 沒有 D2S_LAUNCHER（玩家從遊戲自己的捷徑開的）就讀這個檔，一樣能開啟動器 --after-update。寫不進去不影響其他事
+pub fn remember_exe() {
+    if let Ok(exe) = std::env::current_exe() {
+        let _ = write_atomic(&data_dir().join("launcher-path.txt"), exe.to_string_lossy().as_bytes());
+    }
+}
+
 pub fn default_game_dir() -> PathBuf {
     let base = std::env::var_os("LOCALAPPDATA").map(PathBuf::from).unwrap_or_default();
     base.join("Programs").join("D2 Survivors")
