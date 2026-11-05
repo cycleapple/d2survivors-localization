@@ -2,6 +2,186 @@
   "schema": 1,
   "entries": [
     {
+      "version": "20261105-1417",
+      "date": "2026-11-05",
+      "kind": "game-fix",
+      "announce": true,
+      "summary": {
+        "zh-TW": "已支援遊戲 2026.1105.2（新增 17 條譯文）",
+        "zh-CN": "已支持游戏 2026.1105.2（新增 17 条译文）",
+        "en": "Supports game version 2026.1105.2 (17 new strings translated)",
+        "ja": "ゲーム 2026.1105.2 に対応しました（新しい訳文 17 件）",
+        "de": "Unterstützt Spielversion 2026.1105.2 (17 neue Texte übersetzt)",
+        "fr": "Prise en charge de la version 2026.1105.2 du jeu (17 nouveaux textes traduits)",
+        "ru": "Поддержка версии игры 2026.1105.2 (переведено 17 новых строк)",
+        "pl": "Obsługa wersji gry 2026.1105.2 (przetłumaczono 17 nowych tekstów)"
+      },
+      "game": {
+        "desktop": "2026.1105.2"
+      },
+      "launcher": "1.0.7",
+      "languages": [
+        {
+          "id": "zh-TW",
+          "status": "available",
+          "entries": 14263,
+          "added": 17,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "zh-CN",
+          "status": "available",
+          "entries": 14262,
+          "added": 17,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ja",
+          "status": "available",
+          "entries": 14268,
+          "added": 17,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "de",
+          "status": "available",
+          "entries": 14302,
+          "added": 17,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "fr",
+          "status": "available",
+          "entries": 14311,
+          "added": 17,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ru",
+          "status": "available",
+          "entries": 14350,
+          "added": 17,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "pl",
+          "status": "available",
+          "entries": 14340,
+          "added": 17,
+          "changed": 0,
+          "removed": 0
+        }
+      ],
+      "gameNotes": {
+        "version": "2026.1105.2",
+        "at": "2026-11-05T12:48:51.093Z",
+        "lines": {
+          "zh-TW": [
+            "心靈傳動現在和所有被動一樣有5級，第5級的距離與原本第3級相同",
+            "地圖會以紅色小三角形標示地上的燃燒的恐懼精華或拉蘇克精華",
+            "淬鍊現在每件物品最多10次，只有地獄熔爐能讓物品超過10次",
+            "淬鍊超過10次的物品會減為10次，原本有20次以上的則減為20次，每條屬性維持原本的比例",
+            "地獄熔爐現在每件物品只能使用一次，減為20次的物品視為已使用過",
+            "恐懼階中首領以外的掉落物附帶燃燒的恐懼精華的機率，降為原本的約四分之一",
+            "從需要挑戰不只一次的超級首領取得的滅絕、器官或地獄火炬，不再讓你的紀錄無法列入天梯",
+            "快於1:30的超級崔斯特姆通關紀錄現在會列入天梯，不再遭到拒絕而堆積未送出",
+            "重新抽選現在會再次向任何職業、技能已配滿的英雄提供心靈傳動，讓昏暗視野能進化為混亂",
+            "對已是精英底材的物品使用恰西的「升級」時，現在會說明這點並顯示底材名稱，不再顯示沒有更強的底材"
+          ],
+          "zh-CN": [
+            "心灵传动现在和所有被动一样有5级，第5级的距离与原本第3级相同",
+            "地图会用红色小三角形标示地上的燃烧的恐惧精华或拉苏克精华",
+            "淬火现在每件物品最多10次，只有地狱熔炉能让物品超过10次",
+            "淬火超过10次的物品会减为10次，原本有20次以上的则减为20次，每条属性保持原本的比例",
+            "地狱熔炉现在每件物品只能使用一次，减为20次的物品视为已使用过",
+            "恐惧阶中首领以外的掉落物附带燃烧的恐惧精华的几率，降为原本的约四分之一",
+            "从需要挑战不止一次的超级首领获得的毁灭、器官或地狱火炬，不再让你的记录无法计入天梯",
+            "快于1:30的超级崔斯特姆通关记录现在会计入天梯，不再被拒绝而堆积未发送",
+            "重新抽选现在会再次向任何职业、技能已配满的英雄提供心灵传动，让微暗灵视能进化为迷乱",
+            "对已是精英底材的物品使用恰西的“升级”时，现在会说明这一点并显示底材名称，不再显示没有更强的底材"
+          ],
+          "en": [
+            "Telekinesis now has 5 levels like every passive, and its 5th reaches as far as its 3rd did",
+            "The map marks a Burning Essence of Terror or Larzuk's Essence on the ground with a small red triangle",
+            "Temper now stops at 10 tempers an item, and only the Hellforge raises one past 10",
+            "An item tempered past 10 is cut back to 10, or to 20 if it had 20 or more, each line keeping its share",
+            "The Hellforge now works once per item, and an item cut back to 20 counts as having used it",
+            "Terror drops other than the boss's bring a Burning Essence of Terror about a quarter as often",
+            "An Annihilus, organ or Hellfire Torch from an uber you had to fight more than once no longer keeps your runs off the Ladder",
+            "Uber Tristram clears faster than 1:30 now reach the Ladder instead of being refused and piling up unsent",
+            "A re-draft offers Telekinesis again to a fully built hero of any class, so Dim Vision can evolve into Confuse",
+            "Charsi's Upgrade on an item already on its elite base says so and names the base, where it said no stronger base existed"
+          ],
+          "ja": [
+            "テレキネシスがほかの常時発動と同じく5レベルまでになり、レベル5で以前のレベル3と同じ距離まで届きます",
+            "地面にある燃え盛る恐怖のエッセンスとラルザックのエッセンスが、マップに小さな赤い三角形で表示されるようになりました",
+            "鍛錬は1つのアイテムにつき10回までになり、10回を超えられるのは地獄の炉だけになりました",
+            "10回を超えて鍛錬したアイテムは10回に、20回以上だった場合は20回に減り、各行の割合はそのまま維持されます",
+            "地獄の炉はアイテムごとに1回だけ使えるようになり、20回に減ったアイテムは使用済みとして扱われます",
+            "恐怖の段階でボス以外のドロップに燃え盛る恐怖のエッセンスが付いてくる頻度が、約4分の1になりました",
+            "複数回戦う必要があったウーバーから手に入れたアニヒラス、臓器、業火のたいまつのせいで、ランがラダーから外されることはなくなりました",
+            "1分30秒より速いウーバー・トリストラムのクリアが、拒否されて未送信のままたまることなく、ラダーに記録されるようになりました",
+            "選び直しで、どのクラスでもビルドが埋まった英雄に再びテレキネシスが提示されるようになり、視力減退が混乱に進化できるようになりました",
+            "すでにエリートのベースアイテムになっているアイテムにチャルシの「アップグレード」を使うと、より強いベースアイテムがないと表示する代わりに、そのことをベースアイテム名とともに表示するようになりました"
+          ],
+          "de": [
+            "Telekinese hat jetzt wie jede passive Fertigkeit 5 Stufen, und Stufe 5 reicht so weit wie früher Stufe 3",
+            "Die Karte markiert eine Brennende Essenz des Schreckens oder Larzuks Essenz am Boden mit einem kleinen roten Dreieck",
+            "Härten endet jetzt bei 10 Härtungen pro Gegenstand, und nur die Höllenschmiede bringt einen Gegenstand über 10",
+            "Ein Gegenstand mit mehr als 10 Härtungen wird auf 10 gekürzt, oder auf 20, wenn er 20 oder mehr hatte, wobei jede Zeile ihren Anteil behält",
+            "Die Höllenschmiede wirkt jetzt einmal pro Gegenstand, und ein auf 20 gekürzter Gegenstand gilt als bereits geschmiedet",
+            "Schreckensbeute außer der des Bosses bringt nur noch etwa ein Viertel so oft eine Brennende Essenz des Schreckens",
+            "Vernichtikus, ein Organ oder eine Höllenfeuerfackel von einem Über-Gegner, den du mehrmals bekämpfen musstest, hält deine Durchgänge nicht mehr aus der Rangliste fern",
+            "Über-Tristram-Abschlüsse unter 1:30 kommen jetzt in die Rangliste, statt abgelehnt zu werden und sich ungesendet anzusammeln",
+            "Eine Neuwahl bietet einem fertig ausgebauten Helden jeder Klasse wieder Telekinese an, sodass sich Schwache Sicht zu Verwirren entwickeln kann",
+            "Charsis Aufwerten bei einem Gegenstand, der bereits auf seinem Elite-Basisgegenstand ist, sagt das jetzt und nennt die Basis, statt zu melden, dass es keine stärkere Basis gibt"
+          ],
+          "fr": [
+            "Télékinésie a désormais 5 niveaux comme tous les passifs, et son 5e niveau porte aussi loin que son 3e auparavant",
+            "La carte signale une Essence brûlante de terreur ou une Essence de Larzuk au sol par un petit triangle rouge",
+            "La trempe s’arrête désormais à 10 trempes par objet, et seule la Forge des Enfers permet de dépasser 10",
+            "Un objet trempé plus de 10 fois est ramené à 10, ou à 20 s’il en avait 20 ou plus, chaque ligne gardant sa part",
+            "La Forge des Enfers ne fonctionne plus qu’une fois par objet, et un objet ramené à 20 compte comme l’ayant déjà utilisée",
+            "Les butins de Terreur autres que celui du boss apportent une Essence brûlante de terreur environ quatre fois moins souvent",
+            "Un Annihilus, un organe ou une Torche des flammes infernales obtenu d’un Über que vous avez dû affronter plus d’une fois n’exclut plus vos parties du Tournoi",
+            "Les victoires sur Über Tristram en moins de 1:30 arrivent désormais au Tournoi au lieu d’être refusées et de s’accumuler sans être envoyées",
+            "Un nouveau choix propose de nouveau Télékinésie à un héros complet de n’importe quelle classe, pour que Vision diminuée puisse évoluer en Désorienter",
+            "Améliorer de Charsi sur un objet déjà sur sa base d’élite le signale et nomme la base, au lieu de dire qu’il n’existe pas de base plus forte"
+          ],
+          "ru": [
+            "У Телекинеза теперь 5 уровней, как у всех пассивных умений, и на 5-м уровне он достает так же далеко, как раньше на 3-м",
+            "Карта отмечает лежащие на земле Обжигающую сущность Ужаса и Эссенцию Ларзука маленьким красным треугольником",
+            "Закалка теперь ограничена 10 закалками на предмет, и только Адская кузня поднимает ее выше 10",
+            "Предмет, закаленный больше 10 раз, сокращается до 10, или до 20, если у него было 20 или больше, и каждая строка сохраняет свою долю",
+            "Адская кузня теперь работает один раз на предмет, а предмет, сокращенный до 20, считается уже прошедшим через нее",
+            "Добыча Ужаса, кроме добычи босса, приносит Обжигающую сущность Ужаса примерно в четыре раза реже",
+            "Аннигилюс, орган или Факел адского пламени от супер-босса, с которым пришлось сражаться больше одного раза, больше не исключает ваши забеги из рейтингов",
+            "Прохождения Супер-Тристрама быстрее 1:30 теперь попадают в рейтинги, а не отклоняются и не копятся неотправленными",
+            "Новый выбор снова предлагает Телекинез полностью собранному герою любого класса, так что Лишение зрения может развиться в Замешательство",
+            "Улучшение Чарси для предмета, который уже на элитной основе, теперь сообщает об этом и называет основу, а не пишет, что более сильной основы нет"
+          ],
+          "pl": [
+            "Telekineza ma teraz 5 poziomów jak każda umiejętność pasywna, a na 5. poziomie sięga tak daleko jak wcześniej na 3.",
+            "Mapa oznacza leżącą na ziemi Płonącą Esencję Grozy lub Esencję Larzuka małym czerwonym trójkątem",
+            "Hartowanie kończy się teraz na 10 hartowaniach na przedmiot i tylko Piekielna Kuźnia pozwala przekroczyć 10",
+            "Przedmiot hartowany ponad 10 razy zostaje zredukowany do 10 albo do 20, jeśli miał 20 lub więcej, a każdy wiersz zachowuje swój udział",
+            "Piekielna Kuźnia działa teraz raz na przedmiot, a przedmiot zredukowany do 20 liczy się jako taki, który już jej użył",
+            "Łupy z Grozy inne niż łup bossa dają Płonącą Esencję Grozy mniej więcej cztery razy rzadziej",
+            "Annihilus, organ lub Pochodnia Piekielnego Ognia od uber-bossa, z którym trzeba było walczyć więcej niż raz, nie wyklucza już twoich podejść z rankingu",
+            "Ukończenia Uber Tristrama szybsze niż 1:30 trafiają teraz do rankingu, zamiast być odrzucane i gromadzić się jako niewysłane",
+            "Ponowny wybór znów proponuje Telekinezę w pełni rozbudowanemu bohaterowi każdej klasy, więc Zamroczenie może rozwinąć się w Zamęt",
+            "Ulepszenie Charsi na przedmiocie, który jest już na elitarnej bazie, informuje o tym i podaje nazwę bazy, zamiast mówić, że nie ma mocniejszej bazy"
+          ]
+        }
+      }
+    },
+    {
       "version": "20261105-1104",
       "date": "2026-11-05",
       "kind": "game-fix",
