@@ -115,6 +115,34 @@ cargo test --release                        # 有 backup/2026.1026.4/app.asar �
 
 要進遊戲看：把整個遊戲資料夾複製一份，`D2S_USER_DATA` 指到另一個資料夾（遊戲本身支援，存檔和設定就不會動到平常的），裡面 `d2` 複製一份平常的 `%APPDATA%\D2 Survivors\d2`（取出的 D2 素材，1.5 GB；不要用 junction：2026.1103.2 起遊戲版本變了會重新取出，會寫進平常的那份），`desktop.json` 的 `checkForUpdates` 設成 false。再用 `D2S_QUERY=d2slang=ko` 和 `--remote-debugging-port` 開複製的那份，用 `tools/cdp.mjs` 截圖
 
+## 1.0.7
+
+- 使用者回報（2026-11-05）：新的啟動器語言選單只有 English 和 한국어。那台電腦第一次用（本機沒有 manifest），又連不上 cycleapple.github.io（中國、公司網路、VPN、防火牆之類），下載失敗，語言清單只剩原版，畫面也沒有說明
+- 備用更新來源：用預設的更新來源（`config.json` 的 `manifest_url` 空的）時，預設網址下載 manifest 失敗（連不上、逾時、不是 2xx、格式不對）就改用 jsDelivr 的 GitHub 鏡像 `https://cdn.jsdelivr.net/gh/cycleapple/d2survivors-localization@main/site/data/manifest.json`（`paths.rs` 的 `FALLBACK_MANIFEST_URL`）
+  - 預設網址後面還有備用時，連線 6 秒、整個 15 秒就放棄（manifest 不到 100 KB）；備用和自己設的來源照原本的 60 秒
+  - 字典照 manifest 的相對網址，從實際拿到 manifest 的那個來源解析；sha256 照樣核對。備用來源的字典對不上（jsDelivr 的快取還是舊的）時這次更新失敗、用本機的
+  - 備用來源的 manifest 比本機的舊（`version` 比較小）時不採用，免得退回舊的翻譯
+  - 玩家自己設了更新來源（設定頁或 `--manifest`）時只試那一個
+  - 記錄寫「改用備用來源：…」「翻譯清單來源：…」；`state.json` 的 `manifest_source` 記上次成功的來源，`--status` 印出「更新來源」（依序）和「上次的翻譯清單來源」
+  - 更新紀錄（changelog.json）也從拿到 manifest 的來源讀
+  - jsDelivr 的快取：發布後要清（`purge.jsdelivr.net`），宣傳網站聊天室加在 pages.yml
+- 提示：本機沒有 manifest、下載也失敗時，精靈的語言頁和主畫面最上面放黃色卡片「無法下載翻譯清單，所以只能選原版。請檢查網路，或關掉 VPN、防火牆後重試。」和「↻ 重試」按鈕（重新檢查更新）。八種語言
+  - 「先用本機的翻譯」只在本機有 manifest 時說：底部狀態列的 ⚠ 提示、啟動時的記錄（沒有時寫「下載不到翻譯清單，本機也沒有，只能用原版」）、啟動器太舊時的記錄都分開
+  - 開遊戲前的檢查更新（`--play`、啟動遊戲）失敗也算（`Outcome.update_failed`），原本只有單獨的「檢查更新」會亮黃點
+- 自動更新啟動器失敗（下載不到 GitHub Release 等）：卡片「無法自動更新啟動器。請到網站手動下載新版，換掉現在的 d2s-launcher.exe。」和兩個按鈕：網站的下載段落（`SITE_URL/<語言>/#download`）、GitHub 的最新版發布頁（github.io 連不上時 github.com 可能連得上）。命令列的錯誤訊息也附網站的網址。Release 的檔案 jsDelivr 拿不到，不另外做備用
+- 測試用的環境變數：`D2S_DEFAULT_MANIFEST_URL`、`D2S_FALLBACK_MANIFEST_URL`（換掉預設和備用的網址；空的照原本）
+- 測試（2026-11-05，`D2S_LAUNCHER_DIR` 指到 `work/launcher/fb107/`，不碰平常的啟動器資料夾、遊戲和 `%APPDATA%\D2 Survivors`）：
+  - `work/launcher/rr/fallback-test.sh`（備用來源是本機的 http 伺服器，放 site/data 的複本）：
+    - 預設網址逾時（10.255.255.1）：6 秒後改用備用，字典從備用來源下載，共 7 秒；`--status` 印出來源
+    - 預設網址拒絕連線、備用是真的 jsDelivr：5 秒拿到 manifest 和字典
+    - 兩個都失敗：「預設和備用的更新來源都下載不到」
+    - 備用的 manifest 比本機舊：不採用，本機的版本不變
+    - 備用的字典 sha 對不上：更新失敗
+    - 自己設了來源：只試那一個
+  - `work/launcher/rr/nomanifest-ui.ps1`：精靈的語言頁、主畫面的卡片截圖（`work/launcher/nomanifest-*.png`）。「重試」按鈕沒點到（測試時啟動器沒辦法搶到最前面），它跟「檢查更新」是同一個工作
+  - 自動更新失敗：`--self-update` 對下載不到的網址，錯誤訊息附網站的下載網址，啟動器本身沒被換掉
+- 發布：推 tag `launcher-v1.0.7`
+
 ## 1.0.6
 
 - 使用者回報（2026-11-05）：桌面版在遊戲裡按左下角「更新」，遊戲關掉、出現安裝程式，重新開起來的遊戲沒有翻譯，要再從啟動器開一次

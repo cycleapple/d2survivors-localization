@@ -10,6 +10,10 @@ pub const DEFAULT_MANIFEST_URL: &str = match option_env!("D2S_MANIFEST_URL") {
     None => "https://cycleapple.github.io/d2survivors-localization/data/manifest.json",
 };
 
+/// 預設來源下載失敗時的備用來源：jsDelivr 的 GitHub 鏡像（repo 是公開的），內容就是 repo 裡的 site/data/manifest.json。
+/// 有些網路連不上 github.io（中國、公司網路、VPN、防火牆）。玩家自己設了更新來源時不用備用
+pub const FALLBACK_MANIFEST_URL: &str = "https://cdn.jsdelivr.net/gh/cycleapple/d2survivors-localization@main/site/data/manifest.json";
+
 /// 舊版（manifest v1）的預設更新來源，設定檔裡存的是這個就改用新的預設值
 const V1_MANIFEST_URL: &str = "https://api.github.com/repos/cycleapple/d2survivors-zh-tw-dist/contents/manifest.json";
 
@@ -115,6 +119,17 @@ impl Config {
         if u.is_empty() { DEFAULT_MANIFEST_URL.to_string() } else { u.to_string() }
     }
 
+    /// 這次要依序試的更新來源：自己設的只有那一個；預設的後面加上備用。
+    /// 測試時可以用 D2S_DEFAULT_MANIFEST_URL、D2S_FALLBACK_MANIFEST_URL 環境變數換掉這兩個網址
+    pub fn manifest_sources(&self) -> Vec<String> {
+        let u = self.manifest_url.trim();
+        if !u.is_empty() {
+            return vec![u.to_string()];
+        }
+        let env = |k: &str, d: &str| std::env::var(k).ok().filter(|s| !s.trim().is_empty()).unwrap_or_else(|| d.to_string());
+        vec![env("D2S_DEFAULT_MANIFEST_URL", DEFAULT_MANIFEST_URL), env("D2S_FALLBACK_MANIFEST_URL", FALLBACK_MANIFEST_URL)]
+    }
+
     pub fn game_dir(&self) -> PathBuf {
         if self.game_dir.trim().is_empty() { default_game_dir() } else { PathBuf::from(self.game_dir.trim()) }
     }
@@ -129,6 +144,8 @@ pub struct State {
     pub changelog_seen: String,
     /// 上次啟動時翻譯套不上、改用原版開的原因（jobs::Fallback::id）。下次開啟啟動器時主畫面照樣顯示，翻譯套上或選原版時清掉
     pub fallback: Option<String>,
+    /// 上次成功下載 manifest 的來源（預設的或備用的；--status 印出來）
+    pub manifest_source: String,
 }
 
 #[derive(Clone, Serialize, Deserialize)]

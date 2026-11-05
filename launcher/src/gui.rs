@@ -48,6 +48,8 @@ pub struct App {
     game_version: Option<String>,
     /// 檢查更新失敗過（精靈的語言清單顯示離線說明、狀態列顯示黃點）
     update_failed: bool,
+    /// 自動更新啟動器失敗（請玩家到網站手動下載的卡片）
+    selfupdate_failed: bool,
     error: Option<String>,
     notice: Option<String>,
     logs: Vec<String>,
@@ -103,6 +105,7 @@ impl App {
             changelog_unseen: false,
             game_version: None,
             update_failed: false,
+            selfupdate_failed: false,
             error: None,
             notice: None,
             logs: Vec::new(),
@@ -218,7 +221,14 @@ impl App {
                     if job == Job::Update {
                         self.update_failed = error.is_some();
                     }
+                    if job == Job::SelfUpdate {
+                        self.selfupdate_failed = error.is_some();
+                    }
                     if let Some(o) = outcome {
+                        // 開遊戲前檢查更新的結果（Launch 失敗也照常開遊戲，所以看 outcome）
+                        if let Some(f) = o.update_failed {
+                            self.update_failed = f;
+                        }
                         if o.manifest.is_some() {
                             self.manifest = o.manifest;
                         }
@@ -509,13 +519,14 @@ impl App {
     }
 
     /// 語言畫面：只有語言卡片（各語言用自己的名稱和狀態），沒有步驟指示和說明文字
-    fn language_page(&mut self, ui: &mut egui::Ui) {
+    fn language_page(&mut self, ui: &mut egui::Ui, ctx: &egui::Context) {
         ui.add_space(6.0);
         // 還在讀語言清單：只轉圈，不寫字
         if self.manifest.is_none() && self.busy {
             ui.vertical_centered(|ui| ui.spinner());
             ui.add_space(8.0);
         }
+        self.no_manifest_card(ui, ctx);
         self.language_picker(ui, false);
     }
 
@@ -693,7 +704,41 @@ impl App {
         }
     }
 
+    /// 本機沒有翻譯清單、下載也失敗：語言只剩原版，說明原因、可以重試（精靈的語言頁和主畫面最上面）
+    fn no_manifest_card(&mut self, ui: &mut egui::Ui, ctx: &egui::Context) {
+        if self.manifest.is_some() || !self.update_failed || self.busy {
+            return;
+        }
+        let (text, label) = (self.t("no_manifest"), self.t("retry"));
+        let mut go = false;
+        theme::banner(ui, Tone::Warn, |ui| {
+            ui.horizontal_wrapped(|ui| {
+                ui.label(RichText::new(text).color(TEXT));
+                go = ui.button(RichText::new(format!("↻ {label}")).color(GOLD_HI)).clicked();
+            });
+        });
+        if go {
+            self.start(Job::Update, ctx);
+        }
+    }
+
     fn banners(&mut self, ui: &mut egui::Ui, ctx: &egui::Context) {
+        self.no_manifest_card(ui, ctx);
+        // 自動更新啟動器失敗：網站或 GitHub 的發布頁手動下載
+        if self.selfupdate_failed {
+            let (text, site) = (self.t("selfupdate_failed"), self.t("open_download_page"));
+            theme::banner(ui, Tone::Warn, |ui| {
+                ui.label(RichText::new(text).color(TEXT));
+                ui.horizontal_wrapped(|ui| {
+                    if ui.button(RichText::new(format!("↗ {site}")).color(GOLD_HI)).clicked() {
+                        system::open_url(&system::download_url(&self.ui_lang()));
+                    }
+                    if ui.button(RichText::new("↗ GitHub Releases").color(GOLD_HI)).clicked() {
+                        system::open_url(system::RELEASES_URL);
+                    }
+                });
+            });
+        }
         // 翻譯套不上、改用原版開：主畫面最上面的黃色卡片（標題、原因；遊戲記的語言是韓文時加上切回 English 的步驟）
         let korean = self.game_lang_ko && self.config.language != "ko";
         if let Some(f) = self.fallback {
@@ -762,7 +807,7 @@ impl App {
                 (None, _) => (IDLE, "—".into()),
             };
             theme::status_item(ui, tc, self.t("status_translation"), &tv);
-            if self.update_failed {
+            if self.update_failed && self.manifest.is_some() {
                 ui.label(RichText::new("⚠").small().color(WARN)).on_hover_text(self.t("update_failed"));
             }
             ui.add_space(8.0);
@@ -957,7 +1002,7 @@ impl eframe::App for App {
 
         egui::CentralPanel::default().frame(egui::Frame::new().inner_margin(egui::Margin::symmetric(20, 14))).show(ctx, |ui| {
             egui::ScrollArea::vertical().auto_shrink([false, false]).show(ui, |ui| match self.page {
-                Page::Language => self.language_page(ui),
+                Page::Language => self.language_page(ui, ctx),
                 Page::Wizard(step) => self.wizard(ui, ctx, step),
                 Page::Main => self.main_page(ui, ctx),
                 Page::Settings => self.settings_page(ui, ctx),

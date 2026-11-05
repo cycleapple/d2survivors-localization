@@ -10,13 +10,21 @@ pub const DISCORD_URL: &str = "https://discord.gg/QMBbTHSsaK";
 /// 贊助連結：開網站的贊助段落（#support，裡面 PayPal、Portaly 等贊助方式並列），用啟動器的介面語言。
 /// 贊助方式換了只改網站，不用再發新版啟動器。只放在主畫面底部和「關於」的連結區，不跳出、不提醒；贊助與否不影響任何功能
 pub fn support_url(ui_lang: &str) -> String {
-    // 網站的語言路徑是小寫（zh-tw、zh-cn…），沒有的語言用英文
-    let lang = match ui_lang {
+    format!("{SITE_URL}{}/#support", site_lang(ui_lang))
+}
+/// 網站的下載段落（自動更新啟動器失敗時請玩家手動下載）
+pub fn download_url(ui_lang: &str) -> String {
+    format!("{SITE_URL}{}/#download", site_lang(ui_lang))
+}
+/// 網站的語言路徑是小寫（zh-tw、zh-cn…），沒有的語言用英文
+fn site_lang(ui_lang: &str) -> String {
+    match ui_lang {
         "zh-TW" | "zh-CN" | "en" | "ja" | "de" | "fr" | "ru" | "pl" => ui_lang.to_lowercase(),
         _ => "en".to_string(),
-    };
-    format!("{SITE_URL}{lang}/#support")
+    }
 }
+/// GitHub 的最新版發布頁（網站 github.io 連不上時，github.com 可能還連得上）
+pub const RELEASES_URL: &str = "https://github.com/cycleapple/d2survivors-localization/releases/latest";
 /// D2 Survivors 官方網站（下載遊戲）。跟網站 site/src/config.mjs 的 LINKS 一樣
 pub const GAME_URL: &str = "https://d2survivors.lol/";
 /// D2 Survivors 的瀏覽器版

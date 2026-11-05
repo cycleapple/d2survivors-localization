@@ -87,7 +87,9 @@ fn cli(args: &[String]) -> anyhow::Result<()> {
             println!("資料夾：{}", paths::data_dir().display());
             println!("遊戲：{}", config.game_dir().display());
             println!("語言：{}", game::language_name(&config.language, m.as_ref()));
-            println!("更新來源：{}", config.manifest_url());
+            println!("更新來源：{}", config.manifest_sources().join("（連不上時）→ "));
+            let src = paths::State::load().manifest_source;
+            println!("上次的翻譯清單來源：{}", if src.is_empty() { "—" } else { &src });
             println!("遊戲記的語言（localStorage）：{}", system::stored_game_lang().as_deref().unwrap_or("讀不到"));
             if let Some(f) = jobs::Fallback::last() {
                 println!("上次啟動改用原版：{}", i18n::tr("zh-TW", f.key()));

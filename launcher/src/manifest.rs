@@ -5,6 +5,7 @@ use anyhow::{bail, Context, Result};
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 use std::fs;
+use std::time::Duration;
 use std::io::Read;
 use std::path::Path;
 
@@ -168,10 +169,16 @@ fn is_url(s: &str) -> bool {
 
 /// 下載網址或讀本機檔案
 pub fn fetch(location: &str) -> Result<Vec<u8>> {
+    fetch_with(location, Duration::from_secs(15), Duration::from_secs(60))
+}
+
+/// 同 fetch，連線（connect）和整個下載（total）各自的逾時
+fn fetch_with(location: &str, connect: Duration, total: Duration) -> Result<Vec<u8>> {
     if is_url(location) {
         // GitHub Pages 的 CDN 會快取，要求拿最新的（manifest 網址另外加上 ?t=）
-        let resp = ureq::get(location)
-            .timeout(std::time::Duration::from_secs(60))
+        let agent = ureq::AgentBuilder::new().timeout_connect(connect).timeout(total).build();
+        let resp = agent
+            .get(location)
             .set("Cache-Control", "no-cache")
             .call()
             .context("下載失敗")?; // ureq 的錯誤訊息裡已經有網址
@@ -230,33 +237,67 @@ pub fn latest_changelog(manifest_url: &str, m: &Manifest) -> Result<Option<Chang
 }
 
 pub enum Update {
-    /// 新的 manifest 已經存好；changed 是更新了字典的語言
-    Done { manifest: Manifest, changed: Vec<String> },
+    /// 新的 manifest 已經存好；changed 是更新了字典的語言，source 是實際拿到 manifest 的來源
+    Done { manifest: Manifest, changed: Vec<String>, source: String },
     /// 啟動器版本低於 launcher.minimum：新的 manifest 沒有存下來，要先更新啟動器
-    LauncherTooOld { manifest: Manifest },
+    LauncherTooOld { manifest: Manifest, source: String },
 }
 
-/// 下載 manifest，再把有變動的字典下載下來：要用的語言（want）和本機已經有的語言
-pub fn update(manifest_url: &str, want: &str, log: &dyn Fn(String)) -> Result<Update> {
-    if manifest_url.trim().is_empty() {
-        bail!("還沒設定更新來源（manifest_url）");
-    }
-    log(format!("檢查更新：{manifest_url}"));
+/// 下載一個來源的 manifest 並檢查格式。quick：後面還有備用來源，連不上就早點放棄（連線 6 秒、整個 15 秒）
+fn get_manifest(url: &str, quick: bool) -> Result<(Vec<u8>, Manifest)> {
     // 網址加上時間，避開 CDN 快取，剛發布的翻譯馬上拿得到
-    let fresh = if is_url(manifest_url) && !manifest_url.contains('?') {
+    let fresh = if is_url(url) && !url.contains('?') {
         let t = std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).map_or(0, |d| d.as_secs());
-        format!("{manifest_url}?t={t}")
+        format!("{url}?t={t}")
     } else {
-        manifest_url.to_string()
+        url.to_string()
     };
-    let raw = fetch(&fresh)?;
+    let raw = if quick { fetch_with(&fresh, Duration::from_secs(6), Duration::from_secs(15))? } else { fetch(&fresh)? };
     let schema = serde_json::from_slice::<serde_json::Value>(&raw).context("manifest.json 格式不對")?["schema"].as_u64();
     if schema != Some(SCHEMA as u64) {
         bail!("manifest 版本 {} 不支援，請更新啟動器", schema.map_or("?".into(), |s| s.to_string()));
     }
     let manifest: Manifest = serde_json::from_slice(&raw).context("manifest.json 格式不對")?;
+    Ok((raw, manifest))
+}
+
+/// 下載 manifest，再把有變動的字典下載下來：要用的語言（want）和本機已經有的語言。
+/// sources 依序試（預設的、備用的；玩家自己設的只有一個），字典從實際拿到 manifest 的那個來源解析相對網址
+pub fn update(sources: &[String], want: &str, log: &dyn Fn(String)) -> Result<Update> {
+    let sources: Vec<&String> = sources.iter().filter(|s| !s.trim().is_empty()).collect();
+    if sources.is_empty() {
+        bail!("還沒設定更新來源（manifest_url）");
+    }
+    let mut got = None;
+    let mut last = None;
+    for (i, src) in sources.iter().enumerate() {
+        let more = i + 1 < sources.len();
+        log(if i == 0 { format!("檢查更新：{src}") } else { format!("改用備用來源：{src}") });
+        match get_manifest(src, more) {
+            Ok(r) => {
+                got = Some((src.to_string(), i > 0, r));
+                break;
+            }
+            Err(e) => {
+                if more {
+                    log(format!("⚠ 下載不到：{e:#}"));
+                }
+                last = Some(e);
+            }
+        }
+    }
+    let Some((source, backup, (raw, manifest))) = got else {
+        let e = last.expect("至少試了一個來源");
+        return Err(if sources.len() > 1 { e.context("預設和備用的更新來源都下載不到") } else { e });
+    };
+    // 備用來源（jsDelivr）有快取，可能比上次拿到的舊：不要退回舊的翻譯
+    if backup {
+        if let Some(c) = cached().filter(|c| c.version > manifest.version) {
+            bail!("備用來源的翻譯（{}）比本機的（{}）舊，可能還沒同步", manifest.version, c.version);
+        }
+    }
     if crate::selfupdate::required(&manifest).is_some() {
-        return Ok(Update::LauncherTooOld { manifest });
+        return Ok(Update::LauncherTooOld { manifest, source });
     }
     fs::create_dir_all(paths::data_dir().join("dicts"))?;
     let mut changed = Vec::new();
@@ -265,8 +306,11 @@ pub fn update(manifest_url: &str, want: &str, log: &dyn Fn(String)) -> Result<Up
             continue;
         }
         log(format!("下載 {} 字典（{} 版，{} 條）…", lang.name, manifest.version, lang.entries));
-        let b = fetch(&resolve(manifest_url, &lang.dict.url))?;
+        let b = fetch(&resolve(&source, &lang.dict.url))?;
         if sha256_hex(&b) != lang.dict.sha256 {
+            if backup {
+                bail!("{} 字典的 sha256 不符（備用來源的快取可能還沒更新）", lang.name);
+            }
             bail!("{} 字典的 sha256 不符，下載的檔案可能損壞", lang.name);
         }
         serde_json::from_slice::<serde_json::Value>(&b).with_context(|| format!("{} 字典不是有效的 JSON", lang.name))?;
@@ -274,5 +318,5 @@ pub fn update(manifest_url: &str, want: &str, log: &dyn Fn(String)) -> Result<Up
         changed.push(lang.name.clone());
     }
     paths::write_atomic(&paths::data_dir().join("manifest.json"), &raw)?;
-    Ok(Update::Done { manifest, changed })
+    Ok(Update::Done { manifest, changed, source })
 }

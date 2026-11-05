@@ -4,7 +4,7 @@ use crate::manifest::{self, ChangelogEntry, LauncherInfo, Manifest, Update};
 use crate::patcher::RuleMismatch;
 use crate::paths::{Config, State};
 use crate::selfupdate;
-use anyhow::Result;
+use anyhow::{Context, Result};
 use std::path::PathBuf;
 
 #[derive(Clone, Copy, PartialEq)]
@@ -73,6 +73,10 @@ pub struct Outcome {
     pub game_version: Option<String>,
     /// 最新一筆更新紀錄（看過沒有用 changelog_unseen 判斷）
     pub changelog: Option<ChangelogEntry>,
+    /// 啟動時檢查了更新：Some(true) 是失敗（沒檢查是 None）
+    pub update_failed: Option<bool>,
+    /// 這次實際拿到 manifest 的來源
+    pub source: Option<String>,
 }
 
 pub fn run(job: Job, config: &Config, manifest: Option<Manifest>, log: &dyn Fn(String)) -> Result<Outcome> {
@@ -107,8 +111,14 @@ pub fn run(job: Job, config: &Config, manifest: Option<Manifest>, log: &dyn Fn(S
         }
         Job::Launch | Job::Install => {
             if config.auto_update {
-                if let Err(e) = update(config, &mut out, log) {
-                    log(format!("⚠ 更新失敗，用本機的翻譯：{e:#}"));
+                let r = update(config, &mut out, log);
+                out.update_failed = Some(r.is_err());
+                if let Err(e) = r {
+                    if out.manifest.is_some() {
+                        log(format!("⚠ 更新失敗，用本機的翻譯：{e:#}"));
+                    } else {
+                        log(format!("⚠ 下載不到翻譯清單，本機也沒有，只能用原版：{e:#}"));
+                    }
                 }
             }
             let game = Game::new(config.game_dir())?;
@@ -146,7 +156,12 @@ pub fn run(job: Job, config: &Config, manifest: Option<Manifest>, log: &dyn Fn(S
         Job::SelfUpdate => {
             update(config, &mut out, log)?;
             match out.launcher.clone().filter(|l| selfupdate::newer(&l.latest)) {
-                Some(l) => out.restart = Some(selfupdate::apply(&l, &config.manifest_url(), log)?),
+                Some(l) => {
+                    let base = out.source.clone().unwrap_or_else(|| config.manifest_url());
+                    let exe = selfupdate::apply(&l, &base, log)
+                        .with_context(|| format!("無法自動更新啟動器，請到網站手動下載：{}", crate::system::download_url(config.ui_language())))?;
+                    out.restart = Some(exe);
+                }
                 None => log(format!("啟動器已經是最新版（{}）", selfupdate::VERSION)),
             }
         }
@@ -156,9 +171,8 @@ pub fn run(job: Job, config: &Config, manifest: Option<Manifest>, log: &dyn Fn(S
 
 /// 下載 manifest 和字典。可以用的新 manifest 放進 out.manifest（啟動器太舊時不換），也帶回啟動器版本和沒看過的更新紀錄
 fn update(config: &Config, out: &mut Outcome, log: &dyn Fn(String)) -> Result<()> {
-    let url = config.manifest_url();
-    let manifest = match manifest::update(&url, &config.language, log)? {
-        Update::Done { manifest, changed } => {
+    let (manifest, url) = match manifest::update(&config.manifest_sources(), &config.language, log)? {
+        Update::Done { manifest, changed, source } => {
             if changed.is_empty() {
                 log("翻譯已經是最新的".into());
             } else {
@@ -168,14 +182,20 @@ fn update(config: &Config, out: &mut Outcome, log: &dyn Fn(String)) -> Result<()
                 log(format!("有新版啟動器 {}（目前 {}）", l.latest, selfupdate::VERSION));
             }
             out.manifest = Some(manifest.clone());
-            manifest
+            (manifest, source)
         }
-        Update::LauncherTooOld { manifest } => {
+        Update::LauncherTooOld { manifest, source } => {
             let min = manifest.launcher.as_ref().map_or("", |l| l.minimum.as_str());
-            log(format!("⚠ 新的翻譯需要啟動器 {min} 以上（目前 {}），請先更新啟動器；這次先用本機的翻譯", selfupdate::VERSION));
-            manifest
+            let now = if out.manifest.is_some() { "這次先用本機的翻譯" } else { "本機沒有翻譯，只能用原版" };
+            log(format!("⚠ 新的翻譯需要啟動器 {min} 以上（目前 {}），請先更新啟動器；{now}", selfupdate::VERSION));
+            (manifest, source)
         }
     };
+    log(format!("翻譯清單來源：{url}"));
+    if State::load().manifest_source != url {
+        let _ = State { manifest_source: url.clone(), ..State::load() }.save();
+    }
+    out.source = Some(url.clone());
     out.launcher = manifest.launcher.clone();
     if manifest.changelog.is_some() {
         match manifest::latest_changelog(&url, &manifest) {
