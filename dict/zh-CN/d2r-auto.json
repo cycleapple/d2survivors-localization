@@ -8969,6 +8969,7 @@
  "of Vita": "生机之",
  "of Inertia": "惯性之",
  "Tyrael": "泰瑞尔",
+ "FULL SCREEN": "全屏",
  "Hardcore": "专家模式",
  "Softcore": "普通",
  "Your deeds of valor will be remembered": "你的英勇事迹将被铭记",
@@ -9047,6 +9048,9 @@
  "White": "白色",
  "Zephyr": "和风",
  "Socketed (#)": "镶孔 ({0})",
+ "Burning Essences of Terror": "燃烧的恐惧精华",
+ "Temper": "淬火",
+ "Hellforge": "地狱熔炉",
  "Ethereal (Cannot be Repaired)": "无形的 (无法修复)",
  "Ethereal (Cannot be Repaired), Socketed (#)": "无形的 (无法修复), 镶孔 ({0})",
  "Runewords": "符文之语",
@@ -9132,6 +9136,7 @@
  "of Hope": "希望之",
  "of Virility": "刚勇之",
  "Jewel": "珠宝",
+ "Burning Essence of Terror": "燃烧的恐惧精华",
  "Choose the item to which you wish to add sockets.": "选择你想添加镶孔的物品。",
  "JEWELS": "珠宝"
 }

@@ -8685,6 +8685,7 @@
  "of Vita": "命力の",
  "of Inertia": "軽快の",
  "Tyrael": "ティラエル",
+ "FULL SCREEN": "フルスクリーン",
  "Hardcore": "ハードコア",
  "Softcore": "ソフトコア",
  "Your deeds of valor will be remembered": "君の勇敢な行為は語り継がれるだろう",
@@ -8763,6 +8764,9 @@
  "White": "白",
  "Zephyr": "軟風",
  "Socketed (#)": "ソケット（{0}）",
+ "Burning Essences of Terror": "燃え盛る恐怖のエッセンス",
+ "Temper": "沈着",
+ "Hellforge": "地獄の炉",
  "Ethereal (Cannot be Repaired)": "イシリアル（修理不可能）",
  "Ethereal (Cannot be Repaired), Socketed (#)": "イシリアル（修理不可能）、ソケット（{0}）",
  "Runewords": "ルーンワード",
@@ -8844,6 +8848,7 @@
  "of Hope": "希望の",
  "of Virility": "膂力の",
  "Jewel": "宝玉",
+ "Burning Essence of Terror": "燃え盛る恐怖のエッセンス",
  "Choose the item to which you wish to add sockets.": "ソケットを追加したいアイテムを選択してください。",
  "JEWELS": "宝石"
 }
