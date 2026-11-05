@@ -2,6 +2,134 @@
   "schema": 1,
   "entries": [
     {
+      "version": "20261105-0212",
+      "date": "2026-11-05",
+      "kind": "launcher",
+      "announce": true,
+      "summary": {
+        "zh-TW": "啟動器 1.0.7：連不上 GitHub 的網路也能下載翻譯。建議用主畫面的「更新啟動器」更新",
+        "zh-CN": "启动器 1.0.7：连不上 GitHub 的网络也能下载翻译。建议用主界面的“更新启动器”更新",
+        "en": "Launcher 1.0.7: the translation downloads even on networks that can't reach GitHub. Update with Update launcher on the main screen",
+        "ja": "ランチャー 1.0.7：GitHub につながらないネットワークでも翻訳をダウンロードできるようになりました。メイン画面の「ランチャーを更新」で更新してください",
+        "de": "Launcher 1.0.7: Die Übersetzung lädt jetzt auch in Netzen, die GitHub nicht erreichen. Aktualisiere über „Launcher aktualisieren“ auf dem Hauptbildschirm",
+        "fr": "Lanceur 1.0.7 : la traduction se télécharge même sur les réseaux qui n’accèdent pas à GitHub. Mettez à jour avec « Mettre à jour le lanceur » sur l’écran principal",
+        "ru": "Лаунчер 1.0.7: перевод скачивается даже в сетях, где GitHub недоступен. Обновитесь кнопкой «Обновить лаунчер» на главном экране",
+        "pl": "Launcher 1.0.7: tłumaczenie pobiera się nawet w sieciach bez dostępu do GitHuba. Zaktualizuj przyciskiem „Zaktualizuj launcher” na głównym ekranie"
+      },
+      "notes": {
+        "zh-TW": [
+          "連不上 GitHub（github.io）的網路，例如部分地區、公司網路或 VPN，啟動器會自動改用備用來源下載翻譯",
+          "語言選單只剩 English／한국어 時，會顯示原因和「重試」按鈕",
+          "自動更新啟動器失敗時，會提示你到網站手動下載",
+          "1.0.3 以前的啟動器不會自己提示更新，請到網站重新下載"
+        ],
+        "zh-CN": [
+          "连不上 GitHub（github.io）的网络，例如部分地区、公司网络或 VPN，启动器会自动改用备用来源下载翻译",
+          "语言菜单只剩 English／한국어 时，会显示原因和“重试”按钮",
+          "自动更新启动器失败时，会提示你到网站手动下载",
+          "1.0.3 及更早的启动器不会自己提示更新，请到网站重新下载"
+        ],
+        "en": [
+          "On networks that can't reach GitHub (github.io), such as some regions, work networks or VPNs, the launcher downloads the translation from a backup source by itself",
+          "When the language menu only shows English and 한국어, the launcher says why and shows a Retry button",
+          "If the launcher can't update itself, it tells you to download it from the website",
+          "Launchers 1.0.3 and older don't offer the update themselves: please download it again from the website"
+        ],
+        "ja": [
+          "GitHub（github.io）につながらないネットワーク（一部の地域、職場のネットワーク、VPN など）では、ランチャーが自動的に予備の配信元から翻訳をダウンロードします",
+          "言語メニューに English と 한국어 しかないときは、理由と「再試行」ボタンを表示します",
+          "ランチャーの自動更新に失敗したときは、サイトから手動でダウンロードするよう案内します",
+          "1.0.3 以前のランチャーは更新を案内しません。サイトからダウンロードし直してください"
+        ],
+        "de": [
+          "In Netzen, die GitHub (github.io) nicht erreichen, etwa in manchen Regionen, Firmennetzen oder mit VPN, lädt der Launcher die Übersetzung automatisch von einer Ausweichquelle",
+          "Zeigt das Sprachmenü nur English und 한국어, nennt der Launcher den Grund und zeigt die Schaltfläche „Erneut versuchen“",
+          "Schlägt die automatische Aktualisierung des Launchers fehl, verweist er auf den manuellen Download von der Website",
+          "Launcher 1.0.3 und älter bieten das Update nicht selbst an: bitte neu von der Website laden"
+        ],
+        "fr": [
+          "Sur les réseaux qui n’accèdent pas à GitHub (github.io), comme dans certaines régions, sur un réseau d’entreprise ou avec un VPN, le lanceur télécharge automatiquement la traduction depuis une source de secours",
+          "Quand le menu des langues ne propose qu’English et 한국어, le lanceur en indique la raison et affiche un bouton « Réessayer »",
+          "Si la mise à jour automatique du lanceur échoue, il vous invite à le télécharger depuis le site",
+          "Les lanceurs 1.0.3 et plus anciens ne proposent pas la mise à jour : retéléchargez-le depuis le site"
+        ],
+        "ru": [
+          "В сетях, где GitHub (github.io) недоступен, например в некоторых регионах, в рабочих сетях или через VPN, лаунчер сам скачивает перевод из резервного источника",
+          "Если в меню языков остались только English и 한국어, лаунчер объясняет причину и показывает кнопку «Повторить»",
+          "Если лаунчер не смог обновиться сам, он предложит скачать его с сайта вручную",
+          "Лаунчеры 1.0.3 и старше сами не предлагают обновиться: скачайте лаунчер заново с сайта"
+        ],
+        "pl": [
+          "W sieciach bez dostępu do GitHuba (github.io), np. w niektórych regionach, w sieciach firmowych lub przez VPN, launcher sam pobiera tłumaczenie z zapasowego źródła",
+          "Gdy w menu języków są tylko English i 한국어, launcher podaje przyczynę i pokazuje przycisk „Spróbuj ponownie”",
+          "Jeśli launcher nie zdoła sam się zaktualizować, podpowie, by pobrać go ręcznie ze strony",
+          "Launchery 1.0.3 i starsze same nie proponują aktualizacji: pobierz go ponownie ze strony"
+        ]
+      },
+      "game": {
+        "desktop": "2026.1104.2"
+      },
+      "launcher": "1.0.7",
+      "languages": [
+        {
+          "id": "zh-TW",
+          "status": "available",
+          "entries": 14088,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "zh-CN",
+          "status": "available",
+          "entries": 14087,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ja",
+          "status": "available",
+          "entries": 14093,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "de",
+          "status": "available",
+          "entries": 14127,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "fr",
+          "status": "available",
+          "entries": 14136,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ru",
+          "status": "available",
+          "entries": 14175,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "pl",
+          "status": "available",
+          "entries": 14165,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        }
+      ]
+    },
+    {
       "version": "20261105-0114",
       "date": "2026-11-05",
       "kind": "launcher",
