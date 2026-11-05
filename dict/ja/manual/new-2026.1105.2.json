@@ -1,0 +1,19 @@
+{
+ "Once: double or lose all tempers": "1回のみ: 鍛錬がすべて倍になるか、すべて失われる",
+ "Already on its elite base: *": "すでにエリートのベースアイテムです: {0}",
+ "Charsi's Upgrade on an item already on its elite base says so and names the base, where it said no stronger base existed": "すでにエリートのベースアイテムになっているアイテムにチャルシの「アップグレード」を使うと、より強いベースアイテムがないと表示する代わりに、そのことをベースアイテム名とともに表示するようになりました",
+ "Up to 10 tempers an item": "1つのアイテムにつき鍛錬は10回まで",
+ "Temper stops at 10: use the Hellforge": "鍛錬は10回までです: 地獄の炉を使ってください",
+ "Temper stops at 10": "鍛錬は10回までです",
+ "This item has used its Hellforge": "このアイテムはすでに地獄の炉を使用しました",
+ "Once per item": "アイテムごとに1回",
+ "Temper now stops at 10 tempers an item, and only the Hellforge raises one past 10": "鍛錬は1つのアイテムにつき10回までになり、10回を超えられるのは地獄の炉だけになりました",
+ "An item tempered past 10 is cut back to 10, or to 20 if it had 20 or more, each line keeping its share": "10回を超えて鍛錬したアイテムは10回に、20回以上だった場合は20回に減り、各行の割合はそのまま維持されます",
+ "The Hellforge now works once per item, and an item cut back to 20 counts as having used it": "地獄の炉はアイテムごとに1回だけ使えるようになり、20回に減ったアイテムは使用済みとして扱われます",
+ "The map marks a Burning Essence of Terror or Larzuk's Essence on the ground with a small red triangle": "地面にある燃え盛る恐怖のエッセンスとラルザックのエッセンスが、マップに小さな赤い三角形で表示されるようになりました",
+ "Terror drops other than the boss's bring a Burning Essence of Terror about a quarter as often": "恐怖の段階でボス以外のドロップに燃え盛る恐怖のエッセンスが付いてくる頻度が、約4分の1になりました",
+ "An Annihilus, organ or Hellfire Torch from an uber you had to fight more than once no longer keeps your runs off the Ladder": "複数回戦う必要があったウーバーから手に入れたアニヒラス、臓器、業火のたいまつのせいで、ランがラダーから外されることはなくなりました",
+ "Uber Tristram clears faster than 1:30 now reach the Ladder instead of being refused and piling up unsent": "1分30秒より速いウーバー・トリストラムのクリアが、拒否されて未送信のままたまることなく、ラダーに記録されるようになりました",
+ "A re-draft offers Telekinesis again to a fully built hero of any class, so Dim Vision can evolve into Confuse": "選び直しで、どのクラスでもビルドが埋まった英雄に再びテレキネシスが提示されるようになり、視力減退が混乱に進化できるようになりました",
+ "Telekinesis now has 5 levels like every passive, and its 5th reaches as far as its 3rd did": "テレキネシスがほかの常時発動と同じく5レベルまでになり、レベル5で以前のレベル3と同じ距離まで届きます"
+}

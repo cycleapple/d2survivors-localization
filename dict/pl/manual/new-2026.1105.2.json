@@ -1,0 +1,19 @@
+{
+ "Once: double or lose all tempers": "Raz: podwój lub strać wszystkie hartowania",
+ "Already on its elite base: *": "Już na elitarnej bazie: {0}",
+ "Charsi's Upgrade on an item already on its elite base says so and names the base, where it said no stronger base existed": "Ulepszenie Charsi na przedmiocie, który jest już na elitarnej bazie, informuje o tym i podaje nazwę bazy, zamiast mówić, że nie ma mocniejszej bazy",
+ "Up to 10 tempers an item": "Do 10 hartowań na przedmiot",
+ "Temper stops at 10: use the Hellforge": "Hartowanie kończy się na 10: użyj Piekielnej Kuźni",
+ "Temper stops at 10": "Hartowanie kończy się na 10",
+ "This item has used its Hellforge": "Ten przedmiot użył już Piekielnej Kuźni",
+ "Once per item": "Raz na przedmiot",
+ "Temper now stops at 10 tempers an item, and only the Hellforge raises one past 10": "Hartowanie kończy się teraz na 10 hartowaniach na przedmiot i tylko Piekielna Kuźnia pozwala przekroczyć 10",
+ "An item tempered past 10 is cut back to 10, or to 20 if it had 20 or more, each line keeping its share": "Przedmiot hartowany ponad 10 razy zostaje zredukowany do 10 albo do 20, jeśli miał 20 lub więcej, a każdy wiersz zachowuje swój udział",
+ "The Hellforge now works once per item, and an item cut back to 20 counts as having used it": "Piekielna Kuźnia działa teraz raz na przedmiot, a przedmiot zredukowany do 20 liczy się jako taki, który już jej użył",
+ "The map marks a Burning Essence of Terror or Larzuk's Essence on the ground with a small red triangle": "Mapa oznacza leżącą na ziemi Płonącą Esencję Grozy lub Esencję Larzuka małym czerwonym trójkątem",
+ "Terror drops other than the boss's bring a Burning Essence of Terror about a quarter as often": "Łupy z Grozy inne niż łup bossa dają Płonącą Esencję Grozy mniej więcej cztery razy rzadziej",
+ "An Annihilus, organ or Hellfire Torch from an uber you had to fight more than once no longer keeps your runs off the Ladder": "Annihilus, organ lub Pochodnia Piekielnego Ognia od uber-bossa, z którym trzeba było walczyć więcej niż raz, nie wyklucza już twoich podejść z rankingu",
+ "Uber Tristram clears faster than 1:30 now reach the Ladder instead of being refused and piling up unsent": "Ukończenia Uber Tristrama szybsze niż 1:30 trafiają teraz do rankingu, zamiast być odrzucane i gromadzić się jako niewysłane",
+ "A re-draft offers Telekinesis again to a fully built hero of any class, so Dim Vision can evolve into Confuse": "Ponowny wybór znów proponuje Telekinezę w pełni rozbudowanemu bohaterowi każdej klasy, więc Zamroczenie może rozwinąć się w Zamęt",
+ "Telekinesis now has 5 levels like every passive, and its 5th reaches as far as its 3rd did": "Telekineza ma teraz 5 poziomów jak każda umiejętność pasywna, a na 5. poziomie sięga tak daleko jak wcześniej na 3."
+}

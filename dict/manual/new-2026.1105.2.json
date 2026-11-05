@@ -1,0 +1,19 @@
+{
+ "Once: double or lose all tempers": "限一次：所有淬鍊加倍或全部失去",
+ "Already on its elite base: *": "已經是精英底材：{0}",
+ "Charsi's Upgrade on an item already on its elite base says so and names the base, where it said no stronger base existed": "對已是精英底材的物品使用恰西的「升級」時，現在會說明這點並顯示底材名稱，不再顯示沒有更強的底材",
+ "Up to 10 tempers an item": "每件物品最多淬鍊10次",
+ "Temper stops at 10: use the Hellforge": "淬鍊上限為10次：請使用地獄熔爐",
+ "Temper stops at 10": "淬鍊上限為10次",
+ "This item has used its Hellforge": "此物品已使用過地獄熔爐",
+ "Once per item": "每件物品限一次",
+ "Temper now stops at 10 tempers an item, and only the Hellforge raises one past 10": "淬鍊現在每件物品最多10次，只有地獄熔爐能讓物品超過10次",
+ "An item tempered past 10 is cut back to 10, or to 20 if it had 20 or more, each line keeping its share": "淬鍊超過10次的物品會減為10次，原本有20次以上的則減為20次，每條屬性維持原本的比例",
+ "The Hellforge now works once per item, and an item cut back to 20 counts as having used it": "地獄熔爐現在每件物品只能使用一次，減為20次的物品視為已使用過",
+ "The map marks a Burning Essence of Terror or Larzuk's Essence on the ground with a small red triangle": "地圖會以紅色小三角形標示地上的燃燒的恐懼精華或拉蘇克精華",
+ "Terror drops other than the boss's bring a Burning Essence of Terror about a quarter as often": "恐懼階中首領以外的掉落物附帶燃燒的恐懼精華的機率，降為原本的約四分之一",
+ "An Annihilus, organ or Hellfire Torch from an uber you had to fight more than once no longer keeps your runs off the Ladder": "從需要挑戰不只一次的超級首領取得的滅絕、器官或地獄火炬，不再讓你的紀錄無法列入天梯",
+ "Uber Tristram clears faster than 1:30 now reach the Ladder instead of being refused and piling up unsent": "快於1:30的超級崔斯特姆通關紀錄現在會列入天梯，不再遭到拒絕而堆積未送出",
+ "A re-draft offers Telekinesis again to a fully built hero of any class, so Dim Vision can evolve into Confuse": "重新抽選現在會再次向任何職業、技能已配滿的英雄提供心靈傳動，讓昏暗視野能進化為混亂",
+ "Telekinesis now has 5 levels like every passive, and its 5th reaches as far as its 3rd did": "心靈傳動現在和所有被動一樣有5級，第5級的距離與原本第3級相同"
+}
