@@ -198,6 +198,8 @@ node tools/serve.mjs site 8766     # 本機預覽（或 python -m http.server 87
 
 `.github/workflows/pages.yml`：push 到 `main` 時跑 `node tools/build-site.mjs`，把 `site/` 整個上傳到 GitHub Pages（含 `site/data/`、`site/web/`）。repo 的 Settings → Pages → Source 要選「GitHub Actions」。流程見 [release.md](release.md)。
 
+部署成功後會清 jsDelivr 的快取：啟動器連不上 GitHub Pages 時改讀 `https://cdn.jsdelivr.net/gh/cycleapple/d2survivors-localization@main/site/data/…`，jsDelivr 對 `@main` 最多快取 12 小時。只在這次 push 改到 `site/data/` 時清（手動執行 workflow 一律清），清的是 `manifest.json`、`changelog.json`、`dict/*.json`；字型不用（桌面版是內嵌的）。清除失敗只在 Actions 記警告，部署照樣算成功。
+
 ## 部署後要使用者自己做的
 
 1. GitHub repo 公開、Settings → Pages → Source 選 GitHub Actions，push 一次讓網站上線

@@ -43,3 +43,26 @@ jobs:
 
       - id: deployment
         uses: actions/deploy-pages@v4
+
+      # 啟動器連不上 GitHub Pages 時改讀 jsDelivr（gh/<repo>@main/site/data/…），jsDelivr 對 @main 最多快取 12 小時，部署完要清掉。
+      # 只在這次 push 改到 site/data/ 時清（手動執行一律清）；purge 有頻率限制，一次清一輪；失敗只記警告，不讓部署失敗
+      - name: Purge jsDelivr cache
+        continue-on-error: true
+        env:
+          BEFORE: ${{ github.event.before }}
+        run: |
+          if [ "$GITHUB_EVENT_NAME" = push ] && [ -n "$BEFORE" ] && [ "$BEFORE" != 0000000000000000000000000000000000000000 ] \
+             && git fetch --quiet --depth=1 origin "$BEFORE" && git diff --quiet "$BEFORE" HEAD -- site/data/; then
+            echo "site/data/ 沒有變動，不用清"
+            exit 0
+          fi
+          for f in site/data/manifest.json site/data/changelog.json site/data/dict/*.json; do
+            if body=$(curl -fsS --retry 2 --retry-delay 5 --max-time 30 "https://purge.jsdelivr.net/gh/$GITHUB_REPOSITORY@main/$f"); then
+              case "$body" in
+                *'"throttled":true'*) echo "::warning::jsDelivr purge throttled: $f" ;;
+                *) echo "purged $f" ;;
+              esac
+            else
+              echo "::warning::jsDelivr purge failed: $f"
+            fi
+          done
