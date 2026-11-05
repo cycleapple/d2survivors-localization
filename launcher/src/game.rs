@@ -218,7 +218,9 @@ pub fn language_name<'a>(id: &str, manifest: Option<&'a Manifest>) -> String {
     if let Some((_, n)) = BUILTIN.iter().find(|(i, _)| *i == id) {
         return n.to_string();
     }
-    manifest.and_then(|m| m.languages.iter().find(|l| l.id == id)).map_or(id.to_string(), |l| l.label())
+    manifest
+        .and_then(|m| m.languages.iter().find(|l| l.id == id))
+        .map_or_else(|| crate::i18n::native_name(id).map_or(id.to_string(), str::to_string), |l| l.label())
 }
 
 pub fn exists(dir: &Path) -> bool {

@@ -115,6 +115,11 @@ cargo test --release                        # 有 backup/2026.1026.4/app.asar �
 
 要進遊戲看：把整個遊戲資料夾複製一份，`D2S_USER_DATA` 指到另一個資料夾（遊戲本身支援，存檔和設定就不會動到平常的），裡面 `d2` 複製一份平常的 `%APPDATA%\D2 Survivors\d2`（取出的 D2 素材，1.5 GB；不要用 junction：2026.1103.2 起遊戲版本變了會重新取出，會寫進平常的那份），`desktop.json` 的 `checkForUpdates` 設成 false。再用 `D2S_QUERY=d2slang=ko` 和 `--remote-debugging-port` 開複製的那份，用 `tools/cdp.mjs` 截圖
 
+## 下一版（未發布）
+
+- 沒有 manifest（第一次開又下載不到）時，主畫面的語言選單顯示選的語言的名稱（`i18n::native_name`，例如「繁體中文」），不再顯示「zh-TW」這種代碼。選的語言不改成 English：清單下載到之後照原本的選擇套用。`--status` 的「語言」也一樣
+- 這時按「啟動遊戲」：用原版開遊戲，視窗不關，上面兩張卡片，「無法下載翻譯清單…」（有「重試」）和「這次用原版開啟：翻譯還沒下載（請確認網路），先用原版開啟。」加上遊戲語言的說明。測試：`work/launcher/rr/nomanifest-play.ps1`（遊戲複本、獨立的啟動器資料夾和使用者資料、兩個更新來源都連不上），截圖 `work/launcher/nomanifest-play-zh-TW.png`
+
 ## 1.0.7
 
 - 使用者回報（2026-11-05）：新的啟動器語言選單只有 English 和 한국어。那台電腦第一次用（本機沒有 manifest），又連不上 cycleapple.github.io（中國、公司網路、VPN、防火牆之類），下載失敗，語言清單只剩原版，畫面也沒有說明

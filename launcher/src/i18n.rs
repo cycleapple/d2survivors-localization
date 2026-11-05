@@ -100,6 +100,21 @@ const TABLE: &[(&str, [&str; 8])] = &[
     ("link_translation_discord", ["翻譯社群 Discord", "翻译社区 Discord", "Translation community Discord", "翻訳コミュニティの Discord", "Discord der Übersetzungs-Community", "Discord de la communauté de traduction", "Discord сообщества переводчиков", "Discord społeczności tłumaczy"]),
 ];
 
+/// 翻譯語言的名稱（那個語言自己寫）：沒有 manifest（第一次開又連不上）時，主畫面的選單用這個顯示選的語言，不顯示「zh-TW」這種代碼。
+/// 跟 tools/patch-rules.mjs 的 LANGUAGES 的 name 一樣
+pub fn native_name(id: &str) -> Option<&'static str> {
+    const NAMES: &[(&str, &str)] = &[
+        ("zh-TW", "繁體中文"),
+        ("zh-CN", "简体中文"),
+        ("ja", "日本語"),
+        ("de", "Deutsch"),
+        ("fr", "Français"),
+        ("ru", "Русский"),
+        ("pl", "Polski"),
+    ];
+    NAMES.iter().find(|(i, _)| *i == id).map(|(_, n)| *n)
+}
+
 /// 語言的狀態用那個語言自己寫：status 是 manifest 的 status（None＝available 不加標示，beta 測試中，其他都當草稿）
 pub fn native_status(id: &str, status: Option<&str>) -> Option<&'static str> {
     // (語言, 測試中, 草稿)

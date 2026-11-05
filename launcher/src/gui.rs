@@ -294,7 +294,10 @@ impl App {
         let languages = self.languages();
         if combo {
             let label = |name: &str, id: &str, note: Option<&str>| i18n::with_note(id, name, note);
-            let selected = languages.iter().find(|(id, ..)| *id == self.config.language).map_or(self.config.language.clone(), |(id, n, s)| label(n, id, *s));
+            let selected = languages.iter().find(|(id, ..)| *id == self.config.language).map_or_else(
+                || i18n::native_name(&self.config.language).map_or(self.config.language.clone(), str::to_string),
+                |(id, n, s)| label(n, id, *s),
+            );
             egui::ComboBox::from_id_salt("language")
                 .selected_text(RichText::new(selected).size(16.0).color(GOLD_HI))
                 .width(ui.available_width())
