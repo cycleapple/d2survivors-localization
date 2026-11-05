@@ -25,7 +25,10 @@ node tools/serve.mjs site 8766      # 本機預覽（允許跨網域讀取）；
 
 - 跟桌面版一樣用遊戲內建的翻譯系統，不是蓋一層字上去：書籤讀 `../data/manifest.json`（相對於 `d2zh.js`），抓下遊戲頁面和全部模組（約 44 個），照**目前的語言**挑出 groups 符合的規則套用，模組做成 blob 網址，用 import map 換掉原本的模組，再在同網域的 iframe 裡重新開一次遊戲。字典照 manifest 的 `dict.url` 抓，做成 blob 模組
 - 原版遊戲（外層頁面）會先停掉：送 `pagehide` 讓它存檔、放掉防止開兩個分頁的 Web Lock；送一個 F24 按鍵讓它讀 AudioContext 再關掉（不然背景音樂會兩份）；停掉 rAF、計時器、WebGL
-- 停掉的那一份不能再拿 Web Lock（`d2-survivors/play`，2026-11-05 起）：原版在拿到 `/site.json` 之後才去搶鎖，按書籤時它可能還在等（手機、網路慢），停掉之後才拿到，iframe 裡的修改版就一直顯示「D2 Survivors is open in another tab」。`stopPage` 先把那個 realm 的 `LockManager.prototype.request` 換成永遠不回應（每個 realm 各一份，iframe 不受影響），再送 `pagehide`。已經在排隊的（另一個分頁開著遊戲時排在它後面、送 `pagehide` 時正拿到一半）：遊戲拿到鎖時才登記 `pagehide` 的 listener，所以停掉之後登記的 `pagehide` listener 一律馬上呼叫，拿到就放掉。換語言時停掉的舊 iframe 也一樣。真的有另一個分頁開著遊戲時照原版顯示「open in another tab」，那個分頁關掉後修改版接手
+- 停掉的那一份不能再拿 Web Lock（`d2-survivors/play`，2026-11-05 起）：原版在拿到 `/site.json` 之後才去搶鎖，按書籤時它可能還在等（手機、網路慢），停掉之後才拿到，iframe 裡的修改版就一直顯示「D2 Survivors is open in another tab」。`stopPage` 先把那個 realm 的 `LockManager.prototype.request` 換成永遠不回應（每個 realm 各一份，iframe 不受影響），再送 `pagehide`
+- 停掉的那一份也不能再存檔（2026-11-05 起）：遊戲的存檔是 `pagehide` 時同步寫 localStorage（`d2-survivors/save/v1`），另外非同步寫一份備份進 IndexedDB。送完 `pagehide` 之後，那個 realm 的 `Storage.prototype` 的 `setItem`／`removeItem`／`clear` 換成什麼都不做（不丟錯誤：存不進去時遊戲會刪別的東西騰空間），300 毫秒後（備份寫完）`IDBDatabase.prototype.transaction` 的寫入也擋掉。停住時的狀態是舊的，之後再存就會蓋掉 iframe 裡的進度。書籤自己存設定（`d2zh:last` 等）用載入時留下的 `setItem`
+- 停掉的那一份之後也不再登記 `pagehide`、`pageshow`、`visibilitychange`、`freeze`、`resume`、`beforeunload`、`unload`（window、document 上的；`EventTarget.prototype.addEventListener` 也是每個 realm 一份）。`pagehide` 例外要馬上呼叫一次：已經在排隊的鎖（另一個分頁開著遊戲時排在它後面、送 `pagehide` 時正拿到一半）拿到時，遊戲才登記放鎖用的 `pagehide`，呼叫了才會放掉、輪到 iframe。同時登記的其他 `pagehide`（例如遊戲晚建好時的存檔）也會被呼叫，但已經寫不進去。換語言時停掉的舊 iframe 也一樣。真的有另一個分頁開著遊戲時照原版顯示「open in another tab」，那個分頁關掉後修改版接手
+- 原版停掉之前登記的 listener：外層在 `openShell` 的 `document.open()` 時全部清掉（實測 window、document 上一個都不剩），所以之後真的關掉分頁時，原版不會用舊狀態再存一次。舊的 iframe 一停掉就移除
 - 可以在首頁（`/`）或遊戲頁面（`/play/`、`/play/setup.html`）啟動（2026-10-30 起）。手機建議從首頁：在 `/play/` 啟動時停掉的原版還佔著記憶體（模組、下載的遊戲資料），等於兩份遊戲；首頁只有 landing 的小腳本（約 33KB，2D 的火星動畫，一樣用 `stopPage` 停掉）。從首頁啟動時：遊戲頁面固定是 `/play/`；網址列用 `history.replaceState` 換成 `/play/`、分頁標題用遊戲頁面的，所以分頁被手機丟掉重新載入、或再按一次書籤時回到的是原版遊戲，不是首頁。其他頁面（wiki 等，它們也有 `#d2-files`，所以還要看路徑）提示要先打開首頁或遊戲頁面
 - iframe 先載入 `/robots.txt` 再把修改版寫進去：這樣才歸遊戲的 Service Worker（scope `/`）管，「USE MY OWN FILES」模式靠它從 OPFS 讀 D2 檔案
 - 遊戲要選檔案模式時會把 iframe 換到 `setup.html`（原版英文）；選完回到 `/play/` 時書籤再換成修改版。iframe 停在 `setup.html` 的時候，畫面下方一直顯示「請先選擇遊戲檔案，選完會自動切回〇〇」（七種語言；遊戲語言是英文、韓文時用英文），離開就收起來。見下面「選檔案（setup.html）和 hosted 檔案拿掉之後」
@@ -171,6 +174,11 @@ Web Lock（2026-11-05，遊戲 game-DLW6qfcM.js，正式 manifest 20261105-1104�
 - 改之後：上面兩種都正常進到繁中、換日文正常，鎖只在 iframe 手上、沒有排隊的請求。首頁一開就按（`/site.json` 延遲 8 秒）也正常
 - 正常時機按、再按一次（重新整理成原版）、重新整理後再按、換日文、換俄文：都正常，每次鎖都在目前的 iframe
 - 另一個分頁先開著原版：按書籤後 iframe 照原版顯示「open in another tab」；把那個分頁關掉，3 秒內 iframe 拿到鎖、進到繁中（改之前會被停掉的原版拿走，一直卡住）
+- 存檔（2026-11-05 第二次修改之後）：
+  - 按書籤後外層的 window、document 上沒有任何 `pagehide`／`visibilitychange` 等 listener（改之前也一樣，`document.open()` 清掉的）
+  - 從外層（停住的 realm）直接 `localStorage.setItem`、登記 `pagehide`／`visibilitychange` 寫 localStorage、寫 IndexedDB，再關掉分頁重開：改之前三個都寫進去了，改之後都沒有（IndexedDB 丟 `InvalidStateError`）；iframe 的寫入、iframe 關分頁時的 `pagehide` 都照常寫進去
+  - 真的玩：`/play/?class=sorceress` 讓原版玩 8 秒 → 按書籤（存檔是原版的進度）→ iframe 裡一直選升級卡片，玩到 1:04 死掉，`bestTimes.normal` 變 63.7 秒、金幣 4 → 關掉分頁重開，存檔跟關掉前一樣（同一個 seal），沒有被原版的舊進度蓋掉
+  - 書籤自己存的 `d2zh:last`、遊戲存的 `d2s:lang` 照常更新
 - 沒在手機實機上測
 
 還沒測：USE MY OWN FILES 實際讀檔、Safari／Firefox、手機、遊戲中的升級卡片和物品名稱（日文的魔法物品順序、禁則斷行只用 `build-web.mjs` 確認規則套得上；德法俄的名稱組合用 `compose-check.mjs` 對照過，沒有在遊戲畫面上看過）。

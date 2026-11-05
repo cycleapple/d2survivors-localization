@@ -16,8 +16,9 @@ const MANIFEST = new URL('../data/manifest.json', import.meta.url).href;
 const LANG_KEY = 'd2s:lang';
 const LAST_KEY = 'd2zh:last';   // 最後一次用的翻譯語言（切回英文之後，再按一次書籤要回到它）
 const GAME_HOSTS = ['d2survivors.lol', 'www.d2survivors.lol'];
-// stopPage 會把頁面的 fetch 換掉，先留一份
+// stopPage 會把頁面的 fetch、localStorage 的寫入換掉，先留一份
 const fetch0 = window.fetch.bind(window);
+const setItem0 = Storage.prototype.setItem;
 
 const MESSAGES = {
   'zh-TW': {
@@ -87,7 +88,7 @@ const STATUS = {
 
 const store = {
   get(key) { try { return localStorage.getItem(key); } catch { return null; } },
-  set(key, value) { try { localStorage.setItem(key, value); } catch { /* 存不了就只有這次 */ } },
+  set(key, value) { try { setItem0.call(localStorage, key, value); } catch { /* 存不了就只有這次 */ } },
 };
 // 舊版書籤存的 zh＝繁中
 const normalize = id => id === 'zh' ? 'zh-TW' : id;
@@ -194,14 +195,23 @@ async function stopPage(win = window) {
   // 原版可能還沒去搶（還在等 site.json…，手機上常見）：先讓這一份之後再也搶不到，不然它停住以後才拿到鎖，
   // iframe 裡的修改版就一直卡在「open in another tab」。LockManager.prototype 每個 realm 各一份，iframe 不受影響
   try { win.LockManager.prototype.request = () => new Promise(() => {}); } catch { /* 沒有 Web Locks */ }
-  // 已經在排隊的（另一個分頁開著遊戲時排在它後面、或送 pagehide 時正拿到一半）：拿到鎖時遊戲才登記 pagehide，
-  // 之後登記的一律馬上呼叫，拿到就放掉，輪到 iframe 裡的修改版
-  const add = win.addEventListener;
-  win.addEventListener = function (type, fn, ...rest) {
-    if (type === 'pagehide' && typeof fn === 'function') Promise.resolve().then(() => fn.call(win, new win.PageTransitionEvent('pagehide', { persisted: true })));
+  try { win.dispatchEvent(new PageTransitionEvent('pagehide', { persisted: true })); } catch { /* 舊瀏覽器 */ }
+  // 存檔是 pagehide 時同步寫 localStorage，上面已經存好。之後這一份不能再存：停住時的狀態是舊的，
+  // 遊戲還在跑的程式、真的關掉分頁時的 pagehide／visibilitychange 再存一次，就會蓋掉 iframe 裡的進度。
+  // 寫入換成什麼都不做（不丟錯誤：存不進去時遊戲會刪別的東西騰空間）；Storage.prototype 每個 realm 各一份
+  try { for (const name of ['setItem', 'removeItem', 'clear']) win.Storage.prototype[name] = () => {}; } catch { /* 沒有 localStorage */ }
+  // 這一份之後也不再登記換頁、切到背景的 listener。只有 pagehide 例外要馬上呼叫一次：已經在排隊的鎖
+  // （另一個分頁開著遊戲時排在它後面、或送 pagehide 時正拿到一半）拿到時遊戲才登記放鎖用的 pagehide，
+  // 呼叫了才會放掉，輪到 iframe 裡的修改版。同時登記的其他 pagehide（存檔）也會被呼叫，但已經寫不進去
+  const add = win.EventTarget.prototype.addEventListener;
+  const lifecycle = ['pagehide', 'pageshow', 'visibilitychange', 'freeze', 'resume', 'beforeunload', 'unload'];
+  win.EventTarget.prototype.addEventListener = function (type, fn, ...rest) {
+    if ((this == null || this === win || this === win.document) && lifecycle.includes(type)) {
+      if (type === 'pagehide' && typeof fn === 'function') Promise.resolve().then(() => fn.call(win, new win.PageTransitionEvent('pagehide', { persisted: true })));
+      return;
+    }
     return add.call(this, type, fn, ...rest);
   };
-  try { win.dispatchEvent(new PageTransitionEvent('pagehide', { persisted: true })); } catch { /* 舊瀏覽器 */ }
   // AudioContext 沒辦法從外面找到：攔截 state、currentTime 一小段時間，遊戲讀到的那個就是。
   // 遊戲每次按鍵都會檢查 state（被瀏覽器暫停就恢復），所以送一個沒有作用的按鍵（F24）讓它讀一次
   const contexts = new Set();
@@ -211,6 +221,14 @@ async function stopPage(win = window) {
   for (const type of ['keydown', 'keyup']) win.dispatchEvent(new KeyboardEvent(type, { key: 'F24', code: 'F24', bubbles: true }));
   await new Promise(r => setTimeout(r, 300));
   for (const [name, d] of hooked) Object.defineProperty(proto, name, d);
+  // 存檔的備份另外寫進 IndexedDB（非同步，上面這段時間會寫完）：之後也不能再寫
+  try {
+    const tx = win.IDBDatabase.prototype.transaction;
+    win.IDBDatabase.prototype.transaction = function (stores, mode, ...rest) {
+      if (mode && mode !== 'readonly') throw new win.DOMException('stopped', 'InvalidStateError');
+      return tx.call(this, stores, mode, ...rest);
+    };
+  } catch { /* 沒有 IndexedDB */ }
   // 背景音樂是接進 AudioContext 的 <audio>，關掉 AudioContext 就一起沒聲音了
   for (const c of contexts) c.close().catch(() => {});
 
