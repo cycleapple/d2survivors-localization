@@ -12,7 +12,7 @@ import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { SITE, SITE_LANGS } from '../site/src/config.mjs';
 import { I18N } from '../site/src/i18n.mjs';
-import { htmlKey, fillKey } from './wiki-strings.mjs';
+import { htmlKey, fillKey, enSpans, lookup } from './wiki-strings.mjs';
 
 const OFFICIAL = 'https://d2survivors.lol/wiki/';
 const LANG = SITE_LANGS.find(l => l.id === 'zh-TW');
@@ -42,8 +42,9 @@ const VOID = new Set(['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input'
 const RAW = new Set(['script', 'style', 'textarea']);
 const TAG_RE = /<!--[\s\S]*?-->|<![^>]*>|<\/([a-zA-Z][\w-]*)\s*>|<([a-zA-Z][\w-]*)((?:\s+[^\s"'>/=]+(?:\s*=\s*(?:"[^"]*"|'[^']*'|[^\s"'=<>`]+))?)*)\s*(\/?)>/g;
 
-// 節點：{ text }（原始 HTML 文字，實體不解碼）或 { tag, attrs: [[name, value|null]], children }
-export function parseHtml(html) {
+// 節點：{ text }（原始 HTML 文字，實體不解碼）或 { tag, attrs: [[name, value|null]], children }；
+// pos 時元素多一欄 at（開標籤在 html 裡的位置），用來對回 wiki-strings 的 enSpans
+export function parseHtml(html, { pos = false } = {}) {
   const root = { tag: '#root', attrs: [], children: [] };
   const stack = [root];
   const top = () => stack[stack.length - 1];
@@ -59,6 +60,7 @@ export function parseHtml(html) {
       continue;
     }
     const el = { tag: m[2].toLowerCase(), attrs: parseAttrs(m[3]), children: [] };
+    if (pos) el.at = m.index;
     top().children.push(el);
     if (RAW.has(el.tag)) {
       const end = new RegExp(`</${el.tag}\\s*>`, 'ig');
@@ -109,12 +111,14 @@ const textOf = nodes => decode(nodes.map(n => (n.tag ? textOf(n.children) : n.te
 
 // ---------- 譯文 ----------
 
-// key 的算法用翻譯的 tools/wiki-strings.mjs（htmlKey、fillKey），兩邊才不會對不上
+// key 和查法都用翻譯的 tools/wiki-strings.mjs，兩邊才不會分岔：官方頁面裡的 span 用 enSpans 給的 key、tags、context，
+// 譯文用 lookup 查（技能變體名稱先查 modifier:名稱）；其他（頁尾的版權聲明、譯文換回來之後裡面的元素）用 htmlKey 算
 const placeholders = s => [...s.matchAll(/<\/?\d+\/?>/g)].map(m => m[0]).sort().join();
 // 一個元素的內容 → { key, nodes（譯文換回的節點，沒有譯文或佔位符對不上是 null）, bad }
-function translate(el, dict) {
-  const { key, tags } = htmlKey(serialize(el.children));
-  const tr = key && dict[key];
+function translate(el, ctx) {
+  const span = ctx.spans.get(el.at);
+  const { key, tags } = span || htmlKey(serialize(el.children));
+  const tr = key && (span ? lookup(ctx.dict, span) : ctx.dict[key]);
   if (!tr) return { key, nodes: null };
   if (placeholders(tr) !== placeholders(key)) return { key, nodes: null, bad: true };
   try { return { key, nodes: parseHtml(fillKey(tr, tags)).children }; } catch { return { key, nodes: null, bad: true }; }
@@ -156,7 +160,7 @@ function localize(nodes, ctx) {
     }
     let el = n.attrs.some(([k]) => k === 'href') ? link(n, ctx) : n;
     if (lang === 'en') {
-      const { key, nodes: f, bad } = translate(n, ctx.dict);
+      const { key, nodes: f, bad } = translate(n, ctx);
       if (f) ctx.translated++;
       else if (bad) ctx.bad.add(key);
       else if (key) ctx.missing.add(key);
@@ -202,8 +206,9 @@ function fontLinks(html) {
 const jsonLd = data => `<script type="application/ld+json">${JSON.stringify(data, null, 1).replace(/</g, '\\u003c')}</script>`;
 
 function buildPage(src, p, ctx) {
-  const doc = parseHtml(src);
-  const c = { ...ctx, path: p, official: officialUrl(p), translated: 0, missing: new Set(), bad: new Set() };
+  const doc = parseHtml(src, { pos: true });
+  const spans = new Map(enSpans(src).map(s => [s.start, s]));
+  const c = { ...ctx, path: p, official: officialUrl(p), spans, translated: 0, missing: new Set(), bad: new Set() };
   const toc = find(doc.children, n => hasClass(n, 'wiki-toc'));
   const crumbs = find(doc.children, n => hasClass(n, 'wiki-crumbs'));
   const h1 = find(doc.children, n => n.tag === 'h1');
@@ -222,7 +227,7 @@ function buildPage(src, p, ctx) {
   const tocHtml = inner(toc, c);
   // 官方頁尾的作者和暴雪版權聲明：照原文保留（有譯文就用譯文）
   const legalHtml = legal.map(n => {
-    const f = translate(n, c.dict).nodes;
+    const f = translate(n, c).nodes;
     return `<p${f ? '' : ' lang="en"'}>${serialize(f || n.children)}</p>`;
   }).join('\n      ');
 
