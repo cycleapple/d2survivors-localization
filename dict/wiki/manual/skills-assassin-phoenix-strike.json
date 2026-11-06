@@ -1,0 +1,13 @@
+{
+ "As in Diablo II, each takes its own synergy: the meteor Fists of Fire’s, the chain lightning Claws of Thunder’s, the chaos ice Blades of Ice’s. Its claw blow takes none.": "與《暗黑破壞神 II》相同，三者各自採用自己的協同加成：隕石採用烈火拳的，連鎖閃電採用雷電爪的，混沌冰彈採用寒冰刃的。它的爪擊則沒有協同加成。",
+ "Blades of Ice: +100% Cold Damage per Level": "寒冰刃：每級冰寒傷害 +100%",
+ "Claws of Thunder: +130% Lightning Damage per Level": "雷電爪：每級閃電傷害 +130%",
+ "Claws with your weapon, letting go a meteor (533), chain lightning (514), chaos ice (230), then the ice again.": "以武器爪擊，依序釋放隕石（533）、連鎖閃電（514）、混沌冰彈（230），然後再次釋放冰彈。",
+ "Each charging blow lets its charge go at once: the first a meteor, the second chain lightning, the third chaos ice. The fourth blow lets the ice go again. A finisher lets go only the last charge’s, as in Diablo II.": "每次集氣打擊都會立刻釋放該層集氣：第一次是隕石，第二次是連鎖閃電，第三次是混沌冰彈。第四次打擊會再次釋放冰彈。與《暗黑破壞神 II》相同，終結技只會釋放最後一層集氣的效果。",
+ "Fists of Fire: +13% Fire Damage per Level": "烈火拳：每級火焰傷害 +13%",
+ "Its lightning, ice and meteor’s fire never critically strike.": "它的閃電、冰彈與隕石的火焰永遠不會造成致命一擊。",
+ "Its meteor, lightning and ice take the highest of your fire, lightning and cold bonuses.": "它的隕石、閃電與冰彈會採用你火焰、閃電與冰寒加成中最高的一項。",
+ "Phoenix Strike, the Assassin's evolution in D2 Survivors: Claws with your weapon, letting go a meteor (533), chain lightning (514), chaos ice (230), then the ice again.": "鳳凰擊，D2 Survivors 中刺客的進化技能：以武器爪擊，依序釋放隕石（533）、連鎖閃電（514）、混沌冰彈（230），然後再次釋放冰彈。",
+ "The chaos ice freezes a normal monster for <0>14.8</0> seconds on Normal. The freeze is shorter on Nightmare and in Hell, on champions, uniques and act bosses, and by the monster’s cold resistance.": "混沌冰彈在普通難度會讓普通怪物凍結<0>14.8</0>秒。在惡夢與地獄難度、對精英怪物、獨特怪物與章節首領，凍結時間較短，也會依怪物的冰寒抗性縮短。",
+ "Unlike Diablo II, its blow and its meteor, lightning and ice deal <0>50%</0> more than Diablo II’s, and so do Fists of Fire’s, Claws of Thunder’s and Blades of Ice’s blows and releases: the four stand to each other as in Diablo II.": "與《暗黑破壞神 II》不同，它的打擊與隕石、閃電、冰彈的傷害都比《暗黑破壞神 II》多<0>50%</0>，烈火拳、雷電爪與寒冰刃的打擊與釋放也一樣：這四個技能之間的比例與《暗黑破壞神 II》相同。"
+}

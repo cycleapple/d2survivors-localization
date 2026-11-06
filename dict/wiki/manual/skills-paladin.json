@@ -1,0 +1,8 @@
+{
+ "Auras": "靈氣",
+ "Every skill casts itself on its own recharge. His Combat Skills hold every skill he casts: Blessed Hammer, Holy Bolt, Holy Shield, Conversion and his melee blows.": "每個技能都依自身的冷卻時間自動施放。他的戰鬥技能包含他施放的所有技能：祝福之鎚、聖光彈、神聖之盾、招降打擊與他的近戰打擊。",
+ "Exceptions": "例外",
+ "His weapon blows can critically strike, but not the fire, cold and lightning they add. As in Diablo II, Smite, Sacrifice and Vengeance never do, nor Alma Negra, Bloodrise and Rusthandle. His hammers, bolts, auras and Holy Shield’s smite never do.": "他的武器打擊可以造成致命一擊，但附加的火焰、冰寒與閃電不會。與《暗黑破壞神 II》相同，盾牌重擊、犧牲打擊與復仇打擊絕不會造成致命一擊，黑魂、血升與鏽蝕把手也不會。他的鎚子、聖光彈、靈氣與神聖之盾的盾牌重擊也絕不會。",
+ "Smite, Sacrifice and Zeal wait for a monster within his reach, then strike the toughest one there: an act boss first, then a unique, then a champion.": "盾牌重擊、犧牲打擊與熱忱打擊會等怪物進入他的攻擊範圍，再攻擊其中最強的一隻：依序為章節首領、獨特怪物、精英怪物。",
+ "Vengeance and Rusthandle strike an act boss or a unique in reach first, else the monster with the most others around it, where their bursts reach the most.": "復仇打擊與鏽蝕把手會優先攻擊範圍內的章節首領或獨特怪物，否則攻擊周圍其他怪物最多的那隻，讓爆發波及最多目標。"
+}

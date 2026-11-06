@@ -1,0 +1,13 @@
+{
+ "An item that casts Bone Armor gives it to any class, its bone too, for <0>30</0> seconds, at the item’s level or yours where yours is higher.": "施放骸骨護甲的物品會讓任何職業獲得它（包括骸骨），持續<0>30</0>秒，以物品的等級施放，若你的技能等級較高則以你的為準。",
+ "Bone Armor, the Necromancer's passive in D2 Survivors: Bone takes all physical damage, up to 100, regrowing in 30s. 17% less physical damage": "骸骨護甲，D2 Survivors 中死靈法師的被動技能：骸骨承受所有物理傷害，最多100點，30秒後重新長出。受到的物理傷害降低17%",
+ "Bone takes all physical damage, up to 100, regrowing in 30s. 17% less physical damage": "骸骨承受所有物理傷害，最多100點，30秒後重新長出。受到的物理傷害降低17%",
+ "Bone takes all physical damage, up to 180, regrowing in 30s. 24% less physical damage": "骸骨承受所有物理傷害，最多180點，30秒後重新長出。受到的物理傷害降低24%",
+ "Bone takes all physical damage, up to 260, regrowing in 30s. 29% less physical damage": "骸骨承受所有物理傷害，最多260點，30秒後重新長出。受到的物理傷害降低29%",
+ "Bone takes all physical damage, up to 340, regrowing in 30s. 32% less physical damage": "骸骨承受所有物理傷害，最多340點，30秒後重新長出。受到的物理傷害降低32%",
+ "Bone takes all physical damage, up to 420, regrowing in 30s. 33% less physical damage": "骸骨承受所有物理傷害，最多420點，30秒後重新長出。受到的物理傷害降低33%",
+ "It takes <0>17%</0> off every physical blow at level 1 and <1>33%</1> at level 5, more with gear’s +skills.": "等級1時讓每次物理打擊降低<0>17%</0>，等級5時降低<1>33%</1>，裝備的 +技能還能讓它更多。",
+ "Its bone also takes all of every physical hit before your life, as Diablo II’s, until it has taken <0>100</0> at level 1 and <1>420</1> at level 5, and <2>30</2> more a Diablo II level of Bone Wall and of Bone Prison you learned: <3>1020</3> with Bone Wall at level 5, <4>1620</4> with Bone Prison at level 8 too (items’ +skills on them don’t count). Fire, cold, lightning, poison and magic pass it by. It grows back whole in <5>30</5> seconds, where Diablo II’s comes back as you cast it again.": "與《暗黑破壞神 II》相同，它的骸骨也會在你的生命之前承受每次物理攻擊的全部傷害，直到承受量達到等級1時的<0>100</0>、等級5時的<1>420</1>，你學會的骨牆與骨牢每一個《暗黑破壞神 II》等級再多<2>30</2>：骨牆等級5時為<3>1020</3>，骨牢也達等級8時為<4>1620</4>（物品給這兩個技能的 +技能不計）。火焰、冰寒、閃電、毒素與魔法傷害不受它阻擋。它會在<5>30</5>秒後完全長回，而《暗黑破壞神 II》則要再次施放才會恢復。",
+ "Necromancer · Passive": "死靈法師 · 被動技能",
+ "Unlike Diablo II, it is a passive, always on. It is Damage Reduced: it adds to your items’, up to the cap of <0>50%</0>, <1>75%</1> in Terror.": "與《暗黑破壞神 II》不同，它是被動技能，永遠有效。它屬於傷害降低：會與你物品的傷害降低疊加，上限為<0>50%</0>，恐懼階中為<1>75%</1>。"
+}

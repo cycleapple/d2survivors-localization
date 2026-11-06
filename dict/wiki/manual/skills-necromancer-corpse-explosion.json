@@ -1,0 +1,16 @@
+{
+ "A corpse explodes, dealing 70-120% of its life within 120.": "引爆一具屍體，對120範圍內造成屍體生命70-120%的傷害。",
+ "A corpse explodes, dealing 70-120% of its life within 136.": "引爆一具屍體，對136範圍內造成屍體生命70-120%的傷害。",
+ "A corpse explodes, dealing 70-120% of its life within 160.": "引爆一具屍體，對160範圍內造成屍體生命70-120%的傷害。",
+ "A corpse explodes, dealing 70-120% of its life within 176.": "引爆一具屍體，對176範圍內造成屍體生命70-120%的傷害。",
+ "A corpse explodes, dealing 70-120% of its life within 200.": "引爆一具屍體，對200範圍內造成屍體生命70-120%的傷害。",
+ "A corpse explodes, dealing 70-120% of its life within 216.": "引爆一具屍體，對216範圍內造成屍體生命70-120%的傷害。",
+ "A corpse explodes, dealing 70-120% of its life within 80.": "引爆一具屍體，對80範圍內造成屍體生命70-120%的傷害。",
+ "A corpse explodes, dealing 70-120% of its life within 96.": "引爆一具屍體，對96範圍內造成屍體生命70-120%的傷害。",
+ "Corpse Explosion, the Necromancer's skill in D2 Survivors: A corpse explodes, dealing 70-120% of its life within 80.": "屍爆，D2 Survivors 中死靈法師的技能：引爆一具屍體，對80範圍內造成屍體生命70-120%的傷害。",
+ "Each cast blows up one fresh corpse in reach of you: the one with the most monsters around it.": "每次施放會引爆你範圍內的一具新鮮屍體：周圍怪物最多的那一具。",
+ "Energy raises the whole blast. A fire immune takes its physical half, and Amplify Damage raises that half.": "能量會提高整個爆炸的傷害。火焰免疫的怪物會受到其中物理的一半，傷害加深會提高這一半。",
+ "It deals <0>70%</0> to <1>120%</1> of the slain monster’s own Diablo II life at its level, as Diablo II’s does: none of a champion’s or unique’s extra life, nor what the game gives the horde as the acts go on. A corpse higher in level than you blows up for your level over its own, as in Diablo II.": "與《暗黑破壞神 II》相同，它造成被殺怪物在其等級下《暗黑破壞神 II》原本生命的<0>70%</0>到<1>120%</1>：不包括精英怪物或獨特怪物的額外生命，也不包括遊戲隨章節推進給怪物群增加的生命。與《暗黑破壞神 II》相同，等級比你高的屍體會以你的等級而非它自己的等級計算爆炸傷害。",
+ "Its reach is Diablo II’s: <0>216</0> at its 8th level, as at Diablo II’s 20 points. Its levels and gear’s +skills raise its reach; its share is Diablo II’s at every level. Its recharge stays its own level’s.": "它的範圍與《暗黑破壞神 II》相同：等級8時為<0>216</0>，相當於《暗黑破壞神 II》的20點。技能等級與裝備的 +技能會擴大範圍；傷害比例在每個等級都與《暗黑破壞神 II》相同。冷卻時間仍依技能本身的等級。",
+ "Monsters its blast kills leave corpses the next cast can blow up, as in Diablo II. Its Chain skill modifier blows up the most crowded of them at once, for half the damage.": "與《暗黑破壞神 II》相同，被爆炸殺死的怪物會留下屍體，可供下一次施放引爆。它的「連鎖」技能變體會立即引爆其中周圍怪物最密集的一具，造成一半的傷害。"
+}

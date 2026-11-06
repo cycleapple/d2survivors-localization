@@ -1,0 +1,14 @@
+{
+ "Battle Cry, the Barbarian's skill in D2 Survivors: Monsters around you, bosses too, take 15% more damage for 4.0s.": "戰鬥怒吼，D2 Survivors 中野蠻人的技能：你周圍的怪物（包括首領）受到的傷害提高15%，持續4.0秒。",
+ "Cast by an item (Call to Arms), its curse lasts Diablo II’s <0>12</0> seconds and <1>2.4</1> more a level.": "由物品（戰爭召喚）施放時，它的詛咒持續時間與《暗黑破壞神 II》相同：<0>12</0>秒，每級再多<1>2.4</1>秒。",
+ "It deals no damage of its own, so gear’s +skills raise its reach, length and strength.": "它本身不造成傷害，因此裝備的 +技能會提高它的範圍、持續時間與效果。",
+ "It works on bosses too, but not on a Possessed champion. It adds to other curses that make a monster take more, and never breaks an immunity.": "它對首領也有效，但對著魔的精英怪物無效。它會與其他讓怪物受到更多傷害的詛咒相加，且永遠不會破除免疫。",
+ "Monsters around you, bosses too, take 15% more damage for 4.0s.": "你周圍的怪物（包括首領）受到的傷害提高15%，持續4.0秒。",
+ "Monsters around you, bosses too, take 19% more damage for 4.5s.": "你周圍的怪物（包括首領）受到的傷害提高19%，持續4.5秒。",
+ "Monsters around you, bosses too, take 23% more damage for 5.0s.": "你周圍的怪物（包括首領）受到的傷害提高23%，持續5.0秒。",
+ "Monsters around you, bosses too, take 27% more damage for 5.5s.": "你周圍的怪物（包括首領）受到的傷害提高27%，持續5.5秒。",
+ "Monsters around you, bosses too, take 31% more damage for 6.0s.": "你周圍的怪物（包括首領）受到的傷害提高31%，持續6.0秒。",
+ "Monsters around you, bosses too, take 35% more damage for 6.5s.": "你周圍的怪物（包括首領）受到的傷害提高35%，持續6.5秒。",
+ "Monsters around you, bosses too, take 39% more damage for 7.0s.": "你周圍的怪物（包括首領）受到的傷害提高39%，持續7.0秒。",
+ "Monsters around you, bosses too, take 43% more damage for 7.5s.": "你周圍的怪物（包括首領）受到的傷害提高43%，持續7.5秒。"
+}

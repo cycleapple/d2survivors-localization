@@ -1,0 +1,11 @@
+{
+ "An item’s lasts Diablo II’s <0>30</0> seconds and <1>10</1> more a level, so it stays up after you swap back to your other weapons.": "物品施放的持續時間與《暗黑破壞神 II》相同：<0>30</0>秒，每級再多<1>10</1>秒，因此你換回其他武器後效果仍會維持。",
+ "Battle Orders, the Barbarian's evolution in D2 Survivors: You have 35% more life and mana, renewed every 12 seconds.": "戰鬥命令，D2 Survivors 中野蠻人的進化技能：你的生命與法力提高35%，每12秒刷新一次。",
+ "Cast by an item (Call to Arms), it gives its life and mana alone, as much as his own gives at the level the item gives: <0>+35%</0> at level 1 and <1>+56%</1> at level 5.": "由物品（戰爭召喚）施放時，只給予生命與法力加成，數值與他自己在物品所給等級下施放的相同：等級1時<0>+35%</0>，等級5時<1>+56%</1>。",
+ "It casts with no monster near too, and lasts a little longer than its recharge, so it stays up. The life it adds comes filled.": "附近沒有怪物時也會施放，持續時間比冷卻時間稍長，因此能一直維持。它增加的生命會直接補滿。",
+ "It deals no damage of its own, so gear’s +skills raise its life. It gives no Defense, as in Diablo II.": "它本身不造成傷害，因此裝備的 +技能會提高它的生命加成。與《暗黑破壞神 II》相同，它不提供防禦。",
+ "It raises maximum mana by the same share as life, as in Diablo II: the blue globe shows it, and a Sorceress’s Energy Shield has that much more mana to spend. It goes when Battle Orders ends.": "與《暗黑破壞神 II》相同，它會以與生命相同的比例提高最大法力：藍色球體會顯示出來，魔法使的能量護盾也有相應更多的法力可用。戰鬥命令結束時效果就會消失。",
+ "On him, Call to Arms’ +Battle Orders raises his own Battle Orders or Battle Command instead, and his own cast while he wears it lasts as long as the item’s would.": "在野蠻人身上，戰爭召喚的 +戰鬥命令會改為提高他自己的戰鬥命令或戰鬥指揮，而他裝備該物品時自己施放的效果，持續時間與物品施放的相同。",
+ "Once it evolves on, Shout can evolve into it again.": "它進一步進化後，大吼可以再次進化為它。",
+ "You have 35% more life and mana, renewed every 12 seconds.": "你的生命與法力提高35%，每12秒刷新一次。"
+}

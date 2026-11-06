@@ -1,0 +1,14 @@
+{
+ "Amplify Damage, the Necromancer's skill in D2 Survivors: Monsters within 80 of a target lose 100% physical resistance for 4 seconds (a fifth if immune).": "傷害加深，D2 Survivors 中死靈法師的技能：目標周圍80範圍內的怪物在4秒內物理抗性降低100%（若免疫則為五分之一）。",
+ "It holds on act bosses and every rank alike.": "它對章節首領與所有類型的怪物效果都相同。",
+ "Monsters within 100 of a target lose 100% physical resistance for 5 seconds (a fifth if immune).": "目標周圍100範圍內的怪物在5秒內物理抗性降低100%（若免疫則為五分之一）。",
+ "Monsters within 110 of a target lose 100% physical resistance for 5.5 seconds (a fifth if immune).": "目標周圍110範圍內的怪物在5.5秒內物理抗性降低100%（若免疫則為五分之一）。",
+ "Monsters within 120 of a target lose 100% physical resistance for 6 seconds (a fifth if immune).": "目標周圍120範圍內的怪物在6秒內物理抗性降低100%（若免疫則為五分之一）。",
+ "Monsters within 130 of a target lose 100% physical resistance for 6.5 seconds (a fifth if immune).": "目標周圍130範圍內的怪物在6.5秒內物理抗性降低100%（若免疫則為五分之一）。",
+ "Monsters within 140 of a target lose 100% physical resistance for 7 seconds (a fifth if immune).": "目標周圍140範圍內的怪物在7秒內物理抗性降低100%（若免疫則為五分之一）。",
+ "Monsters within 150 of a target lose 100% physical resistance for 7.5 seconds (a fifth if immune).": "目標周圍150範圍內的怪物在7.5秒內物理抗性降低100%（若免疫則為五分之一）。",
+ "Monsters within 80 of a target lose 100% physical resistance for 4 seconds (a fifth if immune).": "目標周圍80範圍內的怪物在4秒內物理抗性降低100%（若免疫則為五分之一）。",
+ "Monsters within 90 of a target lose 100% physical resistance for 4.5 seconds (a fifth if immune).": "目標周圍90範圍內的怪物在4.5秒內物理抗性降低100%（若免疫則為五分之一）。",
+ "On a monster that resists no physical damage, it doubles what physical damage deals: your summons’ blows and Corpse Explosion’s physical half too.": "對沒有物理抗性的怪物，它會讓物理傷害加倍：你召喚物的打擊與屍爆的物理部分也包括在內。",
+ "On a physical immune it takes off a fifth as much, which can break the immunity (see <0>Damage</0>).": "對物理免疫的怪物，降低量只有五分之一，但仍可能破除免疫（見<0>傷害</0>）。"
+}

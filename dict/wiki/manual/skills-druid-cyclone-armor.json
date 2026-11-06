@@ -1,0 +1,12 @@
+{
+ "+10% cold damage. Winds take 100% of fire, cold and lightning hits, up to 152, regrowing in 10s": "冰寒傷害 +10%。氣旋吸收火焰、冰寒與閃電攻擊的100%，最多152點，10秒內恢復",
+ "+20% cold damage. Winds take 100% of fire, cold and lightning hits, up to 248, regrowing in 10s": "冰寒傷害 +20%。氣旋吸收火焰、冰寒與閃電攻擊的100%，最多248點，10秒內恢復",
+ "+30% cold damage. Winds take 100% of fire, cold and lightning hits, up to 344, regrowing in 10s": "冰寒傷害 +30%。氣旋吸收火焰、冰寒與閃電攻擊的100%，最多344點，10秒內恢復",
+ "+40% cold damage. Winds take 100% of fire, cold and lightning hits, up to 440, regrowing in 10s": "冰寒傷害 +40%。氣旋吸收火焰、冰寒與閃電攻擊的100%，最多440點，10秒內恢復",
+ "+50% cold damage. Winds take 100% of fire, cold and lightning hits, up to 536, regrowing in 10s": "冰寒傷害 +50%。氣旋吸收火焰、冰寒與閃電攻擊的100%，最多536點，10秒內恢復",
+ "An item that casts Cyclone Armor (Infinity’s charges, Rain’s) gives Diablo II’s absorb at the item’s level for <0>30</0> seconds, with no +cold damage and none of your winds’ points. Your own counts while it absorbs more.": "施放氣旋護甲的物品（無限的充能、降雨），會以物品等級給予《暗黑破壞神 II》的吸收量，持續<0>30</0>秒，不含 +冰寒傷害，也不計你旋風技能的點數。你自己的氣旋護甲吸收量較多時，以你自己的為準。",
+ "As in Diablo II, it absorbs fire, cold and lightning damage up to its amount, <0>+7%</0> for each of Diablo II’s points you hold in Twister, Tornado and Hurricane: a skill at its top level is 20 points, and so are an evolution and each skill it evolved from. Gear’s +skills don’t count for these points. Here it takes <1>100%</1> of each such hit until it is used up, and grows back whole in <2>10</2> seconds.": "與《暗黑破壞神 II》相同，它會吸收火焰、冰寒與閃電傷害，直到吸收量用完；你在旋風術、龍捲風與颶風術上持有的《暗黑破壞神 II》點數，每點使吸收量<0>+7%</0>：滿級技能算20點，進化技能及其進化來源的每個技能也各算20點。裝備的 +技能不計入這些點數。在本遊戲中，它會承受每次此類攻擊的<1>100%</1>，直到耗盡為止，並在<2>10</2>秒內完全恢復。",
+ "Cyclone Armor, the Druid's passive in D2 Survivors: +10% cold damage. Winds take 100% of fire, cold and lightning hits, up to 152, regrowing in 10s": "氣旋護甲，D2 Survivors 中德魯伊的被動技能：冰寒傷害 +10%。氣旋吸收火焰、冰寒與閃電攻擊的100%，最多152點，10秒內恢復",
+ "Druid · Passive": "德魯伊 · 被動技能",
+ "Its +cold damage counts for all your cold damage, beside its synergies on Arctic Blast and Tornado.": "它的 +冰寒傷害適用於你所有的冰寒傷害，另外還有它對極地寒風與龍捲風的協同加成。"
+}

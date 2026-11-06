@@ -1,0 +1,15 @@
+{
+ "Its blows can be critical strikes, and use your items’ Crushing Blow, Open Wounds and Life Stolen as yours do.": "它的打擊可以造成致命一擊，並且像你的打擊一樣使用你物品的粉碎打擊、開放傷口與竊取生命。",
+ "Its blows strike with your weapon’s damage and your physical damage bonuses, and take your Energy as your spells do.": "它的打擊以你武器的傷害與你的物理傷害加成攻擊，並像你的法術一樣計入你的能量。",
+ "Its life is Diablo II’s and grows with your level, or the area’s monster level when that is higher. A level-99 hero’s has <0>18848</0> life at level 1 and <1>55819</1> at level 8. Gear’s +skills raise its damage only.": "它的生命與《暗黑破壞神 II》相同，會隨你的等級成長，若區域的怪物等級更高則隨怪物等級成長。99級英雄的暗影在技能等級1時有<0>18848</0>點生命，等級8時有<1>55819</1>點。裝備的 +技能只會提高它的傷害。",
+ "Shadow Warrior, the Assassin's skill in D2 Survivors: Summons your shadow, with 16 damage a blow, every third a kick. 18848 life at level 99.": "暗影戰士，D2 Survivors 中刺客的技能：召喚你的暗影，每次打擊造成16點傷害，每第三擊為踢擊。99級時有18848點生命。",
+ "Summons your shadow, with 16 damage a blow, every third a kick. 18848 life at level 99.": "召喚你的暗影，每次打擊造成16點傷害，每第三擊為踢擊。99級時有18848點生命。",
+ "Summons your shadow, with 23 damage a blow, every third a kick. 23198 life at level 99.": "召喚你的暗影，每次打擊造成23點傷害，每第三擊為踢擊。99級時有23198點生命。",
+ "Summons your shadow, with 30 damage a blow, every third a kick. 29722 life at level 99.": "召喚你的暗影，每次打擊造成30點傷害，每第三擊為踢擊。99級時有29722點生命。",
+ "Summons your shadow, with 37 damage a blow, every third a kick. 34072 life at level 99.": "召喚你的暗影，每次打擊造成37點傷害，每第三擊為踢擊。99級時有34072點生命。",
+ "Summons your shadow, with 44 damage a blow, every third a kick. 40596 life at level 99.": "召喚你的暗影，每次打擊造成44點傷害，每第三擊為踢擊。99級時有40596點生命。",
+ "Summons your shadow, with 51 damage a blow, every third a kick. 44946 life at level 99.": "召喚你的暗影，每次打擊造成51點傷害，每第三擊為踢擊。99級時有44946點生命。",
+ "Summons your shadow, with 58 damage a blow, every third a kick. 51470 life at level 99.": "召喚你的暗影，每次打擊造成58點傷害，每第三擊為踢擊。99級時有51470點生命。",
+ "Summons your shadow, with 65 damage a blow, every third a kick. 55819 life at level 99.": "召喚你的暗影，每次打擊造成65點傷害，每第三擊為踢擊。99級時有55819點生命。",
+ "The base never comes back after this evolution.": "進化為此技能後，原技能不會再出現。"
+}

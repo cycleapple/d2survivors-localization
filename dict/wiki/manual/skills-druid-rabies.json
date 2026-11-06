@@ -1,0 +1,11 @@
+{
+ "A monster carries one poison at a time: a stronger one replaces Rabies, a weaker one only makes it last longer.": "怪物一次只會帶有一種毒素：較強的毒素會取代狂犬撕咬，較弱的只會延長其持續時間。",
+ "Every wereform blow poisons, the sweeps and splashes too. Energy raises the poison.": "每次變身形態打擊都會使目標中毒，橫掃與濺射也一樣。能量會提升毒素傷害。",
+ "Rabies, the Druid's passive in D2 Survivors: Your wereform blows add 32 poison over 4s, and a bitten monster spreads it to those around it.": "狂犬撕咬，D2 Survivors 中德魯伊的被動技能：你的變身形態打擊會在4秒內附加32點毒素傷害，被咬的怪物會將毒素傳染給周圍的怪物。",
+ "While a bitten monster carries it, every <0>0.16</0> seconds it throws the poison a short way in a random direction: the first monster in its path catches it for the time left, and spreads it in turn.": "被咬的怪物帶毒期間，每<0>0.16</0>秒會朝隨機方向短距離拋出毒素：路徑上第一隻怪物會中毒，持續剩餘的時間，並再依序傳染出去。",
+ "Your wereform blows add 128 poison over 4s, and a bitten monster spreads it to those around it.": "你的變身形態打擊會在4秒內附加128點毒素傷害，被咬的怪物會將毒素傳染給周圍的怪物。",
+ "Your wereform blows add 160 poison over 4s, and a bitten monster spreads it to those around it.": "你的變身形態打擊會在4秒內附加160點毒素傷害，被咬的怪物會將毒素傳染給周圍的怪物。",
+ "Your wereform blows add 32 poison over 4s, and a bitten monster spreads it to those around it.": "你的變身形態打擊會在4秒內附加32點毒素傷害，被咬的怪物會將毒素傳染給周圍的怪物。",
+ "Your wereform blows add 64 poison over 4s, and a bitten monster spreads it to those around it.": "你的變身形態打擊會在4秒內附加64點毒素傷害，被咬的怪物會將毒素傳染給周圍的怪物。",
+ "Your wereform blows add 96 poison over 4s, and a bitten monster spreads it to those around it.": "你的變身形態打擊會在4秒內附加96點毒素傷害，被咬的怪物會將毒素傳染給周圍的怪物。"
+}

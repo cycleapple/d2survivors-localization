@@ -1,0 +1,8 @@
+{
+ "Creates a golem of iron with 1700 life and 280 damage. Its Thorns aura returns 435% of each blow to its striker.": "製造一具擁有1700點生命、造成280點傷害的鋼鐵魔像。其荊棘靈氣會將每次攻擊的435%反彈給攻擊者。",
+ "Iron Golem, the Necromancer's evolution in D2 Survivors: Creates a golem of iron with 1700 life and 280 damage. Its Thorns aura returns 435% of each blow to its striker.": "鋼鐵魔像，D2 Survivors 中死靈法師的進化技能：製造一具擁有1700點生命、造成280點傷害的鋼鐵魔像。其荊棘靈氣會將每次攻擊的435%反彈給攻擊者。",
+ "Its Thorns sends <0>435%</0> of each melee blow on it back at the monster that struck, as physical damage, as Diablo II’s does at its 20th level. Missiles and spells don’t come back.": "它的荊棘會將每次對它的近戰打擊的<0>435%</0>以物理傷害反彈給攻擊的怪物，與《暗黑破壞神 II》等級20時相同。飛彈與法術不會被反彈。",
+ "Once it evolves on, Blood Golem can evolve into it again.": "它再進化之後，鮮血魔像就能再次進化成它。",
+ "One an item’s charges raise (Metalgrid’s, Oath’s) sends back Diablo II’s share at the item’s level: <0>150%</0> and <1>15%</1> more a level.": "由物品充能喚出的鋼鐵魔像（金屬網格、誓約）會依物品等級反彈《暗黑破壞神 II》的比例：<0>150%</0>，每級再加<1>15%</1>。",
+ "Strength and Energy raise its blow and its Thorns.": "力量與能量會提高它的打擊與荊棘。"
+}

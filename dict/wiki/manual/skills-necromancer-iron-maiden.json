@@ -1,0 +1,14 @@
+{
+ "For 4.5s, monsters within 90 of the nearest take back 300% of their blows on you and summons.": "4.5秒內，最近的怪物周圍90範圍內的怪物攻擊你或召喚物時，會受到該次攻擊300%的反彈傷害。",
+ "For 4s, monsters within 80 of the nearest take back 250% of their blows on you and summons.": "4秒內，最近的怪物周圍80範圍內的怪物攻擊你或召喚物時，會受到該次攻擊250%的反彈傷害。",
+ "For 5.5s, monsters within 110 of the nearest take back 425% of their blows on you and summons.": "5.5秒內，最近的怪物周圍110範圍內的怪物攻擊你或召喚物時，會受到該次攻擊425%的反彈傷害。",
+ "For 5s, monsters within 100 of the nearest take back 375% of their blows on you and summons.": "5秒內，最近的怪物周圍100範圍內的怪物攻擊你或召喚物時，會受到該次攻擊375%的反彈傷害。",
+ "For 6.5s, monsters within 130 of the nearest take back 550% of their blows on you and summons.": "6.5秒內，最近的怪物周圍130範圍內的怪物攻擊你或召喚物時，會受到該次攻擊550%的反彈傷害。",
+ "For 6s, monsters within 120 of the nearest take back 500% of their blows on you and summons.": "6秒內，最近的怪物周圍120範圍內的怪物攻擊你或召喚物時，會受到該次攻擊500%的反彈傷害。",
+ "For 7.5s, monsters within 150 of the nearest take back 675% of their blows on you and summons.": "7.5秒內，最近的怪物周圍150範圍內的怪物攻擊你或召喚物時，會受到該次攻擊675%的反彈傷害。",
+ "For 7s, monsters within 140 of the nearest take back 625% of their blows on you and summons.": "7秒內，最近的怪物周圍140範圍內的怪物攻擊你或召喚物時，會受到該次攻擊625%的反彈傷害。",
+ "Iron Maiden, the Necromancer's skill in D2 Survivors: For 4s, monsters within 80 of the nearest take back 250% of their blows on you and summons.": "攻擊反噬，D2 Survivors 中死靈法師的技能：4秒內，最近的怪物周圍80範圍內的怪物攻擊你或召喚物時，會受到該次攻擊250%的反彈傷害。",
+ "Melee blows on your summons come back too, but never their missiles or spells, Spite or not. It holds on act bosses and every rank alike.": "對你召喚物的近戰打擊也會被反彈，但不論有沒有「惡意」，飛彈與法術都不會。它對章節首領與所有類型的怪物效果都相同。",
+ "Only a melee blow comes back, unless you choose Spite: then their missiles and spells do too.": "只有近戰打擊會被反彈，除非你選擇「惡意」：這時它們的飛彈與法術也會被反彈。",
+ "What comes back is physical damage, the blow’s share as in Diablo II: your magic damage bonuses (Energy, Bone Wall) don’t raise it.": "反彈的是物理傷害，比例與《暗黑破壞神 II》相同：你的魔法傷害加成（能量、骨牆）不會提高它。"
+}

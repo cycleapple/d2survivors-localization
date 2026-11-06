@@ -1,0 +1,8 @@
+{
+ "A blow whose monster has died moves on to the next in reach; with none in reach, that blow is lost.": "目標已死亡的打擊會轉移到範圍內的下一隻怪物；範圍內沒有怪物時，那次打擊就會落空。",
+ "As a werewolf, you strike all in reach 5 times every 1.4s for +423% weapon damage each.": "以狼人形態每1.4秒攻擊範圍內所有目標5次，每次造成 +423% 武器傷害。",
+ "Fury, the Druid's evolution in D2 Survivors: As a werewolf, you strike all in reach 5 times every 1.4s for +423% weapon damage each.": "狂怒連擊，D2 Survivors 中德魯伊的進化技能：以狼人形態每1.4秒攻擊範圍內所有目標5次，每次造成 +423% 武器傷害。",
+ "On a unique or an act boss, every blow goes into him. Otherwise the blows go round the monsters in reach, the toughest first.": "面對獨特怪物或章節首領時，每次打擊都會落在他身上。否則打擊會在範圍內的怪物間輪流，從最強的開始。",
+ "Unlike Diablo II, its blows deal <0>50%</0> more than Diablo II’s, against his other skills.": "與《暗黑破壞神 II》不同，相對於他的其他技能，它的打擊傷害比《暗黑破壞神 II》多<0>50%</0>。",
+ "While you hold it your critical strike chance is <0>+41%</0>, a maxed werewolf’s and Fury’s own, for all your hits that can critically strike.": "持有它期間，你的致命一擊機率為<0>+41%</0>，即滿級狼人變化與狂怒連擊本身的加總，適用於你所有能造成致命一擊的攻擊。"
+}

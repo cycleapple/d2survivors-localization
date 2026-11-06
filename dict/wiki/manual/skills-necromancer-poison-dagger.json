@@ -1,0 +1,16 @@
+{
+ "A monster carries one poison at a time: a stronger one replaces it, a weaker one only makes it last longer.": "一隻怪物同一時間只會中一種毒：較強的毒會取代它，較弱的毒只會延長持續時間。",
+ "It stabs the nearest monsters within a short reach of you.": "它會刺擊你身邊短距離內最近的怪物。",
+ "Poison Dagger, the Necromancer's skill in D2 Survivors: Stabs 1 monster for 10 damage and 36 poison over 3 seconds.": "淬毒匕首，D2 Survivors 中死靈法師的技能：刺擊1隻怪物，造成10點傷害，並在3秒內造成36點毒素傷害。",
+ "Poison Explosion: +200% Poison Damage per Level": "毒爆：每級毒素傷害 +200%",
+ "Poison Nova: +200% Poison Damage per Level": "劇毒新星：每級毒素傷害 +200%",
+ "Stabs 1 monster for 10 damage and 36 poison over 3 seconds.": "刺擊1隻怪物，造成10點傷害，並在3秒內造成36點毒素傷害。",
+ "Stabs 2 monsters for 15 damage and 66 poison over 3 seconds.": "刺擊2隻怪物，造成15點傷害，並在3秒內造成66點毒素傷害。",
+ "Stabs 2 monsters for 20 damage and 96 poison over 3 seconds.": "刺擊2隻怪物，造成20點傷害，並在3秒內造成96點毒素傷害。",
+ "Stabs 3 monsters for 25 damage and 126 poison over 3 seconds.": "刺擊3隻怪物，造成25點傷害，並在3秒內造成126點毒素傷害。",
+ "Stabs 3 monsters for 30 damage and 156 poison over 3 seconds.": "刺擊3隻怪物，造成30點傷害，並在3秒內造成156點毒素傷害。",
+ "Stabs 4 monsters for 35 damage and 186 poison over 3 seconds.": "刺擊4隻怪物，造成35點傷害，並在3秒內造成186點毒素傷害。",
+ "Stabs 4 monsters for 40 damage and 216 poison over 3 seconds.": "刺擊4隻怪物，造成40點傷害，並在3秒內造成216點毒素傷害。",
+ "Stabs 5 monsters for 45 damage and 246 poison over 3 seconds.": "刺擊5隻怪物，造成45點傷害，並在3秒內造成246點毒素傷害。",
+ "The stab is physical and Strength raises it. Energy raises its poison.": "刺擊屬於物理，由力量提高。能量會提高它的毒素傷害。"
+}

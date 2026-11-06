@@ -1,0 +1,9 @@
+{
+ "A blow your shield blocks sends its share back too.": "被你盾牌格擋的打擊也會反彈相應比例的傷害。",
+ "As in Diablo II, Spirit of Barbs, your own or an item’s, reaches your summons too: a monster that strikes one in melee takes its share back, the stronger of the two.": "與《暗黑破壞神 II》相同，荊棘之靈不論是你自己的還是物品的，也會作用在你的召喚物上：近戰攻擊召喚物的怪物會受到相應比例的反彈傷害，取兩者中較強的。",
+ "Each hit you take sends its share back as physical damage on up to <0>3</0> monsters in reach of you, whoever struck: an arrow’s comes back on the monsters beside you, not the archer. With none beside you, nothing comes back.": "你每受到一次攻擊，就會把相應比例的傷害以物理傷害反彈給你範圍內最多<0>3</0>隻怪物，不論攻擊者是誰：箭矢的反彈會落在你身旁的怪物身上，而不是弓箭手。你身旁沒有怪物時，就不會反彈。",
+ "Each level gear’s +skills add makes your own Spirit of Barbs’ thorns and Heart of Wolverine’s damage and Attack Rating bonuses <0>15%</0> of their own bigger.": "裝備的 +技能每增加一級，你自己的荊棘之靈的荊棘傷害，以及狼獾之心的傷害與準確率加成，就增加其本身的<0>15%</0>。",
+ "Monsters that strike you take 240% of the damage back, and Wolverine's bonuses stay.": "攻擊你的怪物會受到240%的反彈傷害，狼獾之心的加成也會保留。",
+ "Spirit of Barbs from an item’s charges, such as Wisp Projector’s, works as in Diablo II: only a melee blow sends its share back, onto the monster that struck, <0>50%</0> and <1>10%</1> more a charge level (<2>110%</2> at level 7). Gear’s +skills don’t raise it.": "來自物品充能的荊棘之靈（如鬼火投射者）與《暗黑破壞神 II》相同：只有近戰打擊會把相應比例的傷害反彈給攻擊的怪物，為<0>50%</0>，每充能等級再增加<1>10%</1>（等級7為<2>110%</2>）。裝備的 +技能不會提升它。",
+ "Spirit of Barbs, the Druid's evolution in D2 Survivors: Monsters that strike you take 240% of the damage back, and Wolverine's bonuses stay.": "荊棘之靈，D2 Survivors 中德魯伊的進化技能：攻擊你的怪物會受到240%的反彈傷害，狼獾之心的加成也會保留。"
+}
