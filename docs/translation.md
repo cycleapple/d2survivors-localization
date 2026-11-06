@@ -239,7 +239,7 @@ node tools/build-wiki.mjs
 
 字典分三層（跟遊戲字典一樣，後面的蓋過前面的）：
 
-- `dict/wiki/auto.json`：工具產生，不要手改。wiki 字串跟遊戲的 key 一樣（不分大小寫）就用 `dict/zh-TW.json` 的譯名，每次 `wiki-merge` 重新產生，遊戲改譯名會跟著變。有佔位符的不配
+- `dict/wiki/auto.json`：工具產生，不要手改。wiki 字串跟遊戲的 key 一樣（不分大小寫）就用 `dict/zh-TW.json` 的譯名，每次 `wiki-merge` 重新產生，遊戲改譯名會跟著變。有佔位符的不配；單字只配遊戲裡當名稱用的（技能、變體、怪物、NPC、區域…，看 `work/usage.json`），其他單字像 Skill（遊戲裡是「點」）、Circle（手把「○ 鍵」）要人工翻；「Amazon · Bow and Crossbow Skills」這種 ` · ` 連起來的，每段都有譯文就組起來
 - `dict/wiki/manual/*.json`：人寫的 `{ key: 譯文 }`，按頁面分檔（`getting-started.json`、`items-uniques.json`…；每頁都有的導覽、頁首頁尾在 `common.json`）
 - `dict/wiki/zh-TW.json`：合併結果，`{ strings }`，只放現在官方頁面上有的 key。`build-wiki` 讀這份
 
@@ -259,11 +259,35 @@ key 的算法在 `tools/wiki-strings.mjs`，`build-wiki` 也用同一份才不�
 |---|---|---|
 | `items/uniques`、`items/sets` | `{ items: { kind, words, level } }` | `words` 裡的介面字（篩選、「{n} uniques」…） |
 | `items/runewords` | `{ runewords: { words, groups, types, level } }` | `words`（標題、說明、篩選、「{n} sockets」…）、`groups`、`types`（物品種類） |
-| `terror` | `{ rows, text, waves, pay }` | `text`（表頭）；`rows` 是數字表，`waves`、`pay` 是數字 |
+| `terror` | `{ rows, text, waves }` | `text`（轉盤上的標籤）；`rows` 是數字表，`waves` 是數字（見下面「恐懼階轉盤」） |
 
 - 規則只有一條：**每個有字串 `en` 的物件 `{ en, ko }` 都是一條要翻的字**，key 是 `en`（空白合併後），其他都是資料（`kind`、`level`、數字），不要動。產生頁面時把 `en` 換成譯文就好（沒有譯文就留英文，不要用 `ko`）
 - `{n}`、`{level}` 是官方 JS 填的數字，譯文裡照樣保留（`{n} uniques` → `{n} 件獨特物品`）
 - 物品清單本身（獨特、套裝、符文之語的名稱和屬性）**不在** wiki-data 裡：官方 JS 讀玩家自己的遊戲檔（`#d2-files`）畫出來。我們不放官方的程式和遊戲檔，所以這幾頁只有說明文字和 `words`；要列物品的話得另外想辦法（例如連到官方頁面）
+
+### 恐懼階轉盤（`terror` 頁的 `.wiki-dial`）
+
+官方 JS（`assets/wiki-*.js`，2026-11-06 版）用 `wiki-data` 畫：選一個階，從 `rows` 找第 0 欄等於那個階的一列，顯示 8 格。`rows` 有 100 列（第 1～100 階），每列 13 欄：
+
+| 欄 | 是什麼 | 例（第 1 階／第 100 階） | 顯示在哪一格 |
+|---|---|---|---|
+| 0 | 階 | 1／100 | 轉盤上方「`text.tier` 1」 |
+| 1 | 怪物等級 | 86／185 | 「`monsterLevel`」格的大字 |
+| 2 | 首領的怪物等級 | 89／188 | 同一格小字：「`boss` 89 · /players 8」 |
+| 3 | /players 設定（D2 的玩家人數） | 8／107 | 同上 |
+| 4 | 這一局的怪物總數 | 2,565／4,230 | 「`monsters`」格大字（千分位）；小字是 總數 ÷ `waves`（9）＋「`perWave`」 |
+| 5 | 生命倍數 | 1／33.696 | 「`life`」格：`1.00×`，10 以上 `33.7×`；小字「`eachMonster`」 |
+| 6 | 傷害倍數 | 1／12.059 | 「`damage`」格，同上的寫法；小字「`eachHit`」 |
+| 7 | 經驗值倍數 | 1／3.56 | 「`experience`」格，同上；小字「`eachKill`」 |
+| 8 | 怪物詞綴數 | 1／5 | 「`affixes`」格 |
+| 9 | 物品等級 | 86／99 | 「`itemLevel`」格 |
+| 10 | 魔寶尋獲率加成（%） | 3／180 | 「`magicFind`」格：`+3%`；小字「+{11}% `gold` · +{12}% `items`」 |
+| 11 | 金幣加成（%） | 3／180 | 同上 |
+| 12 | 物品掉落加成（%） | 2／200 | 同上 |
+
+- 格子的順序：monsters、monsterLevel、life、damage、experience、affixes、magicFind、itemLevel；monsters 和 life 那兩格有 `hot` class（強調）
+- 標籤都在 `text`（`{ en, ko }`），跟其他 wiki-data 一樣換成譯文就好。`/players` 是寫死的英文，不翻（D2 的指令）
+- 做成靜態表格的話：每一列一階，欄位照上表，倍數照官方的格式（`toFixed(2)`，10 以上 `toFixed(1)`，加 `×`）
 
 ### 注意
 
