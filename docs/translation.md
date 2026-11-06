@@ -221,6 +221,55 @@ node tools/publish.mjs
 
 測技能變體譯名的 `work/test-mods.js` 裡的檔名和匯出名稱（變體表匯出成什麼）每版都會變，用 `node work/find-export.mjs <keepSave 檔> <變體表名稱>` 查。
 
+## wiki（網站上的繁中版，2026-11-06 起）
+
+官方 wiki 翻成繁中，放在網站的 `/zh-tw/wiki/`。分工和頁面規則見 [manifest-v2.md](manifest-v2.md) 的「wiki」；只做繁中。
+
+```
+# 1. 抓官方 wiki（一次一頁、每頁隔 1.5 秒，約 256 頁要 10 幾分鐘）→ data/wiki/src/<路徑>/index.html、pages.json（不進 repo）
+#    再跑一次會列出新增、改動、官方拿掉的頁面，和還沒有譯文的字串數
+node tools/wiki-fetch.mjs
+# 2. 自動配對遊戲字典 + 人工譯文 → dict/wiki/zh-TW.json
+node tools/wiki-merge.mjs
+# 3. 檢查：佔位符、韓文、各頁進度；--todo <路徑> 列出那一頁沒有譯文的 key
+node tools/wiki-check.mjs --pages
+# 4. 產生頁面（宣傳網站的程式，翻譯這邊只呼叫）→ site/zh-tw/wiki/**，跟 dict/wiki/ 一起 commit
+node tools/build-wiki.mjs
+```
+
+字典分三層（跟遊戲字典一樣，後面的蓋過前面的）：
+
+- `dict/wiki/auto.json`：工具產生，不要手改。wiki 字串跟遊戲的 key 一樣（不分大小寫）就用 `dict/zh-TW.json` 的譯名，每次 `wiki-merge` 重新產生，遊戲改譯名會跟著變。有佔位符的不配
+- `dict/wiki/manual/*.json`：人寫的 `{ key: 譯文 }`，按頁面分檔（`getting-started.json`、`items-uniques.json`…；每頁都有的導覽、頁首頁尾在 `common.json`）
+- `dict/wiki/zh-TW.json`：合併結果，`{ strings }`，只放現在官方頁面上有的 key。`build-wiki` 讀這份
+
+key 的算法在 `tools/wiki-strings.mjs`，`build-wiki` 也用同一份才不會對不上：
+
+- `enSpans(html)`：每個 `<span data-in="en">`（官方只用 span；script、style、註解裡的不算）。回傳 `{ start, end, inner, key, tags }`，`start`／`end` 是整個元素的位置
+- `htmlKey(inner)`：標籤照出現順序換成 `<0>…</0>`，沒有結尾的（`br`、`img`…）是 `<1/>`；屬性不進 key；空白合併成一個、去掉頭尾空白。實體照原樣（官方只有頁尾一個 `&#160;`）
+- `fillKey(譯文, tags)`：佔位符換回原本的標籤（保留 `href`、`class`），沒有譯文時用 `fillKey(key, tags)` 就是原本的英文
+- `lookup(strings, span)`：查譯文要用這個，不要直接 `strings[key]`。技能變體的名稱（`<ul class="wiki-mods"><li><strong>` 裡的 span，`context: 'modifier'`）先查 `modifier:<名稱>` 再查 `<名稱>`，跟遊戲一樣。目前只有跟別的技能同名的 8 個（`modifier:Vengeance` 復仇等，見 term-decisions.md），同一頁的導覽列裡同名的技能還是「復仇打擊」
+- 字串種類（`pageStrings` 的 `kind`）：`html`（上面的 span）、`data`（wiki-data，見下面）、`meta`（`<title>` 的「頁名 · Wiki · D2 Survivors」只取頁名，和 `<meta name="description">`；官方只有英文）、`attr`（`aria-label`、`placeholder`、`title` 屬性，大多是頁首、搜尋框、語言切換的固定字）
+
+### wiki-data（給宣傳網站）
+
+只有 4 頁有 `<script type="application/json" id="wiki-data">`（2026-11-06）：
+
+| 頁面 | 結構 | 要翻的 |
+|---|---|---|
+| `items/uniques`、`items/sets` | `{ items: { kind, words, level } }` | `words` 裡的介面字（篩選、「{n} uniques」…） |
+| `items/runewords` | `{ runewords: { words, groups, types, level } }` | `words`（標題、說明、篩選、「{n} sockets」…）、`groups`、`types`（物品種類） |
+| `terror` | `{ rows, text, waves, pay }` | `text`（表頭）；`rows` 是數字表，`waves`、`pay` 是數字 |
+
+- 規則只有一條：**每個有字串 `en` 的物件 `{ en, ko }` 都是一條要翻的字**，key 是 `en`（空白合併後），其他都是資料（`kind`、`level`、數字），不要動。產生頁面時把 `en` 換成譯文就好（沒有譯文就留英文，不要用 `ko`）
+- `{n}`、`{level}` 是官方 JS 填的數字，譯文裡照樣保留（`{n} uniques` → `{n} 件獨特物品`）
+- 物品清單本身（獨特、套裝、符文之語的名稱和屬性）**不在** wiki-data 裡：官方 JS 讀玩家自己的遊戲檔（`#d2-files`）畫出來。我們不放官方的程式和遊戲檔，所以這幾頁只有說明文字和 `words`；要列物品的話得另外想辦法（例如連到官方頁面）
+
+### 注意
+
+- 技能變體的名稱：`wiki-merge` 會自動從遊戲字典的 `modifier:*` 配好（見上面的 `lookup`）；遊戲以後多了新的專用譯名，重跑 `wiki-merge` 就有
+- 很短的片段（`s` 是「秒」之類的單位）跟數字拼在一起，先看韓文和前後文
+
 ## D2R 官方譯名自動配對（2026.1026.4）
 
 `d2r-strings.mjs` 借用遊戲自己的 CASC 讀取器（從 `extract-worker.cjs` 複製到 `work/casc-reader.cjs`，再匯出 `openCascFolder`），從 D2R 取出 21 個字串檔，共 12,245 條，每條都有 enUS／zhTW／koKR。`work/casc-reader.cjs` 是遊戲的程式，不放進 repo。
