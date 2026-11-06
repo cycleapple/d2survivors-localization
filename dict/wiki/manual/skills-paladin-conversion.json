@@ -1,0 +1,15 @@
+{
+ "A converted monster keeps its look and its attack, its missiles too, and fights with twice its life. Its blow is twice its own plus Conversion’s, raised by your magic damage (Energy, items’ +% Damage).": "被招降的怪物保有原本的外觀與攻擊（包括投射物），並以兩倍的生命作戰。它的打擊為自身的兩倍再加上招降打擊的傷害，並受你的魔法傷害加成（能量、物品的「+% 傷害」）提升。",
+ "Conversion, the Paladin's skill in D2 Survivors: The strongest monster near you, never an elite or a boss, fights for you for 8s, up to 1 at once.": "招降打擊，D2 Survivors 中聖騎士的技能：你附近最強的怪物（精英與首領除外）會為你作戰8秒，同時最多1隻。",
+ "It deals no damage of its own, so items’ +skills raise its length, how many it holds and their damage. Its recharge stays its card level’s.": "它本身不造成傷害，因此物品的 +技能會提升持續時間、同時招降的數量與它們的傷害。冷卻時間仍依卡片等級。",
+ "It turns the ordinary monster with the most life near you. It never turns a nest, an egg, a summoned monster, Diablo’s Bone Prison or Baal’s tentacles.": "它會招降你附近生命最多的普通怪物。它絕不會招降巢穴、蛋、召喚出的怪物、迪亞布羅的骨牢或巴爾的觸手。",
+ "The strongest monster near you, never an elite or a boss, fights for you for 10s, up to 2 at once.": "你附近最強的怪物（精英與首領除外）會為你作戰10秒，同時最多2隻。",
+ "The strongest monster near you, never an elite or a boss, fights for you for 11s, up to 2 at once.": "你附近最強的怪物（精英與首領除外）會為你作戰11秒，同時最多2隻。",
+ "The strongest monster near you, never an elite or a boss, fights for you for 12s, up to 2 at once.": "你附近最強的怪物（精英與首領除外）會為你作戰12秒，同時最多2隻。",
+ "The strongest monster near you, never an elite or a boss, fights for you for 13s, up to 3 at once.": "你附近最強的怪物（精英與首領除外）會為你作戰13秒，同時最多3隻。",
+ "The strongest monster near you, never an elite or a boss, fights for you for 14s, up to 3 at once.": "你附近最強的怪物（精英與首領除外）會為你作戰14秒，同時最多3隻。",
+ "The strongest monster near you, never an elite or a boss, fights for you for 15s, up to 3 at once.": "你附近最強的怪物（精英與首領除外）會為你作戰15秒，同時最多3隻。",
+ "The strongest monster near you, never an elite or a boss, fights for you for 8s, up to 1 at once.": "你附近最強的怪物（精英與首領除外）會為你作戰8秒，同時最多1隻。",
+ "The strongest monster near you, never an elite or a boss, fights for you for 9s, up to 1 at once.": "你附近最強的怪物（精英與首領除外）會為你作戰9秒，同時最多1隻。",
+ "When its time is up it turns on you again with its share of the life it has left, and can’t be turned again for <0>5</0> seconds. One that falls while converted dies as itself: you get its experience. A new act lets them go.": "時間結束時，它會帶著剩餘生命的比例再次轉而攻擊你，且<0>5</0>秒內無法再被招降。在招降期間倒下的怪物會以原本的身分死亡：你會獲得它的經驗值。進入新的章節時，它們會離去。"
+}

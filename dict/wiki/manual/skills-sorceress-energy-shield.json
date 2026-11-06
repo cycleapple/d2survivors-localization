@@ -1,0 +1,15 @@
+{
+ "Diablo II’s mana potions are hers alone. Monsters, barrels and urns leave them beside the healing potions, as Diablo II’s potions drop, and Akara sells them: <0>43</0> to every 100 healing potions in Nightmare, Hell and the Terror tiers, where each is a Super Mana Potion. One fills the shield by its mana, <1>2</1> times it for her as in Diablo II: <2>500</2> for a Super Mana Potion. Walked onto with the shield full, it goes into the belt; drink it with 1-4.": "《暗黑破壞神 II》的法力藥水只有她能取得。怪物、木桶與甕會像《暗黑破壞神 II》的藥水掉落一樣，在生命藥水之外掉落法力藥水，阿卡拉也有販售：在惡夢、地獄與恐懼階，每100瓶生命藥水對應<0>43</0>瓶法力藥水，且每瓶都是特效法力藥水。一瓶藥水會依其法力量補充護盾，與《暗黑破壞神 II》相同，她的補充量是<1>2</1>倍：特效法力藥水為<2>500</2>。護盾已滿時走過去撿起，藥水會放進腰帶；按1-4飲用。",
+ "Each point of life it saves costs <0>1</0> mana, and <1>0.38</1> with Telekinesis learned to level 5. Items’ +skills on Telekinesis don’t count.": "每擋下一點生命傷害需消耗<0>1</0>點法力，心靈傳動學到等級5時為<1>0.38</1>點。物品上心靈傳動的 +技能不計入。",
+ "Energy Shield, the Sorceress's passive in D2 Survivors: Your mana takes 35% of every hit instead of your life, at most 400 mana a hit.": "能量護盾，D2 Survivors 中魔法使的被動技能：每次受到攻擊時，35%的傷害改由法力承受，而非生命，每次攻擊最多消耗400點法力。",
+ "It takes its share of a hit after your resistances, Absorb and Damage Reduced, from the mana in your globe. Once the mana runs dry, hits reach your life until it refills. Poison goes past it.": "它在你的抗性、吸收與傷害降低計算之後，從你法力球中的法力承擔它那一份傷害。法力耗盡後，攻擊會直接打在你的生命上，直到法力回補為止。毒素傷害不受它影響。",
+ "Items’ +skills raise it past level 5, but +Lightning Skills for any class don’t: only the Sorceress’s own. However high its level, it takes no more than <0>95%</0> of a hit, <1>97.5%</1> in Terror.": "物品的 +技能能讓它超過等級5，但適用任何職業的 +閃電技能不行：只有魔法使專屬的才行。不論等級多高，它最多只承擔每次攻擊的<0>95%</0>，在恐懼階為<1>97.5%</1>。",
+ "Items’ Mana Stolen Per Hit and Mana after each Kill refill it too, as in Diablo II.": "與《暗黑破壞神 II》相同，物品的擊中竊取法力與擊殺法力恢復也會補充它。",
+ "No hit costs it more than <0>400</0> mana, <1>150</1> with Telekinesis at level 5, however hard it lands, so it takes its share of the biggest hits for as long as your mana lasts, more mana lasting longer. Diablo II’s has no such cap.": "不論攻擊多重，每次被擊中最多只消耗<0>400</0>點法力，心靈傳動等級5時為<1>150</1>點，因此只要法力還夠，它就能承擔最重攻擊的那一份傷害，法力越多撐得越久。《暗黑破壞神 II》的能量護盾沒有這個上限。",
+ "Your mana takes 35% of every hit instead of your life, at most 400 mana a hit.": "每次受到攻擊時，35%的傷害改由法力承受，而非生命，每次攻擊最多消耗400點法力。",
+ "Your mana takes 55% of every hit instead of your life, at most 400 mana a hit.": "每次受到攻擊時，55%的傷害改由法力承受，而非生命，每次攻擊最多消耗400點法力。",
+ "Your mana takes 63% of every hit instead of your life, at most 400 mana a hit.": "每次受到攻擊時，63%的傷害改由法力承受，而非生命，每次攻擊最多消耗400點法力。",
+ "Your mana takes 71% of every hit instead of your life, at most 400 mana a hit.": "每次受到攻擊時，71%的傷害改由法力承受，而非生命，每次攻擊最多消耗400點法力。",
+ "Your mana takes 75% of every hit instead of your life, at most 400 mana a hit.": "每次受到攻擊時，75%的傷害改由法力承受，而非生命，每次攻擊最多消耗400點法力。",
+ "Your skills spend no mana, so the shield has all of it, items’ +Mana included. It refills whole in <0>120</0> seconds, faster with Warmth and items’ Regenerate Mana. A Refilling Shrine or a Full Rejuvenation Potion fills it at once.": "你的技能不消耗法力，所以護盾可以使用全部法力，包括物品的 +法力。它會在<0>120</0>秒內完全補滿，暖流與物品的法力恢復能加快速度。回復聖壇或全效活力藥水會立刻將它補滿。"
+}

@@ -1,0 +1,18 @@
+{
+ "Charge, the Paladin's skill in D2 Survivors: Charges through the monsters in your path for +150% weapon damage each, then attacks.": "衝鋒打擊，D2 Survivors 中聖騎士的技能：衝過路徑上的怪物，各造成+150%的武器傷害，然後發動攻擊。",
+ "Charges through the monsters in your path for +150% weapon damage each, then attacks.": "衝過路徑上的怪物，各造成+150%的武器傷害，然後發動攻擊。",
+ "Charges through the monsters in your path for +200% weapon damage each, then attacks.": "衝過路徑上的怪物，各造成+200%的武器傷害，然後發動攻擊。",
+ "Charges through the monsters in your path for +275% weapon damage each, then attacks.": "衝過路徑上的怪物，各造成+275%的武器傷害，然後發動攻擊。",
+ "Charges through the monsters in your path for +325% weapon damage each, then attacks.": "衝過路徑上的怪物，各造成+325%的武器傷害，然後發動攻擊。",
+ "Charges through the monsters in your path for +400% weapon damage each, then attacks.": "衝過路徑上的怪物，各造成+400%的武器傷害，然後發動攻擊。",
+ "Charges through the monsters in your path for +450% weapon damage each, then attacks.": "衝過路徑上的怪物，各造成+450%的武器傷害，然後發動攻擊。",
+ "Charges through the monsters in your path for +525% weapon damage each, then attacks.": "衝過路徑上的怪物，各造成+525%的武器傷害，然後發動攻擊。",
+ "Charges through the monsters in your path for +575% weapon damage each, then attacks.": "衝過路徑上的怪物，各造成+575%的武器傷害，然後發動攻擊。",
+ "Each monster in the way is struck once and thrown aside. The blow at the end strikes the toughest in reach for <0>1.5</0> times as much. Steering off its way stops the charge where you are, and you swing.": "路上的每隻怪物會被打擊一次並被撞開。最後的打擊會以<0>1.5</0>倍的傷害攻擊範圍內最強的怪物。偏離衝鋒方向會讓衝鋒在當下位置停止，改為揮擊。",
+ "Its blow strikes with your weapon’s damage, raised by Diablo II’s Charge bonus at its level, and can critically strike.": "它的打擊以你武器的傷害攻擊，並依其等級加上《暗黑破壞神 II》衝鋒打擊的加成，且可造成致命一擊。",
+ "Its reach is your run speed’s: Faster Run/Walk and Vigor carry it further.": "它的衝鋒距離取決於你的跑步速度：跑步 / 行走速度與活力會讓它衝得更遠。",
+ "Might: +40% Damage per Level": "力量：每級傷害 +40%",
+ "Standing, it charges at a boss in view first, else at the biggest pack in reach, then carries you back to where you stood, striking what’s in the way again.": "站著不動時，它會優先衝向視野內的首領，沒有的話就衝向範圍內最大的怪物群，然後帶你回到原本的位置，並再次打擊路上的怪物。",
+ "Vigor: +40% Damage per Level": "活力：每級傷害 +40%",
+ "While you run, it charges only along your way, never back into the monsters behind you, and on through the pack to a boss ahead. It stops short of a chest or an item in your way.": "跑動時，它只會沿著你的前進方向衝鋒，絕不會回頭衝向你身後的怪物，並會穿過怪物群一路衝向前方的首領。遇到路上的寶箱或物品時，會在其前方停下。"
+}

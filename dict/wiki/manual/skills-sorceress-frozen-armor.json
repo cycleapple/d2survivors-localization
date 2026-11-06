@@ -1,0 +1,13 @@
+{
+ "A melee blow it doesn’t turn aside freezes the monsters swinging at you beside you, up to <0>3</0> at once.": "沒被它擋開的近戰攻擊，會凍結在你身旁攻擊你的怪物，一次最多<0>3</0>隻。",
+ "For 10s, melee attackers freeze for 1.7s, and 5% of blows and missiles miss you.": "10秒內，近戰攻擊者會被凍結1.7秒，且5%的近戰與遠程攻擊無法命中你。",
+ "For 11s, melee attackers freeze for 2.0s, and 6% of blows and missiles miss you.": "11秒內，近戰攻擊者會被凍結2.0秒，且6%的近戰與遠程攻擊無法命中你。",
+ "For 12s, melee attackers freeze for 2.3s, and 7% of blows and missiles miss you.": "12秒內，近戰攻擊者會被凍結2.3秒，且7%的近戰與遠程攻擊無法命中你。",
+ "For 13s, melee attackers freeze for 2.6s, and 8% of blows and missiles miss you.": "13秒內，近戰攻擊者會被凍結2.6秒，且8%的近戰與遠程攻擊無法命中你。",
+ "For 14s, melee attackers freeze for 2.9s, and 9% of blows and missiles miss you.": "14秒內，近戰攻擊者會被凍結2.9秒，且9%的近戰與遠程攻擊無法命中你。",
+ "For 15s, melee attackers freeze for 3.2s, and 10% of blows and missiles miss you.": "15秒內，近戰攻擊者會被凍結3.2秒，且10%的近戰與遠程攻擊無法命中你。",
+ "For 16s, melee attackers freeze for 3.5s, and 11% of blows and missiles miss you.": "16秒內，近戰攻擊者會被凍結3.5秒，且11%的近戰與遠程攻擊無法命中你。",
+ "For 9s, melee attackers freeze for 1.4s, and 4% of blows and missiles miss you.": "9秒內，近戰攻擊者會被凍結1.4秒，且4%的近戰與遠程攻擊無法命中你。",
+ "Frozen Armor, the Sorceress's skill in D2 Survivors: For 9s, melee attackers freeze for 1.4s, and 4% of blows and missiles miss you.": "冰封甲，D2 Survivors 中魔法使的技能：9秒內，近戰攻擊者會被凍結1.4秒，且4%的近戰與遠程攻擊無法命中你。",
+ "It deals no damage of its own, so items’ +skills raise its length, its freeze and its miss chance. Its recharge stays its card level’s.": "它本身不造成傷害，所以物品的 +技能會提高它的持續時間、凍結時間與落空機率。冷卻時間仍依卡片等級。"
+}

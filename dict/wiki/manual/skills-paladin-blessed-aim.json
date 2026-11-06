@@ -1,0 +1,12 @@
+{
+ "Blessed Aim, the Paladin's passive in D2 Survivors: Gives Zeal, Smite, Charge and Sacrifice +10% chance of a critical strike (double damage).": "精準祝福，D2 Survivors 中聖騎士的被動技能：使熱忱打擊、盾牌重擊、衝鋒打擊與犧牲打擊的致命一擊機率 +10%（造成雙倍傷害）。",
+ "Gives Zeal, Smite, Charge and Sacrifice +10% chance of a critical strike (double damage).": "使熱忱打擊、盾牌重擊、衝鋒打擊與犧牲打擊的致命一擊機率 +10%（造成雙倍傷害）。",
+ "Gives Zeal, Smite, Charge and Sacrifice +14% chance of a critical strike (double damage).": "使熱忱打擊、盾牌重擊、衝鋒打擊與犧牲打擊的致命一擊機率 +14%（造成雙倍傷害）。",
+ "Gives Zeal, Smite, Charge and Sacrifice +19% chance of a critical strike (double damage).": "使熱忱打擊、盾牌重擊、衝鋒打擊與犧牲打擊的致命一擊機率 +19%（造成雙倍傷害）。",
+ "Gives Zeal, Smite, Charge and Sacrifice +24% chance of a critical strike (double damage).": "使熱忱打擊、盾牌重擊、衝鋒打擊與犧牲打擊的致命一擊機率 +24%（造成雙倍傷害）。",
+ "Gives Zeal, Smite, Charge and Sacrifice +29% chance of a critical strike (double damage).": "使熱忱打擊、盾牌重擊、衝鋒打擊與犧牲打擊的致命一擊機率 +29%（造成雙倍傷害）。",
+ "It works on every weapon blow, never on spells, hammers, bolts or Holy Shield’s smite. A critical strike doubles a blow’s physical damage alone.": "對每次武器打擊都有效，但對法術、鎚子、聖光彈或神聖之盾的重擊無效。致命一擊只會使打擊的物理傷害加倍。",
+ "Its chance stops at <0>40%</0> however high its level.": "不論等級多高，機率最高為<0>40%</0>。",
+ "Paladin · Passive": "聖騎士 · 被動技能",
+ "Unlike Diablo II, where it raises Attack Rating, your blows always land here, so it gives critical strike chance instead.": "在《暗黑破壞神 II》中它提高準確率；這裡你的打擊必定命中，所以改為提供致命一擊機率。"
+}

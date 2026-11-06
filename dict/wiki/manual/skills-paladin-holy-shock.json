@@ -1,0 +1,8 @@
+{
+ "Each level of Resist Lightning you learned raises its damage <0>+48%</0>, and each of Salvation <1>+16%</1>: its pulse and what it adds to your attacks alike. Items’ +skills on them don’t count.": "你學會的抗電每一級使它的傷害<0>+48%</0>，聖護每一級<1>+16%</1>：脈衝傷害與附加到攻擊上的傷害都一樣。物品對這些技能的 +技能不計入。",
+ "Each level raises its jolt and its reach.": "每一級都會提升它的電擊傷害與範圍。",
+ "Holy Shock, the Paladin's passive in D2 Survivors: Jolts monsters around you each second, and adds 6 times that to your attacks.": "神聖電擊，D2 Survivors 中聖騎士的被動技能：每秒電擊你周圍的怪物，並在你的攻擊中附加6倍的該傷害。",
+ "Its damage is lightning: Energy, items’ +% Damage and +Lightning Skills raise it. It never critically strikes.": "它的傷害為閃電傷害：能量、物品的「+% 傷害」與 +閃電技能會提升它。它絕不會造成致命一擊。",
+ "Jolts monsters around you each second, and adds 6 times that to your attacks.": "每秒電擊你周圍的怪物，並在你的攻擊中附加6倍的該傷害。",
+ "What it adds to your attacks joins your weapon’s damage, as an item’s added lightning does: it raises every weapon skill, and that share of each weapon blow is dealt as lightning.": "它附加到攻擊上的傷害，會像物品附加的閃電傷害一樣併入你的武器傷害：會提升每個武器技能，每次武器打擊中的這部分以閃電傷害造成。"
+}

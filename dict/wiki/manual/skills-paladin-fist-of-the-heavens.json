@@ -1,0 +1,11 @@
+{
+ "Blessed Hammer: +8% Magic Damage per Level": "祝福之鎚：每級魔法傷害 +8%",
+ "Cast by an item’s chance to cast (Goldstrike Arch’s, Cloudcrack’s), its holy bolts are Diablo II’s at the item’s level: <0>4</0> from each strike at level 7, and they hurt the undead alone.": "由物品的施放機率施放時（金擊之拱、雲裂），它的聖光彈就是物品等級的《暗黑破壞神 II》版本：等級7時每道落雷迸發<0>4</0>發，且只傷害不死怪物。",
+ "Fist of the Heavens, the Paladin's evolution in D2 Survivors: Lightning strikes the toughest monster and one more for 110, as holy bolts burst out for 30 each.": "天堂之拳，D2 Survivors 中聖騎士的進化技能：閃電擊中最強的怪物及另一隻怪物，造成110點傷害，同時迸發聖光彈，每發造成30點傷害。",
+ "Holy Bolt: +19% Magic Damage per Level": "聖光彈：每級魔法傷害 +19%",
+ "Holy Shock: +14% Lightning Damage per Level": "神聖電擊：每級閃電傷害 +14%",
+ "Its lightning strikes the toughest monster in reach (an act boss, then a unique, then a champion) and one other at random, bursting round each.": "它的閃電會擊中範圍內最強的怪物（依序為章節首領、獨特怪物、精英怪物）以及隨機另一隻怪物，並在每個目標周圍爆發。",
+ "Lightning strikes the toughest monster and one more for 110, as holy bolts burst out for 30 each.": "閃電擊中最強的怪物及另一隻怪物，造成110點傷害，同時迸發聖光彈，每發造成30點傷害。",
+ "The strike is lightning, the holy bolts magic: Holy Bolt’s synergy raises only the bolts, Holy Shock’s only the strike.": "落雷為閃電傷害，聖光彈為魔法傷害：聖光彈的協同加成只提升聖光彈，神聖電擊的協同加成只提升落雷。",
+ "Unlike Holy Bolt’s, its holy bolts deal the same to every monster: none double on the undead.": "與聖光彈技能不同，它的聖光彈對每隻怪物造成相同傷害：對不死怪物不會加倍。"
+}

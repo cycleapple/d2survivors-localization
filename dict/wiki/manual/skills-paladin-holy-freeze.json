@@ -1,0 +1,8 @@
+{
+ "Each level of Resist Cold you learned raises its damage <0>+60%</0>, and each of Salvation <1>+28%</1>: its pulse and what it adds to your attacks alike. Items’ +skills on them don’t count.": "你學會的抗寒每一級使它的傷害<0>+60%</0>，聖護每一級<1>+28%</1>：脈衝傷害與附加到攻擊上的傷害都一樣。物品對這些技能的 +技能不計入。",
+ "Holy Freeze, the Paladin's passive in D2 Survivors: Slows monsters around you by half and chills them, and adds 5 times its cold to attacks.": "神聖冰凍，D2 Survivors 中聖騎士的被動技能：使你周圍的怪物速度減半並造成冰緩，並在攻擊中附加5倍的冰寒傷害。",
+ "Its damage is cold: Energy, items’ +% Damage and +Cold Skills raise it. It never critically strikes.": "它的傷害為冰寒傷害：能量、物品的「+% 傷害」與 +冰寒技能會提升它。它絕不會造成致命一擊。",
+ "Monsters in its reach are slowed by half while they stay in it. As with a chill, a monster immune to cold isn’t slowed, and the few monsters Diablo II’s cold leaves alone (Hell’s wraiths and wisps among them) take neither its slow nor its damage. A monster’s cold resistance shortens how long the slow lingers once it steps out. Unlike a chill, it isn’t shortened on Nightmare and Hell. Each level raises its damage and its reach.": "範圍內的怪物停留期間速度減半。與冰緩相同，冰寒免疫的怪物不會被減速，而少數不受《暗黑破壞神 II》冰寒影響的怪物（包括地獄的怨靈與鬼火）既不會被減速，也不會受到傷害。怪物的冰寒抗性會縮短它離開範圍後緩速殘留的時間。與冰緩不同，在惡夢與地獄難度不會縮短。每一級都會提升它的傷害與範圍。",
+ "Slows monsters around you by half and chills them, and adds 5 times its cold to attacks.": "使你周圍的怪物速度減半並造成冰緩，並在攻擊中附加5倍的冰寒傷害。",
+ "What it adds to your attacks joins your weapon’s damage, as an item’s added cold does: it raises every weapon skill, and that share of each weapon blow is dealt as cold.": "它附加到攻擊上的傷害，會像物品附加的冰寒傷害一樣併入你的武器傷害：會提升每個武器技能，每次武器打擊中的這部分以冰寒傷害造成。"
+}

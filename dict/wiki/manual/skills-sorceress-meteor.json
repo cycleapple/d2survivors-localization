@@ -1,0 +1,9 @@
+{
+ "3 meteors crash onto monsters nearby for 131 damage each and leave the ground burning.": "3顆隕石砸向附近的怪物，每顆造成131點傷害，並使地面持續燃燒。",
+ "Cast by an item (Moonfall, Skystrike), its ground burns as long as Diablo II’s at the item’s level: <0>1.2</0> seconds and <1>0.6</1> more a level.": "由物品施放時（月落、天擊），燃燒地面的持續時間與《暗黑破壞神 II》中物品上的技能等級相同：<0>1.2</0>秒，每級再加<1>0.6</1>秒。",
+ "Fire Ball: +50% Fire Damage per Level": "火球術：每級火焰傷害 +50%",
+ "Fire Bolt: +6% Fire Damage per Level": "火焰彈：每級火焰傷害 +6%",
+ "Its meteors fall on the packs within reach, the one with the most monsters first, then the most outside its crash, and crash a moment after their mark shows. With fewer packs than meteors the rest fall on other monsters, one each; with fewer monsters than meteors, only that many fall: a lone boss takes one.": "它的隕石會落在範圍內的怪物群上，先落在怪物最多的那群，接著是前一顆落點以外怪物最多的地方，並在標記出現片刻後砸下。怪物群少於隕石數時，剩下的隕石會落在其他怪物上，每隻一顆；怪物少於隕石數時，只會落下相同數量的隕石：單獨的首領只會承受一顆。",
+ "Meteor, the Sorceress's evolution in D2 Survivors: 3 meteors crash onto monsters nearby for 131 damage each and leave the ground burning.": "隕石術，D2 Survivors 中魔法使的進化技能：3顆隕石砸向附近的怪物，每顆造成131點傷害，並使地面持續燃燒。",
+ "The ground each crash leaves burns for <0>3</0> seconds.": "每次撞擊留下的燃燒地面會持續<0>3</0>秒。"
+}

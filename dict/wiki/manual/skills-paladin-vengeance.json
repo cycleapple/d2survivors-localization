@@ -1,0 +1,15 @@
+{
+ "As in Diablo II, it strikes with your weapon’s damage and adds its fire, cold and lightning to it, each <0>70%</0> of the blow of the Short Sword every Paladin starts with and <1>+6%</1> a point, <2>184%</2> at its eighth level. Only the monster struck takes the weapon’s blow.": "與《暗黑破壞神 II》相同，它以你武器的傷害攻擊，並附加火焰、冰寒與閃電傷害，各為每位聖騎士初始短劍打擊的<0>70%</0>，每投入一點再<1>+6%</1>，第8級時為<2>184%</2>。只有被打擊的怪物會受到武器打擊。",
+ "It counts as a fire skill, where Diablo II’s counts as cold: items’ +Fire Skills raise it, not +Cold or +Lightning Skills. As in Diablo II, it never critically strikes.": "它算是火焰技能，而《暗黑破壞神 II》的算是冰寒技能：物品的 +火焰技能會提升它，+冰寒或 +閃電技能則不會。與《暗黑破壞神 II》相同，它絕不會造成致命一擊。",
+ "Its fire, cold and lightning are each dealt and resisted on their own: a fire immune still takes the cold and the lightning. The cold chills.": "它的火焰、冰寒與閃電傷害各自造成、各自計算抗性：火焰免疫的怪物仍會受到冰寒與閃電傷害。冰寒會造成冰緩。",
+ "Strikes the thickest pack in reach with 18 fire, cold and lightning damage added, half to those beside.": "攻擊範圍內最密集的怪物群，附加各18點火焰、冰寒與閃電傷害，對其旁的怪物造成一半傷害。",
+ "Strikes the thickest pack in reach with 21 fire, cold and lightning damage added, half to those beside.": "攻擊範圍內最密集的怪物群，附加各21點火焰、冰寒與閃電傷害，對其旁的怪物造成一半傷害。",
+ "Strikes the thickest pack in reach with 25 fire, cold and lightning damage added, half to those beside.": "攻擊範圍內最密集的怪物群，附加各25點火焰、冰寒與閃電傷害，對其旁的怪物造成一半傷害。",
+ "Strikes the thickest pack in reach with 28 fire, cold and lightning damage added, half to those beside.": "攻擊範圍內最密集的怪物群，附加各28點火焰、冰寒與閃電傷害，對其旁的怪物造成一半傷害。",
+ "Strikes the thickest pack in reach with 32 fire, cold and lightning damage added, half to those beside.": "攻擊範圍內最密集的怪物群，附加各32點火焰、冰寒與閃電傷害，對其旁的怪物造成一半傷害。",
+ "Strikes the thickest pack in reach with 35 fire, cold and lightning damage added, half to those beside.": "攻擊範圍內最密集的怪物群，附加各35點火焰、冰寒與閃電傷害，對其旁的怪物造成一半傷害。",
+ "Strikes the thickest pack in reach with 39 fire, cold and lightning damage added, half to those beside.": "攻擊範圍內最密集的怪物群，附加各39點火焰、冰寒與閃電傷害，對其旁的怪物造成一半傷害。",
+ "Strikes the thickest pack in reach with 41 fire, cold and lightning damage added, half to those beside.": "攻擊範圍內最密集的怪物群，附加各41點火焰、冰寒與閃電傷害，對其旁的怪物造成一半傷害。",
+ "Vengeance, the Paladin's skill in D2 Survivors: Strikes the thickest pack in reach with 18 fire, cold and lightning damage added, half to those beside.": "復仇打擊，D2 Survivors 中聖騎士的技能：攻擊範圍內最密集的怪物群，附加各18點火焰、冰寒與閃電傷害，對其旁的怪物造成一半傷害。",
+ "Your fire, cold and lightning bonuses (Energy, items’ +% Damage) and your weapon’s damage raise its elements. Strength, Might, Concentration and Fanaticism raise its weapon’s blow alone: theirs is physical.": "你的火焰、冰寒與閃電加成（能量、物品的「+% 傷害」）與你武器的傷害會提升它的元素傷害。力量、力量靈氣、專注與狂熱只提升它的武器打擊：它們的加成屬於物理。"
+}

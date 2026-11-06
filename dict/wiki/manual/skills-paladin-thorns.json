@@ -1,0 +1,12 @@
+{
+ "It gives back its share of the blow as the monster swung it, before your Defense and Damage Reduced cut it.": "它依怪物揮出時的原始打擊傷害反彈相應比例，在你的防禦與傷害降低減免之前計算。",
+ "Monsters that strike you in melee take back 100% of the blow.": "近戰攻擊你的怪物會受到該次傷害100%的反傷。",
+ "Monsters that strike you in melee take back 140% of the blow.": "近戰攻擊你的怪物會受到該次傷害140%的反傷。",
+ "Monsters that strike you in melee take back 180% of the blow.": "近戰攻擊你的怪物會受到該次傷害180%的反傷。",
+ "Monsters that strike you in melee take back 220% of the blow.": "近戰攻擊你的怪物會受到該次傷害220%的反傷。",
+ "Monsters that strike you in melee take back 60% of the blow, +40% a level.": "近戰攻擊你的怪物會受到該次傷害60%的反傷，每等級 +40%。",
+ "Monsters that strike you in melee take back 60% of the blow.": "近戰攻擊你的怪物會受到該次傷害60%的反傷。",
+ "Only melee blows that land are given back: not missiles, and not blows you block or avoid.": "只有命中的近戰打擊會被反彈：投射物，以及被你格擋或閃避的打擊都不會。",
+ "Thorns, the Paladin's passive in D2 Survivors: Monsters that strike you in melee take back 60% of the blow, +40% a level.": "荊棘，D2 Survivors 中聖騎士的被動技能：近戰攻擊你的怪物會受到該次傷害60%的反傷，每等級 +40%。",
+ "Your physical damage bonus raises it: Strength, Might, Concentration and Fanaticism. It never critically strikes.": "你的物理傷害加成會提升它：力量、力量靈氣、專注與狂熱。它絕不會造成致命一擊。"
+}

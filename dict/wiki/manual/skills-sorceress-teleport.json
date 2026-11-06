@@ -1,0 +1,15 @@
+{
+ "Cast from an item (Enigma’s) by another class, it blinks you only with no monster beside you, to your side of the thickest pack nearby, and while you run only to a pack ahead.": "其他職業由物品（謎團）施放時，只有身旁沒有怪物時才會傳送你，目的地是附近最密集怪物群靠你這一側的位置；跑動時則只會傳送到前方的怪物群。",
+ "It waits until several monsters, or one elite, close in on you, then blinks you to the spot round you where monsters are fewest.": "它會等到好幾隻怪物或一隻精英怪物逼近你時，才把你瞬間移動到周圍怪物最少的位置。",
+ "Items’ +skills don’t shorten its recharge.": "物品的 +技能不會縮短它的冷卻時間。",
+ "Teleport, the Sorceress's skill in D2 Survivors: When monsters close in, you blink ahead where they are fewest. It recharges in 8.0s.": "傳送術，D2 Survivors 中魔法使的技能：怪物逼近時，你會瞬間移動到前方怪物最少的地方。冷卻時間8.0秒。",
+ "When monsters close in, you blink ahead where they are fewest. It recharges in 3.3s.": "怪物逼近時，你會瞬間移動到前方怪物最少的地方。冷卻時間3.3秒。",
+ "When monsters close in, you blink ahead where they are fewest. It recharges in 3.7s.": "怪物逼近時，你會瞬間移動到前方怪物最少的地方。冷卻時間3.7秒。",
+ "When monsters close in, you blink ahead where they are fewest. It recharges in 4.2s.": "怪物逼近時，你會瞬間移動到前方怪物最少的地方。冷卻時間4.2秒。",
+ "When monsters close in, you blink ahead where they are fewest. It recharges in 4.8s.": "怪物逼近時，你會瞬間移動到前方怪物最少的地方。冷卻時間4.8秒。",
+ "When monsters close in, you blink ahead where they are fewest. It recharges in 5.5s.": "怪物逼近時，你會瞬間移動到前方怪物最少的地方。冷卻時間5.5秒。",
+ "When monsters close in, you blink ahead where they are fewest. It recharges in 6.2s.": "怪物逼近時，你會瞬間移動到前方怪物最少的地方。冷卻時間6.2秒。",
+ "When monsters close in, you blink ahead where they are fewest. It recharges in 7.0s.": "怪物逼近時，你會瞬間移動到前方怪物最少的地方。冷卻時間7.0秒。",
+ "When monsters close in, you blink ahead where they are fewest. It recharges in 8.0s.": "怪物逼近時，你會瞬間移動到前方怪物最少的地方。冷卻時間8.0秒。",
+ "While you run, it prefers spots ahead of you, so it doesn’t send you back toward what you’re leaving.": "你在跑動時，它會優先選擇你前方的位置，因此不會把你送回你正要離開的地方。"
+}

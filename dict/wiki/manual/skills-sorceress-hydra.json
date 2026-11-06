@@ -1,0 +1,17 @@
+{
+ "Each cast raises a hydra of three heads most of the way to the nearest pack, apart from those already standing. It casts only with a monster in reach.": "每次施放會在你與最近怪物群之間、靠近怪物群的位置召喚一隻三頭的多頭蛇，並與已存在的多頭蛇分開。只有範圍內有怪物時才會施放。",
+ "Enchant raises its bolts twice as much as your other fire skills. Its kills are its own: they don’t set off your items’ effects on a kill.": "附魔對它火焰彈的加成是你其他火焰技能的兩倍。它的擊殺算它自己的：不會觸發你物品上的擊殺效果。",
+ "Fire Ball: +30% Fire Damage per Level": "火球術：每級火焰傷害 +30%",
+ "Fire Bolt: +4% Fire Damage per Level": "火焰彈：每級火焰傷害 +4%",
+ "Hydra, the Sorceress's skill in D2 Survivors: Summons a hydra by the nearest pack for 10s that spits 10 damage fire bolts.": "多頭蛇，D2 Survivors 中魔法使的技能：在最近的怪物群旁召喚多頭蛇10秒，噴吐造成10點傷害的火焰彈。",
+ "Its heads spit in turn, each at the nearest monster in its reach: one spit every <0>0.4</0> seconds a hydra.": "它的頭會輪流噴吐，各自瞄準範圍內最近的怪物：每隻多頭蛇每<0>0.4</0>秒噴吐一次。",
+ "Its timers are Diablo II’s at every level: each hydra stands <0>10</0> seconds and it recharges in <1>1.6</1>. Up to <2>6</2> stand at once, as many as those timers let stand. A hydra sinks early once you go far from it.": "它的各項時間在每個等級都與《暗黑破壞神 II》相同：每隻多頭蛇存在<0>10</0>秒，冷卻時間為<1>1.6</1>秒。同時最多存在<2>6</2>隻，正好是這些時間所允許的數量。你離多頭蛇太遠時，它會提早消失。",
+ "Summons a hydra by the nearest pack for 10s that spits 10 damage fire bolts.": "在最近的怪物群旁召喚多頭蛇10秒，噴吐造成10點傷害的火焰彈。",
+ "Summons a hydra by the nearest pack for 10s that spits 14 damage fire bolts.": "在最近的怪物群旁召喚多頭蛇10秒，噴吐造成14點傷害的火焰彈。",
+ "Summons a hydra by the nearest pack for 10s that spits 18 damage fire bolts.": "在最近的怪物群旁召喚多頭蛇10秒，噴吐造成18點傷害的火焰彈。",
+ "Summons a hydra by the nearest pack for 10s that spits 22 damage fire bolts.": "在最近的怪物群旁召喚多頭蛇10秒，噴吐造成22點傷害的火焰彈。",
+ "Summons a hydra by the nearest pack for 10s that spits 26 damage fire bolts.": "在最近的怪物群旁召喚多頭蛇10秒，噴吐造成26點傷害的火焰彈。",
+ "Summons a hydra by the nearest pack for 10s that spits 30 damage fire bolts.": "在最近的怪物群旁召喚多頭蛇10秒，噴吐造成30點傷害的火焰彈。",
+ "Summons a hydra by the nearest pack for 10s that spits 34 damage fire bolts.": "在最近的怪物群旁召喚多頭蛇10秒，噴吐造成34點傷害的火焰彈。",
+ "Summons a hydra by the nearest pack for 10s that spits 38 damage fire bolts.": "在最近的怪物群旁召喚多頭蛇10秒，噴吐造成38點傷害的火焰彈。"
+}

@@ -1,0 +1,9 @@
+{
+ "A monster whose melee blow lands on you takes its cold back and its chill.": "近戰擊中你的怪物會受到它的冰寒反擊並被冰緩。",
+ "Chilling Armor: +90% Cold Damage per Level": "寒冰甲：每級冰寒傷害 +90%",
+ "For 15 seconds, melee attackers take 55 cold damage and a 2.5 second chill, and 12% of blows and missiles miss you.": "15秒內，近戰攻擊者會受到55點冰寒傷害並被冰緩2.5秒，且12%的近戰與遠程攻擊無法命中你。",
+ "Frozen Armor: +11% Cold Damage per Level": "冰封甲：每級冰寒傷害 +11%",
+ "Items’ +skills raise its cold and its miss chance, which is <0>12%</0> with none, and at most <1>75%</1>.": "物品的 +技能會提高它的冰寒傷害與落空機率；沒有 +技能時落空機率為<0>12%</0>，最高<1>75%</1>。",
+ "Once it evolves on, Frozen Armor can evolve into it again.": "它進一步進化後，冰封甲可以再次進化為它。",
+ "Shiver Armor, the Sorceress's evolution in D2 Survivors: For 15 seconds, melee attackers take 55 cold damage and a 2.5 second chill, and 12% of blows and missiles miss you.": "碎冰甲，D2 Survivors 中魔法使的進化技能：15秒內，近戰攻擊者會受到55點冰寒傷害並被冰緩2.5秒，且12%的近戰與遠程攻擊無法命中你。"
+}

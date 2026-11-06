@@ -1,0 +1,13 @@
+{
+ "Conviction, the Paladin's passive in D2 Survivors: Monsters around you resist fire, cold and lightning 45% less, +20% a level (a fifth of that if immune).": "信念，D2 Survivors 中聖騎士的被動技能：你周圍怪物的火焰、冰寒與閃電抗性降低45%，每等級 +20%（若免疫則為五分之一）。",
+ "Diablo II’s Conviction also lowers Defense. Here your blows always land, so there is none to lower.": "《暗黑破壞神 II》的信念也會降低防禦。這裡你的打擊必定命中，所以沒有防禦可降低。",
+ "It lowers the resistances of every monster in its reach, the same at every level as in Diablo II, and holds a moment after a monster steps out.": "它會降低範圍內每隻怪物的抗性，範圍與《暗黑破壞神 II》相同，每個等級都一樣；怪物離開範圍後，效果還會維持片刻。",
+ "Monsters around you resist fire, cold and lightning 105% less (a fifth of that if immune).": "你周圍怪物的火焰、冰寒與閃電抗性降低105%（若免疫則為五分之一）。",
+ "Monsters around you resist fire, cold and lightning 125% less (a fifth of that if immune).": "你周圍怪物的火焰、冰寒與閃電抗性降低125%（若免疫則為五分之一）。",
+ "Monsters around you resist fire, cold and lightning 45% less (a fifth of that if immune).": "你周圍怪物的火焰、冰寒與閃電抗性降低45%（若免疫則為五分之一）。",
+ "Monsters around you resist fire, cold and lightning 45% less, +20% a level (a fifth of that if immune).": "你周圍怪物的火焰、冰寒與閃電抗性降低45%，每等級 +20%（若免疫則為五分之一）。",
+ "Monsters around you resist fire, cold and lightning 65% less (a fifth of that if immune).": "你周圍怪物的火焰、冰寒與閃電抗性降低65%（若免疫則為五分之一）。",
+ "Monsters around you resist fire, cold and lightning 85% less (a fifth of that if immune).": "你周圍怪物的火焰、冰寒與閃電抗性降低85%（若免疫則為五分之一）。",
+ "Of several Convictions on a monster (yours, your items’, your mercenary’s), the strongest alone counts.": "怪物同時受到數個信念影響時（你的、物品的、傭兵的），只計算最強的那一個。",
+ "On a monster immune to an element it lowers that resistance by a fifth, as in Diablo II, which can break the immunity. It never lowers a resistance by more than <0>150%</0>.": "與《暗黑破壞神 II》相同，對免疫某元素的怪物，它只以五分之一的效果降低該抗性，這可能破除免疫。它降低的抗性絕不會超過<0>150%</0>。"
+}

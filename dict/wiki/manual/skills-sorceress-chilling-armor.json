@@ -1,0 +1,10 @@
+{
+ "A missile that reaches you sends an ice bolt back at the nearest monster the way it came, at most one every <0>0.2</0> seconds.": "擊中你的遠程攻擊會沿著來的方向，向最近的怪物反射一枚寒冰彈，最多每<0>0.2</0>秒一枚。",
+ "Cast by an item (Fortitude, Snowclash), it is Diablo II’s: it answers missiles alone, never melee blows. An item’s chance to cast it (Fortitude’s) lasts Diablo II’s length at the item’s level.": "由物品施放時（剛毅、冰雪交織），它就是《暗黑破壞神 II》的版本：只反擊遠程攻擊，絕不反擊近戰攻擊。由物品的施放機率（剛毅）施放時，持續時間與《暗黑破壞神 II》中物品上的技能等級相同。",
+ "Chilling Armor, the Sorceress's evolution in D2 Survivors: For 15s, melee attackers take 70 cold damage and a 3s chill, ranged ones a 60 ice bolt. 14% miss.": "寒冰甲，D2 Survivors 中魔法使的進化技能：15秒內，近戰攻擊者會受到70點冰寒傷害並被冰緩3秒，遠程攻擊者則會受到60點傷害的寒冰彈。14%的攻擊無法命中你。",
+ "For 15s, melee attackers take 70 cold damage and a 3s chill, ranged ones a 60 ice bolt. 14% miss.": "15秒內，近戰攻擊者會受到70點冰寒傷害並被冰緩3秒，遠程攻擊者則會受到60點傷害的寒冰彈。14%的攻擊無法命中你。",
+ "Frozen Armor: +9% Cold Damage per Level": "冰封甲：每級冰寒傷害 +9%",
+ "Items’ +skills raise its cold, its bolts and its miss chance, which is <0>14%</0> with none, and at most <1>75%</1>.": "物品的 +技能會提高它的冰寒傷害、寒冰彈與落空機率；沒有 +技能時落空機率為<0>14%</0>，最高<1>75%</1>。",
+ "Shiver Armor: +70% Cold Damage per Level": "碎冰甲：每級冰寒傷害 +70%",
+ "Unlike Diablo II’s, which answers only missiles, it also hurts and chills the monsters whose melee blows land on you.": "《暗黑破壞神 II》的寒冰甲只會反擊遠程攻擊；這裡它也會對近戰擊中你的怪物造成傷害並使其冰緩。"
+}

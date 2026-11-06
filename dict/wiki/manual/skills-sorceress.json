@@ -1,0 +1,18 @@
+{
+ "A freeze holds a champion <0>60%</0> as long, a unique <1>35%</1> and an act boss <2>15%</2>, then less again on Nightmare and Hell and by the monster’s cold resistance (see <3>Damage</3>). A cold immune is never frozen.": "凍結對精英怪物的持續時間為<0>60%</0>，獨特怪物<1>35%</1>，章節首領<2>15%</2>，在惡夢與地獄會再縮短，也會依怪物的冰寒抗性縮短（見<3>傷害</3>）。冰寒免疫的怪物絕不會被凍結。",
+ "A skill that fires several bolts at the nearest monsters sends the spare ones at the same monsters when there are fewer monsters than bolts: a lone boss takes every bolt of a cast. Meteor is the exception: its meteors fall on different packs, the one with the most monsters first.": "朝最近的怪物發射多枚飛彈的技能，在怪物數量少於飛彈時，會把多出來的飛彈射向同一批怪物：單獨的首領會承受一次施放的所有飛彈。隕石術是例外：它的隕石會落在不同的怪物群上，怪物最多的那群優先。",
+ "An item’s +Fire Skills for any class also raise Warmth, Enchant and Fire Mastery. +Cold Skills and +Lightning Skills for any class raise none of hers: not Cold Mastery, Lightning Mastery or Energy Shield.": "物品上適用任何職業的 +火焰技能，也會提高暖流、附魔與火焰專精。適用任何職業的 +冰寒技能與 +閃電技能則不會提高她的任何被動技能：冰寒專精、閃電專精與能量護盾都不會。",
+ "Every skill casts itself on its own recharge. A skill aims past a monster immune to its element.": "每個技能都依自身的冷卻時間自動施放。技能會略過對其元素免疫的怪物。",
+ "For her, Telekinesis is on the Lightning Skills, so her +skills reach it, and the levels she learned make Energy Shield cheaper.": "對她來說，心靈傳動屬於閃電技能，所以她的 +技能會影響它，而她學習的等級會讓能量護盾更省法力。",
+ "Her Fire, Cold and Lightning Mastery all lower monsters’ resistance to their element, as items’ -% to Enemy Resistance does, which can break an immunity. In Diablo II, Fire and Lightning Mastery raise her damage instead.": "她的火焰、冰寒與閃電專精都會降低怪物對該元素的抗性，與物品的「-% 敵人抗性」相同，可以破除免疫。在《暗黑破壞神 II》中，火焰專精與閃電專精則是提高她的傷害。",
+ "Her freezes": "她的凍結效果",
+ "Her only summon is the <0>Hydra</0>: up to <1>6</1> stand at once, and a new one sinks the oldest.": "她唯一的召喚物是<0>多頭蛇</0>：同時最多存在<1>6</1>隻，新召喚的會讓最舊的那隻消失。",
+ "Her passives": "她的被動技能",
+ "Ice Blast, Glacial Spike and Frozen Armor freeze: the monster stands still and can’t attack, though a swing already under way finishes, then thaws into a chill.": "寒冰球、冰川之槍與冰封甲會凍結怪物：怪物會停在原地且無法攻擊（已經揮出的攻擊仍會完成），解凍後轉為冰緩。",
+ "Items’ +skills raise a skill’s damage: its bolts, its reach, its length and its recharge stay its card level’s (see <0>Damage</0>). Frozen Armor and Static Field deal no damage of their own, so they are cast at their raised level. Shiver Armor’s and Chilling Armor’s miss chance rises with +skills too.": "物品的 +技能會提高技能的傷害；飛彈數、範圍、持續時間與冷卻時間則維持卡片等級的數值（見<0>傷害</0>）。冰封甲與靜電力場本身不造成傷害，所以會以提升後的等級施放。碎冰甲與寒冰甲讓攻擊落空的機率也會隨 +技能提高。",
+ "Items’ +skills raise each of her own passives past level 5: +All Skills, +Sorceress Skill Levels, its tree’s +skills (Sorceress Only) and its own.": "物品的 +技能能讓她自己的每個被動技能超過等級5：+所有技能、+魔法使技能等級、該技能樹的 +技能（只限魔法使）與該技能本身的 +技能。",
+ "Past the cast rate cap, where a recharge takes <0>50%</0> of its time, Faster Cast Rate and Warmth count at half, down to <1>40%</1> of its time. The Paladin’s, the Barbarian’s and the Amazon’s spells stop at the cap, and every class’s weapon attacks go on past it at half (see <2>Stats</2>).": "冷卻時間縮短到原本的<0>50%</0>即達施法速度上限，超過上限後，施法速度與暖流只以一半計算，最低可到原本的<1>40%</1>。聖騎士、野蠻人與亞馬遜的法術停在上限，而所有職業的武器攻擊都能以一半效果繼續超過上限（見<2>數值</2>）。",
+ "The Sorceress's skills, passives and evolutions in D2 Survivors.": "D2 Survivors 中魔法使的技能、被動技能與進化技能。",
+ "Unlike Diablo II, Faster Cast Rate and Warmth shorten every recharge: Blizzard’s, Meteor’s, Frozen Orb’s and the Hydra’s too, which are fixed delays in Diablo II.": "與《暗黑破壞神 II》不同，施法速度與暖流會縮短所有冷卻時間，暴風雪、隕石術、冰封球與多頭蛇也一樣，這些在《暗黑破壞神 II》中都是固定的延遲。",
+ "Unlike Diablo II, where she gains the least life of the seven classes, she gains as much as the Amazon: <0>4</0> life a level and <1>6</1> a point of Vitality (see <2>Attributes</2>).": "在《暗黑破壞神 II》中，她是七個職業裡生命成長最少的；在這裡則與亞馬遜相同：每級<0>4</0>點生命，每點體能<1>6</1>點生命（見<2>屬性</2>）。"
+}

@@ -1,0 +1,16 @@
+{
+ "A Terror tier’s class multiplier doesn’t raise it.": "恐懼階的職業倍率不會提高它。",
+ "As in Diablo II, it never kills: it takes a monster no lower than 1 life on Normal, <0>33%</0> of its life on Nightmare, and <1>50%</1> in Hell and the Terror tiers.": "與《暗黑破壞神 II》相同，它絕不會殺死怪物：在普通難度最多把怪物削到剩1點生命，在惡夢為其生命的<0>33%</0>，在地獄與恐懼階為<1>50%</1>。",
+ "Cast by an item’s chance to cast (Schaefer’s Hammer’s, Stormlash’s), it is Diablo II’s at every level: it takes <0>25%</0> of every monster’s life, elites and bosses too, within Diablo II’s reach at the item’s level, with no least. The floor above holds for it too.": "由物品的施放機率施放時（史恰佛之鎚、暴風之鞭），它在每個等級都是《暗黑破壞神 II》的版本：在《暗黑破壞神 II》中物品上技能等級的範圍內，削減每隻怪物<0>25%</0>的生命，精英與首領也一樣，沒有最低削減量。上述下限同樣適用。",
+ "It deals no damage of its own, so items’ +skills raise its reach and its share. Its recharge stays its card level’s.": "它本身不造成傷害，所以物品的 +技能會提高它的範圍與削減比例。冷卻時間仍依卡片等級。",
+ "Its share is lightning damage: a monster’s lightning resistance cuts it, and a lightning immune takes none. Above the floor below, it takes at least a little life each cast.": "它削減的部分屬於閃電傷害：怪物的電擊抗性會減少它，閃電免疫的怪物則完全不受影響。在下述下限之上，每次施放至少都會削減一點生命。",
+ "Monsters within 160 lose 15% of their life, and elites and bosses a third of that.": "160範圍內的怪物失去15%的生命，精英與首領則為其三分之一。",
+ "Monsters within 170 lose 17% of their life, and elites and bosses a third of that.": "170範圍內的怪物失去17%的生命，精英與首領則為其三分之一。",
+ "Monsters within 180 lose 19% of their life, and elites and bosses a third of that.": "180範圍內的怪物失去19%的生命，精英與首領則為其三分之一。",
+ "Monsters within 190 lose 21% of their life, and elites and bosses a third of that.": "190範圍內的怪物失去21%的生命，精英與首領則為其三分之一。",
+ "Monsters within 200 lose 23% of their life, and elites and bosses a third of that.": "200範圍內的怪物失去23%的生命，精英與首領則為其三分之一。",
+ "Monsters within 210 lose 25% of their life, and elites and bosses a third of that.": "210範圍內的怪物失去25%的生命，精英與首領則為其三分之一。",
+ "Monsters within 220 lose 27% of their life, and elites and bosses a third of that.": "220範圍內的怪物失去27%的生命，精英與首領則為其三分之一。",
+ "Monsters within 230 lose 29% of their life, and elites and bosses a third of that.": "230範圍內的怪物失去29%的生命，精英與首領則為其三分之一。",
+ "Static Field, the Sorceress's skill in D2 Survivors: Monsters within 160 lose 15% of their life, and elites and bosses a third of that.": "靜電力場，D2 Survivors 中魔法使的技能：160範圍內的怪物失去15%的生命，精英與首領則為其三分之一。"
+}

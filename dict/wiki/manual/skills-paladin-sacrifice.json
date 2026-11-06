@@ -1,0 +1,14 @@
+{
+ "As in Diablo II, it swings as often as your Attack: every level recharges the same, <0>0.6</0> seconds with the Short Sword. Increased Attack Speed and a faster weapon shorten it.": "與《暗黑破壞神 II》相同，它的揮擊頻率與你的「攻擊」一樣：每個等級的冷卻時間都相同，使用短劍時為<0>0.6</0>秒。攻擊速度與較快的武器會縮短它。",
+ "Its blow strikes with your weapon’s damage, raised by Diablo II’s Sacrifice bonus at its level. As in Diablo II, it never critically strikes.": "它的打擊以你武器的傷害攻擊，並依其等級加上《暗黑破壞神 II》犧牲打擊的加成。與《暗黑破壞神 II》相同，它絕不會造成致命一擊。",
+ "Sacrifice, the Paladin's skill in D2 Survivors: Strikes the toughest in reach for +210% weapon damage, costing 1% of your life (none below 40%).": "犧牲打擊，D2 Survivors 中聖騎士的技能：打擊範圍內最強的怪物，造成+210%的武器傷害，消耗1%的生命（生命低於40%時不會發動）。",
+ "Strikes the toughest in reach for +210% weapon damage, costing 1% of your life (none below 40%).": "打擊範圍內最強的怪物，造成+210%的武器傷害，消耗1%的生命（生命低於40%時不會發動）。",
+ "Strikes the toughest in reach for +240% weapon damage, costing 1% of your life (none below 40%).": "打擊範圍內最強的怪物，造成+240%的武器傷害，消耗1%的生命（生命低於40%時不會發動）。",
+ "Strikes the toughest in reach for +285% weapon damage, costing 1% of your life (none below 40%).": "打擊範圍內最強的怪物，造成+285%的武器傷害，消耗1%的生命（生命低於40%時不會發動）。",
+ "Strikes the toughest in reach for +315% weapon damage, costing 1% of your life (none below 40%).": "打擊範圍內最強的怪物，造成+315%的武器傷害，消耗1%的生命（生命低於40%時不會發動）。",
+ "Strikes the toughest in reach for +360% weapon damage, costing 1% of your life (none below 40%).": "打擊範圍內最強的怪物，造成+360%的武器傷害，消耗1%的生命（生命低於40%時不會發動）。",
+ "Strikes the toughest in reach for +390% weapon damage, costing 1% of your life (none below 40%).": "打擊範圍內最強的怪物，造成+390%的武器傷害，消耗1%的生命（生命低於40%時不會發動）。",
+ "Strikes the toughest in reach for +435% weapon damage, costing 1% of your life (none below 40%).": "打擊範圍內最強的怪物，造成+435%的武器傷害，消耗1%的生命（生命低於40%時不會發動）。",
+ "Strikes the toughest in reach for +465% weapon damage, costing 1% of your life (none below 40%).": "打擊範圍內最強的怪物，造成+465%的武器傷害，消耗1%的生命（生命低於40%時不會發動）。",
+ "Unlike Diablo II, where each blow costs you a share of the damage it deals, it costs a share of your life. No block, resistance or Damage Reduced lessens the cost.": "在《暗黑破壞神 II》中，每次打擊會讓你承受其造成傷害的一定比例；這裡則是消耗你生命的一定比例。格擋、抗性或傷害降低都無法減少這項消耗。"
+}

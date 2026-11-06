@@ -1,0 +1,16 @@
+{
+ "Blessed Hammer: +63% Magic Damage per Level": "祝福之鎚：每級魔法傷害 +63%",
+ "Cast by an item’s chance to cast or charges (Principle’s, Boneslayer Blade’s), it is Diablo II’s: one bolt at an undead monster, which passes through the living and hurts the first undead it meets, never double. It casts only with an undead in reach.": "由物品的施放機率或充能施放時（原則、斬骨者之斧），它就是《暗黑破壞神 II》的版本：向一隻不死怪物發射一枚聖光彈，聖光彈會穿過活物，傷害遇到的第一隻不死怪物，且不會加倍。只有範圍內有不死怪物時才會施放。",
+ "Each bolt goes at one of the nearest monsters. With fewer monsters than bolts, the spare bolts go at the same ones: a lone boss takes them all.": "每枚聖光彈會射向最近的怪物之一。怪物比聖光彈少時，多出的聖光彈會射向同樣的怪物：單獨的首領會承受全部。",
+ "Fires 1 bolt of holy light that pierces 1, for 12 damage (double to the undead).": "發射1枚聖光，穿透1隻怪物，造成12點傷害（對不死怪物加倍）。",
+ "Fires 1 bolt of holy light that pierces 1, for 17 damage (double to the undead).": "發射1枚聖光，穿透1隻怪物，造成17點傷害（對不死怪物加倍）。",
+ "Fires 1 bolt of holy light that pierces 2, for 22 damage (double to the undead).": "發射1枚聖光，穿透2隻怪物，造成22點傷害（對不死怪物加倍）。",
+ "Fires 2 bolts of holy light that pierce 2, for 27 damage (double to the undead).": "發射2枚聖光，穿透2隻怪物，造成27點傷害（對不死怪物加倍）。",
+ "Fires 2 bolts of holy light that pierce 2, for 32 damage (double to the undead).": "發射2枚聖光，穿透2隻怪物，造成32點傷害（對不死怪物加倍）。",
+ "Fires 2 bolts of holy light that pierce 3, for 37 damage (double to the undead).": "發射2枚聖光，穿透3隻怪物，造成37點傷害（對不死怪物加倍）。",
+ "Fires 3 bolts of holy light that pierce 3, for 42 damage (double to the undead).": "發射3枚聖光，穿透3隻怪物，造成42點傷害（對不死怪物加倍）。",
+ "Fires 3 bolts of holy light that pierce 3, for 47 damage (double to the undead).": "發射3枚聖光，穿透3隻怪物，造成47點傷害（對不死怪物加倍）。",
+ "Fist of the Heavens: +500% Magic Damage per Level": "天堂之拳：每級魔法傷害 +500%",
+ "Holy Bolt, the Paladin's skill in D2 Survivors: Fires 1 bolt of holy light that pierces 1, for 12 damage (double to the undead).": "聖光彈，D2 Survivors 中聖騎士的技能：發射1枚聖光，穿透1隻怪物，造成12點傷害（對不死怪物加倍）。",
+ "Its damage is magic: Energy and items’ +% Damage raise it. Concentration doesn’t, as in Diablo II.": "它的傷害為魔法傷害：能量與物品的「+% 傷害」會提升它。與《暗黑破壞神 II》相同，專注不會提升它。"
+}
