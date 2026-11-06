@@ -235,7 +235,21 @@ node tools/wiki-merge.mjs
 node tools/wiki-check.mjs --pages
 # 4. 產生頁面（宣傳網站的程式，翻譯這邊只呼叫）→ site/zh-tw/wiki/**，跟 dict/wiki/ 一起 commit
 node tools/build-wiki.mjs
+node tools/build-site.mjs
 ```
+
+補翻（官方改了頁面、`wiki-fetch` 說有沒有譯文的）用本機 `work/translation/` 的三個小工具（不進 repo）：
+
+```
+# 待翻清單：每條附官方的韓文和遊戲用語提示；--all 是全部頁面，也可以只給幾個頁面路徑
+node work/translation/wiki-todo.mjs work/translation/wiki-todo/new.json --all
+# 交給代理翻：work/translation/wiki-prompt.md 是說明（佔位符規則、已經定下來的用詞），把 {INPUT}、{OUTPUT} 換成檔名
+# 譯文分進 dict/wiki/manual/（50 頁以上都有的進 common.json，其他照第一個出現的頁面分檔），再合併、檢查
+node work/translation/wiki-split.mjs work/translation/wiki-todo/new-out.json
+node tools/wiki-merge.mjs && node tools/wiki-check.mjs --pages
+```
+
+`wiki-prompt.md` 的用詞表是 2026-11-06 第一次全翻時各批統一過的（存下的英雄、稀有度、飾環、短棒、獸皮、飛彈、墮落俠盜、生命上限…），新加的詞要跟它一致
 
 字典分三層（跟遊戲字典一樣，後面的蓋過前面的）：
 
