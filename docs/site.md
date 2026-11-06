@@ -208,7 +208,7 @@ node tools/build-site.mjs        # 再跑這個，sitemap 和繁中首頁的 wik
 
 - **在本機產生、commit 進 repo**：GitHub Actions 讀不到 `data/`，部署時不會產生 wiki。`build-site.mjs` 不產生也不刪 `site/zh-tw/wiki/`，只讀 `site/zh-tw/wiki/pages.json`（`{ schema, official, pages: [{ path, title, lastmod, checked, untranslated }] }`）把頁面加進 sitemap、在繁中首頁加入口；沒有這個檔就都不顯示。`pages.yml` 把整個 `site/` 上傳，wiki 跟著上去
 - **頁面怎麼來**：`build-wiki` 讀官方頁面的目錄（`.wiki-toc`）、路徑、`h1`、副標、`article`，換上我們網站的標題列、頁尾和樣式（`site/style.css` + `site/wiki.css`）。官方的 CSS、JS、圖片都不用
-  - 每個 `data-in="en"` 換成譯文（key 用 `tools/wiki-strings.mjs` 的 `htmlKey`、`fillKey`，跟翻譯的工具同一套），`data-in="ko"` 拿掉。沒有譯文或佔位符對不上的留英文、標 `lang="en"`
+  - 每個 `data-in="en"` 換成譯文（key、佔位符和查法都用翻譯的 `tools/wiki-strings.mjs`：`enSpans` 給每個 span 的 key、tags 和 context，`lookup` 查譯文，技能變體名稱先查 `modifier:<名稱>`；`fillKey` 換回標籤。兩邊同一套才不會分岔），`data-in="ko"` 拿掉。沒有譯文或佔位符對不上的留英文、標 `lang="en"`
   - 拿掉：`script`、`style`、圖片、`svg`、`canvas`、表單元件（搜尋框、篩選器）、`.wiki-icon`（官方用玩家的遊戲檔畫的圖示）、有 `hidden` 的元素（等官方 JS 才顯示的）
   - 用遊戲檔畫的清單（`data-items`：獨特、套裝、符文之語）和官方 JS 的互動表（`.wiki-dial`：恐怖區域的階級轉盤）換成一句說明，連到官方原頁。清單本身不在官方頁面裡（官方 JS 讀玩家的遊戲檔），我們不放遊戲檔
   - 連結：這次有產生的 wiki 頁面換成我們的相對網址，其他（遊戲、排行榜、FAQ、還沒產生的 wiki 頁面）連回官方，開新分頁
