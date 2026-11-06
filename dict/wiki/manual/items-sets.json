@@ -1,7 +1,12 @@
 {
  "{n} pieces worn": "穿戴{n}件",
+ "{n} sets": "{n}個套裝",
+ "A set item is one of a set’s named green pieces, with its own properties. Wearing more pieces of its set turns on its green lines and the set’s own bonuses; the whole set turns on all of them. The stash’s Uniques tab keeps one of each set item too.": "套裝物品是某個套裝中有名稱的綠色物品之一，有專屬屬性。穿戴越多同套裝的物品，就會啟用越多綠色屬性與套裝本身的加成；穿齊整套則全部啟用。儲物箱的「獨特物品」分頁也會為每件套裝物品各保存一件。",
  "Each box is the game’s item box, every line at the top of its range; the grey brackets give what it can roll. Lines that grow with character level are at level 99.": "每個框都是遊戲中的物品資訊框，每一行都以範圍上限顯示；灰色括號內是可能出現的範圍。隨角色等級成長的數值以99級計算。",
  "Every category": "所有類別",
+ "Every set in D2 Survivors with its pieces and set bonuses, each with its picture and item box, drawn from Diablo II’s own files.": "D2 Survivors 的所有套裝，包含各件物品與套裝加成，每件都附有取自《暗黑破壞神 II》原始檔案的圖片與物品資訊框。",
+ "Filter by name or set": "依名稱或套裝篩選",
  "Full set": "全套",
+ "Here the whole set is worn, so every green line is on.": "這裡穿齊了整套，所以所有綠色屬性都已啟用。",
  "Set bonuses": "套裝加成"
 }
