@@ -33,6 +33,18 @@ try {
 } catch (e) {
   if (e.code !== 'ENOENT') console.warn(`略過 data/changelog.json：${e.message}`);
 }
+// wiki 繁中版（site/zh-tw/wiki/）：tools/build-wiki.mjs 在本機產生、commit 進 repo，這裡不產生也不刪，只讀它的 pages.json
+// 加進 sitemap 和繁中首頁的入口。沒有這個檔就都不顯示
+let wiki = null;
+try {
+  wiki = JSON.parse(fs.readFileSync(path.join(ROOT, 'zh-tw/wiki/pages.json'), 'utf8'));
+  if (!wiki.pages?.length) wiki = null;
+} catch (e) {
+  if (e.code !== 'ENOENT') console.warn(`略過 zh-tw/wiki/pages.json：${e.message}`);
+}
+const WIKI_LINKS = ['getting-started', 'skills', 'items', 'monsters', 'terror', 'glossary']; // 首頁入口列出的頁面（有產生的才列）
+const wikiUrl = p => new URL(`zh-tw/wiki/${p ? `${p}/` : ''}`, BASE).href;
+
 // 原始碼相關的連結：常見問題裡的 {repo}、{license}、{dictLicense}、{issues}、{actions}，頁尾，JSON-LD 的 license
 const REPO_LINKS = {
   repo: SITE.repoUrl,
@@ -374,6 +386,7 @@ function langPage(sl) {
   // 桌面捷徑的範例用這一頁的語言（不是遊戲翻譯語言的就用繁中）
   const exampleLang = state.languages.some(l => l.id === sl.id && l.entries) ? sl.id : 'zh-TW';
   const only = p => (p ? ` data-only="${p}"` : '');
+  const wikiOn = Boolean(wiki && t['wiki.title']);
   const runtime = {
     lang: sl.id,
     t: Object.fromEntries(RUNTIME_KEYS.map(k => [k, t[k]])),
@@ -423,7 +436,8 @@ function langPage(sl) {
         <a href="#languages">${esc(t['nav.languages'])}</a>
         <a href="#install" data-only="desktop">${esc(t['nav.install'])}</a>
         <a href="#web" data-only="web">${esc(t['nav.install'])}</a>
-        <a href="#faq">${esc(t['nav.faq'])}</a>
+        <a href="#faq">${esc(t['nav.faq'])}</a>${wikiOn ? `
+        <a href="wiki/">${esc(t['nav.wiki'])}</a>` : ''}
       </nav>
       <div class="subtabs" id="platform-switch" role="group" aria-label="${esc(t['platform.label'])}">
         ${['desktop', 'web'].map(p => `<button type="button" data-platform="${p}">${esc(t['platform.' + p])}<small>${esc(t[`platform.${p}.sub`])}</small></button>`).join('\n        ')}
@@ -561,7 +575,18 @@ function langPage(sl) {
       </div>
     </section>
 
-    <section class="section" id="faq">
+    ${wikiOn ? `<section class="section" id="wiki">
+      <div class="wrap">
+        <h2>${esc(t['wiki.title'])}</h2>
+        <p class="section-lead">${esc(t['wiki.lead'])}</p>
+        <ul class="wiki-entry">
+          ${WIKI_LINKS.map(p => wiki.pages.find(x => x.path === p)).filter(Boolean).map(x => `<li><a href="wiki/${esc(x.path)}/">${esc(x.title)}</a></li>`).join('\n          ')}
+        </ul>
+        <p class="cta wiki-entry-cta"><a class="btn btn-ghost" href="wiki/">${esc(t['wiki.open'])} →</a><span class="wiki-entry-count">${esc(fmt(t['wiki.pages'], wiki.pages.length))}</span></p>
+      </div>
+    </section>
+
+    ` : ''}<section class="section" id="faq">
       <div class="wrap narrow">
         <h2>${esc(t['faq.title'])}</h2>
         <div class="faq">
@@ -681,10 +706,17 @@ function sitemap(lastmod) {
     <loc>${loc}</loc>
     <lastmod>${lastmod[loc]}</lastmod>
 ${links}
-  </url>`).join('\n');
+  </url>`);
+  // wiki：只有繁中，另一個語言版本是官方的英文原頁
+  for (const x of wiki?.pages || []) urls.push(`  <url>
+    <loc>${wikiUrl(x.path)}</loc>
+    <lastmod>${x.lastmod}</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="${wikiUrl(x.path)}"/>
+    <xhtml:link rel="alternate" hreflang="en" href="${new URL(x.path ? `${x.path}/` : '', wiki.official).href}"/>
+  </url>`);
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-${urls}
+${urls.join('\n')}
 </urlset>
 `;
 }
@@ -713,6 +745,7 @@ for (const sl of SITE_LANGS) {
 page(BASE, path.join(ROOT, 'index.html'), rootPage());
 write(path.join(ROOT, 'sitemap.xml'), sitemap(lastmod));
 write(path.join(ROOT, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${new URL('sitemap.xml', BASE).href}\n`);
+if (wiki) console.log(`wiki：${wiki.pages.length} 頁（zh-tw/wiki/pages.json）`);
 console.log(manifest ? `manifest：${manifest.version || manifest.updated}` : `沒有 ${SITE.manifestPath}，用 config 的數字`);
 
 if (process.argv.includes('--check')) seoCheck();

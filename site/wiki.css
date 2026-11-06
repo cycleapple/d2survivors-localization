@@ -1,0 +1,101 @@
+/* wiki（/zh-tw/wiki/，tools/build-wiki.mjs 產生）：官方 wiki 的繁中版。用本站的配色和字型（style.css 的變數），不用官方的 CSS。
+   class 名稱大多沿用官方頁面裡的（wiki-toc、wiki-rules、wiki-table…），版面是這裡自己寫的 */
+
+html:has(> body.wiki) { scroll-padding-top: 72px; }
+
+.wiki-topbar { align-items: center; }
+/* style.css 在窄螢幕把首頁的標題列藏起來（改用語言列），wiki 沒有語言列，標題列要留著 */
+@media (max-width: 1000px) { .topbar .wiki-topbar { display: flex; } }
+.wiki-topnav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 4px 18px; margin-left: auto; font-size: 0.92rem; }
+.wiki-topnav a { color: var(--muted); text-decoration: none; white-space: nowrap; }
+.wiki-topnav a:hover, .wiki-topnav a[aria-current="page"] { color: var(--gold-hi); }
+
+.wiki-layout { max-width: 1200px; display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 40px; align-items: start; padding-top: 28px; padding-bottom: 56px; }
+
+/* 側欄目錄：寬螢幕固定在左邊，可以自己捲動 */
+.wiki-side { position: sticky; top: 68px; max-height: calc(100vh - 84px); overflow-y: auto; overscroll-behavior: contain; font-size: 0.88rem; scrollbar-width: thin; }
+.wiki-side-box > summary { cursor: pointer; color: var(--gold-hi); font-weight: 600; padding: 4px 8px; }
+.wiki-toc ul { list-style: none; margin: 0; padding: 0; }
+.wiki-toc ul ul { padding-left: 10px; }
+.wiki-toc a { display: block; padding: 3px 8px; border-radius: 4px; color: var(--text); text-decoration: none; line-height: 1.45; }
+.wiki-toc a:hover { color: var(--gold-hi); background: var(--bg-2); }
+.wiki-toc a[aria-current="page"] { color: var(--gold-hi); background: var(--panel); box-shadow: inset 2px 0 0 var(--gold); }
+.wiki-toc-home { margin: 6px 0 10px; font-family: var(--font-display); font-weight: 700; color: var(--gold) !important; }
+.wiki-toc-group { margin: 0 0 14px; }
+.wiki-toc-head { margin: 0 0 2px; padding: 0 8px; color: var(--muted); font-size: 0.76rem; letter-spacing: 0.06em; }
+.wiki-toc-sub { margin: 6px 0 2px; padding: 0 8px 0 18px; color: var(--muted); font-size: 0.76rem; }
+.wiki-toc-fold > summary { display: flex; align-items: center; gap: 2px; cursor: pointer; padding-left: 4px; color: var(--muted); }
+.wiki-toc-fold > summary a { flex: 1; padding-left: 4px; }
+.wiki-toc-here { margin: 2px 0 4px 8px !important; border-left: 1px solid var(--line); }
+.wiki-toc-here a { color: var(--muted); font-size: 0.82rem; padding-top: 1px; padding-bottom: 1px; }
+
+/* 內容 */
+.wiki-page { min-width: 0; overflow-wrap: break-word; }
+.wiki-crumbs { font-size: 0.85rem; color: var(--muted); }
+.wiki-crumbs a { color: var(--muted); }
+.wiki-crumbs a:hover { color: var(--gold-hi); }
+.wiki-sep { margin: 0 6px; opacity: 0.6; }
+.wiki-notice, .wiki-data-note { margin: 12px 0 0; padding: 10px 14px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg-2); color: var(--muted); font-size: 0.88rem; line-height: 1.6; }
+.wiki-notice strong { color: var(--gold-hi); }
+.wiki-missing { display: block; margin-top: 2px; }
+.wiki-checked { white-space: nowrap; }
+.wiki-data-note { margin: 16px 0; color: var(--text); }
+
+.doc-head h1 { margin: 22px 0 6px; font-family: var(--font-display); font-size: clamp(1.7rem, 4vw, 2.4rem); line-height: 1.25; color: var(--gold-hi); }
+.doc-sub { margin: 0 0 8px; color: var(--muted); font-size: 1.02rem; }
+
+.wiki-body h2 { margin: 36px 0 12px; padding-bottom: 6px; border-bottom: 1px solid var(--line-soft); font-family: var(--font-display); font-size: 1.35rem; line-height: 1.35; color: var(--gold); }
+.wiki-body h3 { margin: 24px 0 8px; font-family: var(--font-display); font-size: 1.1rem; color: var(--gold-hi); }
+.wiki-body p { margin: 10px 0; }
+.wiki-body b { color: var(--gold-hi); font-weight: 600; }
+.wiki-body ul { padding-left: 1.3em; }
+.wiki-body li { margin: 0 0 6px; }
+.wiki-body .quiet { color: var(--muted); font-size: 0.92rem; }
+.wiki-mods li strong { color: var(--gold-hi); }
+
+.wiki-scroll { overflow-x: auto; margin: 14px 0; }
+.wiki-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; line-height: 1.5; }
+.wiki-table th, .wiki-table td { padding: 6px 10px; border: 1px solid var(--line-soft); text-align: left; vertical-align: top; }
+.wiki-table th { background: var(--bg-2); color: var(--gold-hi); font-weight: 600; }
+.wiki-table tbody tr:nth-child(even) { background: rgba(255, 255, 255, 0.015); }
+.wiki-num td, .wiki-levels td { font-variant-numeric: tabular-nums; }
+
+.wiki-facts { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 8px; margin: 12px 0; }
+.wiki-facts > div { padding: 8px 12px; border: 1px solid var(--line-soft); border-radius: var(--radius); background: var(--panel); }
+.wiki-facts dt { color: var(--muted); font-size: 0.8rem; }
+.wiki-facts dd { margin: 0; }
+
+/* wiki 首頁的分類卡片 */
+.wiki-cards { list-style: none; padding: 0 !important; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+.wiki-cards li { margin: 0; }
+.wiki-card { display: block; height: 100%; padding: 14px 16px; border: 1px solid var(--line-soft); border-radius: var(--radius); background: var(--panel); color: var(--text); text-decoration: none; }
+.wiki-card:hover { border-color: var(--gold); }
+.wiki-card strong { display: block; margin-bottom: 4px; color: var(--gold-hi); }
+.wiki-card span { color: var(--muted); font-size: 0.9rem; line-height: 1.55; }
+
+.wiki-build { margin-top: 40px !important; font-size: 0.82rem !important; }
+
+/* 窄螢幕：目錄收在內容上面，點「目錄」打開 */
+@media (max-width: 900px) {
+  .wiki-layout { grid-template-columns: minmax(0, 1fr); gap: 14px; padding-top: 14px; }
+  .wiki-side { position: static; max-height: none; overflow: visible; }
+  .wiki-side-box { border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); }
+  .wiki-side-box > summary { padding: 10px 14px; }
+  .wiki-side-box[open] .wiki-toc { max-height: 65vh; overflow-y: auto; overscroll-behavior: contain; padding: 0 8px 10px; }
+  .doc-head h1 { margin-top: 14px; }
+}
+@media (max-width: 560px) {
+  .wiki-topbar .brand span { display: none; }
+  .wiki-topnav { gap: 2px 14px; font-size: 0.86rem; }
+  .wiki-table { font-size: 0.84rem; }
+  .wiki-table th, .wiki-table td { padding: 5px 7px; }
+}
+
+/* 長條圖（恐怖區域每一波的怪物數等）：官方頁面裡的 inline style 給高度 */
+.wiki-strip { margin: 18px 0; }
+.wiki-strip figcaption { color: var(--muted); font-size: 0.88rem; margin-bottom: 8px; }
+.wiki-strip ol { list-style: none; margin: 0; padding: 0 !important; display: flex; align-items: flex-end; gap: 6px; height: 160px; }
+.wiki-strip li { flex: 1; min-width: 0; height: 100%; margin: 0 !important; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; gap: 2px; font-size: 0.75rem; }
+.wiki-strip-bar { display: block; width: 100%; max-width: 42px; min-height: 2px; border-radius: 3px 3px 0 0; background: linear-gradient(var(--gold), rgba(201, 164, 92, 0.35)); }
+.wiki-strip-v { color: var(--gold-hi); font-variant-numeric: tabular-nums; }
+.wiki-strip-k { color: var(--muted); }

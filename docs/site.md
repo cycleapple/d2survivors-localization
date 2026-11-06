@@ -17,6 +17,7 @@ node tools/serve.mjs site 8766     # 本機預覽（或 python -m http.server 87
 | `/en/` | English |
 | `/ja/` | 日本語 |
 | `/de/`、`/fr/`、`/ru/`、`/pl/` | Deutsch、Français、Русский、Polski |
+| `/zh-tw/wiki/…` | 官方 wiki 的繁中翻譯，路徑跟官方 `/wiki/…` 一樣（見下面「wiki」） |
 
 `BASE`（網站網址）在 `site/src/config.mjs` 的 `SITE.base`，暫定 `https://cycleapple.github.io/d2survivors-localization/`。換網域就改這個值再重新產生；canonical、hreflang、Open Graph、sitemap、書籤網址都從這裡來。頁面之間的連結和 CSS、JS 用相對路徑，本機預覽和子路徑都能用。
 
@@ -30,6 +31,7 @@ node tools/serve.mjs site 8766     # 本機預覽（或 python -m http.server 87
 | `tools/build-site.mjs` | 頁面樣板，產生靜態頁 |
 | `site/app.js` | 語言頁的互動：版本切換、書籤按鈕、讀較新的 manifest 重畫 |
 | `site/root.js` | 首頁：標出建議語言 |
+| `tools/build-wiki.mjs`、`site/wiki.css` | wiki 繁中版的頁面樣板和樣式（見下面「wiki」） |
 | `site/style.css`、`site/assets/` | 樣式、截圖（`assets/shots/<語言>/`）、分享圖（`og.jpg`、`og-<語言>.jpg`，1200×630） |
 
 產生的檔案（commit 進 repo，部署時也會重新產生）：`site/index.html`、`site/<語言>/index.html`、`site/sitemap.xml`、`site/robots.txt`。**不要手動改**，改 `site/src/` 再重跑。
@@ -193,6 +195,29 @@ node tools/serve.mjs site 8766     # 本機預覽（或 python -m http.server 87
 - `LANGUAGES` 的順序就是網站上的順序；還在做的語言先放進去，manifest 沒有的顯示「計畫中」。目前沒有計畫中的語言（使用者 2026-10-28 拿掉了西、義、葡），這時語言區塊不加 `languages.planned` 那句，首頁也不列計畫中的語言
 - 文字裡要列出「有哪些語言」的地方用 `{langs}`（A、B 或 C）或 `{langsAnd}`（A、B 和 C），建置時用 manifest 裡可用和測試中的語言、以那一頁的語言產生（`Intl.ListFormat`）。新語言發布後重新產生就好，不用改文字
 - Discord 置頂文字裡的語言列表歸 Discord 聊天室，語言有變動時傳訊息給它
+
+## wiki（/zh-tw/wiki/）
+
+官方 wiki（`https://d2survivors.lol/wiki/`）的繁中翻譯。分工和頁面規則見 [manifest-v2.md](manifest-v2.md) 的「wiki」，抓頁面和翻譯的流程見 [translation.md](translation.md) 的「wiki」。
+
+```
+node tools/build-wiki.mjs        # data/wiki/src/ + dict/wiki/zh-TW.json → site/zh-tw/wiki/**（含 pages.json）
+node tools/build-site.mjs        # 再跑這個，sitemap 和繁中首頁的 wiki 入口才會更新
+# 測試：--src <官方頁面資料夾> --dict <譯文> --out <輸出資料夾>
+```
+
+- **在本機產生、commit 進 repo**：GitHub Actions 讀不到 `data/`，部署時不會產生 wiki。`build-site.mjs` 不產生也不刪 `site/zh-tw/wiki/`，只讀 `site/zh-tw/wiki/pages.json`（`{ schema, official, pages: [{ path, title, lastmod, checked, untranslated }] }`）把頁面加進 sitemap、在繁中首頁加入口；沒有這個檔就都不顯示。`pages.yml` 把整個 `site/` 上傳，wiki 跟著上去
+- **頁面怎麼來**：`build-wiki` 讀官方頁面的目錄（`.wiki-toc`）、路徑、`h1`、副標、`article`，換上我們網站的標題列、頁尾和樣式（`site/style.css` + `site/wiki.css`）。官方的 CSS、JS、圖片都不用
+  - 每個 `data-in="en"` 換成譯文（key 用 `tools/wiki-strings.mjs` 的 `htmlKey`、`fillKey`，跟翻譯的工具同一套），`data-in="ko"` 拿掉。沒有譯文或佔位符對不上的留英文、標 `lang="en"`
+  - 拿掉：`script`、`style`、圖片、`svg`、`canvas`、表單元件（搜尋框、篩選器）、`.wiki-icon`（官方用玩家的遊戲檔畫的圖示）、有 `hidden` 的元素（等官方 JS 才顯示的）
+  - 用遊戲檔畫的清單（`data-items`：獨特、套裝、符文之語）和官方 JS 的互動表（`.wiki-dial`：恐怖區域的階級轉盤）換成一句說明，連到官方原頁。清單本身不在官方頁面裡（官方 JS 讀玩家的遊戲檔），我們不放遊戲檔
+  - 連結：這次有產生的 wiki 頁面換成我們的相對網址，其他（遊戲、排行榜、FAQ、還沒產生的 wiki 頁面）連回官方，開新分頁
+- **每頁**：上方寫「非官方翻譯」、原頁連結、上次對照官方的日期（`pages.json` 的 `fetched`），還有幾段沒翻；頁尾保留官方的作者和暴雪版權聲明（有譯文用譯文，沒有就英文）。canonical 指自己，hreflang `zh-Hant`（自己）+ `en`（官方原頁）；結構化資料是 `WebPage`（`translationOfWork` 指官方原頁）和 `BreadcrumbList`
+- **lastmod**：內容跟上次一樣就沿用舊日期（比對時不看「上次對照」的日期，免得每次重抓都改掉全部頁面）
+- **官方刪掉的頁面**：`build-wiki` 比上一次的 `pages.json`，只刪我們產生的那頁 `index.html` 和空掉的資料夾
+- **手機**：寬螢幕目錄固定在左邊；900px 以下目錄收在內容上面，點「目錄」打開（沒有 JS 也是收著）。表格在 `.wiki-scroll` 裡左右捲，頁面本身不橫向捲動
+- **字型**：跟其他頁一樣，Noto Serif TC 只載 `h1`～`h3` 用到的字（`&text=`）
+- 首頁入口：`i18n.mjs` 只有繁中有 `wiki.*`、`nav.wiki`，其他語言頁不顯示。入口列的頁面在 `build-site.mjs` 的 `WIKI_LINKS`（有產生的才列）
 
 ## 部署
 
