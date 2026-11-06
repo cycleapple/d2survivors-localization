@@ -210,7 +210,8 @@ node tools/build-site.mjs        # 再跑這個，sitemap 和繁中首頁的 wik
 - **頁面怎麼來**：`build-wiki` 讀官方頁面的目錄（`.wiki-toc`）、路徑、`h1`、副標、`article`，換上我們網站的標題列、頁尾和樣式（`site/style.css` + `site/wiki.css`）。官方的 CSS、JS、圖片都不用
   - 每個 `data-in="en"` 換成譯文（key、佔位符和查法都用翻譯的 `tools/wiki-strings.mjs`：`enSpans` 給每個 span 的 key、tags 和 context，`lookup` 查譯文，技能變體名稱先查 `modifier:<名稱>`；`fillKey` 換回標籤。兩邊同一套才不會分岔），`data-in="ko"` 拿掉。沒有譯文或佔位符對不上的留英文、標 `lang="en"`
   - 拿掉：`script`、`style`、圖片、`svg`、`canvas`、表單元件（搜尋框、篩選器）、`.wiki-icon`（官方用玩家的遊戲檔畫的圖示）、有 `hidden` 的元素（等官方 JS 才顯示的）
-  - 用遊戲檔畫的清單（`data-items`：獨特、套裝、符文之語）和官方 JS 的互動表（`.wiki-dial`：恐怖區域的階級轉盤）換成一句說明，連到官方原頁。清單本身不在官方頁面裡（官方 JS 讀玩家的遊戲檔），我們不放遊戲檔
+  - 用遊戲檔畫的清單（`data-items`：獨特、套裝、符文之語）換成一句說明，連到官方原頁。清單本身不在官方頁面裡（官方 JS 讀玩家的遊戲檔），我們不放遊戲檔
+  - 恐懼階轉盤（`terror` 頁的 `.wiki-dial`）做成 100 階的靜態表：每列一階，欄位和數字格式照 [translation.md](translation.md) 的「恐懼階轉盤」（倍數 `toFixed(2)`、10 以上 `toFixed(1)` 加 `×`；每波 = 怪物總數 ÷ `waves` 四捨五入）。欄名是 `wiki-data` 的 `text` 換成譯文，`/players` 不翻。表格放在自己能捲的框裡（最高 70vh），表頭和第一欄「階」固定，手機左右捲也看得到是第幾階；頁面本身不橫向捲動。沒有 `wiki-data` 的話一樣換成說明連到官方
   - 連結：這次有產生的 wiki 頁面換成我們的相對網址，其他（遊戲、排行榜、FAQ、還沒產生的 wiki 頁面）連回官方，開新分頁
 - **每頁**：上方寫「非官方翻譯」、原頁連結、上次對照官方的日期（`pages.json` 的 `fetched`），還有幾段沒翻；頁尾保留官方的作者和暴雪版權聲明（有譯文用譯文，沒有就英文）。canonical 指自己，hreflang `zh-Hant`（自己）+ `en`（官方原頁）；結構化資料是 `WebPage`（`translationOfWork` 指官方原頁）和 `BreadcrumbList`
 - **lastmod**：內容跟上次一樣就沿用舊日期（比對時不看「上次對照」的日期，免得每次重抓都改掉全部頁面）

@@ -99,3 +99,17 @@ html:has(> body.wiki) { scroll-padding-top: 72px; }
 .wiki-strip-bar { display: block; width: 100%; max-width: 42px; min-height: 2px; border-radius: 3px 3px 0 0; background: linear-gradient(var(--gold), rgba(201, 164, 92, 0.35)); }
 .wiki-strip-v { color: var(--gold-hi); font-variant-numeric: tabular-nums; }
 .wiki-strip-k { color: var(--muted); }
+
+/* 恐懼階的 100 階表（build-wiki 從官方轉盤的 wiki-data 產生）：表格自己捲動，表頭和第一欄（階）固定，手機也看得到是第幾階 */
+.wiki-tiers { max-height: min(70vh, 640px); overflow: auto; border: 1px solid var(--line-soft); border-radius: var(--radius); }
+.wiki-tiers:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.wiki-tiers .wiki-table { border-collapse: separate; border-spacing: 0; width: max-content; min-width: 100%; }
+.wiki-tiers th, .wiki-tiers td { border-width: 0 1px 1px 0; white-space: nowrap; text-align: right; }
+.wiki-tiers thead th { position: sticky; top: 0; z-index: 2; text-align: center; }
+.wiki-tiers tbody th { position: sticky; left: 0; z-index: 1; background: var(--bg-2); color: var(--gold-hi); text-align: center; }
+.wiki-tiers thead th:first-child { left: 0; z-index: 3; }
+.wiki-tiers tbody td { background: var(--bg); }
+.wiki-tiers tbody tr:nth-child(even) td { background: #100d0a; }
+.wiki-tiers tbody tr:nth-child(10n) th, .wiki-tiers tbody tr:nth-child(10n) td { border-bottom-color: var(--line); }
+.wiki-tiers .hot { color: var(--gold-hi); }
+.wiki-tiers thead .hot { color: var(--gold); }

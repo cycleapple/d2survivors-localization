@@ -12,7 +12,7 @@ import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { SITE, SITE_LANGS } from '../site/src/config.mjs';
 import { I18N } from '../site/src/i18n.mjs';
-import { htmlKey, fillKey, enSpans, lookup } from './wiki-strings.mjs';
+import { htmlKey, fillKey, enSpans, lookup, wikiData } from './wiki-strings.mjs';
 
 const OFFICIAL = 'https://d2survivors.lol/wiki/';
 const LANG = SITE_LANGS.find(l => l.id === 'zh-TW');
@@ -32,6 +32,7 @@ const T = {
   dataList: link => `這份清單是官方網頁讀《暗黑破壞神 II》的遊戲檔畫出來的，這裡不放遊戲檔，請到${link}查看。`,
   dataListLink: '官方原頁',
   // 官方用 JS 做的互動表（恐怖區域的階級轉盤等）
+  tiersLabel: '每一階的數字（可以左右、上下捲動）',
   dataWidget: link => `這裡原本是官方網頁的互動表格，請到${link}使用。`,
   sourceCredit: 'wiki 原文：D2 Survivors 官方 wiki（framara 製作），繁體中文由玩家翻譯。',
 };
@@ -152,6 +153,11 @@ function localize(nodes, ctx) {
     if (!n.tag) { out.push(n); continue; }
     const lang = attr(n, 'data-in');
     if ((lang && lang !== 'en') || attr(n, 'lang') === 'ko' || dropped(n)) continue;
+    // 恐懼階轉盤：wiki-data 的 rows 做成 100 階的靜態表
+    if (hasClass(n, 'wiki-dial') && ctx.data?.rows?.length) {
+      out.push({ text: terrorTable(ctx.data, ctx) });
+      continue;
+    }
     // 用遊戲檔畫的清單（data-items 等）：換成一句說明
     const widget = attr(n, 'data-items') !== undefined ? T.dataList : hasClass(n, 'wiki-dial') ? T.dataWidget : null;
     if (widget) {
@@ -175,6 +181,46 @@ function localize(nodes, ctx) {
     out.push({ ...el, children: localize(el.children, ctx) });
   }
   return out;
+}
+
+// wiki-data 的 { en, ko }：換成譯文，沒有就英文（標 lang="en"）
+function dataText(o, ctx) {
+  const key = (o?.en || '').replace(/\s+/g, ' ').trim();
+  const tr = ctx.dict[key];
+  if (tr) ctx.translated++;
+  else if (key) ctx.missing.add(key);
+  return tr ? escText(tr) : `<span lang="en">${escText(key)}</span>`;
+}
+
+// 恐懼階轉盤（terror 頁的 .wiki-dial）→ 靜態表格。官方是選一階顯示 8 格，這裡每一列一階。
+// rows 的 13 欄和數字格式見 docs/translation.md 的「恐懼階轉盤」：階、怪物等級、首領等級、/players、怪物總數、
+// 生命、傷害、經驗值倍數、詞綴數、物品等級、魔寶%、金幣%、物品%
+function terrorTable(data, ctx) {
+  const t = k => dataText(data.text?.[k], ctx);
+  const num = n => n.toLocaleString('en-US');
+  const times = x => `${x >= 10 ? x.toFixed(1) : x.toFixed(2)}×`;
+  const cols = [
+    [t('tier'), r => r[0]],
+    [t('monsters'), r => num(r[4]), 'hot'],
+    [t('perWave'), r => num(Math.round(r[4] / (data.waves || 9)))],
+    [t('monsterLevel'), r => r[1]],
+    [t('boss'), r => r[2]],
+    ['/players', r => r[3]],
+    [t('life'), r => times(r[5]), 'hot'],
+    [t('damage'), r => times(r[6])],
+    [t('experience'), r => times(r[7])],
+    [t('affixes'), r => r[8]],
+    [t('magicFind'), r => `+${r[10]}%`],
+    [t('gold'), r => `+${r[11]}%`],
+    [t('items'), r => `+${r[12]}%`],
+    [t('itemLevel'), r => r[9]],
+  ];
+  return `<div class="wiki-scroll wiki-tiers" tabindex="0" role="region" aria-label="${T.tiersLabel}"><table class="wiki-table wiki-num">
+  <thead><tr>${cols.map(([h, , c]) => `<th scope="col"${c ? ` class="${c}"` : ''}>${h}</th>`).join('')}</tr></thead>
+  <tbody>
+${data.rows.map(r => `  <tr>${cols.map(([, f, c], i) => (i ? `<td${c ? ` class="${c}"` : ''}>${f(r)}</td>` : `<th scope="row">${f(r)}</th>`)).join('')}</tr>`).join('\n')}
+  </tbody>
+</table></div>`;
 }
 
 // 連結：wiki 頁面之間（這次有產生的頁面）換成我們的，其他（遊戲、排行榜、FAQ、還沒有譯文的頁面）連回官方
@@ -208,7 +254,7 @@ const jsonLd = data => `<script type="application/ld+json">${JSON.stringify(data
 function buildPage(src, p, ctx) {
   const doc = parseHtml(src, { pos: true });
   const spans = new Map(enSpans(src).map(s => [s.start, s]));
-  const c = { ...ctx, path: p, official: officialUrl(p), spans, translated: 0, missing: new Set(), bad: new Set() };
+  const c = { ...ctx, path: p, official: officialUrl(p), spans, data: wikiData(src), translated: 0, missing: new Set(), bad: new Set() };
   const toc = find(doc.children, n => hasClass(n, 'wiki-toc'));
   const crumbs = find(doc.children, n => hasClass(n, 'wiki-crumbs'));
   const h1 = find(doc.children, n => n.tag === 'h1');
