@@ -62,13 +62,6 @@ site/data/dict/ja.json
         "fonts": ["Microsoft JhengHei", "PingFang TC", "Noto Sans TC"]
         // 每一項是系統字型名稱，或 { "url": "../web/fonts/….woff2" }（相對於 manifest.json，網頁書籤 2026-11-04 起）。
         // 照順序當備用；舊版 core.js 讀到 { url } 會找不到、改用下一項，所以 url 後面要接系統字型
-      },
-      "wiki": {                            // 沒有這一欄＝官方 wiki（d2survivors.lol/wiki/）不翻；見下面「wiki 字典」
-        "url": "wiki/zh-TW.json?v=…",      // 相對於 manifest.json
-        "sha256": "…",
-        "entries": 5608,                   // 有譯文的條數
-        "total": 5608,                     // 上次掃描時 wiki 的條數（entries < total：沒翻到的顯示英文）
-        "checked": "2026-10-30T00:00:00Z"  // 上次掃描官方 wiki 的時間
       }
     }
   ],
@@ -102,29 +95,43 @@ site/data/dict/ja.json
 - `draft`：翻譯還在做（`tools/langs.mjs` 標的）。`publish` 不會把 draft 的語言寫進 manifest，所以正常發布的 manifest 裡不會出現。萬一出現（例如手動產生的測試用 manifest），啟動器和書籤標成「草稿」，網站顯示成「計畫中」
 - 讀到不認得的值：當成 `draft` 處理，不要當成正式版
 
-### wiki 字典
+### wiki（網站上的繁中版，2026-11-06 起）
 
-> 暫緩（2026-10-30）：使用者決定先不做 wiki，目前 manifest 沒有這一欄，書籤也還沒支援。格式先留著，之後重啟時照這裡做。
+官方 wiki（`https://d2survivors.lol/wiki/`，約 256 頁）翻成繁體中文，放在我們網站的 `/zh-tw/wiki/`，網址路徑跟官方一樣（官方 `/wiki/items/uniques/` → 我們 `/zh-tw/wiki/items/uniques/`）。2026-10-30 的「書籤在官方 wiki 上就地翻譯」計畫取消，manifest 沒有 wiki 的欄位，書籤不碰 wiki。
 
-官方 wiki 是作者用遊戲程式產生的靜態頁面（約 256 頁），每段文字都寫成一對：`<span data-in="en">…</span><span data-in="ko" lang="ko">…</span>`（也有 `div`、`p` 等），用 `<html lang>` 切換顯示。書籤在 wiki 頁面上把 `data-in="ko"` 那一份換成譯文、把 `<html lang>` 設成 `ko`，跟遊戲一樣借用韓文的位置；外觀照官方 wiki，不另外做頁面，也不轉載 wiki 內容。
+官方頁面：每段文字寫成一對 `<… data-in="en">…</…><… data-in="ko" lang="ko">…</…>`（`span`、`div`、`p` 等）。說明頁（getting-started 等）文字都在 HTML 裡；資料頁（物品、技能、怪物…）有 `<script type="application/json" id="wiki-data">`，由官方的 JS 畫出來，圖示讀玩家自己的遊戲檔（`#d2-files`）。
 
-`site/data/wiki/<id>.json`：
+流程：
+
+1. 抓官方 wiki（翻譯）：`tools/wiki-fetch.mjs` 把每一頁存到 `data/wiki/src/<路徑>/index.html`，清單寫在 `data/wiki/src/pages.json`（`{ fetched, pages: [{ path, sha256 }] }`）。`data/` 不進 repo
+2. 翻譯（翻譯）：`dict/wiki/zh-TW.json`，格式見下面
+3. 產生頁面（宣傳網站）：`tools/build-wiki.mjs` 讀 1、2，寫 `site/zh-tw/wiki/**`，commit 進 repo（GitHub Actions 讀不到 `data/`，所以不在部署時產生；`tools/build-site.mjs` 不能刪掉這些檔案）。翻譯發布 wiki 時要跑它
+4. 官方 wiki 更新：`wiki-fetch` 比 sha256 列出新增、改動、刪除的頁面和沒有譯文的字串
+
+`dict/wiki/zh-TW.json`：
 
 ```jsonc
 {
-  "version": "20261030-0100",
   "strings": {
     // key：data-in="en" 元素的 innerHTML，標籤換成編號佔位符 <0>…</0>、<1/>（照出現順序編號，屬性不進 key），空白合併成一個
-    // value：譯文，佔位符跟 key 一樣（可以換順序，不能少、不能多）；書籤把佔位符換回英文那份對應的元素（保留 href、class）
+    // value：譯文，佔位符跟 key 一樣（可以換順序，不能少、不能多）；產生頁面時把佔位符換回英文那份對應的元素（保留 href、class）
     "Every class’s skills, passives, evolutions and skill modifiers.": "每個職業的技能、被動、進化和技能修飾。",
     "Read <0>Skill systems</0> first.": "先看<0>技能體系</0>。"
+    // wiki-data 裡顯示給玩家的英文字串也放這裡（純文字，沒有佔位符）
   }
 }
 ```
 
-- 遊戲裡也有的名稱（技能、物品、怪物、地名）用 `dict/<id>.json` 的同一個譯名
+- 遊戲裡也有的名稱（技能、物品、怪物、地名、屬性句子）用 `dict/zh-TW.json` 的同一個譯名
 - 沒有譯文的 key 顯示英文，不顯示韓文
-- 抽字串、翻譯、產生檔案：翻譯；在 wiki 頁面套用：網頁書籤
+
+頁面規則：
+
+- 每頁上方寫明：非官方翻譯、翻譯自官方 wiki 的哪一頁（連結）、上次對照官方的日期；保留官方頁尾的暴雪版權聲明和「非官方粉絲專案」說明
+- 不放遊戲本身的檔案（圖示、字型、資料檔）和官方網站的程式、圖片；需要圖示的地方不顯示或連到官方頁面
+- wiki 頁面之間的連結換成我們的 `/zh-tw/wiki/…`，遊戲、排行榜、FAQ 等連到官方網站
+- canonical 指自己；hreflang 只有 zh-Hant，加上 `en` 指官方原頁；加進 sitemap
+- 只有繁體中文，其他語言不做
 
 ## 各欄位歸誰
 
@@ -135,7 +142,8 @@ site/data/dict/ja.json
 | `languages[].web`、`web` | `tools/web-rules.mjs` | 書籤 | 網頁書籤 |
 | `launcher` | `tools/publish.mjs` 讀最新的 GitHub Release | 啟動器 | 啟動器 |
 | `game` | `tools/publish.mjs` | 網站（顯示） | 翻譯 |
-| `languages[].wiki`、`site/data/wiki/` | `tools/publish.mjs`（讀 `dict/wiki/`） | 書籤 | 翻譯 |
+| wiki：`dict/wiki/`、`data/wiki/src/` | `tools/wiki-fetch.mjs`、翻譯 | `tools/build-wiki.mjs` | 翻譯 |
+| wiki：`site/zh-tw/wiki/` | `tools/build-wiki.mjs` | 網站 | 宣傳網站 |
 
 - `desktop`、`web` 兩塊、`languages[].desktop`、`languages[].web` 裡面的欄位，由各自的負責方決定，改了只要兩邊（產生和讀取）一致就好，在這份文件更新說明
 - 最上層和 `languages[]` 的共用欄位要改，先改這份文件、通知另外兩邊
