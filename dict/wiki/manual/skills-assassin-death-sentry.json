@@ -1,0 +1,11 @@
+{
+ "A sentry shoots lightning 5 times, more with Fire Blast, for 320 damage, each shot exploding a nearby corpse for 34 plus 44% of its life.": "衛哨射出閃電5次（有火焰轟擊時更多），造成320點傷害，每次射擊會引爆附近一具屍體，造成34點加上屍體生命44%的傷害。",
+ "Charged Bolt Sentry: +6% Lightning Damage per Level": "電能衛哨：每級閃電傷害 +6%",
+ "Death Sentry, the Assassin's evolution in D2 Survivors: A sentry shoots lightning 5 times, more with Fire Blast, for 320 damage, each shot exploding a nearby corpse for 34 plus 44% of its life.": "死亡衛哨，D2 Survivors 中刺客的進化技能：衛哨射出閃電5次（有火焰轟擊時更多），造成320點傷害，每次射擊會引爆附近一具屍體，造成34點加上屍體生命44%的傷害。",
+ "Each shot also blows up a corpse near it, of the monsters slain in the last few seconds: the one with the most monsters around it.": "每次射擊也會引爆附近的一具屍體：從最近幾秒內被殺死的怪物中，選擇周圍怪物最多的那一具。",
+ "Fire Blast: +6% Lightning Damage per Level": "火焰轟擊：每級閃電傷害 +6%",
+ "Lightning Sentry: +120% Lightning Damage per Level": "雷光衛哨：每級閃電傷害 +120%",
+ "Shock Web: +6% Lightning Damage per Level": "雷電網：每級閃電傷害 +6%",
+ "The blast is fire, a share of the dead monster’s own life without the run’s toughening, and never critically strikes. A corpse it blows up can’t be raised.": "爆炸是火焰傷害，依死亡怪物自身生命（不含本局中的強化）的一部分計算，且永遠不會造成致命一擊。被它引爆的屍體無法再被復活。",
+ "The blast’s fixed part grows with Death Sentry’s synergies and gear’s +skills, as its shots do. Its share of the corpse’s life takes neither, as in Diablo II.": "爆炸的固定部分會像射擊一樣，隨死亡衛哨的協同加成與裝備的 +技能成長。依屍體生命計算的部分則兩者都不計入，與《暗黑破壞神 II》相同。"
+}

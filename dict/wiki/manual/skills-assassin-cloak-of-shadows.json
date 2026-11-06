@@ -1,0 +1,14 @@
+{
+ "Blinded monsters lose you: they wander and don’t attack. Champions and uniques stay blinded less long. Act bosses aren’t blinded, but take more damage all the same.": "目盲的怪物會失去你的蹤影：它們會四處遊蕩且不攻擊。精英怪物與獨特怪物的目盲時間較短。章節首領不會目盲，但同樣會受到更多傷害。",
+ "Cast by an item’s charges (Darksight Helm’s, Nadir’s), it is Diablo II’s at the item’s level. It reaches as far at every level and blinds for <0>12</0> seconds at level 5, <1>20</1> at level 13. It makes no monster take more: it lowers the Defense of all it covers, act bosses’ too, as -% Target Defense does (see <2>Damage</2>), by <3>27%</3> at level 5 and <4>51%</4> at level 13.": "由物品的充能施放時（暗視之盔、天底），它是物品等級的《暗黑破壞神 II》版本。範圍在每個等級都相同，等級5時目盲<0>12</0>秒，等級13時<1>20</1>秒。它不會讓怪物受到更多傷害：而是像 -% 目標防禦一樣，降低範圍內所有怪物（包括章節首領）的防禦（見<2>傷害</2>），等級5時降低<3>27%</3>，等級13時降低<4>51%</4>。",
+ "Cloak of Shadows, the Assassin's skill in D2 Survivors: Near a crowd or boss, blinds all but act bosses around you for 3.0s. They take 15% more damage.": "魔影斗蓬，D2 Survivors 中刺客的技能：靠近怪物群或首領時，使你周圍除章節首領外的所有怪物目盲3.0秒。這些怪物受到的傷害提高15%。",
+ "It deals no damage of its own, so gear’s +skills raise its reach, its length and how much more they take. A Possessed champion is blinded but takes no more.": "它本身不造成傷害，所以裝備的 +技能會提高它的範圍、持續時間，以及目標多受到的傷害。著魔精英怪物會目盲，但不會受到更多傷害。",
+ "Near a crowd or boss, blinds all but act bosses around you for 3.0s. They take 15% more damage.": "靠近怪物群或首領時，使你周圍除章節首領外的所有怪物目盲3.0秒。這些怪物受到的傷害提高15%。",
+ "Near a crowd or boss, blinds all but act bosses around you for 3.4s. They take 18% more damage.": "靠近怪物群或首領時，使你周圍除章節首領外的所有怪物目盲3.4秒。這些怪物受到的傷害提高18%。",
+ "Near a crowd or boss, blinds all but act bosses around you for 3.7s. They take 21% more damage.": "靠近怪物群或首領時，使你周圍除章節首領外的所有怪物目盲3.7秒。這些怪物受到的傷害提高21%。",
+ "Near a crowd or boss, blinds all but act bosses around you for 4.0s. They take 24% more damage.": "靠近怪物群或首領時，使你周圍除章節首領外的所有怪物目盲4.0秒。這些怪物受到的傷害提高24%。",
+ "Near a crowd or boss, blinds all but act bosses around you for 4.4s. They take 27% more damage.": "靠近怪物群或首領時，使你周圍除章節首領外的所有怪物目盲4.4秒。這些怪物受到的傷害提高27%。",
+ "Near a crowd or boss, blinds all but act bosses around you for 4.8s. They take 30% more damage.": "靠近怪物群或首領時，使你周圍除章節首領外的所有怪物目盲4.8秒。這些怪物受到的傷害提高30%。",
+ "Near a crowd or boss, blinds all but act bosses around you for 5.1s. They take 33% more damage.": "靠近怪物群或首領時，使你周圍除章節首領外的所有怪物目盲5.1秒。這些怪物受到的傷害提高33%。",
+ "Near a crowd or boss, blinds all but act bosses around you for 5.4s. They take 36% more damage.": "靠近怪物群或首領時，使你周圍除章節首領外的所有怪物目盲5.4秒。這些怪物受到的傷害提高36%。"
+}

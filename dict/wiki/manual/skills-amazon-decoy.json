@@ -1,0 +1,6 @@
+{
+ "A double appears every <0>12</0> seconds at level 1 and every <1>7.2</1> at level 5, never sooner than every <2>4</2>. It stands <3>4</3> seconds at level 1, <4>6.4</4> at level 5.": "分身在等級1時每<0>12</0>秒出現一次，等級5時每<1>7.2</1>秒一次，最快也不會短於每<2>4</2>秒。等級1時存在<3>4</3>秒，等級5時<4>6.4</4>秒。",
+ "Decoy, the Amazon's passive in D2 Survivors: A duplicate of you appears every few seconds to draw monsters, more often and longer by level.": "替身，亞馬遜在 D2 Survivors 中的被動技能：每隔幾秒出現一個你的分身來吸引怪物，等級越高出現越頻繁、持續越久。",
+ "Monsters strike it: the ones drawn to it, and most others that stand nearer to it than to you, never an act boss. Their missiles strike it too. It has <0>70%</0> of your life at level 1 and <1>150%</1> at level 5, and is gone when that is spent.": "怪物會攻擊它：被它吸引的怪物，以及大多數離它比離你更近的怪物，但章節首領絕不會。它們的飛彈也會擊中它。它在等級1時擁有你<0>70%</0>的生命，等級5時<1>150%</1>，生命耗盡就會消失。",
+ "Only normal monsters and champions that just walk up and swing, and swooping birds, are drawn to it, never uniques, act bosses or monsters that shoot, cast, charge, leap or breathe.": "只有單純走過來揮擊的普通怪物與精英怪物，以及俯衝的鳥類會被它吸引；獨特怪物、章節首領，以及會射擊、施法、衝鋒、跳躍或吐息的怪物都不會。"
+}

@@ -1,0 +1,14 @@
+{
+ "A Horadric Codex is rare. It drops from Normal on, mostly from elites and act bosses, never twice in a run. Magic Find raises its chance, and every run that finds none raises the next run’s a little, until one drops.": "赫拉迪姆寶典很稀有。從普通難度起掉落，主要來自精英與章節首領，一局絕不會掉兩本。魔寶尋獲率會提高其機率，每一局沒有掉落，下一局的機率就會稍微提高，直到掉落為止。",
+ "A run holds <0>6</0> skills and <1>6</1> passives on Normal, <2>8</2> and <3>8</3> on Nightmare, and <4>10</4> and <5>10</5> on Hell.": "一局在普通難度可擁有<0>6</0>個技能與<1>6</1>個被動技能，惡夢為<2>8</2>個與<3>8</3>個，地獄為<4>10</4>個與<5>10</5>個。",
+ "A skill evolves when three things are true: it is at its max level, you hold its catalyst passive, and your level has reached the evolution’s required level and the catalyst’s. The next chest then turns it into its evolution. An evolution banished in Akara’s re-draft doesn’t come until your next re-draft, past every Baal.": "技能在三個條件都成立時進化：已達最高等級、你擁有其觸媒被動技能，且你的等級已達到進化技能與觸媒的需要等級。接著下一個寶箱就會把它變成進化技能。在阿卡拉的重新抽選中被排除的進化，即使擊敗巴爾，也要到你下一次重新抽選才會出現。",
+ "A skill opens at its required level. Each level after that waits one character level more: a skill that opens at 12 can reach level 3 at character level 14.": "技能在其需要等級開放。之後每升一級，都要再多一個角色等級：12級開放的技能，在角色等級14時可達到等級3。",
+ "Every skill, passive, evolution and skill modifier in D2 Survivors, class by class.": "D2 Survivors 中每個技能、被動技能、進化技能與技能變體，依職業分類。",
+ "Evolutions only come from chests, never from level-up cards. An evolution has one level.": "進化技能只來自寶箱，絕不會來自升級卡片。進化技能只有一個等級。",
+ "How skills work": "技能如何運作",
+ "Once a skill has evolved, its base comes back to the level-up cards as a new skill at level 1, in a slot of its own. The exception: an evolution that carries what its base does (the pack it raised, its armor, its curse, the form it takes) keeps the base from coming back.": "技能進化後，其原技能會以等級1的新技能重新出現在升級卡片中，佔用自己的欄位。例外：承接原技能效果的進化技能（它召喚的群體、它的護甲、它的詛咒、它變身的形態），原技能不會再出現。",
+ "Skill modifiers: most skills and auras have two or three options. A Horadric Codex gives one point, up to <0>10</0> per class. A point turns on one option of one skill, and works in every run that holds that skill.": "技能變體：大多數技能與靈氣有兩到三個選項。一本赫拉迪姆寶典給一點，每個職業最多<0>10</0>點。一點可啟用一個技能的一個選項，並在擁有該技能的每一局生效。",
+ "Synergies work as in Diablo II: each level of the skills and passives a skill lists raises its damage. A skill learned again beside its own evolutions counts them too, except the Amazon’s and the Barbarian’s.": "協同加成與《暗黑破壞神 II》相同：技能列出的技能與被動技能每一級都會提升其傷害。與自己的進化技能並存而重新學會的技能也會計算那些進化技能，亞馬遜與野蠻人的除外。",
+ "You can move a point to another skill or option at any time from the skill window.": "你隨時可以在技能視窗把點數移到其他技能或選項。",
+ "Your skills cast on their own, each on its own recharge. Faster Cast Rate shortens a spell’s, Increased Attack Speed a weapon attack’s.": "你的技能會自動施放，各自有自己的冷卻時間。施法速度縮短法術的冷卻時間，攻擊速度縮短武器攻擊的冷卻時間。"
+}

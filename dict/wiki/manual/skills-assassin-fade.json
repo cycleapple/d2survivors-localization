@@ -1,0 +1,10 @@
+{
+ "+38% to all resistances, 4% Damage Reduced. Curses 62% shorter, poison and chill 17%.": "所有抗性 +38%，傷害降低4%。詛咒時效縮短62%，中毒與冰緩縮短17%。",
+ "+50% to all resistances, 8% Damage Reduced. Curses 71% shorter, poison and chill 29%.": "所有抗性 +50%，傷害降低8%。詛咒時效縮短71%，中毒與冰緩縮短29%。",
+ "+57% to all resistances, 12% Damage Reduced. Curses 76% shorter, poison and chill 38%.": "所有抗性 +57%，傷害降低12%。詛咒時效縮短76%，中毒與冰緩縮短38%。",
+ "+62% to all resistances, 16% Damage Reduced. Curses 80% shorter, poison and chill 44%.": "所有抗性 +62%，傷害降低16%。詛咒時效縮短80%，中毒與冰緩縮短44%。",
+ "+64% to all resistances, 20% Damage Reduced. Curses 82% shorter, poison and chill 50%.": "所有抗性 +64%，傷害降低20%。詛咒時效縮短82%，中毒與冰緩縮短50%。",
+ "As Diablo II’s curse resistance, the curses monsters lay on you last <0>62%</0> shorter at level 1 and <1>82%</1> at level 5, never more than <2>90%</2>.": "如同《暗黑破壞神 II》的詛咒抗性，怪物對你施加的詛咒持續時間在等級1時縮短<0>62%</0>，等級5時縮短<1>82%</1>，最多不超過<2>90%</2>。",
+ "Fade, the Assassin's passive in D2 Survivors: +38% to all resistances, 4% Damage Reduced. Curses 62% shorter, poison and chill 17%.": "影散，D2 Survivors 中刺客的被動技能：所有抗性 +38%，傷害降低4%。詛咒時效縮短62%，中毒與冰緩縮短17%。",
+ "Its resistances add to yours, under your caps. Its Damage Reduced is physical, and stops at <0>50%</0> with all your others, <1>75%</1> in Terror.": "它的抗性會加到你的抗性上，受你的上限限制。它的傷害降低只對物理傷害有效，與你其他所有來源合計最多<0>50%</0>，恐懼階中為<1>75%</1>。"
+}

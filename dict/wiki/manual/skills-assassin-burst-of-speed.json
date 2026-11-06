@@ -1,0 +1,11 @@
+{
+ "+39% movement speed (up to +70%) and 15% shorter recharge": "移動速度 +39%（最多 +70%），冷卻時間縮短15%",
+ "+49% movement speed (up to +70%) and 17% shorter recharge": "移動速度 +49%（最多 +70%），冷卻時間縮短17%",
+ "+55% movement speed (up to +70%) and 19% shorter recharge": "移動速度 +55%（最多 +70%），冷卻時間縮短19%",
+ "+59% movement speed (up to +70%) and 20% shorter recharge": "移動速度 +59%（最多 +70%），冷卻時間縮短20%",
+ "+61% movement speed (up to +70%) and 21% shorter recharge": "移動速度 +61%（最多 +70%），冷卻時間縮短21%",
+ "Assassin · Passive": "刺客 · 被動",
+ "Burst of Speed, the Assassin's passive in D2 Survivors: +39% movement speed (up to +70%) and 15% shorter recharge": "速度爆發，D2 Survivors 中刺客的被動技能：移動速度 +39%（最多 +70%），冷卻時間縮短15%",
+ "Gear’s +skills raise it past level 5, levelling off by <0>+70%</0> speed and <1>23%</1> shorter recharge.": "裝備的 +技能能讓它超過等級5，最終趨近於速度<0>+70%</0>、冷卻時間縮短<1>23%</1>。",
+ "Its speed adds into one pool with Faster Run/Walk. Its shorter recharge counts with Faster Cast Rate, under the same cap, past which it counts at half (see <0>Stats</0>).": "它的速度與跑步 / 行走速度合併計算。它縮短的冷卻時間與施法速度一起計算，受同一個上限限制，超過上限的部分只算一半（見<0>數值</0>）。"
+}

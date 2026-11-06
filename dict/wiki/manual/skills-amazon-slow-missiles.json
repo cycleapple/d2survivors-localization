@@ -1,0 +1,11 @@
+{
+ "Each monster missile slows once, as it’s fired, and keeps its range. A lightning bolt drawn whole the moment it’s fired, as a monster’s Lightning is, isn’t slowed.": "每個怪物投射物只在發射時減速一次，射程不變。像怪物的閃電那樣在發射瞬間就整道出現的閃電，不會被減速。",
+ "From an item (Peace, Sanctuary) at a level above yours, they fly Diablo II’s <0>67%</0> slower whatever its level, or as slow as yours makes them where that is slower.": "由等級高於你的物品施放時（和平、庇護），不論其等級，投射物都會如《暗黑破壞神 II》減慢<0>67%</0>；若你自己的效果更慢，則以你的為準。",
+ "Gear’s +skills take it past level 5, up to <0>70%</0> slower.": "裝備的 +技能能讓它超過等級5，最多減慢<0>70%</0>。",
+ "Monsters' missiles fly 10% slower.": "怪物的投射物飛行速度減慢10%。",
+ "Monsters' missiles fly 20% slower.": "怪物的投射物飛行速度減慢20%。",
+ "Monsters' missiles fly 30% slower.": "怪物的投射物飛行速度減慢30%。",
+ "Monsters' missiles fly 40% slower.": "怪物的投射物飛行速度減慢40%。",
+ "Monsters' missiles fly 50% slower.": "怪物的投射物飛行速度減慢50%。",
+ "Slow Missiles, the Amazon's passive in D2 Survivors: Monsters' missiles fly 10% slower.": "緩箭術，D2 Survivors 中亞馬遜的被動技能：怪物的投射物飛行速度減慢10%。"
+}
