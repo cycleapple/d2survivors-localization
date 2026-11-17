@@ -47,7 +47,7 @@ function pattern(src) {
 }
 
 export const WEB_PLAY_URL = 'https://d2survivors.lol/play/';
-export const WEB_CHECKED = '2026-11-05T21:19:54.502Z';
+export const WEB_CHECKED = '2026-11-17T01:23:17.987Z';
 
 export const WEB_LANGUAGES = [
   {
@@ -137,11 +137,16 @@ export const WEB_RULES = [
   // 排行榜：照原版送（2026-11-01 起；之前一律不上傳）。書籤只改文字和版面、不改玩法；紀錄照實送，
   // lang 是實際的語言（zh-TW…），不碰 tainted、webdriver 這類判斷。見 docs/web.md「排行榜和問題回報」
   // 問題回報（REPORT）不送：翻譯版的錯誤不該送給原作者。佇列裡原版留下的回報原封不動
-  // 遊戲 20261102 起回報的程式從 saveTransfer 搬到 leaderboardSend，20261103 起又搬到 report，三個檔名都接受
+  // 遊戲 20261102 起回報的程式從 saveTransfer 搬到 leaderboardSend，20261103 起又搬到 report，三個檔名都接受。
+  // 送出函式的回傳值有兩種寫法，一條規則都接受（lookahead 只認，不改原本的程式）：
+  //   正式版：let t=await sd(…);return …?`sent`:… → 回傳 `refused`（畫面顯示原版的「被拒」訊息）
+  //   beta（/next/，2026-11-15）：let{status:t,code:n}=await Wb(…);return …?{result:`sent`,code:null}:…
+  //     → 回傳 {result:`refused`,code:null}（code 是 null 時顯示「伺服器拒收，不是因為內容；請稍後再試，或複製診斷資料到 Discord」）
+  //   $3 是 beta 才有的 `{status:`：放進字串常數裡選回傳的格式
   {
     label: '回報：不送出', groups: ['base'], file: '^(saveTransfer|leaderboardSend|report)-.*\\.js$',
-    find: pattern('async function <1>(<2>){let <3>=await <4>(JSON.stringify(<2>));return <3>!==null&&<3>>=200&&<3><300?`sent`:'),
-    replace: 'async function $1($2){return`refused`;let $3=await $4(JSON.stringify($2));return $3!==null&&$3>=200&&$3<300?`sent`:',
+    find: `async function ${ID}\\(${ID}\\)\\{(?=let(?: |(\\{status:))${ID}(?:,code:[\\w$]+\\})?=await [\\w$]+\\(JSON\\.stringify\\(\\2\\)\\);return \\4!==null&&\\4>=200&&\\4<300\\?(?:\\{result:)?\`sent\`)`,
+    replace: 'async function $1($2){return`$3`?{result:`refused`,code:null}:`refused`;',
   },
   {
     label: '回報：不送出佇列', groups: ['base'], file: '^(saveTransfer|leaderboardSend|report)-.*\\.js$',

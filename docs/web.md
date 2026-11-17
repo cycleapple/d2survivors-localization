@@ -91,6 +91,11 @@ node tools/serve.mjs site 8766      # 本機預覽（允許跨網域讀取）；
 - 專家級報到（`/hc/checkin`）的內容是 player、name、build（和已經有的 mark），沒有 `lang`
 - 驗證：用 `site/web/core.js` 對抓下來的遊戲模組套 zh-TW 的規則，`saveTransfer` 的送出函式、排進佇列、送出佇列、死亡回報都跟原版一字不差；問題回報的兩處有改。`build-web.mjs` 八種語言全部 ✓。沒有在遊戲裡實際打一局（會送到正式的排行榜）
 - 2026-11-02 的遊戲版本把排行榜佇列、死亡回報和問題回報（`/api/report`、`d2s:report-queue`）原封不動搬到新模組 `leaderboardSend`，`saveTransfer` 裡已經沒有。舊規則只對 `saveTransfer`，所以兩條回報規則對不上、書籤載入失敗；改成兩個檔名都接受。同一版的顯示設定在 SHOW DAMAGE 後面多了 WEATHER、SHOW DAMAGE 的說明也改了，省電畫質那一列改成接在 SHOW DAMAGE 前面，只對 `label`、`toggle`，說明再改也對得上。重驗：39 條規則七種語言全部套得上，`leaderboardSend` 的送出、排進佇列、送出佇列、死亡回報跟原版一字不差
+- 官方 beta 版（`/next/play/`，2026-11-15 看到，主程式 `game-CavqmBqN.js`）的回報送出函式改成回傳 `{result, code}`（呼叫端用 `result` 選訊息，`refused` 時再看 `code`）。「回報：不送出」改成一條規則兩種寫法都接受（2026-11-17）：`let` 後面是 `{status:` 就回傳 `` {result:`refused`,code:null} ``，不是就照舊回傳 `` `refused` ``（用 lookahead 認出寫法，只在函式開頭插一行 `return`）。畫面上的訊息：
+  - 正式版：「The report was refused. Shorten the text, or leave the screenshot out, and try again.」（原版的被拒訊息，字典已經有翻譯）
+  - beta：`code` 是 null，顯示「The server refused the report, and not for its text. Try again later, or copy the diagnostics and send them on Discord.」。beta 能選的訊息裡最合理的一個（其他的是「先寫幾個字」「聯絡方式格式」「截圖被拒」，都不對）；這句是新字串，字典還沒有，正式上線後翻譯那邊補
+  - `node tools/build-web.mjs --check` 和 `--check https://d2survivors.lol/next/play/` 八種語言全部必要規則 ✓。正式版的行為沒變（還是回傳 `` `refused` ``），已發布的 manifest 照樣能用，不用重新發布；beta 換成正式 `/play/` 之前，翻譯那邊重新產生 manifest 時就會帶上新規則
+  - 書籤不支援 `/next/`（測試伺服器，帳號之後會清掉），在那裡按書籤一樣提示要先打開首頁或遊戲頁面
 
 ### 2026-10-27 的舊決定（已經不適用）
 
