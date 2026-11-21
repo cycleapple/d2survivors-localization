@@ -147,8 +147,7 @@ jobs:
                 out.push(head);
                 line = line.slice(head.length);
               }
-              const next = cur ? `${cur}
-${line}` : line;
+              const next = cur ? `${cur}\n${line}` : line;
               if (!fits(next)) out.push(cur), (cur = line);
               else cur = next;
             }
