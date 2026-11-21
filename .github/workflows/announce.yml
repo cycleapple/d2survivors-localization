@@ -122,22 +122,34 @@ jobs:
           const COLOR = 0xc7a15a;
           const page = (lang) => `${SITE.base}${lang.toLowerCase()}/`;
 
-          // Discord 的上限：每個 embed 的 description 4096 字，每則訊息的 embed 加起來 6000 字、最多 10 個
+          // Discord 的上限：每個 embed 的 description 4096 字，每則訊息的 embed 加起來 6000 字、最多 10 個。
+          // 另外 Discord 會擋 UTF-8 太大的 embeds（文件沒寫；中日文一個字 3 bytes，4000 字約 11 KB 時回 413 40005，
+          // 俄文約 7.3 KB 還能發），所以也照 bytes 切：每則訊息的 embeds 轉成 JSON 不超過 MESSAGE_BYTES
           const DESC_MAX = 4000;
           const MESSAGE_MAX = 5800;
+          const DESC_BYTES = 6000;
+          const MESSAGE_BYTES = 7000;
+          const bytes = (s) => Buffer.byteLength(s, 'utf8');
+          const fits = (s) => s.length <= DESC_MAX && bytes(s) <= DESC_BYTES;
 
-          // 把幾行字切成幾段 description，每段不超過 DESC_MAX；只在行和行之間切（單獨一行太長才硬切）
+          // 把幾行字切成幾段 description，每段都 fits；只在行和行之間切（單獨一行太長才硬切）
           function chunks(lines) {
             const out = [];
             let cur = '';
             for (let line of lines) {
-              while (line.length > DESC_MAX) {
+              while (!fits(line)) {
                 if (cur) out.push(cur), (cur = '');
-                out.push(line.slice(0, DESC_MAX));
-                line = line.slice(DESC_MAX);
+                let head = '';
+                for (const ch of line) {
+                  if (!fits(head + ch)) break;
+                  head += ch;
+                }
+                out.push(head);
+                line = line.slice(head.length);
               }
-              const next = cur ? `${cur}\n${line}` : line;
-              if (next.length > DESC_MAX) out.push(cur), (cur = line);
+              const next = cur ? `${cur}
+${line}` : line;
+              if (!fits(next)) out.push(cur), (cur = line);
               else cur = next;
             }
             if (cur) out.push(cur);
@@ -156,7 +168,8 @@ jobs:
             const groups = [];
             for (const e of embeds) {
               const g = groups.at(-1);
-              if (g && g.length < 10 && g.reduce((s, x) => s + size(x), 0) + size(e) <= MESSAGE_MAX) g.push(e);
+              if (g && g.length < 10 && g.reduce((s, x) => s + size(x), 0) + size(e) <= MESSAGE_MAX
+                  && bytes(JSON.stringify([...g, e])) <= MESSAGE_BYTES) g.push(e);
               else groups.push([e]);
             }
             return groups.map((embeds, i) => ({
