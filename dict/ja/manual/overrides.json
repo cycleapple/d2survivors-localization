@@ -23,5 +23,6 @@
  "Keep a copy of your save: save it as a file in SAVES": "セーブデータのコピーを残しましょう: 「セーブデータ」でファイルとして保存できます",
  "On a touch screen, the buttons of SAVES, REPORT and the level-up no longer name keyboard keys": "タッチスクリーンでは、「セーブデータ」「報告」、レベルアップのボタンにキーボードのキーが表示されなくなりました",
  "Hide": "非表示",
- "Kept": "収集済み"
+ "Kept": "収集済み",
+ "Undo": "取り消し"
 }
