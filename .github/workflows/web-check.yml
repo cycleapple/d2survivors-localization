@@ -4,9 +4,10 @@
 # 修好規則、重新發布後，手動關掉 issue；下一次檢查失敗才會再開新的。
 name: Web check
 
+# 2026-11-21 起暫停排程：d2survivors.lol 網頁版 404，使用者說之後應該會關閉。要檢查時手動執行（Actions → Web check → Run workflow）
 on:
-  schedule:
-    - cron: '17 * * * *'
+  # schedule:
+  #   - cron: '17 * * * *'
   workflow_dispatch:
 
 permissions:
