@@ -369,7 +369,7 @@ key 的算法在 `tools/wiki-strings.mjs`，`build-wiki` 也用同一份才不�
 ## 正式版標準的做法（2026.1027.2，七種語言）
 
 字典層的名稱（`tools/langs.mjs` 的 `layers()` 依名稱排序合併，後面的蓋過前面的）：
-- `new-<版本>.json`：新版補翻；`new-extra-*`：韓文字典沒有的 key（舊改版說明、樣板）；`new-synergy-*`：技能協同清單（程式把技能名稱接成一段，要整段當 key，產生器 `work/agents/synergy/build.mjs`，技能改名後要重跑）；`new-runtime-*`：韓文 key 永遠對不到的執行時字串（`#` 放的是文字的、帶職業名稱的商店句子等）；`new-titles-*`：女性職業稱號 `title:<稱號>:f`（規則在 patch-rules／web-rules）；`new-death-*`
+- `new-<版本>.json`：新版補翻；`new-extra-*`：韓文字典沒有的 key（舊改版說明、樣板）；`new-synergy-*`：技能協同清單（程式把技能名稱接成一段，要整段當 key，產生器 `work/agents/synergy/build.mjs`，技能改名後要重跑）；`new-runtime-*`：韓文 key 永遠對不到的執行時字串（`#` 放的是文字的、帶職業名稱的商店句子等）；`new-titles-*`：女性職業稱號 `title:<稱號>:f`（規則在 patch-rules）；`new-death-*`
 - `review-<版本>.json`：第二輪審稿（每種語言三個新代理，`work/translation/make-review.mjs`、`apply-review.mjs`）；`review-global-*`：審稿員指出的全字典問題；`review-qa-*`：截圖檢查的修正；`review-todo-*`、`review-leftover-*`、`review-bases-*`
 - 德、法、俄、波蘭文的 `overrides.json` 由 `work/unify-eu.mjs` 產生，**不改 `review-*.json` 裡的 key**（審稿過的是最後決定）；樣板（有 `*`、`#`）不強制大寫
 - 合併：`bash work/translation/remerge.sh <語言…>`（歐洲語言會先重產 overrides）
