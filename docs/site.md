@@ -19,24 +19,24 @@ node tools/serve.mjs site 8766     # 本機預覽（或 python -m http.server 87
 | `/de/`、`/fr/`、`/ru/`、`/pl/` | Deutsch、Français、Русский、Polski |
 | `/zh-tw/wiki/…` | 官方 wiki 的繁中翻譯，路徑跟官方 `/wiki/…` 一樣（見下面「wiki」） |
 
-`BASE`（網站網址）在 `site/src/config.mjs` 的 `SITE.base`，暫定 `https://cycleapple.github.io/d2survivors-localization/`。換網域就改這個值再重新產生；canonical、hreflang、Open Graph、sitemap、書籤網址都從這裡來。頁面之間的連結和 CSS、JS 用相對路徑，本機預覽和子路徑都能用。
+`BASE`（網站網址）在 `site/src/config.mjs` 的 `SITE.base`，暫定 `https://cycleapple.github.io/d2survivors-localization/`。換網域就改這個值再重新產生；canonical、hreflang、Open Graph、sitemap 都從這裡來。頁面之間的連結和 CSS、JS 用相對路徑，本機預覽和子路徑都能用。
 
 ## 檔案
 
 | 檔案 | 說明 |
 |---|---|
-| `site/src/config.mjs` | 設定：`SITE`（BASE、下載網址、manifest 路徑、書籤路徑、manifest 讀不到時的版本號、中文化社群 Discord、更新紀錄筆數、「翻譯修正中」的時數）、`LINKS`（官方連結）、`SITE_LANGS`（介面語言）、`LANGUAGES`（遊戲翻譯語言清單） |
-| `site/src/i18n.mjs` | 每種介面語言的文字。`key@web` 是瀏覽器版專用的文字；`faq.items`、`sources.cards` 的連結第三欄標 `desktop`／`web` 只在那個版本顯示 |
+| `site/src/config.mjs` | 設定：`SITE`（BASE、下載網址、manifest 路徑、manifest 讀不到時的版本號、中文化社群 Discord、更新紀錄筆數、「翻譯修正中」的時數）、`LINKS`（官方連結：官方網站只剩下載頁，見「網頁書籤版（已移除）」）、`SITE_LANGS`（介面語言）、`LANGUAGES`（遊戲翻譯語言清單） |
+| `site/src/i18n.mjs` | 每種介面語言的文字 |
 | `site/src/shared.mjs` | 建置腳本和網頁共用：合併 manifest、產生語言進度、首頁資訊列、下載按鈕 |
 | `tools/build-site.mjs` | 頁面樣板，產生靜態頁 |
-| `site/app.js` | 語言頁的互動：版本切換、書籤按鈕、讀較新的 manifest 重畫 |
+| `site/app.js` | 語言頁的互動：截圖輪播、讀較新的 manifest 重畫、「翻譯修正中」提示 |
 | `site/root.js` | 首頁：標出建議語言 |
 | `tools/build-wiki.mjs`、`site/wiki.css` | wiki 繁中版的頁面樣板和樣式（見下面「wiki」） |
 | `site/style.css`、`site/assets/` | 樣式、截圖（`assets/shots/<語言>/`）、分享圖（`og.jpg`、`og-<語言>.jpg`，1200×630） |
 
 產生的檔案（commit 進 repo，部署時也會重新產生）：`site/index.html`、`site/<語言>/index.html`、`site/sitemap.xml`、`site/robots.txt`。**不要手動改**，改 `site/src/` 再重跑。
 
-`site/web/`（書籤，見 [web.md](web.md)）和 `site/data/`（manifest v2 和字典，見 [manifest-v2.md](manifest-v2.md)）是其他聊天室的，網站只讀不改。
+`site/data/`（manifest v2 和字典，見 [manifest-v2.md](manifest-v2.md)）是翻譯聊天室的，網站只讀不改。`site/web/` 是已經停掉的網頁書籤版留下的（之後會整個拿掉），網站不用、也不改。
 
 ## SEO
 
@@ -47,7 +47,7 @@ node tools/serve.mjs site 8766     # 本機預覽（或 python -m http.server 87
 - 首段要寫清楚是**把遊戲本身翻成該語言**，不是攻略（搜尋結果前面多半是攻略站的語言版）
 - 長度：title 約 60 字元（中日文約 30 字），description 約 160 字元（中日文約 100 字）；重要的詞放前面。不要堆關鍵字，也不要提其他翻譯作者
 - `sitemap.xml` 每個網址都附 hreflang 對照
-- 結構化資料（JSON-LD，在 `<head>`）：語言頁是 SoftwareApplication（桌面版啟動器，operatingSystem Windows）、WebApplication（瀏覽器版書籤）、FAQPage（只放兩個版本都看得到的題目，文字跟頁面一樣）；首頁是 WebSite。alternateName 用 i18n 的 `seo.alternateNames`。不寫 author／publisher。部署後用 Google 的「複合式搜尋結果測試」檢查
+- 結構化資料（JSON-LD，在 `<head>`）：語言頁是 SoftwareApplication（桌面版啟動器，operatingSystem Windows）、FAQPage（文字跟頁面一樣）；首頁是 WebSite。alternateName 用 i18n 的 `seo.alternateNames`。不寫 author／publisher。部署後用 Google 的「複合式搜尋結果測試」檢查
 - 站長平台驗證：`SITE.verify` 的 google、bing、baidu 有值才輸出 google-site-verification、msvalidate.01、baidu-site-verification
 - favicon：`site/favicon.svg`、`favicon.ico`（16／32／48）、`apple-touch-icon.png`（180），每頁都有 link（Google 搜尋結果的小圖示要真的網址）
 - 分享圖：`assets/og-<語言>.jpg`，背景是該語言的升級卡片截圖（見「截圖」），標題用該語言（i18n 的 `hero.title`、`og.subtitle`），og:image:alt 用 `og.alt`（背景還是繁中截圖時自動加 `shots.fallback`）；首頁用 `og.jpg`。改了這些文字要在本機跑 `node tools/build-site.mjs --og`（需要 ImageMagick 和 Windows 字型），產生的圖 commit 進 repo
@@ -63,16 +63,11 @@ node tools/serve.mjs site 8766     # 本機預覽（或 python -m http.server 87
   - 新加用標題字型（`var(--font-display)`）的元素時，要把它加進 `displayText`，不然那些中日文字會用系統字型
   - 量測：`work/` 以外的地方裝 Lighthouse，`node <lighthouse>/cli/index.js <網址> --only-categories=performance`；不要在沒有 package.json 的資料夾跑 `npm install`（會往上找到家目錄的 package.json）
 
-## 兩層分頁
+## 語言分頁和頁內導覽
 
-- 第一層是介面語言：各自一頁，用連結切換。寬螢幕是分頁（前面有 🌐）；1000px 以下放不下，改成在頁面最上面一次列出所有語言（`.lang-strip`，會折成兩、三行，目前的語言反白），標題列只留版本分頁。每個語言都用自己的語言寫，不用只寫一種語言的「語言」標籤或下拉選單，看不懂中文的訪客也找得到。之後語言再變多、寬螢幕的分頁放不下時，調高這個寬度
-- 第二層是版本：桌面版（啟動器，`#install`）、瀏覽器版（書籤，`#web`），同一頁裡切換。兩邊內容都在 HTML 裡，標 `data-only="desktop"`／`"web"`，用 CSS 藏起另一邊
-- 切換版本的地方有三個：
-  - 首屏標題下面的兩張大卡片（`.platform-pick`）：圖示、版本名稱、`platform.*.sub`、一句說明 `platform.*.desc`，上面一行 `platform.choose`。手機上也並排，不用捲動就看得到
-  - 標題列的小分頁：標題列固定在上方，捲到哪裡都在
-  - 安裝區塊開頭的小卡片（`.platform-pick.compact`）：按另一個版本會捲到那個版本的安裝區塊
-- 選中的卡片是金框、淡金底加 ✓，靠 `body[data-platform]` 的 CSS 判斷，JS 還沒跑也對
-- 顯示哪個版本：網址 `?platform=desktop`／`web` → `#install`／`#web` → 上次選的（localStorage）→ Windows 用桌面版，其他（Mac、Linux、手機）用瀏覽器版。在 `<body>` 開頭用一小段內嵌程式先決定，不會先閃一下桌面版
+- 介面語言各自一頁，用連結切換。寬螢幕是分頁（前面有 🌐）；1000px 以下放不下，改成在頁面最上面一次列出所有語言（`.lang-strip`，會折成兩、三行，目前的語言反白）。每個語言都用自己的語言寫，不用只寫一種語言的「語言」標籤或下拉選單，看不懂中文的訪客也找得到。之後語言再變多、寬螢幕的分頁放不下時，調高這個寬度
+- 標題列下面一排是頁內導覽（下載、來源、語言、安裝、常見問題，繁中頁加 Wiki）；760px 以下放不下，整排藏起來
+- 以前第二層是桌面版／瀏覽器版切換（`data-only`、`body[data-platform]`），2026-11 書籤版移除時拿掉了，現在只有桌面版
 
 ## manifest v2
 
@@ -90,7 +85,7 @@ node tools/serve.mjs site 8766     # 本機預覽（或 python -m http.server 87
 
 ## 「遊戲剛更新，翻譯修正中」
 
-- GitHub 上有開著的 `game-update` 標籤 issue（`SITE.gameUpdateLabel`）時，頁面上方（標題列下面）顯示提示。這個 issue 是每小時的 `.github/workflows/web-check.yml` 在必要規則對不上時開的，修好、重新發布後手動關掉
+- GitHub 上有開著的 `game-update` 標籤 issue（`SITE.gameUpdateLabel`）時，頁面上方（標題列下面）顯示提示。這個 issue 是 `.github/workflows/desktop-check.yml` 在必要規則對不上時開的（以前還有每小時的 `web-check.yml`，書籤版停掉後不跑了），修好、重新發布後手動關掉
 - `app.js` 在瀏覽器裡呼叫 GitHub API（`issues?labels=game-update&state=open&per_page=1`，未登入每個 IP 每小時 60 次）。API 失敗、被限流、回傳不是陣列時一律不顯示（寧可漏掉也不誤報）；結果在 sessionStorage 記 10 分鐘。HTML 裡預設是 `hidden`，不在建置時決定
 - 以前是看 manifest 的 `game.web_checked` 有沒有超過 3 小時，但那個時間只在發布時更新，發布 3 小時後一定誤報，2026-10-28 改掉了。不要再拿它判斷
 - 有中文化社群 Discord 時，提示後面加一句「最新消息請看中文化社群 Discord」
@@ -103,11 +98,11 @@ node tools/serve.mjs site 8766     # 本機預覽（或 python -m http.server 87
 ## 開源
 
 - repo 網址在 `SITE.repoUrl`。頁尾有「原始碼（GitHub）」連結（`footer.source`，在 Discord 和贊助中間）
-- 常見問題第二題「這是開源的嗎？」：程式（啟動器、書籤、網站、工具）是 MIT（`LICENSE`）；啟動器由 GitHub Actions 從公開原始碼編譯，Release 附 sha256；翻譯字典沒有開放授權、保留所有權利（`dict/LICENSE`），官方譯名屬於 Blizzard。不要寫成「全部開源」或「翻譯可以自由使用」
+- 常見問題第二題「這是開源的嗎？」：程式（啟動器、網站、工具）是 MIT（`LICENSE`）；啟動器由 GitHub Actions 從公開原始碼編譯，Release 附 sha256；翻譯字典沒有開放授權、保留所有權利（`dict/LICENSE`），官方譯名屬於 Blizzard。不要寫成「全部開源」或「翻譯可以自由使用」
 - SmartScreen 那題補一句原始碼和編譯過程都公開；回報問題那題加 GitHub Issues
-- SmartScreen 前面一題「翻譯版的成績會上傳排行榜嗎？」（兩個版本都顯示）：瀏覽器版用書籤翻譯時成績照常上傳，普通和專家模式都一樣，紀錄標示實際使用的語言；電腦版選翻譯語言時遊戲把紀錄標成 patched，要正常上榜在啟動器選 English。作者的伺服器收不收 en／ko 以外的語言還沒確認，只寫「會上傳」，不要寫「一定會出現在排行榜上」。專家模式照字典裡 Hardcore 的譯名（專家級、专家模式、ハードコア、Hardcore、Extrême、героический режим、hardkor）
+- SmartScreen 前面一題「翻譯版的成績會上傳排行榜嗎？」：選翻譯語言時遊戲把紀錄標成 patched，要正常上榜在啟動器選 English。（以前還有一段寫瀏覽器版用書籤時照常上傳，書籤版移除時拿掉了）
 - 常見問題的回答裡可以用 `{repo}`、`{license}`、`{dictLicense}`、`{issues}`、`{actions}`，建置時換成 repo 的網址（`REPO_LINKS`）
-- JSON-LD：SoftwareApplication（啟動器）加 `license`。WebApplication 不加（書籤會載入字典）；`codeRepository` 是 SoftwareSourceCode 的屬性，不放
+- JSON-LD：SoftwareApplication（啟動器）加 `license`；`codeRepository` 是 SoftwareSourceCode 的屬性，不放
 - 字典的授權定下來之後，要改這題和 `dict/LICENSE` 的說法
 
 ## 贊助
@@ -120,15 +115,14 @@ node tools/serve.mjs site 8766     # 本機預覽（或 python -m http.server 87
 
 ## 截圖
 
-規格在 [release.md](release.md) 的「宣傳截圖」：全部語言 available 之後，請啟動器、網頁書籤聊天室截圖，網站放進各語言頁。
+規格在 [release.md](release.md) 的「宣傳截圖」：全部語言 available 之後，請啟動器聊天室截圖，網站放進各語言頁。
 
 - 檔案：`site/assets/shots/<頁面 path>/<場景>.webp`（path 是 `zh-tw`、`zh-cn`、`ja`、`de`、`fr`、`ru`、`pl`），寬 1600 以內。各語言共用的（啟動器的語言畫面）放 `shots/all/`
 - 場景在 `config.mjs` 的 `SHOTS`：
-  - 遊戲（兩個版本都顯示）：`title` 標題畫面、`menu` 主選單、`levelup` 升級卡片、`item` 物品說明框、`character` 角色畫面、`skills` 技能樹、`hud` 遊戲中
+  - 遊戲：`title` 標題畫面、`menu` 主選單、`levelup` 升級卡片、`item` 物品說明框、`character` 角色畫面、`skills` 技能樹、`hud` 遊戲中
   - 桌面版：`launcher-lang` 啟動器的語言畫面、`launcher-main` 主畫面
-  - 瀏覽器版：`web-desktop` 電腦、`web-mobile` 手機直式
 - 每頁先找自己語言的，再找 `all/`，再沒有就用 `zh-tw/` 的，圖說後面加 `shots.fallback`（「圖為繁中版」）。三個地方都沒有的場景不顯示，所以只要放檔案、重新產生就好
-- 版面：遊戲畫面一排，寬螢幕一次兩張、手機一次一張，放不下時 app.js 加上一張／下一張按鈕（也可以橫向滑）。桌面版、瀏覽器版的畫面另一排，同高度並排（手機直式的圖比較窄），只在那個版本顯示。下面一行出處（`shots.credit`：「遊戲畫面：D2 Survivors（framara），使用玩家自己的 Diablo II 檔案」）
+- 版面：遊戲畫面一排，寬螢幕一次兩張、手機一次一張，放不下時 app.js 加上一張／下一張按鈕（也可以橫向滑）。啟動器的畫面另一排，同高度並排。下面一行出處（`shots.credit`：「遊戲畫面：D2 Survivors（framara），使用玩家自己的 Diablo II 檔案」）
 - 圖說是 i18n 的 `shots.<場景>`；img 的 width／height 建置時從 webp 讀
 - 結構化資料：SoftwareApplication 的 `screenshot` 是這一頁的遊戲畫面截圖
 - 換了 `levelup` 截圖要跑 `--og` 重做分享圖。`--check` 會列出每頁幾張截圖、幾張是自己語言的
@@ -138,41 +132,12 @@ node tools/serve.mjs site 8766     # 本機預覽（或 python -m http.server 87
 
 固定指到 `https://github.com/cycleapple/d2survivors-localization/releases/latest/download/d2s-launcher.exe`（`SITE.downloadUrl`）。manifest 裡有 `launcher.latest` 才算已發布（`publish.mjs` 只在有 GitHub Release 時寫入），在那之前按鈕顯示「即將推出」。
 
-## 書籤
+## 網頁書籤版（已移除）
 
-書籤網址是 `BASE + web/d2zh.js`，建置時寫進 HTML。本機預覽時書籤也是指到正式網址。
-
-書籤依網頁語言決定：各語言頁的書籤帶自己的語言 `m.default('zh-TW')`（`SITE_LANGS` 的 `id`），在哪一頁裝就固定開那個語言；英文頁不帶參數，由書籤自己選（瀏覽器語言、上次用的）。電腦拖曳的按鈕和手機複製的程式碼是同一段。原因是 Android 上在遊戲裡換語言會卡住，所以「使用方式」寫的是到那個語言的網頁重裝書籤，手機上建議用書籤換語言。書籤名稱 `web.bookmark.name` 本來就各語言不同（「D2 中文化」「D2 日本語化」…），Android 在網址列打名稱找書籤也不會混在一起。
-
-書籤建議從 d2survivors.lol 首頁點，不要先開遊戲頁 /play/：先開遊戲頁的話原版會先載入，點了書籤停掉之後還是佔著記憶體，手機上等於兩份遊戲，容易被瀏覽器自動重新整理；從首頁點原版根本不會載入，載入時間也只要一半。所以電腦第 3 步、手機第 5 步、「使用方式」都寫「打開首頁 → 點書籤，在遊戲頁點也可以」，手機特別建議首頁。再點一次書籤會回到原版英文遊戲頁面。
-
-書籤的「省電畫質」開關（遊戲的「選項 → 顯示設定」，解析度降低、比較順、比較不燙）：名稱放在 i18n 的 `web.lowpower`，文字裡寫 `{lowpower}`，建置時換掉（`fillLangs`）。書籤聊天室定了正式名稱只改 `web.lowpower`。選單路徑寫遊戲翻譯後的名稱（字典的 Options、VIDEO OPTIONS、GAME OPTIONS）。「使用方式」第 4 項和常見問題「手機玩到一半自動重新整理？」用到它。
-
-### Hosted files 停止提供的預告
-
-- 2026-11 遊戲新增 /play/setup.html，要玩家選自己的檔案（電腦上的 D2 1.14 或 D2R 安裝資料夾）或 Hosted files；官方說 Hosted files 很快會拿掉，沒有日期。拿掉後觸控手機讀不了安裝資料夾，只會看到「已停止提供」頁；電腦要選「USE MY OWN FILES…」，書籤照樣能用；桌面版不受影響
-- 網站上的預告：
-  - 書籤區塊開頭的黃框 `web.hosted`（`.web-hosted`）
-  - 手機卡片標題下一行 `web.mobile.hosted`
-  - 常見問題「可以在 Mac、Linux 或手機上玩嗎？」最後加一段
-  - 新的瀏覽器版題目「官方說要停止提供遊戲檔案，會怎樣？」
-- 語氣中性，寫成遊戲本身的改變、書籤沒辦法改變，不寫成我們能解決。按鈕名稱寫英文原文「USE MY OWN FILES…」，括號附翻譯，因為設定頁不一定有翻譯
-- 官方真的拿掉之後，把「預告／很快」改成現況，手機的說明和教學也要重新檢討
-
-### 手機書籤教學
-
-- 瀏覽器版的「手機」卡片：複製程式碼的按鈕下面，iPhone（Safari）／Android（Chrome）兩個分頁，各五步：複製 → 加入書籤 → 打開書籤編輯 → 名稱改成建議名稱、網址換成程式碼 → 到 d2survivors.lol 首頁執行（iPhone 從書籤清單點，Android 在網址列打名稱再點有 ☆ 的建議；補充寫首頁比較省記憶體，在遊戲頁也可以）
-- 每步一個用 HTML/CSS 畫的示意畫面（`.phone`，`build-site.mjs` 的 `mobileGuide`），不用截圖：各語言用自己的文字，也不影響手機速度
-  - 深色模式的 Safari／Chrome，配網站的色調。只畫跟這一步有關的那一截：`.crop-top`（下緣淡出）、`.crop-bottom`（上緣淡出）
-  - 第 1 步畫本站的縮小版（標題、金色複製按鈕），最後一步畫 d2survivors.lol 首頁上的 D2 Survivors 標題（只用文字和 CSS，不用遊戲美術）
-  - 每個畫面只有一個要按的地方（`.tap`：金色光暈加點按漣漪，`prefers-reduced-motion` 時關掉漣漪）；次要的提示用 `.glow`
-- 每步下面是粗體短標題、一句說明、需要時一行小字補充。手機上一次一張（置中），下面是上一張／下一張和第幾步的圓點（app.js，高度跟著目前那一步）；761px 以上直接排成格子，不輪播
-- 文字在 i18n：`guide.tab.*`、`guide.ios.steps`、`guide.android.steps`（每步 `[標題, 說明, 補充]`；`{copy}`、`{name}`、`{home}`（首頁）、`{play}`（遊戲頁）和 `guide.ui` 的 key 會被換掉）、`guide.ui`（示意畫面裡 Safari、Chrome 的按鈕文字，照各語言的系統用語）、`guide.note`（畫面僅供參考）
-- 瀏覽器版卡片的標題（`#web .card > h3`）用內文字型：Cinzel 的小寫是小型大寫，「iPhone」會變成「iPHONE」
-- 建議的書籤名稱就是 `web.bookmark.name`（電腦版拖曳按鈕的名字，常見問題也用同一個）
-- iOS 26 以後 Safari 的分享、書籤按鈕收進「⋯」選單，說明裡有寫；Safari、Chrome 改版時檢查 `guide.ui` 和說明
-- 預設分頁照裝置：Android 用 Android，其他用 iPhone。沒有 JS 時兩套都顯示
-- 常見問題有一題「加入主畫面後可以用中文嗎？」：不行（全螢幕沒有網址列和書籤，翻譯也不會留到下次）
+- 2026-11 官方移除了網頁版（d2survivors.lol/play/）和 wiki，使用者決定我們的網頁書籤版也跟著停掉。網站拿掉了書籤安裝區塊、桌面版／瀏覽器版切換、手機書籤教學、瀏覽器版截圖（`web-desktop`、`web-mobile`）、常見問題裡書籤和手機的題目（含省電畫質那題）、結構化資料的 WebApplication。舊的做法看 git 紀錄（2026-11-22 以前的 `build-site.mjs`、`i18n.mjs`、這份文件）
+- 首屏說明下面一行 `hero.webRemoved`（`.hero-note`）：「官方網頁版已經移除，翻譯只支援桌面版」，八種語言都有
+- 常見問題「可以在 Mac、Linux 或手機上玩嗎？」改成「目前不行」：啟動器只有 Windows 版，官方網頁版移除後書籤也停了
+- 官方網站：2026-11-22 檢查時首頁（`/`）、`/play/`、`/wiki/`、`/leaderboards/`、`/faq/` 都是 404，只剩 `/download/`。所以 `LINKS` 沒有官方首頁，來源卡片只連下載頁和遊戲官方 Discord，頁尾的「D2 Survivors」連到下載頁。官方網站恢復的話再加回來
 
 ## 加一種介面語言（例如 /de/）
 
@@ -183,7 +148,6 @@ node tools/serve.mjs site 8766     # 本機預覽（或 python -m http.server 87
    - 安裝步驟、還原原版、桌面捷徑裡的按鈕名稱：照 `launcher/src/i18n.rs` 的 `TABLE` 裡該語言的寫法（啟動器的介面跟著選的語言）；啟動器沒有的語言用英文那欄
    - SmartScreen 那題用該語言版 Windows 的按鈕文字
    - `shots.fallback`：還沒有自己語言的截圖時，圖說後面加的「圖為繁中版」
-   - 書籤名稱 `web.bookmark.name`
 3. `LANGUAGES` 每一筆的 `name` 加這個語言（沒加就顯示英文名稱）
 4. `style.css` 視需要加 `:root:lang(xx)` 的字型
 5. `node tools/build-site.mjs`。hreflang、sitemap、語言分頁、首頁卡片、首頁標題都會自動多一個
@@ -198,7 +162,7 @@ node tools/serve.mjs site 8766     # 本機預覽（或 python -m http.server 87
 
 ## wiki（/zh-tw/wiki/）
 
-官方 wiki（`https://d2survivors.lol/wiki/`）的繁中翻譯。分工和頁面規則見 [manifest-v2.md](manifest-v2.md) 的「wiki」，抓頁面和翻譯的流程見 [translation.md](translation.md) 的「wiki」。
+官方 wiki（`https://d2survivors.lol/wiki/`，2026-11 已移除）的繁中翻譯。**最後一版，不再跟官方同步**：官方 wiki 拿掉了，頁面不連回官方；之後只在改樣板時用本機的 `data/wiki/src/` 重新產生。分工和頁面規則見 [manifest-v2.md](manifest-v2.md) 的「wiki」，抓頁面和翻譯的流程見 [translation.md](translation.md) 的「wiki」。
 
 ```
 node tools/build-wiki.mjs        # data/wiki/src/ + dict/wiki/zh-TW.json → site/zh-tw/wiki/**（含 pages.json）
@@ -210,10 +174,10 @@ node tools/build-site.mjs        # 再跑這個，sitemap 和繁中首頁的 wik
 - **頁面怎麼來**：`build-wiki` 讀官方頁面的目錄（`.wiki-toc`）、路徑、`h1`、副標、`article`，換上我們網站的標題列、頁尾和樣式（`site/style.css` + `site/wiki.css`）。官方的 CSS、JS、圖片都不用
   - 每個 `data-in="en"` 換成譯文（key、佔位符和查法都用翻譯的 `tools/wiki-strings.mjs`：`enSpans` 給每個 span 的 key、tags 和 context，`lookup` 查譯文，技能變體名稱先查 `modifier:<名稱>`；`fillKey` 換回標籤。兩邊同一套才不會分岔），`data-in="ko"` 拿掉。沒有譯文或佔位符對不上的留英文、標 `lang="en"`
   - 拿掉：`script`、`style`、圖片、`svg`、`canvas`、表單元件（搜尋框、篩選器）、`.wiki-icon`（官方用玩家的遊戲檔畫的圖示）、有 `hidden` 的元素（等官方 JS 才顯示的）
-  - 用遊戲檔畫的清單（`data-items`：獨特、套裝、符文之語）換成一句說明，連到官方原頁。清單本身不在官方頁面裡（官方 JS 讀玩家的遊戲檔），我們不放遊戲檔
-  - 恐懼階轉盤（`terror` 頁的 `.wiki-dial`）做成 100 階的靜態表：每列一階，欄位和數字格式照 [translation.md](translation.md) 的「恐懼階轉盤」（倍數 `toFixed(2)`、10 以上 `toFixed(1)` 加 `×`；每波 = 怪物總數 ÷ `waves` 四捨五入）。欄名是 `wiki-data` 的 `text` 換成譯文，`/players` 不翻。表格放在自己能捲的框裡（最高 70vh），表頭和第一欄「階」固定，手機左右捲也看得到是第幾階；頁面本身不橫向捲動。沒有 `wiki-data` 的話一樣換成說明連到官方
-  - 連結：這次有產生的 wiki 頁面換成我們的相對網址，其他（遊戲、排行榜、FAQ、還沒產生的 wiki 頁面）連回官方，開新分頁
-- **每頁**：上方寫「非官方翻譯」、原頁連結、上次對照官方的日期（`pages.json` 的 `fetched`），還有幾段沒翻；頁尾保留官方的作者和暴雪版權聲明（有譯文用譯文，沒有就英文）。canonical 指自己，hreflang `zh-Hant`（自己）+ `en`（官方原頁）；結構化資料是 `WebPage`（`translationOfWork` 指官方原頁）和 `BreadcrumbList`
+  - 用遊戲檔畫的清單（`data-items`：獨特、套裝、符文之語）換成一句說明（清單本身不在官方頁面裡，官方 JS 讀玩家的遊戲檔；我們不放遊戲檔，官方 wiki 也已經移除，所以不連過去）
+  - 恐懼階轉盤（`terror` 頁的 `.wiki-dial`）做成 100 階的靜態表：每列一階，欄位和數字格式照 [translation.md](translation.md) 的「恐懼階轉盤」（倍數 `toFixed(2)`、10 以上 `toFixed(1)` 加 `×`；每波 = 怪物總數 ÷ `waves` 四捨五入）。欄名是 `wiki-data` 的 `text` 換成譯文，`/players` 不翻。表格放在自己能捲的框裡（最高 70vh），表頭和第一欄「階」固定，手機左右捲也看得到是第幾階；頁面本身不橫向捲動。沒有 `wiki-data` 的話一樣換成一句說明
+  - 連結：這次有產生的 wiki 頁面換成我們的相對網址。官方網站上已經移除的頁面（wiki、遊戲、排行榜、FAQ…）變成一般文字，不連；官方還在的（`OFFICIAL_LIVE`，目前只有 `/download/`）和其他網站照常連，開新分頁
+- **每頁**：上方寫「非官方翻譯」、原頁的英文名稱（不連，官方 wiki 已移除）、最後一次對照官方的日期（`pages.json` 的 `fetched`）、之後不再更新，還有幾段沒翻；頁尾保留官方的作者和暴雪版權聲明（有譯文用譯文，沒有就英文）。標題列右邊連到官方下載頁。canonical 指自己，hreflang 只有 `zh-Hant`（官方原頁已移除，不寫 `en`，sitemap 也一樣）；結構化資料是 `WebPage`（`translationOfWork` 只寫原頁名稱）和 `BreadcrumbList`
 - **lastmod**：內容跟上次一樣就沿用舊日期（比對時不看「上次對照」的日期，免得每次重抓都改掉全部頁面）
 - **官方刪掉的頁面**：`build-wiki` 比上一次的 `pages.json`，只刪我們產生的那頁 `index.html` 和空掉的資料夾
 - **手機**：寬螢幕目錄固定在左邊；900px 以下目錄收在內容上面，點「目錄」打開（沒有 JS 也是收著）。表格在 `.wiki-scroll` 裡左右捲，頁面本身不橫向捲動
@@ -222,7 +186,7 @@ node tools/build-site.mjs        # 再跑這個，sitemap 和繁中首頁的 wik
 
 ## 部署
 
-`.github/workflows/pages.yml`：push 到 `main` 時跑 `node tools/build-site.mjs`，把 `site/` 整個上傳到 GitHub Pages（含 `site/data/`、`site/web/`）。repo 的 Settings → Pages → Source 要選「GitHub Actions」。流程見 [release.md](release.md)。
+`.github/workflows/pages.yml`：push 到 `main` 時跑 `node tools/build-site.mjs`，把 `site/` 整個上傳到 GitHub Pages（含 `site/data/`、`site/zh-tw/wiki/`）。repo 的 Settings → Pages → Source 要選「GitHub Actions」。流程見 [release.md](release.md)。
 
 部署成功後會清 jsDelivr 的快取：啟動器連不上 GitHub Pages 時改讀 `https://cdn.jsdelivr.net/gh/cycleapple/d2survivors-localization@main/site/data/…`，jsDelivr 對 `@main` 最多快取 12 小時。只在這次 push 改到 `site/data/` 時清（手動執行 workflow 一律清），清的是 `manifest.json`、`changelog.json`、`dict/*.json`；字型不用（桌面版是內嵌的）。清除失敗只在 Actions 記警告，部署照樣算成功。
 

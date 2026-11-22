@@ -6,6 +6,9 @@
 // node tools/build-wiki.mjs --src <資料夾> --dict <檔案> --out <資料夾>   換來源或輸出位置（測試用）
 //
 // 譯文的 key 跟翻譯的工具一樣用 tools/wiki-strings.mjs 算
+//
+// 官方 wiki 在 2026-11 移除了：site/zh-tw/wiki/ 是最後一版，不再跟官方同步，只在改樣板時用本機的 data/wiki/src/ 重新產生。
+// 頁面上不連回官方 wiki（OFFICIAL_LIVE 以外的官方網址都變成一般文字）
 
 import fs from 'node:fs';
 import path from 'node:path';
@@ -15,6 +18,8 @@ import { I18N } from '../site/src/i18n.mjs';
 import { htmlKey, fillKey, enSpans, lookup, wikiData } from './wiki-strings.mjs';
 
 const OFFICIAL = 'https://d2survivors.lol/wiki/';
+// 官方 wiki 和首頁 2026-11 移除了（我們的是最後一版，不再同步）。官方網站上還在的頁面，連結才保留
+const OFFICIAL_LIVE = ['/download/'];
 const LANG = SITE_LANGS.find(l => l.id === 'zh-TW');
 const OUT_PATH = `${LANG.path}/wiki/`; // 相對於網站根目錄
 
@@ -22,19 +27,18 @@ const OUT_PATH = `${LANG.path}/wiki/`; // 相對於網站根目錄
 const T = {
   titleSuffix: 'D2 Survivors Wiki 繁體中文版',
   home: '繁中翻譯首頁',
-  official: '官方網站',
+  officialDownload: '官方下載頁',
   toc: '目錄',
   tocLabel: 'Wiki 目錄',
   crumbs: '目前位置',
-  notice: (link, date) => `<strong>非官方翻譯。</strong>本頁翻譯自 D2 Survivors 官方 wiki 的${link}，上次對照官方：${date}。內容以官方原文為準。`,
+  notice: (title, date) => `<strong>非官方翻譯。</strong>本頁翻譯自 D2 Survivors 官方 wiki 的${title}，最後一次對照官方：${date}。官方 wiki 已經移除，這裡保留最後一版，之後不再更新。`,
   untranslated: n => `這頁還有 ${n} 段沒翻譯，先顯示英文原文。`,
   // 官方用玩家自己的遊戲檔在瀏覽器裡畫的清單（物品等）：我們不放遊戲檔，連到官方原頁
-  dataList: link => `這份清單是官方網頁讀《暗黑破壞神 II》的遊戲檔畫出來的，這裡不放遊戲檔，請到${link}查看。`,
-  dataListLink: '官方原頁',
+  dataList: '這份清單原本是官方網頁讀《暗黑破壞神 II》的遊戲檔畫出來的。這裡不放遊戲檔，官方 wiki 也已經移除，所以沒有這份清單。',
   // 官方用 JS 做的互動表（恐怖區域的階級轉盤等）
   tiersLabel: '每一階的數字（可以左右、上下捲動）',
-  dataWidget: link => `這裡原本是官方網頁的互動表格，請到${link}使用。`,
-  sourceCredit: 'wiki 原文：D2 Survivors 官方 wiki（framara 製作），繁體中文由玩家翻譯。',
+  dataWidget: '這裡原本是官方網頁的互動表格，官方 wiki 已經移除，所以沒有這份表格。',
+  sourceCredit: 'wiki 原文：D2 Survivors 官方 wiki（framara 製作，已移除），繁體中文由玩家翻譯。',
 };
 
 // ---------- HTML：小型解析器（官方頁面是程式產生的，結構規律，不需要完整的 HTML5 解析） ----------
@@ -158,10 +162,10 @@ function localize(nodes, ctx) {
       out.push({ text: terrorTable(ctx.data, ctx) });
       continue;
     }
-    // 用遊戲檔畫的清單（data-items 等）：換成一句說明
+    // 用遊戲檔畫的清單（data-items 等）、沒有 wiki-data 的轉盤：換成一句說明
     const widget = attr(n, 'data-items') !== undefined ? T.dataList : hasClass(n, 'wiki-dial') ? T.dataWidget : null;
     if (widget) {
-      out.push({ text: `<p class="wiki-data-note">${widget(`<a href="${escAttr(ctx.official)}" target="_blank" rel="noopener">${T.dataListLink}</a>`)}</p>` });
+      out.push({ text: `<p class="wiki-data-note">${widget}</p>` });
       continue;
     }
     let el = n.attrs.some(([k]) => k === 'href') ? link(n, ctx) : n;
@@ -223,15 +227,17 @@ ${data.rows.map(r => `  <tr>${cols.map(([, f, c], i) => (i ? `<td${c ? ` class="
 </table></div>`;
 }
 
-// 連結：wiki 頁面之間（這次有產生的頁面）換成我們的，其他（遊戲、排行榜、FAQ、還沒有譯文的頁面）連回官方
+// 連結：wiki 頁面之間（這次有產生的頁面）換成我們的。官方網站已經移除的頁面（wiki、遊戲、排行榜、FAQ…）不連，變成一般文字；
+// 官方網站上還在的（OFFICIAL_LIVE）和其他網站照常連，開新分頁
+const unlink = n => ({ ...n, tag: 'span', attrs: n.attrs.filter(([k]) => k === 'class') });
 function link(n, ctx) {
   const href = decode(attr(n, 'href'));
   if (href.startsWith('#')) return n;
   let u;
-  try { u = new URL(href, ctx.official); } catch { return withAttr(n, 'href'); }
-  if (u.pathname.startsWith('/cdn-cgi/')) return withAttr(n, 'href'); // Cloudflare 的信箱保護
+  try { u = new URL(href, ctx.official); } catch { return unlink(n); }
   const p = wikiPath(u.href);
   if (p !== null && ctx.pages.has(p)) return withAttr(n, 'href', escAttr(relWiki(ctx.path, p) + u.hash));
+  if (u.origin === new URL(OFFICIAL).origin && !OFFICIAL_LIVE.includes(u.pathname)) return unlink(n);
   let el = withAttr(n, 'href', escAttr(u.href));
   if (u.protocol.startsWith('http')) el = withAttr(withAttr(el, 'target', '_blank'), 'rel', 'noopener');
   return el;
@@ -297,7 +303,6 @@ function buildPage(src, p, ctx) {
   <meta name="color-scheme" content="dark">
   <link rel="canonical" href="${url}">
   <link rel="alternate" hreflang="zh-Hant" href="${url}">
-  <link rel="alternate" hreflang="en" href="${c.official}">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="D2 Survivors Localization">
   <meta property="og:title" content="${escAttr(title)}">
@@ -324,8 +329,8 @@ function buildPage(src, p, ctx) {
         description,
         url,
         inLanguage: 'zh-Hant',
-        isBasedOn: c.official,
-        translationOfWork: { '@type': 'WebPage', url: c.official, name: enTitle, inLanguage: 'en' },
+        // 原頁（官方 wiki）已經移除，只寫名稱
+        translationOfWork: { '@type': 'WebPage', name: enTitle, inLanguage: 'en' },
         dateModified: ctx.checked,
       },
       ...(breadcrumb.length > 1 ? [{
@@ -342,7 +347,7 @@ function buildPage(src, p, ctx) {
       <nav class="wiki-topnav">
         <a href="${prefix}${LANG.path}/">${T.home}</a>
         <a href="${wikiHome}"${p ? '' : ' aria-current="page"'}>Wiki</a>
-        <a href="${escAttr(new URL(OFFICIAL).origin + '/')}" target="_blank" rel="noopener">${T.official} ↗</a>
+        <a href="${escAttr(new URL(OFFICIAL_LIVE[0], OFFICIAL).href)}" target="_blank" rel="noopener">${T.officialDownload} ↗</a>
       </nav>
     </div>
   </header>
@@ -356,7 +361,7 @@ function buildPage(src, p, ctx) {
     </aside>
     <main class="wiki-page">
       ${crumbsHtml ? `<nav class="wiki-crumbs" aria-label="${T.crumbs}">${crumbsHtml}</nav>` : ''}
-      <p class="wiki-notice" role="note">${T.notice(`〈<a href="${escAttr(c.official)}" target="_blank" rel="noopener" hreflang="en" lang="en">${escText(enTitle)}</a>〉`, `<time class="wiki-checked" datetime="${ctx.checked}">${ctx.checked}</time>`)}${missing ? ` <span class="wiki-missing">${T.untranslated(missing)}</span>` : ''}</p>
+      <p class="wiki-notice" role="note">${T.notice(`〈<span lang="en">${escText(enTitle)}</span>〉`, `<time class="wiki-checked" datetime="${ctx.checked}">${ctx.checked}</time>`)}${missing ? ` <span class="wiki-missing">${T.untranslated(missing)}</span>` : ''}</p>
       <header class="doc-head">
         <h1>${titleHtml}</h1>
         ${subHtml ? `<p class="doc-sub">${subHtml}</p>` : ''}

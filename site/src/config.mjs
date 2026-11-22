@@ -2,14 +2,12 @@
 // 這個檔案建置腳本（Node）和網頁的 app.js 都會讀，不能用到 Node 或瀏覽器專屬的東西。
 
 export const SITE = {
-  // 網站網址（結尾要有 /）。換網域改這裡再重新產生；canonical、hreflang、sitemap、書籤網址都從這裡來
+  // 網站網址（結尾要有 /）。換網域改這裡再重新產生；canonical、hreflang、sitemap 都從這裡來
   base: 'https://cycleapple.github.io/d2survivors-localization/',
   // 啟動器固定下載網址（最新的 GitHub Release）。manifest 裡有 launcher.latest 才算已發布，之前按鈕顯示「即將推出」
   downloadUrl: 'https://github.com/cycleapple/d2survivors-localization/releases/latest/download/d2s-launcher.exe',
   // manifest v2，相對於網站根目錄
   manifestPath: 'data/manifest.json',
-  // 網頁版書籤載入的程式，相對於網站根目錄
-  bookmarkletPath: 'web/d2zh.js',
   // manifest 讀不到時用的數字
   fallback: { gameVersion: '2026.1027.2', launcherVersion: '1.0.0' },
   // 中文化社群的 Discord 邀請連結（使用者自己的伺服器，不是遊戲官方的 LINKS.d2sDiscord）。留空就不顯示
@@ -26,16 +24,13 @@ export const SITE = {
   feedbackUrl: '',
   // 更新紀錄顯示幾筆（site/data/changelog.json，manifest 的 changelog.url）
   changelogCount: 5,
-  // 「遊戲剛更新，翻譯修正中」：repoUrl 上有開著的這個標籤的 issue 才顯示（每小時的 web-check.yml 檢查失敗時開，修好後手動關）。
-  // manifest 的 game.web_checked 只在發布時更新，不能拿來判斷
+  // 「遊戲剛更新，翻譯修正中」：repoUrl 上有開著的這個標籤的 issue 才顯示（desktop-check.yml 檢查失敗時開，修好後手動關）
   gameUpdateLabel: 'game-update',
 };
 
-// 官方連結（D2 Survivors 官網上的 Battle.net 商店連結也是這個）
+// 官方連結（D2 Survivors 官網上的 Battle.net 商店連結也是這個）。官方網頁版、wiki、首頁都已移除（2026-11），只剩下載頁
 export const LINKS = {
-  d2sHome: 'https://d2survivors.lol/',
   d2sDownload: 'https://d2survivors.lol/download/',
-  d2sPlay: 'https://d2survivors.lol/play/',
   d2sDiscord: 'https://discord.gg/mYMGgZPuQb',
   bnetShop: 'https://us.shop.battle.net/en-us/family/diablo-ii',
   bnetApp: 'https://download.battle.net/',
@@ -58,11 +53,10 @@ export const SITE_LANGS = [
 
 // 宣傳截圖（規格見 docs/release.md 的「宣傳截圖」）：site/assets/shots/<頁面 path>/<場景>.webp。
 // 每頁先找自己語言的，沒有就找 all/（各語言共用的），再沒有就用 zh-tw/ 的並在圖說註明（shots.fallback）；都沒有的場景不顯示。
-// 圖說是 i18n 的 shots.<場景>。game 是並排輪播，desktop／web 只在那個版本顯示
+// 圖說是 i18n 的 shots.<場景>。game 是遊戲畫面的輪播，desktop 是啟動器的畫面（另一排）
 export const SHOTS = {
   game: ['title', 'menu', 'levelup', 'item', 'character', 'skills', 'hud'],
   desktop: ['launcher-lang', 'launcher-main'],
-  web: ['web-desktop', 'web-mobile'],
 };
 // 分享圖（og-<path>.jpg）的背景用哪個場景
 export const OG_SHOT = 'levelup';

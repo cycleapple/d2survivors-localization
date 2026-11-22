@@ -1,5 +1,5 @@
 # 網站：push 到 main 時重新產生靜態頁（tools/build-site.mjs），把 site/ 整個部署到 GitHub Pages。
-# site/data/（manifest v2、字典）和 site/web/（書籤）是其他聊天室 commit 的，跟著一起上傳。
+# site/data/（manifest v2、字典，翻譯聊天室 commit 的）和 site/zh-tw/wiki/（tools/build-wiki.mjs 在本機產生的）跟著一起上傳。
 # repo 的 Settings → Pages → Source 要選「GitHub Actions」。
 name: Pages
 

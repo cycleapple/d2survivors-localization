@@ -93,31 +93,6 @@
    "license": "https://github.com/cycleapple/d2survivors-localization/blob/main/LICENSE"
   },
   {
-   "@type": "WebApplication",
-   "@id": "https://cycleapple.github.io/d2survivors-localization/en/#bookmark",
-   "name": "D2 Survivors Translations – Browser",
-   "description": "Get the bookmark",
-   "url": "https://cycleapple.github.io/d2survivors-localization/en/#web",
-   "applicationCategory": "GameApplication",
-   "operatingSystem": "Any",
-   "browserRequirements": "Chrome, Edge, Firefox, Safari",
-   "inLanguage": [
-    "zh-TW",
-    "zh-CN",
-    "ja",
-    "de",
-    "fr",
-    "ru",
-    "pl"
-   ],
-   "isAccessibleForFree": true,
-   "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
-   }
-  },
-  {
    "@type": "FAQPage",
    "@id": "https://cycleapple.github.io/d2survivors-localization/en/#faq",
    "inLanguage": "en",
@@ -135,7 +110,7 @@
      "name": "Is this open source?",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "\u003cp>The code is. The source for the launcher, the bookmark, this website, and the tools is on \u003ca href=\"https://github.com/cycleapple/d2survivors-localization\" target=\"_blank\" rel=\"noopener\">GitHub\u003c/a> under the \u003ca href=\"https://github.com/cycleapple/d2survivors-localization/blob/main/LICENSE\" target=\"_blank\" rel=\"noopener\">MIT License\u003c/a>. The launcher is built automatically from that public source by GitHub Actions (\u003ca href=\"https://github.com/cycleapple/d2survivors-localization/actions/workflows/release-launcher.yml\" target=\"_blank\" rel=\"noopener\">build history\u003c/a>), and every release includes d2s-launcher.exe.sha256 so you can check it yourself.\u003c/p>\u003cp>The translation data (the dictionaries) is not openly licensed yet; all rights are reserved, see \u003ca href=\"https://github.com/cycleapple/d2survivors-localization/blob/main/dict/LICENSE\" target=\"_blank\" rel=\"noopener\">dict/LICENSE\u003c/a>. The official terms used in them belong to Blizzard Entertainment.\u003c/p>"
+      "text": "\u003cp>The code is. The source for the launcher, this website, and the tools is on \u003ca href=\"https://github.com/cycleapple/d2survivors-localization\" target=\"_blank\" rel=\"noopener\">GitHub\u003c/a> under the \u003ca href=\"https://github.com/cycleapple/d2survivors-localization/blob/main/LICENSE\" target=\"_blank\" rel=\"noopener\">MIT License\u003c/a>. The launcher is built automatically from that public source by GitHub Actions (\u003ca href=\"https://github.com/cycleapple/d2survivors-localization/actions/workflows/release-launcher.yml\" target=\"_blank\" rel=\"noopener\">build history\u003c/a>), and every release includes d2s-launcher.exe.sha256 so you can check it yourself.\u003c/p>\u003cp>The translation data (the dictionaries) is not openly licensed yet; all rights are reserved, see \u003ca href=\"https://github.com/cycleapple/d2survivors-localization/blob/main/dict/LICENSE\" target=\"_blank\" rel=\"noopener\">dict/LICENSE\u003c/a>. The official terms used in them belong to Blizzard Entertainment.\u003c/p>"
      }
     },
     {
@@ -143,7 +118,39 @@
      "name": "Can I play on Mac, Linux, or a phone?",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "\u003cp>Yes. The launcher is Windows-only for now; on Mac, Linux, and phones, play the \u003ca href=\"https://d2survivors.lol/play/\" target=\"_blank\" rel=\"noopener\">web version\u003c/a> and use the bookmark from the Browser tab.\u003c/p>\u003cp>Note: the developer says the web version will soon stop providing the game files (no date yet). After that, phones and tablets can’t play; on a computer, pick your own Diablo II install folder on the game’s setup page.\u003c/p>"
+      "text": "\u003cp>Not at the moment. The launcher is Windows-only, and since the official web version has been removed, our browser bookmark is gone too. For now there is no way to use these translations on Mac, Linux, or phones.\u003c/p>"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Will it touch my saves?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "\u003cp>No. The launcher only replaces resources\\app.asar in the game folder, after backing up the original. Saves live elsewhere and are never read or changed.\u003c/p>"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "What happens when the game updates?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "\u003cp>A game update replaces app.asar, so the translation disappears until you start the game from the launcher or its shortcut again, which re-applies it.\u003c/p>\u003cp>If a new version changed too much for the patch rules to match, the launcher doesn’t force anything: it starts the original game and says the translation is being fixed. Once it’s fixed, the next start applies it again automatically; you don’t need to do anything.\u003c/p>"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Why does the in-game language menu show my language instead of Korean?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "\u003cp>The translation borrows the game's built-in Korean language slot, so after applying it the menu shows the name of the language you picked (for example 简体中文) where Korean used to be. To play in Korean, pick 한국어 (원본) in the launcher.\u003c/p>"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Why is some text still in English?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "\u003cp>All of the game’s text is translated and has been checked in game for anything left untranslated. If you see English, the game has probably just been updated with new text; a later translation update fills it in, and the launcher downloads it automatically. If it stays in English, please let us know.\u003c/p>"
      }
     },
     {
@@ -151,7 +158,15 @@
      "name": "Are runs sent to the leaderboard when the game is translated?",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "\u003cp>In the browser, yes. With the bookmark, runs are sent to the leaderboard as usual, Normal and Hardcore alike, and each record shows the language you actually played in (for example zh-TW).\u003c/p>\u003cp>On desktop, picking a translated language makes the game mark records as patched; to show up normally, pick English under “Game language” in the launcher.\u003c/p>"
+      "text": "\u003cp>Picking a translated language makes the game mark records as patched; to show up normally, pick English under “Game language” in the launcher.\u003c/p>"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Windows says “Windows protected your PC”. What do I do?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "\u003cp>The launcher isn’t code-signed (a signing certificate costs money every year), so Windows SmartScreen warns about it until enough people have downloaded it.\u003c/p>\u003cp>It isn’t signed, but the launcher’s \u003ca href=\"https://github.com/cycleapple/d2survivors-localization\" target=\"_blank\" rel=\"noopener\">source code\u003c/a> and \u003ca href=\"https://github.com/cycleapple/d2survivors-localization/actions/workflows/release-launcher.yml\" target=\"_blank\" rel=\"noopener\">build process\u003c/a> are both public.\u003c/p>\u003cp>Click \u003cstrong>More info\u003c/strong>, then \u003cstrong>Run anyway\u003c/strong>; Windows won’t ask again. Only download it from this site or \u003ca href=\"https://github.com/cycleapple/d2survivors-localization/releases\" target=\"_blank\" rel=\"noopener\">GitHub Releases\u003c/a>. Every release includes d2s-launcher.exe.sha256, which you can check with certutil -hashfile d2s-launcher.exe SHA256.\u003c/p>\u003cp>If your browser says the file isn’t commonly downloaded, choose \u003cstrong>Keep\u003c/strong> from the download’s menu.\u003c/p>"
      }
     },
     {
@@ -167,7 +182,7 @@
      "name": "Where do I report a translation error or something broken?",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "\u003cp>Typos, missing translations, and problems with the bookmark or launcher go to the \u003ca href=\"https://discord.gg/QMBbTHSsaK\" target=\"_blank\" rel=\"noopener\">localization community Discord\u003c/a>, where news is posted too.\u003c/p>\u003cp>You can also report translation errors and bugs in the code on \u003ca href=\"https://github.com/cycleapple/d2survivors-localization/issues\" target=\"_blank\" rel=\"noopener\">GitHub Issues\u003c/a>.\u003c/p>\u003cp>Problems with the game itself (not caused by the translation) go to the \u003ca href=\"https://discord.gg/mYMGgZPuQb\" target=\"_blank\" rel=\"noopener\">official D2 Survivors Discord\u003c/a>.\u003c/p>"
+      "text": "\u003cp>Typos, missing translations, and problems with the launcher go to the \u003ca href=\"https://discord.gg/QMBbTHSsaK\" target=\"_blank\" rel=\"noopener\">localization community Discord\u003c/a>, where news is posted too.\u003c/p>\u003cp>You can also report translation errors and bugs in the code on \u003ca href=\"https://github.com/cycleapple/d2survivors-localization/issues\" target=\"_blank\" rel=\"noopener\">GitHub Issues\u003c/a>.\u003c/p>\u003cp>Problems with the game itself (not caused by the translation) go to the \u003ca href=\"https://discord.gg/mYMGgZPuQb\" target=\"_blank\" rel=\"noopener\">official D2 Survivors Discord\u003c/a>.\u003c/p>"
      }
     },
     {
@@ -183,8 +198,7 @@
  ]
 }</script>
 </head>
-<body data-platform="desktop">
-  <script>(function(){var P=['desktop','web'],q=new URLSearchParams(location.search).get('platform'),h={'#install':'desktop','#web':'web'}[location.hash],s;try{s=localStorage.getItem('d2s-site-platform')}catch(e){}document.body.dataset.platform=P.indexOf(q)>=0?q:h||(P.indexOf(s)>=0?s:/Windows/i.test(navigator.userAgent)?'desktop':'web')})()</script>
+<body>
   <nav class="lang-strip lang-switch" aria-label="Site language">
     <span class="globe" aria-hidden="true">🌐</span>
     <a href="../zh-tw/" hreflang="zh-TW" lang="zh-Hant-TW" data-lang="zh-TW">繁體中文</a>
@@ -197,7 +211,7 @@
     <a href="../pl/" hreflang="pl" lang="pl" data-lang="pl">Polski</a>
   </nav>
   <header class="topbar">
-    <!-- 第一層選網站語言（各自一頁），第二層選桌面版／瀏覽器版（同一頁裡切換） -->
+    <!-- 第一層選網站語言（各自一頁），第二層是頁內導覽 -->
     <div class="wrap topbar-inner">
       <a class="brand" href="https://cycleapple.github.io/d2survivors-localization/">D2S <span>Localization</span></a>
       <nav class="tabs lang-switch" aria-label="Site language">
@@ -217,55 +231,31 @@
         <a href="#download">Download</a>
         <a href="#sources">Sources</a>
         <a href="#languages">Languages</a>
-        <a href="#install" data-only="desktop">Install</a>
-        <a href="#web" data-only="web">Install</a>
+        <a href="#install">Install</a>
         <a href="#faq">FAQ</a>
       </nav>
-      <div class="subtabs" id="platform-switch" role="group" aria-label="Version">
-        <button type="button" data-platform="desktop">Desktop<small>Windows</small></button>
-        <button type="button" data-platform="web">Browser<small>computer &amp; phone</small></button>
-      </div>
     </div>
   </header>
 
   <main id="top">
     <!-- GitHub 上有開著的 game-update issue 時由 app.js 顯示（看當下狀態，所以不在建置時決定） -->
     <div class="notice" id="stale-notice" role="status" hidden>
-      <div class="wrap"><strong>The game was just updated and the translation is being fixed.</strong> Until then, the bookmark and the launcher may not be able to apply it, and the game runs in English as usual. The fix will be listed in the changelog. For the latest news, see the <a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">localization community Discord</a>.</div>
+      <div class="wrap"><strong>The game was just updated and the translation is being fixed.</strong> Until then, the launcher may not be able to apply it, and the game runs in English as usual. The fix will be listed in the changelog. For the latest news, see the <a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">localization community Discord</a>.</div>
     </div>
 
     <section class="hero" id="download">
       <div class="wrap">
         <p class="eyebrow">Unofficial fan translation</p>
         <h1>D2 Survivors Translations</h1>
-        <div class="platform-pick" role="group" aria-label="Version">
-          <p class="pick-label">Choose your version</p>
-          <button type="button" class="pick" data-platform="desktop">
-            <span class="pick-icon" aria-hidden="true">🖥️</span>
-            <span class="pick-title">Desktop</span>
-            <span class="pick-sub">Windows</span>
-            <span class="pick-desc">One-click install and auto-updates with the launcher</span>
-          </button>
-          <button type="button" class="pick" data-platform="web">
-            <span class="pick-icon" aria-hidden="true">🌐</span>
-            <span class="pick-title">Browser</span>
-            <span class="pick-sub">computer &amp; phone</span>
-            <span class="pick-desc">One click on a bookmark at d2survivors.lol, nothing to install</span>
-          </button>
-        </div>
-        <p class="lead" data-only="desktop">Play Diablo 2 Survivors, the free fan game where Diablo 2 meets Vampire Survivors, in your own language. This project translates the game itself, not just a guide: menus, skills, items, monsters, and level-up cards, using the official Diablo II: Resurrected terms. The launcher installs, updates, and restores it in one click.</p>
-        <p class="lead" data-only="web">Play Diablo 2 Survivors (also called Diablo Survivors) in your own language. This project translates the game itself, not just a guide: in the browser, one click on a bookmark switches the game to Chinese (Traditional), Chinese (Simplified), Japanese, German, French, Russian, or Polish, using the official Diablo II: Resurrected terms. Nothing to install, on computers and phones alike.</p>
-        <div class="cta" data-only="desktop">
+        <p class="lead">Play Diablo 2 Survivors, the free fan game where Diablo 2 meets Vampire Survivors, in your own language. This project translates the game itself, not just a guide: menus, skills, items, monsters, and level-up cards, using the official Diablo II: Resurrected terms. The launcher installs, updates, and restores it in one click.</p>
+        <!-- 官方網頁版已移除（2026-11），翻譯只剩桌面版 -->
+        <p class="hero-note">The official web version has been removed, so the translations now work with the desktop game only (Windows launcher).</p>
+        <div class="cta">
           <a class="btn btn-primary" id="download-btn" href="https://github.com/cycleapple/d2survivors-localization/releases/latest/download/d2s-launcher.exe">Download launcher <small>v1.0.7</small></a>
           <a class="btn btn-ghost" href="#install">How to install</a>
         </div>
-        <div class="cta" data-only="web">
-          <a class="btn btn-primary" href="#web">Get the bookmark</a>
-          <a class="btn btn-ghost" href="https://d2survivors.lol/play/" target="_blank" rel="noopener">Open the game page</a>
-        </div>
         <div id="hero-meta">
-        <ul class="meta" data-only="desktop"><li>Game version <strong>2026.1105.3</strong></li><li>Launcher <strong>v1.0.7 · Windows</strong></li><li>Translations updated <strong>2026-11-05</strong></li></ul>
-        <ul class="meta" data-only="web"><li>Browsers <strong>Chrome · Edge · Firefox · Safari</strong></li><li>Devices <strong>computer &amp; phone</strong></li><li>Translations updated <strong>2026-11-05</strong></li></ul>
+        <ul class="meta"><li>Game version <strong>2026.1120.1</strong></li><li>Launcher <strong>v1.0.7 · Windows</strong></li><li>Translations updated <strong>2026-11-22</strong></li></ul>
         </div>
         <p class="hero-community"><a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">Join the localization Discord</a></p>
       </div>
@@ -303,7 +293,7 @@
             <figcaption>In game: area names, life, mana, and gold (Traditional Chinese version shown)</figcaption>
           </figure>
         </div>
-        <div class="shots shots-platform" data-only="desktop" tabindex="0" aria-label="Screenshots">
+        <div class="shots shots-platform" tabindex="0" aria-label="Screenshots">
           <figure class="shot shot-launcher-lang">
             <img data-src="../assets/shots/all/launcher-lang.webp" width="580" height="620" alt="Desktop launcher: choosing a language" style="aspect-ratio: 580 / 620"><noscript><img src="../assets/shots/all/launcher-lang.webp" width="580" height="620" alt="Desktop launcher: choosing a language"></noscript>
             <figcaption>Desktop launcher: choosing a language</figcaption>
@@ -311,16 +301,6 @@
           <figure class="shot shot-launcher-main">
             <img data-src="../assets/shots/zh-tw/launcher-main.webp" width="580" height="620" alt="Desktop launcher: main screen (Traditional Chinese version shown)" style="aspect-ratio: 580 / 620"><noscript><img src="../assets/shots/zh-tw/launcher-main.webp" width="580" height="620" alt="Desktop launcher: main screen (Traditional Chinese version shown)"></noscript>
             <figcaption>Desktop launcher: main screen (Traditional Chinese version shown)</figcaption>
-          </figure>
-        </div>
-        <div class="shots shots-platform" data-only="web" tabindex="0" aria-label="Screenshots">
-          <figure class="shot shot-web-desktop">
-            <img data-src="../assets/shots/zh-tw/web-desktop.webp" width="800" height="600" alt="Browser version on a computer (Traditional Chinese version shown)" style="aspect-ratio: 800 / 600"><noscript><img src="../assets/shots/zh-tw/web-desktop.webp" width="800" height="600" alt="Browser version on a computer (Traditional Chinese version shown)"></noscript>
-            <figcaption>Browser version on a computer (Traditional Chinese version shown)</figcaption>
-          </figure>
-          <figure class="shot shot-web-mobile">
-            <img data-src="../assets/shots/zh-tw/web-mobile.webp" width="390" height="844" alt="Browser version on a phone (Traditional Chinese version shown)" style="aspect-ratio: 390 / 844"><noscript><img src="../assets/shots/zh-tw/web-mobile.webp" width="390" height="844" alt="Browser version on a phone (Traditional Chinese version shown)"></noscript>
-            <figcaption>Browser version on a phone (Traditional Chinese version shown)</figcaption>
           </figure>
         </div>
         <p class="shots-credit">Game screens: D2 Survivors (framara), running on the player's own Diablo II files</p>
@@ -337,9 +317,7 @@
             <p class="card-sub">Created by framara</p>
             <p>A free, unofficial fan-made survivors-like set in the world of Diablo II. This translation project is not affiliated with its author; please report game issues through the official channels.</p>
             <ul class="links">
-              <li><a href="https://d2survivors.lol/" target="_blank" rel="noopener">Official website<span class="host">d2survivors.lol</span></a></li>
-              <li data-only="desktop"><a href="https://d2survivors.lol/download/" target="_blank" rel="noopener">Desktop download (Windows / Mac / Linux)<span class="host">d2survivors.lol</span></a></li>
-              <li data-only="web"><a href="https://d2survivors.lol/play/" target="_blank" rel="noopener">Play in the browser<span class="host">d2survivors.lol</span></a></li>
+              <li><a href="https://d2survivors.lol/download/" target="_blank" rel="noopener">Desktop download (Windows / Mac / Linux)<span class="host">d2survivors.lol</span></a></li>
               <li><a href="https://discord.gg/mYMGgZPuQb" target="_blank" rel="noopener">Official game Discord<span class="host">discord.gg</span></a></li>
             </ul>
           </article>
@@ -367,43 +345,43 @@
       <div class="lang-head"><span class="lang-name" lang="zh-TW">繁體中文</span><span class="lang-code">zh-TW</span></div>
       <span class="lang-sub">Chinese (Traditional)</span>
       <span class="status available">Available</span>
-      <span class="lang-sub">14,344 strings</span>
+      <span class="lang-sub">14,751 strings</span>
     </li>
 <li class="lang available">
       <div class="lang-head"><span class="lang-name" lang="zh-CN">简体中文</span><span class="lang-code">zh-CN</span></div>
       <span class="lang-sub">Chinese (Simplified)</span>
       <span class="status available">Available</span>
-      <span class="lang-sub">14,343 strings</span>
+      <span class="lang-sub">14,750 strings</span>
     </li>
 <li class="lang available">
       <div class="lang-head"><span class="lang-name" lang="ja">日本語</span><span class="lang-code">ja</span></div>
       <span class="lang-sub">Japanese</span>
       <span class="status available">Available</span>
-      <span class="lang-sub">14,349 strings</span>
+      <span class="lang-sub">14,756 strings</span>
     </li>
 <li class="lang available">
       <div class="lang-head"><span class="lang-name" lang="de">Deutsch</span><span class="lang-code">de</span></div>
       <span class="lang-sub">German</span>
       <span class="status available">Available</span>
-      <span class="lang-sub">14,383 strings</span>
+      <span class="lang-sub">14,790 strings</span>
     </li>
 <li class="lang available">
       <div class="lang-head"><span class="lang-name" lang="fr">Français</span><span class="lang-code">fr</span></div>
       <span class="lang-sub">French</span>
       <span class="status available">Available</span>
-      <span class="lang-sub">14,392 strings</span>
+      <span class="lang-sub">14,799 strings</span>
     </li>
 <li class="lang available">
       <div class="lang-head"><span class="lang-name" lang="ru">Русский</span><span class="lang-code">ru</span></div>
       <span class="lang-sub">Russian</span>
       <span class="status available">Available</span>
-      <span class="lang-sub">14,431 strings</span>
+      <span class="lang-sub">14,838 strings</span>
     </li>
 <li class="lang available">
       <div class="lang-head"><span class="lang-name" lang="pl">Polski</span><span class="lang-code">pl</span></div>
       <span class="lang-sub">Polish</span>
       <span class="status available">Available</span>
-      <span class="lang-sub">14,421 strings</span>
+      <span class="lang-sub">14,828 strings</span>
     </li>
         </ul>
       </div>
@@ -412,8 +390,23 @@
     <section class="section" id="changelog">
       <div class="wrap narrow">
         <h2>Changelog</h2>
-        <p class="section-lead">Updates to translations, languages, and the launcher. The launcher and the bookmark pick up the latest translation every time, with no new download.</p>
+        <p class="section-lead">Updates to translations, languages, and the launcher. The launcher picks up the latest translation every time, with no new download.</p>
         <ol class="changelog" id="changelog-list">
+          <li>
+            <time datetime="2026-11-22">2026-11-22</time>
+            <span class="kind kind-translation">Translation</span>
+            <span class="changelog-summary">The official web version has been removed, so the web bookmarklet stops too; the desktop launcher works as before</span>
+          </li>
+          <li>
+            <time datetime="2026-11-21">2026-11-21</time>
+            <span class="kind kind-game-fix">Game update</span>
+            <span class="changelog-summary">Desktop game 2026.1120.1 is now supported, with all its new strings translated</span>
+            <details class="game-notes">
+              <summary>What’s new in the game itself (game version 2026.1120.1)</summary>
+              <p class="game-notes-credit">These are the D2 Survivors developer’s own patch notes; the other language pages show our translation. <time datetime="2026-11-20T20:50:11.208Z">Official update time: Nov 20, 2026, 08:50 PM UTC</time></p>
+              <ul><li>A run that starts with the sound muted says so, and how to turn it back on</li><li>In Terror, every item that drops in the Cow tier rolls with +100% Magic Find</li><li>Charsi's Imbue makes a unique of the base she shows, where it made a rare</li><li>A run's page on the website's leaderboards now lists every one of Charsi's ranks the hero bought</li><li>The Quest Log's Six Evolutions says how many of the six evolutions your build holds now</li><li>The automap marks a unique or set item not yet in your collection with a purple star</li><li>The automap marks gear a loot filter line at KEEP names</li><li>The uber keys and organs on the floor now have the Horadric Codex's red diamond on the automap</li><li>The mouse pointer hides while you play with a gamepad, and comes back as soon as you move the mouse</li><li>On Apple phones and tablets, SOUND OPTIONS has an OTHER MUSIC switch that lets your own music play on under the game's sound</li><li>In Terror, the bosses of Acts III and IV drop one more Burning Essence of Terror, since those acts have no Pandemonium key</li><li>As an act's portal opens, the uber keys, organs and essences left on the floor fly to your hero with its gold</li><li>In Terror, a Pandemonium key's drop is sometimes two keys (16%) and rarely three (4%)</li><li>A Terror tier's boss drops one more Burning Essence of Terror every 50 tiers, two from tier 50 and three from tier 100</li><li>At level 99 the Experience Shrine gives +200% Magic Find instead of experience</li><li>The stash has six shared tabs instead of three, numbered 1 to 6 on their buttons, and your items stay where they were</li><li>Online play opens in the desktop app, where PLAY ONLINE signs you in to climb the Softcore and Hardcore Terror boards</li><li>Online heroes start from zero, and your offline heroes and saves stay as they are, offline</li><li>Sales and a full inventory now show as a small line over the mana globe, out of the middle of the screen</li><li>A new Controller line in Options turns the gamepad off, so a pad you use in another program does nothing here</li><li>Gheed's gamble now offers Arrows and Bolts to the Amazon, as magic or rare quivers at the gamble's odds</li><li>A temper at Charsi's Forge now raises a line by 40% of its roll instead of 20%, items already tempered too</li><li>The Hellforge now fails 30% of the time instead of 60%, and doubles every temper the other 70%</li><li>The screen no longer turns itself off while a run plays untouched</li><li>Fire, Cold and Lightning Mastery add +8% fire, +8% cold and +14% lightning damage at level 5, and still lower enemy resistance</li><li>The Assassin's traps and charge-up releases grow with your weapon's damage, so tempering your weapon raises them</li><li>The Assassin's traps also grow with Strength, Dexterity and physical damage bonuses, as charge-up releases do</li><li>The Shadow Warrior and Shadow Master fight with your charge-ups, Dragon Claw, Dragon Flight and Blade Fury, as in Diablo II</li><li>Sixteen of D2R's runewords now drop, among them Mist, Obsession, Plague, Unbending Will, Mosaic and Metamorphosis</li><li>Mosaic's finishing moves can keep their charges, and Metamorphosis grants the Druid Mark of the Wolf and Mark of the Bear</li><li>Charsi's Forge is one window, with Temper, Undo, Clean, Hellforge and Upgrade buttons under the anvil</li><li>Undo takes back the temper that just landed, for 3 Burning Essences of Terror</li><li>The anvil shows an item's tempers against its cap, and every item box reads Tempered (3/6)</li><li>Play on the website may show a short Ko-fi note, at most once a week, and never in the game or the desktop app</li><li>When an act's portal opens, the floor's gear and chests fly to the ground around your hero for you to pick up</li><li>Charsi now asks before buying an item your hero is wearing, while items from the inventory still sell with one tap</li><li>PULL LOOT in GAME OPTIONS can be turned off, so an act's gear and chests stay where they fell instead of flying to your hero</li><li>Undo at Charsi's anvil asks for a second press, so a stray click no longer throws away a temper</li><li>Terror tiers past tier 100 hold more monsters, half as many again by tier 700</li><li>A Terror tier's boss past tier 100 is a real fight, with over 5 times the life at tier 300 and nearly 7 times at tier 700</li><li>Online clears in a board's best 10 are checked first, and the rest of the best 100 wait for the server's spare time</li><li>Ghosts and Wraiths no longer leave a tall column of mist standing where they died, as in Diablo II</li><li>The Cow tier's colours now drift gently all through, where after four minutes they cycled round the whole colour wheel</li><li>An Oblivion Knight's Decrepify now shows its curse over your hero</li><li>A monster's Conviction aura now shows under your hero while you stand in it, as in Diablo II</li><li>The loot filter now says that a second copy of a unique, set item or runeword you keep goes by its own line, never AMULETS or RINGS</li><li>Gear that falls onto a well lands just outside it, where you can pick it up</li><li>An item box's &quot;Not in your collection&quot; line is purple now, no longer the green of a set item's bonuses</li><li>Every curse on a monster shows its own overlay in turn, so Decrepify no longer hides under another curse</li><li>On a phone held upright, the I / II weapon swap button now sits at the right edge, off your gold and your mercenary's portrait</li><li>The Amazon's Decoy wears your hero's gear instead of standing bare with a plain bow</li><li>Heart of Wolverine from gear (Wisp Projector) adds its damage to the physical blows of every class's summons, as in Diablo II</li><li>The loot filter's MAGIC ITEMS and RARE ITEMS lines now name the lines at KEEP, such as charms and jewels, that still pick theirs up</li><li>Vitality placed on the character screen shows all the life it gives at once, Battle Orders' share too, where it showed less until reopened</li><li>Picking a hero at the bonfire whose art didn't load tries again, instead of failing every time until the page is reloaded</li><li>On phones, Nihlathak and the other Terror key holders no longer run off as soon as they come, taking the monsters around them along</li><li>Larzuk's Essence's box now says to right-click it, or hold it on a phone, then pick the item to socket</li><li>A tempered runeword bow's own Bow and Crossbow Skills line no longer vanishes from its box, though your hero always kept the skills</li><li>A tempered resistance on a Paladin shield's runeword now reads its own number in the box, not the other resistances'</li><li>The desktop app no longer loses its backup of your save after two launches that start with an empty save</li><li>A save that can't be read now comes back from the game's backup copy instead of starting empty</li><li>The loot filter's two ETHEREAL ONLY switches are now ETHEREAL UNIQUES and ETHEREAL RUNEWORDS, so they no longer read as one line twice</li><li>Tempering an item's All Resistances or +to all Attributes raises all four together, as one line</li><li>The character sheet's Defense page now shows the Assassin's Weapon Block chance, which turns hits aside with any weapon or none</li><li>Charsi's Forge no longer shows a set bonus or a socketed jewel's line as the one a temper raised</li><li>A tempered line that a socketed jewel adds to now shows its tempers in the item's box</li><li>Runs still waiting to reach the Ladder when the hero dies are no longer marked as played from an older copy of the save</li><li>Uber Tristram no longer crashes on phones, where Mephisto, Diablo and Baal now load fewer animations to fit in memory</li><li>On phones, Uber Tristram's monsters are drawn at half resolution so the fight fits in memory</li><li>Uber Tristram's exit portal no longer opens behind the town's stone fence or in a wall, but on your screen where you can walk to it</li><li>The loot filter warns when NOT FOR MY CLASS hides or sells quivers, which only the Amazon uses</li><li>The waypoint's Replay a cleared tier row no longer goes missing when Act I's tab is full, and no row runs past the close button</li><li>The Cow King now drops a Burning Essence of Terror in the Cow tier, as every Terror tier's boss does</li><li>The loot filter's BETTER ONLY no longer sells a Hellfire Torch of another class than the one in your collection, whatever it rolled</li><li>The character sheet's Defense page now lists the Absorb that the Paladin's resist auras and Salvation give</li><li>A tempered runeword line its runes add to, such as Infinity's Crushing Blow, now shows its tempers in the item's box and at Charsi's Forge</li><li>A tempered item with two Enhanced Damage lines, such as a rare quiver, now shows its tempers in the item's box and at Charsi's Forge</li><li>The loot filter's BETTER ONLY picks up a copy only when it rolls higher than yours on a stat and lower on none</li><li>A tempered set item worn with its set now shows its green set bonuses as on in its box, as an untempered one does</li><li>M'avina's Caster, Kuko Shakaku, Lycander's Aim, Blood Raven's Charge and Melody now raise the Amazon's Bow and Crossbow Skills</li><li>A controller can now reach the item on Charsi's anvil, to see its stats and take it off</li><li>Your save comes back from the game's backup copy even after the game opened once on an empty save</li><li>The automap's marks now show what each thing is, with skulls for monsters and a big red horned skull for the boss</li><li>The wiki's Getting started page has a legend of every automap mark</li><li>A Terror tier's death screen shows the damage each skill dealt again, as the other difficulties' do</li><li>Clicking the weapon set I or II tab now works with an item in hand, so a weapon from the stash can go straight into set II</li><li>Items' +% Skill Damage now multiplies the Sorceress's, Necromancer's, Druid's and Assassin's spells instead of adding to Energy's bonus</li><li>Revive's army grows with items' +skills as much as Raise Skeleton does</li><li>Clay, Blood and Iron Golem grow faster with items' +skills, as Fire Golem does</li><li>Tiger Strike's charges grow with items' +skills</li><li>Lightning Sentry and Death Sentry recharge in 1.9 seconds instead of 3, as Charged Bolt Sentry does</li><li>SAVES moved from the main menu to the screen after PLAY, beside START, with the reminder to keep a copy of your save</li><li>START OVER moved from GAME OPTIONS to SAVES, beside export and import</li><li>The main menu keeps its EXIT only in the desktop app, under OPTIONS, as a game on the website closes with its browser tab</li><li>REPORT no longer asks you to shorten your text when the text wasn't the problem, and a big screenshot no longer gets a report refused</li><li>On phones and tablets, a long item description no longer covers the Drop and Sell buttons, held upright or sideways</li><li>Your Valkyries' portraits in the top-left corner now show their life bars, as your vines' and your mercenary's do</li><li>Summons raised by an item now keep fighting for your hero after you take it off, instead of standing frozen in place</li><li>A new waypoint run over a saved Normal, Nightmare or Hell run now costs that run's levels, as a death there does</li><li>An item holds 2 tempers for each line a temper can raise, up to 10, so items with more good lines are worth more</li><li>The Hellforge opens once an item holds its own cap of tempers, instead of always at 10</li><li>Items tempered past their new cap lose the extra tempers, and you get back the essences those tempers cost</li><li>W and the I / II tabs swap your weapon set with your mercenary's panel open, as in Diablo II</li><li>Online runs start on your own D2R files, which now give Diablo II 1.14's set bonuses and mercenaries</li><li>Poison Explosion's and Poison Dagger's poison lasts as long as in Diablo II, 9.6 seconds at full points and longer with +skills</li><li>Hovering an item no longer shows your hero's current life lower on the character screen</li><li>The trade window no longer shows a Skill Tree tab that did nothing beside Charsi, Gamble and Stash</li><li>The life globe no longer flashes empty the first time a monster poisons you</li><li>Energy Shield now shows its orb over your Sorceress's head, as in Diablo II</li><li>Back from Tristram or the Secret Cow Level, the automap keeps what you had explored of the act</li><li>The Druid's ravens no longer vanish while they fly in some directions</li><li>The weapon swap's I and II tabs no longer show over the Charms window or swap weapons when clicked there</li><li>Freeing Deckard Cain shows &quot;Quest completed&quot; once, not once for each difficulty it completes</li><li>Clicking Deckard Cain or anyone else in the camp walks your hero up to them and talks, wherever on them you click</li><li>Online, talking to Deckard Cain now hands over your quest reward and shows it in the Quest Log at once</li><li>Swapping weapons while Decoys stand no longer makes the screen flicker</li><li>On a touch screen, an item you tapped up can be dragged with your finger, and goes down where you lift it</li><li>In Korean, the character screen's crowded stat pages no longer cut off the tops of the letters, and their Casting lines read as one sentence</li><li>The stat points' hover tells a mouse to Shift-click to spend every point, and a touch screen to hold</li><li>On a phone restarted with lighter graphics, online monsters show their own art within seconds instead of blank placeholder shapes</li><li>Plague's Lower Resist no longer stays on your hero after Plague comes off, and monsters it already cursed keep it to its end</li><li>Tapping an item in the stash picks it up and shows its box again, where another hero's item left in hand made taps do nothing</li><li>Online runs that spend part of a stack you started with, such as a Larzuk's Essence on a socket, are no longer refused</li><li>In online runs, a Necromancer's revived monsters and a Paladin's converted ones no longer vanish while they stand still</li><li>Online runs where you pressed O, W or a belt potion while the Esc menu was open are no longer refused</li><li>Long sessions stutter less, as fallen monsters and their art are no longer loaded again and again</li><li>Online runs started with PLAY AGAIN while your hero still had Akara's re-draft picks waiting are no longer refused</li><li>Monsters walk round rocks and walls in their way instead of getting stuck against them</li><li>Online runs played while some of the game's pictures hadn't loaded yet, such as the red portal's or a chest's, are no longer refused</li><li>Pandemonium levels and Uber Tristram are now offered beside your three Terror offers, so Act I stays open while your hero holds a set</li><li>Online runs longer than about an hour and a half are now proven and count, along with the runs you played after them</li><li>On a phone restarted with lighter graphics, monsters are drawn at half resolution offline too, so long Terror runs stop closing the game</li><li>Starting something else over a saved Uber Tristram or Pandemonium run now warns that its organs or keys are lost</li><li>In the camp's stash, clicking the weapon set I or II tab with an item in hand swaps weapons again</li><li>W with an item in hand now has your hero say &quot;I can't&quot;, as in Diablo II, instead of doing nothing</li><li>A controller's swap button now works over the mercenary's panel and a vendor's window, and W over the camp's waypoint and people's menus</li><li>Online runs opened from a link with extra text in its address are no longer refused when Rakanishu or Treehead guards the Search for Cain</li><li>Online runs played while a scenery picture of the first area never loaded are no longer refused</li><li>Gear put on during a run now shows the same numbers on the character screen as its preview, auras such as Dream's Holy Shock included</li><li>Online, a page whose Diablo II menus fail to load opens the Rogue Encampment, instead of a hero select that refused every run</li><li>When some Rogue Encampment pictures fail to load, the campfire says why and stands in, and the camp tries again after your next run</li><li>Cure's and Plague's Cleansing now shortens poison and curses on your hero every 2 seconds, as in Diablo II</li><li>In Terror, a Cold Enchanted monster's death no longer chills your hero for over a minute, at most as long as in Hell</li><li>Slow Missiles from your gear no longer stays on your hero after the item comes off, and monsters it already slowed keep it to its end</li><li>Online runs are no longer refused when AUTO STATS or PULL LOOT was turned on and off again while paused</li><li>Peace no longer summons Valkyrie after Valkyrie when your Valkyrie has Shieldmaidens or Huntress on</li><li>Online runs continued past Baal are no longer refused when gear was left lying where he fell</li><li>An online run still open when an update is undone now ends as an update ends it, keeping everything saved before, instead of being refused</li><li>Metamorphosis's Marks of the Bear and the Wolf no longer take away your weapon's damage, while they hold or for the rest of the run</li><li>On a phone, the game no longer closes when a hero wearing Wolfhowl turns into a werewolf in Uber Tristram</li><li>START OVER now sticks when the browser's storage is full, instead of bringing the old save back on the next visit</li><li>SAVES says when the browser couldn't store an imported save, instead of &quot;Save imported.&quot;</li><li>A temper on Chains of Honor's All Resistances +65 now raises all of it, 26 each time, as on any line a runeword's runes add to</li><li>The character screen's damage counts your mercenary's auras in the camp too, such as the Desert Mercenary's Might</li><li>The Damage line's hover says what only the damage meter counts, such as every monster hit, curses on them, Static Field and Crushing Blow</li><li>A Terror tier the server ended while the game was in the background no longer gets your hero's next tier refused</li><li>Online runs where you opened Akara's re-draft just as the run began, then sold at a smith during the run, are no longer refused</li></ul>
+            </details>
+          </li>
           <li>
             <time datetime="2026-11-05">2026-11-05</time>
             <span class="kind kind-game-fix">Game update</span>
@@ -444,36 +437,14 @@
               <ul><li>In the desktop app, Video Options has a Full Screen line to switch between full screen and a window</li><li>Click Charsi in the camp to Temper, Clean, Hellforge or Upgrade your items with Burning Essences of Terror</li><li>Temper raises a random line, a skill by 1 level and any other line by a fifth of its roll, with a lower chance each time</li><li>Clean removes every temper from an item</li><li>From 10 tempers, the Hellforge doubles them all (40%) or loses them all (60%)</li><li>Upgrade moves a magic, rare or runeword weapon or armour to its exceptional, then elite base, keeping every line</li><li>Every Terror tier boss drops a Burning Essence of Terror, and other Terror drops sometimes bring one</li><li>Essences, Larzuk's and Charsi's, now stack to 99</li><li>Weapon skills strike with your weapon's own damage, so its Enhanced Damage, your Strength and every +% damage count in full, as in Diablo II</li><li>Increased Attack Speed and a fast weapon now quicken your weapon attacks in full, and Faster Cast Rate on items speeds only your spells</li><li>Weapon skills' cards show their +% weapon damage instead of a fixed number</li><li>Your inventory shows the three uber keys beside the gold once your Terror tiers are open, each with how many you hold</li><li>Hover over the keys to see who drops each, the Countess, the Summoner or Nihlathak, and what a set of them opens</li><li>In a Terror tier the Countess, the Summoner and Nihlathak say when they come, and the waypoint names who may drop each act's key</li><li>The loot filter has a RUNEWORDS line, so IN MY COLLECTION no longer sells a runeword's second copy before you see its base</li><li>Turning down Skill Effects in Video Options now dims your skills' coloured light on the floor too, not only the spells</li><li>Holding SHOW ITEMS while walking up to a smith or the Training Ground's Larzuk no longer opens their window, so you can pick up loot there</li><li>Ethereal items are drawn see-through on the floor, in the inventory, the stash and on the hero, as in Diablo II</li><li>The Amazon's Decoy now takes Defiance, Prayer and Thorns from your side's auras, as your summons do</li><li>Spirit of Barbs from items or the Druid now hurts monsters that strike your summons in melee, as in Diablo II</li><li>Fire, cold and lightning damage on charms and gear no longer lowers the life and mana your weapon attacks steal</li><li>Wirt's Leg dropped on the ground in a run no longer lets Griswold leave a second one</li><li>Sockets lie as in Diablo II, so five make a die's five and a helm's three make a V, where they stood in columns</li><li>A charm's box now names the key that opens the Charms window, H unless you rebound it</li><li>Picking up a key or organ now says how many you hold and that they're in your inventory</li><li>A Barbarian with Whirlwind and Leap Attack now uses both in turn, where a fast cast rate kept him spinning and he never leapt</li><li>The Amazon's Valkyrie now takes Defiance, Prayer, Thorns and Fanaticism from your side's auras, as your summons do</li><li>In a Terror tier the Countess, the Summoner and Nihlathak now stay until they fall, as in D2, instead of leaving with their keys</li><li>Poison Skill Damage on Bramble and Trang-Oul's Claws now shows its number in the desktop app</li><li>With a controller, the item under the cursor now shows its sockets and the runes, gems or jewels in them, as with the mouse</li><li>Fade from items such as Treachery now shows on your hero and your mercenary while it lasts, so you can see it working</li><li>Every class now holds any weapon as itself, where a Necromancer's bow or two-handed sword was drawn as his wand</li><li>Curses from items, such as Decrepify and Amplify Damage, now show over the monsters they curse, from any class or your mercenary</li><li>Uber keys and organs lying on the floor now have red names, as the Horadric Codex has, so they no longer look like uniques</li><li>On a phone held upright, the Sell button with the stash open is now on the right, where it is beside Drop in a run</li><li>Spirit of Barbs from items now hurts monsters that strike a Necromancer or a Sorceress, and stays on with Dodge or Weapon Block</li><li>A hero whose runs reached the Ladder hours late is no longer marked as played from an older copy of the save</li><li>The damage meter's curses line is named for the Necromancer's Attract or Confuse when he holds one, not always Iron Maiden</li><li>A summon or revived monster raised before its art loaded is drawn at its own size once it appears, no longer as a giant</li><li>The desktop setup says a disk a little short of room in MB, not &quot;1.8 GB&quot; twice, with how much more to free</li></ul>
             </details>
           </li>
-          <li>
-            <time datetime="2026-11-05">2026-11-05</time>
-            <span class="kind kind-launcher">Launcher</span>
-            <span class="changelog-summary">Launcher 1.0.7: the translation downloads even on networks that can't reach GitHub. Update with Update launcher on the main screen</span>
-          </li>
-          <li>
-            <time datetime="2026-11-05">2026-11-05</time>
-            <span class="kind kind-launcher">Launcher</span>
-            <span class="changelog-summary">Launcher 1.0.6: fixes the game coming back in English after you update it from inside the game. Please update to 1.0.6</span>
-          </li>
         </ol>
       </div>
     </section>
 
-    <section class="section" id="install" data-only="desktop">
+    <section class="section" id="install">
       <div class="wrap">
         <h2>Install</h2>
         <p class="section-lead">You never edit game files by hand; the launcher does it all. Close the game first. The launcher shows its screens in the language you pick, so the button names below may read differently on yours.</p>
-        <div class="platform-pick compact" role="group" aria-label="Version">
-          <button type="button" class="pick" data-platform="desktop">
-            <span class="pick-icon" aria-hidden="true">🖥️</span>
-            <span class="pick-title">Desktop</span>
-            <span class="pick-sub">Windows</span>
-            </button>
-          <button type="button" class="pick" data-platform="web">
-            <span class="pick-icon" aria-hidden="true">🌐</span>
-            <span class="pick-title">Browser</span>
-            <span class="pick-sub">computer &amp; phone</span>
-            </button>
-        </div>
         <ol class="steps">
           <li><strong>Install D2 Survivors first</strong><p>Download the desktop app from the <a href="https://d2survivors.lol/download/" target="_blank" rel="noopener">official D2 Survivors site</a>, point its setup screen at your Diablo II install, and make sure the game runs.</p></li>
           <li><strong>Download the launcher</strong><p>Download <code>d2s-launcher.exe</code> and put it in any folder. No installation needed.</p></li>
@@ -505,154 +476,21 @@
       </div>
     </section>
 
-    <section class="section" id="web" data-only="web">
-      <div class="wrap">
-        <h2>Get the bookmark</h2>
-        <p class="section-lead">Playing in the browser at <a href="https://d2survivors.lol/play/" target="_blank" rel="noopener">d2survivors.lol</a>? One bookmark switches the game to Chinese (Traditional), Chinese (Simplified), Japanese, German, French, Russian, or Polish, using the same translation as the launcher. Nothing to install, on computers and phones alike.</p>
-        <!-- 預告：官方之後停止提供 Hosted files，手機就不能玩 -->
-        <p class="web-hosted" role="note"><strong>Heads-up: phones may soon be unable to play.</strong> The D2 Survivors developer says the web version will soon stop providing the game files (“Hosted files”); no date has been given. After that, touch phones and tablets can’t read a Diablo II install folder and will only see a “no longer available” page, so they can’t play. On a computer, first pick “USE MY OWN FILES…” on the game’s setup page and choose your D2 1.14 or D2R install folder; the bookmark keeps working after that. The desktop version is not affected.</p>
-        <div class="platform-pick compact" role="group" aria-label="Version">
-          <button type="button" class="pick" data-platform="desktop">
-            <span class="pick-icon" aria-hidden="true">🖥️</span>
-            <span class="pick-title">Desktop</span>
-            <span class="pick-sub">Windows</span>
-            </button>
-          <button type="button" class="pick" data-platform="web">
-            <span class="pick-icon" aria-hidden="true">🌐</span>
-            <span class="pick-title">Browser</span>
-            <span class="pick-sub">computer &amp; phone</span>
-            </button>
-        </div>
-        <div class="cards">
-          <article class="card">
-            <h3>Computer (Chrome, Edge, Firefox)</h3>
-            <p class="bookmarklet-row">
-              <a class="btn btn-primary bookmarklet" id="bookmarklet" href="javascript:import('https://cycleapple.github.io/d2survivors-localization/web/d2zh.js').then(m=&gt;m.default()).catch(e=&gt;alert('D2 Survivors Localization: '+e))" draggable="true">D2 Localization</a>
-              <span class="bookmarklet-hint" id="bookmarklet-hint">← drag to the bookmarks bar</span>
-            </p>
-            <ol class="web-steps">
-              <li>Press <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>B</kbd> (Mac: <kbd>⌘</kbd>+<kbd>Shift</kbd>+<kbd>B</kbd>) to show the bookmarks bar.</li>
-              <li>Drag the “D2 Localization” button above onto the bookmarks bar.</li>
-              <li>Open the <a href="https://d2survivors.lol/" target="_blank" rel="noopener">d2survivors.lol home page</a> and click “D2 Localization” in the bookmarks bar; the game starts translated right away. Starting from the home page uses less memory and loads faster. Clicking it on the <a href="https://d2survivors.lol/play/" target="_blank" rel="noopener">game page</a> (/play/) works too.</li>
-            </ol>
-          </article>
-          <article class="card guide" data-os="ios">
-            <h3>Phone (Android Chrome, iPhone Safari)</h3>
-            <p class="web-hosted-mobile">Once the developer stops providing the game files (“Hosted files”), phones and tablets can’t play; see the notice above.</p>
-            <p class="bookmarklet-row">
-              <button type="button" class="btn btn-ghost" id="copy-bookmarklet">Copy bookmark code</button>
-              <span class="bookmarklet-hint" id="copy-status" role="status"></span>
-            </p>
-            <pre class="bookmarklet-code"><code id="bookmarklet-code">javascript:import('https://cycleapple.github.io/d2survivors-localization/web/d2zh.js').then(m=&gt;m.default()).catch(e=&gt;alert('D2 Survivors Localization: '+e))</code></pre>
-            <div class="os-tabs" role="group" aria-label="Phone (Android Chrome, iPhone Safari)">
-              <button type="button" data-os="ios" aria-pressed="true">iPhone (Safari)</button>
-              <button type="button" data-os="android" aria-pressed="false">Android (Chrome)</button>
-            </div>
-            <ol class="guide-steps" data-os-pane="ios" data-prev="Previous" data-next="Next">
-              <li class="guide-step">
-                <div class="phone ios crop-top" aria-hidden="true"><div class="ph-screen"><div class="ph-url">cycleapple.github.io</div><div class="ph-site"><span class="ph-brand">D2S <i>Localization</i></span><b class="ph-title">D2 Survivors Translations</b><span class="ph-btn tap">Copy bookmark code</span><code class="ph-code">javascript:import(…</code></div></div></div>
-                <h4><span class="step-no">1</span>Copy the code</h4>
-                <p>Tap “Copy bookmark code” above.</p>
-              </li>
-              <li class="guide-step">
-                <div class="phone ios crop-bottom" aria-hidden="true"><div class="ph-screen"><div class="ph-sheet"><div class="ph-sheet-head"><span class="ph-fav">D2</span><span class="ph-t"><b>D2 Survivors Translations</b><small>cycleapple.github.io</small></span></div>
-        <div class="ph-apps"><i></i><i></i><i></i><i></i></div><div class="ph-row tap"><span class="ph-ico">📖</span><span class="ph-t">Add Bookmark</span></div><div class="ph-row dim"><span class="ph-ico">☆</span><span class="ph-ph" style="width:60%"></span></div></div></div></div>
-                <h4><span class="step-no">2</span>Add a bookmark</h4>
-                <p>Open this page in Safari, tap Share, choose “Add Bookmark”, and save.</p>
-                <p class="step-note">Newer iOS: Share is in the “⋯” menu.</p>
-              </li>
-              <li class="guide-step">
-                <div class="phone ios crop-bottom" aria-hidden="true"><div class="ph-screen"><div class="ph-head"><span></span><b>Bookmarks</b><span></span></div><div class="ph-row dim"><span class="ph-ico">▤</span><span class="ph-ph" style="width:55%"></span></div><div class="ph-row"><span class="ph-ico">📖</span><span class="ph-t">D2 Survivors Translations</span></div>
-        <div class="ph-foot"><span></span><span class="tap">Edit</span></div></div></div>
-                <h4><span class="step-no">3</span>Edit the bookmark</h4>
-                <p>Open your bookmarks, tap “Edit”, then tap the new bookmark.</p>
-                <p class="step-note">Newer iOS: Bookmarks are in the “⋯” menu.</p>
-              </li>
-              <li class="guide-step">
-                <div class="phone ios crop-top" aria-hidden="true"><div class="ph-screen"><div class="ph-head"><span></span><b>Edit Bookmark</b><span class="tap">Done</span></div>
-        <div class="ph-field glow">D2 Localization</div><div class="ph-field glow mono">javascript:import(…</div></div></div>
-                <h4><span class="step-no">4</span>Swap in the code</h4>
-                <p>Name it “D2 Localization”, replace the whole address with the code, and tap “Done”.</p>
-              </li>
-              <li class="guide-step">
-                <div class="phone ios crop-bottom" aria-hidden="true"><div class="ph-screen"><div class="ph-url">d2survivors.lol</div><div class="ph-gametitle"><b>D2</b><b>SURVIVORS</b><span class="ph-ph" style="width:40%"></span><span class="ph-ph" style="width:40%"></span></div>
-        <div class="ph-sheet"><div class="ph-head"><span></span><b>Bookmarks</b><span></span></div><div class="ph-row tap"><span class="ph-ico">📖</span><span class="ph-t">D2 Localization</span></div></div></div></div>
-                <h4><span class="step-no">5</span>Tap it on the home page</h4>
-                <p>Open the <a href="https://d2survivors.lol/" target="_blank" rel="noopener">d2survivors.lol</a> home page and tap “D2 Localization” in your bookmarks.</p>
-                <p class="step-note">The home page uses less memory and loads faster, which helps most on phones. Tapping it on the game page (/play/) works too.</p>
-              </li>
-            </ol>
-            <ol class="guide-steps" data-os-pane="android" data-prev="Previous" data-next="Next">
-              <li class="guide-step">
-                <div class="phone android crop-top" aria-hidden="true"><div class="ph-screen"><div class="ph-url">cycleapple.github.io<span class="ph-dots">⋮</span></div><div class="ph-site"><span class="ph-brand">D2S <i>Localization</i></span><b class="ph-title">D2 Survivors Translations</b><span class="ph-btn tap">Copy bookmark code</span><code class="ph-code">javascript:import(…</code></div></div></div>
-                <h4><span class="step-no">1</span>Copy the code</h4>
-                <p>Tap “Copy bookmark code” above.</p>
-              </li>
-              <li class="guide-step">
-                <div class="phone android crop-top" aria-hidden="true"><div class="ph-screen"><div class="ph-url">cycleapple.github.io<span class="ph-dots glow">⋮</span></div><div class="ph-site"><span class="ph-brand">D2S <i>Localization</i></span><b class="ph-title">D2 Survivors Translations</b><span class="ph-btn">Copy bookmark code</span><code class="ph-code">javascript:import(…</code></div>
-        <div class="ph-menu"><div class="ph-icons"><span>→</span><span class="tap">☆</span><span>⤓</span><span>ⓘ</span><span>↻</span></div><div class="ph-row dim"><span class="ph-ico"></span><span class="ph-ph" style="width:70%"></span></div><div class="ph-row dim"><span class="ph-ico"></span><span class="ph-ph" style="width:50%"></span></div></div></div></div>
-                <h4><span class="step-no">2</span>Add a bookmark</h4>
-                <p>Open this page in Chrome, tap ⋮, then ☆ in the top row.</p>
-              </li>
-              <li class="guide-step">
-                <div class="phone android crop-top" aria-hidden="true"><div class="ph-screen"><div class="ph-head"><span>←</span><b>Bookmarks</b></div><div class="ph-row"><span class="ph-ico">★</span><span class="ph-t">D2 Survivors Translations</span><span class="ph-dots glow">⋮</span></div>
-        <div class="ph-pop"><div class="ph-row tap"><span class="ph-ico"></span><span class="ph-t">Edit</span></div><div class="ph-row dim"><span class="ph-ico"></span><span class="ph-ph" style="width:60%"></span></div></div></div></div>
-                <h4><span class="step-no">3</span>Edit the bookmark</h4>
-                <p>Tap ⋮ → “Bookmarks”, then the ⋮ next to the new bookmark → “Edit”.</p>
-              </li>
-              <li class="guide-step">
-                <div class="phone android crop-top" aria-hidden="true"><div class="ph-screen"><div class="ph-head"><span>←</span><b>Edit bookmark</b></div>
-        <div class="ph-label">Name</div><div class="ph-field glow">D2 Localization</div><div class="ph-label">URL</div><div class="ph-field glow mono">javascript:import(…</div></div></div>
-                <h4><span class="step-no">4</span>Swap in the code</h4>
-                <p>Name it “D2 Localization”, replace the whole URL with the code, and tap ← to save.</p>
-              </li>
-              <li class="guide-step">
-                <div class="phone android crop-top" aria-hidden="true"><div class="ph-screen"><div class="ph-url focus">D2 Localization</div><div class="ph-gametitle"><b>D2</b><b>SURVIVORS</b><span class="ph-ph" style="width:40%"></span><span class="ph-ph" style="width:40%"></span></div>
-        <div class="ph-suggest"><div class="ph-row tap"><span class="ph-ico">☆</span><span class="ph-t"><b>D2 Localization</b><small>javascript:import(…</small></span></div><div class="ph-row dim"><span class="ph-ico">⌕</span><span class="ph-ph" style="width:60%"></span></div></div></div></div>
-                <h4><span class="step-no">5</span>Type its name</h4>
-                <p>On the <a href="https://d2survivors.lol/" target="_blank" rel="noopener">d2survivors.lol</a> home page, type “D2 Localization” in the address bar and tap the suggestion with ☆.</p>
-                <p class="step-note">Tapping it in the bookmarks list doesn’t run it. The home page uses less memory and loads faster; the game page (/play/) works too.</p>
-              </li>
-            </ol>
-            <noscript><style>.guide [data-os-pane] { display: grid !important; } .os-tabs { display: none; }</style></noscript>
-            <p class="guide-note">The screens are only a guide; button names and positions can differ a little between system versions and languages.</p>
-          </article>
-        </div>
-        <div class="card web-usage">
-          <h3>How it works</h3>
-          <ul>
-            <li>Use the bookmark on the d2survivors.lol home page and the game starts translated right away. The home page uses less memory and loads faster, which is especially worth it on phones. It also works on the game page (/play/): the game restarts translated, saving first if you’re mid-run.</li>
-            <li>The bookmark from this page picks a language from your browser settings the first time and then remembers the last one you used; the bookmark from any other language’s page always opens that language. To switch language, install the bookmark from that language’s page; if you installed it before, reinstall it to lock in a language. The game’s OPTIONS → GAME OPTIONS language setting also gains Chinese (Traditional), Chinese (Simplified), Japanese, German, French, Russian, and Polish, but on a phone it’s best to switch with the bookmark.</li>
-            <li>Using the bookmark again takes you back to the original English game page. Reloading also brings back the original; use the bookmark again to play translated.</li>
-            <li>If your phone stutters, gets hot, or keeps reloading the game, turn on “Power saving graphics” under OPTIONS → VIDEO OPTIONS in the game: it lowers the resolution, so the game runs smoother and cooler, with a slightly softer picture.</li>
-            <li>Saves stay in your browser as usual. The bookmark loads the latest translation from this site each time, so it needs a connection.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
     <section class="section" id="faq">
       <div class="wrap narrow">
         <h2>FAQ</h2>
         <div class="faq">
           <details><summary>Is this an official translation?</summary><div class="answer"><p>No. It is an unofficial fan translation, not affiliated with the D2 Survivors developers or Blizzard Entertainment.</p></div></details>
-          <details><summary>Is this open source?</summary><div class="answer"><p>The code is. The source for the launcher, the bookmark, this website, and the tools is on <a href="https://github.com/cycleapple/d2survivors-localization" target="_blank" rel="noopener">GitHub</a> under the <a href="https://github.com/cycleapple/d2survivors-localization/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a>. The launcher is built automatically from that public source by GitHub Actions (<a href="https://github.com/cycleapple/d2survivors-localization/actions/workflows/release-launcher.yml" target="_blank" rel="noopener">build history</a>), and every release includes <code>d2s-launcher.exe.sha256</code> so you can check it yourself.</p><p>The translation data (the dictionaries) is not openly licensed yet; all rights are reserved, see <a href="https://github.com/cycleapple/d2survivors-localization/blob/main/dict/LICENSE" target="_blank" rel="noopener">dict/LICENSE</a>. The official terms used in them belong to Blizzard Entertainment.</p></div></details>
-          <details><summary>Can I play on Mac, Linux, or a phone?</summary><div class="answer"><p>Yes. The launcher is Windows-only for now; on Mac, Linux, and phones, play the <a href="https://d2survivors.lol/play/" target="_blank" rel="noopener">web version</a> and use the bookmark from the Browser tab.</p><p>Note: the developer says the web version will soon stop providing the game files (no date yet). After that, phones and tablets can’t play; on a computer, pick your own Diablo II install folder on the game’s setup page.</p></div></details>
-          <details data-only="web"><summary>The developer is removing the hosted game files. What changes?</summary><div class="answer"><p>Before starting, the D2 Survivors web version now asks whether to use your own files (a D2 1.14 or D2R install folder on your computer) or “Hosted files” provided by the site. The developer says Hosted files will be removed soon; no date has been given.</p><ul><li><strong>Phones and tablets:</strong> they can’t read an install folder, so once Hosted files are gone they only see a “no longer available” page and can’t play. This is a change in the game itself, and the bookmark can’t change it.</li><li><strong>Computers:</strong> pick “USE MY OWN FILES…” on the setup page and choose your game folder, then use the bookmark as usual.</li><li><strong>Desktop version:</strong> it already reads the game files on your computer and is not affected.</li></ul></div></details>
-          <details data-only="desktop"><summary>Will it touch my saves?</summary><div class="answer"><p>No. The launcher only replaces <code>resources\app.asar</code> in the game folder, after backing up the original. Saves live elsewhere and are never read or changed.</p></div></details>
-          <details data-only="web"><summary>Will it touch my saves?</summary><div class="answer"><p>No. Saves stay in your browser as usual. The bookmark only swaps the game text in the page you have open and leaves nothing behind; reloading brings back the original.</p></div></details>
-          <details data-only="desktop"><summary>What happens when the game updates?</summary><div class="answer"><p>A game update replaces <code>app.asar</code>, so the translation disappears until you start the game from the launcher or its shortcut again, which re-applies it.</p><p>If a new version changed too much for the patch rules to match, the launcher doesn’t force anything: it starts the original game and says the translation is being fixed. Once it’s fixed, the next start applies it again automatically; you don’t need to do anything.</p></div></details>
-          <details data-only="web"><summary>What happens when the web game updates?</summary><div class="answer"><p>The bookmark checks that its patch rules still match the new version every time. If they don’t, it says the translation needs an update and doesn’t start, leaving the original game untouched. Play in English until it’s updated here.</p></div></details>
-          <details data-only="desktop"><summary>Why does the in-game language menu show my language instead of Korean?</summary><div class="answer"><p>The translation borrows the game's built-in Korean language slot, so after applying it the menu shows the name of the language you picked (for example 简体中文) where Korean used to be. To play in Korean, pick 한국어 (원본) in the launcher.</p></div></details>
-          <details data-only="web"><summary>Nothing happens when I tap the bookmark on my phone?</summary><div class="answer"><p>Android Chrome doesn’t run bookmarks tapped in the bookmarks list: type the bookmark name “D2 Localization” in the address bar and tap the bookmark that appears below. On iPhone, open Safari’s bookmarks while on the home page or the game page and tap it there.</p><p>Also check that the bookmark’s whole address was replaced with the bookmark code, starting with <code>javascript:</code>.</p></div></details>
-          <details data-only="web"><summary>Does the game reload by itself partway through on my phone?</summary><div class="answer"><p>Usually the phone ran low on memory and the browser reloaded the tab. To help:</p><ul><li>Use the bookmark on the <a href="https://d2survivors.lol/" target="_blank" rel="noopener">d2survivors.lol home page</a> instead of opening the game page first; otherwise the original game loads first and keeps holding memory.</li><li>Turn on “Power saving graphics” under OPTIONS → VIDEO OPTIONS in the game.</li><li>Close other tabs.</li></ul><p>After a reload, use the bookmark again to carry on; your progress is whatever the game itself saved.</p></div></details>
-          <details data-only="web"><summary>Does it work if I add the game to my home screen?</summary><div class="answer"><p>No. The home screen version opens full screen, with no address bar or bookmarks to tap, and the translation doesn’t carry over: reloading or reopening brings back the original. Play in a Safari or Chrome tab instead, and tap the bookmark again each time you open or reload the game.</p></div></details>
-          <details data-only="desktop"><summary>Why is some text still in English?</summary><div class="answer"><p>All of the game’s text is translated and has been checked in game for anything left untranslated. If you see English, the game has probably just been updated with new text; a later translation update fills it in, and the launcher downloads it automatically. If it stays in English, please let us know.</p></div></details>
-          <details data-only="web"><summary>Why is some text still in English?</summary><div class="answer"><p>All of the game’s text is translated and has been checked in game for anything left untranslated. If you see English, the game has probably just been updated with new text; a later translation update fills it in, and the bookmark always loads the latest translation. If it stays in English, please let us know.</p></div></details>
-          <details><summary>Are runs sent to the leaderboard when the game is translated?</summary><div class="answer"><p>In the browser, yes. With the bookmark, runs are sent to the leaderboard as usual, Normal and Hardcore alike, and each record shows the language you actually played in (for example zh-TW).</p><p>On desktop, picking a translated language makes the game mark records as patched; to show up normally, pick English under “Game language” in the launcher.</p></div></details>
-          <details data-only="desktop"><summary>Windows says “Windows protected your PC”. What do I do?</summary><div class="answer"><p>The launcher isn’t code-signed (a signing certificate costs money every year), so Windows SmartScreen warns about it until enough people have downloaded it.</p><p>It isn’t signed, but the launcher’s <a href="https://github.com/cycleapple/d2survivors-localization" target="_blank" rel="noopener">source code</a> and <a href="https://github.com/cycleapple/d2survivors-localization/actions/workflows/release-launcher.yml" target="_blank" rel="noopener">build process</a> are both public.</p><p>Click <strong>More info</strong>, then <strong>Run anyway</strong>; Windows won’t ask again. Only download it from this site or <a href="https://github.com/cycleapple/d2survivors-localization/releases" target="_blank" rel="noopener">GitHub Releases</a>. Every release includes <code>d2s-launcher.exe.sha256</code>, which you can check with <code>certutil -hashfile d2s-launcher.exe SHA256</code>.</p><p>If your browser says the file isn’t commonly downloaded, choose <strong>Keep</strong> from the download’s menu.</p></div></details>
+          <details><summary>Is this open source?</summary><div class="answer"><p>The code is. The source for the launcher, this website, and the tools is on <a href="https://github.com/cycleapple/d2survivors-localization" target="_blank" rel="noopener">GitHub</a> under the <a href="https://github.com/cycleapple/d2survivors-localization/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a>. The launcher is built automatically from that public source by GitHub Actions (<a href="https://github.com/cycleapple/d2survivors-localization/actions/workflows/release-launcher.yml" target="_blank" rel="noopener">build history</a>), and every release includes <code>d2s-launcher.exe.sha256</code> so you can check it yourself.</p><p>The translation data (the dictionaries) is not openly licensed yet; all rights are reserved, see <a href="https://github.com/cycleapple/d2survivors-localization/blob/main/dict/LICENSE" target="_blank" rel="noopener">dict/LICENSE</a>. The official terms used in them belong to Blizzard Entertainment.</p></div></details>
+          <details><summary>Can I play on Mac, Linux, or a phone?</summary><div class="answer"><p>Not at the moment. The launcher is Windows-only, and since the official web version has been removed, our browser bookmark is gone too. For now there is no way to use these translations on Mac, Linux, or phones.</p></div></details>
+          <details><summary>Will it touch my saves?</summary><div class="answer"><p>No. The launcher only replaces <code>resources\app.asar</code> in the game folder, after backing up the original. Saves live elsewhere and are never read or changed.</p></div></details>
+          <details><summary>What happens when the game updates?</summary><div class="answer"><p>A game update replaces <code>app.asar</code>, so the translation disappears until you start the game from the launcher or its shortcut again, which re-applies it.</p><p>If a new version changed too much for the patch rules to match, the launcher doesn’t force anything: it starts the original game and says the translation is being fixed. Once it’s fixed, the next start applies it again automatically; you don’t need to do anything.</p></div></details>
+          <details><summary>Why does the in-game language menu show my language instead of Korean?</summary><div class="answer"><p>The translation borrows the game's built-in Korean language slot, so after applying it the menu shows the name of the language you picked (for example 简体中文) where Korean used to be. To play in Korean, pick 한국어 (원본) in the launcher.</p></div></details>
+          <details><summary>Why is some text still in English?</summary><div class="answer"><p>All of the game’s text is translated and has been checked in game for anything left untranslated. If you see English, the game has probably just been updated with new text; a later translation update fills it in, and the launcher downloads it automatically. If it stays in English, please let us know.</p></div></details>
+          <details><summary>Are runs sent to the leaderboard when the game is translated?</summary><div class="answer"><p>Picking a translated language makes the game mark records as patched; to show up normally, pick English under “Game language” in the launcher.</p></div></details>
+          <details><summary>Windows says “Windows protected your PC”. What do I do?</summary><div class="answer"><p>The launcher isn’t code-signed (a signing certificate costs money every year), so Windows SmartScreen warns about it until enough people have downloaded it.</p><p>It isn’t signed, but the launcher’s <a href="https://github.com/cycleapple/d2survivors-localization" target="_blank" rel="noopener">source code</a> and <a href="https://github.com/cycleapple/d2survivors-localization/actions/workflows/release-launcher.yml" target="_blank" rel="noopener">build process</a> are both public.</p><p>Click <strong>More info</strong>, then <strong>Run anyway</strong>; Windows won’t ask again. Only download it from this site or <a href="https://github.com/cycleapple/d2survivors-localization/releases" target="_blank" rel="noopener">GitHub Releases</a>. Every release includes <code>d2s-launcher.exe.sha256</code>, which you can check with <code>certutil -hashfile d2s-launcher.exe SHA256</code>.</p><p>If your browser says the file isn’t commonly downloaded, choose <strong>Keep</strong> from the download’s menu.</p></div></details>
           <details><summary>Can I use Chinese in character names?</summary><div class="answer"><p>Not yet. The game itself only allows English letters and Korean in character names.</p></div></details>
-          <details><summary>Where do I report a translation error or something broken?</summary><div class="answer"><p>Typos, missing translations, and problems with the bookmark or launcher go to the <a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">localization community Discord</a>, where news is posted too.</p><p>You can also report translation errors and bugs in the code on <a href="https://github.com/cycleapple/d2survivors-localization/issues" target="_blank" rel="noopener">GitHub Issues</a>.</p><p>Problems with the game itself (not caused by the translation) go to the <a href="https://discord.gg/mYMGgZPuQb" target="_blank" rel="noopener">official D2 Survivors Discord</a>.</p></div></details>
+          <details><summary>Where do I report a translation error or something broken?</summary><div class="answer"><p>Typos, missing translations, and problems with the launcher go to the <a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">localization community Discord</a>, where news is posted too.</p><p>You can also report translation errors and bugs in the code on <a href="https://github.com/cycleapple/d2survivors-localization/issues" target="_blank" rel="noopener">GitHub Issues</a>.</p><p>Problems with the game itself (not caused by the translation) go to the <a href="https://discord.gg/mYMGgZPuQb" target="_blank" rel="noopener">official D2 Survivors Discord</a>.</p></div></details>
           <details><summary>How can I help translate or report a typo?</summary><div class="answer"><p>Gladly! Every language is fully released, but a translation can always get better. If you spot awkward wording or a typo, especially in your native language, please tell us. Get in touch <a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">here</a>.</p></div></details>
         </div>
         <!-- 贊助：低調放在常見問題後面，不跳視窗 -->
@@ -669,12 +507,12 @@
   <footer class="footer">
     <div class="wrap">
       <p class="footer-community"><a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">Join the localization Discord</a><span class="sep" aria-hidden="true">·</span><a href="https://github.com/cycleapple/d2survivors-localization" target="_blank" rel="noopener">Source code (GitHub)</a><span class="sep" aria-hidden="true">·</span><a href="https://paypal.me/DonateCYtw" target="_blank" rel="noopener">☕ Buy me a coffee</a><span class="sep" aria-hidden="true">·</span><a href="https://portaly.cc/thecy" target="_blank" rel="noopener">Donate with Portaly</a></p>
-      <p>Unofficial fan translation, not affiliated with <a href="https://d2survivors.lol/" target="_blank" rel="noopener">D2 Survivors</a> (framara) or Blizzard Entertainment. Diablo® is a trademark of Blizzard Entertainment, Inc.</p>
-      <p class="footer-small"><span data-only="desktop">Game 2026.1105.3 · Launcher v1.0.7</span><span data-only="web">Web · Translations 2026-11-05</span></p>
+      <p>Unofficial fan translation, not affiliated with <a href="https://d2survivors.lol/download/" target="_blank" rel="noopener">D2 Survivors</a> (framara) or Blizzard Entertainment. Diablo® is a trademark of Blizzard Entertainment, Inc.</p>
+      <p class="footer-small">Game 2026.1120.1 · Launcher v1.0.7</p>
     </div>
   </footer>
 
-  <script id="page-data" type="application/json">{"lang":"en","t":{"changelog.kind.translation":"Translation","changelog.kind.language":"Language","changelog.kind.game-fix":"Game update","changelog.kind.launcher":"Launcher","changelog.game.title":"What’s new in the game itself (game version {0})","changelog.game.credit":"These are the D2 Survivors developer’s own patch notes; the other language pages show our translation.","changelog.game.at":"Official update time: {0}","changelog.game.source":"Source","lang.coverage":"{0} strings","status.available":"Available","status.beta":"Beta","status.planned":"Planned","meta.updated":"Translations updated","meta.game":"Game version","meta.launcher":"Launcher","meta.platform":"Windows","meta.browsers":"Browsers","meta.devices":"Devices","meta.devices.value":"computer & phone","hero.download":"Download launcher","hero.soon":"Coming soon","web.copied":"Copied","web.copyfail":"Couldn’t copy automatically; select the code below by hand.","web.pc.drag":"Drag the button to your bookmarks bar; clicking it here does nothing."}}</script>
+  <script id="page-data" type="application/json">{"lang":"en","t":{"changelog.kind.translation":"Translation","changelog.kind.language":"Language","changelog.kind.game-fix":"Game update","changelog.kind.launcher":"Launcher","changelog.game.title":"What’s new in the game itself (game version {0})","changelog.game.credit":"These are the D2 Survivors developer’s own patch notes; the other language pages show our translation.","changelog.game.at":"Official update time: {0}","changelog.game.source":"Source","lang.coverage":"{0} strings","status.available":"Available","status.beta":"Beta","status.planned":"Planned","meta.updated":"Translations updated","meta.game":"Game version","meta.launcher":"Launcher","meta.platform":"Windows","hero.download":"Download launcher","hero.soon":"Coming soon"}}</script>
   <script type="module" src="../app.js"></script>
 </body>
 </html>

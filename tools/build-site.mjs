@@ -54,8 +54,6 @@ const REPO_LINKS = {
   actions: `${SITE.repoUrl}/actions/workflows/release-launcher.yml`,
 };
 const discordLink = (t, text) => `<a href="${esc(SITE.discordUrl)}" target="_blank" rel="noopener">${esc(text)}</a>`;
-// 書籤帶這一頁的語言（在哪個語言的頁面裝，就固定開那個語言）；英文頁不帶，照書籤自己的規則選
-const bookmarklet = sl => `javascript:import('${new URL(SITE.bookmarkletPath, BASE).href}').then(m=>m.default(${sl.id === 'en' ? '' : `'${sl.id}'`})).catch(e=>alert('D2 Survivors Localization: '+e))`;
 
 const pageUrl = l => (l ? new URL(`${l.path}/`, BASE).href : BASE);
 const alternates = () => [
@@ -173,11 +171,11 @@ function head({ title, description, url, ogLocale, ogAlt = [], prefix, image, im
 // 遊戲翻譯目前可以選的語言（manifest 的 available／beta）
 const translatedLangs = () => state.languages.filter(l => l.status === 'available' || l.status === 'beta').map(l => l.id);
 
-// 語言頁的結構化資料：桌面版啟動器（SoftwareApplication）、瀏覽器版書籤（WebApplication）、常見問題（FAQPage）。
+// 語言頁的結構化資料：桌面版啟動器（SoftwareApplication）、常見問題（FAQPage）。
 // 不寫 author／publisher（不是暴雪、也不是遊戲作者的產品）
 function langPageLd(sl, t, url, image, faq) {
   const offers = { '@type': 'Offer', price: '0', priceCurrency: 'USD' };
-  // FAQPage 只放兩個版本都看得到的題目，答案用頁面上的同一段文字（Google 允許的標籤以外的拿掉）
+  // FAQPage 的答案用頁面上的同一段文字（Google 允許的標籤以外的拿掉）
   const answer = a => a.replace(/<\/?(code|kbd)>/g, '');
   return {
     '@context': 'https://schema.org',
@@ -197,27 +195,14 @@ function langPageLd(sl, t, url, image, faq) {
         isAccessibleForFree: true,
         offers,
         ...(state.launcherReleased ? { downloadUrl: SITE.downloadUrl, softwareVersion: state.launcherVersion } : {}),
-        // 啟動器的程式是 MIT（翻譯字典不是，所以 WebApplication 不寫）。codeRepository 是 SoftwareSourceCode 的屬性，這裡不放
+        // 啟動器的程式是 MIT（翻譯字典不是）。codeRepository 是 SoftwareSourceCode 的屬性，這裡不放
         license: REPO_LINKS.license,
-      },
-      {
-        '@type': 'WebApplication',
-        '@id': url + '#bookmark',
-        name: `${t['hero.title']} – ${t['platform.web']}`,
-        description: t['web.title'],
-        url: url + '#web',
-        applicationCategory: 'GameApplication',
-        operatingSystem: 'Any',
-        browserRequirements: 'Chrome, Edge, Firefox, Safari',
-        inLanguage: translatedLangs(),
-        isAccessibleForFree: true,
-        offers,
       },
       {
         '@type': 'FAQPage',
         '@id': url + '#faq',
         inLanguage: sl.hreflang,
-        mainEntity: faq.filter(([, , only]) => !only).map(([q, a]) => ({
+        mainEntity: faq.map(([q, a]) => ({
           '@type': 'Question',
           name: q,
           acceptedAnswer: { '@type': 'Answer', text: answer(a) },
@@ -236,36 +221,16 @@ const footer = t => `<footer class="footer">
         SITE.portalyUrl && `<a href="${esc(SITE.portalyUrl)}" target="_blank" rel="noopener">${esc(t['donate.portaly'])}</a>`,
       ].filter(Boolean).join('<span class="sep" aria-hidden="true">·</span>')}</p>
       <p>${t['footer.disclaimer']}</p>
-      <p class="footer-small"><span data-only="desktop">Game ${esc(state.gameVersion)} · Launcher ${state.launcherReleased ? 'v' + esc(state.launcherVersion) : '—'}</span><span data-only="web">Web · Translations ${esc(state.updated || '')}</span></p>
+      <p class="footer-small">Game ${esc(state.gameVersion)} · Launcher ${state.launcherReleased ? 'v' + esc(state.launcherVersion) : '—'}</p>
     </div>
   </footer>`;
 
-// 文字有「key@web」版本時，兩個版本各輸出一份
-function perPlatform(t, key, render) {
-  const web = t[`${key}@web`];
-  return web === undefined ? render(t[key], '') : render(t[key], ' data-only="desktop"') + '\n        ' + render(web, ' data-only="web"');
-}
-
-// 選版本的兩張大卡片：首屏標題下面一份，安裝區塊開頭各一份（compact，按了會捲到另一個版本的安裝區塊）。
-// 選中的那張靠 body[data-platform] 的 CSS 標出來，JS 還沒跑也對
-const PLATFORM_ICON = { desktop: '🖥️', web: '🌐' };
-const platformPicker = (t, compact = false) => `<div class="platform-pick${compact ? ' compact' : ''}" role="group" aria-label="${esc(t['platform.label'])}">
-          ${compact ? '' : `<p class="pick-label">${esc(t['platform.choose'])}</p>\n          `}${['desktop', 'web'].map(p => `<button type="button" class="pick" data-platform="${p}">
-            <span class="pick-icon" aria-hidden="true">${PLATFORM_ICON[p]}</span>
-            <span class="pick-title">${esc(t['platform.' + p])}</span>
-            <span class="pick-sub">${esc(t[`platform.${p}.sub`])}</span>
-            ${compact ? '' : `<span class="pick-desc">${esc(t[`platform.${p}.desc`])}</span>\n          `}</button>`).join('\n          ')}
-        </div>`;
-
-// 版本分頁用：在 JS 執行前先決定顯示哪個版本，避免先閃一下桌面版
-const PLATFORM_BOOT = `<script>(function(){var P=['desktop','web'],q=new URLSearchParams(location.search).get('platform'),h={'#install':'desktop','#web':'web'}[location.hash],s;try{s=localStorage.getItem('d2s-site-platform')}catch(e){}document.body.dataset.platform=P.indexOf(q)>=0?q:h||(P.indexOf(s)>=0?s:/Windows/i.test(navigator.userAgent)?'desktop':'web')})()</script>`;
-
 // 文字裡的 {langs}（A、B 或 C）、{langsAnd}（A、B 和 C）：manifest 裡可用和測試中的語言，用這一頁的語言寫。
-// 加了新語言重新產生就好，不用改文字。{lowpower} 是書籤「省電畫質」開關在遊戲裡的名稱（web.lowpower），改名只改那一個值
+// 加了新語言重新產生就好，不用改文字
 function fillLangs(texts, lang) {
   const names = state.languages.filter(l => l.status === 'available' || l.status === 'beta').map(l => l.name[lang] || l.name.en || l.native);
   const list = type => new Intl.ListFormat(lang, { type }).format(names);
-  const fill = v => typeof v === 'string' ? v.replaceAll('{langs}', list('disjunction')).replaceAll('{langsAnd}', list('conjunction')).replaceAll('{lowpower}', texts['web.lowpower'])
+  const fill = v => typeof v === 'string' ? v.replaceAll('{langs}', list('disjunction')).replaceAll('{langsAnd}', list('conjunction'))
     : Array.isArray(v) ? v.map(fill)
     : v && typeof v === 'object' ? Object.fromEntries(Object.entries(v).map(([k, x]) => [k, fill(x)]))
     : v;
@@ -286,7 +251,7 @@ const langStrip = (sl, label, prefix) => `<nav class="lang-strip lang-switch" ar
     ${SITE_LANGS.map(o => langLink(o, sl, prefix)).join('\n    ')}
   </nav>`;
 
-// 截圖區：遊戲畫面一排（橫向捲動，寬螢幕一次兩張，app.js 加上一張／下一張），桌面版、瀏覽器版各自的畫面一排。
+// 截圖區：遊戲畫面一排（橫向捲動，寬螢幕一次兩張，app.js 加上一張／下一張），啟動器的畫面一排。
 // 圖片網址放 data-src，捲到附近才由 app.js 換成 src：loading="lazy" 在手機上的範圍很大，首屏還沒畫好就會先下載這排 1～2 MB 的圖。
 // 沒有 JS 時用 noscript 裡的 img；aspect-ratio 讓還沒載入的圖先佔好位置
 function shotsSection(sl, t) {
@@ -298,13 +263,13 @@ function shotsSection(sl, t) {
             <figcaption>${esc(caption)}</figcaption>
           </figure>`;
   };
-  const row = (scenes, cls, attr = '') => {
+  const row = (scenes, cls) => {
     const items = scenes.map(scene => [scene, shotFor(sl, scene)]).filter(([, s]) => s);
-    return items.length ? `<div class="shots ${cls}"${attr} tabindex="0" aria-label="${esc(t['shots.label'])}">
+    return items.length ? `<div class="shots ${cls}" tabindex="0" aria-label="${esc(t['shots.label'])}">
           ${items.map(([scene, s]) => figure(scene, s)).join('\n          ')}
         </div>` : '';
   };
-  const rows = [row(SHOTS.game, 'shots-game'), row(SHOTS.desktop, 'shots-platform', ' data-only="desktop"'), row(SHOTS.web, 'shots-platform', ' data-only="web"')].filter(Boolean);
+  const rows = [row(SHOTS.game, 'shots-game'), row(SHOTS.desktop, 'shots-platform')].filter(Boolean);
   if (!rows.length) return '';
   return `<section class="screens" aria-label="${esc(t['shots.label'])}" data-prev="${esc(t['shots.prev'])}" data-next="${esc(t['shots.next'])}">
       <div class="wrap">
@@ -314,70 +279,6 @@ function shotsSection(sl, t) {
     </section>`;
 }
 
-// 手機書籤教學：iPhone（Safari）／Android（Chrome）各五步。每步一個用 HTML/CSS 畫的深色示意畫面（不用截圖：各語言用自己的文字，也不拖慢手機），
-// 下面是粗體短標題、一句說明、需要時一行小字補充（i18n 的 guide.<os>.steps：[標題, 說明, 補充]）。
-// 示意畫面只畫跟這一步有關的那一截（.crop-top／.crop-bottom 另一邊淡出），每個畫面只有一個要按的地方（.tap：金色光暈加點按漣漪）。
-// 畫面裡的瀏覽器按鈕文字是 i18n 的 guide.ui（照各語言的 Safari、Chrome 用語）；文字裡的 {name} 是建議的書籤名稱（web.bookmark.name），
-// {copy} 是複製按鈕的文字，{home} 是 d2survivors.lol 首頁的連結（書籤建議從首頁點），{play} 是遊戲頁面的連結，其他 {key} 換成那個系統的 guide.ui
-function mobileGuide(t) {
-  const name = t['web.bookmark.name'];
-  const host = new URL(BASE).host;
-  const code = 'javascript:import(…';
-  const page = t['hero.title'];
-  const ph = w => `<span class="ph-ph"${w ? ` style="width:${w}%"` : ''}></span>`;
-  const row = (icon, inner, cls = '') => `<div class="ph-row${cls ? ' ' + cls : ''}"><span class="ph-ico">${icon}</span>${inner}</div>`;
-  const label = s => `<span class="ph-t">${esc(s)}</span>`;
-  // 第 1 步：我們網站的縮小版；最後一步：d2survivors.lol 首頁上的 D2 Survivors 標題（只用文字和 CSS，不用遊戲美術）
-  const siteMini = `<div class="ph-site"><span class="ph-brand">D2S <i>Localization</i></span><b class="ph-title">${esc(page)}</b><span class="ph-btn tap">${esc(t['web.copy'])}</span><code class="ph-code">${code}</code></div>`;
-  const title = `<div class="ph-gametitle"><b>D2</b><b>SURVIVORS</b>${ph(40)}${ph(40)}</div>`;
-  const screens = {
-    ios: ui => [
-      ['crop-top', `<div class="ph-url">${esc(host)}</div>${siteMini}`],
-      ['crop-bottom', `<div class="ph-sheet"><div class="ph-sheet-head"><span class="ph-fav">D2</span><span class="ph-t"><b>${esc(page)}</b><small>${esc(host)}</small></span></div>
-        <div class="ph-apps"><i></i><i></i><i></i><i></i></div>${row('📖', label(ui.addBookmark), 'tap')}${row('☆', ph(60), 'dim')}</div>`],
-      ['crop-bottom', `<div class="ph-head"><span></span><b>${esc(ui.bookmarks)}</b><span></span></div>${row('▤', ph(55), 'dim')}${row('📖', label(page))}
-        <div class="ph-foot"><span></span><span class="tap">${esc(ui.edit)}</span></div>`],
-      ['crop-top', `<div class="ph-head"><span></span><b>${esc(ui.editBookmark)}</b><span class="tap">${esc(ui.done)}</span></div>
-        <div class="ph-field glow">${esc(name)}</div><div class="ph-field glow mono">${code}</div>`],
-      ['crop-bottom', `<div class="ph-url">d2survivors.lol</div>${title}
-        <div class="ph-sheet"><div class="ph-head"><span></span><b>${esc(ui.bookmarks)}</b><span></span></div>${row('📖', label(name), 'tap')}</div>`],
-    ],
-    android: ui => [
-      ['crop-top', `<div class="ph-url">${esc(host)}<span class="ph-dots">⋮</span></div>${siteMini}`],
-      ['crop-top', `<div class="ph-url">${esc(host)}<span class="ph-dots glow">⋮</span></div>${siteMini.replace(' tap', '')}
-        <div class="ph-menu"><div class="ph-icons"><span>→</span><span class="tap">☆</span><span>⤓</span><span>ⓘ</span><span>↻</span></div>${row('', ph(70), 'dim')}${row('', ph(50), 'dim')}</div>`],
-      ['crop-top', `<div class="ph-head"><span>←</span><b>${esc(ui.bookmarks)}</b></div>${row('★', `${label(page)}<span class="ph-dots glow">⋮</span>`)}
-        <div class="ph-pop">${row('', label(ui.edit), 'tap')}${row('', ph(60), 'dim')}</div>`],
-      ['crop-top', `<div class="ph-head"><span>←</span><b>${esc(ui.editBookmark)}</b></div>
-        <div class="ph-label">${esc(ui.name)}</div><div class="ph-field glow">${esc(name)}</div><div class="ph-label">${esc(ui.url)}</div><div class="ph-field glow mono">${code}</div>`],
-      ['crop-top', `<div class="ph-url focus">${esc(name)}</div>${title}
-        <div class="ph-suggest">${row('☆', `<span class="ph-t"><b>${esc(name)}</b><small>${code}</small></span>`, 'tap')}${row('⌕', ph(60), 'dim')}</div>`],
-    ],
-  };
-  const home = `<a href="${LINKS.d2sHome}" target="_blank" rel="noopener">d2survivors.lol</a>`;
-  const play = `<a href="${LINKS.d2sPlay}" target="_blank" rel="noopener">d2survivors.lol/play/</a>`;
-  const fill = (s, ui) => s.replace(/\{(\w+)\}/g, (m, k) => (k === 'name' ? esc(name) : k === 'copy' ? esc(t['web.copy']) : k === 'home' ? home : k === 'play' ? play : ui[k] !== undefined ? esc(ui[k]) : m));
-  const pane = os => {
-    const ui = t['guide.ui'][os];
-    const shots = screens[os](ui);
-    return `<ol class="guide-steps" data-os-pane="${os}" data-prev="${esc(t['shots.prev'])}" data-next="${esc(t['shots.next'])}">
-              ${t[`guide.${os}.steps`].map(([head, body, note], i) => `<li class="guide-step">
-                <div class="phone ${os} ${shots[i][0]}" aria-hidden="true"><div class="ph-screen">${shots[i][1]}</div></div>
-                <h4><span class="step-no">${i + 1}</span>${fill(head, ui)}</h4>
-                <p>${fill(body, ui)}</p>${note ? `\n                <p class="step-note">${fill(note, ui)}</p>` : ''}
-              </li>`).join('\n              ')}
-            </ol>`;
-  };
-  return `<div class="os-tabs" role="group" aria-label="${esc(t['web.mobile.title'])}">
-              <button type="button" data-os="ios" aria-pressed="true">${esc(t['guide.tab.ios'])}</button>
-              <button type="button" data-os="android" aria-pressed="false">${esc(t['guide.tab.android'])}</button>
-            </div>
-            ${pane('ios')}
-            ${pane('android')}
-            <noscript><style>.guide [data-os-pane] { display: grid !important; } .os-tabs { display: none; }</style></noscript>
-            <p class="guide-note">${esc(t['guide.note'])}</p>`;
-}
-
 // 遊戲畫面截圖的網址（結構化資料的 screenshot）
 const gameShotUrls = sl => SHOTS.game.map(scene => shotFor(sl, scene)).filter(Boolean).map(s => new URL(s.file, BASE).href);
 
@@ -385,7 +286,6 @@ function langPage(sl) {
   const t = fillLangs(I18N[sl.id], sl.id);
   // 桌面捷徑的範例用這一頁的語言（不是遊戲翻譯語言的就用繁中）
   const exampleLang = state.languages.some(l => l.id === sl.id && l.entries) ? sl.id : 'zh-TW';
-  const only = p => (p ? ` data-only="${p}"` : '');
   const wikiOn = Boolean(wiki && t['wiki.title']);
   const runtime = {
     lang: sl.id,
@@ -395,10 +295,10 @@ function langPage(sl) {
   // 常見問題：頁面和 FAQPage 結構化資料用同一份文字
   const faq = t['faq.items']
     .filter(([, a]) => SITE.discordUrl || !a.includes('{discord}'))
-    .map(([q, a, p]) => [q, a
+    .map(([q, a]) => [q, a
       .replace('{feedback}', feedbackUrl ? fmt(t['faq.feedback'], esc(feedbackUrl)) : t['faq.nofeedback'])
       .replaceAll('{discord}', esc(SITE.discordUrl))
-      .replace(/\{(repo|license|dictLicense|issues|actions)\}/g, (_, k) => esc(REPO_LINKS[k])), p]);
+      .replace(/\{(repo|license|dictLicense|issues|actions)\}/g, (_, k) => esc(REPO_LINKS[k]))]);
   const url = pageUrl(sl);
   const image = ogImage(sl);
 
@@ -417,11 +317,10 @@ function langPage(sl) {
     ld: langPageLd(sl, t, url, image, faq),
   })}
 </head>
-<body data-platform="desktop">
-  ${PLATFORM_BOOT}
+<body>
   ${langStrip(sl, t['langs.label'], '../')}
   <header class="topbar">
-    <!-- 第一層選網站語言（各自一頁），第二層選桌面版／瀏覽器版（同一頁裡切換） -->
+    <!-- 第一層選網站語言（各自一頁），第二層是頁內導覽 -->
     <div class="wrap topbar-inner">
       <a class="brand" href="${BASE}">D2S <span>Localization</span></a>
       <nav class="tabs lang-switch" aria-label="${esc(t['langs.label'])}">
@@ -434,14 +333,10 @@ function langPage(sl) {
         <a href="#download">${esc(t['nav.download'])}</a>
         <a href="#sources">${esc(t['nav.sources'])}</a>
         <a href="#languages">${esc(t['nav.languages'])}</a>
-        <a href="#install" data-only="desktop">${esc(t['nav.install'])}</a>
-        <a href="#web" data-only="web">${esc(t['nav.install'])}</a>
+        <a href="#install">${esc(t['nav.install'])}</a>
         <a href="#faq">${esc(t['nav.faq'])}</a>${wikiOn ? `
         <a href="wiki/">${esc(t['nav.wiki'])}</a>` : ''}
       </nav>
-      <div class="subtabs" id="platform-switch" role="group" aria-label="${esc(t['platform.label'])}">
-        ${['desktop', 'web'].map(p => `<button type="button" data-platform="${p}">${esc(t['platform.' + p])}<small>${esc(t[`platform.${p}.sub`])}</small></button>`).join('\n        ')}
-      </div>
     </div>
   </header>
 
@@ -455,15 +350,12 @@ function langPage(sl) {
       <div class="wrap">
         <p class="eyebrow">${esc(t['hero.eyebrow'])}</p>
         <h1>${esc(t['hero.title'])}</h1>
-        ${platformPicker(t)}
-        ${perPlatform(t, 'hero.lead', (s, a) => `<p class="lead"${a}>${esc(s)}</p>`)}
-        <div class="cta" data-only="desktop">
+        <p class="lead">${esc(t['hero.lead'])}</p>
+        <!-- 官方網頁版已移除（2026-11），翻譯只剩桌面版 -->
+        <p class="hero-note">${esc(t['hero.webRemoved'])}</p>
+        <div class="cta">
           ${downloadBtnHtml(state, t, SITE.downloadUrl)}
           <a class="btn btn-ghost" href="#install">${esc(t['hero.howto'])}</a>
-        </div>
-        <div class="cta" data-only="web">
-          <a class="btn btn-primary" href="#web">${esc(t['hero.bookmark'])}</a>
-          <a class="btn btn-ghost" href="${LINKS.d2sPlay}" target="_blank" rel="noopener">${esc(t['hero.play'])}</a>
         </div>
         <div id="hero-meta">
         ${heroMetaHtml(state, t)}
@@ -484,7 +376,7 @@ function langPage(sl) {
             <p class="card-sub">${esc(c.sub)}</p>
             <p>${esc(c.body)}</p>
             <ul class="links">
-              ${c.links.map(([label, key, p]) => `<li${only(p)}><a href="${LINKS[key]}" target="_blank" rel="noopener">${esc(label)}<span class="host">${new URL(LINKS[key]).hostname}</span></a></li>`).join('\n              ')}
+              ${c.links.map(([label, key]) => `<li><a href="${LINKS[key]}" target="_blank" rel="noopener">${esc(label)}<span class="host">${new URL(LINKS[key]).hostname}</span></a></li>`).join('\n              ')}
             </ul>
           </article>`).join('\n          ')}
         </div>
@@ -512,11 +404,10 @@ function langPage(sl) {
       </div>
     </section>
 
-    <section class="section" id="install" data-only="desktop">
+    <section class="section" id="install">
       <div class="wrap">
         <h2>${esc(t['install.title'])}</h2>
         <p class="section-lead">${esc(t['install.lead'])}</p>
-        ${platformPicker(t, true)}
         <ol class="steps">
           ${t['install.steps'].map(([title, body]) => `<li><strong>${esc(title)}</strong><p>${body}</p></li>`).join('\n          ')}
         </ol>
@@ -537,44 +428,6 @@ function langPage(sl) {
       </div>
     </section>
 
-    <section class="section" id="web" data-only="web">
-      <div class="wrap">
-        <h2>${esc(t['web.title'])}</h2>
-        <p class="section-lead">${t['web.lead']}</p>
-        <!-- 預告：官方之後停止提供 Hosted files，手機就不能玩 -->
-        <p class="web-hosted" role="note">${t['web.hosted']}</p>
-        ${platformPicker(t, true)}
-        <div class="cards">
-          <article class="card">
-            <h3>${esc(t['web.pc.title'])}</h3>
-            <p class="bookmarklet-row">
-              <a class="btn btn-primary bookmarklet" id="bookmarklet" href="${esc(bookmarklet(sl))}" draggable="true">${esc(t['web.bookmark.name'])}</a>
-              <span class="bookmarklet-hint" id="bookmarklet-hint">${esc(t['web.pc.hint'])}</span>
-            </p>
-            <ol class="web-steps">
-              ${t['web.pc.steps'].map(s => `<li>${s}</li>`).join('\n              ')}
-            </ol>
-          </article>
-          <article class="card guide" data-os="ios">
-            <h3>${esc(t['web.mobile.title'])}</h3>
-            <p class="web-hosted-mobile">${esc(t['web.mobile.hosted'])}</p>
-            <p class="bookmarklet-row">
-              <button type="button" class="btn btn-ghost" id="copy-bookmarklet">${esc(t['web.copy'])}</button>
-              <span class="bookmarklet-hint" id="copy-status" role="status"></span>
-            </p>
-            <pre class="bookmarklet-code"><code id="bookmarklet-code">${esc(bookmarklet(sl))}</code></pre>
-            ${mobileGuide(t)}
-          </article>
-        </div>
-        <div class="card web-usage">
-          <h3>${esc(t['web.usage.title'])}</h3>
-          <ul>
-            ${t['web.usage.items'].map(s => `<li>${esc(s)}</li>`).join('\n            ')}
-          </ul>
-        </div>
-      </div>
-    </section>
-
     ${wikiOn ? `<section class="section" id="wiki">
       <div class="wrap">
         <h2>${esc(t['wiki.title'])}</h2>
@@ -590,7 +443,7 @@ function langPage(sl) {
       <div class="wrap narrow">
         <h2>${esc(t['faq.title'])}</h2>
         <div class="faq">
-          ${faq.map(([q, a, p]) => `<details${only(p)}><summary>${esc(q)}</summary><div class="answer">${a}</div></details>`).join('\n          ')}
+          ${faq.map(([q, a]) => `<details><summary>${esc(q)}</summary><div class="answer">${a}</div></details>`).join('\n          ')}
         </div>
         ${SITE.donateUrl || SITE.portalyUrl ? `<!-- 贊助：低調放在常見問題後面，不跳視窗 -->
         <aside class="support" id="support">
@@ -707,12 +560,11 @@ function sitemap(lastmod) {
     <lastmod>${lastmod[loc]}</lastmod>
 ${links}
   </url>`);
-  // wiki：只有繁中，另一個語言版本是官方的英文原頁
+  // wiki：只有繁中（官方的英文原頁已經移除，不寫 en）
   for (const x of wiki?.pages || []) urls.push(`  <url>
     <loc>${wikiUrl(x.path)}</loc>
     <lastmod>${x.lastmod}</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="${wikiUrl(x.path)}"/>
-    <xhtml:link rel="alternate" hreflang="en" href="${new URL(x.path ? `${x.path}/` : '', wiki.official).href}"/>
   </url>`);
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">

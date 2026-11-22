@@ -38,22 +38,15 @@ export function langGridHtml(state, t, lang) {
   }).join('\n');
 }
 
-// 首頁資訊列，兩個版本各一份（data-only）
+// 首頁資訊列：遊戲版本、啟動器版本、翻譯更新日期
 export function heroMetaHtml(state, t) {
   const item = ([k, v]) => `<li>${esc(k)} <strong>${esc(v)}</strong></li>`;
-  const updated = state.updated && [t['meta.updated'], state.updated];
-  const desktop = [
+  const rows = [
     [t['meta.game'], state.gameVersion],
     [t['meta.launcher'], state.launcherReleased ? `v${state.launcherVersion} · ${t['meta.platform']}` : `${t['hero.soon']} · ${t['meta.platform']}`],
-    updated,
+    state.updated && [t['meta.updated'], state.updated],
   ];
-  const web = [
-    [t['meta.browsers'], 'Chrome · Edge · Firefox · Safari'],
-    [t['meta.devices'], t['meta.devices.value']],
-    updated,
-  ];
-  return `<ul class="meta" data-only="desktop">${desktop.filter(Boolean).map(item).join('')}</ul>
-        <ul class="meta" data-only="web">${web.filter(Boolean).map(item).join('')}</ul>`;
+  return `<ul class="meta">${rows.filter(Boolean).map(item).join('')}</ul>`;
 }
 
 // 下載按鈕：已發布就是連結，還沒發布顯示「即將推出」
@@ -105,6 +98,6 @@ export const RUNTIME_KEYS = [
   'changelog.kind.translation', 'changelog.kind.language', 'changelog.kind.game-fix', 'changelog.kind.launcher',
   'changelog.game.title', 'changelog.game.credit', 'changelog.game.at', 'changelog.game.source',
   'lang.coverage', 'status.available', 'status.beta', 'status.planned',
-  'meta.updated', 'meta.game', 'meta.launcher', 'meta.platform', 'meta.browsers', 'meta.devices', 'meta.devices.value',
-  'hero.download', 'hero.soon', 'web.copied', 'web.copyfail', 'web.pc.drag',
+  'meta.updated', 'meta.game', 'meta.launcher', 'meta.platform',
+  'hero.download', 'hero.soon',
 ];
