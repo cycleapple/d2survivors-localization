@@ -59,6 +59,8 @@ while (queue.length) {
   if (queue.length) await sleep(DELAY);
 }
 console.log();
+// 官方 wiki 已移除（2026-11-21）：抓不到任何一頁就不改寫 pages.json，留著最後一版
+if (!pages.length) { console.error(`官方 wiki 一頁都抓不到（${BASE} 回 404），${OUT}/pages.json 不改寫`); process.exit(1); }
 pages.sort((a, b) => a.path.localeCompare(b.path, 'en'));
 fs.writeFileSync(`${OUT}/pages.json`, JSON.stringify({ fetched: new Date().toISOString(), pages }, null, 1) + '\n');
 console.log(`${pages.length} 頁 → ${OUT}/`);

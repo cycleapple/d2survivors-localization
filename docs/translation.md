@@ -99,12 +99,12 @@ node tools/where.mjs 非表示 --lang ja
 
 俄文字型試了三種（`work/translation/ru-proto.mjs` 在 debug 版上加範圍和字型，截圖在 `work/translation/ru-*.png`）：Exocet（D2R 的 exocetblizzardot-medium.otf，有西里爾字母，小寫畫成小型大寫，跟遊戲的拉丁字母一致）、Philosopher Bold Italic（D2R 的 philosopher-bolditalic.ttf，應該是俄文版代替 Formal436 的內文字型，小寫好讀但是斜體）、Kodia。建議：**標題、按鈕用 Exocet，內文用 Philosopher**。`node tools/zh-fonts.mjs … --lang ru` 產生 `work/fonts/ru/title.woff2`、`body.woff2`。
 
-### 需要啟動器（patch-rules.mjs）和網頁書籤（web-rules.mjs）加的規則
+### 需要啟動器（patch-rules.mjs）加的規則
 
 參考實作和測試：`node work/translation/compose-proto.mjs dict/<語言>/d2r-auto.json <de|fr|ru>`。
 
 1. **俄文：外文字範圍**。`HANGUL_RANGES` 那條再加 `||t>=1024&&t<=1279`（U+0400–04FF）
-2. **俄文：字型**。外文字的字型家族照點陣字型分兩種（keepSave 的 `foreignFont()`）：標題字型（exocet10／24／30／42）用 `D2R Kodia`，內文用 `D2R Iris`（粗體）；沒有 D2R 時是 `D2 Hangul`／`D2 Hangul 14`。註冊 unicodeRange `U+0400-04FF`：`D2R Kodia` ← title.woff2，其他三個 ← body.woff2。網頁版沒有 D2R 字型的話用系統字型也可以
+2. **俄文：字型**。外文字的字型家族照點陣字型分兩種（keepSave 的 `foreignFont()`）：標題字型（exocet10／24／30／42）用 `D2R Kodia`，內文用 `D2R Iris`（粗體）；沒有 D2R 時是 `D2 Hangul`／`D2 Hangul 14`。註冊 unicodeRange `U+0400-04FF`：`D2R Kodia` ← title.woff2，其他三個 ← body.woff2
 3. **魔法物品名稱**（三種語言各一個群組）。取代 `return[a(i),a(r),this.translateAs(`item`,t)].filter(Boolean).join(` `)`：
    - 詞性 `g = this.exact.get(s(`gender:${t.trim()}`)) ?? 'ms'`；`pick(v)`：`v` 開頭是 `[` 就取 `[g]` 後面那段（沒有就取第一段），否則原樣
    - 德文：`前綴 物品 後綴`，前綴結尾是「 -」時跟物品用連字號接（Engels-Ring），整個名稱第一個字母大寫：Robuste Kappe des Geistes
@@ -136,7 +136,7 @@ D2R plPL：魔法物品 `%0 %1 %2`、稀有名稱 `%0 %1`（形容詞＋名詞�
 
 ## 發布
 
-翻譯有變動、要讓啟動器和網頁版書籤拿到時：
+翻譯有變動、要讓啟動器拿到時（網頁書籤版已於 2026-11 隨官方網頁版停止，manifest 不再有 `web`、`languages[].web`、`game.web_checked`）：
 
 ```
 node tools/publish.mjs
@@ -155,9 +155,7 @@ manifest 各部分從哪裡來：
 | `languages[]` 的 `id`、`name`、`status` | `tools/langs.mjs` 的 `TARGETS` |
 | `languages[]` 的 `entries`、`dict` | 合併後的 `dict/<id>.json` |
 | `languages[].desktop`、`desktop` | `tools/patch-rules.mjs` 的 `LANGUAGES`、`RULES`、`ASSETS_DIR`、`DICT_TARGET`（啟動器聊天室維護） |
-| `languages[].web`、`web` | `tools/web-rules.mjs` 的 `WEB_LANGUAGES`、`WEB_RULES`、`WEB_PLAY_URL`（網頁書籤聊天室維護）；還沒匯出 `WEB_LANGUAGES` 時不輸出 |
 | `game.desktop` | `versions/` 裡最新一版 |
-| `game.web_checked` | `tools/web-rules.mjs` 有匯出 `WEB_CHECKED` 才輸出 |
 | `launcher` | 還沒有 GitHub Release，先不輸出。之後加的時候：`sha256_url` 指到的檔案是 sha256sum 格式（`<雜湊> <檔名>`），啟動器只取第一欄 |
 
 ### 更新紀錄（changelog）
@@ -180,7 +178,7 @@ manifest 各部分從哪裡來：
 - `summary` 至少要有 `zh-TW` 和 `en`（沒有的話 publish 會停下來）；網站每種介面語言（zh-TW、zh-CN、en、ja、de、fr、ru、pl）都要寫，少了的 publish 會列出來，網站顯示 en。`notes` 選填
 - 沒有這個檔或是 `{}`：依統計自動寫每種介面語言（`tools/changelog-summary.mjs`：「繁中修正 30 條、新增 12 條；新增日文（測試中）」「Russisch: 562 korrigiert」），`kind` 是 `translation`、`announce` 是 `false`
 - 寫了這個檔（不是 `{}`）就一定新增一筆、manifest 換新的 version，字典和規則都沒變也一樣（只發公告用）
-- 遊戲本身的更新說明（`gameNotes`，格式見 [manifest-v2.md](manifest-v2.md)）：publish 自動帶入。來源是 `versions/<版本>/changelog.json`（遊戲的 `web/changelog.json`，按 build 分的清單，`extract-keys` 會一起存；網頁版先改版、還沒有 app.asar 時用 `curl -s https://d2survivors.lol/changelog.json -o versions/<版本>/changelog.json`）。遊戲版本 2026.1102.1 取 `build` 是 `20261102.1` 那一項，原文照遊戲順序，各語言用合併後字典的譯文，缺的用 en，不另外翻。這個遊戲版本還沒有 `gameNotes` 時放進最新一筆（這次新增的，沒有新增就是上一筆；只放在 `game.desktop` 是這個版本的那筆）。改舊的項目不會再發 Discord 公告（announce.yml 只發新增的 version）。`at` 是那個 build 的官方發布時間（遊戲 changelog.json 的 `at`，UTC）
+- 遊戲本身的更新說明（`gameNotes`，格式見 [manifest-v2.md](manifest-v2.md)）：publish 自動帶入。來源是 `versions/<版本>/changelog.json`（遊戲的 `web/changelog.json`，按 build 分的清單，`extract-keys` 會一起存）。遊戲版本 2026.1102.1 取 `build` 是 `20261102.1` 那一項，原文照遊戲順序，各語言用合併後字典的譯文，缺的用 en，不另外翻。這個遊戲版本還沒有 `gameNotes` 時放進最新一筆（這次新增的，沒有新增就是上一筆；只放在 `game.desktop` 是這個版本的那筆）。改舊的項目不會再發 Discord 公告（announce.yml 只發新增的 version）。`at` 是那個 build 的官方發布時間（遊戲 changelog.json 的 `at`，UTC）
 - 要另外公告某個遊戲版本的更新說明：changelog-next.json 加 `"gameNotes": "2026.1102.1"`（再加 `announce: true` 和 summary），publish 會把那個版本的 `gameNotes` 從舊的那筆搬到這次新增的那筆，舊的不留
 - 先看結果再發：`node tools/publish.mjs --dry-run` 在 `work/translation/publish-dry/` 的複本上跑，不清空 changelog-next、不 commit
 
@@ -222,6 +220,8 @@ node tools/publish.mjs
 測技能變體譯名的 `work/test-mods.js` 裡的檔名和匯出名稱（變體表匯出成什麼）每版都會變，用 `node work/find-export.mjs <keepSave 檔> <變體表名稱>` 查。
 
 ## wiki（網站上的繁中版，2026-11-06 起）
+
+**官方 wiki 已移除（2026-11-21）**：`dict/wiki/` 和網站上的繁中 wiki（`/zh-tw/wiki/`）維持最後一版，不再同步。`tools/wiki-fetch.mjs` 留著，但不再定期跑（官方回 404、一頁都抓不到時它會停下來，不改寫 `data/wiki/src/pages.json`）。下面是官方 wiki 還在時的流程和格式，`build-wiki` 重新產生頁面時還是照這些。
 
 官方 wiki 翻成繁中，放在網站的 `/zh-tw/wiki/`。分工和頁面規則見 [manifest-v2.md](manifest-v2.md) 的「wiki」；只做繁中。
 

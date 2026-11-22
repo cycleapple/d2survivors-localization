@@ -2,8 +2,8 @@
 //   node tools/publish.mjs
 // commit 只收 site/data/、合併後的 dict/<id>.json 和 dict/changelog-next.json（repo 裡的字典和發布出去的一致），其他聊天室的改動不碰。
 // 更新紀錄（格式見 docs/manifest-v2.md）：dict/changelog-next.json 是人寫的這次說明，併進 site/data/changelog.json 後清空；
-// 沒寫就依統計自動產生。只有字典、規則、語言狀態、啟動器版本有變動才多一筆（game.web_checked 每小時會變，不算）
-// push 之後 GitHub Actions 部署 Pages，啟動器和書籤下次開啟就會拿到。v1 的 dist repo 不再更新
+// 沒寫就依統計自動產生。只有字典、規則、語言狀態、啟動器版本有變動才多一筆
+// push 之後 GitHub Actions 部署 Pages，啟動器下次開啟就會拿到。v1 的 dist repo 不再更新
 import { execFileSync } from 'node:child_process';
 import crypto from 'node:crypto';
 import fs from 'node:fs';
@@ -35,7 +35,7 @@ function makeGameNotes(version) {
 }
 
 // manifest 會讀到別的聊天室的檔案（修改規則）：工作目錄裡有還沒 commit 的改動就停下來，免得把做到一半的規則發布出去
-const FOREIGN = ['tools/patch-rules.mjs', 'tools/web-rules.mjs'];
+const FOREIGN = ['tools/patch-rules.mjs'];
 const dirty = FOREIGN.filter(p => { try { git('diff', '--quiet', 'HEAD', '--', p); return false; } catch { return true; } });
 if (dirty.length && !DRY) fail(`這些檔案有還沒 commit 的改動（別的聊天室在改）：${dirty.join('、')}。等它們 commit 再發布`);
 if (dirty.length) console.log(`注意：${dirty.join('、')} 有還沒 commit 的改動，試跑結果會包含它們`);
@@ -75,7 +75,7 @@ const stats = manifest.languages.map(l => {
   };
 });
 
-const rulesChanged = JSON.stringify([before?.desktop, before?.web]) !== JSON.stringify([manifest.desktop, manifest.web]);
+const rulesChanged = JSON.stringify(before?.desktop) !== JSON.stringify(manifest.desktop);
 const launcherChanged = before?.launcher?.latest !== manifest.launcher?.latest;
 const dictChanged = stats.some(s => s.new || s.added || s.changed || s.removed || s.statusFrom) || (before?.languages.length ?? 0) !== manifest.languages.length;
 const changelog = readJson(CHANGELOG, { schema: 1, entries: [] });
