@@ -7,13 +7,12 @@ A fan-made translation of [D2 Survivors](https://d2survivors.lol/) (Diablo 2 Sur
 **Website:** https://cycleapple.github.io/d2survivors-localization/ · **Discord:** https://discord.gg/QMBbTHSsaK
 
 - **Desktop (Windows):** download the [launcher](https://github.com/cycleapple/d2survivors-localization/releases/latest/download/d2s-launcher.exe), pick a language and press Play. It downloads the latest translation and applies it to the game. When the game updates itself, the launcher re-applies the translation the next time you start from it.
-- **Browser (PC and mobile):** on the web version at d2survivors.lol, tap a bookmark to switch the game to your language. Tap it again to switch back to English.
+- **Browser:** discontinued. The official web version of the game was removed in November 2026, so the bookmarklet no longer works.
 
 It plugs into the game's own translation system (it takes over the Korean dictionary slot) instead of drawing text on top of the screen, so the UI, items, skills and tooltips are all translated. Items, skills, monsters and places use the official names from *Diablo II: Resurrected*.
 
 ## Leaderboards
 
-- The browser version uploads leaderboard runs as usual while a translation is active; each record shows the language actually used (for example zh-TW). Problem reports are not sent from the translated game.
 - The game marks a translated desktop install as *patched*. To compete on the leaderboard, choose English in the launcher and it restores the untouched original game.
 
 ## Disclaimer
@@ -34,7 +33,6 @@ It plugs into the game's own translation system (it takes over the Korean dictio
 | `tools/patch-rules.mjs` | How the desktop game is patched (shared by the launcher and `patch.mjs`) | [docs/desktop-patch.md](docs/desktop-patch.md) |
 | `launcher/` | Desktop launcher (Rust) | [docs/launcher.md](docs/launcher.md) |
 | `site/` | Website (downloads, install guide) | [docs/site.md](docs/site.md) |
-| `site/web/`, `tools/web-rules.mjs` | Browser bookmarklet | [docs/web.md](docs/web.md) |
 | `site/data/` | Update feed: manifest and per-language dictionaries (generated) | [docs/manifest-v2.md](docs/manifest-v2.md) |
 
 What is open source, what stays out of the repo, and how releases work: [docs/release.md](docs/release.md). The docs under `docs/` are written in Traditional Chinese.

@@ -1,6 +1,8 @@
 # manifest v2（更新來源格式）
 
-啟動器、網頁版書籤、網站三邊共用的更新來源。v1 只給啟動器用，放在 dist repo；v2 跟網站放在一起，三邊讀同一份。
+啟動器和網站共用的更新來源。v1 只給啟動器用，放在 dist repo；v2 跟網站放在一起，兩邊讀同一份。
+
+網頁書籤版已在 2026-11-22 移除（官方 2026-11-21 移除網頁版遊戲和 wiki）：manifest 不再有 `languages[].web`、`web`、`game.web_checked`。舊的 manifest 和書籤程式在 git 歷史裡。
 
 ## 放在哪裡
 
@@ -13,8 +15,8 @@ site/data/dict/zh-CN.json
 site/data/dict/ja.json
 ```
 
-- `<BASE>` 是網站的網址。暫定 `https://cycleapple.github.io/d2survivors-localization/`；有自己的網域就換成網域。**公開宣傳前要定案**，因為玩家裝好的書籤寫死了這個網址
-- manifest 網址：`<BASE>data/manifest.json`。啟動器編譯時用 `D2S_MANIFEST_URL` 設預設值；書籤用自己所在的網址推算（`new URL('../data/manifest.json', import.meta.url)`）；網站用相對路徑 `data/manifest.json`
+- `<BASE>` 是網站的網址。暫定 `https://cycleapple.github.io/d2survivors-localization/`；有自己的網域就換成網域。啟動器編譯時寫進預設值，換網址要發新版啟動器
+- manifest 網址：`<BASE>data/manifest.json`。啟動器編譯時用 `D2S_MANIFEST_URL` 設預設值；網站用相對路徑 `data/manifest.json`
 - 這些檔案由 `node tools/publish.mjs` 產生，commit 進 repo，不要手動改
 - Pages 的 CDN 會快取約 10 分鐘。manifest 本身讀的時候加 `cache: 'no-cache'`；字典網址帶雜湊（`?v=<sha256 前 12 碼>`），內容換了網址就換了，不會拿到舊的
 - 不用 GitHub API，所以沒有每小時 60 次的限制，也不用 token
@@ -28,8 +30,7 @@ site/data/dict/ja.json
   "version": "20261028-0300",              // 這次發布的版本，顯示用
 
   "game": {
-    "desktop": "2026.1027.1",              // 規則對得上的桌面版遊戲版本（顯示用，不是限制）
-    "web_checked": "2026-10-28T02:55:00Z"  // 上次用 build-web.mjs --check 確認網頁版規則的時間
+    "desktop": "2026.1027.1"               // 規則對得上的桌面版遊戲版本（顯示用，不是限制）
   },
 
   "launcher": {
@@ -41,7 +42,7 @@ site/data/dict/ja.json
 
   "languages": [
     {
-      "id": "zh-TW",                       // 語言代碼，三邊通用
+      "id": "zh-TW",                       // 語言代碼，各處通用
       "name": "繁體中文",                   // 顯示名稱（用該語言自己寫）
       "status": "available",               // available | beta（可以選，標示測試中）| draft（見下面）
       "entries": 12616,                    // 字典條數
@@ -54,14 +55,6 @@ site/data/dict/ja.json
         "menu_name": "繁體中文",
         "html_lang": "zh-Hant",
         "groups": ["base", "dict", "cjk", "magic-zh", "fullwidth"]
-      },
-      "web": {                             // 沒有這一欄＝網頁版不能選
-        "menu_name": "繁體中文",
-        "html_lang": "zh-Hant",
-        "groups": ["…"],
-        "fonts": ["Microsoft JhengHei", "PingFang TC", "Noto Sans TC"]
-        // 每一項是系統字型名稱，或 { "url": "../web/fonts/….woff2" }（相對於 manifest.json，網頁書籤 2026-11-04 起）。
-        // 照順序當備用；舊版 core.js 讀到 { url } 會找不到、改用下一項，所以 url 後面要接系統字型
       }
     }
   ],
@@ -79,11 +72,6 @@ site/data/dict/ja.json
     //   只有新版才需要的規則（例如語言模組裡的查詢函式）from＝to＝語言模組裡的 `d2s:lang`，舊版套用等於不改。所以不用提高 launcher.minimum
     // app（可省略，啟動器 1.0.4 起）：{ "path": "desktop/dist/main.cjs", "find": "…", "replace": "…" }，改 assets 以外、asar 裡 path 這個檔案，
     //   只看 app 裡的 find／replace（寫法跟上面一樣），不看 file／from／to／find／replace。舊版不認得 app，這種規則的其他欄位都做成不改
-  },
-
-  "web": {
-    "play_url": "https://d2survivors.lol/play/",
-    "rules": [ { "label": "…", "groups": ["…"], "file": "…", "find": "…", "replace": "…", "optional": false } ]
   }
 }
 ```
@@ -92,10 +80,12 @@ site/data/dict/ja.json
 
 - `available`：正式版
 - `beta`：可以選，標示「測試中」
-- `draft`：翻譯還在做（`tools/langs.mjs` 標的）。`publish` 不會把 draft 的語言寫進 manifest，所以正常發布的 manifest 裡不會出現。萬一出現（例如手動產生的測試用 manifest），啟動器和書籤標成「草稿」，網站顯示成「計畫中」
+- `draft`：翻譯還在做（`tools/langs.mjs` 標的）。`publish` 不會把 draft 的語言寫進 manifest，所以正常發布的 manifest 裡不會出現。萬一出現（例如手動產生的測試用 manifest），啟動器標成「草稿」，網站顯示成「計畫中」
 - 讀到不認得的值：當成 `draft` 處理，不要當成正式版
 
 ### wiki（網站上的繁中版，2026-11-06 起）
+
+**官方 wiki 在 2026-11-21 移除了。** `/zh-tw/wiki/` 保留最後一版、不再同步（`wiki-fetch` 不再定期跑）。下面是當時的做法，留作紀錄。
 
 官方 wiki（`https://d2survivors.lol/wiki/`，約 256 頁）翻成繁體中文，放在我們網站的 `/zh-tw/wiki/`，網址路徑跟官方一樣（官方 `/wiki/items/uniques/` → 我們 `/zh-tw/wiki/items/uniques/`）。2026-10-30 的「書籤在官方 wiki 上就地翻譯」計畫取消，manifest 沒有 wiki 的欄位，書籤不碰 wiki。
 
@@ -137,21 +127,19 @@ site/data/dict/ja.json
 
 | 部分 | 產生的程式 | 讀的程式 | 誰維護 |
 |---|---|---|---|
-| 最上層、`languages[]` 的 `id`／`name`／`status`／`entries`／`dict` | `tools/publish.mjs`（讀 `tools/langs.mjs`） | 三邊 | 翻譯 |
+| 最上層、`languages[]` 的 `id`／`name`／`status`／`entries`／`dict` | `tools/publish.mjs`（讀 `tools/langs.mjs`） | 啟動器、網站 | 翻譯 |
 | `languages[].desktop`、`desktop` | `tools/patch-rules.mjs` | 啟動器 | 啟動器 |
-| `languages[].web`、`web` | `tools/web-rules.mjs` | 書籤 | 網頁書籤 |
 | `launcher` | `tools/publish.mjs` 讀最新的 GitHub Release | 啟動器 | 啟動器 |
 | `game` | `tools/publish.mjs` | 網站（顯示） | 翻譯 |
 | wiki：`dict/wiki/`、`data/wiki/src/` | `tools/wiki-fetch.mjs`、翻譯 | `tools/build-wiki.mjs` | 翻譯 |
 | wiki：`site/zh-tw/wiki/` | `tools/build-wiki.mjs` | 網站 | 宣傳網站 |
 
-- `desktop`、`web` 兩塊、`languages[].desktop`、`languages[].web` 裡面的欄位，由各自的負責方決定，改了只要兩邊（產生和讀取）一致就好，在這份文件更新說明
-- 最上層和 `languages[]` 的共用欄位要改，先改這份文件、通知另外兩邊
+- `desktop`、`languages[].desktop` 裡面的欄位，由各自的負責方決定，改了只要兩邊（產生和讀取）一致就好，在這份文件更新說明
+- 最上層和 `languages[]` 的共用欄位要改，先改這份文件、通知其他負責的聊天室
 
 ## 讀取規則
 
 - **啟動器**：`schema` 不是 2 就停下來，提示更新啟動器。自己的版本低於 `launcher.minimum` 時，不套用新規則，先自我更新。語言下拉選單列出有 `desktop` 欄位的語言，加上 English／한국어原版
-- **書籤**：列出有 `web` 欄位的語言。localStorage 的語言值用 `id`（`zh-TW`、`zh-CN`、`ja`）；舊版存的 `zh` 當成 `zh-TW`
 - **網站**：語言清單、條數、更新時間讀 `languages[]`；`status` 顯示成「可用」或「測試中」。下載按鈕固定用 `launcher.download`（或直接寫 `releases/latest/download/…`，不用每次改網站）
 
 ## 啟動器自我更新
@@ -231,13 +219,12 @@ site/data/dict/ja.json
 
 | | 讀什麼 | 做什麼 |
 |---|---|---|
-| 網站 | 最近幾筆的 `summary`、`date`、`gameNotes` | 「更新紀錄」區塊，有 `gameNotes` 的那筆多一段「遊戲本身的更新」（可收合）；manifest 的 `game.web_checked` 太舊或 Web check 失敗時顯示「遊戲剛更新，翻譯修正中」 |
+| 網站 | 最近幾筆的 `summary`、`date`、`gameNotes` | 「更新紀錄」區塊，有 `gameNotes` 的那筆多一段「遊戲本身的更新」（可收合） |
 | 啟動器 | `changelog.latest` 跟本機上次看過的比 | 有新的就在視窗上顯示最新一筆的 `summary`（介面語言對應的那個） |
 | Discord 公告 | `announce: true` 而且還沒發過的，含 `gameNotes` | 發到 #announcements（見 [release.md](release.md)）；`gameNotes` 接在 summary 後面，超過 Discord 長度就只列前幾條、其餘連到網站 |
 
 ## 遊戲改版的應對
 
-- **網頁版**：`.github/workflows/web-check.yml` 每小時用 `build-web.mjs --check` 檢查線上的遊戲。必要規則對不上就開 `game-update` issue，並通知 Discord 的維護者頻道（secret `DISCORD_WEBHOOK_ALERTS`）。書籤本身在規則對不上時不啟動、提示「需要更新」，原版遊戲照常能玩
 - **桌面版**：`.github/workflows/desktop-check.yml` 每小時讀遊戲自己的更新資訊 `https://d2survivors.lol/download/latest.yml`。版本跟 manifest 的 `game.desktop` 不同時，下載新版安裝檔（同一版只下載一次），解出 `app.asar`，跑 `check-rules.mjs`、數出各語言字典還沒有的新字串，開 `desktop-update` issue；必要規則對不上時另外加 `game-update`（網站會顯示提示）並通知 #alerts。手動測試：Actions → Desktop check → Run workflow，勾 force（只印結果、不開 issue）
 - 啟動器套用時，必要規則對不上就**改用原版開遊戲**並在主畫面顯示黃色卡片；只有加分規則（optional）對不上時照樣套用翻譯
 - **新字串**：補翻之前顯示英文，不算壞掉。補翻寫進 `dict/manual/new-<遊戲版本>.json`

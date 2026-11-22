@@ -7,13 +7,12 @@
 **网站：** https://cycleapple.github.io/d2survivors-localization/zh-cn/ · **Discord：** https://discord.gg/QMBbTHSsaK
 
 - **桌面版**（Windows）：下载[启动器](https://github.com/cycleapple/d2survivors-localization/releases/latest/download/d2s-launcher.exe)，选好语言、点「启动游戏」，就会自动下载最新翻译并应用到游戏。游戏自己更新后，下次从启动器打开会自动重新应用。
-- **浏览器版**（电脑、手机）：在 d2survivors.lol 的网页版点一下书签就切换成你的语言，再点一次切回英文。
+- **浏览器版**：已停止。官方在 2026 年 11 月移除了网页版游戏，书签已经无法使用。
 
 做法是沿用游戏内置的翻译系统（替换韩文字典的位置），不是在画面上另外盖一层字，所以界面、物品、技能、说明都能翻译到。物品、技能、怪物、地名使用《暗黑破坏神 II：狱火重生》的官方译名。
 
 ## 排行榜
 
-- 浏览器版应用翻译时，排行榜成绩照常上传，记录会标明实际使用的语言（例如 zh-CN）。翻译版不会发送问题回报。
 - 桌面版的翻译版会被游戏标记为 patched。想冲排行榜，在启动器选 English，就会换回完全原版的游戏。
 
 ## 声明

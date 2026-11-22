@@ -7,13 +7,12 @@ Eine Fan-Übersetzung von [D2 Survivors](https://d2survivors.lol/) (Diablo 2 Sur
 **Website:** https://cycleapple.github.io/d2survivors-localization/de/ · **Discord:** https://discord.gg/QMBbTHSsaK
 
 - **Desktop (Windows):** Laden Sie den [Launcher](https://github.com/cycleapple/d2survivors-localization/releases/latest/download/d2s-launcher.exe) herunter, wählen Sie eine Sprache und klicken Sie auf „Spielen“. Er lädt die neueste Übersetzung herunter und wendet sie auf das Spiel an. Wenn sich das Spiel selbst aktualisiert, wendet der Launcher die Übersetzung beim nächsten Start automatisch erneut an.
-- **Browser (PC und Handy):** Tippen Sie in der Browserversion auf d2survivors.lol auf ein Lesezeichen, um das Spiel auf Ihre Sprache umzustellen. Ein weiterer Tipp schaltet zurück auf Englisch.
+- **Browser:** eingestellt. Die offizielle Browserversion des Spiels wurde im November 2026 entfernt, daher funktioniert das Lesezeichen nicht mehr.
 
 Statt Text über das Bild zu legen, nutzt die Übersetzung das eingebaute Übersetzungssystem des Spiels (sie belegt den Platz des koreanischen Wörterbuchs). Dadurch sind Oberfläche, Gegenstände, Fertigkeiten und Tooltips vollständig übersetzt. Gegenstände, Fertigkeiten, Monster und Orte tragen die offiziellen Namen aus *Diablo II: Resurrected*.
 
 ## Bestenliste
 
-- Die Browserversion lädt Läufe auch mit aktiver Übersetzung wie gewohnt in die Bestenliste hoch; jeder Eintrag nennt die tatsächlich verwendete Sprache (zum Beispiel de). Fehlerberichte werden aus der übersetzten Version nicht gesendet.
 - Eine übersetzte Desktop-Installation markiert das Spiel als *patched*. Wer in der Bestenliste antreten will, wählt im Launcher English. Dann wird das unveränderte Originalspiel wiederhergestellt.
 
 ## Hinweis
