@@ -2,6 +2,84 @@
   "schema": 1,
   "entries": [
     {
+      "version": "20261122-0713",
+      "date": "2026-11-22",
+      "kind": "translation",
+      "announce": false,
+      "summary": {
+        "zh-TW": "官方網頁版已移除，網頁書籤版也跟著停止；桌面版的啟動器照常使用",
+        "zh-CN": "官方网页版已移除，网页书签版也随之停止；桌面版的启动器照常使用",
+        "en": "The official web version has been removed, so the web bookmarklet stops too; the desktop launcher works as before",
+        "ja": "公式のウェブ版が削除されたため、ブックマークレット版も終了しました。デスクトップ版のランチャーはこれまでどおり使えます",
+        "de": "Die offizielle Webversion wurde entfernt, deshalb wird auch das Lesezeichen-Skript eingestellt; der Desktop-Launcher funktioniert weiter wie bisher",
+        "fr": "La version web officielle a été retirée, le favori (bookmarklet) s’arrête donc aussi ; le lanceur de la version bureau fonctionne comme avant",
+        "ru": "Официальная веб-версия удалена, поэтому закладка (букмарклет) тоже прекращает работу; лаунчер для ПК работает как прежде",
+        "pl": "Oficjalna wersja przeglądarkowa została usunięta, więc zakładka (bookmarklet) również przestaje działać; launcher wersji desktopowej działa jak dotąd"
+      },
+      "game": {
+        "desktop": "2026.1120.1"
+      },
+      "launcher": "1.0.7",
+      "languages": [
+        {
+          "id": "zh-TW",
+          "status": "available",
+          "entries": 14751,
+          "added": 0,
+          "changed": 0,
+          "removed": 3
+        },
+        {
+          "id": "zh-CN",
+          "status": "available",
+          "entries": 14750,
+          "added": 0,
+          "changed": 0,
+          "removed": 3
+        },
+        {
+          "id": "ja",
+          "status": "available",
+          "entries": 14756,
+          "added": 0,
+          "changed": 0,
+          "removed": 3
+        },
+        {
+          "id": "de",
+          "status": "available",
+          "entries": 14790,
+          "added": 0,
+          "changed": 0,
+          "removed": 3
+        },
+        {
+          "id": "fr",
+          "status": "available",
+          "entries": 14799,
+          "added": 0,
+          "changed": 0,
+          "removed": 3
+        },
+        {
+          "id": "ru",
+          "status": "available",
+          "entries": 14838,
+          "added": 0,
+          "changed": 0,
+          "removed": 3
+        },
+        {
+          "id": "pl",
+          "status": "available",
+          "entries": 14828,
+          "added": 0,
+          "changed": 0,
+          "removed": 3
+        }
+      ]
+    },
+    {
       "version": "20261121-1124",
       "date": "2026-11-21",
       "kind": "game-fix",

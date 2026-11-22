@@ -15555,8 +15555,5 @@
  "Slain by *'s *: * magic damage": "Причина гибели: {1} ({0}) — магический урон: {2}",
  "Fire Resist +#%": "+{0}% к сопротивлению огню",
  "Lightning Resist +#%": "+{0}% к сопротивлению молнии",
- "Attacker Takes Damage of #": "Атакующий получает урон: {0}",
- "BATTERY SAVER": "ЭКОНОМИЧНАЯ ГРАФИКА",
- "BATTERY SAVER: #": "ЭКОНОМИЧНАЯ ГРАФИКА: {0}",
- "Lower resolution, for phones": "Пониженное разрешение, для телефонов"
+ "Attacker Takes Damage of #": "Атакующий получает урон: {0}"
 }
