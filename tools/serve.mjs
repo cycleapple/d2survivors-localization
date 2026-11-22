@@ -1,6 +1,5 @@
-// 本機預覽網站，並允許其他網域讀取（在 d2survivors.lol 上測試書籤用）
+// 本機預覽網站，並允許其他網域讀取
 //   node tools/serve.mjs [資料夾=site] [port=8766]
-// 書籤改成：javascript:import('http://localhost:8766/web/d2zh.js').then(m=>m.default())
 import { createServer } from 'node:http';
 import { readFile } from 'node:fs/promises';
 import { extname, join, normalize } from 'node:path';
