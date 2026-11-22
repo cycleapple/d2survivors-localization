@@ -2,7 +2,7 @@
 // 每條規則：在 assets 裡找到檔案（file 是檔名的 regex；沒有的話就找唯一含有 from 的 .js），
 // from 必須剛好出現一次，換成 to。from／to 裡的 {{menu_name}}、{{html_lang}} 依語言代換。
 // optional: true 是加分的規則（稱號、名稱組合、斷行、標點、版面…）：對不上時略過那一條，照樣套用翻譯（啟動器提示「部分細節修正中」）；
-// 沒標的是必要的（字典位置、啟動器指定語言、選單名稱、頁面語言、外文字判斷、字型），對不上就整個退回原版。跟網頁書籤的 web-rules.mjs 一樣
+// 沒標的是必要的（字典位置、啟動器指定語言、選單名稱、頁面語言、外文字判斷、字型），對不上就整個退回原版
 // groups：base 每種翻譯語言都套用（English／한국어原版是真正的原版，不套任何規則）；dict 換掉韓文字典的語言才套用；cjk 中日文才套用；
 //   magic-zh／magic-ja 魔法物品名稱的組合順序（照 D2R 各語言的 MagicFormat）；fullwidth 冒號用全形（只有繁中）；
 //   magic-de／magic-fr／magic-ru、unique-de／unique-fr／unique-ru 有詞性的語言組名稱；cyrillic、font-ru 俄文的字；
@@ -12,10 +12,10 @@ import fs from 'node:fs';
 
 export const ASSETS_DIR = 'desktop/dist/web/assets';
 
-// 俄文字型：Philosopher Bold 的西里爾字母子集（SIL OFL 1.1），跟網頁書籤用同一個檔（site/web/fonts/，產生方式見 docs/web.md）。
+// 俄文字型：Philosopher Bold 的西里爾字母子集（SIL OFL 1.1），在 tools/fonts/（產生方式見 docs/desktop-patch.md 的 14）。
 // 整個字型用 base64 data: URL 寫進規則（manifest 格式不用改，從啟動器套用也有字型），OFL 全文用註解放在字型旁邊（OFL 要求授權跟著字型）
-const RU_FONT = fs.readFileSync(new URL('../site/web/fonts/philosopher-bold-cyrillic.woff2', import.meta.url)).toString('base64');
-const RU_OFL = fs.readFileSync(new URL('../site/web/fonts/OFL.txt', import.meta.url), 'utf8').replace(/\r\n/g, '\n').trim();
+const RU_FONT = fs.readFileSync(new URL('fonts/philosopher-bold-cyrillic.woff2', import.meta.url)).toString('base64');
+const RU_OFL = fs.readFileSync(new URL('fonts/OFL.txt', import.meta.url), 'utf8').replace(/\r\n/g, '\n').trim();
 if (RU_OFL.includes('*/')) throw new Error('OFL.txt 裡有 */，不能放進註解');
 
 // 換掉韓文字典的位置（ko 槽位）
@@ -30,7 +30,7 @@ const HANGUL_RANGES = 'return t>=44032&&t<=55203||t>=12592&&t<=12687||t>=4352&&t
 // 漢字、擴充 A、中文標點、全形字元、平假名和片假名
 const CJK_RANGES = '||t>=19968&&t<=40959||t>=13312&&t<=19903||t>=12288&&t<=12351||t>=65280&&t<=65519||t>=12352&&t<=12543';
 
-// 有詞性的語言（德、法、俄）的名稱組合，參考實作是 work/translation/compose-proto.mjs（網頁書籤的 web-rules.mjs 輸出要一樣）。
+// 有詞性的語言（德、法、俄）的名稱組合，參考實作是 work/translation/compose-proto.mjs。
 // 字典裡 affix:<詞綴>、unique:<前段> 是每種詞性的形式「[ms]прочный[fs]прочная…」，gender:<名詞> 是名詞的詞性（ms／fs／ns／pl，法文複數 mp／fp，波蘭文中性和複數 nl）
 // 挑出詞性 G 的形式：沒有標記就原樣，找不到那個詞性就用第一個
 const pick = G => `k=v=>{if(!v.startsWith(\`[\`))return v;let o=v.split(\`[\`).slice(1),w=o.find(x=>x.startsWith(${G}+\`]\`))??o[0];return w.slice(w.indexOf(\`]\`)+1).trim()}`;
@@ -161,7 +161,7 @@ export const RULES = [
   { label: '外文字判斷', groups: ['cjk'], from: HANGUL_RANGES, to: HANGUL_RANGES.slice(0, -1) + CJK_RANGES + '}' },
   // 俄文：西里爾字母（U+0400–04FF）點陣字型也沒有，一樣當外文字
   { label: '外文字判斷（西里爾字母）', groups: ['cyrillic'], from: HANGUL_RANGES, to: HANGUL_RANGES.slice(0, -1) + '||t>=1024&&t<=1279}' },
-  // 波蘭文：ą ć ę ł ń ś ź ż（拉丁擴充 A，U+0100–017F）點陣字型只有 Latin-1，也當外文字（群組名稱跟網頁書籤一樣）
+  // 波蘭文：ą ć ę ł ń ś ź ż（拉丁擴充 A，U+0100–017F）點陣字型只有 Latin-1，也當外文字
   { label: '外文字判斷（拉丁擴充 A）', groups: ['latin-ext'], from: HANGUL_RANGES, to: HANGUL_RANGES.slice(0, -1) + '||t>=256&&t<=383}' },
   // 外文字大小（波蘭文）：遊戲照韓文放大（有 D2R 韓文字型時標題 ×1.25～1.4、內文 ×1.3 加粗；沒有時 12／15／24 px），
   // 波蘭文只有幾個字母走外文字、夾在點陣字母中間，會比旁邊的字大一號：標題 ×1.2、內文 ×1.0，不加粗。
@@ -251,7 +251,7 @@ export const RULES = [
 
 // ── 不怕小改動的寫法：find／replace（啟動器 1.0.3 起）──
 // 上面的 from／to 是逐字比對（舊版啟動器 1.0.0～1.0.2 只看這兩個欄位，照舊能用）。遊戲改版時壓縮後的名稱常常換掉，
-// 所以每條規則另外有 find（regex）和 replace：壓縮後的名稱用群組抓下來再放回去，跟網頁書籤的 web-rules.mjs 同一個做法。
+// 所以每條規則另外有 find（regex）和 replace：壓縮後的名稱用群組抓下來再放回去。
 // 寫法：‹1›、‹2›… 是一個名稱（第一次出現時抓下來，之後再出現要一樣），‹n*› 是任意一段（最短）；號碼照第一次出現的順序編。
 // find 只會用到：跳脫過的原始碼、([A-Za-z0-9_$]+)、([\s\S]*?) 和反向參照 \1…，JavaScript 和啟動器（Rust regex，反向參照換成群組再比對）解讀一樣。
 // replace 的 $1…（兩位數時要有那麼多群組）放回抓到的名稱、$$ 是 $，其他字元照原樣；{{html_lang}}、{{menu_name}} 先代換。
@@ -368,8 +368,8 @@ RULES.push({
 // （營地的「法力 35 / 35」原版看起來像 36）。點陣字型的 constructor 拿到圖集時先改「5」那一格：中線以下、最底兩列墨以上，
 // 墨（亮度 >= peak×0.2）分成兩段以上的列，最後一段（碗的右邊）之前的像素全部清掉（含暗的描邊）。先算那一格的墨的 FNV-1a，
 // 是五種已知的形狀才改（自己的 D2R 檔案、替代字型等形狀不一樣的不改）。只有翻譯語言（英文、韓文照原版）。
-// FIVE／FIVE_SHAPES 照網頁書籤的 tools/web-rules.mjs 複製（同一份遊戲程式碼和點陣字型），那邊改了這裡要跟著改。
-// 點陣字型的類別在桌面版的 saveTransfer-*.js（網頁版在 ui-*.js），不指定 file，找唯一符合的 .js
+// FIVE_SHAPES 是遊戲原本的五種點陣字型「5」那一格的雜湊（字型換了要重算）。
+// 點陣字型的類別在 saveTransfer-*.js（2026.1103.2；之前在 moved-*.js），不指定 file，找唯一符合的 .js
 const FIVE_SHAPES = [209616337, 2051203955, 1072978108, 3695317340, 770335231];
 const FIVE = '(d2i,d2a)=>{let{cellWidth:d2w,cellHeight:d2c,top:d2t,height:d2h,peak:d2p}=d2i,d2d=d2a?.data;if(!d2d||!d2w)return;'
   + 'let d2X=53%16*d2w,d2Y=Math.floor(53/16)*d2c+d2t,d2o=(x,y)=>((d2Y+y)*d2a.width+d2X+x)*4,'

@@ -1,10 +1,10 @@
 # 桌面版的修改（app.asar）
 
-修改規則在 `tools/patch-rules.mjs`，`tools/patch.mjs` 和啟動器共用同一份（啟動器從 manifest 讀，見 [manifest-v2.md](manifest-v2.md)）。網頁版的規則另外在 `tools/web-rules.mjs`，見 [web.md](web.md)。
+修改規則在 `tools/patch-rules.mjs`，`tools/patch.mjs` 和啟動器共用同一份（啟動器從 manifest 讀，見 [manifest-v2.md](manifest-v2.md)）。
 
 ## 不怕小改動的寫法：find／replace（啟動器 1.0.3 起）
 
-- 規則原本逐字比對壓縮後的程式碼（`from`／`to`），遊戲改版、壓縮後的名稱一換就對不上（2026.1027.4 壞了 5 條）。現在每條規則另外有 `find`（regex）和 `replace`，壓縮後的名稱用群組抓下來再放回去，跟網頁書籤的 `web-rules.mjs` 同一個做法；兩邊是同一份遊戲程式碼，比對的寫法（壓縮名稱用 `([A-Za-z0-9_$]+)`、同一個名稱用反向參照）一樣
+- 規則原本逐字比對壓縮後的程式碼（`from`／`to`），遊戲改版、壓縮後的名稱一換就對不上（2026.1027.4 壞了 5 條）。現在每條規則另外有 `find`（regex）和 `replace`，壓縮後的名稱用群組抓下來再放回去（壓縮名稱用 `([A-Za-z0-9_$]+)`、同一個名稱用反向參照）
 - 寫在 `patch-rules.mjs` 最後的 `ROBUST`：`T(樣板, 換成)`，`‹1›`、`‹2›`… 是壓縮後的名稱（第一次出現時抓下來，之後要一樣），`‹n*›` 是任意一段（最短）。規則加進去的變數名稱都用 `$` 開頭，不會跟抓到的名稱撞在一起
 - 程式碼裡拿不到的名稱不再依賴：女性職業的名單直接寫出來、標題字型家族直接比對 `D2R Kodia`、魔法物品的 key 正規化照遊戲寫在規則裡。Survivor 和變體名稱需要翻譯函式，改成在語言模組放查詢函式（`globalThis.__d2Survivor`、`globalThis.__d2Mods`，各一條規則），用的地方 `?.`／`||` 保護，查詢函式那條對不上也不會出錯
 - 升級卡片的頓號用同一個函式裡翻譯標題的函式；HUD 的頓號（網頁元素）改成條件後面另外接一段「、」，條件本身交給遊戲的網頁翻譯
@@ -45,11 +45,14 @@
   10. 技能變體專用譯名：變體表定義完之後，把每個變體的 `name` 換成 getter，翻譯時先查 `modifier:名稱`（`dict/manual/modifiers.json`），查不到照一般譯名；英文照原本。用來分開跟別的技能同名的變體（荊棘之靈的「復仇」vs 聖騎士的「復仇打擊」），原因和清單見 [term-decisions.md](term-decisions.md)
 
   11. 德、法、俄文的魔法物品名稱（magic-de／magic-fr／magic-ru）：照 `gender:<物品>` 從 `affix:` 的「[ms]…[fs]…」挑出對應詞性的形式。德文「前綴 物品 後綴」（前綴結尾是「 -」時用連字號接：Engels-Ring）、法文「物品 前綴 後綴」、俄文「前綴 物品 後綴」（物品小寫開頭）；德、俄文句首大寫
-  12. 德、法、俄文的獨特怪物名字（keepSave 的 `Ma`，unique-de／unique-fr／unique-ru）：德文「前段-後段 稱號」、法文「後段 前段 稱號」、俄文「稱號, 前段 後段」；法、俄文的前段照 `gender:<後段>` 挑形式。參考實作是 `work/translation/compose-proto.mjs`（網頁書籤的 `web-rules.mjs` 輸出要一樣）
+  12. 德、法、俄文的獨特怪物名字（keepSave 的 `Ma`，unique-de／unique-fr／unique-ru）：德文「前段-後段 稱號」、法文「後段 前段 稱號」、俄文「稱號, 前段 後段」；法、俄文的前段照 `gender:<後段>` 挑形式。參考實作是 `work/translation/compose-proto.mjs`
   13. 俄文（cyrillic）：西里爾字母 U+0400–04FF 也當外文字畫（點陣字型沒有，原本畫成「?」）；第 9 項的暗色字修正也套用（按鈕上的黑字原本一樣是空心的灰字）
-  14. 俄文字型（font-ru，2026-11-04 起）：按鈕（D2R Kodia）和內文（D2R Iris、D2 Hangul、D2 Hangul 14）四個家族都註冊 Philosopher Bold，範圍 U+0400-04FF。字型檔跟網頁書籤共用 `site/web/fonts/philosopher-bold-cyrillic.woff2`（SIL OFL 1.1，西里爾字母子集 16 KB，產生方式見 [web.md](web.md)），`patch-rules.mjs` 讀進來、用 base64 的 `data:` URL 直接寫進規則（manifest 格式不用改），所以從啟動器套用、本機打包都有字型（原本的 D2R Exocet／Philosopher 只有本機打包才有，從啟動器套用時是系統字型）。OFL 全文用註解放在語言模組裡字型的旁邊（OFL 要求授權跟著字型；網站上也有 `site/web/fonts/OFL.txt`）。2026.1103.2 實測：四個家族都是 loaded，主選單、角色畫面的俄文是 Philosopher（`work/launcher/ru-1103.2-menu.png`、`ru-1103.2-character.png`）
+  14. 俄文字型（font-ru，2026-11-04 起）：按鈕（D2R Kodia）和內文（D2R Iris、D2 Hangul、D2 Hangul 14）四個家族都註冊 Philosopher Bold，範圍 U+0400-04FF。字型檔是 `tools/fonts/philosopher-bold-cyrillic.woff2`（SIL OFL 1.1，西里爾字母子集 16 KB；2026-11-22 網頁書籤版移除時從 `site/web/fonts/` 搬過來），`patch-rules.mjs` 讀進來、用 base64 的 `data:` URL 直接寫進規則（manifest 格式不用改），所以從啟動器套用、本機打包都有字型（原本的 D2R Exocet／Philosopher 只有本機打包才有，從啟動器套用時是系統字型）。OFL 全文用註解放在語言模組裡字型的旁邊（OFL 要求授權跟著字型；repo 裡是 `tools/fonts/OFL.txt`）。2026.1103.2 實測：四個家族都是 loaded，主選單、角色畫面的俄文是 Philosopher（`work/launcher/ru-1103.2-menu.png`、`ru-1103.2-character.png`）
+     - 字型來源：Philosopher Bold（github.com/google/fonts 的 `ofl/philosopher`；沒有保留字型名稱，子集可以照原名）。只留 U+0400–04FF（176 字），用 fontTools 產生：
+       `python -m fontTools.subset Philosopher-Bold.ttf --unicodes=U+0400-04FF --flavor=woff2 --layout-features=* --name-IDs=* --output-file=tools/fonts/philosopher-bold-cyrillic.woff2`（woff2 要裝 brotli）。`OFL.txt` 是那個資料夾的授權全文，換字型時一起換
+     - 換了字型檔要重新產生 manifest（規則裡是 base64）。數字 5 的 `FIVE_SHAPES` 不用重算：digit5 改的是遊戲的點陣字型，跟這個字型無關
 
-  15. 波蘭文（群組名稱跟網頁書籤一樣：latin-ext、font-pl、size-pl、magic-pl、unique-pl）：
+  15. 波蘭文（群組：latin-ext、font-pl、size-pl、magic-pl、unique-pl）：
       - 拉丁擴充 A（U+0100–017F，ą ć ę ł ń ś ź ż）當外文字；第 9 項的暗色字修正也套用
       - 字型：D2R Kodia（標題）← `title.woff2`（Exocet），其他 ← `body.woff2`（Formal436），`zh-fonts.mjs … --lang pl` 產生到 `work/fonts/pl/`，只有本機打包才有；從啟動器套用時用系統字型
       - 大小：只有幾個字母走外文字、夾在點陣字母中間，照韓文的放大比例會大一號。標題 ×1.2、內文 ×1.0、不加粗；沒有 D2R 韓文字型時（桌面版通常是這樣）原本是固定的 12／15／24 px，也改成同樣的算法，標題一律用 D2R Kodia 家族。小的標題字（按鈕的 fontexocet10，字高不到 16）用 ×1.5：Exocet 的大寫只有 0.59 em，×1.2 時 Ś 比旁邊的點陣大寫矮一截
@@ -64,7 +67,7 @@
   19. 進化條件（cjk）：升級卡片和 HUD 的條件之間，遊戲接半形「,」，中日文改成「、」（條件先翻譯好再接）。中文斷行的「不放在行首」加上半形 `: ; , . ! ? )`（日文「ライトニングセントリー: +4%」不會斷在冒號前）
   20. 中日文的系統字型（cjk）：沒有 `fonts-zh/body.woff2` 時（從啟動器套用的都是這樣），原本交給 Chromium 照字挑字型，簡中同一行混用兩種字型、日文粗體用到中文字型。改成先用 `local()` 註冊這個語言的系統字型（簡中微軟雅黑、日文遊ゴシック Medium／メイリオ、繁中微軟正黑），再註冊字型檔；同一個家族裡後註冊的優先，字型檔缺的字才用系統字型。本機打包時 patch.mjs 放進去的字型照語言分：繁中 `work/fonts-zh/`、簡中 `work/fonts/zh-CN/`、日文 `work/fonts/ja/`（`langs.mjs` 的 `fonts`）
 
-  21. 數字「5」開口（digit5，七種翻譯語言，optional，2026-11-04 起）：font16、font24、font30、font42、fontexocet10 的「5」碗是封閉的，看起來像頂端平的「6」（「法力 35 / 35」原版看起來像 36）。點陣字型的 constructor 拿到圖集時先改「5」那一格（中線以下、最底兩列墨以上，墨分成兩段以上的列，碗右邊那段之前的像素清掉）；改之前先算那一格的 FNV-1a，是五種已知的形狀才改。函式和形狀照網頁書籤 `web-rules.mjs` 的 `FIVE`／`FIVE_SHAPES` 複製（那邊改了這裡要跟著改），細節見 [web.md](web.md)。點陣字型的類別在桌面版的 `saveTransfer-*.js`（2026.1027.x 是 `moved-*.js`，網頁版是 `ui-*.js`），規則不指定檔案。英文、韓文不套。2026.1103.2 實測：俄文角色畫面的 25、35、5 都是開口的，原版（同一個存檔）看起來是 26、36（`work/launcher/five-zoom.png`）；有改到就表示桌面版圖集的形狀跟網頁版一樣
+  21. 數字「5」開口（digit5，七種翻譯語言，optional，2026-11-04 起）：font16、font24、font30、font42、fontexocet10 的「5」碗是封閉的，看起來像頂端平的「6」（「法力 35 / 35」原版看起來像 36）。點陣字型的 constructor 拿到圖集時先改「5」那一格（中線以下、最底兩列墨以上，墨分成兩段以上的列，碗右邊那段之前的像素清掉）；改之前先算那一格的 FNV-1a，是五種已知的形狀才改。`FIVE_SHAPES` 是遊戲原本五種點陣字型「5」那一格的雜湊（原本跟網頁書籤版共用，網頁書籤版 2026-11-22 移除後只剩這裡；遊戲換了點陣字型要重算）。點陣字型的類別在 `saveTransfer-*.js`（2026.1027.x 是 `moved-*.js`），規則不指定檔案。英文、韓文不套。2026.1103.2 實測：俄文角色畫面的 25、35、5 都是開口的，原版（同一個存檔）看起來是 26、36（`work/launcher/five-zoom.png`）
   17～20 是翻譯聊天室截圖檢查的需求（`work/qa/RULE-REQUESTS.md` 1～5），補截圖在 `work/qa/<語言>/desktop/*-fix.png`
 
   `tools/compare-shots.ps1` 可以把兩張截圖的同一塊放大並排，比較改前改後；`node tools/cdp.mjs 9229 preload "<js>"` 可以在頁面載入前掛上攔截（例如記錄 `fillText` 用的顏色）

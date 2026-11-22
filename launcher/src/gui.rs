@@ -663,7 +663,6 @@ impl App {
         theme::panel(ui, |ui| {
             Self::section_label(ui, self.t("about_game_links"));
             link(ui, self.t("link_game_site"), system::GAME_URL);
-            link(ui, self.t("link_game_play"), system::GAME_PLAY_URL);
             link(ui, self.t("link_game_discord"), system::GAME_DISCORD_URL);
             link(ui, self.t("d2r_page"), system::D2R_URL);
         });
