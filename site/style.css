@@ -120,6 +120,9 @@ h1 { font-size: clamp(2rem, 5vw, 3.2rem); margin: 0 0 16px; word-break: keep-all
 /* 官方網頁版已移除：首屏說明下面一行小字 */
 .hero-note { max-width: 640px; margin: -20px auto 28px; color: var(--muted); font-size: 0.9rem; }
 .cta { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+/* 網頁版存檔轉移按鈕下面的說明 */
+.hero-save { max-width: 640px; margin: 16px auto 0; color: var(--muted); font-size: 0.9rem; }
+.hero-save strong { color: var(--text); }
 
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;

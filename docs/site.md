@@ -25,7 +25,7 @@ node tools/serve.mjs site 8766     # 本機預覽（或 python -m http.server 87
 
 | 檔案 | 說明 |
 |---|---|
-| `site/src/config.mjs` | 設定：`SITE`（BASE、下載網址、manifest 路徑、manifest 讀不到時的版本號、中文化社群 Discord、更新紀錄筆數、「翻譯修正中」的時數）、`LINKS`（官方連結：官方網站只剩下載頁，見「網頁書籤版（已移除）」）、`SITE_LANGS`（介面語言）、`LANGUAGES`（遊戲翻譯語言清單） |
+| `site/src/config.mjs` | 設定：`SITE`（BASE、下載網址、manifest 路徑、manifest 讀不到時的版本號、中文化社群 Discord、更新紀錄筆數、「翻譯修正中」的時數）、`LINKS`（官方連結：官方網站只剩下載頁和網頁版存檔轉移頁，見「網頁書籤版（已移除）」）、`SITE_LANGS`（介面語言）、`LANGUAGES`（遊戲翻譯語言清單） |
 | `site/src/i18n.mjs` | 每種介面語言的文字 |
 | `site/src/shared.mjs` | 建置腳本和網頁共用：合併 manifest、產生語言進度、首頁資訊列、下載按鈕 |
 | `tools/build-site.mjs` | 頁面樣板，產生靜態頁 |
@@ -137,7 +137,11 @@ node tools/serve.mjs site 8766     # 本機預覽（或 python -m http.server 87
 - 2026-11 官方移除了網頁版（d2survivors.lol/play/）和 wiki，使用者決定我們的網頁書籤版也跟著停掉。網站拿掉了書籤安裝區塊、桌面版／瀏覽器版切換、手機書籤教學、瀏覽器版截圖（`web-desktop`、`web-mobile`）、常見問題裡書籤和手機的題目（含省電畫質那題）、結構化資料的 WebApplication。舊的做法看 git 紀錄（2026-11-22 以前的 `build-site.mjs`、`i18n.mjs`、這份文件）
 - 首屏說明下面一行 `hero.webRemoved`（`.hero-note`）：「官方網頁版已經移除，翻譯只支援桌面版」，八種語言都有
 - 常見問題「可以在 Mac、Linux 或手機上玩嗎？」改成「目前不行」：啟動器只有 Windows 版，官方網頁版移除後書籤也停了
-- 官方網站：2026-11-22 檢查時首頁（`/`）、`/play/`、`/wiki/`、`/leaderboards/`、`/faq/` 都是 404，只剩 `/download/`。所以 `LINKS` 沒有官方首頁，來源卡片只連下載頁和遊戲官方 Discord，頁尾的「D2 Survivors」連到下載頁。官方網站恢復的話再加回來
+- 官方網站：2026-11-22 檢查時首頁（`/`）、`/play/`、`/wiki/`、`/leaderboards/`、`/faq/` 都是 404，只剩 `/download/`（2026-11-23 起還有 `/save/`，見下一點）。所以 `LINKS` 沒有官方首頁，來源卡片只連下載頁和遊戲官方 Discord，頁尾的「D2 Survivors」連到下載頁。官方網站恢復的話再加回來
+- 網頁版存檔轉移：官方特地留了 `https://d2survivors.lol/save/`（`LINKS.d2sSave`，只有英文和韓文），從玩家的瀏覽器裡找出網頁版的存檔，下載成 `.txt`，再到桌面版主選單 SAVES → Open a save file 匯入。這頁直接連 `/save/`，不要改成 `/download/`
+  - 首屏「下載啟動器」「安裝說明」旁邊第三顆按鈕 `hero.save`（新分頁開），下面一行 `hero.saveNote`（`.hero-save`）
+  - 常見問題「以前在網頁版玩的存檔可以搬到桌面版嗎？」放在「會動到我的存檔嗎？」後面，答案裡的 `{save}` 換成這個網址
+  - 一定要寫：要用**當初玩網頁版的同一個瀏覽器**（同一個設定檔）打開，存檔才找得到，別的瀏覽器、無痕視窗都找不到。選單名稱寫遊戲裡的譯名，後面括號附英文（字典的 `SAVES`、`Open a save file`），英文頁只寫英文。Hardcore 存檔跟遊戲裡一樣不能轉移（譯名照字典的 `Hardcore`）
 
 ## 加一種介面語言（例如 /de/）
 
@@ -176,7 +180,7 @@ node tools/build-site.mjs        # 再跑這個，sitemap 和繁中首頁的 wik
   - 拿掉：`script`、`style`、圖片、`svg`、`canvas`、表單元件（搜尋框、篩選器）、`.wiki-icon`（官方用玩家的遊戲檔畫的圖示）、有 `hidden` 的元素（等官方 JS 才顯示的）
   - 用遊戲檔畫的清單（`data-items`：獨特、套裝、符文之語）換成一句說明（清單本身不在官方頁面裡，官方 JS 讀玩家的遊戲檔；我們不放遊戲檔，官方 wiki 也已經移除，所以不連過去）
   - 恐懼階轉盤（`terror` 頁的 `.wiki-dial`）做成 100 階的靜態表：每列一階，欄位和數字格式照 [translation.md](translation.md) 的「恐懼階轉盤」（倍數 `toFixed(2)`、10 以上 `toFixed(1)` 加 `×`；每波 = 怪物總數 ÷ `waves` 四捨五入）。欄名是 `wiki-data` 的 `text` 換成譯文，`/players` 不翻。表格放在自己能捲的框裡（最高 70vh），表頭和第一欄「階」固定，手機左右捲也看得到是第幾階；頁面本身不橫向捲動。沒有 `wiki-data` 的話一樣換成一句說明
-  - 連結：這次有產生的 wiki 頁面換成我們的相對網址。官方網站上已經移除的頁面（wiki、遊戲、排行榜、FAQ…）變成一般文字，不連；官方還在的（`OFFICIAL_LIVE`，目前只有 `/download/`）和其他網站照常連，開新分頁
+  - 連結：這次有產生的 wiki 頁面換成我們的相對網址。官方網站上已經移除的頁面（wiki、遊戲、排行榜、FAQ…）變成一般文字，不連；官方還在的（`OFFICIAL_LIVE`：`/download/`、`/save/`）和其他網站照常連，開新分頁
 - **每頁**：上方寫「非官方翻譯」、原頁的英文名稱（不連，官方 wiki 已移除）、最後一次對照官方的日期（`pages.json` 的 `fetched`）、之後不再更新，還有幾段沒翻；頁尾保留官方的作者和暴雪版權聲明（有譯文用譯文，沒有就英文）。標題列右邊連到官方下載頁。canonical 指自己，hreflang 只有 `zh-Hant`（官方原頁已移除，不寫 `en`，sitemap 也一樣）；結構化資料是 `WebPage`（`translationOfWork` 只寫原頁名稱）和 `BreadcrumbList`
 - **lastmod**：內容跟上次一樣就沿用舊日期（比對時不看「上次對照」的日期，免得每次重抓都改掉全部頁面）
 - **官方刪掉的頁面**：`build-wiki` 比上一次的 `pages.json`，只刪我們產生的那頁 `index.html` 和空掉的資料夾

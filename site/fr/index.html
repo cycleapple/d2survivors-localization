@@ -139,6 +139,14 @@
     },
     {
      "@type": "Question",
+     "name": "Puis-je transférer ma sauvegarde de la version navigateur vers la version de bureau ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "\u003cp>Oui. Le développeur a conservé une \u003ca href=\"https://d2survivors.lol/save/\" target=\"_blank\" rel=\"noopener\">page officielle de transfert de sauvegarde\u003c/a> (en anglais et en coréen uniquement). Elle retrouve la sauvegarde de la version navigateur dans votre navigateur et vous permet de la télécharger en fichier .txt.\u003c/p>\u003cp>Ouvrez-la impérativement \u003cstrong>dans le même navigateur que celui où vous jouiez à la version navigateur\u003c/strong> (et avec le même profil), sinon la sauvegarde est introuvable. Un autre navigateur ou une fenêtre de navigation privée ne la trouvera pas.\u003c/p>\u003cp>Ouvrez ensuite la version de bureau, choisissez SAUVEGARDES (SAVES) → Ouvrir un fichier de sauvegarde (Open a save file) dans le menu principal et sélectionnez le .txt téléchargé. Les sauvegardes du mode Extrême (Hardcore) ne peuvent pas être transférées, comme dans le jeu lui-même.\u003c/p>"
+     }
+    },
+    {
+     "@type": "Question",
      "name": "Que se passe-t-il quand le jeu est mis à jour ?",
      "acceptedAnswer": {
       "@type": "Answer",
@@ -261,9 +269,12 @@
         <div class="cta">
           <a class="btn btn-primary" id="download-btn" href="https://github.com/cycleapple/d2survivors-localization/releases/latest/download/d2s-launcher.exe">Télécharger le lanceur <small>v1.0.7</small></a>
           <a class="btn btn-ghost" href="#install">Comment installer</a>
+          <a class="btn btn-ghost" href="https://d2survivors.lol/save/" target="_blank" rel="noopener">Transférer la sauvegarde web ↗</a>
         </div>
+        <!-- 網頁版存檔要用當初玩的同一個瀏覽器開官方頁面才找得到；詳細的在常見問題 -->
+        <p class="hero-save">Vous jouiez à la version navigateur ? Ouvrez « Transférer la sauvegarde web » (page officielle, en anglais) <strong>dans le même navigateur que celui où vous jouiez</strong> pour télécharger votre sauvegarde en .txt, puis, dans le menu principal de la version de bureau, choisissez SAUVEGARDES (SAVES) → Ouvrir un fichier de sauvegarde (Open a save file) et sélectionnez ce fichier.</p>
         <div id="hero-meta">
-        <ul class="meta"><li>Version du jeu <strong>2026.1120.1</strong></li><li>Lanceur <strong>v1.0.7 · Windows</strong></li><li>Traduction mise à jour <strong>2026-11-22</strong></li></ul>
+        <ul class="meta"><li>Version du jeu <strong>2026.1122.1</strong></li><li>Lanceur <strong>v1.0.7 · Windows</strong></li><li>Traduction mise à jour <strong>2026-11-22</strong></li></ul>
         </div>
         <p class="hero-community"><a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">Rejoindre le Discord de la communauté de traduction</a></p>
       </div>
@@ -353,43 +364,43 @@
       <div class="lang-head"><span class="lang-name" lang="zh-TW">繁體中文</span><span class="lang-code">zh-TW</span></div>
       <span class="lang-sub">chinois (traditionnel)</span>
       <span class="status available">Disponible</span>
-      <span class="lang-sub">14 751 textes</span>
+      <span class="lang-sub">14 775 textes</span>
     </li>
 <li class="lang available">
       <div class="lang-head"><span class="lang-name" lang="zh-CN">简体中文</span><span class="lang-code">zh-CN</span></div>
       <span class="lang-sub">chinois (simplifié)</span>
       <span class="status available">Disponible</span>
-      <span class="lang-sub">14 750 textes</span>
+      <span class="lang-sub">14 774 textes</span>
     </li>
 <li class="lang available">
       <div class="lang-head"><span class="lang-name" lang="ja">日本語</span><span class="lang-code">ja</span></div>
       <span class="lang-sub">japonais</span>
       <span class="status available">Disponible</span>
-      <span class="lang-sub">14 756 textes</span>
+      <span class="lang-sub">14 780 textes</span>
     </li>
 <li class="lang available">
       <div class="lang-head"><span class="lang-name" lang="de">Deutsch</span><span class="lang-code">de</span></div>
       <span class="lang-sub">allemand</span>
       <span class="status available">Disponible</span>
-      <span class="lang-sub">14 790 textes</span>
+      <span class="lang-sub">14 814 textes</span>
     </li>
 <li class="lang available">
       <div class="lang-head"><span class="lang-name" lang="fr">Français</span><span class="lang-code">fr</span></div>
       <span class="lang-sub">français</span>
       <span class="status available">Disponible</span>
-      <span class="lang-sub">14 799 textes</span>
+      <span class="lang-sub">14 823 textes</span>
     </li>
 <li class="lang available">
       <div class="lang-head"><span class="lang-name" lang="ru">Русский</span><span class="lang-code">ru</span></div>
       <span class="lang-sub">russe</span>
       <span class="status available">Disponible</span>
-      <span class="lang-sub">14 838 textes</span>
+      <span class="lang-sub">14 862 textes</span>
     </li>
 <li class="lang available">
       <div class="lang-head"><span class="lang-name" lang="pl">Polski</span><span class="lang-code">pl</span></div>
       <span class="lang-sub">polonais</span>
       <span class="status available">Disponible</span>
-      <span class="lang-sub">14 828 textes</span>
+      <span class="lang-sub">14 852 textes</span>
     </li>
         </ul>
       </div>
@@ -400,6 +411,16 @@
         <h2>Journal des modifications</h2>
         <p class="section-lead">Mises à jour des traductions, des langues et du lanceur. Le lanceur récupère la dernière traduction à chaque fois, sans nouveau téléchargement.</p>
         <ol class="changelog" id="changelog-list">
+          <li>
+            <time datetime="2026-11-22">2026-11-22</time>
+            <span class="kind kind-game-fix">Mise à jour du jeu</span>
+            <span class="changelog-summary">La version bureau 2026.1122.1 du jeu est désormais prise en charge (24 nouveaux textes traduits)</span>
+            <details class="game-notes">
+              <summary>Nouveautés du jeu lui-même (version du jeu 2026.1122.1)</summary>
+              <p class="game-notes-credit">Notes de mise à jour écrites par le développeur de D2 Survivors ; nous nous chargeons seulement de la traduction. <time datetime="2026-11-22T21:44:36.144Z">Mise à jour officielle : 22 nov. 2026, 21:44 UTC</time></p>
+              <ul><li>L’appli de bureau aide à vérifier les parties des autres joueurs tant qu’elle est ouverte, sauf si vous désactivez AIDER À VÉRIFIER LES PARTIES dans les PARAMÈTRES</li><li>Les monstres réanimés du Nécromancien ne s’affichent plus sous forme de carrés noirs</li><li>L’inventaire et les fenêtres des marchands s’ouvrent plus vite, avec l’image de chaque objet déjà en place</li><li>Les couleurs mouvantes du palier des vaches de la Terreur ne rendent plus son combat environ neuf fois plus lourd à afficher que celui d’un acte</li><li>Quand l’installation de l’appli de bureau s’arrête en copiant les fichiers de jeu, elle indique l’erreur de cette étape, et non celle d’une image qui a échoué ensuite</li><li>Quand le jeu en ligne ne peut pas utiliser vos fichiers de jeu, l’appli de bureau le signale et propose de les extraire à nouveau</li><li>Une partie en ligne attend désormais les données d’animation de votre héros avant de commencer : un premier chargement lent ne fait plus refuser une partie honnête</li><li>Échap ferme de nouveau le menu Échap et C l’écran de personnage sur les PC où ces touches ne faisaient rien et où seuls les boutons fonctionnaient</li><li>Quand une mise à jour lit les fichiers de jeu différemment, l’appli de bureau les recopie tous et garde les anciens jusqu’à la fin de la copie</li><li>Le bouton Collecter de la réserve ne prend plus dans votre inventaire ou votre réserve un objet trempé ou amélioré à la Forge de Charsi</li><li>Les Pierres de Cairn n’apparaissent plus dans un buisson ou derrière des rochers : chaque pierre peut être atteinte et allumée</li><li>Dans Über Tristram, les trois Démons Originels affichent désormais la marque de carte du boss d’acte, comme les clones d’Über Baal</li><li>Les parties en ligne où vous avez utilisé une Essence de Larzuk de votre pile puis en avez ramassé une autre ne sont plus refusées</li><li>Cliquer sur quelqu’un au camp juste avant une partie en ligne ne fait plus refuser une partie honnête</li><li>Choisir une carte de compétence qui remplace l’une de vos compétences ne fait plus refuser votre prochaine partie en ligne</li><li>Les parties en ligne où vous avez parié chez un forgeron, quitté sa fenêtre puis êtes revenu avant que l’achat soit validé ne sont plus refusées</li><li>Les parties en ligne où vous avez survolé de l’équipement dans l’écran de personnage, puis abandonné une arme à aura en changeant d’arme, ne sont plus refusées</li></ul>
+            </details>
+          </li>
           <li>
             <time datetime="2026-11-22">2026-11-22</time>
             <span class="kind kind-translation">Traduction</span>
@@ -433,16 +454,6 @@
               <summary>Nouveautés du jeu lui-même (version du jeu 2026.1105.2)</summary>
               <p class="game-notes-credit">Notes de mise à jour écrites par le développeur de D2 Survivors ; nous nous chargeons seulement de la traduction. <time datetime="2026-11-05T12:48:51.093Z">Mise à jour officielle : 5 nov. 2026, 12:48 UTC</time></p>
               <ul><li>Télékinésie a désormais 5 niveaux comme tous les passifs, et son 5e niveau porte aussi loin que son 3e auparavant</li><li>La carte signale une Essence brûlante de terreur ou une Essence de Larzuk au sol par un petit triangle rouge</li><li>La trempe s’arrête désormais à 10 trempes par objet, et seule la Forge des Enfers permet de dépasser 10</li><li>Un objet trempé plus de 10 fois est ramené à 10, ou à 20 s’il en avait 20 ou plus, chaque ligne gardant sa part</li><li>La Forge des Enfers ne fonctionne plus qu’une fois par objet, et un objet ramené à 20 compte comme l’ayant déjà utilisée</li><li>Les butins de Terreur autres que celui du boss apportent une Essence brûlante de terreur environ quatre fois moins souvent</li><li>Un Annihilus, un organe ou une Torche des flammes infernales obtenu d’un Über que vous avez dû affronter plus d’une fois n’exclut plus vos parties du Tournoi</li><li>Les victoires sur Über Tristram en moins de 1:30 arrivent désormais au Tournoi au lieu d’être refusées et de s’accumuler sans être envoyées</li><li>Un nouveau choix propose de nouveau Télékinésie à un héros complet de n’importe quelle classe, pour que Vision diminuée puisse évoluer en Désorienter</li><li>Améliorer de Charsi sur un objet déjà sur sa base d’élite le signale et nomme la base, au lieu de dire qu’il n’existe pas de base plus forte</li></ul>
-            </details>
-          </li>
-          <li>
-            <time datetime="2026-11-05">2026-11-05</time>
-            <span class="kind kind-game-fix">Mise à jour du jeu</span>
-            <span class="changelog-summary">Prise en charge de la version 2026.1105.1 du jeu (158 nouveaux textes traduits)</span>
-            <details class="game-notes">
-              <summary>Nouveautés du jeu lui-même (version du jeu 2026.1105.1)</summary>
-              <p class="game-notes-credit">Notes de mise à jour écrites par le développeur de D2 Survivors ; nous nous chargeons seulement de la traduction. <time datetime="2026-11-05T09:22:51.976Z">Mise à jour officielle : 5 nov. 2026, 09:22 UTC</time></p>
-              <ul><li>Dans l’application de bureau, Options vidéo a une ligne Plein écran pour passer du plein écran au mode fenêtré</li><li>Cliquez sur Charsi au camp pour Tremper, Nettoyer, passer à la Forge des Enfers ou Améliorer vos objets avec des Essences brûlantes de terreur</li><li>Tremper augmente une ligne au hasard, une compétence de 1 niveau et toute autre ligne d’un cinquième de son tirage, avec une chance plus faible à chaque fois</li><li>Nettoyer retire toutes les trempes d’un objet</li><li>À partir de 10 trempes, la Forge des Enfers les double toutes (40%) ou les fait toutes perdre (60%)</li><li>Améliorer fait passer une arme ou une armure magique, rare ou à mot runique à sa base exceptionnelle, puis d’élite, en conservant toutes les lignes</li><li>Chaque boss d’un palier de Terreur laisse tomber une Essence brûlante de terreur, et les autres butins de Terreur en apportent parfois une</li><li>Les essences, de Larzuk comme de Charsi, s’empilent désormais jusqu’à 99</li><li>Les compétences d’arme frappent avec les dégâts propres de votre arme : ses dégâts supplémentaires, votre Force et chaque +% de dégâts comptent donc pleinement, comme dans Diablo II</li><li>La vitesse d’attaque et une arme rapide accélèrent désormais pleinement vos attaques à l’arme, et la vitesse de sort très rapide des objets n’accélère que vos sorts</li><li>Les cartes des compétences d’arme affichent leurs +% de dégâts de l’arme au lieu d’un nombre fixe</li><li>Une fois vos paliers de Terreur ouverts, l’inventaire affiche à côté de l’or les trois clés des Über, chacune avec le nombre que vous en avez</li><li>Survolez les clés pour voir qui laisse tomber chacune (la Comtesse, l’Invocateur ou Nihlathak) et ce qu’un jeu complet ouvre</li><li>Dans un palier de Terreur, la Comtesse, l’Invocateur et Nihlathak annoncent leur arrivée, et le relais indique qui peut laisser tomber la clé de chaque acte</li><li>Le filtre de butin a une ligne MOTS RUNIQUES : DANS MA COLLECTION ne vend plus le deuxième exemplaire d’un mot runique avant que vous ayez vu sa base</li><li>Baisser Effets dans les options vidéo atténue désormais aussi la lumière colorée de vos compétences au sol, pas seulement les sorts</li><li>Maintenir AFFICHER LES OBJETS en s’approchant d’un forgeron ou de Larzuk au Terrain d’entraînement n’ouvre plus leur fenêtre, pour pouvoir ramasser le butin à cet endroit</li><li>Les objets éthérés sont affichés en transparence au sol, dans l’inventaire, la réserve et sur le héros, comme dans Diablo II</li><li>Le Leurre de l’Amazone bénéficie désormais de Défiance, Prière et Épines parmi les auras de votre camp, comme vos invocations</li><li>Esprit vengeur des objets ou du Druide blesse désormais les monstres qui frappent vos invocations au corps à corps, comme dans Diablo II</li><li>Les dégâts de feu, de froid et de foudre des charmes et de l’équipement ne réduisent plus la vie et le mana volés par vos attaques à l’arme</li><li>Une Jambe de Wirt jetée au sol pendant une partie ne permet plus à Griswold d’en laisser une deuxième</li><li>Les châsses sont disposées comme dans Diablo II : cinq forment le cinq d’un dé et les trois d’un casque un V, alors qu’elles étaient en colonnes</li><li>L’infobulle d’un charme indique désormais la touche qui ouvre la fenêtre des charmes : H, sauf si vous l’avez réassignée</li><li>Ramasser une clé ou un organe indique désormais combien vous en avez et qu’ils sont dans votre inventaire</li><li>Un Barbare avec Trombe et Saut d’attaque utilise désormais les deux à tour de rôle, alors qu’une vitesse de sort rapide le faisait tourner sans jamais bondir</li><li>La Valkyrie de l’Amazone bénéficie désormais de Défiance, Prière, Épines et Fanatisme parmi les auras de votre camp, comme vos invocations</li><li>Dans un palier de Terreur, la Comtesse, l’Invocateur et Nihlathak restent désormais jusqu’à leur mort, comme dans D2, au lieu de partir avec leurs clés</li><li>Les Dégâts des compétences de Poison de Ronces et des Griffes de Trang’Oul affichent désormais leur valeur dans l’application de bureau</li><li>À la manette, l’objet sous le curseur affiche désormais ses châsses et les runes, gemmes ou joyaux qu’elles contiennent, comme à la souris</li><li>Transparence des objets comme Traîtrise s’affiche désormais sur votre héros et votre mercenaire tant qu’elle dure, pour qu’on la voie agir</li><li>Chaque classe tient désormais chaque arme telle qu’elle est, alors que l’arc ou l’épée à deux mains d’un Nécromancien était dessiné comme sa baguette</li><li>Les malédictions des objets, comme Décrépitude et Amplifier les dégâts, s’affichent désormais au-dessus des monstres maudits, quelle que soit la classe, et depuis votre mercenaire</li><li>Les clés et organes des Über au sol ont désormais un nom rouge, comme le Codex horadrique, et ne ressemblent plus à des uniques</li><li>Sur un téléphone tenu à la verticale, le bouton Vendre, réserve ouverte, est désormais à droite, là où il se trouve à côté de Jeter pendant une partie</li><li>Esprit vengeur des objets blesse désormais les monstres qui frappent un Nécromancien ou une Sorcière, et reste actif avec Esquive ou Blocage des armes</li><li>Un héros dont les parties sont arrivées au Tournoi avec des heures de retard n’est plus signalé comme ayant joué depuis une ancienne copie de la sauvegarde</li><li>La ligne des malédictions du compteur de dégâts porte le nom d’Attraction ou de Désorienter quand le Nécromancien en possède une, et non plus toujours Vierge de fer</li><li>Une invocation ou un monstre ressuscité avant le chargement de son image s’affiche à sa propre taille une fois apparu, et non plus comme un géant</li><li>L’installation de l’application de bureau indique en Mo un disque auquel il manque un peu de place, au lieu d’afficher deux fois &quot;1,8 Go&quot;, avec la quantité à libérer en plus</li></ul>
             </details>
           </li>
         </ol>
@@ -493,6 +504,7 @@
           <details><summary>Où en est la version française ?</summary><div class="answer"><p>Elle est terminée : entièrement traduite et vérifiée en jeu pour qu’il ne manque rien. Toute l’interface et 300 entrées tirées au hasard ont ensuite été relues de façon indépendante, ce qui a donné environ 360 corrections dans tout le dictionnaire. Les noms d’objets magiques et de monstres uniques respectent l’ordre des mots et le genre en français, par exemple « Coiffe solide de l’esprit », et les héroïnes portent des titres au féminin. Environ 70 % des termes viennent directement de la traduction officielle de Diablo II: Resurrected.</p><p>Si vous repérez une erreur, dites-le-nous.</p></div></details>
           <details><summary>Puis-je jouer sur Mac, Linux ou mobile ?</summary><div class="answer"><p>Pas pour le moment. Le lanceur n’existe que pour Windows, et comme la version navigateur officielle a été retirée, notre favori a disparu aussi. Pour l’instant, la traduction n’est pas utilisable sur Mac, Linux ou mobile.</p></div></details>
           <details><summary>Mes sauvegardes sont-elles touchées ?</summary><div class="answer"><p>Non. Le lanceur remplace seulement <code>resources\app.asar</code> dans le dossier du jeu, après avoir sauvegardé l’original. Les sauvegardes sont ailleurs et ne sont ni lues ni modifiées.</p></div></details>
+          <details><summary>Puis-je transférer ma sauvegarde de la version navigateur vers la version de bureau ?</summary><div class="answer"><p>Oui. Le développeur a conservé une <a href="https://d2survivors.lol/save/" target="_blank" rel="noopener">page officielle de transfert de sauvegarde</a> (en anglais et en coréen uniquement). Elle retrouve la sauvegarde de la version navigateur dans votre navigateur et vous permet de la télécharger en fichier <code>.txt</code>.</p><p>Ouvrez-la impérativement <strong>dans le même navigateur que celui où vous jouiez à la version navigateur</strong> (et avec le même profil), sinon la sauvegarde est introuvable. Un autre navigateur ou une fenêtre de navigation privée ne la trouvera pas.</p><p>Ouvrez ensuite la version de bureau, choisissez SAUVEGARDES (SAVES) → Ouvrir un fichier de sauvegarde (Open a save file) dans le menu principal et sélectionnez le <code>.txt</code> téléchargé. Les sauvegardes du mode Extrême (Hardcore) ne peuvent pas être transférées, comme dans le jeu lui-même.</p></div></details>
           <details><summary>Que se passe-t-il quand le jeu est mis à jour ?</summary><div class="answer"><p>Une mise à jour remplace <code>app.asar</code> : la traduction disparaît jusqu’à ce que vous relanciez le jeu depuis le lanceur ou son raccourci, qui la réapplique.</p><p>Si la nouvelle version a trop changé, le lanceur ne force rien : il lance le jeu original et indique que la traduction est en cours de correction. Une fois corrigée, elle se réapplique automatiquement au lancement suivant ; vous n’avez rien à faire.</p></div></details>
           <details><summary>Pourquoi le menu des langues du jeu affiche-t-il ma langue au lieu du coréen ?</summary><div class="answer"><p>La traduction utilise l’emplacement de la langue coréenne intégré au jeu ; le menu affiche donc le nom de la langue choisie à sa place. Pour jouer en coréen, choisissez « 한국어 (원본) » dans le lanceur.</p></div></details>
           <details><summary>Pourquoi reste-t-il de l’anglais ?</summary><div class="answer"><p>Tous les textes du jeu sont traduits et ont été vérifiés en jeu pour qu’il n’en manque aucun. Si vous voyez de l’anglais, c’est généralement qu’une mise à jour du jeu a ajouté de nouveaux textes ; une prochaine mise à jour de la traduction les ajoutera, et le lanceur la télécharge automatiquement. Si cela reste en anglais, dites-le-nous.</p></div></details>
@@ -517,7 +529,7 @@
     <div class="wrap">
       <p class="footer-community"><a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">Rejoindre le Discord de la communauté de traduction</a><span class="sep" aria-hidden="true">·</span><a href="https://github.com/cycleapple/d2survivors-localization" target="_blank" rel="noopener">Code source (GitHub)</a><span class="sep" aria-hidden="true">·</span><a href="https://paypal.me/DonateCYtw" target="_blank" rel="noopener">☕ M’offrir un café</a><span class="sep" aria-hidden="true">·</span><a href="https://portaly.cc/thecy" target="_blank" rel="noopener">Faire un don avec Portaly</a></p>
       <p>Traduction non officielle par des fans, sans lien avec <a href="https://d2survivors.lol/download/" target="_blank" rel="noopener">D2 Survivors</a> (framara) ni Blizzard Entertainment. Diablo® est une marque de Blizzard Entertainment, Inc.</p>
-      <p class="footer-small">Game 2026.1120.1 · Launcher v1.0.7</p>
+      <p class="footer-small">Game 2026.1122.1 · Launcher v1.0.7</p>
     </div>
   </footer>
 

@@ -136,6 +136,14 @@
     },
     {
      "@type": "Question",
+     "name": "以前在網頁版玩的存檔可以搬到桌面版嗎？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "\u003cp>可以。官方留了一個\u003ca href=\"https://d2survivors.lol/save/\" target=\"_blank\" rel=\"noopener\">網頁版存檔轉移頁面\u003c/a>（只有英文和韓文），會從瀏覽器裡找出網頁版的存檔，讓你下載成 .txt 檔。\u003c/p>\u003cp>一定要用\u003cstrong>當初玩網頁版的同一個瀏覽器\u003c/strong>（同一個使用者設定檔）打開這頁，存檔才找得到；換別的瀏覽器或用無痕視窗都找不到。\u003c/p>\u003cp>下載後打開桌面版，在主選單選「存檔」（SAVES）→「開啟存檔」（Open a save file），選剛下載的 .txt 就匯入了。專家級（Hardcore）的存檔跟遊戲裡一樣不能轉移。\u003c/p>"
+     }
+    },
+    {
+     "@type": "Question",
      "name": "遊戲更新之後怎麼辦？",
      "acceptedAnswer": {
       "@type": "Answer",
@@ -259,9 +267,12 @@
         <div class="cta">
           <a class="btn btn-primary" id="download-btn" href="https://github.com/cycleapple/d2survivors-localization/releases/latest/download/d2s-launcher.exe">下載啟動器 <small>v1.0.7</small></a>
           <a class="btn btn-ghost" href="#install">安裝說明</a>
+          <a class="btn btn-ghost" href="https://d2survivors.lol/save/" target="_blank" rel="noopener">網頁版存檔轉移 ↗</a>
         </div>
+        <!-- 網頁版存檔要用當初玩的同一個瀏覽器開官方頁面才找得到；詳細的在常見問題 -->
+        <p class="hero-save">玩過網頁版的話，請用<strong>當初玩網頁版的同一個瀏覽器</strong>打開「網頁版存檔轉移」（官方頁面，英文），把存檔下載成 .txt，再到桌面版主選單的「存檔」（SAVES）→「開啟存檔」（Open a save file）選這個檔案。</p>
         <div id="hero-meta">
-        <ul class="meta"><li>支援遊戲版本 <strong>2026.1120.1</strong></li><li>啟動器 <strong>v1.0.7 · Windows</strong></li><li>翻譯更新 <strong>2026-11-22</strong></li></ul>
+        <ul class="meta"><li>支援遊戲版本 <strong>2026.1122.1</strong></li><li>啟動器 <strong>v1.0.7 · Windows</strong></li><li>翻譯更新 <strong>2026-11-22</strong></li></ul>
         </div>
         <p class="hero-community"><a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">加入中文化社群 Discord</a></p>
       </div>
@@ -351,43 +362,43 @@
       <div class="lang-head"><span class="lang-name" lang="zh-TW">繁體中文</span><span class="lang-code">zh-TW</span></div>
       <span class="lang-sub">中文（繁體）</span>
       <span class="status available">可用</span>
-      <span class="lang-sub">14,751 條</span>
+      <span class="lang-sub">14,775 條</span>
     </li>
 <li class="lang available">
       <div class="lang-head"><span class="lang-name" lang="zh-CN">简体中文</span><span class="lang-code">zh-CN</span></div>
       <span class="lang-sub">中文（簡體）</span>
       <span class="status available">可用</span>
-      <span class="lang-sub">14,750 條</span>
+      <span class="lang-sub">14,774 條</span>
     </li>
 <li class="lang available">
       <div class="lang-head"><span class="lang-name" lang="ja">日本語</span><span class="lang-code">ja</span></div>
       <span class="lang-sub">日文</span>
       <span class="status available">可用</span>
-      <span class="lang-sub">14,756 條</span>
+      <span class="lang-sub">14,780 條</span>
     </li>
 <li class="lang available">
       <div class="lang-head"><span class="lang-name" lang="de">Deutsch</span><span class="lang-code">de</span></div>
       <span class="lang-sub">德文</span>
       <span class="status available">可用</span>
-      <span class="lang-sub">14,790 條</span>
+      <span class="lang-sub">14,814 條</span>
     </li>
 <li class="lang available">
       <div class="lang-head"><span class="lang-name" lang="fr">Français</span><span class="lang-code">fr</span></div>
       <span class="lang-sub">法文</span>
       <span class="status available">可用</span>
-      <span class="lang-sub">14,799 條</span>
+      <span class="lang-sub">14,823 條</span>
     </li>
 <li class="lang available">
       <div class="lang-head"><span class="lang-name" lang="ru">Русский</span><span class="lang-code">ru</span></div>
       <span class="lang-sub">俄文</span>
       <span class="status available">可用</span>
-      <span class="lang-sub">14,838 條</span>
+      <span class="lang-sub">14,862 條</span>
     </li>
 <li class="lang available">
       <div class="lang-head"><span class="lang-name" lang="pl">Polski</span><span class="lang-code">pl</span></div>
       <span class="lang-sub">波蘭文</span>
       <span class="status available">可用</span>
-      <span class="lang-sub">14,828 條</span>
+      <span class="lang-sub">14,852 條</span>
     </li>
         </ul>
       </div>
@@ -398,6 +409,16 @@
         <h2>更新紀錄</h2>
         <p class="section-lead">翻譯、語言和啟動器的更新。啟動器每次開啟都會拿到最新的翻譯，不用重新下載。</p>
         <ol class="changelog" id="changelog-list">
+          <li>
+            <time datetime="2026-11-22">2026-11-22</time>
+            <span class="kind kind-game-fix">遊戲改版</span>
+            <span class="changelog-summary">已支援桌面版遊戲 2026.1122.1（補翻 24 條新字串）</span>
+            <details class="game-notes">
+              <summary>遊戲本身的更新（遊戲版本 2026.1122.1）</summary>
+              <p class="game-notes-credit">以下是 D2 Survivors 作者寫的更新說明，我們只負責翻譯。 <time datetime="2026-11-22T21:44:36.144Z">官方更新時間：2026年11月22日 下午09:44 [UTC]</time></p>
+              <ul><li>桌面版開啟期間會協助檢查其他玩家的紀錄；若要停止，請在「遊戲設定」關閉「協助檢查紀錄」</li><li>死靈法師重生的怪物不再顯示成黑色方塊</li><li>物品欄與商人視窗開啟得更快，所有物品圖像一開始就已就位</li><li>恐懼的乳牛階不再因飄動的色彩，使戰鬥畫面的繪製負擔約為一般章節的九倍</li><li>桌面版的安裝程序停止複製遊戲檔案時，會顯示該步驟本身的錯誤，而不是之後失敗的某張圖像的錯誤</li><li>線上遊戲無法使用你的遊戲檔案時，桌面版會告知並提供重新擷取</li><li>線上遊戲的一局現在會等英雄的動畫資料載入後才開始，首次載入較慢時，正當的遊戲局不再遭到拒絕</li><li>在按鍵無效、只能點按鈕的電腦上，按Esc可再次關閉Esc選單，按C可再次關閉角色畫面</li><li>當更新改變了遊戲檔案的讀取方式，桌面版會重新複製所有檔案，並在複製完成前保留舊檔案</li><li>儲物箱的「收藏」按鈕不再把在恰西的熔爐淬鍊或升級過的物品從物品欄或儲物箱拿走</li><li>石柱不再出現在樹叢中或岩石後方，每一塊石柱都能走近並點亮</li><li>在超級崔斯特姆中，三大罪惡之源現在會像超級巴爾的分身一樣，顯示章節首領的地圖標記</li><li>線上遊戲的一局若使用了堆疊中的拉蘇克精華後又撿起另一個，不再遭到拒絕</li><li>在線上遊戲的一局開始前於營地點擊某人，不再導致正當的遊戲局遭到拒絕</li><li>選擇取代你某個技能的技能卡後，下一局線上遊戲不再遭到拒絕</li><li>線上遊戲的一局若在鐵匠處賭博後，於購買完成前離開鐵匠視窗再回來，不再遭到拒絕</li><li>線上遊戲的一局若在角色畫面將游標移到裝備上，再從帶有光環的武器切換掉，不再遭到拒絕</li></ul>
+            </details>
+          </li>
           <li>
             <time datetime="2026-11-22">2026-11-22</time>
             <span class="kind kind-translation">翻譯</span>
@@ -431,16 +452,6 @@
               <summary>遊戲本身的更新（遊戲版本 2026.1105.2）</summary>
               <p class="game-notes-credit">以下是 D2 Survivors 作者寫的更新說明，我們只負責翻譯。 <time datetime="2026-11-05T12:48:51.093Z">官方更新時間：2026年11月5日 下午12:48 [UTC]</time></p>
               <ul><li>心靈傳動現在和所有被動一樣有5級，第5級的距離與原本第3級相同</li><li>地圖會以紅色小三角形標示地上的燃燒的恐懼精華或拉蘇克精華</li><li>淬鍊現在每件物品最多10次，只有地獄熔爐能讓物品超過10次</li><li>淬鍊超過10次的物品會減為10次，原本有20次以上的則減為20次，每條屬性維持原本的比例</li><li>地獄熔爐現在每件物品只能使用一次，減為20次的物品視為已使用過</li><li>恐懼階中首領以外的掉落物附帶燃燒的恐懼精華的機率，降為原本的約四分之一</li><li>從需要挑戰不只一次的超級首領取得的滅絕、器官或地獄火炬，不再讓你的紀錄無法列入天梯</li><li>快於1:30的超級崔斯特姆通關紀錄現在會列入天梯，不再遭到拒絕而堆積未送出</li><li>重新抽選現在會再次向任何職業、技能已配滿的英雄提供心靈傳動，讓昏暗視野能進化為混亂</li><li>對已是精英底材的物品使用恰西的「升級」時，現在會說明這點並顯示底材名稱，不再顯示沒有更強的底材</li></ul>
-            </details>
-          </li>
-          <li>
-            <time datetime="2026-11-05">2026-11-05</time>
-            <span class="kind kind-game-fix">遊戲改版</span>
-            <span class="changelog-summary">已支援遊戲 2026.1105.1（新增 158 條譯文）</span>
-            <details class="game-notes">
-              <summary>遊戲本身的更新（遊戲版本 2026.1105.1）</summary>
-              <p class="game-notes-credit">以下是 D2 Survivors 作者寫的更新說明，我們只負責翻譯。 <time datetime="2026-11-05T09:22:51.976Z">官方更新時間：2026年11月5日 上午09:22 [UTC]</time></p>
-              <ul><li>桌面版的顯示設定新增「全螢幕」一行，可切換全螢幕與視窗模式</li><li>在營地點擊恰西，即可用燃燒的恐懼精華為物品進行「淬鍊」、「清除」、「地獄熔爐」或「升級」</li><li>「淬鍊」會隨機提升一行屬性：技能提升1級，其他屬性提升其原始數值的五分之一，每次淬鍊的成功機率都會降低</li><li>「清除」會移除物品上的所有淬鍊</li><li>淬鍊達10次以上時，「地獄熔爐」會讓所有淬鍊加倍（40%）或全部失去（60%）</li><li>「升級」會將魔法、稀有或符文之語的武器與護甲換成卓越底材，再換成精英底材，並保留所有屬性</li><li>每個恐懼階的首領都會掉落一個燃燒的恐懼精華，恐懼階的其他掉落物有時也會附帶一個</li><li>拉蘇克與恰西的精華現在最多可堆疊99個</li><li>武器技能改以武器本身的傷害攻擊，因此武器的傷害強化、你的力量與所有 +% 傷害都會完整計算，與《暗黑破壞神 II》相同</li><li>攻擊速度與快速武器現在會完整加快武器攻擊，而物品上的施法速度只會加快法術</li><li>武器技能的卡片改為顯示 +% 武器傷害，而不是固定數值</li><li>恐懼階開放後，物品欄會在金幣旁顯示三種超級鑰匙，並標示各自的持有數量</li><li>將滑鼠移到鑰匙上，即可查看每把鑰匙由誰掉落（女伯爵、召喚師或尼拉塞克），以及集滿一組能開啟什麼</li><li>在恐懼階中，女伯爵、召喚師與尼拉塞克出現時會發出通知，傳送平台也會標示各章節中可能掉落鑰匙的對象</li><li>拾取篩選器新增「符文之語」一行，「已收藏」不再在你看到底材之前就賣掉符文之語的第二件</li><li>在顯示設定中調低技能效果，現在除了法術之外，也會調暗技能投在地面上的彩色光芒</li><li>按住「顯示物品」走向鐵匠或訓練場的拉蘇克時，不再開啟他們的視窗，讓你能撿起那裡的物品</li><li>無形物品在地上、物品欄、儲物箱與英雄身上都會以半透明顯示，與《暗黑破壞神 II》相同</li><li>亞馬遜的替身現在會像召喚物一樣，獲得我方靈氣中反抗、祈禱與荊棘的效果</li><li>來自物品或德魯伊的荊棘之靈，現在也會傷害近戰攻擊你召喚物的怪物，與《暗黑破壞神 II》相同</li><li>咒符與裝備上的火焰、冰寒與閃電傷害，不再降低武器攻擊竊取的生命與法力</li><li>在一局中把維特的腿丟在地上後，格里斯瓦德不再留下第二支</li><li>鑲孔的排列現在與《暗黑破壞神 II》相同：五個孔排成骰子的五點，頭盔的三個孔排成 V 字形；以前是排成直行</li><li>咒符的說明框現在會標示開啟咒符欄的按鍵：若未變更設定則為 H</li><li>撿起鑰匙或器官時，現在會顯示你持有的數量，並告知它們在物品欄中</li><li>同時擁有旋風斬與躍擊的野蠻人現在會輪流使用兩者；以前施法速度快時會一直旋轉而從不跳躍</li><li>亞馬遜的女武神現在會像召喚物一樣，獲得我方靈氣中反抗、祈禱、荊棘與狂熱的效果</li><li>在恐懼階中，女伯爵、召喚師與尼拉塞克現在會像D2一樣留到被擊倒為止，不再帶著鑰匙離開</li><li>刺藤與塔格奧之爪上的毒素技能傷害，現在在桌面版也會顯示數值</li><li>使用手把時，游標下的物品現在也會像使用滑鼠時一樣，顯示鑲孔以及其中的符文、寶石或珠寶</li><li>來自背信等物品的影散，現在持續期間會顯示在英雄與傭兵身上，讓你看得出它正在生效</li><li>所有職業現在都會顯示手上實際持有的武器；以前死靈法師的弓或雙手劍會被畫成魔杖</li><li>來自物品的詛咒（例如衰老與傷害加深），無論由哪個職業或傭兵施放，現在都會顯示在被詛咒的怪物上方</li><li>掉在地上的超級鑰匙與器官，名稱現在會像赫拉迪姆寶典一樣顯示為紅色，不再看起來像獨特物品</li><li>手機直拿時，開啟儲物箱時的「出售」按鈕現在位於右側，與一局中「丟下」按鈕旁的位置相同</li><li>來自物品的荊棘之靈，現在也會傷害攻擊死靈法師或魔法使的怪物，且擁有閃躲或武器格擋時仍會持續生效</li><li>一局紀錄晚了數小時才送達天梯的英雄，不會再被標記為以較舊的存檔副本遊玩</li><li>傷害計量的詛咒一行，現在會在死靈法師擁有致命吸引或混亂時顯示該詛咒的名稱，不再一律顯示攻擊反噬</li><li>在圖像載入前就召喚或復活的怪物，出現後會以原本的大小顯示，不再變成巨人</li><li>桌面版安裝程式在磁碟空間略為不足時，會以 MB 顯示，不再兩次都顯示「1.8 GB」，並會告訴你還需要釋放多少空間</li></ul>
             </details>
           </li>
         </ol>
@@ -506,6 +517,7 @@
           <details><summary>這是開源的嗎？</summary><div class="answer"><p>程式的部分是。啟動器、網站和工具的原始碼都放在 <a href="https://github.com/cycleapple/d2survivors-localization" target="_blank" rel="noopener">GitHub</a>，用 <a href="https://github.com/cycleapple/d2survivors-localization/blob/main/LICENSE" target="_blank" rel="noopener">MIT 授權</a>。啟動器由 GitHub Actions 從公開的原始碼自動編譯（<a href="https://github.com/cycleapple/d2survivors-localization/actions/workflows/release-launcher.yml" target="_blank" rel="noopener">編譯紀錄</a>），每個 Release 都附 <code>d2s-launcher.exe.sha256</code>，可以自己核對。</p><p>翻譯資料（字典）目前沒有開放授權，保留所有權利，詳見 <a href="https://github.com/cycleapple/d2survivors-localization/blob/main/dict/LICENSE" target="_blank" rel="noopener">dict/LICENSE</a>。字典裡沿用的官方譯名屬於 Blizzard Entertainment。</p></div></details>
           <details><summary>可以在 Mac、Linux 或手機上玩嗎？</summary><div class="answer"><p>目前不行。啟動器只有 Windows 版；官方的網頁版已經移除，網頁書籤也跟著停止，所以 Mac、Linux 和手機暫時沒有辦法使用這個翻譯。</p></div></details>
           <details><summary>會動到我的存檔嗎？</summary><div class="answer"><p>不會。啟動器只替換遊戲資料夾裡的 <code>resources\app.asar</code>，存檔放在別的地方，不會被讀取或修改。替換前會先備份原版。</p></div></details>
+          <details><summary>以前在網頁版玩的存檔可以搬到桌面版嗎？</summary><div class="answer"><p>可以。官方留了一個<a href="https://d2survivors.lol/save/" target="_blank" rel="noopener">網頁版存檔轉移頁面</a>（只有英文和韓文），會從瀏覽器裡找出網頁版的存檔，讓你下載成 <code>.txt</code> 檔。</p><p>一定要用<strong>當初玩網頁版的同一個瀏覽器</strong>（同一個使用者設定檔）打開這頁，存檔才找得到；換別的瀏覽器或用無痕視窗都找不到。</p><p>下載後打開桌面版，在主選單選「存檔」（SAVES）→「開啟存檔」（Open a save file），選剛下載的 <code>.txt</code> 就匯入了。專家級（Hardcore）的存檔跟遊戲裡一樣不能轉移。</p></div></details>
           <details><summary>遊戲更新之後怎麼辦？</summary><div class="answer"><p>遊戲更新會換掉 <code>app.asar</code>，翻譯會暫時消失。照常從啟動器或捷徑開遊戲就會重新套上。</p><p>如果新版本改動太大、修改規則對不上，啟動器不會硬改檔案，而是先用原版開遊戲，並顯示「遊戲剛更新，翻譯修正中」。翻譯修好後，下次開啟就會自動套回去，什麼都不用做。</p></div></details>
           <details><summary>為什麼遊戲的語言選單裡韓文變成了「繁體中文」？</summary><div class="answer"><p>翻譯借用遊戲內建的韓文語言位置，所以套用中文後，選單裡的韓文會顯示成「繁體中文」。想玩韓文版，在啟動器選「한국어 (원본)」再啟動。</p></div></details>
           <details><summary>為什麼還有一些英文？</summary><div class="answer"><p>遊戲裡的文字都已翻譯，也在遊戲裡檢查過沒有漏翻。如果看到英文，通常是遊戲剛更新、加了新的文字；翻譯會在之後的更新補上，啟動器會自動下載。一直沒補上的話，歡迎回報。</p></div></details>
@@ -530,7 +542,7 @@
     <div class="wrap">
       <p class="footer-community"><a href="https://discord.gg/QMBbTHSsaK" target="_blank" rel="noopener">加入中文化社群 Discord</a><span class="sep" aria-hidden="true">·</span><a href="https://github.com/cycleapple/d2survivors-localization" target="_blank" rel="noopener">原始碼（GitHub）</a><span class="sep" aria-hidden="true">·</span><a href="https://paypal.me/DonateCYtw" target="_blank" rel="noopener">☕ 請我喝杯咖啡</a><span class="sep" aria-hidden="true">·</span><a href="https://portaly.cc/thecy" target="_blank" rel="noopener">用 Portaly 贊助</a></p>
       <p>非官方玩家自製翻譯，與 <a href="https://d2survivors.lol/download/" target="_blank" rel="noopener">D2 Survivors</a>（framara）、Blizzard Entertainment 無關。Diablo® 是 Blizzard Entertainment, Inc. 的商標。</p>
-      <p class="footer-small">Game 2026.1120.1 · Launcher v1.0.7</p>
+      <p class="footer-small">Game 2026.1122.1 · Launcher v1.0.7</p>
     </div>
   </footer>
 

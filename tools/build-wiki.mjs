@@ -19,7 +19,7 @@ import { htmlKey, fillKey, enSpans, lookup, wikiData } from './wiki-strings.mjs'
 
 const OFFICIAL = 'https://d2survivors.lol/wiki/';
 // 官方 wiki 和首頁 2026-11 移除了（我們的是最後一版，不再同步）。官方網站上還在的頁面，連結才保留
-const OFFICIAL_LIVE = ['/download/'];
+const OFFICIAL_LIVE = ['/download/', '/save/'];
 const LANG = SITE_LANGS.find(l => l.id === 'zh-TW');
 const OUT_PATH = `${LANG.path}/wiki/`; // 相對於網站根目錄
 

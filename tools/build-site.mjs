@@ -298,6 +298,7 @@ function langPage(sl) {
     .map(([q, a]) => [q, a
       .replace('{feedback}', feedbackUrl ? fmt(t['faq.feedback'], esc(feedbackUrl)) : t['faq.nofeedback'])
       .replaceAll('{discord}', esc(SITE.discordUrl))
+      .replaceAll('{save}', esc(LINKS.d2sSave))
       .replace(/\{(repo|license|dictLicense|issues|actions)\}/g, (_, k) => esc(REPO_LINKS[k]))]);
   const url = pageUrl(sl);
   const image = ogImage(sl);
@@ -356,7 +357,10 @@ function langPage(sl) {
         <div class="cta">
           ${downloadBtnHtml(state, t, SITE.downloadUrl)}
           <a class="btn btn-ghost" href="#install">${esc(t['hero.howto'])}</a>
+          <a class="btn btn-ghost" href="${esc(LINKS.d2sSave)}" target="_blank" rel="noopener">${esc(t['hero.save'])} ↗</a>
         </div>
+        <!-- 網頁版存檔要用當初玩的同一個瀏覽器開官方頁面才找得到；詳細的在常見問題 -->
+        <p class="hero-save">${t['hero.saveNote']}</p>
         <div id="hero-meta">
         ${heroMetaHtml(state, t)}
         </div>

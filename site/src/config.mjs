@@ -31,6 +31,8 @@ export const SITE = {
 // 官方連結（D2 Survivors 官網上的 Battle.net 商店連結也是這個）。官方網頁版、wiki、首頁都已移除（2026-11），只剩下載頁
 export const LINKS = {
   d2sDownload: 'https://d2survivors.lol/download/',
+  // 官方的網頁版存檔轉移頁（從玩家瀏覽器裡找出網頁版存檔、下載成 .txt）。官方特地留著的，跟 /download/ 一樣還在
+  d2sSave: 'https://d2survivors.lol/save/',
   d2sDiscord: 'https://discord.gg/mYMGgZPuQb',
   bnetShop: 'https://us.shop.battle.net/en-us/family/diablo-ii',
   bnetApp: 'https://download.battle.net/',
