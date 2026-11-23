@@ -377,6 +377,10 @@ impl App {
                 let s = if icon.is_empty() { text.to_string() } else { format!("{icon} {text}") };
                 ui.add(egui::Label::new(RichText::new(s).small().color(color)).sense(egui::Sense::click())).on_hover_cursor(egui::CursorIcon::PointingHand)
             };
+            // 網頁版存檔轉移（官方頁面）：說明放在滑鼠提示，「關於」裡有完整的說明
+            if link(ui, "💾", self.t("link_save_transfer"), GOLD).on_hover_text(self.t("save_transfer_hint")).clicked() {
+                system::open_url(system::SAVE_TRANSFER_URL);
+            }
             if link(ui, "🌐", self.t("site_short"), GOLD).clicked() {
                 system::open_url(system::SITE_URL);
             }
@@ -663,6 +667,9 @@ impl App {
         theme::panel(ui, |ui| {
             Self::section_label(ui, self.t("about_game_links"));
             link(ui, self.t("link_game_site"), system::GAME_URL);
+            link(ui, self.t("link_save_transfer"), system::SAVE_TRANSFER_URL);
+            ui.label(RichText::new(self.t("save_transfer_hint")).small().color(MUTED));
+            ui.add_space(2.0);
             link(ui, self.t("link_game_discord"), system::GAME_DISCORD_URL);
             link(ui, self.t("d2r_page"), system::D2R_URL);
         });

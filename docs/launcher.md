@@ -115,7 +115,7 @@ cargo test --release                        # 有 backup/2026.1026.4/app.asar �
 
 要進遊戲看：把整個遊戲資料夾複製一份，`D2S_USER_DATA` 指到另一個資料夾（遊戲本身支援，存檔和設定就不會動到平常的），裡面 `d2` 複製一份平常的 `%APPDATA%\D2 Survivors\d2`（取出的 D2 素材，1.5 GB；不要用 junction：2026.1103.2 起遊戲版本變了會重新取出，會寫進平常的那份），`desktop.json` 的 `checkForUpdates` 設成 false。再用 `D2S_QUERY=d2slang=ko` 和 `--remote-debugging-port` 開複製的那份，用 `tools/cdp.mjs` 截圖
 
-## 下一版（未發布）
+## 1.0.8
 
 - 沒有 manifest（第一次開又下載不到）時，主畫面的語言選單顯示選的語言的名稱（`i18n::native_name`，例如「繁體中文」），不再顯示「zh-TW」這種代碼。選的語言不改成 English：清單下載到之後照原本的選擇套用。`--status` 的「語言」也一樣
 - 這時按「啟動遊戲」：用原版開遊戲，視窗不關，上面兩張卡片，「無法下載翻譯清單…」（有「重試」）和「這次用原版開啟：翻譯還沒下載（請確認網路），先用原版開啟。」加上遊戲語言的說明。測試：`work/launcher/rr/nomanifest-play.ps1`（遊戲複本、獨立的啟動器資料夾和使用者資料、兩個更新來源都連不上），截圖 `work/launcher/nomanifest-play-zh-TW.png`
@@ -124,6 +124,12 @@ cargo test --release                        # 有 backup/2026.1026.4/app.asar �
 
 - 拿掉「關於」裡的「在瀏覽器玩（網頁版）」連結（官方的網頁版已經關掉，網址 404）：`system.rs` 的 `GAME_PLAY_URL`、i18n 的 `link_game_play` 都刪了；遊戲介紹（`about_desc`）的「有桌面版和瀏覽器版」改成只寫桌面版。八種語言
 - 我們的網頁書籤版也一起移除（2026-11-22）：俄文字型從 `site/web/fonts/` 搬到 `tools/fonts/`，`patch-rules.mjs` 改讀那裡（manifest 裡的規則內容不變）
+
+- 網頁版存檔轉移的連結（2026-11-23）：官方網頁版關掉後留了 `https://d2survivors.lol/save/`（`system.rs` 的 `SAVE_TRANSFER_URL`），從玩家的瀏覽器找出網頁版的存檔、下載成 .txt，再到桌面版主選單 SAVES → Open a save file 匯入
+  - 主畫面（和精靈）底部連結列的第一個「💾 網頁版存檔轉移」，滑鼠移上去顯示說明；「關於」的「遊戲」區在官方網站下面，連結加一行小字說明。用預設瀏覽器開，跟其他外部連結一樣
+  - 說明（`save_transfer_hint`）講兩件事：要用當初玩網頁版的同一個瀏覽器打開才找得到存檔；匯入是遊戲主選單的「存檔 → 開啟存檔」。選單名稱照各語言翻譯版遊戲裡的字（dict 的 `SAVES`、`Open a save file`），英文用原文。八種語言（`link_save_transfer`、`save_transfer_hint`），日、德、法、俄、波蘭文是啟動器聊天室寫的，翻譯聊天室可以再看
+  - 測試：`work/launcher/rr/save-ui.ps1`（獨立的啟動器資料夾、預設更新來源連不上、備用是本機的 site/data），主畫面截圖 `work/launcher/save-{zh-TW,de,ru}-main.png`，德文、俄文的連結列會換行、沒有被切掉。「關於」頁沒截到（測試時啟動器搶不到最前面，點不到「關於」）
+- 發布：推 tag `launcher-v1.0.8`
 
 ## 1.0.7
 
