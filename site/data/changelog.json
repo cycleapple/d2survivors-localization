@@ -2,6 +2,126 @@
   "schema": 1,
   "entries": [
     {
+      "version": "20261123-0205",
+      "date": "2026-11-23",
+      "kind": "launcher",
+      "announce": true,
+      "summary": {
+        "zh-TW": "啟動器 1.0.8：新增「網頁版存檔轉移」連結，把網頁版的存檔搬到桌面版。建議用主畫面的「更新啟動器」更新",
+        "zh-CN": "启动器 1.0.8：新增“网页版存档转移”链接，把网页版的存档搬到桌面版。建议用主界面的“更新启动器”更新",
+        "en": "Launcher 1.0.8: new Transfer your web version save link, to bring your web version save to the desktop game. Update with Update launcher on the main screen",
+        "ja": "ランチャー 1.0.8：「ブラウザー版のセーブデータを移行」リンクを追加しました。ブラウザー版のセーブデータをデスクトップ版に移せます。メイン画面の「ランチャーを更新」で更新してください",
+        "de": "Launcher 1.0.8: Neuer Link „Spielstand aus der Browserversion übertragen“, um deinen Browser-Spielstand in die Desktop-Version zu holen. Aktualisiere über „Launcher aktualisieren“ auf dem Hauptbildschirm",
+        "fr": "Lanceur 1.0.8 : nouveau lien « Transférer la sauvegarde de la version navigateur » pour reprendre votre sauvegarde web dans la version bureau. Mettez à jour avec « Mettre à jour le lanceur » sur l’écran principal",
+        "ru": "Лаунчер 1.0.8: новая ссылка «Перенос сохранения из браузерной версии», чтобы перенести сохранение в версию для ПК. Обновитесь кнопкой «Обновить лаунчер» на главном экране",
+        "pl": "Launcher 1.0.8: nowy link „Przenieś zapis z wersji przeglądarkowej”, by przenieść zapis do wersji na komputer. Zaktualizuj przyciskiem „Zaktualizuj launcher” na głównym ekranie"
+      },
+      "notes": {
+        "zh-TW": [
+          "主畫面底部和「關於」新增「網頁版存檔轉移」，連到官方的存檔轉移頁面。要用當初玩網頁版的同一個瀏覽器打開，下載成 .txt 後在遊戲主選單按「存檔」→「開啟存檔」匯入",
+          "還沒抓到語言清單時，主畫面的語言選單也會顯示語言名稱",
+          "拿掉「在瀏覽器玩（網頁版）」的連結（官方已移除網頁版）"
+        ],
+        "zh-CN": [
+          "主界面底部和“关于”新增“网页版存档转移”，链接到官方的存档转移页面。要用当初玩网页版的同一个浏览器打开，下载为 .txt 后在游戏主菜单点“存档”→“打开存档文件”导入",
+          "还没获取到语言列表时，主界面的语言菜单也会显示语言名称",
+          "移除了“在浏览器里玩”的链接（官方已移除网页版）"
+        ],
+        "en": [
+          "The main screen's footer and About now have Transfer your web version save, linking to the official save transfer page. Open it in the same browser you played the web version in, download the .txt file, then import it from the game's main menu: SAVES → Open a save file",
+          "The main screen's language menu shows the language's name even before the language list has loaded",
+          "The Play in the browser link is gone (the official web version was removed)"
+        ],
+        "ja": [
+          "メイン画面の下部と「情報」に「ブラウザー版のセーブデータを移行」を追加し、公式のセーブデータ移行ページにリンクしました。ブラウザー版を遊んでいたのと同じブラウザーで開き、.txt をダウンロードしたら、ゲームのメインメニューの「セーブデータ」→「セーブファイルを開く」で読み込みます",
+          "言語の一覧を読み込む前でも、メイン画面の言語メニューに言語名を表示します",
+          "「ブラウザーでプレイ」リンクを削除しました（公式のブラウザー版が終了したため）"
+        ],
+        "de": [
+          "Unten auf dem Hauptbildschirm und unter „Über“ gibt es jetzt „Spielstand aus der Browserversion übertragen“, einen Link zur offiziellen Übertragungsseite. Öffne sie im selben Browser, in dem du die Browserversion gespielt hast, lade die .txt-Datei herunter und importiere sie im Hauptmenü des Spiels unter „SPIELSTÄNDE“ → „Spielstanddatei öffnen“",
+          "Das Sprachmenü auf dem Hauptbildschirm zeigt den Namen der Sprache, auch bevor die Sprachliste geladen ist",
+          "Der Link „Im Browser spielen“ ist entfernt (die offizielle Browserversion wurde eingestellt)"
+        ],
+        "fr": [
+          "Le bas de l’écran principal et « À propos » proposent désormais « Transférer la sauvegarde de la version navigateur », un lien vers la page officielle de transfert. Ouvrez-la dans le navigateur où vous jouiez à la version navigateur, téléchargez le fichier .txt, puis importez-le depuis le menu principal du jeu : « SAUVEGARDES » → « Ouvrir un fichier de sauvegarde »",
+          "Le menu des langues de l’écran principal affiche le nom de la langue même avant le chargement de la liste des langues",
+          "Le lien « Jouer dans le navigateur » a été retiré (la version navigateur officielle a été supprimée)"
+        ],
+        "ru": [
+          "Внизу главного экрана и в разделе «О программе» появилась ссылка «Перенос сохранения из браузерной версии» на официальную страницу переноса. Откройте её в том же браузере, в котором играли в браузерную версию, скачайте файл .txt и импортируйте его в главном меню игры: «СОХРАНЕНИЯ» → «Открыть файл сохранения»",
+          "Меню языков на главном экране показывает название языка, даже пока список языков ещё не загружен",
+          "Ссылка «Играть в браузере» убрана (официальную браузерную версию закрыли)"
+        ],
+        "pl": [
+          "Na dole głównego ekranu i w „O programie” jest teraz link „Przenieś zapis z wersji przeglądarkowej” do oficjalnej strony przenoszenia zapisów. Otwórz ją w tej samej przeglądarce, w której grano w wersję przeglądarkową, pobierz plik .txt i zaimportuj go w menu głównym gry: „ZAPISY” → „Otwórz plik zapisu”",
+          "Menu języków na głównym ekranie pokazuje nazwę języka, nawet zanim wczyta się lista języków",
+          "Usunięto link „Graj w przeglądarce” (oficjalna wersja przeglądarkowa została wycofana)"
+        ]
+      },
+      "game": {
+        "desktop": "2026.1122.1"
+      },
+      "launcher": "1.0.8",
+      "languages": [
+        {
+          "id": "zh-TW",
+          "status": "available",
+          "entries": 14775,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "zh-CN",
+          "status": "available",
+          "entries": 14774,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ja",
+          "status": "available",
+          "entries": 14780,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "de",
+          "status": "available",
+          "entries": 14814,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "fr",
+          "status": "available",
+          "entries": 14823,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ru",
+          "status": "available",
+          "entries": 14862,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "pl",
+          "status": "available",
+          "entries": 14852,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        }
+      ]
+    },
+    {
       "version": "20261122-2316",
       "date": "2026-11-22",
       "kind": "game-fix",
