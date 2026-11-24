@@ -273,12 +273,17 @@ const T = (from, to) => ({ find: rulePattern(from), replace: to.replace(/\$/g, '
 const pickT = G => `$k=$v=>{if(!$v.startsWith(\`[\`))return $v;let $o=$v.split(\`[\`).slice(1),$w=$o.find($x=>$x.startsWith(${G}+\`]\`))??$o[0];return $w.slice($w.indexOf(\`]\`)+1).trim()}`;
 const CASE_T = '$U=$v=>$v?$v[0].toUpperCase()+$v.slice(1):$v,$W=$v=>$v?$v[0].toLowerCase()+$v.slice(1):$v';
 // 魔法物品：‹1› 查 affix:、‹2› 後綴、‹3› 前綴、‹4› 物品；物品的詞性直接查字典（key 的正規化照遊戲寫在這裡，不依賴遊戲的函式名稱）
-const MAGIC_T = 'return[‹1›(‹2›),‹1›(‹3›),this.translateAs(`item`,‹4›)].filter(Boolean).join(` `)';
-const magicT = expr => `let $g=this.exact.get(\`gender:\${‹4›.trim()}\`.replace(/\\s+/g,\` \`).trim().toUpperCase())??\`ms\`,${pickT('$g')},${CASE_T},$b=this.translateAs(\`item\`,‹4›),$p=$k(‹1›(‹3›)),$q=$k(‹1›(‹2›));return ${expr}`;
+// 2026.1124.1 起：‹1› 是 [前綴, 物品, 後綴] 的陣列，照字典的 format:magic（預設 ‹6›＝`%2 %0 %1`）排；‹2› 查 affix:、‹3› 前綴、‹4› 物品、‹5› 後綴
+const MAGIC_T = '‹1›=[‹2›(‹3›),this.translateAs(`item`,‹4›),‹2›(‹5›)];return(this.exact.get(`FORMAT:MAGIC`)??‹6›).replace(/%(\\d)/g,(‹7›,‹8›)=>‹1›[Number(‹8›)]??``).replace(/\\s+/g,` `).trim()';
+// 中日文：照遊戲的寫法，只換預設的排法（字典沒有 format:magic 時）
+const magicFmt = fmt => '‹1›=[‹2›(‹3›),this.translateAs(`item`,‹4›),‹2›(‹5›)];return(this.exact.get(`FORMAT:MAGIC`)??`' + fmt + '`).replace(/%(\\d)/g,(‹7›,‹8›)=>‹1›[Number(‹8›)]??``).replace(/\\s+/g,` `).trim()';
+const magicT = expr => `‹1›=[];let $g=this.exact.get(\`gender:\${‹4›.trim()}\`.replace(/\\s+/g,\` \`).trim().toUpperCase())??\`ms\`,${pickT('$g')},${CASE_T},$b=this.translateAs(\`item\`,‹4›),$p=$k(‹2›(‹3›)),$q=$k(‹2›(‹5›));return ${expr}`;
 // 獨特怪物：‹1›／‹2›／‹3› 前段、後段、稱號的譯文，‹4› 英文的三段，‹5› map 的參數，‹6› 查詢函式
-const UNIQUE_T = 'let[‹1›,‹2›,‹3›]=‹4›.map(‹5›=>‹6›(`unique`,‹5›));return`${‹3›} ${‹1›} ${‹2›}`';
+// 2026.1124.1 起遊戲用 [稱號, 前段, 後段].join(‹7›)，有漢字時不加空格
+const UNIQUE_T = 'let[‹1›,‹2›,‹3›]=‹4›.map(‹5›=>‹6›(`unique`,‹5›)),‹7›=/[一-鿿]/.test(‹3›+‹1›+‹2›)?``:` `;return[‹3›,‹1›,‹2›].join(‹7›)';
 const uniqueT = expr => `let[‹1›,‹2›,‹3›]=‹4›.map(‹5›=>‹6›(\`unique\`,‹5›)),$G=‹6›(\`gender\`,‹4›[1]);$G=/^(ms|fs|ns|nl|pl|mp|fp)$/.test($G)?$G:\`ms\`;let ${pickT('$G')},${CASE_T};return${expr}`;
-const HANGUL_T = 'return ‹1›>=44032&&‹1›<=55203||‹1›>=12592&&‹1›<=12687||‹1›>=4352&&‹1›<=4607}';
+// 2026.1124.1 起遊戲自己先判斷中文（return ‹x›(t)||t>=44032…），所以不從 return 開始比對
+const HANGUL_T = '‹1›>=44032&&‹1›<=55203||‹1›>=12592&&‹1›<=12687||‹1›>=4352&&‹1›<=4607}';
 const ranges = list => list.map(([a, b]) => `||‹1›>=${a}&&‹1›<=${b}`).join('') + '}';
 const FEMALE = '[`amazon`,`assassin`,`sorceress`]';
 
@@ -286,8 +291,8 @@ const ROBUST = {
   '啟動器指定語言': T('let ‹1›=null;try{‹1›=localStorage.getItem(‹2›)}catch{}',
     'let ‹1›=null;try{let $q=new URLSearchParams(location.search).get(`d2slang`);$q&&!sessionStorage.getItem(`d2slang`)&&sessionStorage.setItem(`d2slang`,$q);‹1›=sessionStorage.getItem(`d2slang`)??localStorage.getItem(‹2›)}catch{}'),
   '遊戲裡切換語言': T('‹1›=‹2›;try{localStorage.setItem(‹3›,‹2›)}catch{return}', '‹1›=‹2›;try{sessionStorage.setItem(`d2slang`,‹2›);localStorage.setItem(‹3›,‹2›)}catch{return}'),
-  '魔法物品名稱組合': T('this.translateAs(`item`,‹1›)].filter(Boolean).join(` `)', 'this.translateAs(`item`,‹1›)].filter(Boolean).join(``)'),
-  '魔法物品名稱組合（日文）': T(MAGIC_T, 'return[‹1›(‹3›),‹1›(‹2›),this.translateAs(`item`,‹4›)].filter(Boolean).join(``)'),
+  '魔法物品名稱組合': T(MAGIC_T, magicFmt('%2%0%1')),
+  '魔法物品名稱組合（日文）': T(MAGIC_T, magicFmt('%0%2%1')),
   '魔法物品名稱組合（德文）': T(MAGIC_T, magicT('$U([$p&&($p.endsWith(` -`)?`${$p.slice(0,-2)}-${$b}`:`${$p} ${$b.includes(` `)?$W($b):$b}`),!$p&&$b,$q].filter(Boolean).join(` `))')),
   '魔法物品名稱組合（法文）': T(MAGIC_T, magicT('[$b,$p,$q].filter(Boolean).join(` `)')),
   '魔法物品名稱組合（俄文）': T(MAGIC_T, magicT('$U([$p,$p?$W($b):$b,$q].filter(Boolean).join(` `))')),
@@ -312,18 +317,22 @@ const ROBUST = {
   '進化條件的頓號（HUD）': T('‹1›.needs.forEach((‹2›,‹3›)=>‹4›.append(` `,‹5›(`span`,‹2›.met?`met`:`missing`,‹2›.text+(‹3›<‹1›.needs.length-1?`,`:``))))',
     '‹1›.needs.forEach((‹2›,‹3›)=>‹4›.append(‹3›?``:` `,‹5›(`span`,‹2›.met?`met`:`missing`,‹2›.text),‹3›<‹1›.needs.length-1?`、`:``))'),
   '日期格式（排行榜）': T('‹1›===`ko`?`${‹2›.getMonth()+1}월 ${‹2›.getDate()}일`:', '‹1›===`ko`?‹2›.toLocaleDateString(document.documentElement.lang,{month:`short`,day:`numeric`}):'),
-  '日期格式（完整）': T('return ‹1›===`ko`?`${‹2›.getFullYear()}년 ${‹2›.getMonth()+1}월 ${‹2›.getDate()}일`:', 'return ‹1›===`ko`?‹2›.toLocaleDateString(document.documentElement.lang,{year:`numeric`,month:`long`,day:`numeric`}):'),
+  '日期格式（完整）': T('‹1›===`ko`?`${‹2›.getFullYear()}년 ${‹2›.getMonth()+1}월 ${‹2›.getDate()}일`:', '‹1›===`ko`?‹2›.toLocaleDateString(document.documentElement.lang,{year:`numeric`,month:`long`,day:`numeric`}):'),
   '標籤與值的冒號': T('return`${‹1›.replace(/:?\\s*$/,`:`)} ${‹2›}`', 'return/[\\u4e00-\\u9fff]/.test(‹1›)?`${‹1›.replace(/[:：]?\\s*$/,`：`)}${‹2›}`:`${‹1›.replace(/:?\\s*$/,`:`)} ${‹2›}`'),
   '外文字判斷': T(HANGUL_T, HANGUL_T.slice(0, -1) + ranges([[19968, 40959], [13312, 19903], [12288, 12351], [65280, 65519], [12352, 12543]])),
   '外文字判斷（西里爾字母）': T(HANGUL_T, HANGUL_T.slice(0, -1) + ranges([[1024, 1279]])),
   '外文字判斷（拉丁擴充 A）': T(HANGUL_T, HANGUL_T.slice(0, -1) + ranges([[256, 383]])),
-  '外文字大小（波蘭文）': T('if(‹1›()){let ‹2›=‹3›>=20?1.25:1.4;[this.foreignSize,this.foreignFamily]=‹4›?[Math.round(‹3›*‹2›),‹5›]:[Math.max(12,Math.round(‹3›*1.3)),‹6›],this.foreignWeight=‹4›?``:`bold `}else[this.foreignSize,this.foreignFamily]=‹3›<14?[12,‹7›]:‹3›<20?[15,‹8›]:[24,‹7›];',
-    '[this.foreignSize,this.foreignFamily]=‹4›?[Math.round(‹3›*(‹3›<16?1.5:1.2)),‹5›]:[Math.max(12,Math.round(‹3›)),‹1›()?‹6›:‹3›<14?‹7›:‹3›<20?‹8›:‹7›],this.foreignWeight=``;'),
+  // 2026.1124.1 起字型家族從這個語言的字型設定拿（‹2›.title、text、fallback、fallbackMiddle），‹1›() 是有沒有 D2R 字型
+  '外文字大小（波蘭文）': T('if(‹1›()||!‹2›.pixel){let ‹3›=‹4›>=20?1.25:1.4,[‹5›,‹6›]=‹1›()?[‹2›.title,‹2›.text]:[‹2›.fallback,‹2›.fallback];[this.foreignSize,this.foreignFamily]=‹7›?[Math.round(‹4›*‹3›),‹5›]:[Math.max(12,Math.round(‹4›*1.3)),‹6›],this.foreignWeight=‹7›?``:`bold `}else[this.foreignSize,this.foreignFamily]=‹4›<14?[12,‹2›.fallback]:‹4›<20?[15,‹2›.fallbackMiddle]:[24,‹2›.fallback];',
+    '[this.foreignSize,this.foreignFamily]=‹7›?[Math.round(‹4›*(‹4›<16?1.5:1.2)),‹2›.title]:[Math.max(12,Math.round(‹4›)),‹1›()?‹2›.text:‹4›<14?‹2›.fallback:‹4›<20?‹2›.fallbackMiddle:‹2›.fallback],this.foreignWeight=``;'),
   // 標題字型家族直接比對名稱 D2R Kodia（遊戲的變數名稱不在這段程式碼裡）
   '外文字不被切掉（波蘭文）': T('for(let ‹1› of ‹2›)‹3›(‹1›)&&‹4›.fillText(‹1›,‹5›+‹6›,‹7›+this.baseline+‹8›),‹5›+=this.advanceOf(‹1›)',
     'for(let ‹1› of ‹2›){if(‹3›(‹1›)){let $Z=this.foreignFamily===`D2R Kodia`?4:1,$c=document.createElement(`canvas`),$q=$c.getContext(`2d`),$F=‹4›.font.replace(/([\\d.]+)px/,($x,$v)=>$v*$Z+`px`);$q.font=$F;let $M=$q.measureText(‹1›),$A=$M.actualBoundingBoxAscent/$Z,$D=$M.actualBoundingBoxDescent/$Z,$L=$M.actualBoundingBoxLeft/$Z,$R=$M.actualBoundingBoxRight/$Z,$h=‹7›+this.baseline,$d=Math.max(0,Math.min(Math.ceil($A-$h),Math.floor(‹4›.canvas.height-$h-$D))),$y=$h+$d,$k=$A>$y?$y/$A:1;if($Z>1){$c.width=Math.ceil(($L+$R+2)*$Z);$c.height=Math.ceil(($A+$D+2)*$Z);$q.font=$F;$q.fillStyle=‹4›.fillStyle;$q.fillText(‹1›,($L+1)*$Z,($A+1)*$Z);‹4›.imageSmoothingQuality=`high`;‹4›.drawImage($c,‹5›+‹6›-$L-1,$y+‹8›-($A+1)*$k,$c.width/$Z,$c.height/$Z*$k)}else{‹4›.save();‹4›.translate(‹5›+‹6›,$y+‹8›);‹4›.scale(1,$k);‹4›.fillText(‹1›,0,0);‹4›.restore()}}‹5›+=this.advanceOf(‹1›)}'),
-  '中文斷行': T('for(let ‹1› of ‹2›.split(` `)){let ‹3›=‹4›?`${‹4›} ${‹1›}`:‹1›;',
-    `for(let ‹1› of ‹2›.split(\` \`).flatMap($w=>($w.match(/[${OPENING}]*[${CJK}][${CLOSING}]*|[^${CJK}]+(?:[${OPENING}]*[${CJK}][${CLOSING}]*)?/g)??[$w]).map(($x,$j)=>$j?\`\\u0001\${$x}\`:$x))){let $g=‹1›[0]===\`\\u0001\`;‹1›=$g?‹1›.slice(1):‹1›;let ‹3›=‹4›?$g?‹4›+‹1›:\`\${‹4›} \${‹1›}\`:‹1›;`),
+  // 2026.1124.1 起遊戲自己切中文（‹3›(行) 傳回 {word, glued}），但只認漢字、不認假名，也沒有日文禁則：換成我們的切法（假名、禁則照舊）
+  '中文斷行': T('for(let{word:‹1›,glued:‹2›}of ‹3›(‹4›)){',
+    `for(let{word:‹1›,glued:‹2›}of ‹4›.split(\` \`).flatMap($w=>($w.match(/[${OPENING}]*[${CJK}][${CLOSING}]*|[^${CJK}]+(?:[${OPENING}]*[${CJK}][${CLOSING}]*)?/g)??[$w]).map(($x,$j)=>({word:$x,glued:$j>0})))){`),
+  // 2026.1124.1 起遊戲有自己的簡中（zh），<html lang> 照語言代碼設；翻譯在 ko 槽位，ko 時改成這個語言的標記
+  '頁面語言標記': T('document.documentElement.lang=‹1›===`zh`?`zh-Hans`:‹1›;', 'document.documentElement.lang=‹1›===`ko`?`{{html_lang}}`:‹1›===`zh`?`zh-Hans`:‹1›;'),
   '暗色字不加描邊': T('‹1›=[];if(‹2›.outline){let ‹3›=`rgb(${‹4›(‹2›.outline.level,‹2›.outline.own)})`;for(let[‹5›,‹6›]of[[-1,0],[1,0],[0,-1],[0,1],[-1,-1],[1,-1],[-1,1],[1,1]])‹1›.push([‹3›,‹5›*‹7›,‹6›*‹7›])}‹1›.push([`rgb(${‹4›(‹2›.level,‹2›.own)})`,0,0]);',
     '‹1›=[],$F=‹4›(‹2›.level,‹2›.own),$U=‹2›.outline&&‹4›(‹2›.outline.level,‹2›.outline.own),$M=$e=>Math.max(...$e.split(`,`).map(Number)),$D=$U&&$M($F)<75&&$M($U)<$M($F);if(‹2›.outline&&!$D){let ‹3›=`rgb(${$U})`;for(let[‹5›,‹6›]of[[-1,0],[1,0],[0,-1],[0,1],[-1,-1],[1,-1],[-1,1],[1,1]])‹1›.push([‹3›,‹5›*‹7›,‹6›*‹7›])}‹1›.push([`rgb(${$D?$U:$F})`,0,0]);$D&&‹1›.push([`rgb(${$U})`,1,0]);'),
   '版權聲明寬度': T('let ‹1›={...‹2›(‹3›),maxWidth:‹4›},‹5›=[‹3›.text(‹6›,‹1›)', 'let ‹1›={...‹2›(‹3›),maxWidth:‹4›},‹5›=[‹3›.text(‹6›,document.documentElement.lang===`{{html_lang}}`?{...‹1›,maxWidth:360}:‹1›)'),
