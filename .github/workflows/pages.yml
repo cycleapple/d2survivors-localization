@@ -1,6 +1,8 @@
 # 網站：push 到 main 時重新產生靜態頁（tools/build-site.mjs），把 site/ 整個部署到 GitHub Pages。
 # site/data/（manifest v2、字典，翻譯聊天室 commit 的）和 site/zh-tw/wiki/（tools/build-wiki.mjs 在本機產生的）跟著一起上傳。
 # repo 的 Settings → Pages → Source 要選「GitHub Actions」。
+# 照官方範本分成 build、deploy 兩個 job：同一個 job 裡上傳完馬上部署，deploy-pages 常常還查不到剛上傳的 artifact
+# （2026-11-24 連續失敗：「No artifacts named "github-pages" were found」）
 name: Pages
 
 on:
@@ -19,11 +21,8 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
 
@@ -35,14 +34,25 @@ jobs:
       - name: Build site
         run: node tools/build-site.mjs
 
-      - uses: actions/configure-pages@v5
+      - uses: actions/configure-pages@v6
 
-      - uses: actions/upload-pages-artifact@v3
+      # v4 起不上傳點開頭的檔案（site/ 底下沒有）
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: site
 
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
+
+      # 下面清 jsDelivr 要比對這次 push 有沒有改到 site/data/，所以部署完再 checkout
+      - uses: actions/checkout@v4
 
       # 啟動器連不上 GitHub Pages 時改讀 jsDelivr（gh/<repo>@main/site/data/…），jsDelivr 對 @main 最多快取 12 小時，部署完要清掉。
       # 只在這次 push 改到 site/data/ 時清（手動執行一律清）；purge 有頻率限制，一次清一輪；失敗只記警告，不讓部署失敗

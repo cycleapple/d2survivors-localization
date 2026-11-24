@@ -198,6 +198,8 @@ node tools/build-site.mjs        # 再跑這個，sitemap 和繁中首頁的 wik
 
 `.github/workflows/pages.yml`：push 到 `main` 時跑 `node tools/build-site.mjs`，把 `site/` 整個上傳到 GitHub Pages（含 `site/data/`、`site/zh-tw/wiki/`）。repo 的 Settings → Pages → Source 要選「GitHub Actions」。流程見 [release.md](release.md)。
 
+照官方範本分兩個 job：`build`（checkout、build-site、configure-pages、upload-pages-artifact）和 `deploy`（`needs: build`，deploy-pages，再 checkout 清 jsDelivr）。以前同一個 job 上傳完馬上部署，2026-11-24 起 deploy-pages 常常查不到剛上傳的 artifact（「No artifacts named "github-pages" were found」），重跑也一樣，所以拆開，同時升到 configure-pages v6、upload-pages-artifact v5、deploy-pages v5。upload-pages-artifact v4 起不上傳點開頭的檔案，`site/` 底下不要放（目前沒有）。
+
 部署成功後會清 jsDelivr 的快取：啟動器連不上 GitHub Pages 時改讀 `https://cdn.jsdelivr.net/gh/cycleapple/d2survivors-localization@main/site/data/…`，jsDelivr 對 `@main` 最多快取 12 小時。只在這次 push 改到 `site/data/` 時清（手動執行 workflow 一律清），清的是 `manifest.json`、`changelog.json`、`dict/*.json`；字型不用（桌面版是內嵌的）。清除失敗只在 Actions 記警告，部署照樣算成功。
 
 ## 部署後要使用者自己做的
