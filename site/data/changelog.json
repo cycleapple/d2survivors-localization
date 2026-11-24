@@ -2,6 +2,134 @@
   "schema": 1,
   "entries": [
     {
+      "version": "20261124-1215",
+      "date": "2026-11-24",
+      "kind": "launcher",
+      "announce": true,
+      "summary": {
+        "zh-TW": "啟動器 1.0.9：還沒裝遊戲時，可以直接從啟動器下載官方安裝檔，裝好後會自動偵測到。建議用主畫面的「更新啟動器」更新",
+        "zh-CN": "启动器 1.0.9：还没装游戏时，可以直接从启动器下载官方安装包，装好后会自动检测到。建议用主界面的“更新启动器”更新",
+        "en": "Launcher 1.0.9: if the game isn't installed yet, download the official installer straight from the launcher, and it finds the game by itself once installed. Update with Update launcher on the main screen",
+        "ja": "ランチャー 1.0.9：ゲームが未インストールのとき、ランチャーから公式インストーラーを直接ダウンロードでき、インストール後は自動で検出します。メイン画面の「ランチャーを更新」で更新してください",
+        "de": "Launcher 1.0.9: Ist das Spiel noch nicht installiert, lädst du den offiziellen Installer direkt im Launcher herunter, und nach der Installation findet er das Spiel von selbst. Aktualisiere über „Launcher aktualisieren“ auf dem Hauptbildschirm",
+        "fr": "Lanceur 1.0.9 : si le jeu n’est pas encore installé, téléchargez l’installateur officiel directement depuis le lanceur, qui trouve ensuite le jeu tout seul. Mettez à jour avec « Mettre à jour le lanceur » sur l’écran principal",
+        "ru": "Лаунчер 1.0.9: если игра ещё не установлена, официальный установщик можно скачать прямо из лаунчера, а после установки он сам найдёт игру. Обновитесь кнопкой «Обновить лаунчер» на главном экране",
+        "pl": "Launcher 1.0.9: jeśli gra nie jest jeszcze zainstalowana, pobierzesz oficjalny instalator prosto z launchera, a po instalacji sam znajdzie on grę. Zaktualizuj przyciskiem „Zaktualizuj launcher” na głównym ekranie"
+      },
+      "notes": {
+        "zh-TW": [
+          "沒找到遊戲時，設定精靈第 1 步和主畫面多了「下載遊戲（官方安裝檔）」按鈕，直接下載官方的 Windows 安裝檔（約 130 MB），旁邊附官方的安裝說明",
+          "安裝檔沒有簽章：Windows 跳出 SmartScreen 警告時按「其他資訊」→「仍要執行」",
+          "裝好遊戲回到啟動器會自動偵測到，不用再按「重新偵測」",
+          "原本連到已關閉的官網首頁的連結（設定精靈、主畫面、「關於」）都改成官方下載頁"
+        ],
+        "zh-CN": [
+          "没找到游戏时，设置向导第 1 步和主界面多了“下载游戏（官方安装包）”按钮，直接下载官方的 Windows 安装包（约 130 MB），旁边附官方的安装说明",
+          "安装包没有签名：Windows 弹出 SmartScreen 警告时点“更多信息”→“仍要运行”",
+          "装好游戏回到启动器会自动检测到，不用再点“重新检测”",
+          "原本链接到已关闭的官网首页的链接（设置向导、主界面、“关于”）都改成官方下载页"
+        ],
+        "en": [
+          "When the game isn't found, step 1 of the setup wizard and the main screen have a Download the game (official installer) button that downloads the official Windows installer (about 130 MB), next to the official install notes",
+          "The installer isn't signed: if SmartScreen warns you, click More info, then Run anyway",
+          "Come back to the launcher after installing and it finds the game by itself, no need to click Detect again",
+          "The links to the official homepage, which has closed (setup wizard, main screen, About), now go to the official download page"
+        ],
+        "ja": [
+          "ゲームが見つからないとき、セットアップの手順 1 とメイン画面に「ゲームをダウンロード（公式インストーラー）」ボタンが表示され、公式の Windows 用インストーラー（約 130 MB）を直接ダウンロードできます。公式のインストール案内へのリンクも付いています",
+          "インストーラーには署名がありません。SmartScreen の警告が出たら「詳細情報」→「実行」を押してください",
+          "インストール後にランチャーに戻ると自動で検出するので、「再検出」を押す必要はありません",
+          "閉鎖された公式サイトのトップページへのリンク（セットアップ、メイン画面、「情報」）は公式ダウンロードページに変更しました"
+        ],
+        "de": [
+          "Wird das Spiel nicht gefunden, zeigen Schritt 1 der Einrichtung und der Hauptbildschirm die Schaltfläche „Spiel herunterladen (offizieller Installer)“. Sie lädt den offiziellen Windows-Installer (etwa 130 MB) herunter, daneben stehen die offiziellen Installationshinweise",
+          "Der Installer ist nicht signiert: Warnt SmartScreen, klicke auf „Weitere Informationen“ und dann „Trotzdem ausführen“",
+          "Nach der Installation findet der Launcher das Spiel von selbst, „Erneut suchen“ ist nicht mehr nötig",
+          "Die Links zur eingestellten offiziellen Startseite (Einrichtung, Hauptbildschirm, „Über“) führen jetzt zur offiziellen Downloadseite"
+        ],
+        "fr": [
+          "Quand le jeu est introuvable, l’étape 1 de l’assistant et l’écran principal proposent le bouton « Télécharger le jeu (installateur officiel) », qui télécharge l’installateur Windows officiel (environ 130 Mo), à côté des notes d’installation officielles",
+          "L’installateur n’est pas signé : si SmartScreen affiche un avertissement, cliquez sur « Informations complémentaires », puis « Exécuter quand même »",
+          "De retour dans le lanceur après l’installation, il trouve le jeu tout seul : plus besoin de cliquer sur « Détecter à nouveau »",
+          "Les liens vers l’ancienne page d’accueil officielle, désormais fermée (assistant, écran principal, « À propos »), mènent maintenant à la page de téléchargement officielle"
+        ],
+        "ru": [
+          "Если игра не найдена, на шаге 1 мастера настройки и на главном экране есть кнопка «Скачать игру (официальный установщик)»: она скачивает официальный установщик для Windows (около 130 МБ), рядом ссылка на официальную инструкцию по установке",
+          "Установщик не подписан: если SmartScreen покажет предупреждение, нажмите «Подробнее», затем «Выполнить в любом случае»",
+          "После установки вернитесь в лаунчер — он сам найдёт игру, нажимать «Повторить поиск» не нужно",
+          "Ссылки на закрытую главную страницу официального сайта (мастер настройки, главный экран, «О программе») теперь ведут на официальную страницу загрузки"
+        ],
+        "pl": [
+          "Gdy gra nie zostanie znaleziona, w kroku 1 kreatora i na głównym ekranie jest przycisk „Pobierz grę (oficjalny instalator)”, który pobiera oficjalny instalator na Windows (około 130 MB); obok są oficjalne informacje o instalacji",
+          "Instalator nie jest podpisany: jeśli SmartScreen wyświetli ostrzeżenie, kliknij „Więcej informacji”, a potem „Uruchom mimo to”",
+          "Po instalacji wróć do launchera — sam znajdzie grę, nie trzeba klikać „Wykryj ponownie”",
+          "Linki do zamkniętej strony głównej oficjalnej witryny (kreator, główny ekran, „O programie”) prowadzą teraz do oficjalnej strony pobierania"
+        ]
+      },
+      "game": {
+        "desktop": "2026.1124.1"
+      },
+      "launcher": "1.0.9",
+      "languages": [
+        {
+          "id": "zh-TW",
+          "status": "available",
+          "entries": 14778,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "zh-CN",
+          "status": "available",
+          "entries": 14777,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ja",
+          "status": "available",
+          "entries": 14783,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "de",
+          "status": "available",
+          "entries": 14817,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "fr",
+          "status": "available",
+          "entries": 14826,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ru",
+          "status": "available",
+          "entries": 14865,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "pl",
+          "status": "available",
+          "entries": 14855,
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        }
+      ]
+    },
+    {
       "version": "20261124-0920",
       "date": "2026-11-24",
       "kind": "game-fix",
