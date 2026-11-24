@@ -1,0 +1,5 @@
+{
+ "The game now plays in Simplified Chinese, picked in Options or chosen by a Chinese system": "ゲームが簡体字中国語でもプレイできるようになりました。オプションで選ぶか、中国語のシステムでは自動で選ばれます",
+ "Online runs where you swapped weapons while the run was starting are no longer refused": "ランの開始中に武器を切り替えたオンラインのランが拒否されなくなりました",
+ "The automap's marks for shrines, elites and floor items come back after the display is lost, instead of staying gone until a restart": "画面出力が途切れて戻った後、オートマップの祭壇、エリート、床のアイテムの印も再び表示されるようになり、再起動まで消えたままにならなくなりました"
+}

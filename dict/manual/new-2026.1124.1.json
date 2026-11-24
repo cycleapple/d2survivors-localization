@@ -1,0 +1,5 @@
+{
+ "The game now plays in Simplified Chinese, picked in Options or chosen by a Chinese system": "遊戲現在可以用簡體中文遊玩，可在「選項」中選擇，或在中文系統上自動選用",
+ "Online runs where you swapped weapons while the run was starting are no longer refused": "線上遊戲的一局若在開始時更換了武器，不再遭到拒絕",
+ "The automap's marks for shrines, elites and floor items come back after the display is lost, instead of staying gone until a restart": "畫面輸出中斷後恢復時，自動地圖上的聖壇、精英與地上物品標記也會重新出現，不再消失到重新啟動為止"
+}

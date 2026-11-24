@@ -1,0 +1,5 @@
+{
+ "The game now plays in Simplified Chinese, picked in Options or chosen by a Chinese system": "Теперь в игру можно играть на упрощенном китайском: его можно выбрать в настройках, а на китайской системе он выбирается сам",
+ "Online runs where you swapped weapons while the run was starting are no longer refused": "Онлайн-забеги, в которых вы сменили оружие во время начала забега, больше не отклоняются",
+ "The automap's marks for shrines, elites and floor items come back after the display is lost, instead of staying gone until a restart": "Отметки святилищ, элитных монстров и предметов на земле на карте снова появляются после пропадания изображения, а не исчезают до перезапуска"
+}
