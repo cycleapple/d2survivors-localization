@@ -2,6 +2,130 @@
   "schema": 1,
   "entries": [
     {
+      "version": "20261124-0920",
+      "date": "2026-11-24",
+      "kind": "game-fix",
+      "announce": true,
+      "summary": {
+        "zh-TW": "已支援桌面版遊戲 2026.1124.1（配合遊戲改版修正修改規則，補翻 3 條新字串）",
+        "zh-CN": "已支持桌面版游戏 2026.1124.1（配合游戏改版修正修改规则，补译 3 条新字符串）",
+        "en": "Desktop game 2026.1124.1 is now supported (patch rules updated for the game's changes, 3 new strings translated)",
+        "ja": "デスクトップ版ゲーム 2026.1124.1 に対応しました（ゲームの変更に合わせて修正ルールを更新、新しい文字列 3 件を翻訳）",
+        "de": "Desktop-Spielversion 2026.1124.1 wird jetzt unterstützt (Anpassungsregeln an die Spieländerungen angepasst, 3 neue Texte übersetzt)",
+        "fr": "La version bureau 2026.1124.1 du jeu est désormais prise en charge (règles de modification adaptées aux changements du jeu, 3 nouveaux textes traduits)",
+        "ru": "Поддерживается версия игры для ПК 2026.1124.1 (правила изменений обновлены под изменения игры, переведено 3 новые строки)",
+        "pl": "Obsługiwana jest wersja gry na komputer 2026.1124.1 (reguły modyfikacji dostosowane do zmian w grze, przetłumaczono 3 nowe teksty)"
+      },
+      "game": {
+        "desktop": "2026.1124.1"
+      },
+      "launcher": "1.0.8",
+      "languages": [
+        {
+          "id": "zh-TW",
+          "status": "available",
+          "entries": 14778,
+          "added": 3,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "zh-CN",
+          "status": "available",
+          "entries": 14777,
+          "added": 3,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ja",
+          "status": "available",
+          "entries": 14783,
+          "added": 3,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "de",
+          "status": "available",
+          "entries": 14817,
+          "added": 3,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "fr",
+          "status": "available",
+          "entries": 14826,
+          "added": 3,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "ru",
+          "status": "available",
+          "entries": 14865,
+          "added": 3,
+          "changed": 0,
+          "removed": 0
+        },
+        {
+          "id": "pl",
+          "status": "available",
+          "entries": 14855,
+          "added": 3,
+          "changed": 0,
+          "removed": 0
+        }
+      ],
+      "gameNotes": {
+        "version": "2026.1124.1",
+        "at": "2026-11-24T07:33:16.028Z",
+        "lines": {
+          "zh-TW": [
+            "遊戲現在可以用簡體中文遊玩，可在「選項」中選擇，或在中文系統上自動選用",
+            "畫面輸出中斷後恢復時，自動地圖上的聖壇、精英與地上物品標記也會重新出現，不再消失到重新啟動為止",
+            "線上遊戲的一局若在開始時更換了武器，不再遭到拒絕"
+          ],
+          "zh-CN": [
+            "游戏现在可以用简体中文游玩，可在“选项”中选择，或在中文系统上自动选用",
+            "画面输出中断后恢复时，自动地图上的魔坛、精英和地上物品标记也会重新出现，不再消失到重启为止",
+            "在线游戏的一局如果在开始时切换了武器，不再被拒绝"
+          ],
+          "en": [
+            "The game now plays in Simplified Chinese, picked in Options or chosen by a Chinese system",
+            "The automap's marks for shrines, elites and floor items come back after the display is lost, instead of staying gone until a restart",
+            "Online runs where you swapped weapons while the run was starting are no longer refused"
+          ],
+          "ja": [
+            "ゲームが簡体字中国語でもプレイできるようになりました。オプションで選ぶか、中国語のシステムでは自動で選ばれます",
+            "画面出力が途切れて戻った後、オートマップの祭壇、エリート、床のアイテムの印も再び表示されるようになり、再起動まで消えたままにならなくなりました",
+            "ランの開始中に武器を切り替えたオンラインのランが拒否されなくなりました"
+          ],
+          "de": [
+            "Das Spiel lässt sich jetzt auf vereinfachtem Chinesisch spielen, auswählbar in den Optionen oder automatisch auf einem chinesischen System",
+            "Die Markierungen der automatischen Karte für Schreine, Elitemonster und Gegenstände am Boden kehren zurück, nachdem die Anzeige verloren ging, statt bis zu einem Neustart verschwunden zu bleiben",
+            "Online-Durchgänge, in denen du beim Start des Durchgangs die Waffen gewechselt hast, werden nicht mehr abgelehnt"
+          ],
+          "fr": [
+            "Le jeu se joue désormais en chinois simplifié, à choisir dans les options ou choisi automatiquement sur un système en chinois",
+            "Les marques de la carte auto. pour les sanctuaires, les élites et les objets au sol reviennent après une perte de l’affichage, au lieu de rester absentes jusqu’au redémarrage",
+            "Les parties en ligne où vous avez changé d’arme pendant le lancement de la partie ne sont plus refusées"
+          ],
+          "ru": [
+            "Теперь в игру можно играть на упрощенном китайском: его можно выбрать в настройках, а на китайской системе он выбирается сам",
+            "Отметки святилищ, элитных монстров и предметов на земле на карте снова появляются после пропадания изображения, а не исчезают до перезапуска",
+            "Онлайн-забеги, в которых вы сменили оружие во время начала забега, больше не отклоняются"
+          ],
+          "pl": [
+            "Grę można teraz prowadzić po chińsku uproszczonym, wybierając go w opcjach lub automatycznie w systemie po chińsku",
+            "Znaczniki kapliczek, elit i przedmiotów na ziemi na automapie wracają po utracie obrazu, zamiast znikać aż do ponownego uruchomienia",
+            "Podejścia online, w których zamieniono broń podczas rozpoczynania podejścia, nie są już odrzucane"
+          ]
+        }
+      }
+    },
+    {
       "version": "20261123-0205",
       "date": "2026-11-23",
       "kind": "launcher",
