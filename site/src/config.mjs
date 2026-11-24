@@ -28,7 +28,7 @@ export const SITE = {
   gameUpdateLabel: 'game-update',
 };
 
-// 官方連結（D2 Survivors 官網上的 Battle.net 商店連結也是這個）。官方網頁版、wiki、首頁都已移除（2026-11），只剩下載頁
+// 官方連結（D2 Survivors 官網上的 Battle.net 商店連結也是這個）。官方網頁版、wiki、首頁都已移除（2026-11），只剩下載頁、存檔轉移頁和安裝檔（GAME_DOWNLOADS）
 export const LINKS = {
   d2sDownload: 'https://d2survivors.lol/download/',
   // 官方的網頁版存檔轉移頁（從玩家瀏覽器裡找出網頁版存檔、下載成 .txt）。官方特地留著的，跟 /download/ 一樣還在
@@ -38,6 +38,15 @@ export const LINKS = {
   bnetApp: 'https://download.battle.net/',
   steam: 'https://store.steampowered.com/app/2536520/',
 };
+
+// 遊戲本體的官方安裝檔（d2survivors.lol/download/ 底下的固定檔名，官方網站關了以後還公開）。
+// 「來源與遊戲本體」的官方下載欄、安裝第一步、常見問題 Mac/Linux 那題都從這裡接（{gameWin}、{gameMac}、{gameLinux}；{gameDl} 是 LINKS.d2sDownload）。
+// size 是約略大小（MB，照 Windows 檔案總管的算法），官方換版會變，差很多再改；translated 是我們的啟動器能不能用（目前只有 Windows）
+export const GAME_DOWNLOADS = [
+  { id: 'win', url: 'https://d2survivors.lol/download/D2-Survivors-Setup-win-x64.exe', ext: '.exe', size: 130, translated: true },
+  { id: 'mac', url: 'https://d2survivors.lol/download/D2-Survivors-mac-arm64.dmg', ext: '.dmg', size: 148, translated: false },
+  { id: 'linux', url: 'https://d2survivors.lol/download/D2-Survivors-linux-x64.AppImage', ext: '.AppImage', size: 135, translated: false },
+];
 
 // 網站介面語言：每個一頁（<path>/index.html）。加 /ja/：這裡加一筆、i18n.mjs 加一份 ja，再重新產生
 // hreflang 給搜尋引擎、html 給 <html lang>、og 給 Open Graph、fonts 是 Google Fonts 要多載的字型

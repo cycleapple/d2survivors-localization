@@ -8,7 +8,7 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
-import { SITE, LINKS, SITE_LANGS, LANGUAGES, SHOTS, OG_SHOT } from '../site/src/config.mjs';
+import { SITE, LINKS, SITE_LANGS, LANGUAGES, SHOTS, OG_SHOT, GAME_DOWNLOADS } from '../site/src/config.mjs';
 import { I18N } from '../site/src/i18n.mjs';
 import { esc, fmt, siteState, langGridHtml, heroMetaHtml, downloadBtnHtml, changelogHtml, RUNTIME_KEYS } from '../site/src/shared.mjs';
 
@@ -52,6 +52,13 @@ const REPO_LINKS = {
   dictLicense: `${SITE.repoUrl}/blob/main/dict/LICENSE`,
   issues: `${SITE.repoUrl}/issues`,
   actions: `${SITE.repoUrl}/actions/workflows/release-launcher.yml`,
+};
+// 遊戲本體的官方下載：文字裡的 {gameWin}、{gameMac}、{gameLinux} 是安裝檔，{gameDl} 是官方下載頁
+const gameUrl = m => {
+  const id = m.slice(5, -1).toLowerCase();
+  const url = id === 'dl' ? LINKS.d2sDownload : GAME_DOWNLOADS.find(g => g.id === id)?.url;
+  if (!url) throw new Error(`不認得的 ${m}`);
+  return esc(url);
 };
 const discordLink = (t, text) => `<a href="${esc(SITE.discordUrl)}" target="_blank" rel="noopener">${esc(text)}</a>`;
 
@@ -299,6 +306,7 @@ function langPage(sl) {
       .replace('{feedback}', feedbackUrl ? fmt(t['faq.feedback'], esc(feedbackUrl)) : t['faq.nofeedback'])
       .replaceAll('{discord}', esc(SITE.discordUrl))
       .replaceAll('{save}', esc(LINKS.d2sSave))
+      .replace(/\{game\w+\}/g, gameUrl)
       .replace(/\{(repo|license|dictLicense|issues|actions)\}/g, (_, k) => esc(REPO_LINKS[k]))]);
   const url = pageUrl(sl);
   const image = ogImage(sl);
@@ -384,6 +392,16 @@ function langPage(sl) {
             </ul>
           </article>`).join('\n          ')}
         </div>
+        <!-- 遊戲本體的官方安裝檔：不是我們的檔案，跟「下載啟動器」分開放；中文化只有 Windows 能用 -->
+        <article class="card game-card" id="game">
+          <h3>${esc(t['game.title'])}</h3>
+          <p class="card-sub">${esc(t['game.sub'])}</p>
+          <p>${esc(t['game.lead'])}</p>
+          <ul class="links game-links">
+            ${GAME_DOWNLOADS.map(g => `<li><a href="${esc(g.url)}">${esc(t['game.' + g.id])}<span class="host">${esc(g.ext)} · ${esc(fmt(t['game.size'], g.size))}</span></a><span class="status ${g.translated ? 'available' : 'original'}">${esc(t[g.translated ? 'game.ok' : 'game.orig'])}</span></li>`).join('\n            ')}
+          </ul>
+          <p class="game-note">${t['game.foot'].replace(/\{game\w+\}/g, gameUrl)}</p>
+        </article>
         <p class="source-note">${esc(t['sources.note'])}</p>
       </div>
     </section>
@@ -413,7 +431,7 @@ function langPage(sl) {
         <h2>${esc(t['install.title'])}</h2>
         <p class="section-lead">${esc(t['install.lead'])}</p>
         <ol class="steps">
-          ${t['install.steps'].map(([title, body]) => `<li><strong>${esc(title)}</strong><p>${body}</p></li>`).join('\n          ')}
+          ${t['install.steps'].map(([title, body]) => `<li><strong>${esc(title)}</strong><p>${body.replace(/\{game\w+\}/g, gameUrl)}</p></li>`).join('\n          ')}
         </ol>
         <div class="cards">
           <article class="card">

@@ -136,12 +136,18 @@ node tools/serve.mjs site 8766     # 本機預覽（或 python -m http.server 87
 
 - 2026-11 官方移除了網頁版（d2survivors.lol/play/）和 wiki，使用者決定我們的網頁書籤版也跟著停掉。網站拿掉了書籤安裝區塊、桌面版／瀏覽器版切換、手機書籤教學、瀏覽器版截圖（`web-desktop`、`web-mobile`）、常見問題裡書籤和手機的題目（含省電畫質那題）、結構化資料的 WebApplication。舊的做法看 git 紀錄（2026-11-22 以前的 `build-site.mjs`、`i18n.mjs`、這份文件）
 - 首屏說明下面一行 `hero.webRemoved`（`.hero-note`）：「官方網頁版已經移除，翻譯只支援桌面版」，八種語言都有
-- 常見問題「可以在 Mac、Linux 或手機上玩嗎？」改成「目前不行」：啟動器只有 Windows 版，官方網頁版移除後書籤也停了
+- 常見問題「可以在 Mac、Linux 或手機上玩嗎？」：中文化目前不行（啟動器只有 Windows 版，官方網頁版移除後書籤也停了）；官方有 Mac 和 Linux 的遊戲本體，附安裝檔連結，只能玩原版（英文／韓文）；手機原本只能玩網頁版，現在沒辦法
 - 官方網站：2026-11-22 檢查時首頁（`/`）、`/play/`、`/wiki/`、`/leaderboards/`、`/faq/` 都是 404，只剩 `/download/`（2026-11-23 起還有 `/save/`，見下一點）。所以 `LINKS` 沒有官方首頁，來源卡片只連下載頁和遊戲官方 Discord，頁尾的「D2 Survivors」連到下載頁。官方網站恢復的話再加回來
 - 網頁版存檔轉移：官方特地留了 `https://d2survivors.lol/save/`（`LINKS.d2sSave`，只有英文和韓文），從玩家的瀏覽器裡找出網頁版的存檔，下載成 `.txt`，再到桌面版主選單 SAVES → Open a save file 匯入。這頁直接連 `/save/`，不要改成 `/download/`
   - 首屏「下載啟動器」「安裝說明」旁邊第三顆按鈕 `hero.save`（新分頁開），下面一行 `hero.saveNote`（`.hero-save`）
   - 常見問題「以前在網頁版玩的存檔可以搬到桌面版嗎？」放在「會動到我的存檔嗎？」後面，答案裡的 `{save}` 換成這個網址
   - 一定要寫：要用**當初玩網頁版的同一個瀏覽器**（同一個設定檔）打開，存檔才找得到，別的瀏覽器、無痕視窗都找不到。選單名稱寫遊戲裡的譯名，後面括號附英文（字典的 `SAVES`、`Open a save file`），英文頁只寫英文。Hardcore 存檔跟遊戲裡一樣不能轉移（譯名照字典的 `Hardcore`）
+- 遊戲本體的官方安裝檔：官方網站關了，但 `/download/` 底下的安裝檔還公開（2026-11-24 查過都是 200），`/download/` 本身也還有一頁純文字說明（系統需求、各平台安裝方式，英文和韓文）。網址和約略大小集中在 `config.mjs` 的 `GAME_DOWNLOADS`（`win` .exe、`mac` Apple 晶片 .dmg、`linux` x64 AppImage；`translated` 只有 Windows 是 true）
+  - 「來源與遊戲本體」兩張卡片下面一張全寬的 `.game-card`（`id="game"`）：標題 `game.title`「先安裝遊戲本體（官方）」，副標寫明是官方安裝檔、不是本專案的檔案；每列一個安裝檔（`game.win`／`mac`／`linux`，副檔名＋`game.size`），右邊寫能不能用中文化（`game.ok` 綠點、`game.orig`「只能玩原版（英文／韓文）」灰點）。下面 `game.foot`：中文化只支援 Windows、Mac 和 Linux 只能玩原版、官方把 Windows 和 Linux 標為 beta、需求見官方下載頁。不放在首屏，不搶「下載啟動器」的位置
+  - 需要自己的 Diablo II 檔案：照《暗黑破壞神 II》卡片的寫法（《暗黑破壞神 II：獄火重生》，或《暗黑破壞神 II》＋《毀滅之王》1.14 版），`game.lead` 只說會讀取你電腦上的檔案、需要的版本見上面那欄，不另外誇大
+  - 安裝第一步直接連 Windows 安裝檔（`{gameWin}`），附 SmartScreen 的「其他資訊 → 仍要執行」（官方下載頁也這樣寫），最後連到 `#game`
+  - 文字裡可以用 `{gameWin}`、`{gameMac}`、`{gameLinux}`（安裝檔）和 `{gameDl}`（`LINKS.d2sDownload`），建置時換掉（常見問題、安裝步驟、`game.foot`）；寫錯的名稱會讓建置失敗
+  - 來源卡片「下載桌面版（Windows／Mac／Linux）」和頁尾的「D2 Survivors」照舊連 `/download/`（那頁還在、有需求說明）；直接下載檔案的只有上面這些
 
 ## 加一種介面語言（例如 /de/）
 

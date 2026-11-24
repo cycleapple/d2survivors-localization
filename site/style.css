@@ -231,6 +231,20 @@ h3 { font-size: 1.15rem; margin: 0 0 10px; }
 .links a:hover { border-color: var(--gold); }
 .links a::after { content: "↗"; color: var(--muted); }
 .links .host { color: var(--muted); font-size: 0.8rem; margin-left: auto; white-space: nowrap; }
+/* 遊戲本體的官方安裝檔：兩欄卡片下面一張全寬的，每列是下載連結＋能不能用中文化 */
+.game-card { margin-top: 16px; }
+/* 寬螢幕兩欄（連結、狀態）對齊：li 用 subgrid；窄螢幕一欄，狀態在連結下面 */
+.game-links { grid-template-columns: minmax(0, 1fr) auto; column-gap: 14px; }
+.game-links li { display: grid; grid-column: 1 / -1; grid-template-columns: subgrid; align-items: center; row-gap: 4px; }
+.game-links a { min-width: 0; }
+@media (max-width: 600px) {
+  .game-links { grid-template-columns: minmax(0, 1fr); }
+  .game-links .status { padding-left: 4px; }
+}
+.game-links a::after { content: "↓"; }
+.status.original { color: var(--muted); }
+.status.original::before { background: var(--idle); }
+.game-note { color: var(--muted); font-size: 0.9rem; margin: 14px 0 0; }
 .source-note { color: var(--muted); font-size: 0.9rem; margin: 20px 0 0; }
 .footer a { color: var(--muted); }
 .footer a:hover { color: var(--gold-hi); }
