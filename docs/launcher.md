@@ -11,12 +11,12 @@ cargo test --release                        # 有 backup/2026.1026.4/app.asar �
 
 - **語言畫面**（第一次開啟時最先出現；「設定」→「重新執行設定精靈」也從這裡開始）：只有標題列的 D2 圖示和程式名稱，加上兩欄的語言卡片（manifest 裡有 `desktop` 的語言，加上 English、한국어）。卡片上是語言名稱（大字）和狀態（小字），都用那個語言自己寫（简体中文／测试中、Русский／бета，`i18n::native_status`），不用國旗。沒有步驟指示、沒有說明文字（玩家這時還沒選語言），底下只有一個「→」。預設選 Windows 的地區格式對應的語言（`GetUserDefaultLocaleName`，zh-TW／zh-HK → 繁中、zh-CN → 簡中、ja／de／fr／ru／pl／ko，其他用英文）。選的語言同時決定啟動器的介面語言和遊戲的翻譯語言
 - **設定精靈**（選完語言之後，全部用選的語言）：上方是步驟指示（① 遊戲 — ② Diablo II — ③ 完成，目前的用金色），底下是「上一步／下一步（找不到時是略過）／完成」；第一步的「上一步」回到語言畫面
-  1. D2 Survivors：沿用 `game_dir` 的偵測（預設 `%LOCALAPPDATA%\Programs\D2 Survivors`），可以手動選資料夾。沒裝時給官方網站按鈕和「重新偵測」，也可以略過
+  1. D2 Survivors：沿用 `game_dir` 的偵測（預設 `%LOCALAPPDATA%\Programs\D2 Survivors`），可以手動選資料夾。沒裝時給說明、「下載遊戲（官方安裝檔）」按鈕、SmartScreen 提示、官方安裝說明的連結和「重新偵測」，也可以略過；裝好後不用按，畫面會自動偵測到（見 1.0.9）
   2. Diablo II：依序找 D2 Survivors 自己記的 `%APPDATA%\D2 Survivors\desktop.json` 的 `installDir`、D2R 的解除安裝登錄（`InstallLocation`）、經典版的登錄（`InstallPath`）、`Program Files (x86)` 下的預設資料夾；資料夾裡有 `D2R.exe` 算 D2R，有 `d2data.mpq` 和 `Game.exe` 算經典版。找到的存進設定的 `d2_dir`／`d2_kind`（之後從 D2R 取字型、或改走在玩家電腦上配對官方譯名的備案時用）。都沒找到時說明需要購買 Diablo II: Resurrected，按鈕連到 Blizzard 官方頁面（只放官方連結）；偵測不到不擋流程。測試「找不到」的畫面：設環境變數 `D2S_FAKE_NO_D2=1` 再按「重新偵測」
   3. 完成：連結（網站、社群 Discord、「☕ 請我喝杯咖啡」）、「在桌面建立捷徑」、「啟動遊戲」
 - **主畫面**：語言下拉選單（選項文字一樣用各自的語言）、說明（原版不會被標成 patched／翻譯版會）、金色的大「啟動遊戲」按鈕、最新一筆更新紀錄的小卡片（沒看過的有「新」和「知道了」）。底部是狀態列（翻譯、遊戲、啟動器的版本，綠點正常、黃點要注意：檢查更新失敗、有新版啟動器）和連結（網站、Discord、贊助）。上方視需要顯示：找不到遊戲、退回原版的原因、錯誤、需要更新啟動器
-- **主畫面沒裝遊戲時**：「啟動遊戲」的位置換成「尚未安裝 D2 Survivors」卡片，附官方網站的下載按鈕（`GAME_URL`）、「重新偵測」、「選擇資料夾」，不會按了啟動才報錯。**找不到 Diablo II** 時顯示一行提醒和 D2R 官方頁面連結，不擋啟動（開啟時沒記錄就先偵測一次，避免誤報）
-- **關於**（標題列的「ⓘ 關於」）：D2 Survivors 的一兩句介紹（framara 製作的免費粉絲遊戲）、需要自己的 Diablo II／D2R 檔案、已安裝的版本；遊戲的連結（官方網站、瀏覽器版、遊戲官方 Discord、D2R 官方頁面）和翻譯的連結（翻譯網站、翻譯社群 Discord、贊助）分成兩區，並註明這個啟動器是非官方翻譯、跟遊戲作者和 Blizzard 無關。網址在 `system.rs`，跟網站 `site/src/config.mjs` 的 `LINKS` 一樣。底部連結列的 Discord 是「翻譯社群 Discord」
+- **主畫面沒裝遊戲時**：「啟動遊戲」的位置換成「尚未安裝 D2 Survivors」卡片，附「下載遊戲（官方安裝檔）」（`GAME_SETUP_URL`）、「重新偵測」、「選擇資料夾」、SmartScreen 提示和官方安裝說明（`GAME_URL`），不會按了啟動才報錯。**找不到 Diablo II** 時顯示一行提醒和 D2R 官方頁面連結，不擋啟動（開啟時沒記錄就先偵測一次，避免誤報）
+- **關於**（標題列的「ⓘ 關於」）：D2 Survivors 的一兩句介紹（framara 製作的免費粉絲遊戲）、需要自己的 Diablo II／D2R 檔案、已安裝的版本；遊戲的連結（官方下載頁、網頁版存檔轉移、遊戲官方 Discord、D2R 官方頁面）和翻譯的連結（翻譯網站、翻譯社群 Discord、贊助）分成兩區，並註明這個啟動器是非官方翻譯、跟遊戲作者和 Blizzard 無關。網址在 `system.rs`，跟網站 `site/src/config.mjs` 的 `LINKS` 一樣。底部連結列的 Discord 是「翻譯社群 Discord」
 - **設定**：遊戲資料夾、Diablo II 資料夾、更新來源、自動更新、啟動後關閉、還原原版、建立桌面捷徑、重新執行設定精靈、連結、命令列說明、授權（Cinzel 的 OFL 全文）、詳細紀錄
 - 背景的檢查更新失敗（離線、網址還沒上線）不跳紅色錯誤，狀態列的翻譯變成黃點、旁邊的 ⚠ 說明「無法檢查更新，先用本機的翻譯」；啟動、還原失敗才顯示錯誤
 - **視覺風格**跟網站一樣（`theme.rs`，顏色照 `site/style.css` 開頭的變數：背景 #0c0a08、面板 #18140f、金色 #c9a45c 等，圓角 6px）。背景是自己畫的深色漸層加一點金光，不用暴雪或遊戲本身的圖、Logo、字型
@@ -114,6 +114,15 @@ cargo test --release                        # 有 backup/2026.1026.4/app.asar �
 3. `d2s-launcher --install --manifest site/data/manifest.json --lang ja`，再比對輸出
 
 要進遊戲看：把整個遊戲資料夾複製一份，`D2S_USER_DATA` 指到另一個資料夾（遊戲本身支援，存檔和設定就不會動到平常的），裡面 `d2` 複製一份平常的 `%APPDATA%\D2 Survivors\d2`（取出的 D2 素材，1.5 GB；不要用 junction：2026.1103.2 起遊戲版本變了會重新取出，會寫進平常的那份），`desktop.json` 的 `checkForUpdates` 設成 false。再用 `D2S_QUERY=d2slang=ko` 和 `--remote-debugging-port` 開複製的那份，用 `tools/cdp.mjs` 截圖
+
+## 1.0.9
+
+- 遊戲本體的官方下載（2026-11-24）：官方網站首頁（`/`）、網頁版（`/play/`）、wiki（`/wiki/`）都 404 了，但 `/download/` 的說明頁和安裝檔還在。`system.rs`：`GAME_SETUP_URL` = `https://d2survivors.lol/download/D2-Survivors-Setup-win-x64.exe`（約 130 MB，沒有簽章；啟動器只支援 Windows，只放這個），`GAME_URL` 從首頁改成 `/download/`（跟網站 `config.mjs` 的 `GAME_DOWNLOADS.win`、`LINKS.d2sDownload` 一樣）
+  - 精靈第一步和主畫面的「尚未安裝」卡片共用 `game_install_help`／`game_install_notes`：說明（`game_install_desc`：官方的 Windows 安裝檔、約 130 MB；遊戲讀取你自己的 D2R 或 Diablo II 的檔案，第一次開遊戲時照遊戲的設定畫面指定位置；裝好回來會自動偵測到，沒有的話按「重新偵測」；之後從啟動器開遊戲才有翻譯）、「⬇ 下載遊戲（官方安裝檔）」按鈕（用預設瀏覽器開安裝檔的網址）、小字的 SmartScreen 提示（`game_install_smartscreen`：「其他資訊」→「仍要執行」，各語言用 Windows 自己的按鈕名稱，跟網站一樣）和「官方的安裝說明（英文）」連結（`/download/`）。主畫面的說明用小字，「重新偵測」「選擇資料夾」放在下載按鈕下面，德文、法文的說明比較長也看得到；SmartScreen 那行在德、法文會在可捲動範圍的下面
+  - 舊的 `game_missing_desc`、`game_not_installed_desc`（叫玩家去官方網站）和 `open_game_site`（連到 404 的首頁）刪掉。`download_game` 改成「下載遊戲（官方安裝檔）」，`link_game_site` 改成「D2 Survivors 官方下載頁」。八種語言，日、德、法、俄、波蘭文是啟動器聊天室寫的（照網站同一段的寫法），翻譯聊天室可以再看
+  - 自動偵測：精靈第一步和主畫面在遊戲不在時每 2 秒重畫一次（每次重畫都檢查遊戲的 exe），裝好回到啟動器不用動滑鼠或按「重新偵測」；偵測到的那一刻讀一次遊戲版本（狀態列的「遊戲」和精靈的版本）。原本要動一下滑鼠才會重畫，狀態列的版本要按「重新偵測」才更新
+  - 測試：`work/launcher/rr/nogame-ui.ps1`（獨立的啟動器資料夾、`game_dir` 指到不存在的測試路徑、預設更新來源連不上、備用是本機的 site/data；`D2S_UI_PAGE` 直接開那一頁）。截圖 `work/launcher/nogame-*.png`：主畫面（繁中、德、法、俄）、精靈第一步（繁中、俄）、「關於」。`-Install` 在開著的時候把測試路徑做成指到 `work/launcher/gamecopy` 的 junction（只偵測，不啟動、不修改）：5 秒內主畫面的卡片換成「啟動遊戲」、狀態列出現遊戲版本，精靈變成「已找到」和「下一步」
+- 發布：推 tag `launcher-v1.0.9`
 
 ## 1.0.8
 

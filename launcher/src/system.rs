@@ -25,8 +25,11 @@ fn site_lang(ui_lang: &str) -> String {
 }
 /// GitHub 的最新版發布頁（網站 github.io 連不上時，github.com 可能還連得上）
 pub const RELEASES_URL: &str = "https://github.com/cycleapple/d2survivors-localization/releases/latest";
-/// D2 Survivors 官方網站（下載遊戲）。跟網站 site/src/config.mjs 的 LINKS 一樣
-pub const GAME_URL: &str = "https://d2survivors.lol/";
+/// D2 Survivors 官方的下載頁（純文字的系統需求和各平台安裝方式，英文／韓文）。官方網站首頁 2026-11-21 起 404，這頁還在。
+/// 跟網站 site/src/config.mjs 的 LINKS.d2sDownload 一樣
+pub const GAME_URL: &str = "https://d2survivors.lol/download/";
+/// D2 Survivors 官方的 Windows 安裝檔（約 130 MB，沒有簽章）。啟動器只支援 Windows，只放這個。跟 config.mjs 的 GAME_DOWNLOADS.win 一樣
+pub const GAME_SETUP_URL: &str = "https://d2survivors.lol/download/D2-Survivors-Setup-win-x64.exe";
 /// 官方的網頁版存檔轉移頁（網頁版 2026-11-21 關閉後官方留下的）：從瀏覽器找出網頁版的存檔、下載成 .txt，
 /// 再到桌面版主選單 SAVES → Open a save file 匯入。要用當初玩網頁版的同一個瀏覽器打開
 pub const SAVE_TRANSFER_URL: &str = "https://d2survivors.lol/save/";

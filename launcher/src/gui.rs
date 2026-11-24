@@ -46,6 +46,8 @@ pub struct App {
     changelog: Option<ChangelogEntry>,
     changelog_unseen: bool,
     game_version: Option<String>,
+    /// 上一次畫面時遊戲在不在（沒裝 → 裝好的那一刻讀一次版本）
+    game_present: bool,
     /// 檢查更新失敗過（精靈的語言清單顯示離線說明、狀態列顯示黃點）
     update_failed: bool,
     /// 自動更新啟動器失敗（請玩家到網站手動下載的卡片）
@@ -104,6 +106,7 @@ impl App {
             changelog: None,
             changelog_unseen: false,
             game_version: None,
+            game_present: false,
             update_failed: false,
             selfupdate_failed: false,
             error: None,
@@ -169,6 +172,7 @@ impl App {
 
     fn refresh_game(&mut self) {
         self.game_version = game::Game::new(self.config.game_dir()).ok().and_then(|g| g.version());
+        self.game_present = game::exists(&self.config.game_dir());
     }
 
     fn detect_d2(&mut self) {
@@ -411,11 +415,9 @@ impl App {
                 } else {
                     Self::path_row(ui, false, self.t("game_missing"), None);
                     ui.add_space(8.0);
-                    ui.label(RichText::new(self.t("game_missing_desc")).color(MUTED));
-                    ui.add_space(8.0);
-                    if ui.button(RichText::new(format!("↗  {}", self.t("open_game_site"))).color(GOLD_HI)).clicked() {
-                        system::open_url(system::GAME_URL);
-                    }
+                    self.game_install_help(ui, false);
+                    ui.add_space(4.0);
+                    self.game_install_notes(ui);
                 }
                 ui.add_space(8.0);
                 ui.horizontal(|ui| {
@@ -620,15 +622,35 @@ impl App {
         self.changelog_card(ui);
     }
 
+    /// 沒裝遊戲時的說明和官方安裝檔：精靈的第一步和主畫面的卡片共用。
+    /// 按鈕直接下載官方的 Windows 安裝檔（用預設瀏覽器）。主畫面（big）的說明用小字，免得卡片太高、
+    /// 「重新偵測」被擠到底部連結列下面（德文、法文、俄文的說明比較長）
+    fn game_install_help(&self, ui: &mut egui::Ui, big: bool) {
+        let desc = RichText::new(self.t("game_install_desc")).color(MUTED);
+        ui.label(if big { desc.small() } else { desc });
+        ui.add_space(8.0);
+        let label = format!("⬇  {}", self.t("download_game"));
+        let clicked = if big { theme::gold_button(ui, &label, 18.0, 40.0, true).clicked() } else { ui.button(RichText::new(label).color(GOLD_HI)).clicked() };
+        if clicked {
+            system::open_url(system::GAME_SETUP_URL);
+        }
+    }
+
+    /// SmartScreen 的提示和官方的下載頁（安裝說明）
+    fn game_install_notes(&self, ui: &mut egui::Ui) {
+        ui.horizontal_wrapped(|ui| {
+            ui.label(RichText::new(format!("ⓘ {}", self.t("game_install_smartscreen"))).small().color(MUTED));
+            if ui.add(egui::Label::new(RichText::new(format!("↗ {}", self.t("game_install_guide"))).small().color(GOLD)).sense(egui::Sense::click())).on_hover_cursor(egui::CursorIcon::PointingHand).on_hover_text(system::GAME_URL).clicked() {
+                system::open_url(system::GAME_URL);
+            }
+        });
+    }
+
     fn game_missing_card(&mut self, ui: &mut egui::Ui) {
         theme::panel(ui, |ui| {
             ui.label(RichText::new(self.t("game_not_installed")).font(theme::display_font(17.0)).color(GOLD));
             ui.add_space(2.0);
-            ui.label(RichText::new(self.t("game_not_installed_desc")).color(MUTED));
-            ui.add_space(8.0);
-            if theme::gold_button(ui, &format!("↗  {}", self.t("download_game")), 18.0, 40.0, true).clicked() {
-                system::open_url(system::GAME_URL);
-            }
+            self.game_install_help(ui, true);
             ui.add_space(6.0);
             ui.horizontal(|ui| {
                 if ui.button(format!("↻  {}", self.t("redetect"))).clicked() {
@@ -644,6 +666,8 @@ impl App {
                     }
                 }
             });
+            ui.add_space(4.0);
+            self.game_install_notes(ui);
         });
     }
 
@@ -990,6 +1014,17 @@ impl eframe::App for App {
             self.font_lang = lang;
         }
         theme::paint_background(ctx);
+        // 沒裝遊戲時每 2 秒重畫一次：玩家裝好遊戲回來，不用動滑鼠或按「重新偵測」，精靈和主畫面就會偵測到
+        // （畫面每次重畫都檢查遊戲的 exe 在不在）。偵測到時讀一次遊戲版本
+        if matches!(self.page, Page::Main | Page::Wizard(0)) {
+            let present = game::exists(&self.config.game_dir());
+            if !present {
+                ctx.request_repaint_after(std::time::Duration::from_secs(2));
+            } else if !self.game_present {
+                self.refresh_game();
+            }
+            self.game_present = present;
+        }
 
         egui::TopBottomPanel::top("header").frame(bar_frame()).show_separator_line(false).show(ctx, |ui| self.header(ui));
         // 標題列下面的細線
