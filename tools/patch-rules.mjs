@@ -332,7 +332,8 @@ const ROBUST = {
   '中文斷行': T('for(let{word:‹1›,glued:‹2›}of ‹3›(‹4›)){',
     `for(let{word:‹1›,glued:‹2›}of ‹4›.split(\` \`).flatMap($w=>($w.match(/[${OPENING}]*[${CJK}][${CLOSING}]*|[^${CJK}]+(?:[${OPENING}]*[${CJK}][${CLOSING}]*)?/g)??[$w]).map(($x,$j)=>({word:$x,glued:$j>0})))){`),
   // 2026.1124.1 起遊戲有自己的簡中（zh），<html lang> 照語言代碼設；翻譯在 ko 槽位，ko 時改成這個語言的標記
-  '頁面語言標記': T('document.documentElement.lang=‹1›===`zh`?`zh-Hans`:‹1›;', 'document.documentElement.lang=‹1›===`ko`?`{{html_lang}}`:‹1›===`zh`?`zh-Hans`:‹1›;'),
+  // 2026.1125.1 起後面多了 zh-TW 的分支（`zh-Hant-TW`），只比對到 zh 的開頭，在前面插入 ko 的分支
+  '頁面語言標記': T('document.documentElement.lang=‹1›===`zh`?`zh-Hans`:', 'document.documentElement.lang=‹1›===`ko`?`{{html_lang}}`:‹1›===`zh`?`zh-Hans`:'),
   '暗色字不加描邊': T('‹1›=[];if(‹2›.outline){let ‹3›=`rgb(${‹4›(‹2›.outline.level,‹2›.outline.own)})`;for(let[‹5›,‹6›]of[[-1,0],[1,0],[0,-1],[0,1],[-1,-1],[1,-1],[-1,1],[1,1]])‹1›.push([‹3›,‹5›*‹7›,‹6›*‹7›])}‹1›.push([`rgb(${‹4›(‹2›.level,‹2›.own)})`,0,0]);',
     '‹1›=[],$F=‹4›(‹2›.level,‹2›.own),$U=‹2›.outline&&‹4›(‹2›.outline.level,‹2›.outline.own),$M=$e=>Math.max(...$e.split(`,`).map(Number)),$D=$U&&$M($F)<75&&$M($U)<$M($F);if(‹2›.outline&&!$D){let ‹3›=`rgb(${$U})`;for(let[‹5›,‹6›]of[[-1,0],[1,0],[0,-1],[0,1],[-1,-1],[1,-1],[-1,1],[1,1]])‹1›.push([‹3›,‹5›*‹7›,‹6›*‹7›])}‹1›.push([`rgb(${$D?$U:$F})`,0,0]);$D&&‹1›.push([`rgb(${$U})`,1,0]);'),
   '版權聲明寬度': T('let ‹1›={...‹2›(‹3›),maxWidth:‹4›},‹5›=[‹3›.text(‹6›,‹1›)', 'let ‹1›={...‹2›(‹3›),maxWidth:‹4›},‹5›=[‹3›.text(‹6›,document.documentElement.lang===`{{html_lang}}`?{...‹1›,maxWidth:360}:‹1›)'),
