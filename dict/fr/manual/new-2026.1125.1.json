@@ -1,0 +1,6 @@
+{
+ "Online runs where you left a smith's window while the server was slow to answer are no longer refused": "Les parties en ligne où vous avez quitté la fenêtre d’un forgeron pendant que le serveur tardait à répondre ne sont plus refusées",
+ "Chinese text no longer shows twice, one over the other, on some players' screens": "Le texte chinois ne s’affiche plus en double, superposé, sur l’écran de certains joueurs",
+ "The game now plays in Traditional Chinese, picked in Options or chosen by a Taiwan or Hong Kong system": "Le jeu se joue désormais en chinois traditionnel, à choisir dans les options ou choisi automatiquement sur un système de Taïwan ou de Hong Kong",
+ "In Hardcore online, playing another hero after a lost connection no longer leaves your first hero waiting for good": "En mode Extrême en ligne, jouer un autre héros après une perte de connexion ne laisse plus votre premier héros en attente indéfiniment"
+}

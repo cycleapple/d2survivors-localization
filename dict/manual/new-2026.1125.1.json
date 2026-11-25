@@ -1,0 +1,6 @@
+{
+ "Online runs where you left a smith's window while the server was slow to answer are no longer refused": "伺服器回應緩慢時離開鐵匠視窗的線上遊戲，不再遭到拒絕",
+ "Chinese text no longer shows twice, one over the other, on some players' screens": "部分玩家畫面上的中文字不再重複顯示、上下疊在一起",
+ "The game now plays in Traditional Chinese, picked in Options or chosen by a Taiwan or Hong Kong system": "遊戲現在可以用繁體中文遊玩，可在「選項」中選擇，或在台灣、香港的系統上自動選用",
+ "In Hardcore online, playing another hero after a lost connection no longer leaves your first hero waiting for good": "在專家級線上遊戲中，連線中斷後改玩另一位英雄，第一位英雄不再一直停在等待狀態"
+}
